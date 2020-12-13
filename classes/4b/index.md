@@ -24,3 +24,10 @@ title: Mathématiques 4èmes B
 - [x] **Chapitre 03 Arithmétique, nombres premiers et fractions** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1RGX_HvINO9RIjn77RBTCOo1QIJSCKFfp/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1TC62NV00WWuwQHnyvM16Hq7dnOYYIHKA/view)
 	- Évaluation bilan [<i class="far fa-file-pdf"></i>]( )
 - [ ] **Chapitre 04 Opérations sur les nombres rationnels**  (support à revoir)  [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/17lpzKTZNL7tOxQfcvTkY_QiUq7_hVyT3/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1b0yvh5EN4zAaX1dQozXQAg6qdqE2Gi8j/view)
+
+
+
+## du 4 Jan au 5 Fév 2021 
+
+
+## du 22 Fév au 9 Avril 2021 
