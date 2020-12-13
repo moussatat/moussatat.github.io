@@ -29,4 +29,4 @@ title: Mathématiques 3èmes C
 - [ ] **Chapitre 04 Calcul littéral**   [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DmckgBCDDYgA16lYymAErSb1q9rmO1Rs/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1OwOeWx78pgXsUPeawnk0atuXIyc-DzXO/view)
 	- AP 01 [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Zh4czwFmcURuC9mAAKGI_vRq-To6Ngl-/view)  
 	- TP Tableur [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Ipzeqgvt9VILIo7RbX0W_tf9g8DB6azO/view)
-- [ ] **Chapitre 05 Triangles égaux, triangles semblables** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1vSM36VzO2oN4_Bi0E2Kl4WNAGoLfWdhw/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1UVwQaxL0TLApsPSRVag_n3rAMRxy13VP/view)
+- [ ] **Chapitre 05 Triangles égaux et semblables** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1vSM36VzO2oN4_Bi0E2Kl4WNAGoLfWdhw/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1UVwQaxL0TLApsPSRVag_n3rAMRxy13VP/view)
