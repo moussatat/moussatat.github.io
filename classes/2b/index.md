@@ -50,7 +50,7 @@ pagination:
 	- [ ] Écritures fractionnaires [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
 	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 - [x] **Évaluation 2** [**ROC**](https://drive.google.com/file/d/1d87qF7StX5K26rD2yeru5941Tn0S-i1j/view)
-- [x] **DS 02** [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1L7e2RjMvbMOttvuJ0zImTER_gjVoEZYx/view)
+- [x] **DS 02** [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1qNUKO77irgYXVzMSpczSerjpkGM76_gw/view)
 
 
 ## du 4 Jan au 5 Fév 2021 
