@@ -37,19 +37,20 @@ pagination:
     
 
 ## du 2 Nov au 18 Dec 2020 
-- **Automatismes** :
-	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
-	- [x] La racine carré [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WBfFrCVG_f6H4c6Rm1ECaW_HJRzZq9GE/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1U7rfkNwj3SI9RJev_1WcE-yn4hHFckwM/view)
 - [x] **Chapitre 3 Information chiffrée** [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Xd2IQfIcWr9QTzSf0JDhkyE6gKet54F3/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1kJFK2Jbz6Ba0kHZ7iKpngbAJ4nkMM3cn/view) 
-- [x] **Chapitre 4 Intervalles. Relations d'ordre et Inéquations** [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Y-VRdKtuuBwuJwSZE_R6zvUhPYl7kKie/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1nEXn1sWp4v7lIpr5Ai9HdnDN6OylAeaV/view)  
-- [ ] **Prise en main de Python** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Eu_DA1NW5M-RQP0J3yMlizGsPnu4dD0g/view) 
+- [x] **Chapitre 4 Intervalles. Relations d'ordre et Inéquations** [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Y-VRdKtuuBwuJwSZE_R6zvUhPYl7kKie/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1nEXn1sWp4v7lIpr5Ai9HdnDN6OylAeaV/view)   
+- [x] **Prise en main de Python** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Eu_DA1NW5M-RQP0J3yMlizGsPnu4dD0g/view) 
 	- Opérations et variables [**Questionnaire 01**](https://doctools.dgpad.net/showlink.html?zPCE)
 	- Affectations et opérations [**Questionnaire 02**](https://doctools.dgpad.net/showlink.html?Nq9f)
 	- Instructions ```if elif else```  [**Questionnaire 03**](https://doctools.dgpad.net/showlink.html?VCZg)
 	- Fonctions simples ```def return```  [**Questionnaire 04**](https://doctools.dgpad.net/showlink.html?Luit)
 	- Boucles finies ```for```  [**Questionnaire 05**](https://doctools.dgpad.net/showlink.html?DL9N)
+- **Automatismes** :
+	- [x] La racine carré [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WBfFrCVG_f6H4c6Rm1ECaW_HJRzZq9GE/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1U7rfkNwj3SI9RJev_1WcE-yn4hHFckwM/view)
+	- [ ] Écritures fractionnaires [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
+	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 - [x] **Évaluation 2** [**ROC**](https://drive.google.com/file/d/1d87qF7StX5K26rD2yeru5941Tn0S-i1j/view)
-- [x] **DS 02** [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1qNUKO77irgYXVzMSpczSerjpkGM76_gw/view)
+- [x] **DS 02** [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1L7e2RjMvbMOttvuJ0zImTER_gjVoEZYx/view)
 
 
 ## du 4 Jan au 5 Fév 2021 
