@@ -54,13 +54,17 @@ pagination:
 
 
 ## du 4 Jan au 5 Fév 2021 
-- **Chapitre 05** Équations et systèmes d'équations à deux inconnues. Approche algébrique des équations de droites. 
+- **Chapitre 05** Géométrie des équations : les droites. 
 - **Chapitre 06** Géométrie du plan
 - **Chapitre 07** Fonctions de référence
 - **Automatismes** :
 	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 
 ## du 22 Fév au 9 Avril 2021 
+
+- **Chapitre 08** Probabilités
+- **Chapitre 09** Vecteurs
+
 
 {: .box-section} 
 # Les 13 démonstrations exigibles

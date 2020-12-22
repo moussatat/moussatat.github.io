@@ -47,21 +47,24 @@ pagination:
 	- Boucles finies ```for```  [**Questionnaire 05**](https://doctools.dgpad.net/showlink.html?DL9N)
 - **Automatismes** :
 	- [x] La racine carré [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WBfFrCVG_f6H4c6Rm1ECaW_HJRzZq9GE/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1U7rfkNwj3SI9RJev_1WcE-yn4hHFckwM/view)
-	- [x] Écritures fractionnaires [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
+	- [ ] ~~Écritures fractionnaires~~ [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
 	- [ ] ~~Équations rationnelles~~ [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 - [x] **Évaluation 2** [**ROC**](https://drive.google.com/file/d/1d87qF7StX5K26rD2yeru5941Tn0S-i1j/view)
 - [x] **DS 02** [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1qNUKO77irgYXVzMSpczSerjpkGM76_gw/view)
 
  
 ## du 4 Jan au 5 Fév 2021 
-- [ ] **Chapitre 05** Équations et systèmes d'équations à deux inconnues. Approche algébrique des équations de droites. 
-- [ ] **Chapitre 06** Géométrie du plan
-- [ ] **Chapitre 07** Fonctions de référence
+- **Chapitre 05** Géométrie des équations : les droites. 
+- **Chapitre 06** Géométrie du plan
+- **Chapitre 07** Fonctions de référence
 - **Automatismes** :
-	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
-	- [ ] Résolutions d'inéquations
+	- [ ] ~~Écritures fractionnaires~~ [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
+	- [ ] ~~Équations rationnelles~~ [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
  
 ## du 22 Fév au 9 Avril 2021 
+
+- **Chapitre 08** Probabilités
+- **Chapitre 09** Vecteurs
 
 
 {: .box-section}  
