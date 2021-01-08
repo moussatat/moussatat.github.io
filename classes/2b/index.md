@@ -54,18 +54,23 @@ pagination:
 
  
 ## du 4 Jan au 5 Fév 2021 
-- **Chapitre 05** Géométrie des équations : les droites. [cours](https://drive.google.com/file/d/18PAZ7GU_S9Odj6VkfdtUUrP5wqIper-5/view) (à retravailler) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ZavAL2YB3fgxkGyU6XH5atUBx3W_67bA/view).
-- **Chapitre 06** Fonctions de référence
-- **Chapitre 07** Probabilités
+- [ ] **Chapitre 05** Géométrie des équations : les droites et des cercles. [cours](https://drive.google.com/file/d/18PAZ7GU_S9Odj6VkfdtUUrP5wqIper-5/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ZavAL2YB3fgxkGyU6XH5atUBx3W_67bA/view).
+- [ ] **Chapitre 06** Fonctions de référence
+- [ ] **Chapitre 07** Probabilités
 - **Automatismes** :
-	- [ ] ~~Écritures fractionnaires~~ [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
-	- [ ] ~~Équations rationnelles~~ [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
+	- [x] Écritures fractionnaires [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
+	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
+	- [ ] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>]()
  
 ## du 22 Fév au 9 Avril 2021 
 
-- **Chapitre 08** Vecteurs
-- **Chapitre 09** Compléments de géométrie
+- [ ] **Chapitre 07 Vecteurs** 
 
+## du 26 Avril au 6 Juillet 2021 
+
+- [ ] **Chapitre 08 Probabilités**
+- [ ] **Chapitre 09 Compléments de géométrie** 
+- [ ] **Chapitre 10 Statistiques** 
 
 {: .box-section}  
 # Les 13 démonstrations exigibles
