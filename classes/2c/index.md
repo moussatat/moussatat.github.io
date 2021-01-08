@@ -54,7 +54,7 @@ pagination:
 
 
 ## du 4 Jan au 5 Fév 2021 
-- [ ] **Chapitre 05 Géométrie des équations : les droites et des cercles**. [cours](https://drive.google.com/file/d/18PAZ7GU_S9Odj6VkfdtUUrP5wqIper-5/view) (à retravailler) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ZavAL2YB3fgxkGyU6XH5atUBx3W_67bA/view).
+- [ ] **Chapitre 05 Géométrie des équations : les droites et des cercles**. [cours](https://drive.google.com/file/d/18PAZ7GU_S9Odj6VkfdtUUrP5wqIper-5/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ZavAL2YB3fgxkGyU6XH5atUBx3W_67bA/view).
 - [ ] **Chapitre 06 Fonctions de référence**
 - [ ] **Automatismes** :
 	- [x] Écritures fractionnaires [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
@@ -68,7 +68,7 @@ pagination:
 ## du 26 Avril au 6 Juillet 2021 
 
 - [ ] **Chapitre 08 Probabilités**
-- [ ] **Chapitre 09 Compléments de géométrie** 
+- [ ] **Chapitre 09 Compléments de géométrie** [cours](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
 - [ ] **Chapitre 10 Statistiques** 
 
 

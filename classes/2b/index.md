@@ -69,7 +69,7 @@ pagination:
 ## du 26 Avril au 6 Juillet 2021 
 
 - [ ] **Chapitre 08 Probabilités**
-- [ ] **Chapitre 09 Compléments de géométrie** 
+- [ ] **Chapitre 09 Compléments de géométrie** [cours](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
 - [ ] **Chapitre 10 Statistiques** 
 
 {: .box-section}  
