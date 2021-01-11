@@ -28,12 +28,28 @@ title: Mathématiques 3èmes C
 	- Évaluation puissances [<i class="far fa-file-pdf"></i>]( )
 - [x] **Chapitre 04 Calcul littéral**   [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DmckgBCDDYgA16lYymAErSb1q9rmO1Rs/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1OwOeWx78pgXsUPeawnk0atuXIyc-DzXO/view)
 	- AP 01 [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Zh4czwFmcURuC9mAAKGI_vRq-To6Ngl-/view)  
-	- TP Tableur [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Ipzeqgvt9VILIo7RbX0W_tf9g8DB6azO/view)
+	- TP Tableur [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Ipzeqgvt9VILIo7RbX0W_tf9g8DB6azO/view) 
+	- Évaluation Calcul littéral [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1juONahDw4g4Njt69WMog6Po6YuBCaB0e/view) 
 - [ ] **Chapitre 05 Triangles égaux et semblables** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1vSM36VzO2oN4_Bi0E2Kl4WNAGoLfWdhw/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1UVwQaxL0TLApsPSRVag_n3rAMRxy13VP/view)
-- [ ] **Chapitre 06 Notions de fonctions** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WFeezDPcxYGOtAi9rNkkj93cRpHVmdnf/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/11z7cDj3uo7grxm2txM8ykMsCUiUFTnAk/view)
-- [ ] **Chapitre 07 Equations** 
+
 
 ## du 4 Jan au 5 Fév 2021 
-
+- [ ] **Chapitre 05 Triangles égaux et semblables** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1vSM36VzO2oN4_Bi0E2Kl4WNAGoLfWdhw/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1UVwQaxL0TLApsPSRVag_n3rAMRxy13VP/view)
+- Brevet Blanc 1 tiré d'annales Brevet
+- [ ] **Chapitre 06 Notions de fonctions** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WFeezDPcxYGOtAi9rNkkj93cRpHVmdnf/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/11z7cDj3uo7grxm2txM8ykMsCUiUFTnAk/view)
+- [ ] **Chapitre 07 Equations** 
+	- Évaluation Équations
+- [ ] **Chapitre 08 Trigonométrie dans le triangle rectangle** 
+	- Évaluation Trigonométrie
 
 ## du 22 Fév au 9 Avril 2021 
+
+- [ ] **Chapitre 09 Fonctions linéaires** 
+- [ ] **Chapitre 10 Statistiques** 
+- [ ] **Chapitre 11 Fonctions affines** 
+
+## du 26 Avril au 5 Juillet 2021 
+ 
+- [ ] **Chapitre 12 Probabilités** 
+- [ ] **Chapitre 13 Géométries dans l'espace** 
+
