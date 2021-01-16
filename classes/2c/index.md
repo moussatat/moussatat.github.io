@@ -60,8 +60,8 @@ pagination:
 	- [x] Écritures fractionnaires [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
 	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 	- [ ] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>]()
-- [x] **Évaluation 3 Inéquations simples** [**Sujet A **](https://drive.google.com/file/d/1MwkKUjADRhjte6OHhgcdfDFRNEA1qppW/view) et [**Sujet B **](https://drive.google.com/file/d/1_bZncCwe0v8VtHLC5JEvaTYJa5SAPqJ4/view) 
-- [ ] **Évaluation 4 Systèmes linéaires** [**Sujet A **]( ) et [**Sujet B **]( ) 
+- [x] **Évaluation 3 Inéquations simples** [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1MwkKUjADRhjte6OHhgcdfDFRNEA1qppW/view) et [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1_bZncCwe0v8VtHLC5JEvaTYJa5SAPqJ4/view) 
+- [ ] **Évaluation 4 Systèmes linéaires** [Sujet A <i class="far fa-file-pdf"></i>]( ) et [Sujet B <i class="far fa-file-pdf"></i>]( ) 
 
 ## du 22 Fév au 9 Avril 2021 
 
