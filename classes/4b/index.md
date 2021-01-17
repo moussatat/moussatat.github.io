@@ -23,16 +23,16 @@ title: Mathématiques 4èmes B
 ## du 2 Nov au 18 Dec 2020
 - [x] **Chapitre 03 Arithmétique, nombres premiers et fractions** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1RGX_HvINO9RIjn77RBTCOo1QIJSCKFfp/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1TC62NV00WWuwQHnyvM16Hq7dnOYYIHKA/view)
 	- Évaluation bilan [<i class="far fa-file-pdf"></i>]( )
-- [ ] **Chapitre 04 Écritures fractionnaires et opérations**    [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/17lpzKTZNL7tOxQfcvTkY_QiUq7_hVyT3/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1b0yvh5EN4zAaX1dQozXQAg6qdqE2Gi8j/view)
+- [x] **Chapitre 04 Écritures fractionnaires et opérations**    [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/17lpzKTZNL7tOxQfcvTkY_QiUq7_hVyT3/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1b0yvh5EN4zAaX1dQozXQAg6qdqE2Gi8j/view)
 	- ~~Évaluation formative~~
 - Dispositif d'AP renforcé suite confinement :
 	- Séance soutien du 25 novembre [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1qMKrOBV1WRF1mc-mWFiF5vxsQJCN09x3/view)
 	- Séance soutien du 9 décembre	[<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/12Os2M915pc9ZeB84MVvIeqTp-lHDm25q/view)
 
 ## du 4 Jan au 5 Fév 2021 
-- [ ] **Chapitre 04 Écritures fractionnaires et opérations**    
-	- Évaluation Bilan [<i class="far fa-file-pdf"></i>]( )
-- [ ] **Chapitre 05 Problèmes. Proportionnelles**
+- [x] **Chapitre 04 Écritures fractionnaires et opérations**    
+	- Évaluation Bilan [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1lzlf8zzgbda7TdyJGvCqK0hV-Ncwv05J/view)
+- [ ] **Chapitre 05 Fractions Problèmes** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1V2loU_TU8wCfrzVrnwMZsrwiXqW5zV1f/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1HITqJpK6oj7RaB_jctbIYZcabQXbjnPV/view)
 - [ ] **Chapitre 06 Théorème de Thalès**
 - [ ] **Chapitre 07 Puissances**
  
