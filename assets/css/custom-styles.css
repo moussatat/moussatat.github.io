@@ -266,7 +266,7 @@ img {
 .sidenote, .marginnote {
   float: right;
   clear: right;
-    margin-right: -80%;
+    margin-right: -60%;
   width: 50%;
   margin-top: 0;
   margin-bottom: 1.96rem;
@@ -277,12 +277,14 @@ img {
 
 li .sidenote, li .marginnote {
   margin-right: -60%; }
-
+ 
+  
 blockquote .sidenote, blockquote .marginnote {
-  margin-right: -59%; }
+  margin-right: -60%; }
 
 .sidenote-number {
-  counter-increment: sidenote-counter; }
+  counter-increment: sidenote-counter;
+ }
 
 .sidenote-number:after, .sidenote:before {
   content: counter(sidenote-counter) " ";
