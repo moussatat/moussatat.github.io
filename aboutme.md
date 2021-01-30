@@ -93,10 +93,19 @@ h2:before {
 
 
 <p class="about-text">
-<span class="fa fa-globe about-icon"></span>
+<span class="fa fa-globe about-icon" markdown="1"></span>
 Bonjour ! Je suis professeur certifié de mathématiques du secondaire. J'habite dans une petite ville au sud de Vienne.
 </p>
- 
+<p class="about-text"><i>
+La création de ce site a débuté lors de la préparation de la séquence Web de SNT en seconde. Je voulais d'abord comprendre le fonctionnement des langages du Web ainsi qu'avoir une interface claire pour les séances de TD de SNT. Cette page github est à ma portée.</i>
+</p>
+<p class="about-text"><i> 
+Le site contient mes notes de cours et fiches d'exercices de mes classes de mathématiques. Les notes n'ont rien d'original et ne sont pas distribuées aux élèves, ni transcrites au tableau dans leur intégralité. Les fiches d'exercices sont faites dans l'ensemble, cependant, certains exercices peuvent prendre la séance entière.</i>
+</p>
+<p class="about-text"><i>
+Un travail de simplification de ces notes, et un rajout de taches complexes adaptées reste nécessaire. Les retours, conseils et suggestions sont toujours les bienvenus !</i> 
+</p>
+
 <h2 contenu='&#xf0b1;'>Enseignement</h2>  
 
 
