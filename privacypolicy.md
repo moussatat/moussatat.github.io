@@ -4,7 +4,7 @@ title: Politique de confidentialité
 subtitle: 
 ---
 
-L'intégration de cookies dans ce site permet de montrer à mes élèves de secondes en Science Numérique et Technologie un ensemble d'informations récoltés par des *Cookies Analytics* lors d'une navigation standard.
+L'intégration de cookies dans ce site permet de montrer à mes élèves de secondes en Science Numérique et Technologie un ensemble d'informations récoltées par des *Cookies Analytics* lors d'une navigation standard.
  
 ## Politique de gestion des cookies 
 Aucune donnée personnelle collectée ne sera diffusée. Dès lors qu’une donnée est susceptible d’être collectée, vous pouvez vous y opposer.
