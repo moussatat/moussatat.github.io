@@ -55,16 +55,16 @@ pagination:
 
 ## du 4 Jan au 5 Fév 2021 
 - [ ] **Chapitre 05 Géométrie des équations : les droites et des cercles**. [cours](https://drive.google.com/file/d/18PAZ7GU_S9Odj6VkfdtUUrP5wqIper-5/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ZavAL2YB3fgxkGyU6XH5atUBx3W_67bA/view).
-- [ ] **Chapitre 06 Fonctions de référence**
-- [ ] **Automatismes** :
+- **Automatismes** :
 	- [x] Écritures fractionnaires [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FNtJYiPiJ34QhTwCrHByrqpSEiWaDl6Z/view)
-	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
-	- [ ] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>]()
 - [x] **Évaluation 3 Inéquations simples** [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1MwkKUjADRhjte6OHhgcdfDFRNEA1qppW/view) et [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1_bZncCwe0v8VtHLC5JEvaTYJa5SAPqJ4/view) 
-- [ ] **Évaluation 4 Systèmes linéaires** [Sujet A <i class="far fa-file-pdf"></i>]( ) et [Sujet B <i class="far fa-file-pdf"></i>]( ) 
+- [x] **Évaluation 4 Systèmes linéaires** Exemples de sujets [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WSdyfovh4Fs9fgl5wMou_SZNHkjzZQHf/view) et [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1x4Ovkf0FQJj-UymmEHrVHn0r5NnZGNM6/view) 
 
 ## du 22 Fév au 9 Avril 2021 
-
+- [ ] **Chapitre 06 Fonctions de référence** 
+- [ ] **Automatismes** :
+	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
+	- [ ] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>]()
 - [ ] **Chapitre 07 Vecteurs** 
 
 ## du 26 Avril au 6 Juillet 2021 
