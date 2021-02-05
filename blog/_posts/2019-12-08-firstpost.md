@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Premier billet"
-subtitle: "sous titre" 
-excerpt: "un petit résumé"
+subtitle: "tests des différentes possibilités" 
+excerpt: "un petit résumé qui apparait sur la page, controle de la date ? remplacer l'anglais"
 image: "/assets/img/avatar-icon.png"
 show-avatar: true
 category: ["blog"]
@@ -11,6 +11,8 @@ comments: true
 social-share: true
 googlefonts: ["Share+Tech+Mono"]
 ---
+
+
 
 {% include about.html footer=true readingtime=true %}
 
