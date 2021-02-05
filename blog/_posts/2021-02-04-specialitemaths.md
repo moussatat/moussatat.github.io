@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "La spécialité maths en 1G"
+title: "La spécialité maths en première"
 subtitle: "Résumé pour les élèves de seconde" 
 excerpt: "Je reprends des points clefs sur ce qui est abordé en classe de première et pourquoi. 
 J'espère que ceci vous éclairera, même si cela reste une appréciation personnelle."
@@ -11,16 +11,14 @@ tags: [blog]
 comments: true
 social-share: true
 googlefonts: ["Share+Tech+Mono"]
----
-## En cours d'élaboration.
+--- 
 
 {: .box-note} 
 ## Le differents degrés d'intensité de maths à JA
 
 En cycle terminal du lycée général, il existe 5 parcours d'intensités mathématiques différentes<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
 	<span class="sidenote" align="left" markdown="1">Les differents coefficients et dates des épreuves de la filière générale. ![LG infographie +](https://i.imgur.com/Jmm1qbG.jpg)</span>. Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales. 
-	
- 
+	 
  
 <table style="width:100%">
   <tr>
@@ -66,7 +64,6 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
   </tr>
 </table>
  
-
 Pour comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
 	<span class="sidenote" align="left" markdown="1">Les differents coefficients et dates des épreuves pour la filière Technologique ![LT infographie +](https://i.imgur.com/w6hl3GM.jpg)</span>.
 
@@ -123,7 +120,7 @@ La géométrie est surtout repérée, avec l'introduction du produit scalaire (d
 
 Avec l'introduction des **probabilités conditionnelles**, des **variables aléatoires** et de leur distribution de probabilités, on quantifiera une incertitude future quand le passé est en partie resté ignoré.
 
-Des problématiques tels &laquo;	à quoi ressemble l'aléatoire ? &raquo;, &laquo;	 quelle stratégie est la plus avantageuse &raquo;. On pourra alors aborder des problèmes rudimentaires de **décision statistique** ou l'objectif est de minimiser un **risque**.  
+C'est l'occasion d'aborder des problématiques telles &laquo; à quoi ressemble l'aléatoire ? &raquo; ou &laquo; quelle stratégie est la plus avantageuse &raquo;. On abordera ensuite des problèmes rudimentaires de **décision statistique** ou l'objectif est de minimiser un **risque**.  
 
 {: .box-note}
 ## Références
