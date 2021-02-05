@@ -14,6 +14,7 @@ googlefonts: ["Share+Tech+Mono"]
 ---
 ## En cours d'élaboration.
 
+{: .box-note} 
 ## Le differents degrés d'intensité de maths à JA
 
 En cycle terminal du lycée général, il existe 5 parcours d'intensités mathématiques différentes<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
@@ -64,68 +65,67 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
     <th colspan="4" style="text-align:center">😎</th>
   </tr>
 </table>
+ 
 
-
-Pour comparaison, et pour mes élèves visant les filières technologiques, les mathématiques sont dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
+Pour comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
 	<span class="sidenote" align="left" markdown="1">Les differents coefficients et dates des épreuves pour la filière Technologique ![LT infographie +](https://i.imgur.com/w6hl3GM.jpg)</span>.
 
+{: .box-note} 
 ## Faire son choix 
 
-[Cette page](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac) rassemble l'ensemble des informations officielles à notre disponsition données par l'EN, organismes affiliés et différentes formations du supérieur sur les spécialités recommandées du LG et Technologique. 
-Généralement, les formations techniques, scientifiques et économiques recommandent de prendre la spécialité maths en première et au moins l'option Maths complémentaire. C'est aussi ma recommendation pour celles et ceux qui pensent préparer certains concours de recrutement même si le niveau exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
-
-Vous noterez que l'*Université Grenoble Alpes* [<i class="far fa-file-pdf"> (page 4)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view) reste vague sur les spécialités recommandées pour la filière de santé PASS. En effet la part physiologie du corps humain à apprendre est tel que les élèves se contenteront de maitriser des applications directes de recettes pour leur épreuve de mathématiques. Néanmoins il est conseillé de faire au moins le parcours 3 avec Spé en première et option Maths complémentaire, rien que pour pouvoir lire les énoncés.
-
-Dans l'absence d'un projet post-bac précis, le parcours 3 correspond environ à l'ancienne filière ES et consitue un choix qui ne ferme pas complètement certaines filières scientifiques séléctives.
+Notre [page sitographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac) rassemble l'ensemble des informations officielles à notre disponsition données par l'EN, organismes affiliés et différentes formations du supérieur (licences, B.U.T., classes prépas) avec les spécialités recommandées du LG&T et les options.
  
-  
+Vous pouvez y vérifier que les formations techniques, scientifiques et économiques recommandent de prendre **a minima** le parcours 3 avec spécialité maths en première et l'option Maths complémentaire. C'est aussi notre recommendation pour celles et ceux qui pensent préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
+
+Vous noterez  que l'*Université Grenoble Alpes* [<i class="far fa-file-pdf"> (page 4)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view) reste vague sur les spécialités recommandées pour la filière de santé PASS. En effet la part physiologie du corps humain dans ce cursus à apprendre est telle, que les élèves se contenteront de maitriser des recettes pour leur épreuve de mathématiques. Néanmoins il est très recommandé de faire au moins le parcours 3 avec Spé en première et option Maths complémentaire, rien que pour pouvoir lire les énoncés.
+
+Dans l'absence d'un projet post-bac précis, le parcours 3 correspond environ à l'ancienne filière ES et consitue un choix qui ne ferme pas des filières scientifiques et économiques séléctives.
+ 
+{: .box-note} 
 ## Pour résumer
 
 <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#FFE599&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2021-02-04T17:24:37.898Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36\&quot; etag=\&quot;hFHC9MFXTP9xzBRrjzH7\&quot; version=\&quot;14.2.9\&quot; type=\&quot;google\&quot;&gt;&lt;diagram name=\&quot;Page-1\&quot; id=\&quot;edf60f1a-56cd-e834-aa8a-f176f3a09ee4\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
   
-## L'option Maths experte
-
+{: .box-note} 
+## L'option Maths expertes
  
-Le chapitre **Nombres complexes** (vu auparavant dans l'enseignement obligatoire de filière S) mélange algèbre, géométrie et trigonométrie. Les élèves y acquièrent une **dextérité dans le calcul** indipensable pour des filières à forte dominante physique et mathématiques. De même pour le chapitre **arithmétique** et les algorithmes pour des parcours à forte dominante informatique et mathématiques.
+Le chapitre **Nombres complexes** (vu auparavant dans l'enseignement obligatoire de filière S) mélange algèbre, géométrie et trigonométrie. Les élèves y acquièrent une **dextérité dans le calcul** indipensable pour des filières à forte dominante physique et mathématiques (mécanique, éléctronique, télécommunications) . 
 
-Le document [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view), dernière colonne donne bien les attentes des recruteurs.
+L'**arithmétique** et les **graphes** sont parmi les rares notions de mathématiques discrète au lycée. Elles offrent une occasion d'aborder des algorithmes désormais partie intégrante d'une culture scientifique pour des parcours à forte dominante informatique et/ou mathématiques.
 
-## Le contenu de l'enseignment de spécialité 
+L'option Maths expertes est vivement recommandée pour les licences de sciences<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
+	<span class="sidenote" align="left" markdown="1">Par exemple l'UGA considère l'option obligatoire. [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view).</span>.
+
+
+{: .box-note} 
+## L'enseignment de spécialité en cycle terminal
 
 Dans le cycle terminal vous continuerez d'aborder petit à petit de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. 
 
-### Les premiers pas dans le calcul infinitésimal
+### Le calcul infinitésimal
 
 Le [calcul infinitésimal](https://fr.wikipedia.org/wiki/Calcul_infinit%C3%A9simal) est indispensable pour le maniement des **inégalités**. Il s'agit de &laquo; Majorer, Minorer et Approcher &raquo; : 
-- Déterminer les variations de grandeurs
+- Déterminer les variations de grandeurs. Notions utilisées en Physique de terminale.
 - **Minorer** ou **majorer** pour des problèmes d'optimisation. 
 - **Approcher** des solutions d'équations et des fonctions.
 
 
-### Algèbre 
+### L'Algèbre 
  
-Vous poursuivrez la maitrise du calcul algébrique en apprenant les formules fermées pour l'étude de polynômes du second degré. Il faudra veiller à ne pas traiter les mathématiques comme distributeur automatique de formules de résolutions mais comprendre les concepts de factorisations, développement, complétion au carré...
+Vous poursuivrez la maitrise du calcul algébrique en apprenant les formules fermées pour l'étude de polynômes du second degré. Il faudra veiller à ne pas traiter les mathématiques comme distributeur automatique de formules de résolutions mais comprendre les concepts de factorisations, développement et complétion au carré...
 
-### Géométrie
+### La Géométrie
 
-La géométrie est surtout repérée, avec le produit scalaire (de vecteurs). Permettra de relier mesure d'angles et coordonnées. Les fonctions trigonométriques sont définies proprement et seront reprises dans le cours de physique dans des problèmes de propagations d'ondes par exemple.
+La géométrie est surtout repérée, avec l'introduction du produit scalaire (de vecteurs). On reliera mesure d'angles et coordonnées dans un repère orthonormé. Les fonctions trigonométriques sont définies proprement et seront reprises dans le cours de physique dans des problèmes de propagations d'ondes par exemple.
  
-### Variables aléatoires et les probabilités conditionnelles
+### Probabilites et statistiques
 
-On introduit la notion de **variables aléatoires** et de leur distribution de probabilités. 
-Calculer des espérances de variables aléatoires vous permettra de quantifier ce que l'on espère se produire à partir de la connaissance du passé.  Les probabilités conditionnelles vont nous permettre de quantifier une incertitude quand le passé est en partie ignoré.
+Avec l'introduction des **probabilités conditionnelles**, des **variables aléatoires** et de leur distribution de probabilités, on quantifiera une incertitude future quand le passé est en partie resté ignoré.
 
-Un exemple simple : on dispose de 2 pièces truquées. L'une à 1 chances sur 4 de tomber sur face. L'autre 3 sur 4 de tomber sur face. Quark choisit une pièce (pas au hasard). Il lance la pièce et obtient face. Il lance la pièce une seconde fois.
-- Quelle est la probabilité d'obtenir encore face ? 
-- Si la pièce est Face vous gagner 15&euro;. sinon vous perdez 20&euro;. Le jeu est-il en votre faveur ?
+Des problématiques tels &laquo;	à quoi ressemble l'aléatoire ? &raquo;, &laquo;	 quelle stratégie est la plus avantageuse &raquo;. On pourra alors aborder des problèmes rudimentaires de **décision statistique** ou l'objectif est de minimiser un **risque**.  
 
-C'est aussi votre premier contact avec les statistiques. Il s'agit d'une branche des mathématiques très active car on se rend compte que les modèles théoriques sont trop simples. établir des modèles plus complexes nécessite d'analyser beaucoup plus de données,  et prendre des décisions  qui minimisent un risque- Quelle stratégie commerciale A ou B pour réduire les stocks d'invendus et satisfaire un maximum de clientèle ?
- sans nécessairement comprendre les corrélations. Par exemple : 
-- Lequel des médicaments A et B est le plus efficace pour traiter telle maladie ?
-- Parmi un lot de 10 000 gènes, quels sont les gênes associés à une maladie ?
-
-
+{: .box-note}
 ## Références
 
 
