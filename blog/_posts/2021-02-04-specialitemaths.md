@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "La spécialité maths en première"
+title: "La spécialité maths en cycle terminal"
 subtitle: "Résumé pour les élèves de seconde" 
-excerpt: "Je reprends des points clefs sur ce qui est abordé en classe de première et pourquoi. 
+excerpt: "Je reprends des points clefs sur ce qui est abordé les prochaines années, les idées soujacentes et les liens pour vérifier les attentes du supérieur. 
 J'espère que ceci vous éclairera, même si cela reste une appréciation personnelle."
 image: "/assets/img/avatar-icon.png"
 show-avatar: true
@@ -12,9 +12,10 @@ comments: true
 social-share: true
 googlefonts: ["Share+Tech+Mono"]
 --- 
-
+ 
 {: .box-note} 
 ## Le differents degrés d'intensité de maths à JA
+ 
 
 En cycle terminal du lycée général, il existe 5 parcours d'intensités mathématiques différentes<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
 	<span class="sidenote" align="left" markdown="1">Les differents coefficients et dates des épreuves de la filière générale. ![LG infographie +](https://i.imgur.com/Jmm1qbG.jpg)</span>. Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales. 
@@ -63,14 +64,19 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
     <th colspan="4" style="text-align:center">😎</th>
   </tr>
 </table>
- 
+  
 Pour comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
 	<span class="sidenote" align="left" markdown="1">Les differents coefficients et dates des épreuves pour la filière Technologique ![LT infographie +](https://i.imgur.com/w6hl3GM.jpg)</span>.
+	  
+<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
+<span class="sidenote" align="left">    
+		 test
+</span>
 
 {: .box-note} 
 ## Faire son choix 
 
-Notre [page sitographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac) rassemble l'ensemble des informations officielles à notre disposition données par l'EN, organismes affiliés et différentes formations du supérieur (licences, B.U.T., classes prépas) avec les spécialités recommandées du LG&T et les options.
+Notre [page Webographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac) rassemble l'ensemble des informations officielles à notre disposition données par l'EN, organismes affiliés et différentes formations du supérieur (licences, B.U.T., classes prépas) avec les spécialités recommandées du LG&T et les options.
  
 Vous pouvez y vérifier que les formations techniques, scientifiques et économiques recommandent de prendre **a minima** le parcours 3 avec spécialité maths en première et l'option Maths complémentaire. C'est aussi notre recommandation pour celles et ceux qui pensent préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
 
@@ -85,43 +91,43 @@ Dans l'absence d'un projet post-bac précis, le parcours 3 correspondant environ
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
   
 {: .box-note} 
-## Sur l'option Maths expertes
+## Sur l'option Maths expertes de terminale
  
 Le chapitre **Nombres complexes** (vu auparavant dans l'enseignement obligatoire de filière S) mélange algèbre, géométrie et trigonométrie. Les élèves y acquièrent une **dextérité de calcul** indispensable pour des filières à forte dominante physique et mathématiques (mécanique, électronique, télécommunications) . 
 
 L'**arithmétique** et les **graphes** sont parmi les rares notions de mathématiques discrètes au lycée. Elles offrent une occasion d'aborder des algorithmes désormais partie intégrante d'une culture scientifique pour des parcours à forte dominante informatique et/ou mathématiques.
 
 L'option Maths expertes est vivement recommandée pour les licences de sciences<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
-	<span class="sidenote" align="left" markdown="1">Par exemple l'UGA considère l'option obligatoire. [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view).</span>.
-
+	<span class="sidenote" align="left" markdown="1">Par exemple l'UGA considère l'option maths expertes très recommandée pour les filières scientifiques. [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view).</span>.
+ 
 
 {: .box-note} 
-## Sur l'enseignement  de spécialité en cycle terminal
+## Sur l'enseignement de spécialité en cycle terminal
 
-Concernant les thèmes abordés, et leur objectifs. Dans le cycle terminal vous continuerez d'aborder petit à petit de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. 
+Concernant les thèmes abordés, et leur objectifs. Dans le cycle terminal vous continuerez d'aborder petit à petit de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. Par ordre d'importance on compte : 
 
 ### Le calcul infinitésimal
 
 Le [calcul infinitésimal](https://fr.wikipedia.org/wiki/Calcul_infinit%C3%A9simal) est indispensable pour le maniement des **inégalités**. Il s'agit de &laquo; Majorer, Minorer et Approcher &raquo; : 
-- Déterminer les variations de grandeurs. Notions utilisées en Physique de terminale.
+- Déterminer les variations de grandeurs. Notions appliquées en Physique de terminale.
 - **Minorer** ou **majorer** pour des problèmes d'optimisation. 
-- **Approcher** des solutions d'équations et des fonctions.
+- **Approcher** des solutions d'équations et des fonctions. Algorithmes de Newton-Raphson et d'Euler.
 
+### Probabilités et statistiques
+
+Avec l'introduction des **probabilités conditionnelles**, des **variables aléatoires** et de leurs distributions de probabilités, on cherche à quantifier une incertitude future quand le passé est en partie resté ignoré. On introduit des problématiques telles :
+- &laquo; à quoi ressemble l'aléatoire ? &raquo;
+- &laquo; quelle stratégie est la plus avantageuse ? &raquo;. 
+C'est aussi les premiers exemples simples de **prise de décision statistique visant à minimiser un risque**.  
 
 ### L'Algèbre 
  
-Vous poursuivrez la maitrise du calcul algébrique en apprenant les formules fermées pour l'étude de polynômes du second degré. Il faudra veiller à ne pas traiter les mathématiques comme distributeur automatique de formules de résolutions mais comprendre les concepts de factorisations, développement et complétion au carré...
+Vous poursuivrez la maitrise du calcul algébrique approfondi en seconde, avec les formules fermées pour l'étude de polynômes du second degré. Il faudra veiller à ne pas traiter les mathématiques comme distributeur automatique de formules de résolutions mais comprendre les concepts de factorisations, développement et complétion au carré...
 
 ### La Géométrie
 
 La géométrie est surtout repérée, avec l'introduction du produit scalaire (de vecteurs). On reliera mesure d'angles et coordonnées dans un repère orthonormé. Les fonctions trigonométriques sont définies proprement et seront reprises dans le cours de physique dans des problèmes de propagations d'ondes par exemple.
- 
-### Probabilites et statistiques
-
-Avec l'introduction des **probabilités conditionnelles**, des **variables aléatoires** et de leur distribution de probabilités, on quantifiera une incertitude future quand le passé est en partie resté ignoré.
-
-C'est l'occasion d'aborder des problématiques telles &laquo; à quoi ressemble l'aléatoire ? &raquo; ou &laquo; quelle stratégie est la plus avantageuse &raquo;. On abordera ensuite des problèmes rudimentaires de **décision statistique** ou l'objectif est de minimiser un **risque**.  
-
+  
 {: .box-note}
 ## Références
 
