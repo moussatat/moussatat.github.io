@@ -33,7 +33,7 @@ show-avatar : true
       <div class="post-entry">
         {{ post.excerpt | strip_html | xml_escape | truncatewords: site.excerpt_length }} {% assign excerpt_word_count = post.excerpt
         | number_of_words %} {% if post.content != post.excerpt or excerpt_word_count > site.excerpt_length %}
-        <a href="{{ post.url | prepend: site.baseurl }}" class="post-read-more">[Read&nbsp;More]</a> {% endif %}
+        <a href="{{ post.url | prepend: site.baseurl }}" class="post-read-more">[Entrez&nbsp;]</a> {% endif %}
       </div>
     </div>
 
@@ -58,11 +58,11 @@ show-avatar : true
 <ul class="pager main-pager">
   {% if paginator.previous_page %}
   <li class="previous">
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Billets plus récents</a>
   </li>
   {% endif %} {% if paginator.next_page %}
   <li class="next">
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Billets plus anciens &rarr;</a>
   </li>
   {% endif %}
 </ul>
