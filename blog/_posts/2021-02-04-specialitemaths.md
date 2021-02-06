@@ -12,7 +12,8 @@ comments: true
 social-share: true
 googlefonts: ["Share+Tech+Mono"]
 --- 
-  
+{% include about.html footer=true readingtime=true %}
+
 {: .box-note} 
 ## Le differents degrés d'intensité de maths à JA
   
@@ -132,3 +133,4 @@ La géométrie est surtout repérée, avec l'introduction du produit scalaire (d
  
 [^1]:  [Webographie orientation](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html) 
 
+ 
