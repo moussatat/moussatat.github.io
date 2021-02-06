@@ -85,7 +85,7 @@ Pour le cas particulier de la filière santé PASS, l'*Université Grenoble Alpe
 Dans l'absence d'un projet post-bac précis, le parcours 3 correspondant environ à l'ancienne filière ES et consitue un choix qui ne ferme pas des filières scientifiques et économiques sélectives.
  
 {: .box-note} 
-## Pour résumer
+## Bref
 
 <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#FFE599&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2021-02-04T17:24:37.898Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36\&quot; etag=\&quot;hFHC9MFXTP9xzBRrjzH7\&quot; version=\&quot;14.2.9\&quot; type=\&quot;google\&quot;&gt;&lt;diagram name=\&quot;Page-1\&quot; id=\&quot;edf60f1a-56cd-e834-aa8a-f176f3a09ee4\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
@@ -97,14 +97,14 @@ Le chapitre **Nombres complexes** (vu auparavant dans l'enseignement obligatoire
 
 L'**arithmétique** et les **graphes** sont parmi les rares notions de mathématiques discrètes au lycée. Elles offrent une occasion d'aborder des algorithmes désormais partie intégrante d'une culture scientifique pour des parcours à forte dominante informatique et/ou mathématiques.
 
-L'option Maths expertes est vivement recommandée pour les licences de sciences<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
-	<span class="sidenote" align="left" markdown="1">Par exemple l'UGA considère l'option maths expertes très recommandée pour les filières scientifiques. [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view).</span>.
+L'option Maths expertes est très recommandée pour les licences de sciences<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
+	<span class="sidenote" align="left" markdown="1">Par exemple l'UGA [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view).</span>.
  
 
 {: .box-note} 
 ## Sur l'enseignement de spécialité en cycle terminal
 
-Concernant les thèmes abordés, et leur objectifs. Dans le cycle terminal vous continuerez d'aborder petit à petit de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. Par ordre d'importance on compte : 
+Concernant les thèmes abordés, et leurs objectifs. Dans le cycle terminal vous continuerez d'aborder de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. Par ordre d'importance on compte : 
 
 ### Le calcul infinitésimal
 
@@ -130,7 +130,6 @@ La géométrie est surtout repérée, avec l'introduction du produit scalaire (d
   
 {: .box-note}
 ## Références
-
-
-[^1]: 
+ 
+[^1]:  [Webographie orientation](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html) 
 
