@@ -2,7 +2,7 @@
 layout: post
 title: "Premier billet"
 subtitle: "tests des différentes possibilités" 
-excerpt: "un petit résumé qui apparait sur la page, controle de la date ? remplacer l'anglais"
+excerpt: "un petit résumé qui apparait sur la page. "
 image: "/assets/img/avatar-icon.png"
 show-avatar: true
 category: ["blog"]
@@ -11,8 +11,9 @@ comments: true
 social-share: true
 googlefonts: ["Share+Tech+Mono"]
 ---
+Ce billet est uniquement pour tester ce qui s'affiche correctement en local, et le comparer avec ce qui s'affiche sur githubpages.
 
-
+controle de la date ? remplacer l'anglais
 
 {% include about.html footer=true readingtime=true %}
 
