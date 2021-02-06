@@ -13,7 +13,7 @@ googlefonts: ["Share+Tech+Mono"]
 ---
 Ce billet est uniquement pour tester ce qui s'affiche correctement en local, et le comparer avec ce qui s'affiche sur githubpages.
 
-controle de la date ? remplacer l'anglais
+controle de la date ? 
 
 {% include about.html footer=true readingtime=true %}
 

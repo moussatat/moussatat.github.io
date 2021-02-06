@@ -17,9 +17,8 @@ googlefonts: ["Share+Tech+Mono"]
 {: .box-note} 
 ## Le differents degrés d'intensité de maths à JA
   
-En cycle terminal du lycée général, il existe 5 parcours d'intensités mathématiques différentes<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
-	<span class="sidenote" align="left" markdown="1">Les differents coefficients et dates des épreuves de la filière générale. ![LG infographie +](https://i.imgur.com/Jmm1qbG.jpg)</span>. Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales. 
-	 
+En cycle terminal du lycée général, il existe 5 parcours d'intensités mathématiques différentes
+ 
  
 <table style="width:100%">
   <tr>
@@ -65,13 +64,16 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
   </tr>
 </table>
   
-Pour comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
-	<span class="sidenote" align="left" markdown="1">Les differents coefficients et dates des épreuves pour la filière Technologique ![LT infographie +](https://i.imgur.com/w6hl3GM.jpg)</span>.
-	  
-<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
-<span class="sidenote" align="left">    
-		 test
-</span>
+
+Rappel, les differents coefficients et dates des épreuves de la filière générale (les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales).
+
+<img src="https://i.imgur.com/Jmm1qbG.jpg"/>
+
+À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5
+
+<img src="https://i.imgur.com/w6hl3GM.jpg"/>
+
+ 
 
 {: .box-note} 
 ## Faire son choix 
