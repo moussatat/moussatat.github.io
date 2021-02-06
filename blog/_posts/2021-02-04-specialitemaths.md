@@ -15,8 +15,7 @@ googlefonts: ["Share+Tech+Mono"]
  
 {: .box-note} 
 ## Le differents degrés d'intensité de maths à JA
- 
-
+  
 En cycle terminal du lycée général, il existe 5 parcours d'intensités mathématiques différentes<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
 	<span class="sidenote" align="left" markdown="1">Les differents coefficients et dates des épreuves de la filière générale. ![LG infographie +](https://i.imgur.com/Jmm1qbG.jpg)</span>. Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales. 
 	 
