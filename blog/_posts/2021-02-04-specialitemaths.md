@@ -12,7 +12,13 @@ comments: true
 social-share: true
 googlefonts: ["Share+Tech+Mono"]
 --- 
+
    
+## Le differents degrés d'intensité de maths à JA
+
+## Le differents degrés d'intensité de maths à JA
+{: .box-note} 
+ 
 {: .box-note} 
 ## Le differents degrés d'intensité de maths à JA
   
