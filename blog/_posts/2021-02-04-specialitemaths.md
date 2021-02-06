@@ -93,40 +93,40 @@ Dans l'absence d'un projet post-bac précis, le parcours 3 correspondant environ
 {: .box-note} 
 ## Sur l'option Maths expertes de terminale
  
-Le chapitre **Nombres complexes** (vu auparavant dans l'enseignement obligatoire de filière S) mélange algèbre, géométrie et trigonométrie. Les élèves y acquièrent une **dextérité de calcul** indispensable pour des filières à forte dominante physique et mathématiques (mécanique, électronique, télécommunications) . 
+Le chapitre des **nombres complexes** (vu dans l'enseignement obligatoire de filière S avant la réforme) mélange algèbre, géométrie et trigonométrie. Les élèves y acquièrent une **dextérité de calcul indispensable** pour des filières à forte dominante physique et mathématiques (mécanique, électronique, télécommunications) . 
 
-L'**arithmétique** et les **graphes** sont parmi les rares notions de mathématiques discrètes au lycée. Elles offrent une occasion d'aborder des algorithmes désormais partie intégrante d'une culture scientifique pour des parcours à forte dominante informatique et/ou mathématiques.
+L'**arithmétique** et les **graphes** sont parmi les rares notions de mathématiques discrètes au lycée. Elles offrent une occasion d'aborder des algorithmes désormais partie intégrante d'une culture scientifique pour des parcours à forte dominante informatique et mathématique.
 
-L'option Maths expertes est très recommandée pour les licences de sciences<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
-	<span class="sidenote" align="left" markdown="1">Par exemple l'UGA [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view).</span>.
+L'option Maths experte est à considérer comme un accompagnement naturel de la spécialité Maths de terminale. Elle est très recommandée pour les licences de sciences<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
+	<span class="sidenote" align="left" markdown="1">Par exemple l'UGA [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view).</span>, ainsi que les prépas scientifiques. 
  
 
 {: .box-note} 
 ## Sur l'enseignement de spécialité en cycle terminal
 
-Concernant les thèmes abordés, et leurs objectifs. Dans le cycle terminal vous continuerez d'aborder de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. Par ordre d'importance on compte : 
+Dans cette dernière partie, je décris les thèmes abordés de l'enseignement de spécialité, et leurs objectifs. Dans le cycle terminal vous continuerez d'aborder de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. Par ordre d'importance on compte : 
 
 ### Le calcul infinitésimal
 
 Le [calcul infinitésimal](https://fr.wikipedia.org/wiki/Calcul_infinit%C3%A9simal) est indispensable pour le maniement des **inégalités**. Il s'agit de &laquo; Majorer, Minorer et Approcher &raquo; : 
-- Déterminer les variations de grandeurs. Notions appliquées en Physique de terminale.
-- **Minorer** ou **majorer** pour des problèmes d'optimisation. 
-- **Approcher** des solutions d'équations et des fonctions. Algorithmes de Newton-Raphson et d'Euler.
+- Déterminer les variations de grandeurs. Notions appliquées en Physique en terminale.
+- **Minorer** ou **majorer** pour des problèmes d'optimisation par exemple. 
+- **Approcher** des solutions d'équations et des fonctions : Algorithmes de Newton-Raphson et d'Euler.
 
 ### Probabilités et statistiques
 
-Avec l'introduction des **probabilités conditionnelles**, des **variables aléatoires** et de leurs distributions de probabilités, on cherche à quantifier une incertitude future quand le passé est en partie resté ignoré. On introduit des problématiques telles :
+Introduction des **probabilités conditionnelles**, des **variables aléatoires** et de leurs distributions de probabilités. L'objectif étant de quantifier une incertitude future quand le passé est en partie resté ignoré. On introduit des problématiques telles que :
 - &laquo; à quoi ressemble l'aléatoire ? &raquo;
 - &laquo; quelle stratégie est la plus avantageuse ? &raquo;. 
-C'est aussi les premiers exemples simples de **prise de décision statistique visant à minimiser un risque**.  
+- &laquo; quelle décision prendre pour minimiser un risque ? &raquo; (problème de décision statistique)
 
 ### L'Algèbre 
  
-Vous poursuivrez la maitrise du calcul algébrique approfondi en seconde, avec les formules fermées pour l'étude de polynômes du second degré. Il faudra veiller à ne pas traiter les mathématiques comme distributeur automatique de formules de résolutions mais comprendre les concepts de factorisations, développement et complétion au carré...
+Poursuite de la maitrise du calcul algébrique approfondi en seconde, avec les formules fermées pour l'étude de polynômes du second degré. Il faudra veiller à ne pas traiter les mathématiques comme distributeur automatique de formules de résolutions mais comprendre les concepts de factorisations, développement et complétion au carré...
 
 ### La Géométrie
 
-La géométrie est surtout repérée, avec l'introduction du produit scalaire (de vecteurs). On reliera mesure d'angles et coordonnées dans un repère orthonormé. Les fonctions trigonométriques sont définies proprement et seront reprises dans le cours de physique dans des problèmes de propagations d'ondes par exemple.
+La géométrie est surtout repérée, avec l'introduction du produit scalaire (de vecteurs). On relie mesure d'angles et coordonnées dans un repère orthonormé. Les fonctions trigonométriques sont définies proprement et seront reprises dans le cours de physique dans des problèmes de propagations d'ondes par exemple.
   
 {: .box-note}
 ## Références
