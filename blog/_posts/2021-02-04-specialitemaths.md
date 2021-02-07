@@ -70,10 +70,9 @@ Rappel, les differents coefficients et dates des épreuves de la filière géné
 
 <img src="https://i.imgur.com/Jmm1qbG.jpg"/>
 
-À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5. Au vu des programmes, un élève de filière technologique aura fait des maths d'un niveau similaire à celui du parcours 3 en filière générale.
+À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5. Au vu des programmes, un(e) élève de filière technologique aura fait des maths d'un niveau comparable à celui du parcours 3 en filière générale.
 
 <img src="https://i.imgur.com/w6hl3GM.jpg"/>
-
  
 
 {: .box-note} 

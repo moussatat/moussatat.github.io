@@ -15,6 +15,17 @@ Ce billet est uniquement pour tester ce qui s'affiche correctement en local, et 
 
 controle de la date ? 
 
+
+
+#slider
+
+{% include slider.html selector="slider1" %} 
+{%- include slider.html  selector="slider2" %}
+{% include slider.html  selector="slider3" %}
+
+
+# des titres en couleurs
+
 {% include about.html footer=true readingtime=true %}
 
 {: .box-warning}
