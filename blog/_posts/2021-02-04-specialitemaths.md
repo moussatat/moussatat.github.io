@@ -66,8 +66,10 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
 
 Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est inutile, les formations du supérieur précisent les spécialités à suivre en première aussi. Cumuler les options n'est pas possible, et n'a aucun intéret. 
 
-Rappel, les differents coefficients et dates des épreuves de la filière générale sont présentées sur notre [page Webographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#le-bac-2021-les-%C3%A9preuves-dates-et-coefficients). Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales.
-  
+Rappel des differents coefficients et dates des épreuves de la filière générale. Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales.
+ 
+<img src="https://i.imgur.com/Jmm1qbG.jpg"/>
+
 À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5. Au vu des programmes, un(e) élève de filière technologique aura fait des maths d'un niveau comparable à celui du parcours 3 en filière générale.
    
 {: .box-note} 
@@ -75,11 +77,11 @@ Rappel, les differents coefficients et dates des épreuves de la filière géné
 
 Notre [page Webographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac) rassemble l'ensemble des informations officielles à notre disposition données par l'EN, organismes affiliés et différentes formations du supérieur (licences, B.U.T., classes prépas) avec les spécialités recommandées du LG&T et les options.
  
-Vous pouvez y vérifier que les formations techniques, scientifiques et économiques recommandent de prendre **a minima** le parcours 3 avec spécialité maths en première et l'option Maths complémentaire. C'est aussi notre recommandation pour celles et ceux qui pensent préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
+Vous pouvez y vérifier que les formations techniques, scientifiques et économiques recommandent de prendre **a minima** le parcours 3 avec spécialité maths en première et l'option Maths complémentaires en terminale. C'est aussi notre recommandation pour celles et ceux qui pensent préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
 
-Pour le cas particulier de la filière santé PASS, l'*Université Grenoble Alpes* [<i class="far fa-file-pdf"> (page 4)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view) reste vague sur les spécialités recommandées comme beaucoup d'autres. En effet la part physiologie du corps humain dans ce cursus à apprendre est telle, que les élèves se contenteront de maitriser des recettes pour leur épreuve de mathématiques. Néanmoins il est très recommandé de faire au moins le parcours 3 avec Spé en première et option Maths complémentaire, rien que pour pouvoir lire les énoncés.
+Dans l'absence d'un projet post-bac précis, le choix du parcours 3 correspondant environ à l'ancienne filière ES ne ferme pas des filières scientifiques et économiques sélectives. 
 
-Dans l'absence d'un projet post-bac précis, le parcours 3 correspondant environ à l'ancienne filière ES et consitue un choix qui ne ferme pas des filières scientifiques et économiques sélectives.
+Pour le cas particulier de la filière santé PASS, les universités restent vagues sur les spécialités recommandées (par exemple l'*Université Grenoble Alpes* [<i class="far fa-file-pdf"> (page 4)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view)). En effet la part physiologie du corps humain dans ce cursus à assimiler est telle, que les élèves se contenteront de maitriser des recettes pour leur épreuve de mathématiques. Néanmoins il est très recommandé de faire au moins le parcours 3 avec Spé en première et option Maths complémentaire, rien que pour pouvoir lire les énoncés.
  
 {: .box-note} 
 ## Bref
