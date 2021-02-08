@@ -8,7 +8,7 @@ show-avatar: false
 category: ["blog"]
 tags: [blog]
 comments: true
-social-share: false
+social-share: true
 googlefonts: ["Share+Tech+Mono"]
 --- 
 {% include about.html footer=true readingtime=true %}
