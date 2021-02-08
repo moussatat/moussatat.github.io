@@ -64,17 +64,12 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
   </tr>
 </table>
 
-Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est inutile, les formations du supérieur précisent les spécialités à suivre en première aussi. Cumuler les options n'est pas possible, et n'a aucun intéret.
+Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est inutile, les formations du supérieur précisent les spécialités à suivre en première aussi. Cumuler les options n'est pas possible, et n'a aucun intéret. 
 
-Rappel, les differents coefficients et dates des épreuves de la filière générale (les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales).
-
-<img src="https://i.imgur.com/Jmm1qbG.jpg"/>
-
+Rappel, les differents coefficients et dates des épreuves de la filière générale sont présentées sur notre [page Webographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#le-bac-2021-les-%C3%A9preuves-dates-et-coefficients). Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales.
+  
 À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5. Au vu des programmes, un(e) élève de filière technologique aura fait des maths d'un niveau comparable à celui du parcours 3 en filière générale.
-
-<img src="https://i.imgur.com/w6hl3GM.jpg"/>
- 
-
+   
 {: .box-note} 
 ## Faire son choix 
 

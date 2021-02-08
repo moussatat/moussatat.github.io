@@ -2,4 +2,3 @@
  * custom scripts for image
  */
  
- 

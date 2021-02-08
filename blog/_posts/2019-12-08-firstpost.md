@@ -14,14 +14,9 @@ googlefonts: ["Share+Tech+Mono"]
 Ce billet est uniquement pour tester ce qui s'affiche correctement en local, et le comparer avec ce qui s'affiche sur githubpages.
 
 controle de la date ? 
+ 
 
-
-
-#slider
-
-{% include slider.html selector="slider1" %} 
-{%- include slider.html  selector="slider2" %}
-{% include slider.html  selector="slider3" %}
+# slider
 
 
 # des titres en couleurs
