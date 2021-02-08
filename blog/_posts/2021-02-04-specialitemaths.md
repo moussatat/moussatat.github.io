@@ -4,11 +4,11 @@ title: "La spécialité maths en cycle terminal"
 subtitle: "Résumé pour les élèves de seconde" 
 excerpt: "Je reprends les différents parcours maths du cycle terminal, les choix attendus pour le supérieur avec quelques liens, et les thèmes abordés en spécialité."
 image: "/assets/img/avatar-icon.png"
-show-avatar: true
+show-avatar: false
 category: ["blog"]
 tags: [blog]
 comments: true
-social-share: true
+social-share: false
 googlefonts: ["Share+Tech+Mono"]
 --- 
 {% include about.html footer=true readingtime=true %}
