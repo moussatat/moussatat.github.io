@@ -140,8 +140,7 @@ Poursuite de la maitrise du calcul algébrique approfondi en seconde, avec les f
 
 La géométrie est surtout repérée, avec l'introduction du produit scalaire (de vecteurs). On relie mesure d'angles et coordonnées dans un repère orthonormé. Les fonctions trigonométriques sont définies proprement et seront reprises dans le cours de physique dans des problèmes de propagations d'ondes par exemple.
   
-{: .box-note}
-## Références
+ 
  
 [^1]:  [Webographie orientation](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html) 
 
