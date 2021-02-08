@@ -64,35 +64,43 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
   </tr>
 </table>
 
-Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est inutile, les formations du supérieur précisent les spécialités à suivre en première aussi. Cumuler les options n'est pas possible, et n'a aucun intéret. 
+Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est inutile : les formations du supérieur précisent les spécialités à suivre en première. Cumuler les options n'est pas possible, et n'a aucun intéret. 
 
-Rappel des differents coefficients et dates des épreuves de la filière générale. Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales.
+En guise de rappel des épreuves de la filière générale, des coefficients et des dates. Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales.
  
 <img src="https://i.imgur.com/Jmm1qbG.jpg"/>
 
-À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5. Au vu des programmes, un(e) élève de filière technologique aura fait des maths d'un niveau comparable à celui du parcours 3 en filière générale.
+À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5. Au vu des programmes, un(e) élève de filière technologique aura fait des maths d'un niveau entre un parcours 2 et celui du parcours 3 de filière générale.
+
+L'ancienne filière ES est comparable au parcours 3, la filière S se situe entre les parcours 4 et 5.
    
 {: .box-note} 
 ## Faire son choix 
 
 Notre [page Webographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac) rassemble l'ensemble des informations officielles à notre disposition données par l'EN, organismes affiliés et différentes formations du supérieur (licences, B.U.T., classes prépas) avec les spécialités recommandées du LG&T et les options.
 
-Prendre le parcours 3 avec spécialité maths en première et l'option Maths complémentaires en terminale est recommandé dans les cas suivants :
-- je vise une formation technique, scientifique et économique dans le supérieur
-- je pense préparer préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
-- je n'ai pas de projet post-bac précis. Le choix du parcours 3 correspond environ à l'ancienne filière ES et garde la possibilité de postuler à des filières scientifiques et économiques sélectives. 
- 
-Pour le cas particulier de la filière santé PASS, les universités restent vagues sur les spécialités recommandées (par exemple l'*Université Grenoble Alpes* [<i class="far fa-file-pdf"> (page 4)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view)). En effet la part physiologie du corps humain dans ce cursus à assimiler est telle, que les élèves se contenteront de maitriser des recettes pour leur épreuve de mathématiques. Néanmoins il est très recommandé de faire au moins le parcours 3 rien que pour pouvoir lire les énoncés.
- 
+Prendre le parcours 3 avec spécialité maths en première et l'option Maths complémentaires en terminale est requis dans les cas suivants :
+- je vise une formation (licence, master) technique, scientifique, économique et gestion, dans le supérieur 
+- je vise des CPGE lettres et sciences sociales ou économiques et sociales voie générale (ECG)
+- je vise un parcours santé PASS<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
+	<span class="sidenote" align="left" markdown="1">Pour le cas particulier de la filière santé PASS, les universités restent vagues sur les spécialités recommandées. Par exemple l'*Université Grenoble Alpes* [<i class="far fa-file-pdf"> (page 4)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view). 
+En effet la part de physiologie du corps humain à assimiler est telle, que les élèves se contenteront de maitriser des recettes pour leur épreuve de mathématiques. Néanmoins le parcours 3 reste un minimum, rien que pour pouvoir lire les énoncés !</span>, des écoles paramédicales, certaines prépas CPGE (écoles de vétérinaires) 
+- je pense préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
+- je n'ai pas de projet post-bac précis mais je garde la possibilité de postuler à des filières scientifiques et économiques sélectives en terminale.
+  
+Opter pour un parcours 4 est un requis pour filières plus sélectives :
+- je vise une formation (licence, master) de mathématiques appliquées, sciences physiques, informatique 
+- je vise des CPGE scientifiques. 
+
 {: .box-note} 
 ## Sur l'option Maths expertes de terminale
 
-L'option Maths expertes est à considérer comme un accompagnement naturel de la spécialité Maths de terminale. Elle est très recommandée pour les licences de sciences<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
+L'option Maths expertes est à considérer comme un **accompagnement naturel de la spécialité Maths de terminale**. Elle est **très recommandée** pour les licences de sciences<label for="One" class="margin-toggle sidenote-number"></label><input type="checkbox" id="One" class="margin-toggle"/>
 	<span class="sidenote" align="left" markdown="1">Par exemple l'UGA [<i class="far fa-file-pdf"> (page 3)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view).</span>, ainsi que les prépas scientifiques. 
 	
-En effet, le chapitre **nombres complexes** (vu dans l'enseignement obligatoire de filière S avant la réforme) mélange algèbre, géométrie et trigonométrie. Les élèves y acquièrent une **dextérité de calcul indispensable** pour des filières à forte dominante physique et mathématiques (mécanique, électronique, télécommunications). C'est cette desctérité de calcul qui fait défaut à beaucoup d'élèves dans le supérieur.
+En effet, le chapitre **nombres complexes** (vu dans l'enseignement obligatoire de filière S avant la réforme) mélange algèbre, géométrie et trigonométrie. Les élèves y acquièrent une **dextérité de calcul indispensable** pour des filières à forte dominante physique et mathématiques (mécanique, électronique, télécommunications). **C'est cette desctérité de calcul qui fait défaut à beaucoup d'élèves dans le supérieur**.
 
-De plus l'**arithmétique** et les **graphes** et les algorithmes associés (de chiffrement, de classement) sont parmi les rares notions de mathématiques discrètes abordées au lycée. Ce sont les prémisses mathématiques de filières à forte dominante informatique et mathématiques.
+De plus l'**arithmétique**, les **graphes** et les algorithmes associés (de chiffrement, de classement) sont parmi les rares notions de mathématiques discrètes abordées au lycée. Ce sont les prémisses mathématiques de filières à forte dominante informatique et mathématiques.
   
 {: .box-note} 
 ## Bref
@@ -105,8 +113,8 @@ De plus l'**arithmétique** et les **graphes** et les algorithmes associés (de 
 {: .box-note} 
 ## Sur l'enseignement de spécialité en cycle terminal
 
-Dans cette dernière partie, je décris les thèmes abordés de l'enseignement de spécialité, et leurs objectifs. Dans le cycle terminal vous continuerez d'aborder de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. Par ordre d'importance on compte : 
-
+Dans cette dernière partie, je décris les thèmes abordés dans l'enseignement de spécialité, et leurs objectifs fondamentaux (en dehors des descriptions officielles du Bulletin officiel).  Dans le cycle terminal vous continuerez d'aborder de nouvelles notions abstraites, non pas pour l'amour de l'abstraction. Mais parce qu'elles permettent de concentrer la lumière sur le coeur des problèmes et en éliminer les détails inutiles. L'option maths complémentaires permet d'enrichir l'enseignement de première en traitant des thèmes en mathématiques appliquées.  
+  
 ### Le calcul infinitésimal
 
 Le [calcul infinitésimal](https://fr.wikipedia.org/wiki/Calcul_infinit%C3%A9simal) est indispensable pour le maniement des **inégalités**. Il s'agit de &laquo; Majorer, Minorer et Approcher &raquo; : 
