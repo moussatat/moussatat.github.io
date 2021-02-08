@@ -2,8 +2,7 @@
 layout: post
 title: "La spécialité maths en cycle terminal"
 subtitle: "Résumé pour les élèves de seconde" 
-excerpt: "Je reprends des points clefs sur ce qui est abordé les prochaines années, les idées soujacentes et les liens pour vérifier les attentes du supérieur. 
-J'espère que ceci vous éclairera, même si cela reste une appréciation personnelle."
+excerpt: "Je reprends les différents parcours maths du cycle terminal, les choix attendus pour le supérieur avec quelques liens, et les thèmes abordés en spécialité."
 image: "/assets/img/avatar-icon.png"
 show-avatar: true
 category: ["blog"]
@@ -64,7 +63,7 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
   </tr>
 </table>
 
-Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est inutile : les formations du supérieur précisent aussi les spécialités à suivre en première. Cumuler les options n'est pas possible, et n'a aucun intéret. 
+Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est inutile : les formations du supérieur précisent aussi les spécialités à suivre en première. Cumuler les options n'est pas possible, et n'a aucun intérêt. 
 
 Je rappelle les épreuves de la filière générale et le calendrier. Les options sont comptabilisées avec les bulletins scolaires et n'ont pas d'évaluations nationales.
  
