@@ -72,7 +72,7 @@ Je rappelle les épreuves de la filière générale et le calendrier :
 Les options sont comptabilisées avec les bulletins scolaires de terminale et n'ont pas d'évaluations nationales. 
 
 Par rapport à l'ancienne filière ES, la spécialité maths en première rajoute de la géométrie pour 1h supplémentaire par semaine [^2]. 
-L'organisation plus cohérente du contenu, fait que certaines notions auparavant abordées en terminale (exponentielle, probabilités conditionnelles par exemple) doivent apparaitre en première. Cela n'est pas indicatif de la difficulté qui reste liée à la formulation les exercices. Les sujets d'évaluations sont connus à l'avance, et l'accès à la banque de sujet est public. La difficulté réelle est d'assimiler les notions selon le calendrier des épreuves.
+L'organisation plus cohérente du contenu, fait que certaines notions auparavant abordées en terminale (exponentielle, probabilités conditionnelles par exemple) doivent apparaitre en première. Cela n'est pas indicatif de la difficulté qui reste liée à la formulation les exercices. Les sujets d'évaluations sont connus à l'avance, et la banque de sujet est publique. La difficulté réelle est d'assimiler les notions selon le calendrier des épreuves.
  
 {: .box-note} 
 ## Faire son choix 
