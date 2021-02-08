@@ -63,7 +63,7 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
   </tr>
 </table>
 
-L'option maths complémentaires vient enrichir l'enseignement de spécialité de première en traitant des thèmes de mathématiques appliquées. Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est incohérente et contreproductive : les formations du supérieur vérifieront les spécialités suivies en première ! Pour l'option maths experte se référer à la [section](http://localhost:4000/blog/2021/02/04/specialitemaths.html#sur-loption-maths-expertes-de-terminale). Cumuler les options n'est pas possible, et n'a aucun intérêt. 
+L'option maths complémentaires en terminale vient enrichir l'enseignement de spécialité de première en traitant des thèmes de mathématiques appliquées. Si les textes n'interdisent pas de prendre l'option Maths complémentaires sans avoir suivi l'enseignement de la spécialité maths en première, cette stratégie est incohérente et contreproductive : les formations du supérieur vérifieront les spécialités suivies en première ! Pour l'option maths experte se référer à la [section](http://localhost:4000/blog/2021/02/04/specialitemaths.html#sur-loption-maths-expertes-de-terminale). Noter que cumuler les options n'est pas possible, et n'a aucun intérêt. 
 
 Je rappelle les épreuves de la filière générale et le calendrier :
  
@@ -71,13 +71,13 @@ Je rappelle les épreuves de la filière générale et le calendrier :
 
 Les options sont comptabilisées avec les bulletins scolaires de terminale et n'ont pas d'évaluations nationales. 
 
-Par rapport à l'ancienne filière ES, la spécialité maths en première rajoute de la géométrie pour 1h supplémentaire par semaine [^2]. 
-L'organisation plus cohérente du contenu, fait que certaines notions auparavant abordées en terminale (exponentielle, probabilités conditionnelles par exemple) doivent apparaitre en première. Cela n'est pas indicatif de la difficulté qui reste liée à la formulation les exercices. Les sujets d'évaluations sont connus à l'avance, et la banque de sujet est publique. La difficulté réelle est d'assimiler les notions selon le calendrier des épreuves.
+Par rapport à l'ancienne filière ES, la spécialité maths en première rajoute de la géométrie pour 1h supplémentaire par semaine[^2]. 
+L'organisation plus cohérente du contenu fait que certaines notions, auparavant abordées en terminale (exponentielle, probabilités conditionnelles par exemple), doivent apparaitre en première. Cela n'est pas indicatif de la difficulté qui reste liée à la formulation les exercices. Par ailleurs, les sujets d'évaluations sont rassemblés dans une banque de sujet publique et distribuée avant l'épreuve. La difficulté réelle est d'assimiler les notions selon le calendrier des épreuves.
  
 {: .box-note} 
 ## Faire son choix 
 
-Notre [page Webographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac)[^1]  rassemble l'ensemble des informations officielles à notre disposition données par l'EN, organismes affiliés et différentes formations du supérieur (licences, B.U.T., classes prépas) avec les spécialités recommandées du LG&T et les options.
+Notre [page Webographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac)[^1]  rassemble l'ensemble des informations officielles à ma disposition communiquées par l'EN (bulletins officiels), organismes affiliés et différentes formations du supérieur (licences, B.U.T., classes prépas) avec les spécialités recommandées du LG&T et les options.
 
 Prendre le parcours 3 avec spécialité maths en première et l'option Maths complémentaires en terminale est requis dans les cas suivants :
 - je vise une formation (licence, master, B.U.T) scientifique, économique et gestion
