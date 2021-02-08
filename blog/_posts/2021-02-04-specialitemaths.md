@@ -30,8 +30,8 @@ En cycle terminal du lycée général, il existe 5 parcours d'intensités mathé
     <th> </th>
     <th>Première (4h)</th>
     <th>Terminale (6h)</th>
-    <th>Complémentaire</th>
-    <th>Experte</th>
+    <th>Complémentaires</th>
+    <th>Expertes</th>
 </tr>
   <tr>
     <th> 1️⃣ </th>
@@ -78,9 +78,9 @@ Rappel des differents coefficients et dates des épreuves de la filière génér
 Notre [page Webographie](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html#sp%C3%A9cialit%C3%A9s-voies-technologiques-et-formations-post-bac) rassemble l'ensemble des informations officielles à notre disposition données par l'EN, organismes affiliés et différentes formations du supérieur (licences, B.U.T., classes prépas) avec les spécialités recommandées du LG&T et les options.
 
 Prendre le parcours 3 avec spécialité maths en première et l'option Maths complémentaires en terminale est recommandé dans les cas suivants :
-- élève vise une formation technique, scientifique et économique dans le supérieur
-- élève pense préparer préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
-- absence d'un projet post-bac précis. Ce choix du parcours 3 correspond environ à l'ancienne filière ES et garde la possibilité de postuler à des filières scientifiques et économiques sélectives. 
+- je vise une formation technique, scientifique et économique dans le supérieur
+- je pense préparer préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde (si le format de ces concours reste inchangé). 
+- je n'ai pas de projet post-bac précis. Le choix du parcours 3 correspond environ à l'ancienne filière ES et garde la possibilité de postuler à des filières scientifiques et économiques sélectives. 
  
 Pour le cas particulier de la filière santé PASS, les universités restent vagues sur les spécialités recommandées (par exemple l'*Université Grenoble Alpes* [<i class="far fa-file-pdf"> (page 4)</i>](https://drive.google.com/file/d/1S1YIiHRbUQMhSFWZ4Y9ZMVEVvYm4FrFL/view)). En effet la part physiologie du corps humain dans ce cursus à assimiler est telle, que les élèves se contenteront de maitriser des recettes pour leur épreuve de mathématiques. Néanmoins il est très recommandé de faire au moins le parcours 3 rien que pour pouvoir lire les énoncés.
  
@@ -92,7 +92,7 @@ L'option Maths expertes est à considérer comme un accompagnement naturel de la
 	
 En effet, le chapitre **nombres complexes** (vu dans l'enseignement obligatoire de filière S avant la réforme) mélange algèbre, géométrie et trigonométrie. Les élèves y acquièrent une **dextérité de calcul indispensable** pour des filières à forte dominante physique et mathématiques (mécanique, électronique, télécommunications). C'est cette desctérité de calcul qui fait défaut à beaucoup d'élèves dans le supérieur.
 
-L'**arithmétique** et les **graphes** et les algorithmes associés (de chiffrement, de classement) sont parmi les rares notions de mathématiques discrètes abordées au lycée.  En relation avec des filières à forte dominante informatique et mathématiques.
+De plus l'**arithmétique** et les **graphes** et les algorithmes associés (de chiffrement, de classement) sont parmi les rares notions de mathématiques discrètes abordées au lycée. Ce sont les prémisses mathématiques de filières à forte dominante informatique et mathématiques.
   
 {: .box-note} 
 ## Bref
