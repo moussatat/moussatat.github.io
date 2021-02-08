@@ -141,6 +141,6 @@ La géométrie est surtout repérée, avec l'introduction du produit scalaire (d
 ## Références 
  
 [^1]:  [Webographie orientation](https://moussatat.github.io/classes/2c/2020/10/15/Semaine-42.html) mis à disposition des secondes pour un travail sur orientation fait en vie de classe.
-[^2]: À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5. Au vu des programmes, un(e) élève de filière technologique aura fait des maths d'un niveau entre un parcours 2 et celui du parcours 3 de filière générale.
+[^2]: À titre de comparaison, en filières technologiques, les mathématiques figurent dans le tronc commun, avec 3 épreuves (2 en première, et 1 en terminale) pour un coefficient total de 5. Au vu des programmes, un(e) élève de filière technologique aura fait des maths d'un niveau simplifé par rapport au parcours 3 de filière générale.
 
  
