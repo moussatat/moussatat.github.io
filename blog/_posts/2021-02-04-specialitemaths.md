@@ -13,7 +13,7 @@ googlefonts: ["Share+Tech+Mono"]
 --- 
 {% include about.html footer=true readingtime=true %}
 
-J'ai été pris au dépourvu par la présence des seuls professeurs principaux de seconde lors la réunion présentation de mercredi 3 février dernier. Il n'y a pas eu comme l'année passée une présentation des différents enseignements de spécialité et de leurs enjeux par les professeurs concernés.
+J'ai été pris au dépourvu par la présence des seuls professeurs principaux de seconde lors la réunion de présentation du mercredi 3 février dernier. Il n'y a pas eu comme l'année passée une présentation des différents enseignements de spécialité et de leurs enjeux par les professeurs concernés.
 
 Ce qui suit est une clarification de la présentation du directeur adjoint de l'enseignement des mathématiques au cycle terminale de la filière générale. Vous pouvez me contacter via [ecoledirecte](https://www.ecoledirecte.com/) pour de plus de précisions.
 
