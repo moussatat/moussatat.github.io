@@ -21,7 +21,7 @@ Ce qui suit est une clarification de la présentation du directeur adjoint de l'
 {: .box-note} 
 ## Le differents parcours de mathématiques
   
-En cycle terminal du lycée général, il existe 5 parcours d'intensités mathématiques différentes
+En cycle terminal du lycée général, il existe 5 parcours de mathématiques différents
  
  
 <table style="width:100%">
