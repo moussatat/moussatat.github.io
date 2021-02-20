@@ -34,22 +34,22 @@ title: Mathématiques 3èmes C
 
 
 ## du 4 Jan au 5 Fév 2021 
-- [ ] **Chapitre 05 Triangles égaux et semblables** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1vSM36VzO2oN4_Bi0E2Kl4WNAGoLfWdhw/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1UVwQaxL0TLApsPSRVag_n3rAMRxy13VP/view)
-- Brevet Blanc 1 tiré d'annales Brevet
-- [ ] **Chapitre 06 Notions de fonctions** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WFeezDPcxYGOtAi9rNkkj93cRpHVmdnf/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/11z7cDj3uo7grxm2txM8ykMsCUiUFTnAk/view)
-- [ ] **Chapitre 07 Equations** 
-	- Évaluation Équations
-- [ ] **Chapitre 08 Trigonométrie dans le triangle rectangle** 
-	- Évaluation Trigonométrie
+- [x] **Chapitre 05 Triangles égaux et semblables** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1vSM36VzO2oN4_Bi0E2Kl4WNAGoLfWdhw/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1UVwQaxL0TLApsPSRVag_n3rAMRxy13VP/view)
+- [x] Brevet Blanc 1 [tiré d'annales du Brevet](https://drive.google.com/file/d/1_A1ZevyrgEk3RLcskn4B5jgBZVOKKejD/view)
+- [x] **Chapitre 06 Notions de fonctions** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WFeezDPcxYGOtAi9rNkkj93cRpHVmdnf/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/11z7cDj3uo7grxm2txM8ykMsCUiUFTnAk/view)
 
 ## du 22 Fév au 9 Avril 2021 
 
+- [ ] **Chapitre 07 Equations** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ITGvRwuoeC3-lr9rfnatBzseoKPsm5Ro/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1tXLAlYqacTeEQ--fVhiipdpp4baacf6I/view) 
+	- Évaluation Notions de fonctions et équations
+- [ ] **Chapitre 08 Trigonométrie dans le triangle rectangle** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1u2ELRz4Ecl0uzLXrTXvP8TLUZpbz7tmo/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ij1y_9MAwDwg6RQrOG5_wrN6QTsoqegB/view)  
+	- Évaluation Géométrie
 - [ ] **Chapitre 09 Fonctions linéaires** 
-- [ ] **Chapitre 10 Statistiques** 
-- [ ] **Chapitre 11 Fonctions affines** 
 
 ## du 26 Avril au 5 Juillet 2021 
  
+- [ ] **Chapitre 10 Statistiques** 
+- [ ] **Chapitre 11 Fonctions affines** 
 - [ ] **Chapitre 12 Probabilités** 
 - [ ] **Chapitre 13 Géométries dans l'espace** 
 
