@@ -62,20 +62,14 @@ pagination:
 - [x] **Évaluation 4 Systèmes linéaires** Exemples de sujets [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WSdyfovh4Fs9fgl5wMou_SZNHkjzZQHf/view) et [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1x4Ovkf0FQJj-UymmEHrVHn0r5NnZGNM6/view) 
 
 ## du 22 Fév au 9 Avril 2021 
-- [ ] **Chapitre 06 Fonctions de référence** 
+- [ ] **Chapitre 06 Fonctions de référence**  
 	- [ ] A Notions, tableaux de variation. [cours](https://drive.google.com/file/d/1iCtRXIaUeeOmlD258svoRhPzQ_FK9HEF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15xdIOufkymEVBBy8Kr9O0emyJjgFbEY-/view).
-	- [ ] B Fonctions affines [cours](https://drive.google.com/file/d/1feX8TLiFQDZNTQ28-ETUeWsp_5Oux53i/view) et [exercices <i class="far fa-file-pdf"></i>](). 
-	- [ ] C Fonction carré [cours](https://drive.google.com/file/d/1iPd2eUJdkHadqNdjnwMog3lWUQmlD3XM/view) et [exercices <i class="far fa-file-pdf"></i>](). exercices à venir
-	- [ ] D Fonction cube [cours](https://drive.google.com/file/d/1ek1MSBVPVxkcALwGPsbuP8hgMzATYYoy/view) et [exercices <i class="far fa-file-pdf"></i>]().
-	- [ ] E Fonction inverse [cours](https://drive.google.com/file/d/1_dtNWX3d7y2vUBhL1iPZw0qCm7akLiZv/view) et [exercices <i class="far fa-file-pdf"></i>]().
-	- [ ] F Parité [cours](https://drive.google.com/file/d/1yt2qjPOgQjcQWJLauazg4pKniUlwr2Sm/view) et [exercices <i class="far fa-file-pdf"></i>]().
-	- [ ] G Fonction racine carrée [cours](https://drive.google.com/file/d/1tqlUTjNyewRAEVrcwSixVZB2s41v9r_6/view) et [exercices <i class="far fa-file-pdf"></i>]().
-	- [ ] H Fonction valeur absolue [cours](https://drive.google.com/file/d/1u2ugYm78r5tli4n2BE5Rbt0TSvHaQ9tb/view) et [exercices <i class="far fa-file-pdf"></i>]().
+	- [ ] B Fonctions affines et autres fonctions de réference [cours](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view).
 - [ ] **Automatismes** :
 	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 	- [ ] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1uswnX_sLNUp6R-m7miWuZ9H7OQ785hI7/view)
 - [ ] **Python** 
-	- [ ]  Boucles infinies ```while``` [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GdY8FPn2ykHXSzZcWqTbGcivpqlzcjDb/view) 
+	- [ ] Boucles infinies ```while``` [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GdY8FPn2ykHXSzZcWqTbGcivpqlzcjDb/view) 
 	- [ ] TP01 Principe accumulateur [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1cHXwmWz3wRwigM42upOfdHD0Fwa4YDrB/view) 
 	- [ ] TP02 Algorithme de Babylone [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18qs1BJgd6GM1f_Btz40dGm3oH-NvoqkT/view) 
 	- [ ] TP03 Algorithme de recherche de zéro par balayage [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DUTnU2MOrDqyfxea7WbBG8aoke241Pbf/view) 
