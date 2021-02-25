@@ -15,7 +15,7 @@ googlefonts: ["Share+Tech+Mono"]
 
 J'ai été pris au dépourvu par la présence des seuls professeurs principaux de seconde lors la réunion de présentation du mercredi 3 février dernier. Il n'y a pas eu comme l'année passée une présentation des différents enseignements de spécialité et de leurs enjeux par les professeurs concernés.
 
-Ce qui suit est une clarification de la présentation du directeur adjoint de l'enseignement des mathématiques au cycle terminale de la filière générale. Vous pouvez me contacter via [ecoledirecte](https://www.ecoledirecte.com/) pour de plus de précisions.
+Ce qui suit est une clarification de la présentation du directeur adjoint de l'enseignement des mathématiques au cycle terminale de la filière générale. Vous pouvez me contacter via [ecoledirecte](https://www.ecoledirecte.com/) pour plus de précisions.
 
 
 {: .box-note} 
@@ -76,7 +76,7 @@ Je rappelle les épreuves de la filière générale et le calendrier :
 
 Les options sont comptabilisées avec les bulletins scolaires de terminale et n'ont pas d'évaluations nationales. 
 
-Par rapport à l'ancienne filière ES, la spécialité maths en première rajoute de la géométrie pour 1h supplémentaire par semaine[^2]. 
+Par rapport à l'ancienne filière ES, la spécialité maths de première rajoute de la géométrie pour 1h supplémentaire par semaine[^2]. 
 L'organisation plus cohérente du contenu fait que certaines notions, auparavant abordées en terminale (exponentielle, probabilités conditionnelles par exemple), doivent apparaitre en première. Cela n'est pas indicatif de la difficulté qui reste liée à la formulation les exercices. Par ailleurs, les sujets d'évaluations sont rassemblés dans une banque de sujet publique et distribuée avant l'épreuve. La difficulté réelle est d'assimiler les notions selon le calendrier des épreuves.
  
 {: .box-note} 
@@ -92,11 +92,15 @@ Prendre le parcours 3 avec spécialité maths en première et l'option Maths com
 En effet la part de physiologie du corps humain à assimiler est telle, que les élèves se contenteront de maitriser des recettes pour leur épreuve de mathématiques. Néanmoins le parcours 3 reste un minimum, rien que pour pouvoir lire les énoncés !</span>, des écoles paramédicales, certaines prépas CPGE (écoles de vétérinaires) 
 - je pense préparer certains concours de recrutement même si le niveau officiel exigé à ces concours est celui de seconde. 
 - je n'ai pas de projet postbac précis mais je garde la possibilité de postuler à des filières scientifiques et économiques sélectives en terminale.
-  
+
 Opter pour un parcours 4 est un requis pour des filières avec plus de mathématiques :
 - je vise une formation (licence, master) de mathématiques appliquées, sciences physiques, informatique 
 - je vise des CPGE scientifiques. Filières MP, PC... 
 
+Les universtiés s'adaptent. Ainsi, le site [BoOST](https://boost.u-bordeaux.fr/) montre les mentions de licences non sélectives en **sciences et techonologie** (hors LAS et PASS) possibles selon les choix de spécialités en 1ère et terminale. Vous noterez qu'une UE de Mathématiques **obligatoire** au premier semestre :
+- *Outils Mathématiques* pour les élèves du parcours 2 ou 3
+- *Mathématiques générales* pour les élèves du parcours 4 et 5.
+Aucune de ces licences n'est accesible pour des élèves du parcours 1.
 
 {: .box-note} 
 ## Bref

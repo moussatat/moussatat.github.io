@@ -62,19 +62,19 @@ pagination:
 
 ## du 22 Fév au 9 Avril 2021 
 - [ ] **Chapitre 06 Fonctions de référence** 
-	- [ ] A Notions, tableaux de variation. [cours](https://drive.google.com/file/d/1iCtRXIaUeeOmlD258svoRhPzQ_FK9HEF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15xdIOufkymEVBBy8Kr9O0emyJjgFbEY-/view).
-	- [ ] B Fonctions affines et autres fonctions de réference [cours](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view).
+	- [ ] Notions, tableaux de variation. [cours](https://drive.google.com/file/d/1iCtRXIaUeeOmlD258svoRhPzQ_FK9HEF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15xdIOufkymEVBBy8Kr9O0emyJjgFbEY-/view).
+	- [ ] Fonctions affines et autres fonctions de réference [cours](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view).
 - [ ] **Automatismes** :
 	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 	- [ ] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1uswnX_sLNUp6R-m7miWuZ9H7OQ785hI7/view)
 - [ ] **Python** 
 	- [ ]  Boucles infinies ```while``` [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GdY8FPn2ykHXSzZcWqTbGcivpqlzcjDb/view) 
-	- [ ] TP01 Principe accumulateur [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1cHXwmWz3wRwigM42upOfdHD0Fwa4YDrB/view) 
-	- [ ] TP02 Algorithme de Babylone [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18qs1BJgd6GM1f_Btz40dGm3oH-NvoqkT/view) 
-	- [ ] TP03 Algorithme de recherche de zéro par balayage [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DUTnU2MOrDqyfxea7WbBG8aoke241Pbf/view) 
-	- [ ] TP04 Algorithme de recherche de zéro par dichotomie [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1aSCMMYmplMMV47vcB7sNKISXZhHHxsAk/view) 
-	- [ ] TP05 Algorithme de recherche de zéro par par méthode de la sécante (si temps le permet) [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/10AUZJL9--Oz_SEMCdJnx7EMjG_0zK3_Y/view) 
-	- [ ] TP06 Algorithme de calcul de la longueur d'une courbe [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1JpIS6lgGLfk-HOy7hFfS6FvEnlxJaX9t/view) 
+	- [ ] **TP01** Principe accumulateur [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1cHXwmWz3wRwigM42upOfdHD0Fwa4YDrB/view) 
+	- [ ] **TP02 Algorithme de Babylone** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18qs1BJgd6GM1f_Btz40dGm3oH-NvoqkT/view) 
+	- [ ] **TP03** Algorithme de recherche de zéro par **balayage** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DUTnU2MOrDqyfxea7WbBG8aoke241Pbf/view) 
+	- [ ] **TP04** Algorithme de recherche de zéro par **dichotomie** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1aSCMMYmplMMV47vcB7sNKISXZhHHxsAk/view) 
+	- [ ] **TP05** Algorithme de recherche de zéro par **méthode de la sécante** (si le temps le permet) [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/10AUZJL9--Oz_SEMCdJnx7EMjG_0zK3_Y/view) 
+	- [ ] **TP06** Algorithme de calcul de la longueur d'une courbe [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1JpIS6lgGLfk-HOy7hFfS6FvEnlxJaX9t/view) 
 - [ ] **Chapitre 07 Vecteurs** [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
 
 ## du 26 Avril au 6 Juillet 2021 
@@ -98,5 +98,5 @@ pagination:
 1. [ ] Le projeté orthogonal d’un point \\(M\\) sur une droite \\(\Delta\\) est le point de la droite \\(\Delta\\)  le plus proche du point \\(M\\).
 1. [ ] Relation trigonométrique *pythagoricienne* \\(\cos^2(\alpha) + \sin^2(\alpha) =1\\) dans un triangle rectangle.
 1. [ ] En utilisant le déterminant, établir la forme générale d’une équation de droite, dans le plan.
-1. [ ] Étudier la position relative des courbes d’équation \\(y=x\\),  \\(y=x^2\\) , \\(y=x^3\\) pour \\(x \geq 0\\).
+1. [x] Étudier la position relative des courbes d’équation \\(y=x\\),  \\(y=x^2\\) , \\(y=x^3\\) pour \\(x \geq 0\\).
 1. [x] Sens de variation des fonctions *carré*, *inverse* et *racine carrée*.
