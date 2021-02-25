@@ -97,10 +97,10 @@ Opter pour un parcours 4 est un requis pour des filières avec plus de mathémat
 - je vise une formation (licence, master) de mathématiques appliquées, sciences physiques, informatique 
 - je vise des CPGE scientifiques. Filières MP, PC... 
 
-Les universtiés s'adaptent. Ainsi, le site [BoOST](https://boost.u-bordeaux.fr/) montre les mentions de licences non sélectives en **sciences et techonologie** (hors LAS et PASS) possibles selon les choix de spécialités en 1ère et terminale. Vous noterez qu'une UE de Mathématiques **obligatoire** au premier semestre :
-- *Outils Mathématiques* pour les élèves du parcours 2 ou 3
-- *Mathématiques générales* pour les élèves du parcours 4 et 5.
-Aucune de ces licences n'est accesible pour des élèves du parcours 1.
+Les universités s'adaptent au nouveau bac. Ainsi, le site [BoOST](https://boost.u-bordeaux.fr/) de l'université de Bordeaux, montre le choix des UEs du premier semestre de licences non sélectives en **sciences et techonologie** (hors LAS et PASS). Vous noterez qu'une UE de Mathématiques **obligatoire** au premier semestre (parmi un total de 5) :
+- *Outils Mathématiques* pour les élèves du parcours 2 ou 3 de lycée général
+- *Mathématiques générales* pour les élèves du parcours 4 et 5 de lycée général.
+Aucune de ces licences n'est accessible pour des élèves du parcours 1. Certaines orientations comme Chimie, Physique, Informatique proposent une UE supplémentaire *Mathématiques approfondies*.
 
 {: .box-note} 
 ## Bref
