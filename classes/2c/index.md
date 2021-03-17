@@ -62,11 +62,19 @@ pagination:
 
 ## du 22 Fév au 9 Avril 2021 
 - [ ] **Chapitre 06 Fonctions de référence** 
-	- [ ] Notions, tableaux de variation. [cours](https://drive.google.com/file/d/1iCtRXIaUeeOmlD258svoRhPzQ_FK9HEF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15xdIOufkymEVBBy8Kr9O0emyJjgFbEY-/view).
-	- [ ] Fonctions affines et autres fonctions de réference [cours](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view).
+	- [x] Notions, tableaux de variation. [cours](https://drive.google.com/file/d/1iCtRXIaUeeOmlD258svoRhPzQ_FK9HEF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15xdIOufkymEVBBy8Kr9O0emyJjgFbEY-/view).
+	- [ ] Fonctions affines et autres fonctions de réference [cours](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18iV3UNY9-0dk_gjycXNmvU57JcfwKNUt/view).
 - [ ] **Automatismes** :
 	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 	- [ ] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1uswnX_sLNUp6R-m7miWuZ9H7OQ785hI7/view)
+- [x] **Évaluation 5 Equations (réduites) de droites** Exemples de sujets [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DB-PlOnf9mh34M05HAVUUx7JYxFgB5NQ/view) et [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1YR9xIftY_TiJ_pYtdLTXoiH0tCw5p9PZ/view) 
+- [ ] **DS 03** [Sujet A <i class="far fa-file-pdf"></i>]( )
+
+## du 26 Avril au 6 Juillet 2021  
+- [ ] **Chapitre 07 Vecteurs** [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
+- [ ] **Chapitre 08 Probabilités**  [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
+- [ ] **Chapitre 09 Compléments de géométrie** [cours](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
+- [ ] **Chapitre 10 Statistiques** 
 - [ ] **Python** 
 	- [ ]  Boucles infinies ```while``` [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GdY8FPn2ykHXSzZcWqTbGcivpqlzcjDb/view) 
 	- [ ] **TP01** Principe accumulateur [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1cHXwmWz3wRwigM42upOfdHD0Fwa4YDrB/view) 
@@ -75,14 +83,6 @@ pagination:
 	- [ ] **TP04** Algorithme de recherche de zéro par **dichotomie** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1aSCMMYmplMMV47vcB7sNKISXZhHHxsAk/view) 
 	- [ ] **TP05** Algorithme de recherche de zéro par **méthode de la sécante** (si le temps le permet) [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/10AUZJL9--Oz_SEMCdJnx7EMjG_0zK3_Y/view) 
 	- [ ] **TP06** Algorithme de calcul de la longueur d'une courbe [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1JpIS6lgGLfk-HOy7hFfS6FvEnlxJaX9t/view) 
-- [ ] **Chapitre 07 Vecteurs** [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
-
-## du 26 Avril au 6 Juillet 2021 
-
-- [ ] **Chapitre 08 Probabilités**
-- [ ] **Chapitre 09 Compléments de géométrie** [cours](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
-- [ ] **Chapitre 10 Statistiques** 
-
 
 {: .box-section} 
 # Les 13 démonstrations exigibles
