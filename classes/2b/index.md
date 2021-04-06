@@ -62,14 +62,14 @@ pagination:
 - [x] **Évaluation 4 Systèmes linéaires** Exemples de sujets [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1WSdyfovh4Fs9fgl5wMou_SZNHkjzZQHf/view) et [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1x4Ovkf0FQJj-UymmEHrVHn0r5NnZGNM6/view) 
 
 ## du 22 Fév au 9 Avril 2021 
-- [ ] **Chapitre 06 Fonctions de référence** 
+- [x] **Chapitre 06 Fonctions de référence** 
 	- [x] Notions, tableaux de variation. [cours](https://drive.google.com/file/d/1iCtRXIaUeeOmlD258svoRhPzQ_FK9HEF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15xdIOufkymEVBBy8Kr9O0emyJjgFbEY-/view).
 	- [ ] Fonctions affines et autres fonctions de réference [cours](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18iV3UNY9-0dk_gjycXNmvU57JcfwKNUt/view).
-- [ ] **Automatismes** :
-	- [ ] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
-	- [ ] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1uswnX_sLNUp6R-m7miWuZ9H7OQ785hI7/view)
+- [x] **Automatismes** :
+	- [x] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
+	- [x] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1uswnX_sLNUp6R-m7miWuZ9H7OQ785hI7/view)
 - [x] **Évaluation 5 Equations (réduites) de droites** Exemples de sujets [Sujet A <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DB-PlOnf9mh34M05HAVUUx7JYxFgB5NQ/view) et [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1YR9xIftY_TiJ_pYtdLTXoiH0tCw5p9PZ/view) 
-- [ ] **DS 03** [Sujet A <i class="far fa-file-pdf"></i>]( )
+- [x] **DS 03** [Sujet B <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/16v4N8a4YPPkkiLYXQuibTHsPQJoPcsbF/view)
 
 ## du 26 Avril au 6 Juillet 2021  
 - [ ] **Chapitre 07 Vecteurs** [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
