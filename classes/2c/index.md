@@ -72,8 +72,15 @@ pagination:
 
 ## du 26 Avril au 6 Juillet 2021  
 - [ ] **Chapitre 06 Fonctions de référence** 
-	- [ ] Fonctions de réference [cours](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18iV3UNY9-0dk_gjycXNmvU57JcfwKNUt/view).
-- [ ] **Chapitre 07 Vecteurs** [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
+	- [ ] Fonctions de réference [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18iV3UNY9-0dk_gjycXNmvU57JcfwKNUt/view).
+- [ ] **Chapitre 07 Vecteurs** 
+	- [ ] Introduction [cours  <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1eGnIBRHSWxrhwCOTb-hfaEqtFs-4omRi/view)
+	- [ ] Vecteurs et coordonnées [cours  <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1jBoYhtY5oGD9AuBAj5-FpGSpAZa75oZS/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/13eu_2uiVfv5djDNVnhKJgbXmZw6kXnzB/view)  
+	- [ ] Somme de vecteurs [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1a4Y2IjPfT85hs-GUNz8U8lv9Xu8ggegj/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1o08jjT9ukks-JH9atGhSGQSNjV5uAJvI/view)  
+	- [ ] Produit d'un vecteur par un réels [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/17Zdwy4AvZz533jnywCtq5CgEWwdRiWbF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ZOXfCzs0eECWvZMTxCpdkk_R2o8DRl2a/view) 
+	- [ ] Colinéarité [cours et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FjAWkuh_pi3YX4RCEPLo1DfWQKfcCqwB/view)
+	- [ ] Bilan [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1zKWJBHRfn_aj_EILkVeLrUiAu1Qm7uwx/view) 
+	- [ ] ~~Approfondissements~~ [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1l7t4JV6zJG_m0wNwqZhfrjQ3sWG3jbux/view)
 - [ ] **Chapitre 08 Probabilités**  [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
 - [ ] **Chapitre 09 Compléments de géométrie** [cours](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
 - [ ] **Chapitre 10 Statistiques** 
