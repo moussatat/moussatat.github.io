@@ -40,15 +40,18 @@ title: Mathématiques 3èmes C
 
 ## du 22 Fév au 9 Avril 2021 
 
-- [ ] **Chapitre 07 Equations** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ITGvRwuoeC3-lr9rfnatBzseoKPsm5Ro/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1tXLAlYqacTeEQ--fVhiipdpp4baacf6I/view) 
-	- Évaluation Notions de fonctions et équations [<i class="far fa-file-pdf"></i>]() à venir
-- [ ] **Chapitre 08 Trigonométrie dans le triangle rectangle** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1u2ELRz4Ecl0uzLXrTXvP8TLUZpbz7tmo/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ij1y_9MAwDwg6RQrOG5_wrN6QTsoqegB/view)  
+- [x] **Chapitre 07 Equations** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ITGvRwuoeC3-lr9rfnatBzseoKPsm5Ro/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1tXLAlYqacTeEQ--fVhiipdpp4baacf6I/view) 
+	- Évaluation Notions de fonctions et équations [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1HDSBeStrvcXIGi6T5VQ1qXsmPezkcSP_/view)
+- [x] **Chapitre 08 Trigonométrie dans le triangle rectangle** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1u2ELRz4Ecl0uzLXrTXvP8TLUZpbz7tmo/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ij1y_9MAwDwg6RQrOG5_wrN6QTsoqegB/view)  
 	- AP 01 [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1CixWZyXp53NEB0fVsQVKdu7Or9shDxhn/view)  
-	- Évaluation Géométrie [<i class="far fa-file-pdf"></i>]()  à venir
-- [ ] **Chapitre 09 Fonctions linéaires** 
+	- Évaluation Géométrie [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1uySN2dUxZGFQDtXhDNicgnPTTetYxNcf/view)
+- [x] **Chapitre 09 Fonctions linéaires** 
+	- Partie A Définition, représentation. [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1UYnnc3Fh4gAVNpl7zdQ_jNTye35dCDwz/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1_ms9Sh1OM52W5SMrJsqNS-8nDwWUL2zI/view) 
 
 ## du 26 Avril au 5 Juillet 2021  
-
+- [ ] **Chapitre 09 Fonctions linéaires** 
+	- [ ] Partie B Pourcentages [Cours <i class="far fa-file-pdf"></i>]() et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1fIEDH0sbA1A3WFIfiHxWxl41z1vKgXRM/view)
+	- [ ] Partie C Problèmes de ratios
 - [ ] **Chapitre 10 Statistiques** 
 - [ ] **Chapitre 11 Fonctions affines** 
 - [ ] **Chapitre 12 Probabilités** 
