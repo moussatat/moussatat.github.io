@@ -50,8 +50,8 @@ title: Mathématiques 3èmes C
 
 ## du 26 Avril au 5 Juillet 2021  
 - [ ] **Chapitre 09 Fonctions linéaires** 
-	- [ ] Partie B Pourcentages [Cours <i class="far fa-file-pdf"></i>]() et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1fIEDH0sbA1A3WFIfiHxWxl41z1vKgXRM/view)
-	- [ ] Partie C Problèmes de ratios
+	- [ ] Partie B Pourcentages [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1BCiwLzSeY_lEh2Zfp_jON-WrdbkSiUqk/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1fIEDH0sbA1A3WFIfiHxWxl41z1vKgXRM/view)
+	- [ ] Partie C Problèmes de ratios [Rappels et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Sf_OAXJHhDaYzmZ3LeZgWSvAEIEfv9-1/view)
 - [ ] **Chapitre 10 Statistiques** 
 - [ ] **Chapitre 11 Fonctions affines** 
 - [ ] **Chapitre 12 Probabilités** 
