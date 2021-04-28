@@ -32,13 +32,23 @@ title: Mathématiques 4èmes B
 ## du 4 Jan au 5 Fév 2021 
 - [x] **Chapitre 04 Écritures fractionnaires et opérations**    
 	- Évaluation Bilan [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1lzlf8zzgbda7TdyJGvCqK0hV-Ncwv05J/view)
-- [ ] **Chapitre 05 Fractions Problèmes** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1V2loU_TU8wCfrzVrnwMZsrwiXqW5zV1f/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1HITqJpK6oj7RaB_jctbIYZcabQXbjnPV/view)
-- [ ] **Chapitre 06 Théorème de Thalès**
-- [ ] **Chapitre 07 Puissances**
- 
+- [ ] **Chapitre 05 Fractions, Ratios, Problèmes** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1V2loU_TU8wCfrzVrnwMZsrwiXqW5zV1f/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1HITqJpK6oj7RaB_jctbIYZcabQXbjnPV/view)
+
 ## du 22 Fév au 9 Avril 2021 
+- [x] **Chapitre 05 Fractions, Ratios, Problèmes**
+	- Évaluation bilan [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1imwRIA2tZSp1Cxo4KZFzbAxblLZE9hem/view)
+- [ ] **Chapitre 06 Calcul litteral**
+	- [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Q2RiQ1gFuTp2NwROKdQUyMForTwufo0Z/view) 
+	- [Activités <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1l9DsygUoLjeTjdS9a8emmDV6aPXCGwag/view)
+	- [Exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1o-xxgmSWN-ou6XIMHSQ3ojw3LGDf_CtD/view)
  
-- [ ] **Chapitre 08 Calcul litteral**
-- [ ] **Chapitre 09 Équations**
-- [ ] **Chapitre 10 Notions de fonctions**
-- [ ] **Chapitre 11 Statistiques**
+## du 26 Avril au 5 Juillet 2021  
+- [ ] **Chapitre 06 Calcul litteral**
+	- Distributivité double
+	- Factorisations et applications 
+	- Évaluation bilan [<i class="far fa-file-pdf"></i>]()
+- [ ] **Chapitre 07 Puissances**
+- [ ] **Chapitre 08 Équations**
+- [ ] **Chapitre 09 Égalité de triangles**
+- [ ] **Chapitre 10 Théorème de Thalès**  
+- [ ] **Chapitre 11 Probabilité**  
