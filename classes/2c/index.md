@@ -62,8 +62,8 @@ pagination:
 
 ## du 22 Fév au 9 Avril 2021 
 - [x] **Chapitre 06 Fonctions** 
-	- [x] Notions de fonctions, variation. [cours](https://drive.google.com/file/d/1iCtRXIaUeeOmlD258svoRhPzQ_FK9HEF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15xdIOufkymEVBBy8Kr9O0emyJjgFbEY-/view).
-	- [x] Fonctions affines [cours](https://drive.google.com/file/d/1OAnaHl6K8PkZujgktNIxaDFsSbp6JM8h/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18iV3UNY9-0dk_gjycXNmvU57JcfwKNUt/view).
+	- [x] Notions de fonctions, variation. [Cours](https://drive.google.com/file/d/1iCtRXIaUeeOmlD258svoRhPzQ_FK9HEF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15xdIOufkymEVBBy8Kr9O0emyJjgFbEY-/view).
+	- [x] Fonctions affines [cours](https://drive.google.com/file/d/1ZT9rPxXPX0gvGZ_5d0znL4A_mU8M0fk2/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1yEl907JWJwhd9KIFFZeqbKTIL1kZkVOy/view).
 - [x] **Automatismes** :
 	- [x] Équations rationnelles [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1AaVtMuvGltXesJYtzgy2-yajp0t7_RCM/view)
 	- [x] Résolution d'inéquations produit et quotient à l'aide de tableaux de signes [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1uswnX_sLNUp6R-m7miWuZ9H7OQ785hI7/view)
