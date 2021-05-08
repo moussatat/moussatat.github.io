@@ -82,8 +82,10 @@ pagination:
 	- [ ] Propriétés des opérations [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/13pFlve-b12x1fY1EOCUo_10_8OXycqsv/view) 
 	- [ ] Équations cartésiennes de droites [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1QiAUW1f58mQQJ8Q-vhiQwkFbUzJ6NBfZ/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1bUHKzLN61cEjM63AGm49-dNGzantoPMz/view) 
 	- [ ] ~~Approfondissements~~ [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1l7t4JV6zJG_m0wNwqZhfrjQ3sWG3jbux/view)
-- [ ] **Chapitre 08 Probabilités**  [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
-- [ ] **Chapitre 09 Compléments de géométrie** [cours](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
+- [ ] **Chapitre 08 Probabilités**  [cours](https://drive.google.com/file/d/1kVsO1k8prQZVT-gnAvzHlC5LADzlyGGm/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GEPmb-ndrFf10V6H85b8FwTFF5L26tFM/view)  
+	- [ ] Activité Dés en folie [<i class="far fa-file-pdf"></i>]()
+	- [ ] Bonus : Loi de Hardy en génétique [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1skzaV6bIVh1NEF4q8APSBAhSvjymb5N8/view)
+- [ ] **Chapitre 09 Compléments de géométrie** [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
 - [ ] **Chapitre 10 Statistiques** 
 - [ ] **Python** 
 	- [ ]  Boucles infinies ```while``` [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GdY8FPn2ykHXSzZcWqTbGcivpqlzcjDb/view) 

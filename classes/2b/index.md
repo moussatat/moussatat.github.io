@@ -81,9 +81,12 @@ pagination:
 	- [ ] Somme de vecteurs [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1a4Y2IjPfT85hs-GUNz8U8lv9Xu8ggegj/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1o08jjT9ukks-JH9atGhSGQSNjV5uAJvI/view)  
 	- [ ] Produit d'un vecteur par un réel [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/17Zdwy4AvZz533jnywCtq5CgEWwdRiWbF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ZOXfCzs0eECWvZMTxCpdkk_R2o8DRl2a/view) 
 	- [ ] Colinéarité [cours et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FjAWkuh_pi3YX4RCEPLo1DfWQKfcCqwB/view)
-	- [ ] Bilan [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1zKWJBHRfn_aj_EILkVeLrUiAu1Qm7uwx/view) 
+	- [ ] Propriétés des opérations [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/13pFlve-b12x1fY1EOCUo_10_8OXycqsv/view) 
+	- [ ] Équations cartésiennes de droites [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1QiAUW1f58mQQJ8Q-vhiQwkFbUzJ6NBfZ/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1bUHKzLN61cEjM63AGm49-dNGzantoPMz/view) 
 	- [ ] ~~Approfondissements~~ [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1l7t4JV6zJG_m0wNwqZhfrjQ3sWG3jbux/view)
-- [ ] **Chapitre 08 Probabilités**  [cours]() et [exercices <i class="far fa-file-pdf"></i>]()  à venir
+- [ ] **Chapitre 08 Probabilités**  [cours](https://drive.google.com/file/d/1kVsO1k8prQZVT-gnAvzHlC5LADzlyGGm/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GEPmb-ndrFf10V6H85b8FwTFF5L26tFM/view)  
+	- [ ] Activité Dés en folie [<i class="far fa-file-pdf"></i>]()
+	- [ ] Bonus : Loi de Hardy en génétique [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1skzaV6bIVh1NEF4q8APSBAhSvjymb5N8/view)
 - [ ] **Chapitre 09 Compléments de géométrie** [cours](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
 - [ ] **Chapitre 10 Statistiques** 
 - [ ] **Python** 
