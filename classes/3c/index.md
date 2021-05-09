@@ -49,11 +49,11 @@ title: Mathématiques 3èmes C
 	- Partie A Définition, représentation. [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1UYnnc3Fh4gAVNpl7zdQ_jNTye35dCDwz/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1_ms9Sh1OM52W5SMrJsqNS-8nDwWUL2zI/view) 
 
 ## du 26 Avril au 5 Juillet 2021  
-- [ ] **Chapitre 09 Fonctions linéaires** 
-	- [ ] Partie B Pourcentages [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1BCiwLzSeY_lEh2Zfp_jON-WrdbkSiUqk/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1fIEDH0sbA1A3WFIfiHxWxl41z1vKgXRM/view)
+- [x] **Chapitre 09 Fonctions linéaires** 
+	- [x] Partie B Pourcentages [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1BCiwLzSeY_lEh2Zfp_jON-WrdbkSiUqk/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1fIEDH0sbA1A3WFIfiHxWxl41z1vKgXRM/view)
 	- [ ] Partie C Problèmes de ratios [Rappels et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Sf_OAXJHhDaYzmZ3LeZgWSvAEIEfv9-1/view)
-- [ ] **Chapitre 10 Statistiques** 
-- [ ] **Chapitre 11 Fonctions affines** 
-- [ ] **Chapitre 12 Probabilités** 
+- [x] **Chapitre 10 Statistiques** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DpMkuZfEgdxcEEjqiR0qF7s60HRkkVL1/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1-KWUxrOjtsjOlqoQpTAMYjnCsSr5PkLX/view)
+- [ ] **Chapitre 11 Probabilités** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1gYGBhxnprx5KwLI1mahpZeM6Hud9W31c/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1alql_ljBrLH387HlXUcbNZDm3UDBAUyK/view)
+- [ ] **Chapitre 12 Fonctions affines** 
 - [ ] **Chapitre 13 Géométries dans l'espace** 
 
