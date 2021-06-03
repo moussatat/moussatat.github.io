@@ -53,7 +53,7 @@ title: Mathématiques 3èmes C
 	- [x] Partie B Pourcentages [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1BCiwLzSeY_lEh2Zfp_jON-WrdbkSiUqk/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1fIEDH0sbA1A3WFIfiHxWxl41z1vKgXRM/view)
 	- [ ] Partie C Problèmes de ratios [Rappels et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Sf_OAXJHhDaYzmZ3LeZgWSvAEIEfv9-1/view)
 - [x] **Chapitre 10 Statistiques** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DpMkuZfEgdxcEEjqiR0qF7s60HRkkVL1/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1-KWUxrOjtsjOlqoQpTAMYjnCsSr5PkLX/view)
-- [ ] **Chapitre 11 Probabilités** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1gYGBhxnprx5KwLI1mahpZeM6Hud9W31c/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1alql_ljBrLH387HlXUcbNZDm3UDBAUyK/view)
-- [ ] **Chapitre 12 Fonctions affines** 
-- [ ] **Chapitre 13 Géométries dans l'espace** 
+- [x] **Chapitre 11 Probabilités** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1gYGBhxnprx5KwLI1mahpZeM6Hud9W31c/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1alql_ljBrLH387HlXUcbNZDm3UDBAUyK/view)
+- [x] **Chapitre 12 Fonctions affines** [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/15tpR5876LqBEIozn7b5QS__lQiyGiBIk/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1XXtcSmdUY5QazBuqWafoaOeAloariH8H/view)
+- [ ] **Chapitre 13 Géométries dans l'espace** [Cours et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DIELLrfJkyEEXwltsgmhtCt9VY34dsQ3/view)
 
