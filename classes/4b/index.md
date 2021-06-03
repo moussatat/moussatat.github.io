@@ -37,24 +37,22 @@ title: Mathématiques 4èmes B
 ## du 22 Fév au 9 Avril 2021 
 - [x] **Chapitre 05 Fractions, Ratios, Problèmes**
 	- Évaluation bilan [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1imwRIA2tZSp1Cxo4KZFzbAxblLZE9hem/view)
-- [ ] **Chapitre 06 Calcul litteral**
+- [x] **Chapitre 06 Calcul litteral**
 	- [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1Q2RiQ1gFuTp2NwROKdQUyMForTwufo0Z/view) 
 	- [Activités <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1l9DsygUoLjeTjdS9a8emmDV6aPXCGwag/view)
 	- [Exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1o-xxgmSWN-ou6XIMHSQ3ojw3LGDf_CtD/view) 
  
 ## du 26 Avril au 5 Juillet 2021  
-- [ ] **Chapitre 06 Calcul litteral**
+- [x] **Chapitre 06 Calcul litteral**
 	- Distributivité double
 	- Factorisations et applications 
 	- Évaluation bilan [<i class="far fa-file-pdf"></i>]() à venir
 - [ ] **Chapitre 07 Puissances**
 	- [Cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1CKWaAlMGRdvjU9ECFUSXtxVwfZTgoMbw/view)  
 	- [Exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1MBs8y5GWXuD824_m4sS2O7QVfXIq5UCs/view)
-	- Évaluation bilan [<i class="far fa-file-pdf"></i>]() à venir
-- [ ] **Chapitre 08 Équations**
+- [x] **Chapitre 08 Équations**
 	- [Cours <i class="far fa-file-pdf"></i>]()  
 	- [Exercices <i class="far fa-file-pdf"></i>]()
-	- Évaluation bilan [<i class="far fa-file-pdf"></i>]() à venir
 - [ ] **Chapitre 09 Égalité de triangles**
 - [ ] **Chapitre 10 Théorème de Thalès**  
 - [ ] **Chapitre 11 Probabilité**  
