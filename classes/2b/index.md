@@ -82,21 +82,10 @@ pagination:
 	- [x] Produit d'un vecteur par un réel [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/17Zdwy4AvZz533jnywCtq5CgEWwdRiWbF/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1ZOXfCzs0eECWvZMTxCpdkk_R2o8DRl2a/view) 
 	- [x] Colinéarité [cours et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FjAWkuh_pi3YX4RCEPLo1DfWQKfcCqwB/view)
 	- [x] Propriétés des opérations [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/13pFlve-b12x1fY1EOCUo_10_8OXycqsv/view) 
-	- [x] Équations cartésiennes de droites [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1QiAUW1f58mQQJ8Q-vhiQwkFbUzJ6NBfZ/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1bUHKzLN61cEjM63AGm49-dNGzantoPMz/view) 
-	- [ ] ~~Approfondissements~~ [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1l7t4JV6zJG_m0wNwqZhfrjQ3sWG3jbux/view)
-- [x] **Chapitre 08 Probabilités**  [cours](https://drive.google.com/file/d/1kVsO1k8prQZVT-gnAvzHlC5LADzlyGGm/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GEPmb-ndrFf10V6H85b8FwTFF5L26tFM/view)  
-	- [x] Activité Dés en folie [<i class="far fa-file-pdf"></i>]([<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1H82lFPcxdQHj4tIt1eqLDP8qN2B5wF2j/view))
-	- [ ] ~~Bonus : Loi de Hardy en génétique~~ [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1skzaV6bIVh1NEF4q8APSBAhSvjymb5N8/view)
-- [ ] **Chapitre 09 Compléments de géométrie** [cours](https://drive.google.com/file/d/1l1If3Ne4edcXsMUgnE1MevzXOu5rFdz0/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1FPVHPQt0DBsARXhq4YGC-d94PSfiR79V/view).
-- [x] **Chapitre 10 Statistiques** [cours et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1XjYDc69EfIGAzy-VMCuMdQS3RTglEviJ/view)
-- [ ] **Python** 
-	- [ ]  Boucles infinies ```while``` [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GdY8FPn2ykHXSzZcWqTbGcivpqlzcjDb/view) 
-	- [ ] **TP01** Principe accumulateur [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1cHXwmWz3wRwigM42upOfdHD0Fwa4YDrB/view) 
-	- [ ] **TP02 Algorithme de Babylone** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/18qs1BJgd6GM1f_Btz40dGm3oH-NvoqkT/view) 
-	- [ ] **TP03** Algorithme de recherche de zéro par **balayage** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1DUTnU2MOrDqyfxea7WbBG8aoke241Pbf/view) 
-	- [ ] **TP04** Algorithme de recherche de zéro par **dichotomie** [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1aSCMMYmplMMV47vcB7sNKISXZhHHxsAk/view) 
-	- [ ] **TP05** Algorithme de recherche de zéro par **méthode de la sécante** (si le temps le permet) [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/10AUZJL9--Oz_SEMCdJnx7EMjG_0zK3_Y/view) 
-	- [ ] **TP06** Algorithme de calcul de la longueur d'une courbe [<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1JpIS6lgGLfk-HOy7hFfS6FvEnlxJaX9t/view) 
+	- [x] Équations cartésiennes de droites [cours <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1QiAUW1f58mQQJ8Q-vhiQwkFbUzJ6NBfZ/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1bUHKzLN61cEjM63AGm49-dNGzantoPMz/view)  
+- [ ] **Chapitre 08 Probabilités**  [cours](https://drive.google.com/file/d/1kVsO1k8prQZVT-gnAvzHlC5LADzlyGGm/view) et [exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1GEPmb-ndrFf10V6H85b8FwTFF5L26tFM/view)  
+	- [ ] Activité Dés en folie [<i class="far fa-file-pdf"></i>]([<i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1H82lFPcxdQHj4tIt1eqLDP8qN2B5wF2j/view)) 
+- [x] **Chapitre 10 Statistiques** [cours et exercices <i class="far fa-file-pdf"></i>](https://drive.google.com/file/d/1XjYDc69EfIGAzy-VMCuMdQS3RTglEviJ/view) 
 
 {: .box-section} 
 # Les 13 démonstrations exigibles
@@ -108,7 +97,7 @@ pagination:
 1. [x] Quels que soient les réels positifs \\(a\\) et \\(b\\) : \\(\sqrt{ab}=\sqrt{a} \sqrt{b}\\)​.
 1. [x] Pour tous réels \\(a\\) et \\(b\\) strictement positifs : \\(\sqrt{a+b} \leqslant \sqrt{a} + \sqrt{b}\\).
 1. [x] Illustration géométrique de l’identité remarquable \\((a+b)^2 = a^2 + 2ab + b^2\\) lorsque \\(a\\) et \\(b\\) sont strictement positifs.
-1. [ ] Deux vecteurs (du plan) sont colinéaires ssi leur déterminant est nul.
+1. [x] Deux vecteurs (du plan) sont colinéaires ssi leur déterminant est nul.
 1. [ ] Le projeté orthogonal d’un point \\(M\\) sur une droite \\(\Delta\\) est le point de la droite \\(\Delta\\)  le plus proche du point \\(M\\).
 1. [ ] Relation trigonométrique *pythagoricienne* \\(\cos^2(\alpha) + \sin^2(\alpha) =1\\) dans un triangle rectangle.
 1. [ ] En utilisant le déterminant, établir la forme générale d’une équation de droite, dans le plan.
