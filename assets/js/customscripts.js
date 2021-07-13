@@ -1,4 +1,0 @@
-/*!
- * custom scripts for image
- */
- 
