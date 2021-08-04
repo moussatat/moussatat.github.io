@@ -1,0 +1,117 @@
+%!TeX root=main.tex
+%----------------------------------------------------------------------------------------
+%	POSTER
+%----------------------------------------------------------------------------------------
+\clearpage
+\loadgeometry{fullwidthlayout}  
+\pagestyle{plain.scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar, 
+}      
+\doublespacing 
+
+
+\tikzset{
+	set angles for level/.style={level #1/.append style={sibling angle=360/(\the\tikznumberofchildren+4)}},
+	level/.append code={
+		\edef\tempa{#1}\edef\tempb{1}
+		\ifx\tempa\tempb\tikzset{level 1/.append style={sibling angle=360/\the\tikznumberofchildren}}\else\tikzset{set angles for level=#1}\fi},
+	%     set angles for level=#1},% solution 1
+	non-concept/.style={
+		rectangle,
+		text width=15em,
+		text=black,
+		align=left,
+		font=\large,
+	},
+	cncc/.style={ edge from parent path={ (\tikzparentnode.#1) to [bend right] (\tikzchildnode)   } },
+}
+  
+\hvFloat*[fullpage,  capPos=after]{figure}%
+{
+\begin{tikzpicture}[level 1 concept/.append style={font=\large, level distance=150} ] 
+	\clip(-21,-14) rectangle (0,14.0);
+	\path[mindmap, concept color=Aquamarine, grow cyclic]
+	node[concept] {$a,b\in\mathbb{R}$, $b\neq0$\\ $\frac{a}{b}$}%[clockwise from=45]
+	child[level distance=8cm, concept color=blue!20!white] {
+		node[concept, text width=7cm, rectangle, rounded corners] (def) {Inverse de $b\neq 0$ se note $\frac{1}{b}$\\ $ b\times \frac{1}{b}=1$ }
+		child[level distance=7.5cm] { node[non-concept, align=center] {Inverse de $\frac{a}{b} = \frac{1}{\frac{a}{b}}=\frac{b}{a}$} edge from parent[cncc=west] }
+		child[level distance=5cm] { node[non-concept] { L'inverse de $0$ n'existe pas $\cancel{\frac{1}{0}}$} edge from parent[cncc=south west] }  
+	}
+	child[level distance=7cm, concept color=Pink]  { node[concept, text width=7cm, rectangle, rounded corners ] {Fraction comme multiplication :\\ $\frac{a}{b}=a\times \frac{1}{b}$} 
+		[clockwise from=90]
+		child[level distance=8cm] { node[non-concept] {L'unité :\\
+				$\frac{b}{b}=b\times \frac{1}{b}=1$	} edge from parent[cncc= east] }
+		child[level distance=5cm] { node[non-concept] {Fractions de fractions :\\
+				$\frac{\frac{a}{b}}{\frac{c}{d}}=\frac{a}{b}\times \frac{1}{\frac{c}{d}}=\frac{a}{b}\times \frac{d}{c}$	} edge from parent[cncc= south] }
+		child[level distance=6cm] { node[non-concept] {$\frac{a}{b}\times c =\frac{a\times c}{b} = a\times \frac{c}{b}$} edge from parent[cncc=south west] } 
+	}
+	child[level distance=8cm, concept color=Bisque]{ node[concept, text width=7cm, rectangle, rounded corners ] {Multiplication de fractions :\\ $\frac{a}{b}\times \frac{c}{d}=\frac{a\times c}{b\times d}$} 
+		[clockwise from=45]
+		%			child[level distance=5cm] { node[non-concept] {Establishing Trust \& Intimacy with the Client} edge from parent[cncc=east] }
+		child[level distance=7.5cm] { node[non-concept] {Simplification/Amplification :\\ $\frac{a}{b}=\frac{a}{b}\times \frac{c}{c}= \frac{a\times c}{b\times c}$} edge from parent[cncc=  east] }    
+		child[level distance=8cm] { node[non-concept] {Règles des signes :\\ $\frac{-a}{b}=-\frac{a}{b}=\frac{a}{-b}$\\ $\frac{-a}{-b}=\frac{a}{b}$} edge from parent[cncc=south   ] }    
+	}
+	child[level distance=7cm, concept color=AntiqueWhite]  { node[concept, text width=7cm, rectangle, rounded corners] {Fraction comme quotient :\\ $\frac{a}{b}=a\divisionsymbol b$} 
+		[clockwise from=-45]
+		child[level distance=7.5cm] { node[non-concept, text width=10cm  ] {Diviser revient à multiplier par l'inverse : \\ $\frac{a}{b}\divisionsymbol \frac{c}{d}=\frac{\frac{a}{b}}{\frac{c}{d}}=\frac{a}{b}\times \frac{d}{c}$} edge from parent[cncc= east] }  
+	}   
+	child[level distance=8cm, concept color=Cyan]  { node[concept, text width=7cm, rectangle, rounded corners] {Sommes de fractions :\\ Ramener au même dénominateur} 
+		[clockwise from=0]
+		%			child[level distance=5cm] { node[non-concept] {Establishing Trust \& Intimacy with the Client} edge from parent[cncc=west] }
+		%			child[level distance=5cm] { node[non-concept] {Coaching Presence} edge from parent[cncc=west] } 
+		child[level distance=5cm] { node[ non-concept , text width=8cm,] { $\frac{a}{b}+\frac{c}{d}=\frac{a\times d}{b\times d}+ \frac{c\times b}{d\times b}=\frac{ad+bc}{bd}$} edge from parent[cncc=north] } 
+		%			child[level distance=5cm] { node[non-concept] {Coaching Presence} edge from parent[cncc=east] }     
+	}; 
+\end{tikzpicture} 
+}%
+%[A float]%
+{Règles opératoires des écritures fractionnaires}{poster:fractions}
+
+\hvFloat*[fullpage, capPos=after]{figure}%
+{
+\begin{tikzpicture}[level 1 concept/.append style={font=\large, level distance=150} ]
+	\clip(0,-14.0) rectangle (21,14.0);
+	\path[mindmap, concept color=Aquamarine, grow cyclic]
+	node[concept] {$a,b\in\mathbb{R}$, $b\neq0$\\ $\frac{a}{b}$}%[clockwise from=45]
+	child[level distance=8cm, concept color=blue!20!white] {
+		node[concept, text width=7cm, rectangle, rounded corners] (def) {Inverse de $b\neq 0$ se note $\frac{1}{b}$\\ $ b\times \frac{1}{b}=1$ }
+		child[level distance=7.5cm] { node[non-concept, align=center] {Inverse de $\frac{a}{b} = \frac{1}{\frac{a}{b}}=\frac{b}{a}$} edge from parent[cncc=west] }
+		child[level distance=5cm] { node[non-concept] { L'inverse de $0$ n'existe pas $\cancel{\frac{1}{0}}$} edge from parent[cncc=south west] }  
+	}
+	child[level distance=7cm, concept color=Pink]  { node[concept, text width=7cm, rectangle, rounded corners ] {Fraction comme multiplication :\\ $\frac{a}{b}=a\times \frac{1}{b}$} 
+		[clockwise from=90]
+		child[level distance=8cm] { node[non-concept] {L'unité :\\
+				$\frac{b}{b}=b\times \frac{1}{b}=1$	} edge from parent[cncc= east] }
+		child[level distance=5cm] { node[non-concept] {Fractions de fractions :\\
+				$\frac{\frac{a}{b}}{\frac{c}{d}}=\frac{a}{b}\times \frac{1}{\frac{c}{d}}=\frac{a}{b}\times \frac{d}{c}$	} edge from parent[cncc= south] }
+		child[level distance=6cm] { node[non-concept] {$\frac{a}{b}\times c =\frac{a\times c}{b} = a\times \frac{c}{b}$} edge from parent[cncc=south west] } 
+	}
+	child[level distance=8cm, concept color=Bisque]{ node[concept, text width=7cm, rectangle, rounded corners ] {Multiplication de fractions :\\ $\frac{a}{b}\times \frac{c}{d}=\frac{a\times c}{b\times d}$} 
+		[clockwise from=45]
+		%			child[level distance=5cm] { node[non-concept] {Establishing Trust \& Intimacy with the Client} edge from parent[cncc=east] }
+		child[level distance=7.5cm] { node[non-concept] {Simplification/Amplification :\\ $\frac{a}{b}=\frac{a}{b}\times \frac{c}{c}= \frac{a\times c}{b\times c}$} edge from parent[cncc=  east] }    
+		child[level distance=8cm] { node[non-concept] {Règles des signes :\\ $\frac{-a}{b}=-\frac{a}{b}=\frac{a}{-b}$\\ $\frac{-a}{-b}=\frac{a}{b}$} edge from parent[cncc=south   ] }    
+	}
+	child[level distance=7cm, concept color=AntiqueWhite]  { node[concept, text width=7cm, rectangle, rounded corners] {Fraction comme quotient :\\ $\frac{a}{b}=a\divisionsymbol b$} 
+		[clockwise from=-45]
+		child[level distance=7.5cm] { node[non-concept, text width=10cm  ] {Diviser revient à multiplier par l'inverse : \\ $\frac{a}{b}\divisionsymbol \frac{c}{d}=\frac{\frac{a}{b}}{\frac{c}{d}}=\frac{a}{b}\times \frac{d}{c}$} edge from parent[cncc= east] }  
+	}   
+	child[level distance=8cm, concept color=Cyan]  { node[concept, text width=7cm, rectangle, rounded corners] {Sommes de fractions :\\ Ramener au même dénominateur} 
+		[clockwise from=0]
+		%			child[level distance=5cm] { node[non-concept] {Establishing Trust \& Intimacy with the Client} edge from parent[cncc=west] }
+		%			child[level distance=5cm] { node[non-concept] {Coaching Presence} edge from parent[cncc=west] } 
+		child[level distance=5cm] { node[ non-concept , text width=8cm,] { $\frac{a}{b}+\frac{c}{d}=\frac{a\times d}{b\times d}+ \frac{c\times b}{d\times b}=\frac{ad+bc}{bd}$} edge from parent[cncc=north] } 
+		%			child[level distance=5cm] { node[non-concept] {Coaching Presence} edge from parent[cncc=east] }     
+	}; 
+\end{tikzpicture}
+}%
+%[A float]%
+{Partie 2}{}
+\clearpage
+
+
+ 

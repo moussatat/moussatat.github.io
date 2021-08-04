@@ -1,0 +1,110 @@
+%!TeX root=main.tex
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\section{Vocabulaire des ensembles}
+\begin{definition}
+	Un ensemble $E$ est constitué d'éléments. 
+	%	Un ensemble est connu si l'on sait décider qu'un objet appartient ou n'appartient pas à cet ensemble.
+	
+	$a\in E$ se lit \og l'élément $a$ appartient à l'ensemble $E$ \fg{}.
+	
+	$a\notin E$ se lit \og l'élément $a$ n'appartient pas à l'ensemble $E$ \fg{}.
+\end{definition}
+\begin{definition}
+	$F$ est un \textbf{sous-ensemble} de l'ensemble $E$ si tous les éléments de $F$ appartiennent aussi à $E$. 
+	On écrira : 
+	
+	$F\subset E$ se lit \og l'ensemble $F$ est \textbf{inclus} dans l'ensemble $E$\fg{}.
+\end{definition}
+\begin{example} 
+	\begin{marginfigure}
+		\includegraphics[width=0.90\marginparwidth]{ensembles.pdf}
+		\caption{Diagramme des ensembles $A$ et $B$} \label{fig:ensemble}
+	\end{marginfigure} 
+	Soit les ensembles $A=\{43; 0; 7 ; 188 \}$, $B=\{7; 4; 82\}$ et $D=\{188; 0; 43\}$.
+	
+	L'ordre d'écriture des éléments  entre accolades n'est pas important : $\{43 ; 0 ; 7 ; 188\} = \{ 7 ; 43 ; 188 ; 0\} $.   
+	
+	43; 0; 7 et 188 sont les \textbf{éléments} de l'ensemble $A$.
+	
+	$43\in A$ % se lit \og 43 \textbf{appartient} à $A$ \fg{}.
+	
+	$82\notin A$ % se lit \og 82 \textbf{n'appartient pas} à $A$ \fg{}.
+	
+	$D\subset A$ car tout élément de $D$ \textbf{appartient} à $A$.
+	
+	$B\not\subset A$. $B$ n'est pas un sous-ensemble de $A$.   
+\end{example} 
+\begin{remark}  Les éléments d'un ensemble doivent être distincts deux-à-deux. $\{0; 5; 0\}$ n'est pas une écriture correcte. 
+\end{remark}
+
+\begin{exerciseT} \hfill 
+	\begin{enumerate}[leftmargin=*]
+		\item 	Compléter à l'aide de $\in$, $\ni$, $\notin$, $\not\ni$, $\subset$, $\supset$  :
+		
+		$ 7\ldots A$ \qquad $43 \ldots A$ \qquad $\{43; 7; 188\} \ldots A$ \qquad $A\ldots 4$ 
+		
+		$ 7\ldots B$ \qquad $ \{7\}\ldots B$ \qquad $B \ldots 43$ \qquad $B\ldots \{ 4; 7\}$ \qquad 
+		\item Donner un ensemble inclus à la fois dans $A$ et dans $B$.
+	\end{enumerate}
+\end{exerciseT} 
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\section{Ensembles particuliers}
+
+\begin{definition}[$\mathbb{N}$ ensemble des entiers naturels]
+	$$\mathbb{N}=\{0;1;2;3;4;\dots\}$$ 
+\end{definition}
+
+\begin{definition}[$\mathbb{Z}$ ensemble des entiers relatifs ]
+	$$\mathbb{Z}=\{\dots;-2;-1;0;1;2;3;\dots\}$$
+\end{definition} 
+Il est composé des nombres entiers naturels et de leurs opposés.
+Tout entier naturel est un entier relatif : $\mathbb{N}\subset \mathbb{Z}$ 
+\begin{definition}[$\mathbb{R}$ ensemble des nombres réels]
+\end{definition}
+
+\begin{figure}[hb]
+	\begin{tikzpicture} 
+		\tkzInit[xmin=-3.5, xmax=6.5]
+		\tkzDrawX[  label={$x$},below right=6pt , line width=1.2pt] %noticks, 
+		\tkzDefPoint(0,0){O}
+		\foreach \x/\xtext in {1.414/\sqrt{2}} {
+			\draw[line width=1.2pt] (\x,0.1cm) -- (\x,-0.1cm) node[below] {$\xtext\strut$};
+		}
+		\foreach \x/\xtext in {0/$0$,-2/$-2$,4/$4$,3.14/\pi} {
+			\draw[line width=1.2pt] (\x,-0.1cm) -- (\x,+0.1cm) node[below] {$\xtext\strut$};
+		}
+	\end{tikzpicture}
+	\caption{L'ensemble des réels est représenté par une droite graduée. Chaque nombre réel correspond à un unique point de la droite graduée.   Réciproquement, à chaque point de la droite graduée correspond un unique réel, appelé \emph{abscisse} de ce point.}
+	\label{fig:droitereels}
+\end{figure} 
+L'ensemble des réels $\mathbb{R}$ contient tout type de nombres :
+\begin{enumerate}[label=\alph*),leftmargin=*]
+	\item les entiers relatifs : $\mathbb{Z}\subset \mathbb{R}$
+	\item les décimaux positifs ou négatifs : $-\numprint{4.3}\in \mathbb{R}$ 
+	\item les fractions d'entiers relatifs : $\tfrac{4}{3}$,  $-\tfrac{4}{10}$
+	\item des constantes géométriques $\pi$, $\cos(\ang{45})=\tfrac{1}{\sqrt{2}}$, $\sin(\ang{60})=\tfrac{\sqrt{3}}{2}$,  ...
+	\item et bien plus encore ...
+\end{enumerate} 
+\begin{exerciseT}Compléter par $\in$, $\notin$ : 
+	\begin{gather*}
+		245 \ldots \mathbb{N} ;\qquad  2^5 \ldots \mathbb{N} ;\qquad \tfrac{3}{15} \ldots\mathbb{N}; \qquad \tfrac{15}{3} \ldots \mathbb{Z}; \\
+		0 \ldots\mathbb{N}^*; \quad    0 \ldots\mathbb{N}; \qquad -5\ldots \mathbb{Z};\quad -5 \ldots \mathbb{N} ; \quad \numprint{4.3}\ldots \mathbb{N} 
+	\end{gather*} 
+\end{exerciseT} 
+\begin{definition}[Ensembles étoilé] \hfill 
+	
+	$\mathbb{N}^*=\mathbb{N}\setminus\{0\}=\{1;2;3;4;\dots\}$  est l'ensemble des entiers naturels non nuls.
+	
+	$\mathbb{Z}^*=\mathbb{Z}\setminus\{0\}=\{\dots;-2;-1;1;2;3;\dots\}$  est l'ensemble des entiers relatifs non nuls.
+	
+	$\mathbb{R}^*=\mathbb{R}\setminus\{0\}$ est l'ensemble des nombres réels non nuls.
+\end{definition}
+De manière plus générale, on peut écrire $\mathbb{R}\setminus\{-2; 4; 5\}$ pour désigner l'ensemble des nombres réels autre que $-2$, $4$ et $5$. 
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------  

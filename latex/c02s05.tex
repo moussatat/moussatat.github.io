@@ -1,0 +1,158 @@
+%!TEX root = ../chapter02.tex 
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	 
+%---------------------------------------------------------------------------------------- 
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+	paper=A4,
+	paper=portrait,
+}     
+
+\onehalfspacing    
+\section{Factorisation à l'aide d'identités remarquables}
+
+\begin{exercise} Compléter les égalités suivantes par des identités remarquables :
+	\begin{align*}
+		\big(x-\ldots\ldots\big)^2&=\ldots\ldots x^2-\ldots\ldots x+36 \rule{0pt}{1.6em} \\
+		\big(\ldots\ldots+\ldots\ldots\big)^2&=9  x^2+\ldots\ldots x+16 \rule{0pt}{1.6em} \\ 
+		\big(\ldots\ldots x+\ldots\ldots\big)^2&=\ldots\ldots+ 20 x+4\rule{0pt}{1.6em} \\
+		\big(\ldots\ldots x+\ldots\ldots\big)\big(\ldots\ldots - \ldots\ldots\big)&=4x^2 -36\rule{0pt}{1.6em} \\ 
+		\big(\ldots\ldots x+\ldots\ldots\big)\big(\ldots\ldots - \ldots\ldots\big)&=36x^2 -4\rule{0pt}{1.6em} 
+	\end{align*} 
+\end{exercise}
+
+\begin{example}[factoriser des expressions sous la forme $a^2\pm 2ab+b^2$]\hfill  
+	
+\noindent\parbox{0.45\linewidth}{	
+$\begin{WithArrows}
+A& = x^2 +8x +16 \rule{0pt}{1.6em} \\
+&= \big ( \qquad \big)^2 \ldots 2\times\big ( \qquad \big)\times \big ( \qquad \big) \ldots \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+& =\big ( \qquad\qquad\qquad \big)^2\rule{0pt}{1.6em}   
+\end{WithArrows}$ 	
+}\hfill\parbox{0.45\linewidth}{	
+$\begin{WithArrows}
+	B& = x^2 -6x +9 \rule{0pt}{1.6em} \\
+	&= \big ( \qquad \big)^2 \ldots 2\times\big ( \qquad \big)\times \big ( \qquad \big) \ldots \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+	& =\big ( \qquad\qquad\qquad \big)^2\rule{0pt}{1.6em}   
+\end{WithArrows}$ 	
+}
+	
+\noindent\parbox{0.45\linewidth}{	
+	$\begin{WithArrows}
+		C& = 25x^2 +80x +64 \rule{0pt}{1.6em} \\
+		&= \big ( \qquad \big)^2 \ldots 2\times\big ( \qquad \big)\times \big ( \qquad \big) \ldots \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+		& =\big ( \qquad\qquad\qquad \big)^2\rule{0pt}{1.6em}   
+	\end{WithArrows}$ 	
+}\hfill\parbox{0.45\linewidth}{	
+	$\begin{WithArrows}
+		D& = \frac{1}{4}x^2+x+1 \rule{0pt}{1.6em} \\
+		&= \big ( \qquad \big)^2 \ldots 2\times\big ( \qquad \big)\times \big ( \qquad \big) \ldots \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+		& =\big ( \qquad\qquad\qquad \big)^2\rule{0pt}{1.6em}   
+	\end{WithArrows}$ 	
+}	 
+\end{example} 
+\begin{exercise}\label{chap02:exo:factoriser:identite:niveau1} Pour $x\in\mathbb{R}$. Factoriser au maximum les expressions suivantes à l'aide d'identités remarquables :
+	\begin{multicols}{3}
+		\begin{enumerate}[label={$\Alph*(x)=$},left= 0pt]
+			\item $x^2 + 2x + 1$ 
+			\item $1 - 2x + x^2$ 
+			\item $x^2 + 6x + 9$
+			\item $4x^2 + 4x + 1$ 
+			\item $4x^2 + 12x + 9$ 
+			\item $4x^2 - 12x + 9$
+			\item $x^2 + x + \tfrac{1}{4}$  
+			\item $9x^2-6\sqrt{5}x + 5$  
+			\item $3x^2-2\sqrt{3}x + 1$  
+		\end{enumerate}
+	\end{multicols}
+\end{exercise}
+\begin{exercise}\label{chap02:exo:factoriser:identite:niveau2} \emoji{cactus} Pour $x\in\mathbb{R}$. Factoriser au maximum  :
+	\begin{multicols}{3}
+		\begin{enumerate}[label={$\Alph*(x)=$},left= 0pt]
+			\item $x^2-36$ 
+			\item $4x^2-36$
+			\item $36x^2-4$ 
+			\item $(2x-1)^2-25$
+			\item $(3x+7)^2-16$
+			\item $4(2x-1)^2-100$  
+			\item $9(2x-1)^2-4x^2$
+			\item $4(2x-1)^2-25x^2$  
+			\item $4(2x-1)^2-25(x+3)^2$  
+		\end{enumerate}
+	\end{multicols}
+\end{exercise}
+\begin{proof}[solution de l'exercice \ref{chap02:exo:factoriser:identite:niveau1} ]  
+	\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [ 
+'x*x+2*x+1',
+'1-2*x+x**2',
+'x*x+6*x+9',
+'4*x**2+4*x+1',
+'4*x**2+12*x+9',
+'4*x**2-12*x+9',
+'x**2+x+0.25'  
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H', 'I']
+for func in funcsfac :  
+	myfactor =  eval('sp.factor(func)')
+	print( '$'+ str(L[n])  + "=" + sp.latex(myfactor) + '$; ' ) 
+	n     = n + 1
+\end{pycode}
+$H=(3x-5)^2$; $I=(\sqrt{3} x-1)^2$.
+\end{proof}
+\begin{proof}[solution de l'exercice \ref{chap02:exo:factoriser:identite:niveau2} ]  
+	\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [
+'x**2-36',
+'4*x**2-36',
+'36*x**2-4',
+'(2*x-1)**2-25',
+'(3*x+7)**2-16',
+'4*(2*x-1)**2-100',
+'9*(2*x-1)**2-4*x**2',
+'4*(2*x-1)**2-25*x**2',
+'4*(2*x-1)**2-25*(x+3)**2'
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H', 'I']
+for func in funcsfac :
+	myfactor =  eval('sp.factor(func)')
+	print( '$'+ str(L[n])  + "=" + sp.latex(myfactor) + '$; ' )
+	n     = n + 1
+	\end{pycode}
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+
+
+
+

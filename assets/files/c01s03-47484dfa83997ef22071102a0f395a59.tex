@@ -1,0 +1,105 @@
+%!TeX root=main.tex
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+}   
+\onehalfspacing 
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\section[Puissances à exposants dans Z]{Puissances à exposants dans $\mathbb{Z}$}
+
+\begin{marginfigure}
+	\begin{tikzpicture} 
+		\node[circle , draw , minimum size=2.3cm] (output)  {\Huge $2^4$};
+		\node (puissance) [semithick, rectangle, draw,   below right=0.5cm and 0.2cm of output] {puissance};
+		\node (exposant) [thin, rectangle, draw,   above right=0.1cm and 0.1cm of output] {exposant};
+		\node (base) [thin, rectangle, draw,  below left=0.3cm and 0.1cm of output] {base};
+		\draw[line width=0.8mm, -> ] (puissance) -- (output);
+		\draw[line width=0.4mm, -> ] (base) --++ (0.9cm,0.9cm);
+		\draw[line width=0.4mm, -> ] (exposant) --++ (-1.1cm,-0.7cm);
+	\end{tikzpicture} 
+	\caption{Vocabulaire}
+	\label{fig:puissance}
+\end{marginfigure}  
+\begin{notation}
+	Pour tout  $a\in\mathbb{R}^*$ et $n\in\mathbb{N}$ :
+	\begin{multicols}{2}
+		\begin{enumerate}[label={\textbullet},leftmargin=*]
+			\item  $a^0= 1$
+			\item $a^1= a$
+			\item $a^2= a\times a$
+			\item $a^n = \underbrace{a \times a \times \ldots \times a}_{n\, \text{fois}}$ 
+			\item $a^{-1}=\text{Inverse de $a$}=\frac{1}{a}$
+			\item $a^{-2}=\text{Inverse de $a^2$}=\frac{1}{a^2}$
+			\item  $a^{-n}=\text{Inverse de $a^n$}=\frac{1}{a^n}$   
+		\end{enumerate}  
+	\end{multicols}
+\end{notation}
+\begin{remark} Pour tout  $a\in\mathbb{R}^*$, et $n\in\mathbb{N}$ :  $\frac{1}{a^{-n}} = a^n$.
+	
+	ainsi que 	$\frac{1}{a^n} = \left(\frac{1}{a}\right)^n$
+\end{remark}
+\begin{example} 
+	\[
+	2^5 ; \quad 3^{-2}; \quad -3^2; \quad (-3)^{-2};  \quad \left(\tfrac{5}{3}\right)^{-1};\quad \left(\tfrac{-9}{7}\right)^{-1};\quad (99)^0; \quad \left(\tfrac{2}{3}\right)^{-4} 
+	\]
+\end{example}
+\begin{theorem}
+	Pour tous  $m, n \in\mathbb{Z}$ et tous $a, b\in\mathbb{R}^*$ :
+	\begin{description}
+		\item[Multiplication de puissances de même base]  
+		\marginnote{
+			\begin{tBox}[frametitle=Règle 1, leftline=false]
+				\og je multiplie des puissances, les bases sont les mêmes, j'ajoute les exposants \fg{}
+			\end{tBox}
+		}[0cm]
+		\[ 
+		a^m\times a^n   =a^{m+n} 
+		\]
+		%		\og je multiplie des puissances, les bases sont les mêmes, j'ajoute les exposants \fg{}
+		Comme conséquence :
+		\[
+		\frac{a^m}{a^n}   =a^m\times \frac{1}{a^n} = a^{m-n}   
+		\]
+		\item[Multiplication de puissances de même exposant] 
+		\marginnote{
+			\begin{tBox}[frametitle=Règle 2, leftline=false]
+				\og la puissance d'un produit est le produit des puissances \fg{}.
+			\end{tBox}
+		}[0cm]
+		\[ 
+		(ab)^n = a^n b^n \qquad  \left(\frac{a}{b}\right)^n  = \frac{a^n}{b^n}
+		\] 
+		\marginnote{
+			\begin{tBox}[frametitle=Règle 2 car particulier, leftline=false]
+				Pour tous réels $a\neq 0$ et $b\neq 0$  
+				\begin{align*} 
+					(ab)^2 &= a^2 b^2 \\
+					\left(\frac{a}{b}\right)^2 &= \frac{a^2}{b^2} 
+				\end{align*}  
+			\end{tBox}
+		}[0cm] 
+		\item[Puissance d'une puissance]
+		\[ 
+		(a^n )^m  = a^{nm} 
+		\] 
+	\end{description}
+\end{theorem}
+
+\begin{example} 
+	Illustrer et justifier les simplifications des expressions suivantes sous la forme $a^n$ avec $a\in\mathbb{R}$   et $n\in\mathbb{Z}$
+	\[
+	3^4\times 5^4 ;\quad (-7)^3\times(-7)^{-5};\quad \frac{2^3}{2^{-2}};\quad (3^4)^7
+	\]
+\end{example}
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------

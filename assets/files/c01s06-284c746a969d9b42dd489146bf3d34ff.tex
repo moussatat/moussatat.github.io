@@ -1,0 +1,114 @@
+%!TeX root=..chapter01.tex
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\section{La racine carrée} 
+\begin{definition} Pour tout réel $a\geqslant 0$. La \og racine carré de $a$ \fg{} est l'\textbf{unique réel positif}  dont le carré vaut $a$. On le note $\sqrt{a}=a^{\frac{1}{2}}$. 
+	\[	
+	\left(\sqrt{a}\right)^2=\left( a^{\frac{1}{2}} \right)^2 = a 
+	\] 
+\end{definition}  
+\begin{example}\hfill 
+	\begin{enumerate}[label=\alph*),leftmargin=*]
+		\item  $\sqrt{36}=6 $, $49^{\numprint{0.5}}=7$
+		\item  $\sqrt{-36}$ et $(-49)^{\numprint{0.5}}$ n'est pas défini.
+		\item $-\sqrt{36} = -6$ et $-49^{\numprint{0.5}}=-7$. 
+	\end{enumerate} 
+\end{example} 
+\begin{proposition}  Pour tout réel $a\geqslant 0$  :
+	\marginnote{
+		\begin{tBox}[leftline=false]
+			Bref  pour tout nombre $a\in\mathbb{R}$ 
+			\[
+			\sqrt{a^2}=\abs{a}
+			\]
+		\end{tBox}
+	}[0cm]
+	\begin{enumerate}[label=\alph*),leftmargin=*]
+		\item  $\left(\sqrt{a}\right)^2= \left(a^{\numprint{0.5}}\right)^2   = a $
+		\item  $\left(-\sqrt{a}\right)^2= \left(-a^{\numprint{0.5}}\right)^2   = a $
+	\end{enumerate}  
+	%	\[
+	%	\left(\sqrt{a}\right)^2 = \left(-\sqrt{a}\right)^2 =a
+	%	\]
+\end{proposition}
+\begin{example}   \hfill 
+	\begin{enumerate}[label=\alph*),leftmargin=*]
+		\item $\sqrt{16}=4$. On a $\big(4\big)^2=\big(-4\big)^2=16$.
+		\item $\big(\sqrt{3}\big)^2=\big(-\sqrt{3}\big)^2=3$.  
+	\end{enumerate} 
+\end{example} 
+%\begin{remark} Pour $a\geqslant 0$  la notation $a^{\frac{1}{2}}=a^{\numprint{0.5}}$ est compatible avec les règles opératoires sur les indices :
+%\begin{align*}
+%	 \big( a^{\numprint{0.5}}\big)^2 & =a^{\numprint{0.5}\times 2}=a^1=a \\ 
+%	 a^{\numprint{0.5}}\times a^{\numprint{0.5}} & = a^{\numprint{0.5}+\numprint{0.5}}=a^1=a 
+%\end{align*}   
+%\end{remark}  
+\begin{proposition} Pour tout réel $a$ :
+	\begin{enumerate}[label=\alph*),leftmargin=*]
+		\item Si $a\geqslant 0$, alors $\sqrt{a^2}= \big(a^2\big)^{\numprint{0.5}}  = a $
+		\item Si $a<0$, alors $\sqrt{a^2}=\big(a^2\big)^{\numprint{0.5}}  = -a $
+	\end{enumerate}  
+\end{proposition} 
+\begin{example} \hfill 
+	\begin{enumerate}[label=\alph*),leftmargin=*]
+		\item $\big(3^2\big)^{\numprint{0.5}}  =\sqrt{3^2}=  3 $
+		\item $\big((-3)^2\big)^{\numprint{0.5}}  =\sqrt{(-3)^2} = \sqrt{9}= 3 = -(-3) $
+	\end{enumerate} 
+\end{example}
+\marginnote{
+	\begin{tBox}[leftline=false]
+		Les formules   généralisent celles déjà connues pour des produit de puissances à exposant entiers :
+		\[
+		\big(a\times b\big)^{\numprint{0.5}}  = a^{\numprint{0.5}} \times b^{\numprint{0.5}} 
+		\]
+		% 	\left( \frac{a}{b}\right)^{\numprint{0.5} = \frac{a^{\numprint{0.5}}{b^{\numprint{0.5}} 
+	\end{tBox}
+}[0cm]
+\begin{theorem}
+	Pour tout réels positifs non nuls $a$ et $b> 0$ :
+	\begin{align*}   
+		\sqrt{a \times b} &= \sqrt{a} \times \sqrt{b}
+		&
+		\sqrt{\frac{a}{b}}  &= \frac{\sqrt{a}}{\sqrt{b}}  %&& ( b\neq 0) %\\
+		%		(a\times b)^{\frac{1}{2}}& = a^\frac{1}{2} \times b^\frac{1}{2}
+		%		&
+		%		\left( \frac{a}{b}\right)^{\frac{1}{2}}& = \frac{a^\frac{1}{2}}{b^\frac{1}{2}}
+	\end{align*}
+\end{theorem}
+\begin{proof} \emph{de la 1\iere égalité, au programme}.
+	$\sqrt{a}\sqrt{b}$ est un nombre positif, dont le carré vaut $ab$ car : 
+	\begin{enumerate}[label=\textbullet]
+		\item $\sqrt{a}\sqrt{b}\geqslant 0$ car produit de $\sqrt{a}\geqslant 0$ et $\sqrt{b}\geqslant 0$.
+		\item  $(\sqrt{a}\sqrt{b})^2=(\sqrt{a})^2(\sqrt{b})^2 = ab$
+	\end{enumerate} 
+	Or $\sqrt{ab}$ est l'\textbf{unique} nombre positif dont le carré vaut $ab$.
+	D'où $\sqrt{a}\sqrt{b} = \sqrt{ab}$. 
+	%	\begin{description}
+	%		\item[$\bullet$]$\frac{\sqrt{a}}{\sqrt{b}}\geqslant 0$ car \dotfill % quotient de $\sqrt{a}\geqslant 0$ et $\sqrt{b}> 0$.
+	%		\item[$\bullet$] $\left(\frac{\sqrt{a}}{\sqrt{b}}\right)^2=$ \dotfill %\frac{(\sqrt{a})^2}{(\sqrt{b})^2} = \frac{a}{b}$.
+	%	\end{description}
+	%	Or $\sqrt{\frac{a}{b}}$ est l'unique nombre \dotfill 
+	%	
+	%	\null \dotfill   
+\end{proof}
+\begin{exerciseT}[À vous] Démontrer la 2\ieme égalité.
+\end{exerciseT}
+

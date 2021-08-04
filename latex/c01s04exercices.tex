@@ -1,0 +1,116 @@
+%!TeX root=..chapter01.tex
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\subsection{Exercices : nombres décimaux}
+\begin{exercise} Écrire chacun des nombres décimaux suivants en notation scientifique et sous la forme $a\times 10^p$  avec $a\in\mathbb{Z}$ non multiple de $10$ et $p\in\mathbb{Z}$. Préciser l'ordre de grandeur.
+	\begin{multicols}{4} 
+		\begin{enumerate}[label={\alph*)\rule{0pt}{1.8em}},leftmargin=*]
+			\item $\numprint{0.9487}$
+			\item $\numprint{320.84}$
+			\item $\numprint{470.84}$
+			\item $\numprint{97.65}$
+			\item $\numprint{637.8}$
+			\item $\numprint{0.00152}$
+			\item $\numprint{9.42}$
+			\item $\numprint{10.42}$
+		\end{enumerate}
+	\end{multicols}  
+\end{exercise}
+\begin{exercise}Donner un encadrement décimal à $10^{-3}$ des nombres réels suivants :
+	\begin{multicols}{5} 
+		\begin{enumerate}[label={\alph*)\rule{0pt}{1.8em}},leftmargin=*]
+			\item $\sqrt{2}$
+			\item $\frac{1}{125}$
+			\item $\frac{22}{7}$
+			\item $\pi$
+			\item $\cos(\ang{35})$ 
+		\end{enumerate}
+	\end{multicols}  
+\end{exercise}
+\begin{exercise}[\cancel{\faCalculator}] Retrouver l'écriture scientifique des expression suivantes. Montrer les étapes. 
+	\begin{multicols}{3} 
+		\begin{enumerate}[label={\alph*)\rule{0pt}{1.8em}},leftmargin=*]
+			\item $\numprint{1.5}\times 10^{-2}\times \numprint{2}\times 10^2$
+			\item $\numprint{1.5}\times 10^{-2}+ \numprint{2}\times 10^2$ 
+			\item $(7\times10^3 )\times ( 7\times 10^2)$
+			\item $(5\times10^3 )\divisionsymbol ( 2\times 10^2)$
+			\item $5\times10^{-7} + 45\times 10^{-5}+2\times 10^{2}$
+			%			\item $  (4.5\times10^2) + (3.2\times 10^{-2} )$ 
+			%			\item $(5\times 10^{3}) \times (3\times 10^{-2}) $
+			%			\item  $(3\times 10^{3}) \divisionsymbol (5\times 10^{-2}) $
+			\item $\numprint{38000}\times \numprint{0.0002}\times \numprint{4000}$
+			\item  $\numprint{0.0025}\times 30000^2$
+			\item $\frac{3\times 10^{-3}\times \big( 4\times 19^{-1}\big)^2}{6\times 10^{-1}}$
+		\end{enumerate}
+	\end{multicols} 
+\end{exercise}
+\begin{example}[Je fais]
+	Écrire sous forme d'une puissance de $10$ l'expression : $(10^{-x})^3 \times  \frac{10^{2x+1} }{10^{x-5}} \times 10$. Simplifer l'exposant au maximum.
+	
+	
+	
+\end{example}
+\begin{exercise}[Nous faisons] Même consigne :
+	\begin{multicols}{3} 
+		\begin{enumerate}[label={\alph*)\rule{0pt}{1.8em}},leftmargin=*]
+			\item $\left(10^{-2x}\right)^{-3}$  
+			\item $\big(10^{4x+1}\big)^7$ 
+			\item $\big(10^{2x-1}\big)^3$ 
+			\item $\frac{10^{x+5}}{10^{3x-2}}$
+			\item $\frac{1}{10^{2x+1}}$
+			\item $\big(10^{x+1}\big)^2\times 10^{-2x}$
+		\end{enumerate}
+	\end{multicols} 
+\end{exercise}
+\begin{exercise}[À vous] \label{chap01:exo:puissance:simplifier} Même consigne :
+	\begin{multicols}{3} 
+		\begin{enumerate}[label={\alph*)\rule{0pt}{1.8em}},leftmargin=*]
+			\item  $10^{2x-1} \times 10^{-x+3}$  
+			\item $\big(10^{x+1}\big)^{-3}$ 
+			\item $\frac{\big(10^{x+1}\big)^2}{10^{3x}}$  
+			\item $\frac{10^{x+3}\times 10^{2x-4}}{10^{5x+1}} $ 
+			\item $\frac{ 30^{x+2} \times 9^{x-3}}{6^{3x-4}\times 5^{2x-6}} $ 
+			\item $\frac{3^{2x+4}\times 20^{x+2}}{18^{x+2} }$
+		\end{enumerate}
+	\end{multicols} 
+\end{exercise} 
+\begin{proof}[correction de l'exercice \ref{chap01:exo:puissance:simplifier}]  $10^{x+2}$  ; $10^{-3x-6}$ ; $10^{-x+2}$ ; $10^{-2x-2}$ ; $10^{-2x+6 }$ ;$10^{x+2}$.
+\end{proof}
+\begin{exercise}  
+	Soit $x,y\in\mathbb{R}^*$. Écrire les expressions suivantes sous la forme $x^p y^q$ avec $p,q\in\mathbb{Z}$. 
+	\begin{multicols}{4} 
+		\begin{enumerate}[label={\alph*)\rule{0pt}{1.8em}},leftmargin=*]
+			\item  $\left(\frac{x}{y}\right)^3$  
+			\item $\frac{(xy)^5}{a^4} $ 
+			\item $\frac{x^4}{x^3\times y^{-7}} $  
+			\item $\left(\frac{y}{x}\right)^4 \times x^2 $  
+		\end{enumerate}
+	\end{multicols}   
+\end{exercise} 
+\begin{exercise}[\emoji{cactus}]
+	Comparer $10^{350}$ et $6^{420}$.
+\end{exercise}
+
+
+%\begin{align*}
+%	A & = \frac{3\times 10^6+6\times 10^5}{2\times 10^3}
+%	& B & = \frac{4\times 10^3-7\times 10^2}{3\times 10^1} 
+%	A & = \frac{8\times 10^2+4\times 10^3}{2\times 10^5-4\times 10^4}
+%	& B & = \frac{5\times 10^2-2\times 10^4}{1\times 10^3+\numprint{1.4}\times 10^4}
+%\end{align*}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
