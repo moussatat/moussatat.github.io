@@ -1,0 +1,268 @@
+%!TEX root = ../chapter06.tex 
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+\section*{Vers la géométrie repérée}
+\begin{figure*}[hb]\centering
+	\begin{tikzpicture}[scale=1]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.2 and .2]  
+		\begin{scope}[dashed] 
+			\tkzGrid[ xstep=1, ystep=1](-6,-5)(12,7)
+		\end{scope}   
+		%	
+		%	
+		\tkzInit[xmin=-6,xmax=12.0,ymin=-5.0,ymax=7,xstep=1.0, ystep=1.0]; 
+		\tkzDrawX[ font=\small, line width=2pt, label=$x$ , above =5pt ] 
+		\tkzDrawY[ font=\small, line width=2pt , label={$y$} , right =5pt ]  
+		\tkzLabelXY[orig = false,  font=\scriptsize] 
+		\tkzRep[ xlabel=,ylabel=, font=\scriptsize, line width = 2pt,xnorm=1, ynorm=1]  
+		\tkzDefPoints{-5/-3/A,1/5/B, -1/-4/C,4/-4/D,6/-1/E,11/-1/F,11/4/G,7/6/H}
+		%		\tkzDefPoints{0/1/A,6/9/B, 3/0/C,9/0/D,11/3/E,16/3/F,16/8/G,12/10/H}
+		\tkzDrawSegments(A,B  C,D D,E F,G G,H)
+	\end{tikzpicture} 
+	\caption{Quel chemin est le plus long ? (d'abord sans quadrillage, puis avec quadrillage et conclure en rajoutant le repère.) 
+	}
+\end{figure*} 
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\newpage 
+\section{Repères et repères orthonormés} 
+%$\left( {{\mathrm{O}};\vec{\imath},\vec{\jmath}} \right)$ 
+$O$, $I$ et $J$ trois points non alignés.
+Un repère  $(O;I,J)$ ( ou $(O; \vv{OI}, \vv{OJ})$), du plan est formé de :
+\begin{dingautolist}{192}
+	\item origine $O$ du repère
+	\item $(OI)$ est l'axe gradué des abscisse  (des $x$)
+	\item $(OJ)$ est l'axe gradué des ordonnées $(OJ)$
+\end{dingautolist}
+Chaque point $M$ du plan correspond à un unique couple de coordonnées $\big(x(M); y(M)\big)\in\mathbb{R}\times\mathbb{R}$. Ces coordonnées se lisent sur les deux axes en tracant leurs parallèles passant par $M$.
+
+
+
+\begin{figure*}[hb]\centering 
+	\begin{tikzpicture}[scale=0.9] 
+		\def \xmin{-1.5}; 
+		\def \xmax{5.0}; 
+		\def \ymin{-2};
+		\def \ymax{5};	
+		\def \alpha{0}
+		\def \beta{90}
+		\def \xnorm{1.0};
+		\def \ynorm{1.0}; 
+		\pgftransformcm{\xnorm*cos(\alpha)}{\xnorm*sin(\alpha)}{\ynorm*cos(\beta)}{\ynorm*sin(\beta)}{\pgfpointorigin}
+		\path[clip,preaction = {draw=gray}] 
+		({(\xmax*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}	) -- ( 
+		{(\xmax*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) --   cycle; 
+		\tkzInit[xmin=-8, ymin=-8,  xmax=8.5,ymax=9.5]
+		%		\begin{scope}[dashed] 
+		%			\tkzGrid[ xstep=1, ystep=1](-11,-9)(10,15)
+		%		\end{scope}  
+		\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ]  
+		\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt] 
+		\tkzRep[color  = Maroon,xlabel=,ylabel=, line width = 2pt,xnorm=1, ynorm=1]  
+		\tkzDefPoint(0,0){O} 
+		\tkzDefPoint(1,0){I} 
+		\tkzDefPoint(0,1){J} 
+		\tkzLabelPoints[below left,  font=\scriptsize](O)
+		\tkzLabelPoints[below,  font=\scriptsize](I)
+		\tkzLabelPoints[left,  font=\scriptsize](J)
+		\tkzDefPoint(2.3,3.7){M}
+		\tkzPointShowCoord[xlabel=$x$,ylabel=$y$](M)
+		\tkzLabelPoint[above](M){\scriptsize$M(x;y)$} 
+		\tkzMarkRightAngle[fill=lightgray, size=0.3](I,O,J);
+		\tkzMarkSegments[mark=s||](O,I O,J)
+	\end{tikzpicture}
+	\begin{tikzpicture}[scale=0.9] 
+		\def \xmin{-1.5}; 
+		\def \xmax{5.0}; 
+		\def \ymin{-2};
+		\def \ymax{5};	
+		\def \alpha{0}
+		\def \beta{90}
+		\def \xnorm{1.5};
+		\def \ynorm{0.8}; 
+		\pgftransformcm{\xnorm*cos(\alpha)}{\xnorm*sin(\alpha)}{\ynorm*cos(\beta)}{\ynorm*sin(\beta)}{\pgfpointorigin}
+		\path[clip,preaction = {draw=gray}] 
+		({(\xmax*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}	) -- ( 
+		{(\xmax*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) --   cycle; 
+		\tkzInit[xmin=-8, ymin=-8,  xmax=8.5,ymax=9.5]
+		%		\begin{scope}[dashed] 
+		%			\tkzGrid[ xstep=1, ystep=1](-11,-9)(10,15)
+		%		\end{scope}  
+		\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ]  
+		\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt] 
+		\tkzRep[color  = Maroon,xlabel=,ylabel=, line width = 2pt,xnorm=1, ynorm=1]  
+		\tkzDefPoint(0,0){O} 
+		\tkzDefPoint(1,0){I} 
+		\tkzDefPoint(0,1){J} 
+		\tkzLabelPoints[below left,  font=\scriptsize](O)
+		\tkzLabelPoints[below,  font=\scriptsize](I)
+		\tkzLabelPoints[left,  font=\scriptsize](J)
+		\tkzDefPoint(2.3,3.7){M}
+		\tkzPointShowCoord[xlabel=$x$,ylabel=$y$](M)
+		\tkzLabelPoint[above](M){\scriptsize$M(x;y)$}
+	\end{tikzpicture}
+	\begin{tikzpicture}[scale=0.9] 
+		\def \xmin{-1.5}; 
+		\def \xmax{5.0}; 
+		\def \ymin{-2};
+		\def \ymax{5};	
+		\def \alpha{-05}
+		\def \beta{75}
+		\def \xnorm{1.5};
+		\def \ynorm{0.8}; 
+		\pgftransformcm{\xnorm*cos(\alpha)}{\xnorm*sin(\alpha)}{\ynorm*cos(\beta)}{\ynorm*sin(\beta)}{\pgfpointorigin}
+		\path[clip,preaction = {draw=gray}] 
+		({(\xmax*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}	) -- ( 
+		{(\xmax*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) --   cycle; 
+		\tkzInit[xmin=-8, ymin=-8,  xmax=8.5,ymax=9.5]
+		%		\begin{scope}[dashed] 
+		%			\tkzGrid[ xstep=1, ystep=1](-11,-9)(10,15)
+		%		\end{scope}  
+		\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ]  
+		\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt] 
+		\tkzRep[color  = Maroon,xlabel=,ylabel=, line width = 2pt,xnorm=1, ynorm=1]  
+		\tkzDefPoint(0,0){O} 
+		\tkzDefPoint(1,0){I} 
+		\tkzDefPoint(0,1){J} 
+		\tkzLabelPoints[below left,  font=\scriptsize](O)
+		\tkzLabelPoints[below,  font=\scriptsize](I)
+		\tkzLabelPoints[left,  font=\scriptsize](J)
+		\tkzDefPoint(2.3,3.7){M}
+		\tkzPointShowCoord[xlabel=$x$,ylabel=$y$](M)
+		\tkzLabelPoint[above](M){\scriptsize$M(x;y)$}
+	\end{tikzpicture}
+	\caption{Dans un repère orthonormé $(O;I,J)$, le triangle $OIJ$ est rectangle isocèle (gauche). Le repère $(O;I,J)$ est orthogonal si $OIJ$ est rectangle mais pas isocèle (milieu). Les repères peuvent être obliques (droite).}
+\end{figure*}
+
+
+Par la suite, on travaille avec des \textbf{repères orthonormés} : 
+\begin{description}
+	\item[ortho-gonal]  les axes sont perpendiculaires
+	\item[normé] la longueur des segments unitaires sur les deux axes est la mêmes
+\end{description}
+%$(O;I,J)$ est orthonormé losrque le triangle $OIJ$ est rectangle isocèle en $O$.
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\newpage 
+\section{Distance dans les repères orthonormés}
+
+\begin{figure}[hb] 
+	\begin{tikzpicture}[scale=0.90]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\def \xmin{-2}; 
+		\def \xmax{11}; 
+		\def \ymin{-1.5};
+		\def \ymax{9};	
+		\def \alpha{0}
+		\def \beta{90}
+		\def \xnorm{1.0};
+		\def \ynorm{1.0}; 
+		\pgftransformcm{\xnorm*cos(\alpha)}{\xnorm*sin(\alpha)}{\ynorm*cos(\beta)}{\ynorm*sin(\beta)}{\pgfpointorigin}
+		\path[clip,preaction = {draw=gray}] 
+		({(\xmax*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}	) -- ( 
+		{(\xmax*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) --   cycle;  
+		
+		\tkzInit[xmin=-8,xmax=10,ymin=-7,ymax=8  ]
+		\tkzDrawX[  noticks,label={$x$}, font=\scriptsize, line width=1.2pt ]  
+		\tkzDrawY[ noticks, label={$y$}, font=\scriptsize, line width=1.2pt] 
+		\tkzRep[color  = Maroon,xlabel=,ylabel=, font=\scriptsize, line width = 2pt,xnorm=1, ynorm=1]   
+		%		\begin{scope}[dashed] 
+		%			\tkzGrid[ xstep=1, ystep=1](-2,-1.5)(11,9)
+		%		\end{scope}
+		\tkzDefPoint(0,0){O} 
+		\tkzDefPoint(1,0){I} 
+		\tkzDefPoint(0,1){J}  
+		\tkzDrawPoints(O,I,J)
+		\tkzLabelPoints[font=\scriptsize](I)
+		\tkzLabelPoints[left, font=\scriptsize](J)
+		\tkzLabelPoints[below left, font=\scriptsize](O)  
+		
+		
+		\tkzDefPoint(3,4){A};
+		\tkzDefPoint(8,6){B};
+		\tkzDefPoint(8, 4){C}; 
+		\tkzDrawSegment[dim={\scriptsize$\abs{x_B-x_A}$,-15pt, ->, >=latex },dashed](A,C))
+		\tkzDrawSegment[dim={\scriptsize$\abs{y_B-y_A}$,-25pt, ->, >=latex },dashed](C,B))
+		\tkzDrawSegment(A,B)
+		\tkzPointShowCoord[   xlabel={\color{blue}$x_A$}, xstyle={below} , ylabel={\color{red}$y_A$}, ystyle={left} ](A)
+		\tkzPointShowCoord[   xlabel={\color{blue}$x_B$}, xstyle={below} , ylabel={\color{red}$y_B$}, ystyle={left} ](B) 
+		\tkzMarkRightAngle[fill=lightgray, size=0.4](B,C,A);
+		
+		\tkzDrawPoints(A,B)
+		\tkzLabelPoints[above, font=\scriptsize ](A)
+		\tkzLabelPoints[above, font=\scriptsize](B)
+	\end{tikzpicture}
+	\caption{ 
+		Le plan est muni d'un repère \textbf{orthonormé} $(O,I,J)$. \\
+		$ABC$ est rectangle en $C$.  
+	}
+\end{figure}  
+\begin{proof}
+	Le repère est orthonormé, le triangle $ABC$ rectangle en $C$. D'après théorème de Pythagore : 
+	\begin{align*}
+		AC&=|x_{B}-x_{A}| & 
+		BC&=|y_{B}-y_{A}|	\\
+		AB^2&= AC^2 + CB^2 \\
+		AB^2& = \left|x_{B}-x_{A}\right|^2+\left|y_{B}-y_{A}\right|^2\\
+		AB^2& =\left(x_{B}-x_{A}\right)^2+\left(y_{B}-y_{A}\right)^2 &&\text{$\abs{a}^2=a^2$}\\
+		AB & =\sqrt{\left(x_{B}-x_{A}\right)^2+\left(y_{B}-y_{A}\right)^2}
+	\end{align*} 
+\end{proof} 
+\begin{theorem} Dans un repère orthonormé. La distance entre les points $A(x_A;y_A)$ et $B(x_B;y_B)$ est donnée par les formules :
+	$$AB^2= \left(x_{B}-x_{A}\right)^2+\left(y_{B}-y_{A}\right)^2$$
+	$$AB   =\sqrt{\left(x_{B}-x_{A}\right)^2+\left(y_{B}-y_{A}\right)^2}$$
+\end{theorem} 
+\newpage 
+\begin{example}
+	Dans un repère orthonormé, $A(1;5)$ et $B(-2;7)$ :
+	
+	
+	\QCM[VF,Alterne,Solution,Largeur=1.0cm,Stretch=1.3]{%
+		{$AB^2= (1+2)^2-(5-7)^2=$ }&2,%  
+		{$AB^2= (1-2)^2+(5-7)^2=$ }&2,%
+		{$AB^2= (1-5)^2+(-2-7)^2=$ }&2,% 
+		{$AB^2= (1+2)^2+(5-7)^2=$ }&1,% 
+		{$AB^2= (1-(-2))^2+(5-7)^2=$ }&1,% 
+		{$AB^2= (-2-1)^2+(7-5)^2=$ }&1,%  
+	} 
+	$$
+	AB=\sqrt{3^2+2^2}=\sqrt{13}
+	$$
+\end{example}
+\begin{example}  Soit $M$ un point du cercle $\mathscr{C}(O;7)$ est le cercle de centre $O(0;0)$ et de rayon $7$. 
+	\begin{align*}
+		M(x;y)\in \mathscr{C}(O;7) & \iff OM = 7 \\
+		& \iff OM^2 = 49\\
+		& \iff \big( x - 0 \big)^2 + \big( y - 0 \big)^2 =49 \\
+		& \iff x^2 + y^2 =49 
+	\end{align*} 
+	L'équation $x^2 + y^2 =49$ sur les coordonnées $(x;y)$ caractérise les points du cercle. 
+	
+	On dira que le cercle $\mathscr{C}$ a pour équation $x^2 + y^2 =49$. En abrégé :
+	\[
+	\mathscr{C}(O;7)\colon x^2 + y^2 =49
+	\] 
+\end{example}

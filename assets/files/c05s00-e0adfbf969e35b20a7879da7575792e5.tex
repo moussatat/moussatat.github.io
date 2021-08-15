@@ -1,0 +1,275 @@
+%!TEX root = ../chapter05.tex 
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+
+\section{Triangles égaux et semblables}
+
+\begin{definition}[triangles égaux]
+	Deux triangles sont égaux si leurs trois côtés et leur trois angles sont égaux deux à deux. 
+\end{definition} 
+%Les triangles $ABC$ et $IJK$ de la figure \ref{chapitre05:trianglesegaux} sont égaux. On a les 6 égalités suivantes :
+%\begin{figure}[h]\centering
+%	\begin{tikzpicture}[scale=0.9]
+%		\tkzDefPoint(0,0){A}
+%		\tkzLabelPoint[above left](A){$A$}
+%		\tkzDefShiftPoint[A](-135:2.5){B}  
+%		\tkzDefTriangle[two angles = 80 and 60](A,B)
+%		\tkzGetPoint{C}
+%		\tkzLabelPoint[left](B){$B$}
+%		\tkzLabelPoint[right](C){$C$}
+%		\tkzDrawPolygon(A,B,C)
+%		\tkzDrawPoints(A,B,C)
+%		\tkzDefShiftPoint[A](4,+3.0){J}  
+%		\tkzDefShiftPoint[J](-70:2.5){I}
+%		\tkzDefTriangle[two angles = -80  and -60](I,J)
+%		\tkzGetPoint{K}
+%		\tkzDrawPolygon(I,J,K)
+%		\tkzDrawPoints(I,J,K) 
+%		\tkzLabelPoint[right](I){$I$}
+%		\tkzLabelPoint[left](J){$J$}
+%		\tkzLabelPoint[right](K){$K$}
+%		\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+%		\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](J,K,I)
+%		\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+%		\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](K,I,J)
+%		\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+%		\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](I,J,K) 
+%		\tkzDrawSegment[line width=2pt, color=red](B,C)
+%		\tkzDrawSegment[line width=2pt, color=red](J,K)
+%		\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+%		\tkzDefMidPoint(J,K)\tkzGetPoint{L}
+%		\draw[<->, >=latex] (A) .. controls +(right:1cm) and +(left:2cm) .. (I) node[sloped,above,pos=0.5]{\scriptsize Angles homologues} ;
+%		\draw[<->, >=latex] (D) .. controls +(right:8cm) and +(down:4cm) .. (L) node[ below right,pos=0.6]{\scriptsize Côtés homologues} ;
+%	\end{tikzpicture}
+%	\caption{$ABC$ et $IJK$ sont égaux.} \label{chapitre05:trianglesegaux}
+%\end{figure}  
+%\begin{align*}
+%	& {\color{red} \widehat{A}= \widehat{I} }
+%	&&  {\color{ForestGreen} \widehat{B}= \widehat{J} } 
+%	&& {\color{Blue} \widehat{C}= \widehat{K} } \\
+%	& {\color{red} BC=JK }
+%	&&  {\color{ForestGreen}  AC=IK } 
+%	&& {\color{Blue} AB=IJ} 
+%\end{align*}
+%
+%Il n'est pas nécessaire de vérifier les six égalités pour prouver que les triangles sont égaux et que les 6 égalités sont vraies.  
+%Il suffit de vérifier que l'on est dans l'une des trois situations suivantes.
+
+\begin{figure}[hb]
+	\begin{tikzpicture} 
+		\tkzDefPoint(0,0){A}
+		%\tkzLabelPoint[above left](A){$A$}
+		\tkzDefShiftPoint[A](-135:2.5){B}  
+		\tkzDefTriangle[two angles = 80 and 60](A,B)
+		\tkzGetPoint{C}
+		%\tkzLabelPoint[left](B){$B$}
+		%\tkzLabelPoint[right](C){$C$}
+		\tkzDrawPolygon(A,B,C)
+		\tkzDrawPoints(A,B,C)
+		\tkzDefShiftPoint[A](6.0,-2.0){J}  
+		\tkzDefShiftPoint[J](110:2.5){I}
+		\tkzDefTriangle[two angles = -80  and -60](I,J)
+		\tkzGetPoint{K}
+		\tkzDrawPolygon(I,J,K)
+		\tkzDrawPoints(I,J,K) 
+		%\tkzLabelPoint[right](I){$I$}
+		%\tkzLabelPoint[below left](J){$J$}
+		%\tkzLabelPoint[below](K){$K$}
+		\tkzMarkSegments[mark=s|, color=black, thick](B,C K,J)
+		\tkzMarkSegments[mark=s||, color=black, thick](B,A I,J)
+		\tkzMarkSegments[mark=x,color=black, thick](A,C K,I)
+		%\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+		%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](J,K,I)
+		%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+		%\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](K,I,J)
+		%\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+		%\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](I,J,K) 
+		\tkzDrawSegment[line width=1pt ](B,C)
+		\tkzDrawSegment[line width=1pt ](J,K)
+		\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+		\tkzDefMidPoint(J,K)\tkzGetPoint{L}
+	\end{tikzpicture}
+\caption{Critère CCC : Si deux triangles ont leurs trois côtés respectivement égaux, alors ils sont égaux.}
+\end{figure}    
+	\begin{figure}[hb]
+		\begin{tikzpicture}
+			\tkzDefPoint(0,0){A}
+			%\tkzLabelPoint[above left](A){$A$}
+			\tkzDefShiftPoint[A](-125:2.5){B}  
+			\tkzDefTriangle[two angles = 80 and 60](A,B)
+			\tkzGetPoint{C}
+			%\tkzLabelPoint[left](B){$B$}
+			%\tkzLabelPoint[right](C){$C$}
+			\tkzDrawPolygon(A,B,C)
+			\tkzDrawPoints(A,B,C)
+			\tkzDefShiftPoint[A](6.0,-2.0){J}  
+			\tkzDefShiftPoint[J](110:2.5){I}
+			\tkzDefTriangle[two angles = -80  and -60](I,J)
+			\tkzGetPoint{K}
+			\tkzDrawPolygon(I,J,K)
+			\tkzDrawPoints(I,J,K) 
+			%\tkzLabelPoint[right](I){$I$}
+			%\tkzLabelPoint[below left](J){$J$}
+			%\tkzLabelPoint[below](K){$K$}
+			%\tkzMarkSegments[mark=x,mkcolor=black, thick](B,C K,J)
+			\tkzMarkSegments[mark=s|,color=black, thick](B,A I,J)
+			\tkzMarkSegments[mark=s||,color=black, thick](A,C K,I)
+			\tkzMarkAngle[mark=s,color=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+			%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](J,K,I)
+			%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+			\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](K,I,J)
+			%\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+			%\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](I,J,K) 
+			\tkzDrawSegment[line width=1pt ](B,C)
+			\tkzDrawSegment[line width=1pt ](J,K)
+			\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+			\tkzDefMidPoint(J,K)\tkzGetPoint{L}
+		\end{tikzpicture}
+	\caption{Critère CAC : Si deux triangles ont un angle égal compris entre deux côtés respectivement égaux, alors ils sont égaux.}
+	\end{figure} 
+%\end{postulat} 
+
+%\begin{postulat}[Critère ACA] Si deux triangles ont un côté égal adjacent à deux angles respectivement égaux, alors ils sont égaux.
+	\begin{figure}[hb]
+		\begin{tikzpicture}
+			\tkzDefPoint(0,0){A}
+			%\tkzLabelPoint[above left](A){$A$}
+			\tkzDefShiftPoint[A](-135:2.5){B}  
+			\tkzDefTriangle[two angles = 80 and 60](A,B)
+			\tkzGetPoint{C}
+			%\tkzLabelPoint[left](B){$B$}
+			%\tkzLabelPoint[right](C){$C$}
+			\tkzDrawPolygon(A,B,C)
+			\tkzDrawPoints(A,B,C)
+			\tkzDefShiftPoint[A](6.0,-2.0){J}  
+			\tkzDefShiftPoint[J](110:2.5){I}
+			\tkzDefTriangle[two angles = -80  and -60](I,J)
+			\tkzGetPoint{K}
+			\tkzDrawPolygon(I,J,K)
+			\tkzDrawPoints(I,J,K) 
+			%\tkzLabelPoint[right](I){$I$}
+			%\tkzLabelPoint[below left](J){$J$}
+			%\tkzLabelPoint[below](K){$K$}
+			\tkzMarkSegments[mark=s||,color=black, thick](B,C K,J)
+			%\tkzMarkSegments[mark=x,mkcolor=black, thick](B,A I,J)
+			%\tkzMarkSegments[mark=s|,mkcolor=black, thick](A,C K,I)
+			%\tkzMarkAngle[mark=||,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+			\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](J,K,I)
+			\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+			%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](K,I,J)
+			\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+			\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](I,J,K) 
+			\tkzDrawSegment[line width=1pt ](B,C)
+			\tkzDrawSegment[line width=1pt ](J,K)
+			\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+			\tkzDefMidPoint(J,K)\tkzGetPoint{L}
+		\end{tikzpicture}
+	\caption{Critère ACA Si deux triangles ont un côté égal adjacent à deux angles respectivement égaux, alors ils sont égaux.}
+	\end{figure}
+%\end{postulat}  
+\begin{remark}
+	Cas RHC (Rectangle-Hypoténuse-Côté). Deux triangles rectangles, qui ont même longueur d'hypoténuse et une même longueur d'un côté de l'angle droit sont égaux.
+\end{remark}
+%\begin{remark} Il n'y a pas de critère ACC
+%	% Tracer deux triangles non égaux, ayant un angle de \ang{40}, adjacent à un côté de \numprint{4.5}~\si{\centi\meter} et opposé à un côté de \numprint{3.5}~\si{\centi\meter} de longueur.
+%	\begin{figure}[h]\centering
+%		\begin{tikzpicture}[scale=1.0]
+%			\tkzDefPoint(0,0){A}
+%			\tkzDefShiftPoint[A](40:5){B}
+%			\tkzDefMidPoint(A,B)\tkzGetPoint{I}
+%			\tkzDefShiftPoint[I](-0.2,0.2){I'}
+%			\node[inner sep=0pt, opacity=1,   rotate=-15] (carte) at (I') {
+%				\includegraphics[ width=0.25\linewidth]{fishing-pole2}
+%			}; 
+%			\tkzDefShiftPoint[A](0:6){C}
+%			%\tkzDrawPoint(B)
+%			\tkzDrawLine[add= 0.2 and 0.25, dashed](A,C)
+%			\tkzDrawLine[add= 0 and 0.15, dashed](A,B)
+%			\tkzLabelAngle[pos=1.5](C,A,B){\large\ang{40}} 
+%			\tkzMarkAngle[size=1.0, opacity=0.5,mark=none](C,A,B)
+%		\end{tikzpicture}
+%		\caption{}
+%	\end{figure} 
+%\end{remark}  
+
+
+
+
+\begin{definition} Deux triangles sont \textbf{semblables}   lorsqu'ils ont leurs angles égaux deux à deux et leurs côtés \textbf{proportionnels}. 
+\end{definition}
+
+\begin{figure}[h]\centering
+	\begin{tikzpicture}[scale=0.8]
+		\tkzDefPoint(0,0){A}
+		\tkzLabelPoint[above left](A){$A$}
+		\tkzDefShiftPoint[A](-135:2.5){B}  
+		\tkzDefTriangle[two angles = 80 and 60](A,B)
+		\tkzGetPoint{C}
+		\tkzLabelPoint[left](B){$B$}
+		\tkzLabelPoint[right](C){$C$}
+		\tkzDrawPolygon(A,B,C)
+		\tkzDrawPoints(A,B,C)
+		\tkzDefShiftPoint[A](4,-1.0){J}  
+		\tkzDefShiftPoint[J](10:6){I}
+		\tkzDefTriangle[two angles = -60 and -40](I,J)
+		\tkzGetPoint{K}
+		\tkzDrawPolygon(I,J,K)
+		\tkzDrawPoints(I,J,K) 
+		\tkzLabelPoint[right](I){$I$}
+		\tkzLabelPoint[left](J){$J$}
+		\tkzLabelPoint[right](K){$K$}
+		\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+		\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](J,K,I)
+		\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+		\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](I,J,K) 
+		\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+		\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](K,I,J)
+		\tkzDrawSegment[line width=2pt, color=red](B,C)
+		\tkzDrawSegment[line width=2pt, color=red](I,J)
+		\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+		\tkzDefMidPoint(I,J)\tkzGetPoint{L}
+		\draw[<->, >=latex] (A) .. controls +(right:1cm) and +(left:2cm) .. (K) node[sloped,above,pos=0.5]{\scriptsize Angles homologues} ;
+		\draw[<->, >=latex] (D) .. controls +(right:8cm) and +(down:3cm) .. (L) node[ below right,pos=0.6]{\scriptsize Côtés homologues} ;
+	\end{tikzpicture}
+	\caption{les trianges $ABC$ et $IJK$ sont semblables.}
+\end{figure} 
+Les \textbf{angles correspondants} sont égaux :
+\[{\color{red} \widehat{A}= \widehat{K} }\qquad {\color{blue} \widehat{B}= \widehat{J} }\qquad {\color{ForestGreen} \widehat{C}= \widehat{I} }\]
+Les \textbf{côtés correspondants} sont proportionnels  :    
+%\begin{table}[h]
+%	\renewcommand{\arraystretch}{2}%
+%	\begin{tabularx}{0.9\linewidth}{|X?c|c|c|} \hline 
+%		\tikz[remember picture,baseline =(C.base)]\node (C) at (-1cm,0.5cm) {};	{\color{HotPink} Côtés  du triangle $ABC$} &  \emph{\color{blue}$AB$}&  \emph{\color{red}$BC$} & \emph{$AC$} \tikz[remember picture]   \node  (A) at (-1cm,0.5cm) {}; \\   \hline
+%		\tikz[remember picture,baseline =(D.base)]\node (D) at (-1cm,0.5cm) {};	{\color{ForestGreen} Côtés  du triangle $IJK$} &  \emph{\color{blue}$JK$}&  \emph{\color{red}$IJ$}& \emph{$IK$} \tikz[remember picture,baseline =(B.base)]\node (B) at (-1cm,0.5cm) {}; \\ \hline
+%	\end{tabularx}
+%	\tikz[overlay,remember picture]
+%	\draw[ ->,>=latex,line width=1.8pt ](A) .. controls +(+1.5cm,.1cm) and +(+1.5cm,-.0cm)..
+%	node[rectangle,fill=white,draw,circle ]{\Large$\times k$} (B);
+%	%	\tikz[overlay,remember picture]
+%	%	\draw[ ->,>=latex,line width=1.8pt ](C) .. controls +(-1.5cm,.1cm) and +(-1.5cm,-.0cm)..
+%	%	node[rectangle,fill=white,draw,circle ]{\Large$\times k$} (D);
+%	\caption{ Si $k> 1$, le triangle $IJK$ est un \emph{agrandissement} de $ABC$.
+%		Si $k< 1$, le triangle $IJK$ est une \emph{réduction} de $ABC$.}
+%\end{table}
+\[ 	{\color{blue} \frac{JK}{AB} } = {\color{red} \frac{IJ}{BC} } = {\color{ForestGreen} \frac{IK}{AC} } \color{black} =k \]
+%\begin{remark}
+%	Pour un rapport d'agrandissement (ou réduction) $k$.
+%	\begin{itemize}
+%		\item Les longueurs sont multipliées par $k$.
+%		\item Les aires sont multipliées par $k^2$.
+%	\end{itemize} 
+%\end{remark}  
+\begin{postulat}[Critère de similitude CCC] Si les longueurs des 3 côtés d'un triangle $T_1$ sont \textbf{proportionnelles} aux longueurs respectives des 3 côtés d'un triangle $T_2$, alors les deux triangles sont semblables.
+\end{postulat}
+
+\begin{postulat}[Critère CAC-Semblable] Si deux triangles $T_1$ et $T_2$ ont un angle égal compris entre 2 côtés respectivement proportionnels, alors les deux triangles sont semblables.  
+\end{postulat} 
+ 
+\begin{postulat}[Critère de similitude AA] Si 2 angles d'un triangle $T_1$ sont \textbf{respectivement égaux} à 2 angles d'un triangle $T_2$. Alors les deux triangles sont semblables.  
+\end{postulat} 

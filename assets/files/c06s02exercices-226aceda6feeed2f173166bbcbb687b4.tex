@@ -1,0 +1,436 @@
+%!TEX root = ../chapter06.tex 
+%----------------------------------------------------------------------------------------
+%	
+%---------------------------------------------------------------------------------------- 
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\subsection{Exercices}
+
+
+
+\begin{exercise}\label{chapter06:exercice:vecteur:coordonneesgraphique}\hfill \\
+	\begin{minipage}{1\columnwidth}\centering
+		\begin{tikzpicture}[scale=0.75 			]
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			
+			
+			\tkzDefPoint(7,-4){A} 
+			\tkzDefShiftPoint[A](2,2){A'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](A,A') 
+			\tkzLabelSegment[above left](A,A') {\scriptsize $\vv{AA'}$}
+			\tkzLabelPoint[below](A){\scriptsize$A$}\tkzLabelPoint[right](A'){\scriptsize$A'$}
+			
+			\tkzDefPoint(1,-2){B} 
+			\tkzDefShiftPoint[B](3,-1){B'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](B,B') 
+			\tkzLabelSegment[above](B,B') {\scriptsize $\vv{BB'}$}
+			\tkzLabelPoint[below](B){\scriptsize$B$}\tkzLabelPoint[right](B'){\scriptsize$B'$}
+			
+			\tkzDefPoint(-7,8){C} 
+			\tkzDefShiftPoint[C](7,-3){C'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](C,C') 
+			\tkzLabelSegment[above](C,C') {\scriptsize $\vv{CC'}$}
+			\tkzLabelPoint[below](C){\scriptsize$C$}\tkzLabelPoint[right](C'){\scriptsize$C'$}
+			
+			\tkzDefPoint(6,8){D} 
+			\tkzDefShiftPoint[D](-2,4){D'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](D,D') 
+			\tkzLabelSegment[right](D,D') {\scriptsize $\vv{DD'}$}
+			\tkzLabelPoint[below](D){\scriptsize$D$}\tkzLabelPoint[right](D'){\scriptsize$D'$}
+			
+			\tkzDefPoint(8,10){E} 
+			\tkzDefShiftPoint[E](6,1){E'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](E,E') 
+			\tkzLabelSegment[above](E,E') {\scriptsize $\vv{EE'}$}
+			\tkzLabelPoint[below](E){\scriptsize$E$}\tkzLabelPoint[right](E'){\scriptsize$E'$}
+			
+			
+			
+			\tkzInit[xmin=-8, ymin=-6,  xmax=15,ymax=12]  
+			\begin{scope}[dashed] 
+				\tkzGrid 
+			\end{scope}  
+			\tkzDrawX[ above=5pt,  label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+			\tkzDrawY[ right =5pt, label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+			\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={}, ylabel={}]
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+			\tkzDefPoint(2,5){M}
+			\tkzDefPoint(3,1){N}
+			\tkzDefPoint(7,6){P} 
+			\tkzDefShiftPoint[M](2,2){M1}
+			\tkzDefShiftPoint[M](3,-1){M2}
+			\tkzDefShiftPoint[M](7,-3){N1}  
+			
+			\tkzDrawPoints[color=black, size=2](M,N,P)
+			\tkzLabelPoint[above](M){\scriptsize$M$} 
+			\tkzLabelPoint[below](N){\scriptsize$N$}  
+			\tkzLabelPoint[above right](P){\scriptsize$P$} 
+			\filldraw 
+			(0,0) circle (2pt) node[align=left, below left] {\scriptsize $O$} ;
+			\filldraw 
+			(1,0) circle (2pt) node[align=left, below] {\scriptsize $I$} ;
+			\filldraw 
+			(0,1) circle (2pt) node[align=left, left] {\scriptsize $J$} ; 
+		\end{tikzpicture} 
+	\end{minipage}
+	
+	Dans le repère orthonormé $(O; I,J)$ :  
+	\begin{enumerate}[leftmargin=*, label=\arabic*)]
+		\item Donner les coordonnées des vecteurs $\vv{AA'}\begin{pmatrix}
+			\ldots \\ \ldots
+		\end{pmatrix}$, $\vv{BB'}\begin{pmatrix}
+			\ldots \\ \ldots
+		\end{pmatrix}$, $\vv{CC'}\begin{pmatrix}
+			\ldots \\ \ldots
+		\end{pmatrix}$, $\vv{DD'}\begin{pmatrix}
+			\ldots \\ \ldots
+		\end{pmatrix}$, $\vv{EE'}\begin{pmatrix}
+			\ldots \\ \ldots
+		\end{pmatrix}$. 
+		\item \begin{enumerate}[leftmargin=*, label=\alph*)]
+			\item Placer le point $M'$ image de $M$ par la translation $\vv{AA'}$.
+			\item Placer l'image $N'$ de $N$ par la translation de vecteur $\vv{BB'}$.
+			\item Placer l'antécédent $P'$ de $P$ par la translation de vecteur $\vv{CC'}$. 
+			\item Placer l'antécédent $Q'$ de $Q$ par la translation de vecteur $\vv{DD'}$.  
+			\item Placer l'image $R$ de $O$ par la translation de vecteur $\vv{EE'}$.      
+		\end{enumerate}  
+		\item \begin{multicols}{2} 
+			\begin{enumerate}[leftmargin=*, label=\alph*)]
+				\item   Placer le point $S$ tel que $\vv{ES}\begin{pmatrix}
+					0\\2
+				\end{pmatrix}$.
+				\item   Placer le point $T$ tel que $\vv{AT}\begin{pmatrix}
+					4\\0
+				\end{pmatrix}$.
+				\item   Placer le point $U$ tel que $\vv{BU}\begin{pmatrix}
+					4\\3
+				\end{pmatrix}$.
+				\item   Placer le point $V$ tel que $\vv{VO}\begin{pmatrix}
+					4\\3
+				\end{pmatrix}$.
+				\item   Placer le point $W$ tel que $\vv{WD}\begin{pmatrix}
+					4\\-2
+				\end{pmatrix}$.
+				\item   Placer le point $X$ tel que $\vv{XE}\begin{pmatrix}
+					-3\\5
+				\end{pmatrix}$.
+			\end{enumerate}  
+		\end{multicols}
+	\end{enumerate} 
+\end{exercise} 
+
+\begin{exercise}\label{chapter06:exercice:vecteurscoordonnees}\hfill \\ 
+	Calculer les coordonnées des vecteurs $\vv{AB}$, $\vv{BC}$ et $\vv{CA}$  dans les cas suivants :
+	\begin{multicols}{2}
+		\begin{enumerate}[leftmargin=*,label=\alph*)]
+			\item $A(3;-8)$, $B(-8;-9)$ et $C(0;8)$.
+			\item $A(-1;1)$, $B(4;-4)$ et $C(5;-2)$.
+			\item $A(0;0)$, $B(-4;5)$ et $C(3;\sqrt{2})$.
+			\item $A(0;3)$, $B(-5;0)$ et $C(2;-2)$.
+		\end{enumerate}
+	\end{multicols}
+\end{exercise}
+\begin{example}Trouver les coordonnées des points $M$ et $N$ du repère $(O;I,J)$ dans les cas suivants\hfill \smallskip
+	
+	\noindent\parbox{0.47\linewidth}{
+		$M$ est l'image de $F(-2;3)$ par la translation de vecteur $\vv{AB}\begin{pmatrix}
+			3\\4
+		\end{pmatrix}$
+	}
+	\hfill 
+	\parbox{0.47\linewidth}{
+		$G(5;3)$ est l'image de $N$ par la translation de vecteur $\vv{CD}\begin{pmatrix}
+			-3\\2
+		\end{pmatrix}$
+	}	
+	
+	\vfill 
+	
+\end{example}
+
+\begin{exercise}\label{chapter06:exercice:translationcoordonnees}\hfill \\
+	On considère un repère $(O;I,J)$. Soit les points $A(1;-3)$, $B(-3;-4)$ et $C(-7;-8)$. \\
+	Trouver par le calcul les coordonnées du point $M(x;y)$ dans les cas suivants : 
+	\begin{enumerate}[leftmargin=*,label=\alph*)] 
+		\item $M$ est l'image de $O$ par la translation de $\vv{AB}\begin{pmatrix}
+			\ldots \\ \ldots
+		\end{pmatrix}$. 
+		\item $M$ est l'image de $A$ par la translation de $\vv{BC}$.
+		\item $M$ est l'image de $I$ par la translation de $\vv{CA}$.
+		\item $J$ est l'image de $M(x;y)$ par la translation de $\vv{CA}$.
+	\end{enumerate} 
+\end{exercise} 
+
+\begin{exercise}[Égalités de vecteurs, direction, sens et norme]\hfill
+	
+	\noindent 
+	\parbox[position=t]{1.0\linewidth}{
+		\centering
+		\begin{tikzpicture}[scale=0.80]
+			\tkzInit[xmin=-1 ,xmax=7,ymin=-1, ymax=6]\tkzGrid 
+			\tkzDefPoint(0,0){A}
+			\tkzDefPoint(2,1){B}
+			\tkzDefPoint(4,2){C}
+			\tkzDefPoint(6,3){D}
+			\tkzDefPoint(5,5){E}
+			\tkzDefPoint(1,3){F}
+			\tkzDrawPolygon[line width=1.2 pt](A,B,C,D,E,F) 
+			\tkzLabelPoint[below left](A){$A$}
+			\tkzLabelPoint[below right](B){$B$}
+			\tkzLabelPoint[below right](C){$C$}
+			\tkzLabelPoint[below right](D){$D$}
+			\tkzLabelPoint[above right](E){$E$}
+			\tkzLabelPoint[above left](F){$F$}  
+			\tkzDrawSegments[line width=1.2pt](F,B F,C C,E)
+		\end{tikzpicture} 
+	} 
+	
+	En utilisant les points de la figure, indiquer 
+	\begin{enumerate}[label=\alph*), leftmargin=*]
+		\item 3 vecteurs de même direction que $\vv{AF}$ : \dotfill
+		\item 3 vecteurs d'origine $C$ et de même direction que $\vv{EF}$ : \dotfill
+		\item 2 vecteurs d'origine $B$ de même direction et sens contraire à $\vv{EF}$ :\dotfill 
+		\item 2 vecteurs de même norme que $\vv{AF}$ mais pas de même direction : \dotfill 
+		\item un vecteur égal à $\vv{DE}=$ : \dotfill  
+		\item tous les vecteurs égaux à $\vv{AB}$  : \dotfill   
+		\item tous les vecteurs égaux à $\vv{FE}$  : \dotfill   
+	\end{enumerate}
+\end{exercise} 
+
+
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+\newpage 
+
+\begin{proof}[solution de l'exercice \ref{chapter06:exercice:vecteur:coordonneesgraphique}]\hfill 
+	
+	\noindent	$\vv{AA'}\begin{pmatrix}
+		2 \\ 2
+	\end{pmatrix}$, $\vv{BB'}\begin{pmatrix}
+		3 \\ -1
+	\end{pmatrix}$, $\vv{CC'}\begin{pmatrix}
+		7 \\ -3
+	\end{pmatrix}$, $\vv{DD'}\begin{pmatrix}
+		-2 \\ 4
+	\end{pmatrix}$, $\vv{EE'}\begin{pmatrix}
+		6 \\ 1
+	\end{pmatrix}$
+	
+	\noindent	\begin{minipage}{1\columnwidth}\centering
+		\begin{tikzpicture}[scale=0.70 			]
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			
+			
+			\tkzInit[xmin=-8, ymin=-6,  xmax=15,ymax=12]  
+			\begin{scope}[dashed] 
+				\tkzGrid 
+			\end{scope}  
+			\tkzDrawX[ above=5pt,  label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+			\tkzDrawY[ right =5pt, label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+			\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={}, ylabel={}] 
+			
+			
+			
+			\tkzDefPoint(7,-4){A} 
+			\tkzDefShiftPoint[A](2,2){A'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](A,A') 
+			\tkzLabelSegment[above left](A,A') {\scriptsize $\vv{AA'}$}
+			\tkzLabelPoint[below](A){\scriptsize$A$}\tkzLabelPoint[right](A'){\scriptsize$A'$}
+			
+			\tkzDefPoint(1,-2){B} 
+			\tkzDefShiftPoint[B](3,-1){B'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](B,B') 
+			\tkzLabelSegment[above](B,B') {\scriptsize $\vv{BB'}$}
+			\tkzLabelPoint[below](B){\scriptsize$B$}\tkzLabelPoint[right](B'){\scriptsize$B'$}
+			
+			\tkzDefPoint(-7,8){C} 
+			\tkzDefShiftPoint[C](7,-3){C'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](C,C') 
+			\tkzLabelSegment[above](C,C') {\scriptsize $\vv{CC'}$}
+			\tkzLabelPoint[below](C){\scriptsize$C$}\tkzLabelPoint[right](C'){\scriptsize$C'$}
+			
+			\tkzDefPoint(6,8){D} 
+			\tkzDefShiftPoint[D](-2,4){D'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](D,D') 
+			\tkzLabelSegment[right](D,D') {\scriptsize $\vv{DD'}$}
+			\tkzLabelPoint[below](D){\scriptsize$D$}\tkzLabelPoint[right](D'){\scriptsize$D'$}
+			
+			\tkzDefPoint(8,10){E} 
+			\tkzDefShiftPoint[E](6,1){E'} 
+			\tkzDrawSegment[->,>=latex, line width=1.2](E,E') 
+			\tkzLabelSegment[above](E,E') {\scriptsize $\vv{EE'}$}
+			\tkzLabelPoint[below](E){\scriptsize$E$}\tkzLabelPoint[right](E'){\scriptsize$E'$}
+			
+			
+			
+			
+			\tkzDefPoint(2,5){M}
+			\tkzDefPoint(3,1){N}
+			\tkzDefPoint(7,6){P} 
+			\tkzDefShiftPoint[M](2,2){M1}
+			\tkzDrawSegment[->,>=latex, line width=1.2,blue](M,M1) 
+			\tkzLabelPoint[right](M1){$M'$}
+			
+			\tkzDefShiftPoint[N](3,-1){N1}
+			\tkzDrawSegment[->,>=latex, line width=1.2,blue](N,N1) 
+			\tkzLabelPoint[right](N1){$N'$}
+			
+			\tkzDefShiftPoint[P](-7,+3){P1}
+			\tkzDrawSegment[->,>=latex, line width=1.2,blue](P1,P) 
+			\tkzLabelPoint[right](P1){$P'$}
+			
+			
+			\tkzDefPoint(11,2){Q} 
+			\tkzDrawPoint(Q)\tkzLabelPoint[above right](Q){$Q$}
+			\tkzDefShiftPoint[Q](2,-4){Q1}
+			\tkzDrawSegment[->,>=latex, line width=1.2,blue](Q1,Q) 
+			\tkzLabelPoint[right](Q1){$Q'$}
+			
+			
+			\tkzDefShiftPoint[E](0,2){S}
+			\tkzDrawSegment[->,>=latex, line width=1.2,red](E,S) 
+			\tkzDrawPoint(S)\tkzLabelPoint[above right](S){$S$}
+			
+			\tkzDefShiftPoint[A](4,0){T}
+			\tkzDrawSegment[->,>=latex, line width=1.2,red](A,T) 
+			\tkzDrawPoint(T)\tkzLabelPoint[above right](T){$T$}
+			
+			\tkzDefShiftPoint[B](4,3){U}
+			\tkzDrawSegment[->,>=latex, line width=1.2,red](B,U) 
+			\tkzDrawPoint(U)\tkzLabelPoint[above right](U){$U$}
+			
+			\tkzDefPoint(0,0){O}	
+			\tkzDefShiftPoint[O](-4,-3){V}
+			\tkzDrawSegment[->,>=latex, line width=1.2,red](O,V) 
+			\tkzDrawPoint(V)\tkzLabelPoint[above left](V){$V$}
+			
+			
+			\tkzDefShiftPoint[O](+6,1){R}
+			\tkzDrawSegment[->,>=latex, line width=1.2,blue](O,R) 
+			\tkzDrawPoint(R)\tkzLabelPoint[above left](R){$R$}
+			
+			
+			\tkzDefShiftPoint[D](-4,+2){W}
+			\tkzDrawSegment[->,>=latex, line width=1.2,red](W,D) 
+			\tkzDrawPoint(W)\tkzLabelPoint[above left](W){$W$}
+			
+			
+			\tkzDefShiftPoint[E](+3,-5){X}
+			\tkzDrawSegment[->,>=latex, line width=1.2,red](X,E) 
+			\tkzDrawPoint(X)\tkzLabelPoint[above left](X){$X$}
+			
+			
+			
+			%		\tkzDefShiftPoint[M](3,-1){M2}
+			%		\tkzDefShiftPoint[M](7,-3){N1} 
+			%		  	  	\tkzDrawSegment[->,>=latex, line width=1.2](M1,P) 
+			%		  	  	\tkzDrawSegment[->,>=latex, line width=1.2](M,M2) 
+			%		  	  	\tkzDrawSegment[->,>=latex, line width=1.2](M2,P) 
+			%			  	\tkzDrawSegment[->,>=latex, line width=1.2](M,N1) 
+			%			  	\tkzDrawSegment[->,>=latex, line width=1.2](N1,P) 
+			%			  	\tkzDrawSegment[->,>=latex, line width=1.2](N,N1) 
+			%		  	\tkzLabelSegment[above](M,M1){\small $\vv{a}$}
+			%			  	\tkzLabelSegment[above](M1,P) {\small $\vv{b}$}
+			%			  	\tkzLabelSegment[above](M,M2){\small $\vv{b}$}
+			%			  	\tkzLabelSegment[above](M2,P) {\small $\vv{a}$}
+			%		%	  	\tkzLabelSegment[below](M,N1)  {\small $\vv{c}$}
+			%			  	\tkzLabelSegment[right](N1,P)  {\small $\vv{d}$}
+			%			  	\tkzLabelSegment[above](N,N1)   {\small $\vv{e}$} 	  	  	
+			
+			
+			
+			\tkzDrawPoints[color=black, size=2](M,N,P)
+			\tkzLabelPoint[above](M){\scriptsize$M$} 
+			\tkzLabelPoint[below](N){\scriptsize$N$}  
+			\tkzLabelPoint[above right](P){\scriptsize$P$} 
+			\filldraw 
+			(0,0) circle (2pt) node[align=left, below left] {\scriptsize $O$} ;
+			\filldraw 
+			(1,0) circle (2pt) node[align=left, below] {\scriptsize $I$} ;
+			\filldraw 
+			(0,1) circle (2pt) node[align=left, left] {\scriptsize $J$} ; 
+		\end{tikzpicture} 
+	\end{minipage} 
+\end{proof}
+
+\begin{multicols}{2}  
+	\begin{proof}[solution de l'exercice \ref{chapter06:exercice:vecteurscoordonnees}]\hfill 
+		\begin{enumerate}[leftmargin=*,label=\alph*)] 
+			\item  $\vv{AB}\begin{pmatrix}
+				-11\\-1
+			\end{pmatrix}$;
+			$\vv{BC}\begin{pmatrix}
+				8\\17
+			\end{pmatrix}$;
+			$\vv{CA}\begin{pmatrix}
+				3\\-16
+			\end{pmatrix}$;
+			\item  $\vv{AB}\begin{pmatrix}
+				5\\-5
+			\end{pmatrix}$;
+			$\vv{BC}\begin{pmatrix}
+				1\\2
+			\end{pmatrix}$;
+			$\vv{CA}\begin{pmatrix}
+				-6\\3
+			\end{pmatrix}$;
+			\item  $\vv{AB}\begin{pmatrix}
+				-4\\5
+			\end{pmatrix}$;
+			$\vv{BC}\begin{pmatrix}
+				7\\\sqrt{2}-5
+			\end{pmatrix}$;
+			$\vv{CA}\begin{pmatrix}
+				-3\\-\sqrt{2}
+			\end{pmatrix}$;
+			\item  $\vv{AB}\begin{pmatrix}
+				-5\\-3
+			\end{pmatrix}$;
+			$\vv{BC}\begin{pmatrix}
+				7\\-2
+			\end{pmatrix}$;
+			$\vv{CA}\begin{pmatrix}
+				-2\\3+\sqrt{2}
+			\end{pmatrix}$;
+		\end{enumerate} 
+	\end{proof}
+	\begin{proof}[solution de l'exercice \ref{chapter06:exercice:translationcoordonnees}]\hfill 
+		\begin{enumerate}[leftmargin=*,label=\alph*)] 
+			\item  $\vv{AB}\begin{pmatrix}
+				-4\\-1
+			\end{pmatrix}$ et $M(-4;-1)$.
+			\item  $\vv{BC}\begin{pmatrix}
+				-4\\-4
+			\end{pmatrix}$ et $M(-3;-7)$.
+			\item  $\vv{CA}\begin{pmatrix}
+				8\\5
+			\end{pmatrix}$; $I(1;0)$ et $M(9;5)$.
+			\item $\vv{CA}\begin{pmatrix}
+				8\\5
+			\end{pmatrix}$; $J(0;1)$ et $M(-8;-4)$.
+		\end{enumerate} 
+	\end{proof} 
+\end{multicols}

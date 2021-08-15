@@ -1,0 +1,209 @@
+%!TEX root = ../chapter06.tex 
+%----------------------------------------------------------------------------------------
+%	
+%---------------------------------------------------------------------------------------- 
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+}   
+\onehalfspacing   
+
+\section{Précisions sur les parallélogrammes}
+
+\begin{definition} Deux droites (du plan) sans points communs seront dites strictement parallèles.
+	
+	Deux droites sont parallèles si elles sont strictement parallèles \textbf{ou} confondues.
+\end{definition}
+\begin{example} Donner un contre-exemple de l'implication :
+	\begin{quote}
+		Si les côtés opposés d'un quadrilatère sont parallèles, alors c'est un parallélogramme. 
+	\end{quote} 
+	\vfill 
+\end{example}
+
+
+
+\begin{marginfigure}
+	\begin{tikzpicture}[scale=0.6]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 0.8pt, add=.2 and .2] 
+		
+		\tkzInit[xmin=0,xmax=7,ymin=-1,ymax=4]  
+		%		\begin{scope}[dashed] 
+		%			\tkzGrid[ xstep=1, ystep=1] 
+		%		\end{scope}  
+		
+		\tkzText[above, font=\scriptsize, fill=white](3.5,4){$A$, $B$ et $C$ non alignés}
+		%		\tkzText[font=\scriptsize,fill=white](3.5,-.5){$AB\textbf{D}C$ est un parallélogramme} 
+		\tkzDefPoint(2,3){A} \tkzDefPoint(5,1){D}
+		\tkzDefPoint(0,0){C} \tkzDefPoint(7,4){B}
+		\tkzDrawSegment[-,>=latex, line width=2](A,B)
+		\tkzDrawSegment[-,>=latex,  line width=2](C,D)
+		\tkzDefMidPoint(A,D) \tkzGetPoint{O}
+		\tkzDrawPoints[](A,B,C,D,O) 
+		\tkzLabelPoint[font=\scriptsize, left](A){A}
+		\tkzLabelPoint[font=\scriptsize, right](B){B}
+		\tkzLabelPoint[font=\scriptsize, left](C){C}
+		\tkzLabelPoint[ font=\scriptsize,right](D){D}
+		\tkzDrawSegment[dashed](A,C)
+		\tkzDrawSegment[dashed](B,D)
+		\tkzDrawSegment(B,C)
+		\tkzDrawSegment(A,D)
+		\tkzMarkSegments[mark=s||, pos=0.25](A,D)
+		\tkzMarkSegments[mark=s||, pos=0.75](A,D)
+		\tkzMarkSegments[mark=s|, pos=0.25](B,C)
+		\tkzMarkSegments[mark=s|, pos=0.75](B,C)
+		\tkzLabelPoint[font=\scriptsize,below](O){O} 
+		%		\begin{scope}[yshift=-7cm,xshift=1cm]
+		%			\tkzInit[xmin=-1,xmax=6,ymin=-1,ymax=4]  
+		%			\begin{scope}[dashed] 
+		%				\tkzGrid[ xstep=1, ystep=1] 
+		%			\end{scope}  
+		%			\tkzDefPoint(0,0){A1} \tkzDefPoint(2,1){B1}
+		%			\tkzDefPoint(4,2){C1} \tkzDefPoint(6,3){D1}
+		%			\tkzDefMidPoint(A1,D1) \tkzGetPoint{O1}
+		%			\tkzDrawPoints[](A1,B1,C1,D1, O1)
+		%			\tkzDrawSegment[->,>=latex, line width=2](A1,B1)
+		%			\tkzDrawSegment[->,>=latex,  line width=2](C1,D1) 
+		%			\tkzDrawSegment(C1,B1)
+		%			\tkzLabelPoint[font=\scriptsize,above](A1){A}
+		%			\tkzLabelPoint[font=\scriptsize,below](B1){B}
+		%			\tkzLabelPoint[font=\scriptsize,below](C1){C}
+		%			\tkzLabelPoint[font=\scriptsize,below](D1){D}
+		%			\tkzLabelPoint[font=\scriptsize,below](O1){O}  
+		%			\tkzText[font=\scriptsize,above,fill=white](1.5,4){Cas $A$, $B$ et $C$ sont alignés}
+		%			%		\tkzText[font=\scriptsize,fill=white](3.5,-.5){$AB\textbf{D}C$ est un parallélogramme aplati}
+		%		\end{scope}
+	\end{tikzpicture} 
+	\caption{$AB\textbf{D}C$ est un parallélogramme strict}\label{chap07.fig.01A}
+\end{marginfigure} 
+\begin{proposition} 
+	Si le quadrilatère $ABDC$ a ses côtés opposés strictement parallèles, alors c'est un 
+	$ABDC$ est un parallélogramme strict ($A$, $B$ et $C$ non alignés). \ref{chap07.fig.01A}).   
+\end{proposition} 
+\begin{definition} 
+	On dira que $AB\textbf{D}C$ est un parallélogramme lorsque les segments $[AD]$ et $[BC]$ ont le même milieu. 
+	
+	Un parallélogramme peut être dégénéré (figure \ref{chap07.fig.01B})
+\end{definition}
+
+\begin{figure}[h]
+	\begin{tikzpicture}[scale=0.75]
+		\tkzInit[xmin=-1,xmax=14,ymin=-1,ymax=4] 
+		\begin{scope}[dashed] 
+			\tkzGrid[ xstep=1, ystep=1] 
+		\end{scope}  
+		\tkzDefPoint(0,0){A1} \tkzDefPoint(2,1){B1}
+		\tkzDefPoint(4,2){C1} \tkzDefPoint(6,3){D1}
+		\tkzDefMidPoint(A1,D1) \tkzGetPoint{O1}
+		\tkzDrawPoints[](A1,B1,C1,D1, O1)
+		\tkzDrawSegment[-,>=latex, line width=2](A1,B1)
+		\tkzDrawSegment[-,>=latex,  line width=2](C1,D1) 
+		\tkzDrawSegment(C1,B1)
+		\tkzLabelPoint[font=\scriptsize,above](A1){A}
+		\tkzLabelPoint[font=\scriptsize,below](B1){B}
+		\tkzLabelPoint[font=\scriptsize,below](C1){C}
+		\tkzLabelPoint[font=\scriptsize,below](D1){D}
+		\tkzLabelPoint[font=\scriptsize,below](O1){O}  
+		%		\tkzText[font=\scriptsize,above,fill=white](1.5,4){Cas $A$, $B$ et $C$ sont alignés}
+		%		\tkzText[font=\scriptsize,fill=white](3.5,-.5){$AB\textbf{D}C$ est un parallélogramme aplati} 
+	\end{tikzpicture} 
+	\caption{  Exemples de parallélogrammes dégénérés, avec les points $A$, $B$ et $C$ alignés.
+	} \label{chap07.fig.01B}
+\end{figure}
+
+\begin{theorem}[admis]\sidenote{
+		Il est difficile de prouver que $CDFE$ n'est pas un quadrilatère croisé. Il faut passer par une étude de cas, et utiliser les critères d'égalité des triangles. \url{http://gabrielbraun.free.fr/Geometry/Tarski/plg_pseudo_trans.html}	 
+	} \label{chapitre06:theorem:parallelogrammetransitif} Si $ABDC$ et $ABFE$ sont des parallélogrammes, alors $CDFE$ est un parallélogramme.
+\end{theorem} 
+\begin{proof}[illustration]  
+	
+\end{proof}\vfill 
+%Les vecteurs offrent un moyen de faire appel au théorème précédent de manière implicite. Cela simplifie beaucoup de raisonnements.
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage  
+\section{Translations, vecteurs et coordonnées}
+Le mot \og  vecteur \fg{} vient du latin \og vehere \fg{} qui signifie conduire, transporter.\sidenote{Utiliser \url{https://www.geogebra.org/classic/xgcanh84}}
+\begin{definition}[vecteur lié] Soit $A$ et $B$ deux points du plan.  
+	Le vecteur lié  $\vv{AB}$ est le segment orienté, du point $A$ vers le point $B$\sidenote{On n'écrira pas \xcancel{$\overleftarrow{BA}$} : l'origine est toujours à gauche, la flèche pointe vers la droite.}. 
+	\begin{enumerate}[label=\textbullet]
+		\item $A$ est l'origine du vecteur  $\vv{AB}$
+		\item $B$ est l'extrémité du vecteur   $\vv{AB}$.
+	\end{enumerate}
+	Le vecteur peut être dégénéré si le même point est origine et extrémité : $\vv{AA}$.
+\end{definition}
+
+\begin{marginfigure}%[h]\centering 
+	\begin{tikzpicture}[scale=0.6] 
+		\def \xmin{-4}; 
+		\def \xmax{5.5}; 
+		\def \ymin{-3};
+		\def \ymax{5};	
+		\def \alpha{-05}
+		\def \beta{75}
+		\def \xnorm{1.2};
+		\def \ynorm{0.8}; 
+		\pgftransformcm{\xnorm*cos(\alpha)}{\xnorm*sin(\alpha)}{\ynorm*cos(\beta)}{\ynorm*sin(\beta)}{\pgfpointorigin}
+		\path[clip,preaction = {draw=gray}] 
+		({(\xmax*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}	) -- ( 
+		{(\xmax*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+		{(\xmin*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) --   cycle; 
+		\tkzInit[xmin=-8, ymin=-8,  xmax=8.5,ymax=9.5]
+		\begin{scope}[dashed] 
+			\tkzGrid[ xstep=1, ystep=1](-11,-9)(10,15)
+		\end{scope}  
+		\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ]  
+		\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt] 
+		\tkzRep[color  = Maroon,xlabel=,ylabel=, line width = 2pt,xnorm=1, ynorm=1]  
+		\tkzDefPoint(0,0){O} 
+		\tkzDefPoint(1,0){I} 
+		\tkzDefPoint(0,1){J} 
+		\tkzLabelPoints[below left,  font=\scriptsize](O)
+		\tkzLabelPoints[below,  font=\scriptsize](I)
+		\tkzLabelPoints[left,  font=\scriptsize](J)
+	\end{tikzpicture}
+	\caption{Le repère $(O; I,J)$ n'est pas forcément orthonormé.}
+\end{marginfigure}  
+\begin{definition}[Dans un repère $(O;I,J)$] et les points $A(x_A;y_A)$ et $B(x_B;y_B)$.
+	
+	Le vecteur $\vv{AB}$  a pour coordonnées $\vv{AB}\begin{pmatrix}
+		x_B-x_A \\ y_B-y_A
+	\end{pmatrix}$  
+\end{definition}
+\begin{example}
+	Soient les points $A(2~;~-4)$, $B(-1~;~3)$, $C(-3~;~-2)$
+	
+	Déterminer les coordonnées des vecteurs $\vv{AB}$, $\vv{CA}$, $\vv{CB}$ et $\vv{AA}$. 
+\end{example}
+\vfill
+\begin{definition}[translation de vecteur $\vv{AB}$] est la transformation du plan qui a un point $X$ associe son image $Y$ tel que $AB\textbf{Y}X$ est un parallélogramme.  
+\end{definition}
+\begin{definition}[translation de vecteur $\vv{AA}$] est une identité. Elle transforme tout point du plan en lui-même. 
+	
+	On dira que c'est la translation de vecteur nul $\vv{0}$. 
+\end{definition} 
+
+
+\begin{definition}[Dans un repère $(O;I,J)$] la translation de vecteur $\vv{AB}\begin{pmatrix}
+		a\\b
+	\end{pmatrix}$ transforme le point $C(x;y)$ en le point $D(x+a; y+b)$.
+\end{definition}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------

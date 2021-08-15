@@ -1,0 +1,266 @@
+%!TEX root = ../chapter06.tex 
+%----------------------------------------------------------------------------------------
+%	
+%---------------------------------------------------------------------------------------- 
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\subsection{Exercices égalités vectorielles}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+\begin{exercise}[Égalités vectorielles]\label{chapter06:exercices:egalitesvectoriels} À l'aide d'un schéma, préciser les énoncés vrais.\hfill     
+	
+	\noindent\QCM[VF,Alterne,Largeur=1.0cm,Stretch=1.1]{%
+		{$Q$ est l'image de $P$ par la translation $\vv{AB}$, alors $\vv{PQ}=\vv{AB}$}&1,% 
+		{$Q$ est l'image de $P$ par la translation $\vv{AB}$, alors $\vv{AP}=\vv{BQ}$}&2,% 
+		{Le quadrilatère $JOLI$ est un parallélogramme revient à dire $\vv{JO}=\vv{LI}$}&2,% 
+		{Le quadrilatère $JOLI$ est un parallélogramme revient à dire $\vv{OJ}=\vv{LI}$}&1,% 
+		{Le quadrilatère $JOLI$ est un parallélogramme revient à dire $\vv{OL}=\vv{JI}$}&1,% 
+		{Le quadrilatère $JOLI$ est un parallélogramme revient à dire $\vv{OL}=\vv{IJ}$}&2,%
+		{Si $I$ est le centre du parallélogramme $ECHO$ alors $\vv{EI}=\vv{IC}$}&2,%   
+		{Si $I$ est le centre du parallélogramme $ECHO$ alors $\vv{IO}=\vv{CI}$}&1,%   
+		{Si $Q$ est l'image de $P$ par la symétrie de centre $R$, alors $\vv{PR}=\vv{RQ}$}&1,% 
+		{Si $M$ est le milieu de $[AB]$ alors $AM=BM$}&2,% 
+		{Si $AM=BM$ alors $M$ est nécessairement le milieu de $[AB]$}&2,% 
+		{Si $\vv{AM}=\vv{MB}$ alors $M$ est nécessairement le milieu de $[AB]$}&2,%
+		{Si $\vv{AB}=\vv{DC}$ alors  $AB=CD$}&1,%
+		{Si $AB=CD$ alors  $\vv{AB}=\vv{DC}$}&2,%
+		{Si $\vv{AB}=\vv{DC}$ alors $\vv{BC}=\vv{AD}$}&1,% 
+	} 
+\end{exercise}
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+\begin{example}\hfill
+	
+	Dans un repère on donne les points : $I(2 ; -2)$, $J(-1 ; -1)$, $K(0 ; 1)$, $L(-3 ; 2)$. 
+	\begin{enumerate}[leftmargin=*,label=\alph*)] 
+		\item Montrer par le calcul que $IJLK$ est un parallélogramme.
+		\vfill 
+		\item Trouver par le calcul le point $M(x;y)$ tel que $ILMJ$ est un parallélogramme.
+		\vfill 
+	\end{enumerate} 
+\end{example}
+
+\begin{exercise} \label{chapter06:exercices:parallelogrammes01}
+	Soit les points $A(-3~;~-1)$, $B(5~;~-2)$, $C(7~;~3)$ et $D(-1~;~4)$ dans le repère $(O;I,J)$. 
+	
+	Montrer que  $ABCD$  est un parallélogramme.
+\end{exercise}
+
+\begin{exercise} \label{chapter06:exercices:parallelogrammes02}
+	Soit les points $A(11,-14)$, $B(-13,12)$ et $C(-4,7)$ dans le repère $(O;I,J)$.
+	
+	Trouver les coordonnées de $M(x;y)$ tel que $ABMC$ est un parallélogramme.
+\end{exercise}
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage
+\begin{exercise} \label{chapter06:exercices:parallelogrammes03}
+	Soit les points $A(12~;~15)$, $B(-11~;~17)$ et $C(-11~;~-13)$. 
+	
+	Calculer les coordonnées du point $D(x;y)$ tel que $ABCD$ soit un parallélogramme.
+\end{exercise}  
+\begin{exercise}\label{chapter06:exercices:parallelogrammes04} Soit les points   $D(-14;15)$; $A(16;11)$; $T(15;-7)$. 
+	
+	$DARK$ est le parallélogramme de centre $T$ (intersection des diagonales). Retrouver par le calcul les coordonnées de $R$ et $K$. 
+\end{exercise}
+\begin{exercise}[Variations]\label{chapter06:exercices:parallelogrammes05} 
+	Le plan est muni d'un repère $(O;I,J)$.  Pour chacun des cas suivants, traduire la propriété donnée en une égalité de vecteurs. En déduire les équations vérifiées par les coordonnées de $M(x;y)$, et les résoudre.
+	\begin{enumerate}[label=\alph*)]
+		\item $A(-1;1)$, $B = ( -1; 2)$. $M(x;y)$ est tel que $ABMO$ est un parallélogramme.
+		\item  $A( -1; 2)$, $B = (3; 1)$.  $M(x;y)$ est tel que $AMBO$ est un parallélogramme.
+		\item  $A(-2;1)$, $B = (1;2)$.  $M(x;y)$ est tel que $ABMI$ est un parallélogramme.
+		\item $A(-3;-2)$, $B(-1;-1)$. $M(x;y)$ est tel que $A$ est le milieu du segment $[MB]$
+		\item $A(-3;-2)$, $B(-1;-1)$. $M(x;y)$ est tel que $M$ est le milieu du segment $[AB]$ 
+		\item $A(2;5)$, $B = (1; 1)$. $M(x;y)$ est tel que $M$ est le milieu du segment $[AB]$ 
+		\item $A(1;5)$. $M(x;y)$ est le symétrique de $A$ par rapport à l'origine $O$.
+	\end{enumerate}
+\end{exercise}  
+\begin{eBox}
+	Dans les exercices suivants, le repère $(O;I,J)$ est orthonormé.
+\end{eBox} 
+\begin{exercise} Soit les points $B(-10;-5)$ , $E(-16;3)$, $A(-48;-21)$ et $U(-42;-29)$
+	\begin{enumerate}[label=\alph*), leftmargin=*]\label{chapter06:exercice:naturequadrilatere01}
+		\item Montrer que $BEAU$ est un parallélgoramme.
+		\item Calculer les longueurs des côtés adjacents $BE$ et $EA$.
+		\item Calculer les longueurs des diagonales $BA$ et $EU$. 
+		\item Que pouvez vous dire du quadrilatère $BEAU$ ?
+	\end{enumerate}
+\end{exercise}
+\begin{exercise}\label{chapter06:exercice:naturequadrilatere02} Soit les points $C(-7;9)$ , $A(\numprint{6.5};2)$, $F(-4;13)$ et $E(-\numprint{17.5};20)$
+	\begin{enumerate}[label=\alph*), leftmargin=*]
+		\item Montrer que $CAFE$ est un parallélgoramme.
+		\item Calculer les longueurs des diagonales $CF$ et $AE$.
+		\item Calculer les longueurs des côtés adjacents $CA$ et $AF$.
+		\item  Que pouvez vous dire du quadrilatère $CAFE$ ?
+	\end{enumerate}
+\end{exercise} 
+\begin{exercise} Soit le parallélogramme $ARMY$ tel que $A(-6;7)$; $R(-11;9)$; $Y(-7;13)$.\hfill 
+	\begin{enumerate}[label=\alph*), leftmargin=*]
+		\item Calculer la longueur de la diagonale $RY$  
+		\item Calculer les coordonnées de $M$, et en déduire la longueur de la diagone $AM$.
+	\end{enumerate}
+\end{exercise} 
+\begin{eBox}
+	Dans les 2 derniers exercices, utiliser directement la formule des coordonnées du milieu d'un segment sans passez par des égalités vectorielles.
+\end{eBox} 
+\begin{exercise}  Soit $F(10;−8)$, $U(13;0)$, $N(24;9)$ et $F(21;1)$.
+	
+	Montrer que $FUNK$ est un parallélogramme en démontrant que les diagonales ont même milieu. 
+\end{exercise}
+\begin{exercise} 	Soit $P(2;3)$, $Q(5;4)$ et $R(4;5)$. 
+	\begin{enumerate}[label=\alph*)]
+		\item Calculer les coordonnées du milieu de $[PQ]$.
+		\item Montrer que $R$ appartient au cercle de diamètre $[PQ]$.
+	\end{enumerate} 
+\end{exercise}  
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\newpage 
+\begin{proof}[solution de l'exercice \ref{chapter06:exercices:egalitesvectoriels}] \hfill 
+	
+	\noindent\QCM[VF,Alterne,Largeur=1.0cm,Stretch=1.1, Solution ]{%
+		{$Q$ est l'image de $P$ par la translation $\vv{AB}$, alors $\vv{PQ}=\vv{AB}$}&1,% 
+		{$Q$ est l'image de $P$ par la translation $\vv{AB}$, alors $\vv{AP}=\vv{BQ}$}&2,% 
+		{Le quadrilatère $JOLI$ est un parallélogramme revient à dire $\vv{JO}=\vv{LI}$}&2,% 
+		{Le quadrilatère $JOLI$ est un parallélogramme revient à dire $\vv{OJ}=\vv{LI}$}&1,% 
+		{Le quadrilatère $JOLI$ est un parallélogramme revient à dire $\vv{OL}=\vv{JI}$}&1,% 
+		{Le quadrilatère $JOLI$ est un parallélogramme revient à dire $\vv{OL}=\vv{IJ}$}&2,%
+		{Si $I$ est le centre du parallélogramme $ECHO$ alors $\vv{EI}=\vv{IC}$}&2,%   
+		{Si $I$ est le centre du parallélogramme $ECHO$ alors $\vv{IO}=\vv{CI}$}&1,%   
+		{Si $Q$ est l'image de $P$ par la symétrie de centre $R$, alors $\vv{PR}=\vv{RQ}$}&1,% 
+		{Si $M$ est le milieu de $[AB]$ alors $AM=BM$}&2,% 
+		{Si $AM=BM$ alors $M$ est nécessairement le milieu de $[AB]$}&2,% 
+		{Si $\vv{AM}=\vv{MB}$ alors $M$ est nécessairement le milieu de $[AB]$}&2,%
+		{Si $\vv{AB}=\vv{DC}$ alors  $AB=CD$}&1,%
+		{Si $AB=CD$ alors  $\vv{AB}=\vv{DC}$}&2,%
+		{Si $\vv{AB}=\vv{DC}$ alors $\vv{BC}=\vv{AD}$}&1,% 
+	} 
+\end{proof}
+\begin{proof}[solution de l'exercice  \ref{chapter06:exercices:parallelogrammes01}]   
+	
+	$\vv{AB}\begin{pmatrix}
+		8\\ -1
+	\end{pmatrix} =\vv{DC}\begin{pmatrix}
+		8\\ -1
+	\end{pmatrix}$.
+\end{proof}
+\begin{proof}[solution de l'exercice \ref{chapter06:exercices:parallelogrammes02}]   
+	
+	$\vv{AB}\begin{pmatrix}
+		-24\\ 26
+	\end{pmatrix} =\vv{DC}\begin{pmatrix}
+		x+4\\ y-7
+	\end{pmatrix}$. $M(-28;33)$.
+\end{proof}
+\begin{proof}[solution de l'exercice  \ref{chapter06:exercices:parallelogrammes03}]   
+	
+	$\vv{AB}\begin{pmatrix}
+		-23\\ 2 
+	\end{pmatrix} =\vv{DC}\begin{pmatrix}
+		-11-x\\ -13-y
+	\end{pmatrix}$. $M(12;-15)$.
+\end{proof}
+\begin{proof}[solution de l'exercice  \ref{chapter06:exercices:parallelogrammes04}]   
+	
+	$\vv{DT}\begin{pmatrix}
+		29\\ -22 
+	\end{pmatrix} =\vv{TR}\begin{pmatrix}
+		x-15\\ y+7
+	\end{pmatrix}$. $R(44;-29)$.
+	
+	$\vv{AT}\begin{pmatrix}
+		-1\\ -18 
+	\end{pmatrix} =\vv{TK}\begin{pmatrix}
+		x-15\\ y+7
+	\end{pmatrix}$. $K(14;-25)$.
+\end{proof}
+\begin{proof}[solution de l'exercice  \ref{chapter06:exercices:parallelogrammes05}]   
+	\begin{enumerate}[label=\alph*)]
+		\item $\vv{OM}\begin{pmatrix}
+			x\\ y 
+		\end{pmatrix} =\vv{TR}\begin{pmatrix}
+			0\\ 1
+		\end{pmatrix}$. $M(0;1)$.
+		\item $\vv{OA}\begin{pmatrix}
+			-1\\ 2 
+		\end{pmatrix} =\vv{BM}\begin{pmatrix}
+			x-3\\ y-1
+		\end{pmatrix}$. $M(2;3)$.
+		\item $\vv{AB}\begin{pmatrix}
+			3\\ 1 
+		\end{pmatrix} =\vv{IM}\begin{pmatrix}
+			x-1\\ y-0
+		\end{pmatrix}$. $M(4;1)$.
+		\item $\vv{BA}\begin{pmatrix}
+			-2\\ -1 
+		\end{pmatrix} =\vv{AM}\begin{pmatrix}
+			x+3\\ y+2
+		\end{pmatrix}$. $M(-5;-3)$.
+		\item $\vv{AM}\begin{pmatrix}
+			x+3\\ y+2 
+		\end{pmatrix} =\vv{MB}\begin{pmatrix}
+			-1-x\\ -1-y
+		\end{pmatrix}$. $M(-2;-\tfrac{3}{2})$.
+		\item $\vv{AM}\begin{pmatrix}
+			x-2\\ y-5 
+		\end{pmatrix} =\vv{MB}\begin{pmatrix}
+			1-x\\ 1-y
+		\end{pmatrix}$. $M(-\tfrac{3}{2};3)$.
+		\item $\vv{AO}\begin{pmatrix}
+			-1\\ -5 
+		\end{pmatrix} =\vv{OM}\begin{pmatrix}
+			x\\ y
+		\end{pmatrix}$. $M(-1;5)$.
+	\end{enumerate} 
+\end{proof}
+\begin{proof}[solution de l'exercice  \ref{chapter06:exercice:naturequadrilatere01}]   \hfill
+	
+	\begin{enumerate}[label=\alph*)]
+		\item $\vv{BE}\begin{pmatrix}
+			-6\\ 8 
+		\end{pmatrix} =\vv{UA}\begin{pmatrix}
+			-6\\ 8
+		\end{pmatrix}$
+		\item  $BE=10$  et $EA =40$.
+		\item $BA=10\sqrt{17}$ et $EU=10\sqrt{17}$.
+		\item $BEAU$ est un rectangle qui n'est pas carré.
+	\end{enumerate} 
+\end{proof}
+\begin{proof}[solution de l'exercice  \ref{chapter06:exercice:naturequadrilatere02}]  \hfill  
+	
+	\begin{enumerate}[label=\alph*)]
+		\item $\vv{CA}\begin{pmatrix}
+			\numprint{13.5}\\ -7 
+		\end{pmatrix} =\vv{UA}\begin{pmatrix}
+			\numprint{13.5}\\ -7 
+		\end{pmatrix}$
+		\item $CA=AF=\tfrac{5\sqrt{37}}{2}$.
+		\item $CF=5$ et $AE=\sqrt{445}$.
+		\item $CAFE$ est un losange qui n'est pas carré.
+	\end{enumerate} 
+\end{proof}
+
