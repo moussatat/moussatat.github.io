@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website_2=self.webpackChunkmy_website_2||[]).push([[2535],{5641:function(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"La sp\xe9cialit\xe9 maths en cycle terminal (brouillon)","permalink":"/blog/2021/02/04/specialitemaths"},{"title":"Premier billet","permalink":"/blog/2021/01/19/test"}]}')}}]);

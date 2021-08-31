@@ -13,12 +13,20 @@
         <link href="https://moussatat.github.io/blog/2021/02/04/specialitemaths"/>
         <updated>2021-02-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[les différents parcours maths du cycle terminal, les choix attendus pour le supérieur avec quelques liens, et les thèmes abordés en spécialité.]]></summary>
+        <author>
+            <name>Nizar Moussatat</name>
+            <uri>https://github.com/zenxbear</uri>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Premier billet]]></title>
         <id>Premier billet</id>
-        <link href="https://moussatat.github.io/blog/2021/01/19/test"/>
+        <link href="https://moussatat.github.io/blog/2021/06/12/test"/>
         <updated>2021-01-19T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Puissances]]></summary>
+        <author>
+            <name>Nizar Moussatat</name>
+            <uri>https://github.com/zenxbear</uri>
+        </author>
     </entry>
 </feed>
