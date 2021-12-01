@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[401],{2318:function(t){t.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/orientation","name":"orientation","count":1,"permalink":"/blog/tags/orientation"}')}}]);
