@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[2118],{47980:function(e){e.exports=JSON.parse('{"label":"math","permalink":"/blog/tags/math","allTagsPath":"/blog/tags","count":1}')}}]);
