@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjdb=self.webpackChunkjdb||[]).push([[1713],{3457:e=>{e.exports=JSON.parse('[{"label":"orientation","permalink":"/blog/tags/orientation","count":1},{"label":"secondes","permalink":"/blog/tags/secondes","count":1},{"label":"hello","permalink":"/blog/tags/hello","count":1},{"label":"math","permalink":"/blog/tags/math","count":1}]')}}]);
