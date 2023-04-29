@@ -36,17 +36,18 @@ Une somme de monômes est \textbf{ordonnée réduite} si les monômes sont rang�
 	\item $5x^3-x^2+5$ est un polynôme ordonné réduit de degré 3.\sidenote{expression \textbf{cubique} en $x$}
 \end{enumerate} 
 \end{example} 
+\vfill 
 \begin{definition} Une fonction	définie sur $\mathbb{R}$ 
 %	$f\colon \begin{aligned}[t] \mathbb{R}&\to \mathbb{R}\\
 %		x&\mapsto y=f(x)\end{aligned}$ 
-est une fonction polynôme de degré 2\sidenote{nous dirons fonction quadratique} 
-	si il existe $a\neq0$, $b$ et $c\in\mathbb{R}$ tel que : 
+est une fonction polynôme de degré 2
+	si il existe $a\neq0$, $b$ et $c\in\mathbb{R}$ tel que :\sidenote{nous dirons fonction quadratique}  
 	\setlength{\abovedisplayskip}{3pt}
 	\setlength{\belowdisplayskip}{3pt}
 	$$\text{pour tout} \;x\in\mathbb{R} \qquad f(x)=ax^2+bx+c$$   
-Sa représentation graphique s'appelle une \textbf{parabole}.
+Sa représentation graphique s'appelle une \textbf{parabole} (\href{https://www.desmos.com/calculator/3tknwzoelj}{Desmos V1} et \href{https://www.desmos.com/calculator/8t1vcgdrmr}{V2}). 
 \end{definition} 
-\begin{figure*}[!h] 
+\begin{figure*}[!hb] 
 	\begin{tikzpicture}[xscale=0.9, yscale=0.9,
 		xkcd/.style={
 			decoration={
@@ -251,7 +252,7 @@ $\mathscr{P}_2\colon y=-x^2$
 	\end{tikzpicture} 
 }
 
-
+\vfill
 \noindent \hfill
 $\mathscr{P}_3\colon y=x^2-3$
 \hfill 
@@ -334,7 +335,7 @@ $\mathscr{P}_4\colon y=(x-2)^2$
 }
 
 
-
+\vfill
 \noindent  \hfill
 $\mathscr{P}_5\colon y=x^2+3$
 \hfill 
@@ -480,6 +481,7 @@ $\mathscr{P}_2\colon y=x^2 +x-3$ et $d\colon y= x-3$
 	\end{tikzpicture} 
 }
 
+\vfill
 \noindent  \hfill
 $\mathscr{P}_3\colon y=2x^2+5x$ et $d\colon  y = 5x$
 \hfill 
@@ -552,7 +554,7 @@ $\mathscr{P}_4\colon y=-x^2 +x$ et $d\colon y=  x$
 \end{tikzpicture} 
 }
 
-
+\vfill 
 \noindent  \hfill
 $\mathscr{P}_5\colon y=-x^2+x+10$ et $d\colon  y = x+10$
 \hfill 
@@ -1091,7 +1093,7 @@ $\mathscr{P}_6\colon y=x^2 -2x+1$ et $d\colon y= -2x+1$
 } 
 \onehalfspacing
 
-\section{Forme canonique} 
+\section{La forme canonique} 
 \begin{definition} Soit $a\neq 0$, $\upalpha, \upbeta\in\mathbb{R}$. \\
 	La fonction quadratique définie sur $\mathbb{R}$ par :
 	\setlength{\abovedisplayskip}{3pt}
@@ -1116,7 +1118,7 @@ $\mathscr{P}_6\colon y=x^2 -2x+1$ et $d\colon y= -2x+1$
 	\noindent Les autres cas se traitent de manière similaire.
 \end{proof}
 
-
+\vfill 
 
 \begin{figure}[!h] 
 	\begin{tikzpicture}[xscale=0.9, yscale=1,
@@ -1289,7 +1291,8 @@ $\mathscr{P}_6\colon y=x^2 -2x+1$ et $d\colon y= -2x+1$
 		\tkzTabInit[lgt = 1.5, espcl =1.5, color, colorC = blue!15, colorL = green!15]{$x$ / 1 ,$f(x)$ / 1.5   }{$-\infty$ ,$\upalpha$ , $+\infty$} 
 		\tkzTabVar{-/$-\infty$  ,+ /$\upbeta$,  -/ $-\infty$}  
 	\end{tikzpicture} 
-	\caption{Représentation graphique d'une fonction quadratique donné par forme canonique $f(x)=a(x-\upalpha)^2+\upbeta$.}
+	\caption{Représentation graphique d'une fonction quadratique donné par forme canonique $f(x)=a(x-\upalpha)^2+\upbeta$.\href{https://www.desmos.com/calculator/ndteejmkxy}{Desmos V1} et \href{https://www.desmos.com/calculator/zypbljxm9p}{V2}
+}
 \end{figure}
 
 \begin{proposition}  Soit $a\neq 0$, $\upalpha, \upbeta\in\mathbb{R}$. \\
@@ -1469,6 +1472,7 @@ $\mathscr{P}_6\colon y=x^2 -2x+1$ et $d\colon y= -2x+1$
 	\end{enumerate} 
 }	
 	\end{exercise}
+\vfill
 \begin{exercise} Pour chaque représentation cochez la fonction quadratique qui correspond.
 	
 \noindent
@@ -1633,18 +1637,17 @@ $\mathscr{P}_6\colon y=x^2 -2x+1$ et $d\colon y= -2x+1$
 			\tkzGetPointCoord(S){S}
 			\tkzGetPointCoord(R){R}
 			\tkzLabelPoint(S){$(3;2)$}
-			\tkzLabelPoint(R){$(4;4)$}
+			\tkzLabelPoint[right](R){$(4;4)$}
 			
 			%-----------------------  
 		\end{tikzpicture}  \hfill \null 
-		\vspace{-1em}
-		\begin{align*}
+	$\begin{WithArrows}
 			f(x)- \ldots\ldots  &= \ldots\ldots ( x - \ldots\ldots )^2\\
 			f(x) &= \ldots\ldots ( x - \ldots\ldots )^2 +  \ldots\ldots \\ 
 			& \\
 			& \\
-			&   
-		\end{align*}  
+			&  
+	\end{WithArrows}$  
 	\end{example} 
 }\hfill 
 \parbox{0.53\linewidth}{
@@ -1844,7 +1847,7 @@ $f(x)- \ldots   =  \ldots  ( x -  \ldots\ldots )^2$  \medskip \\
 $f(x)   =  \ldots  ( x -  \ldots\ldots )^2  +  \ldots$ \medskip
 } 
 
-%\vfill 
+\vfill 
 \noindent
 \parbox{0.32\linewidth}{ \centering
 	\begin{tikzpicture}[xscale=0.65, yscale=0.65 ]
@@ -2229,7 +2232,7 @@ $$f(x)=ax^2+bx+c= a\left(x^2+\tfrac{b}{a}x\right) + c$$
 	\tkzText[draw,xkcd, font=\small,fill=white](2.75,4){\fontspec{xkcd Script}a<0} 
 \end{tikzpicture}  
 \end{figure}
- 
+ \vfill 
  \begin{theorem}[forme canonique]\sidenote{non exigible} Pour tout fonction quadratique définie sur $\mathbb{R}$ par $f(x)=ax^2+bx+c$, il existe deux réels $\alpha$ et $\beta\in\mathbb{R}$ tel que : 
  	$$
  	\text{pour tout $x\in\mathbb{R}$} \qquad f(x) = a (x-\upalpha)^2+\upbeta 
@@ -2255,13 +2258,15 @@ $$f(x)=ax^2+bx+c= a\left(x^2+\tfrac{b}{a}x\right) + c$$
 	La complétion au carré est une technique qui permet d'obtenir la forme canonique à partir de la forme réduite d'une fonction quadratique.
 \end{eBox}
 \begin{example}[complétion au carré cas $a=1$](les $-$ sont parfois à transformer en $+$)\hfill
-	
+
+\begin{spacing}{2}	\large
 \noindent
 \parbox{0.18\linewidth}{
 	\noindent
 	$\begin{WithArrows}
 		f(x)&=x^2+10  \\
 		&    \\
+		&   \\
 		&  \\
 		&  
 	\end{WithArrows}$
@@ -2272,6 +2277,7 @@ $\begin{WithArrows}
  f(x)&=x^2+10x \\
  & = x(x+10) \\
  & = (x+ \ldots - \ldots)(x + 5 + 5)\\
+ & = \\
  & = 
 \end{WithArrows}$
 }\hfill
@@ -2281,9 +2287,10 @@ $\begin{WithArrows}
 		f(x)&=x^2-4x \\
 		& = x(x-\ldots) \\
 		& = (x- \ldots + \ldots)(x - \ldots - \ldots)\\
+		& = \\
 		& = 
 	\end{WithArrows}$
-}	
+}	\vspace{-0.5em}
 
 \noindent
 \parbox{0.45\linewidth}{
@@ -2292,6 +2299,7 @@ $\begin{WithArrows}
 		f(x)&=x^2+5x \\
 		& = x(x - \ldots) \\
 		& = (x - \ldots - \ldots)(x - \ldots - \ldots)\\
+		& = \\
 		& = \\
 		&  
 	\end{WithArrows}$
@@ -2303,9 +2311,10 @@ $\begin{WithArrows}
 	& = x(x - \ldots)  \\
 	& = (x - \ldots - \ldots)(x - \ldots - \ldots) \\
 	& = \\
+	& = \\
 	&  
 \end{WithArrows}$
-} 
+} \vspace{-2em}
 
 \noindent
 \parbox{0.45\linewidth}{
@@ -2315,6 +2324,7 @@ $\begin{WithArrows}
 	& = x(x - \ldots) +5  \\
 	& =(x - \ldots - \ldots)(x - \ldots - \ldots) + 5 \\
 	& = \\
+	& = \\
 	&  
 \end{WithArrows}$
 }	\hfill 
@@ -2322,18 +2332,20 @@ $\begin{WithArrows}
 \noindent
 $\begin{WithArrows}
 	f(x)&=-x^2+12x -2 \\
-	& = x(x - \ldots) -2  \\
+	& = \ldots x(x - \ldots) -2  \\
 	& = (x - \ldots - \ldots)(x - \ldots - \ldots) -2  \\
+	& = \\
 	& = \\
 	&  
 \end{WithArrows}$
 }	
+\end{spacing}\vspace{-4em}
 \end{example}
-	
+	\newpage
 \begin{exercise}\label{chapitre01:exercice:completioncarre:01} Retrouvez par complétion au carré la forme quadratique des fonctions suivantes :
 \vspace{-1em}
 \begin{multicols}{4} 
-	\begin{enumerate}[label={$f_\arabic*(x)=$\rule{0pt}{1.8em}}, leftmargin=*] 
+	\begin{enumerate}[label={$f_\arabic*(x)=$}, leftmargin=*] 
 		\item $x^2+4x$  
 		\item $x^2-10x$  
 		\item $x^2+3x+1$  
@@ -2349,36 +2361,36 @@ $\begin{WithArrows}
 	\noindent
 	$\begin{WithArrows}
 		f(x)&=2x^2+3x-5 \\
-		& = 2\left[ x^2 +\tfrac{3}{2}x-\tfrac{5}{2} \right] \\
+		& = 2\left[ x^2 +\tfrac{3}{2}x-\tfrac{5}{2} \right] %\\
 %		& =  \\
 %		& = \\
 %		& = \\
 %		&   \\
-		&  
+%		&  
 	\end{WithArrows}$
 }	\hfill 
 \parbox{0.35\linewidth}{
 	\noindent
 	$\begin{WithArrows}
 		f(x)&=-x^2+12x -2 \\
-		& = -\left[ x^2 \ldots 12x \ldots 2\right]  \\
+		& = -\left[ x^2 \ldots 12x \ldots 2\right] % \\
 %		& =  \\
 %		& = \\
 %		& = \\
 %		& = \\
-		&    
+%		&    
 	\end{WithArrows}$
 }\hfill 
 \parbox{0.25\linewidth}{
 \noindent
 $\begin{WithArrows}
 	f(x)&=-x^2+10x -25 \\
-	& = -\left[ x^2 \ldots 10x \ldots 25\right]  \\
+	& = -\left[ x^2 \ldots 10x \ldots 25\right] %S \\
 %	& =  \\
 %	& = \\
 %	& = \\
 %	& = \\
-	&    
+%	&    
 \end{WithArrows}$
 }
 \end{example}
@@ -2386,7 +2398,7 @@ $\begin{WithArrows}
 \begin{exercise}\label{chapitre01:exercice:completioncarre:02} Retrouvez par complétion au carré la forme quadratique des fonctions suivantes :
 	\vspace{-1em}
 	\begin{multicols}{4} 
-		\begin{enumerate}[label={$f_\arabic*(x)=$\rule{0pt}{1.8em}}, leftmargin=*] 
+		\begin{enumerate}[label={$f_\arabic*(x)=$}, leftmargin=*] 
 			\item $3x^2+9x+5$  
 			\item $-2x^2+2x+2$  
 			\item $-x^2-8x+7$  
@@ -2395,7 +2407,7 @@ $\begin{WithArrows}
 	\end{multicols} 
 \end{exercise}
 %----------------------------------------------------------------------------------------  
-\newpage  
+%\newpage  
 \begin{exercise}\label{chapitre01:exercice:completioncarre:03} Pour chaque fonction quadratique :
 	\begin{enumerate}[label=\alph*), leftmargin=*]
 		\item Déterminez la forme canonique par complétion au carré.
@@ -2508,6 +2520,7 @@ $\begin{WithArrows}
 %\end{figure*} 
 }
 \end{exercise}  
+\vfill
 \begin{exercise}  
 	 Suivre la démarche proposée pour trouver la forme réduite de la fonction quadratique $f$ dont la représentation graphique est une parabole de sommet $S(-2;3)$ et passant par $A(5,8)$.
 	\begin{enumerate}[label=\alph*), leftmargin=*]
@@ -2517,8 +2530,8 @@ $\begin{WithArrows}
 		\item Développer la forme canonique et conclure.
 	\end{enumerate} 
 	\end{exercise} 
-\begin{problem}\hfill
-	
+\vfill
+\begin{problem} 
 \noindent Dans le repère orthonormé $(O; I,J)$, soit la droite $d\colon y = 2x+3$ et $M(x;y)\in d$.
 \begin{enumerate}[label=\alph*), leftmargin=*]
 		\item Démontrer que $OM^2= 5x^2 + 12x + 9$. (\footnote{On rappelle que dans un repère orthonormé $AB^2 = (x_A-x_B)^2+(y_A-y_B)^2$.})
@@ -2632,7 +2645,7 @@ for func in funcsfac :
 } 
 \onehalfspacing
 
-\section{Forme factorisée}
+\section{La forme factorisée}
 
 \begin{definition} \label{chap01:def:factorise}  Soit $f$ une fonction quadratique définie sur $\mathbb{R}$ par $f(x)=ax^2+bx+c$, avec $a\neq 0$, $b,c\in\mathbb{R}$.
 	
@@ -2659,7 +2672,9 @@ for func in funcsfac :
 		
 		\item  Pour $f(x)=2(x-7)^2$, $7$ est une racine double : $r_1 = r_2 = 7$. 
 	\end{enumerate} 
+\vfill
 \end{example}
+
 \begin{figure*}[!h] 
 	\hfill
 	\begin{tikzpicture}[xscale=0.9, yscale=0.9,
@@ -2808,7 +2823,7 @@ for func in funcsfac :
 	footwidth=textwithmarginpar,
 } 
 \onehalfspacing
-\subsection*{Exercices : forme factorisée}
+\subsection*{Exercices : la forme factorisée}
 \begin{exercise}\label{chapitre01:exercice:factorise:01} Écrire chaque fonction quadratique sous la forme factorisée $a(x-r_1)(x-r_2)$.\\
 Préciser le signe de $a$, et les racines.\vspace{-1em}
 
@@ -3091,7 +3106,9 @@ $f(0)= \ldots3$
 %-----------------------  
 \end{tikzpicture} 
 \end{exercise}
-\begin{exercise}\label{chapitre01:exercice:factorise:03} Suivre la démarche proposée pour trouver la forme factorisée $f(x)=a(x-r_1)(x-r_2)$ des fonctions quadratiques représentées ci-dessous.
+\newpage 
+\begin{exercise}\label{chapitre01:exercice:factorise:03}\hfill \\
+ Suivre la démarche proposée pour trouver la forme factorisée $f(x)=a(x-r_1)(x-r_2)$ des fonctions quadratiques représentées ci-dessous.
 	\begin{enumerate}[label=\alph*), leftmargin=*]
 		\item Donnner par lecture graphique le(s) racine(s) de $f$.
 		\item Donner une équation vérifiée par $a$ et la résoudre.
@@ -3643,7 +3660,7 @@ for func in funcs:
 	footwidth=textwithmarginpar,
 } 
 \onehalfspacing
-\section{Forme factorisée : produit et somme des racines}
+\section{La forme factorisée : produit et somme des racines}
 \emph{Les exercices de cette section peuvent être écourtés}.
 Soit $f$ fonction quadratique factorisable, de racines $r_1$ et $r_2$ :
 %\vspace{-1em} 
@@ -3672,7 +3689,7 @@ Soit $f$ fonction quadratique factorisable, de racines $r_1$ et $r_2$ :
 	footwidth=textwithmarginpar,
 } 
 \onehalfspacing
-\subsection{Exercices : forme factorisée et somme et produit des racines}
+\subsection{Exercices : la forme factorisée et somme et produit des racines}
 %\noindent\parbox{0.40\linewidth}{
 %Pour une fonction quadratique $f$ factorisable, de racines $r_1$ et $r_2$ on a:
 %\vspace{-1em} 
@@ -3835,7 +3852,7 @@ Noms={$r_1$ et $r_2<0$/$r_1<0<r_2$/$r_1$ et $r_2>0$}]{%\textbb{N} marche pas
 \begin{eBox}
 Soit $P(x)$ un polynôme de degré quelconque. Si  $r$ est une racine : $P(r)=0$, alors il existe un polynôme $Q$ tel que $P(x)=(x-r)Q(x)$.
 \end{eBox}
-\begin{exercise} \emoji{cactus}Soit la fonction cubique $f(x)=-x^3+8x^2+11-18$. 
+\begin{exercise} \emoji{cactus}Soit la fonction cubique $P(x)=-x^3+8x^2+11-18$. 
 	\begin{enumerate}[label=\alph*), leftmargin=*]
 		\item Montrer que $P(-2)=0$.
 		\item Développer ordonner et réduire l'expression $(x+2)(ax^2+bx+c)$
@@ -3851,7 +3868,7 @@ Soit $P(x)$ un polynôme de degré quelconque. Si  $r$ est une racine : $P(r)=0$
 	\item Quel est le nombre de racines du polynôme $P$ ?
 \end{enumerate} 
 \end{exercise}
-\begin{exercise}[entraînement] \emoji{cactus} Soit la fonction cubique $f(x)=-2x^3+10x^2-16+8$. 
+\begin{exercise}[entraînement] \emoji{cactus} Soit la fonction cubique $P(x)=-2x^3+10x^2-16+8$. 
 	\begin{enumerate}[label=\alph*), leftmargin=*]
 		\item Montrer que $P(1)=0$.
 		\item Développer ordonner et réduire l'expression $(x-1)(ax^2+bx+c)$
@@ -3894,7 +3911,7 @@ n=0
 L=['A','B','C','D','E','F', 'G', 'H']
 for func in funcsfac :  
 	myfactor =  eval('sp.factor(func)')
-	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
+	print( '$f_'+ str(n+1)  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
 	n     = n + 1
 \end{pycode}
 \end{proof}
@@ -3922,7 +3939,7 @@ n=0
 L=['A','B','C','D','E','F', 'G', 'H']
 for func in funcsfac :  
 	myfactor =  eval('sp.factor(func)')
-	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
+	print( '$f_'+ str(n+1)  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
 	n     = n + 1
 \end{pycode}
 \end{proof}
@@ -3947,7 +3964,7 @@ n=0
 L=['A','B','C','D','E','F', 'G', 'H']
 for func in funcsfac :  
 	myfactor =  eval('sp.factor(func)')
-	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
+	print( '$f_'+ str(n+1)  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
 	n     = n + 1
 \end{pycode}
 \end{proof}
@@ -3967,7 +3984,7 @@ for func in funcsfac :
 \section{Exercices classiques : choisir la forme adaptée}
 \begin{exercise}[Grand classique] Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x)=2x^2+4x-16$.
 	\begin{enumerate}[leftmargin=*,label=\arabic*)]
-		\item Montrer que pour tout $x\in\mathbb{R}$ on a $f(x)=(2x+4)(x-2)$
+		\item Montrer que pour tout $x\in\mathbb{R}$ on a $f(x)=2(x+4)(x-2)$
 		\item Montrer que pour tout $x\in\mathbb{R}$ on a $f(x)=2(x+1)^2-18$
 		\item Choisir la forme la plus adaptée pour répondre aux questions suivantes :
 		\vspace{-1em}
@@ -3989,7 +4006,8 @@ for func in funcsfac :
 	\end{multicols}
 	\end{enumerate} 
 \end{exercise}
-\begin{exercise} Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) =3x^2+14x+15$ et $\mathscr{P}$ sa représentation graphique.
+\begin{exercise} 
+	 Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) =3x^2+14x+15$ et $\mathscr{P}$ sa représentation graphique.
 	\begin{enumerate}[leftmargin=*,label=\arabic*)]
 		\item Montrer que pour tout $x\in\mathbb{R}$ on a $f(x)=(x+3)(3x+5)$.
 		\item Montrer par complétion au carré que $f(x)=3\left(x+\frac{7}{3} \right)^2 -\frac{4}{3} $
@@ -4012,8 +4030,9 @@ for func in funcsfac :
 		\end{enumerate} 
 	\end{multicols}
 	\end{enumerate} 
-\end{exercise}
-\begin{exercise} Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) =4x^2+8x+3$ et $\mathscr{P}$ sa représentation graphique.
+\end{exercise} 
+\begin{exercise} 
+	Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) =4x^2+8x+3$ et $\mathscr{P}$ sa représentation graphique.
 	\begin{enumerate}[leftmargin=*,label=\arabic*)]
 		\item Montrer que pour tout $x\in\mathbb{R}$ on a $f(x)=(2x+1)(2x+3)$.
 		\item Montrer par complétion au carré que $f(x)=4\left(x+1 \right)^2 -1 $
@@ -4024,14 +4043,15 @@ for func in funcsfac :
 				\item Quel est le sommet de $\mathscr{P}$ ?
 				\item Calculer $f(-\sqrt{2})$ et $f(0)$.
 				\item Montrer que pour tout $x$, $f(x)\geqslant -1$.
-				\item Résoudre l'équation $f(x)=0$, inconnue $x$.
-				\item Résoudre l'équation $f(x)=3$, inconnue $x$.
+				\item Résoudre l'inéquation $f(x)<0$, inconnue $x$.
+				\item Résoudre l'inéquation $f(x)<3$, inconnue $x$.
 				\item Résoudre l'équation $f(x)=9$, inconnue $x$.  
 			\end{enumerate} 
 		\end{multicols}
 	\end{enumerate} 
-\end{exercise}
-\begin{exercise} Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) =(x+5)^2-(3x-4)(x+5)$.
+\end{exercise} 
+\begin{exercise} 
+	 Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) =(x+5)^2-(3x-4)(x+5)$.
 	\begin{enumerate}[leftmargin=*,label=\arabic*)] 
 		\item Factoriser et montrer que pour tout $x\in\mathbb{R}$, $f(x)=-2(x+5)(x-\tfrac{9}{2})$.
 		\item Montrer que $f(x)=-2x^2-x+45$.
@@ -4049,6 +4069,8 @@ for func in funcsfac :
 		\end{multicols}
 	\end{enumerate} 
 \end{exercise}
+
+\newpage 
 \begin{exercise}[Rapidité et sans calculatrice] Associez chaque fonction donnée par son expression à sa représentation.  Justifiez votre choix.
 	
 \noindent
@@ -4065,7 +4087,7 @@ for func in funcsfac :
 \end{enumerate}
 }
 \parbox{0.40\linewidth}{ 
-\begin{tikzpicture}[xscale=0.75, yscale=0.75]
+	\begin{tikzpicture}[xscale=0.85, yscale=0.85]
 	%----------------------- 
 	\tkzSetUpPoint[size=3, fill=black]
 	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
@@ -4090,9 +4112,9 @@ for func in funcsfac :
 \begin{exercise}[Rapidité et sans calculatrice] Associez chaque fonction donnée par son expression à sa représentation.  Justifiez votre choix.
 	
 \noindent
-	\parbox{0.45\linewidth}{ 
+	\parbox{0.48\linewidth}{ 
 		\noindent
-	\begin{tikzpicture}[xscale=0.75, yscale=0.75]
+	\begin{tikzpicture}[xscale=0.85, yscale=0.85]
 		%----------------------- 
 		\tkzSetUpPoint[size=3, fill=black]
 		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  

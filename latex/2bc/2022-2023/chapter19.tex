@@ -1,0 +1,2595 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode  
+%!TEX root = chapter19.tex  
+\documentclass[main.tex]{subfiles} 
+\begin{document} 
+	%----------------------------------------------------------------------------------------
+	%	CHAPTER 2
+	%----------------------------------------------------------------------------------------
+	\cleardoublepage 
+	\loadgeometry{marginlayout}  
+	\pagestyle{scrheadings} % Print headers again  
+	\KOMAoptions{
+		headwidth=textwithmarginpar,
+		headsepline=true,
+		headsepline= 0.5pt,
+		footwidth=textwithmarginpar,
+	}   
+	\onehalfspacing 
+	\setcounter{chapter}{18}
+	
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------	
+\chapter{Géométrie plane}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+
+\section{Triangles égaux et semblables}
+
+\begin{definition}[triangles égaux]
+	Deux triangles sont égaux si leurs trois côtés et leur trois angles sont égaux deux à deux. 
+\end{definition} 
+%Les triangles $ABC$ et $IJK$ de la figure \ref{chapitre05:trianglesegaux} sont égaux. On a les 6 égalités suivantes :
+%\begin{figure}[h]\centering
+%	\begin{tikzpicture}[scale=0.9]
+%		\tkzDefPoint(0,0){A}
+%		\tkzLabelPoint[above left](A){$A$}
+%		\tkzDefShiftPoint[A](-135:2.5){B}  
+%		\tkzDefTriangle[two angles = 80 and 60](A,B)
+%		\tkzGetPoint{C}
+%		\tkzLabelPoint[left](B){$B$}
+%		\tkzLabelPoint[right](C){$C$}
+%		\tkzDrawPolygon(A,B,C)
+%		\tkzDrawPoints(A,B,C)
+%		\tkzDefShiftPoint[A](4,+3.0){J}  
+%		\tkzDefShiftPoint[J](-70:2.5){I}
+%		\tkzDefTriangle[two angles = -80  and -60](I,J)
+%		\tkzGetPoint{K}
+%		\tkzDrawPolygon(I,J,K)
+%		\tkzDrawPoints(I,J,K) 
+%		\tkzLabelPoint[right](I){$I$}
+%		\tkzLabelPoint[left](J){$J$}
+%		\tkzLabelPoint[right](K){$K$}
+%		\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+%		\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](J,K,I)
+%		\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+%		\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](K,I,J)
+%		\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+%		\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](I,J,K) 
+%		\tkzDrawSegment[line width=2pt, color=red](B,C)
+%		\tkzDrawSegment[line width=2pt, color=red](J,K)
+%		\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+%		\tkzDefMidPoint(J,K)\tkzGetPoint{L}
+%		\draw[<->, >=latex] (A) .. controls +(right:1cm) and +(left:2cm) .. (I) node[sloped,above,pos=0.5]{\scriptsize Angles homologues} ;
+%		\draw[<->, >=latex] (D) .. controls +(right:8cm) and +(down:4cm) .. (L) node[ below right,pos=0.6]{\scriptsize Côtés homologues} ;
+%	\end{tikzpicture}
+%	\caption{$ABC$ et $IJK$ sont égaux.} \label{chapitre05:trianglesegaux}
+%\end{figure}  
+%\begin{align*}
+%	& {\color{red} \widehat{A}= \widehat{I} }
+%	&&  {\color{ForestGreen} \widehat{B}= \widehat{J} } 
+%	&& {\color{Blue} \widehat{C}= \widehat{K} } \\
+%	& {\color{red} BC=JK }
+%	&&  {\color{ForestGreen}  AC=IK } 
+%	&& {\color{Blue} AB=IJ} 
+%\end{align*}
+%
+%Il n'est pas nécessaire de vérifier les six égalités pour prouver que les triangles sont égaux et que les 6 égalités sont vraies.  
+%Il suffit de vérifier que l'on est dans l'une des trois situations suivantes.
+
+\begin{figure}[hb]
+	\begin{tikzpicture} 
+		\tkzDefPoint(0,0){A}
+		%\tkzLabelPoint[above left](A){$A$}
+		\tkzDefShiftPoint[A](-135:2.5){B}  
+		\tkzDefTriangle[two angles = 80 and 60](A,B)
+		\tkzGetPoint{C}
+		%\tkzLabelPoint[left](B){$B$}
+		%\tkzLabelPoint[right](C){$C$}
+		\tkzDrawPolygon(A,B,C)
+		\tkzDrawPoints(A,B,C)
+		\tkzDefShiftPoint[A](6.0,-2.0){J}  
+		\tkzDefShiftPoint[J](110:2.5){I}
+		\tkzDefTriangle[two angles = -80  and -60](I,J)
+		\tkzGetPoint{K}
+		\tkzDrawPolygon(I,J,K)
+		\tkzDrawPoints(I,J,K) 
+		%\tkzLabelPoint[right](I){$I$}
+		%\tkzLabelPoint[below left](J){$J$}
+		%\tkzLabelPoint[below](K){$K$}
+		\tkzMarkSegments[mark=s|, color=black, thick](B,C K,J)
+		\tkzMarkSegments[mark=s||, color=black, thick](B,A I,J)
+		\tkzMarkSegments[mark=x,color=black, thick](A,C K,I)
+		%\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+		%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](J,K,I)
+		%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+		%\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](K,I,J)
+		%\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+		%\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](I,J,K) 
+		\tkzDrawSegment[line width=1pt ](B,C)
+		\tkzDrawSegment[line width=1pt ](J,K)
+		\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+		\tkzDefMidPoint(J,K)\tkzGetPoint{L}
+	\end{tikzpicture}
+\caption{Critère CCC : Si deux triangles ont leurs trois côtés respectivement égaux, alors ils sont égaux.}
+\end{figure}    
+	\begin{figure}[hb]
+		\begin{tikzpicture}
+			\tkzDefPoint(0,0){A}
+			%\tkzLabelPoint[above left](A){$A$}
+			\tkzDefShiftPoint[A](-125:2.5){B}  
+			\tkzDefTriangle[two angles = 80 and 60](A,B)
+			\tkzGetPoint{C}
+			%\tkzLabelPoint[left](B){$B$}
+			%\tkzLabelPoint[right](C){$C$}
+			\tkzDrawPolygon(A,B,C)
+			\tkzDrawPoints(A,B,C)
+			\tkzDefShiftPoint[A](6.0,-2.0){J}  
+			\tkzDefShiftPoint[J](110:2.5){I}
+			\tkzDefTriangle[two angles = -80  and -60](I,J)
+			\tkzGetPoint{K}
+			\tkzDrawPolygon(I,J,K)
+			\tkzDrawPoints(I,J,K) 
+			%\tkzLabelPoint[right](I){$I$}
+			%\tkzLabelPoint[below left](J){$J$}
+			%\tkzLabelPoint[below](K){$K$}
+			%\tkzMarkSegments[mark=x,mkcolor=black, thick](B,C K,J)
+			\tkzMarkSegments[mark=s|,color=black, thick](B,A I,J)
+			\tkzMarkSegments[mark=s||,color=black, thick](A,C K,I)
+			\tkzMarkAngle[mark=s,color=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+			%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](J,K,I)
+			%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+			\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](K,I,J)
+			%\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+			%\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](I,J,K) 
+			\tkzDrawSegment[line width=1pt ](B,C)
+			\tkzDrawSegment[line width=1pt ](J,K)
+			\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+			\tkzDefMidPoint(J,K)\tkzGetPoint{L}
+		\end{tikzpicture}
+	\caption{Critère CAC : Si deux triangles ont un angle égal compris entre deux côtés respectivement égaux, alors ils sont égaux.}
+	\end{figure} 
+%\end{postulat} 
+
+%\begin{postulat}[Critère ACA] Si deux triangles ont un côté égal adjacent à deux angles respectivement égaux, alors ils sont égaux.
+	\begin{figure}[hb]
+		\begin{tikzpicture}
+			\tkzDefPoint(0,0){A}
+			%\tkzLabelPoint[above left](A){$A$}
+			\tkzDefShiftPoint[A](-135:2.5){B}  
+			\tkzDefTriangle[two angles = 80 and 60](A,B)
+			\tkzGetPoint{C}
+			%\tkzLabelPoint[left](B){$B$}
+			%\tkzLabelPoint[right](C){$C$}
+			\tkzDrawPolygon(A,B,C)
+			\tkzDrawPoints(A,B,C)
+			\tkzDefShiftPoint[A](6.0,-2.0){J}  
+			\tkzDefShiftPoint[J](110:2.5){I}
+			\tkzDefTriangle[two angles = -80  and -60](I,J)
+			\tkzGetPoint{K}
+			\tkzDrawPolygon(I,J,K)
+			\tkzDrawPoints(I,J,K) 
+			%\tkzLabelPoint[right](I){$I$}
+			%\tkzLabelPoint[below left](J){$J$}
+			%\tkzLabelPoint[below](K){$K$}
+			\tkzMarkSegments[mark=s||,color=black, thick](B,C K,J)
+			%\tkzMarkSegments[mark=x,mkcolor=black, thick](B,A I,J)
+			%\tkzMarkSegments[mark=s|,mkcolor=black, thick](A,C K,I)
+			%\tkzMarkAngle[mark=||,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+			\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](J,K,I)
+			\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+			%\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](K,I,J)
+			\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+			\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](I,J,K) 
+			\tkzDrawSegment[line width=1pt ](B,C)
+			\tkzDrawSegment[line width=1pt ](J,K)
+			\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+			\tkzDefMidPoint(J,K)\tkzGetPoint{L}
+		\end{tikzpicture}
+	\caption{Critère ACA Si deux triangles ont un côté égal adjacent à deux angles respectivement égaux, alors ils sont égaux.}
+	\end{figure}
+%\end{postulat}  
+\begin{remark}
+	Cas RHC (Rectangle-Hypoténuse-Côté). Deux triangles rectangles, qui ont même longueur d'hypoténuse et une même longueur d'un côté de l'angle droit sont égaux.
+\end{remark}
+%\begin{remark} Il n'y a pas de critère ACC
+%	% Tracer deux triangles non égaux, ayant un angle de \ang{40}, adjacent à un côté de \numprint{4.5}~\si{\centi\meter} et opposé à un côté de \numprint{3.5}~\si{\centi\meter} de longueur.
+%	\begin{figure}[h]\centering
+%		\begin{tikzpicture}[scale=1.0]
+%			\tkzDefPoint(0,0){A}
+%			\tkzDefShiftPoint[A](40:5){B}
+%			\tkzDefMidPoint(A,B)\tkzGetPoint{I}
+%			\tkzDefShiftPoint[I](-0.2,0.2){I'}
+%			\node[inner sep=0pt, opacity=1,   rotate=-15] (carte) at (I') {
+%				\includegraphics[ width=0.25\linewidth]{fishing-pole2}
+%			}; 
+%			\tkzDefShiftPoint[A](0:6){C}
+%			%\tkzDrawPoint(B)
+%			\tkzDrawLine[add= 0.2 and 0.25, dashed](A,C)
+%			\tkzDrawLine[add= 0 and 0.15, dashed](A,B)
+%			\tkzLabelAngle[pos=1.5](C,A,B){\large\ang{40}} 
+%			\tkzMarkAngle[size=1.0, opacity=0.5,mark=none](C,A,B)
+%		\end{tikzpicture}
+%		\caption{}
+%	\end{figure} 
+%\end{remark}  
+
+
+
+
+\begin{definition} Deux triangles sont \textbf{semblables}   lorsqu'ils ont leurs angles égaux deux à deux et leurs côtés \textbf{proportionnels}. 
+\end{definition}
+
+\begin{figure}[h]\centering
+	\begin{tikzpicture}[scale=0.8]
+		\tkzDefPoint(0,0){A}
+		\tkzLabelPoint[above left](A){$A$}
+		\tkzDefShiftPoint[A](-135:2.5){B}  
+		\tkzDefTriangle[two angles = 80 and 60](A,B)
+		\tkzGetPoint{C}
+		\tkzLabelPoint[left](B){$B$}
+		\tkzLabelPoint[right](C){$C$}
+		\tkzDrawPolygon(A,B,C)
+		\tkzDrawPoints(A,B,C)
+		\tkzDefShiftPoint[A](4,-1.0){J}  
+		\tkzDefShiftPoint[J](10:6){I}
+		\tkzDefTriangle[two angles = -60 and -40](I,J)
+		\tkzGetPoint{K}
+		\tkzDrawPolygon(I,J,K)
+		\tkzDrawPoints(I,J,K) 
+		\tkzLabelPoint[right](I){$I$}
+		\tkzLabelPoint[left](J){$J$}
+		\tkzLabelPoint[right](K){$K$}
+		\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C)
+		\tkzMarkAngle[mark=|,mkcolor=black, thick,size=0.6, fill=red!20, opacity=0.6](J,K,I)
+		\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](A,C,B)
+		\tkzMarkAngle[mark=||,mkcolor=black, thick,size=0.6, fill=blue!20, opacity=0.6](I,J,K) 
+		\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](C,B,A)
+		\tkzMarkAngle[mark=s,mkcolor=black, thick,size=0.6, fill=green!20, opacity=0.6](K,I,J)
+		\tkzDrawSegment[line width=2pt, color=red](B,C)
+		\tkzDrawSegment[line width=2pt, color=red](I,J)
+		\tkzDefMidPoint(B,C)\tkzGetPoint{D}
+		\tkzDefMidPoint(I,J)\tkzGetPoint{L}
+		\draw[<->, >=latex] (A) .. controls +(right:1cm) and +(left:2cm) .. (K) node[sloped,above,pos=0.5]{\scriptsize Angles homologues} ;
+		\draw[<->, >=latex] (D) .. controls +(right:8cm) and +(down:3cm) .. (L) node[ below right,pos=0.6]{\scriptsize Côtés homologues} ;
+	\end{tikzpicture}
+	\caption{les trianges $ABC$ et $IJK$ sont semblables.}
+\end{figure} 
+Les \textbf{angles correspondants} sont égaux :
+\[{\color{red} \widehat{A}= \widehat{K} }\qquad {\color{blue} \widehat{B}= \widehat{J} }\qquad {\color{ForestGreen} \widehat{C}= \widehat{I} }\]
+Les \textbf{côtés correspondants} sont proportionnels  :    
+%\begin{table}[h]
+%	\renewcommand{\arraystretch}{2}%
+%	\begin{tabularx}{0.9\linewidth}{|X?c|c|c|} \hline 
+%		\tikz[remember picture,baseline =(C.base)]\node (C) at (-1cm,0.5cm) {};	{\color{HotPink} Côtés  du triangle $ABC$} &  \emph{\color{blue}$AB$}&  \emph{\color{red}$BC$} & \emph{$AC$} \tikz[remember picture]   \node  (A) at (-1cm,0.5cm) {}; \\   \hline
+%		\tikz[remember picture,baseline =(D.base)]\node (D) at (-1cm,0.5cm) {};	{\color{ForestGreen} Côtés  du triangle $IJK$} &  \emph{\color{blue}$JK$}&  \emph{\color{red}$IJ$}& \emph{$IK$} \tikz[remember picture,baseline =(B.base)]\node (B) at (-1cm,0.5cm) {}; \\ \hline
+%	\end{tabularx}
+%	\tikz[overlay,remember picture]
+%	\draw[ ->,>=latex,line width=1.8pt ](A) .. controls +(+1.5cm,.1cm) and +(+1.5cm,-.0cm)..
+%	node[rectangle,fill=white,draw,circle ]{\Large$\times k$} (B);
+%	%	\tikz[overlay,remember picture]
+%	%	\draw[ ->,>=latex,line width=1.8pt ](C) .. controls +(-1.5cm,.1cm) and +(-1.5cm,-.0cm)..
+%	%	node[rectangle,fill=white,draw,circle ]{\Large$\times k$} (D);
+%	\caption{ Si $k> 1$, le triangle $IJK$ est un \emph{agrandissement} de $ABC$.
+%		Si $k< 1$, le triangle $IJK$ est une \emph{réduction} de $ABC$.}
+%\end{table}
+\[ 	{\color{blue} \frac{JK}{AB} } = {\color{red} \frac{IJ}{BC} } = {\color{ForestGreen} \frac{IK}{AC} } \color{black} =k \]
+%\begin{remark}
+%	Pour un rapport d'agrandissement (ou réduction) $k$.
+%	\begin{itemize}
+%		\item Les longueurs sont multipliées par $k$.
+%		\item Les aires sont multipliées par $k^2$.
+%	\end{itemize} 
+%\end{remark}  
+\begin{postulat}[Critère de similitude CCC] Si les longueurs des 3 côtés d'un triangle $T_1$ sont \textbf{proportionnelles} aux longueurs respectives des 3 côtés d'un triangle $T_2$, alors les deux triangles sont semblables.
+\end{postulat}
+
+\begin{postulat}[Critère CAC-Semblable] Si deux triangles $T_1$ et $T_2$ ont un angle égal compris entre 2 côtés respectivement proportionnels, alors les deux triangles sont semblables.  
+\end{postulat} 
+ 
+\begin{postulat}[Critère de similitude AA] Si 2 angles d'un triangle $T_1$ sont \textbf{respectivement égaux} à 2 angles d'un triangle $T_2$. Alors les deux triangles sont semblables.  
+\end{postulat} 
+
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\subsection{Exercices : calculs algébriques et géométrie}
+ 
+\begin{exercise}[Triangles égaux : à l'oral]
+	
+	Si possible, démontrer pour chaque cas que les triangles sont égaux. Les figures ne sont pas à l'échelle. Utiliser la même couleur pour indiquer les angles et côtés homologues.
+	
+	\noindent\parbox[position=t]{0.33\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=0.75]
+			\tkzText(0.5,2.8){$(A)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](-5:3.3){B}
+			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkRightAngle[](B,A,C)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			%\tkzLabelAngle[font=\scriptsize,pos=.8](C,B,A){$\ang{70}$}
+			%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+			%\tkzLabelSegment[above, font=\scriptsize](A,C){$10$} 
+			\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{7}{\centi\meter}}
+			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}
+			\begin{scope}[xshift=5cm] 
+				\tkzDefPoint(0,0){A}
+				\tkzDefShiftPoint[A](+15:2.5){B} 
+				\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+				
+				\tkzDrawPolygon[line width=1.2pt](A,B,C)
+				%	\tkzLabelPoints[font=\scriptsize](A,B,C)
+				\tkzMarkRightAngle[](B,A,C)
+				%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+				%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+				%\tkzLabelAngle[font=\scriptsize,pos=.8](C,B,A){$\ang{70}$}
+				%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+				%\tkzLabelSegment[above, font=\scriptsize](A,C){$10$} 
+				\tkzLabelSegment[left, font=\scriptsize](A,C){\SI{7}{\centi\meter}}
+				\tkzLabelSegment[above right, font=\scriptsize](C,B){\SI{9}{\centi\meter}}
+			\end{scope}
+		\end{tikzpicture}   
+	}
+%	\hfill 
+	\parbox[position=t]{0.33\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=0.75]
+			\tkzText(0.5,2){$(B)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(0,0){A}
+			\tkzDefPoint(3,0){B}
+			\tkzDefShiftPoint[A](-26:3.1){B}
+			\tkzDefShiftPoint[A](32:4.2){C} 
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzLabelAngle[font=\scriptsize,pos=.9](C,B,A){$\ang{70}$}
+			\tkzLabelAngle[font=\scriptsize,pos=1.0](A,C,B){$\ang{60}$}
+			\tkzLabelSegment[above left, font=\scriptsize](A,C){\SI{10}{\centi\meter}}
+			%		\tkzDefPointWith[orthogonal,K= -0.65](C,A)
+			%		\tkzGetPoint{D}
+			%		\tkzDefLine[parallel=through D](A,B) \tkzGetPoint{E}
+			%		\tkzDrawLine(D,E)
+			%		\tkzDrawLine(A,B)
+			%		\tkzLabelLine[pos=1.5,  right](A,B){$(\Delta_1)$}
+			%		\tkzLabelLine[pos=1.5,  right](D,E){$(\Delta_2)$}
+			%		\tkzMarkRightAngle(D,C,A)
+			%		
+			%		\tkzDrawSegments[line width= 1.2pt](A,C C,D)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.7](B,A,C)
+			%		\tkzLabelAngles[pos=1.3,  ](B,A,C){$a$}
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.7](C,D,E)
+			%		\tkzLabelAngles[pos=1.3, ](C,D,E){$b$} 
+			\begin{scope}[xshift=4cm] 
+				\tkzDefPoint(0,0){A}
+				\tkzDefPoint(3,0){B}
+				\tkzDefShiftPoint[A](-5:4.1){B}
+				\tkzDefShiftPoint[A](48:3.3){C} 
+				\tkzDrawPolygon[line width=1.2pt](A,B,C)
+				%	\tkzLabelPoints[font=\scriptsize](A,B,C)
+				\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+				\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+				\tkzLabelAngle[font=\scriptsize,pos=.9](B,A,C){$\ang{50}$}
+				\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{70}$} 
+				\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{10}{\centi\meter}}
+			\end{scope}
+		\end{tikzpicture}   
+	}
+%\hfill
+\parbox[position=t]{0.33\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=0.75]
+			\tkzText(0.5,2.1){$(C)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(0.5,0){A} 
+			\tkzDefShiftPoint[A](0:3.7){B}
+			\tkzDefTriangle[two angles=-25 and -110](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			%		\tkzMarkRightAngle[](B,A,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.8](C,A,B)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.4](A,B,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](B,C,A)
+			\tkzLabelAngle[font=\scriptsize,pos=1.6](C,A,B){$\ang{20}$}
+			\tkzLabelAngle[font=\scriptsize,pos=0.7](A,B,C){$\ang{130}$}
+			\tkzLabelAngle[font=\scriptsize,pos=1.2](B,C,A){$\ang{30}$}
+			%\tkzLabelSegment[above, font=\scriptsize](A,C){ \SI{13}{\centi\meter}} 
+			%		\tkzLabelSegment[above, font=\scriptsize](A,B){\SI{8}{\centi\meter}}
+			%		\tkzLabelSegment[above right, font=\scriptsize, sloped](C,B){\SI{9}{\centi\meter}}
+			\begin{scope}[xshift=4.5cm, yshift= -0.5cm] 
+				\tkzDefPoint(0.5,0){A} 
+				\tkzDefShiftPoint[A](-5:3.7){B}
+				\tkzDefTriangle[two angles=120 and 30](A,B)\tkzGetPoint{C}  
+				\tkzDrawPolygon[line width=1.2pt](A,B,C)
+				%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+				%		\tkzMarkRightAngle[](B,A,C)
+				\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+				\tkzMarkAngle[mark=none,-, >=latex, size =0.8](C,B,A)
+				\tkzMarkAngle[mark=none,-, >=latex, size =1.0](A,C,B)
+				\tkzLabelAngle[font=\scriptsize,pos=0.8](B,A,C){$\ang{130}$}
+				\tkzLabelAngle[font=\scriptsize,pos=1.7](C,B,A){$\ang{20}$}
+				\tkzLabelAngle[font=\scriptsize,pos=1.5](A,C,B){$\ang{30}$}
+				%	\tkzLabelSegment[left, font=\scriptsize](A,C){\SI{9}{\centi\meter}} 
+				%			\tkzLabelSegment[below  , font=\scriptsize](A,B){\SI{8}{\centi\meter}}
+				%		\tkzLabelSegment[right, font=\scriptsize](C,B){\SI{8}{\centi\meter}}
+			\end{scope}
+		\end{tikzpicture}   
+	}
+
+
+\noindent\parbox[position=t]{0.4\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=0.75]
+			\tkzText(0.5,2.8){$(D)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(0.5,0){A} 
+			\tkzDefShiftPoint[A](0:4.1){B}
+			\tkzDefTriangle[two angles=25 and 125](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			%		\tkzMarkRightAngle[](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.6](B,A,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.4](C,B,A)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			%		\tkzLabelAngle[font=\scriptsize,pos=1.2](B,A,C){$\ang{20}$}
+			\tkzLabelAngle[font=\scriptsize,pos=0.7](C,B,A){$\ang{135}$}
+			%		\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{45}$}
+			%		\tkzLabelSegment[above, font=\scriptsize](A,C){ \SI{13}{\centi\meter}} 
+			\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{15}{\centi\meter}}
+			\tkzLabelSegment[above,sloped, font=\scriptsize](C,B){\SI{8}{\centi\meter}}
+			\begin{scope}[xshift=4.5cm, yshift=-1cm] 
+				\tkzDefPoint(0.5,0){A} 
+				\tkzDefShiftPoint[A](+20:3.1){B}
+				\tkzDefTriangle[two angles=35 and 115](A,B)\tkzGetPoint{C}  
+				\tkzDrawPolygon[line width=1.2pt](A,B,C)
+				%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+				%		\tkzMarkRightAngle[](B,A,C)
+				\tkzMarkAngle[mark=none,-, >=latex, size =0.7](B,A,C)
+				%			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+				\tkzMarkAngle[mark=none,-, >=latex, size =0.7](A,C,B)
+				\tkzLabelAngle[font=\scriptsize,pos=1.5](B,A,C){$\ang{20}$}
+				%\tkzLabelAngle[font=\scriptsize,pos=.8](C,B,A){$\ang{35}$}
+				\tkzLabelAngle[font=\scriptsize,pos=1.1](A,C,B){$\ang{25}$}
+				%		\tkzLabelSegment[left, font=\scriptsize](A,C){$9$} 
+				\tkzLabelSegment[below right, font=\scriptsize](A,B){\SI{15}{\centi\meter}}
+				\tkzLabelSegment[right, font=\scriptsize](C,B){\SI{8}{\centi\meter}}
+			\end{scope}
+		\end{tikzpicture}   
+	}
+%	\hfill 
+ \parbox[position=t]{0.30\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=0.75]
+			\tkzText(0.5,2.5){$(E)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(0.5,0){A} 
+			\tkzDefShiftPoint[A](-20:2.2){B}
+			\tkzDefTriangle[two angles=90 and 55](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkRightAngle[](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.6](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.4](C,B,A)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			%		\tkzLabelAngle[font=\scriptsize,pos=1.2](B,A,C){$\ang{20}$}
+			%		\tkzLabelAngle[font=\scriptsize,pos=0.6](C,B,A){$\ang{70}$}
+			%		\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+			\tkzLabelSegment[left, font=\scriptsize](A,C){ \SI{9}{\centi\meter}} 
+			%	\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{10}{\centi\meter}}
+			\tkzLabelSegment[above right, font=\scriptsize](C,B){\SI{12}{\centi\meter}}
+			\begin{scope}[xshift=3.5cm, yshift=-1cm] 
+				\tkzDefPoint(0.5,0){A} 
+				\tkzDefShiftPoint[A](30:3.1){B}
+				\tkzDefTriangle[two angles=35 and 90](A,B)\tkzGetPoint{C}  
+				\tkzDrawPolygon[line width=1.2pt](A,B,C)
+				%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+				%					\tkzMarkRightAngle[](B,A,C)
+				\tkzMarkRightAngle[](C,B,A) 
+				%			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](B,A,C)
+				%			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+				%			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](A,C,B)
+				%			\tkzLabelAngle[font=\scriptsize,pos=0.9](B,A,C){$\ang{55}$}
+				%\tkzLabelAngle[font=\scriptsize,pos=.8](C,B,A){$\ang{35}$}
+				%			\tkzLabelAngle[font=\scriptsize,pos=0.9](A,C,B){$\ang{70}$}
+				\tkzLabelSegment[above left, font=\scriptsize](A,C){\SI{12}{\centi\meter}} 
+				% \tkzLabelSegment[below  , font=\scriptsize](A,B){\SI{10}{\centi\meter}}
+				\tkzLabelSegment[above right, font=\scriptsize](C,B){\SI{8}{\centi\meter}}
+			\end{scope}
+		\end{tikzpicture}   
+	}
+%	\hfill 
+	\parbox[position=t]{0.30\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=0.75]
+			\tkzText(0.5,2.5){$(F)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(0.5,0){A} 
+			\tkzDefShiftPoint[A](-20:2.5){B}
+			\tkzDefTriangle[two angles=80 and 50](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			%		\tkzMarkRightAngle[](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.6](B,A,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.4](C,B,A)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			%		\tkzLabelAngle[font=\scriptsize,pos=1.2](B,A,C){$\ang{20}$}
+			\tkzLabelAngle[font=\scriptsize,pos=1.0](C,B,A){$\ang{50}$}
+			\tkzLabelAngle[font=\scriptsize,pos=1.0](A,C,B){$\ang{40}$}
+			\tkzLabelSegment[left, font=\scriptsize](A,C){ \SI{9}{\centi\meter}} 
+			%	\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{10}{\centi\meter}}
+			%		\tkzLabelSegment[above right, font=\scriptsize](C,B){\SI{12}{\centi\meter}}
+			\begin{scope}[xshift=3.5cm, yshift=+2cm] 
+				\tkzDefPoint(0.5,0){A} 
+				\tkzDefShiftPoint[A](-60:3.1){B}
+				\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+				\tkzDrawPolygon[line width=1.2pt](A,B,C)
+				%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+				\tkzMarkRightAngle[](B,A,C)
+				%			\tkzMarkRightAngle[](C,B,A) 
+				%			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](B,A,C)
+				%			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+				%			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](A,C,B)
+				%			\tkzLabelAngle[font=\scriptsize,pos=0.9](B,A,C){$\ang{55}$}
+				%\tkzLabelAngle[font=\scriptsize,pos=.8](C,B,A){$\ang{35}$}
+				%			\tkzLabelAngle[font=\scriptsize,pos=0.9](A,C,B){$\ang{70}$}
+				\tkzLabelSegment[above left, font=\scriptsize](A,C){\SI{9}{\centi\meter}} 
+				% \tkzLabelSegment[below  , font=\scriptsize](A,B){\SI{10}{\centi\meter}}
+				\tkzLabelSegment[above right, font=\scriptsize](C,B){\SI{12}{\centi\meter}}
+			\end{scope}
+		\end{tikzpicture}   
+	} 
+\end{exercise}
+\vfill  
+\begin{exercise}[Révision triangles semblables] \hfill 
+	
+	
+\noindent\parbox{0.4\linewidth}{\centering
+\begin{tikzpicture}[scale=1.0] 
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+	\tkzDefPoint(0.0,0){A} 
+	\tkzDefShiftPoint[A](-25:3.5){B}
+	\tkzDefTriangle[two angles=35 and 70](A,B)\tkzGetPoint{C}  
+	\tkzDrawPolygon[line width=1.2pt](A,B,C)
+	\tkzLabelPoints[above,font=\scriptsize](C)
+	\tkzLabelPoints[right,font=\scriptsize](B)
+	\tkzLabelPoints[left,font=\scriptsize](A)
+	%	\tkzMarkRightAngle[](B,A,C)
+	%			\tkzMarkAngle[mark=||,-, >=latex, size =0.5](B,A,C)
+	\tkzMarkAngle[mark=|,-, >=latex, size =0.7](C,B,A)
+	\tkzMarkAngle[mark=||,-, >=latex, size =0.5](A,C,B)
+	%		\tkzLabelAngle[font=\scriptsize,pos=.8](B,A,C){$\ang{80}$}
+	%		\tkzLabelAngle[font=\scriptsize,pos=.8](C,B,A){$\ang{30}$}
+	%		\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{70}$} 
+	\tkzLabelSegment[above, sloped , font=\scriptsize](A,C){\SI{14}{\meter}} 
+	\tkzLabelSegment[below, sloped , font=\scriptsize](A,B){$x$}
+	\tkzLabelSegment[below,sloped ,  font=\scriptsize](C,B){\SI{12}{\meter}}
+	\begin{scope}[xshift=4.5cm,yshift=-2cm ] 
+		\tkzDefPoint(0.0,0){D} 
+		\tkzDefShiftPoint[D](60:2.5){E}
+		\tkzDefTriangle[two angles=30 and 75](D,E)\tkzGetPoint{F}  
+		\tkzDrawPolygon[line width=1.2pt](D,E,F)
+		\tkzLabelPoints[below left,font=\scriptsize](D)
+		\tkzLabelPoints[below right,font=\scriptsize](E)
+		\tkzLabelPoints[above,font=\scriptsize](F) 
+		%			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](E,D,F)
+		\tkzMarkAngle[mark=|,-, >=latex, size =0.5](F,E,D)
+		\tkzMarkAngle[mark=||,-, >=latex, size =0.5](D,F,E)
+		%			\tkzLabelAngle[font=\scriptsize,pos=.8](E,D,F){$\ang{70}$}
+		%			\tkzLabelAngle[font=\scriptsize,pos=.8](F,E,D){$\ang{30}$}
+		%			\tkzLabelAngle[font=\scriptsize,pos=.8](D,F,E){$\ang{80}$}
+		\tkzLabelSegment[below,sloped , font=\scriptsize](D,E){\SI{10}{\centi\meter}}
+		\tkzLabelSegment[above,sloped , font=\scriptsize](F,E){\SI{6}{\centi\meter}}
+		\tkzLabelSegment[above,sloped , font=\scriptsize](D,F){$y$}
+	\end{scope}
+\end{tikzpicture}  
+}  \parbox{0.55\linewidth}{  
+\begin{enumerate}[leftmargin=*, label=\alph*)]
+	\item Justifier que les triangles $ACB$ et $FED$ sont semblables.
+	\item Écrire les égalités des rapports entre les côtés homologues.
+	\item Calculer les longueurs $x$ et $y$.
+\end{enumerate}
+} 
+\end{exercise}
+\vfill 
+\begin{exercise}\hfill 
+	
+ \noindent\parbox{0.4\linewidth}{\centering
+ 	\begin{tikzpicture}[scale=1.0] 
+ 		\tkzSetUpPoint[size=3, fill=black]
+ 		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+ 		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+ 		
+ 		\tkzDefPoint(0,0){A} 
+ 		\tkzDefPoint(4,0){B} 
+ 		\tkzDefPoint(4,3){C} 
+ 		\tkzDefPoint(0,3){D} 
+ 		\tkzDrawPolygon[line width=1.2pt](A,B,C,D) 
+ 		\tkzDefPointBy[projection = onto B--D](C)  \tkzGetPoint{H}
+ 		\tkzDrawSegments(B,D H,C) 
+ 		 \tkzDrawSegment[dim={\scriptsize $20$,+10pt,}](D,C)
+ 		 \tkzDrawSegment[dim={\scriptsize $15$,-10pt,}](B,C)
+ 		\tkzLabelPoints[above right,font=\scriptsize](C)
+ 		\tkzLabelPoints[below,font=\scriptsize](B)
+ 		\tkzLabelPoints[left,font=\scriptsize](A)
+ 		\tkzLabelPoints[left,font=\scriptsize](D)
+ 		\tkzLabelPoints[below,font=\scriptsize](H)
+ 		\tkzLabelSegment[above, sloped , font=\scriptsize](B,H){$c$} 
+ 		\tkzLabelSegment[above, sloped , font=\scriptsize](H,C){$b$}
+ 		\tkzLabelSegment[above,sloped ,  font=\scriptsize](D,H){$a$}
+ 		\tkzMarkRightAngle[size=0.3](C,H,D)
+ 	\end{tikzpicture}  
+ } \parbox{0.55\linewidth}{  
+	\begin{enumerate}[leftmargin=*, label=\alph*)]
+		\item Calculer la longueur de la diagonale du rectangle $ABCD$.
+		\item Justifier que les triangles $ABD$ et $DHC$ sont semblables.
+		\item Écrire les égalités des côtés homologues.
+		\item Déduire les valeurs de $a$, $b$ et $c$.
+	\end{enumerate}
+} 
+\end{exercise}
+\vfill 
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\begin{exercise}[Quadrature du rectangle] \hfill 
+	
+	\noindent Sur la figure ci-dessous, le triangle $ABC$ est rectangle en $A$, et $(AH)$ est perpendiculaire à $(BC)$. 
+	
+	\noindent\parbox[position=t]{0.6 \linewidth}{  
+		\begin{enumerate} [leftmargin=*, label=\alph*)]
+			\item Démontrer que les triangles $ACH$ et $ABH$ sont semblables. 
+			\item Écrire les rapports égaux.
+			\item En déduire que $x=\sqrt{ab}$. 
+		\end{enumerate}  
+	}\hfill
+	\noindent\parbox[position=t]{0.35 \linewidth}{  \centering
+		\begin{tikzpicture}[scale=0.8]
+			\tkzSetUpPoint[size=2, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]   
+			% 
+			\tkzDefPoint(0,0){B} 
+			\tkzDefPoint(1.5,0){H}
+			\tkzDefPoint(7,0){C}  
+			\tkzDefPoint(1.5,3.2){A}  
+			\tkzDrawPoints(A,B,C, H) 
+			\tkzDrawSegments(A,H H,C C,A A,H A,B B,H)
+			\tkzLabelPoints[above,font=\scriptsize](A)
+			\tkzLabelPoints[below,font=\scriptsize](B,H,C)
+			\tkzLabelSegment[right, font=\scriptsize](A,H){  $x$}
+			\tkzLabelSegment[below, font=\scriptsize](H,B){  $a$}
+			\tkzLabelSegment[below, font=\scriptsize](H,C){  $b$}
+			\tkzMarkRightAngle[ size=0.3](A,H,C) 
+			\tkzMarkRightAngle[ size=0.3](B,A,C)	
+			%
+		\end{tikzpicture}
+	}
+\end{exercise}  
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+%\begin{exercise}[théorème de l'angle inscrit dans un demi-cercle] \label{chapitre02:exercice:calcullittéraletgeometrie01} 
+%	Nous voulons démontrer le théorème suivant :
+%\begin{tBox}
+%	Si le point $A$ appartient au  cercle de diamètre $[BC]$ alors le triangle $ABC$ est rectangle en $A$.
+%	\end{tBox} 
+% \noindent\parbox{0.55\linewidth}{
+% $A$ est sur le cercle de diamètre $[BC]$ : $OA=OB=OC$. 
+%
+% On pose $x=\widehat{BAO}$ et $y=\widehat{OAC}$.   
+%\begin{enumerate}[leftmargin=*,label=\alph*)]
+%	\item Exprimer les angles du triangle $OAB$ à l'aide de $x$.
+%	\item En déduire que $\widehat{AOC}=2x$.
+%	\item Exprimer $\widehat{AOB}$ à l'aide de $y$.
+%	\item Montrer que $x+y=\ang{90}$. 
+%\end{enumerate}  
+%}\parbox{0.4\linewidth}{\centering
+%		\begin{tikzpicture}[scale=1.0]
+%			\def \a{3.0};
+%			\tkzSetUpPoint[size=3, fill=black]
+%			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+%			\tkzDefPoint(0,0){B} 
+%			\tkzDefPoint(2*\a,0){C}
+%			\tkzDefPoint(\a,0){O}  
+%			\tkzDefShiftPoint[O](130:\a){A}
+%			\tkzDrawSector[fill = white, line width=1.2pt](O,C)(B)
+%			\tkzDrawPolygon[ line width=1.0pt](A,B,C)
+%			\tkzDrawSegments[ line width=0.75pt](O,A O,B O,C)
+%			\tkzMarkSegments[mark=s||,line     width=0.75pt](O,A O,B O,C)
+%			\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,O)
+%			\tkzLabelAngle[pos=1.0,circle](B,A,O){$x$}
+%			\tkzMarkAngle[mark=,mkcolor=black, thick, size=0.6, fill=blue!20, opacity=0.6](O,A,C)
+%			\tkzLabelAngle[pos=1.1,circle](O,A,C){$y$}
+%			%\tkzLabelAngle[pos=1.1,circle](A,C,O){$y$}
+%			%\tkzLabelAngle[pos=0.5,circle](O,B,A){$x$}
+%			
+%			%\tkzLabelAngle[pos=0.9,circle](A,O,B){$2y$}
+%			%\tkzLabelAngle[pos=0.5,circle](C,O,A){$2x$}
+%			
+%			\tkzDrawPoints(A,B,C, O) 
+%			\tkzLabelPoints[below,font=\scriptsize](C,O,B) 
+%			\tkzLabelPoints[above,font=\scriptsize](A)  
+%		\end{tikzpicture}   
+%} 
+%\end{exercise}
+\begin{exercise}[théorème de l'angle au centre] \label{chapitre02:exercice:calcullittéraletgeometrie02}  
+	Soit un cercle de centre $O$ passant par les points $A$, $B$ et $C$. Nous voulons démontrer le théorème suivant :
+	\begin{tBox}
+		Dans un cercle, un angle au centre mesure le double d'un angle inscrit interceptant le même arc.
+	\end{tBox}
+	
+	\noindent\parbox{0.6\linewidth}{
+		Pour simplifier on suppose que le centre $O$ est intérieur à l'angle aigu $\widehat{BAC}$.
+		Les angles $\widehat{BAC}$ et $\widehat{BOC}$ (intérieur) interceptent le même arc de cercle $ {BC}$.
+		
+		On pose $x=\widehat{BAO}$ et $y=\widehat{OAC}$.  
+		\begin{enumerate}[leftmargin=*,label=\alph*)]
+			\item Exprimer les angles du triangle $OAB$ à l'aide de $x$.
+			\item Exprimer les angles du triangle $AOC$ à l'aide de $y$. 
+			\item Montrer que la mesure de l'angle au centre recherché est égal à $2\widehat{BAC}$. 
+		\end{enumerate}  
+	}
+	\hfill \parbox{0.35\linewidth}{\centering
+		\begin{tikzpicture}[scale=1.0]
+			\def \a{2.5};
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+			\tkzDefPoint(\a,0){O}  
+			\tkzDefShiftPoint[O](-130:\a){B}
+			\tkzDefShiftPoint[O](-10:\a){C}  
+			\tkzDefShiftPoint[O](120:\a){A}
+			\tkzDrawSector[fill = white, line width=1.2pt](O,C)(B)
+			%		\tkzDrawPolygon[ line width=1.0pt](A,B,C)
+			\tkzDrawArc[line width=1.2pt, dashed](O,B)(C)
+			%		\tkzDrawCircle[fill = white, line width=1.2pt](O,A)
+			\tkzDrawSegments[ line width=1.0pt](A,B A,C)
+			\tkzDrawSegments[ line width=0.75pt](O,A O,B O,C)
+			\tkzMarkSegments[mark=s||,line     width=0.75pt](O,A O,B O,C)
+			\tkzMarkAngle[mark=none,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,O)
+			\tkzLabelAngle[pos=1.0,circle](B,A,O){$x$}
+			\tkzMarkAngle[mark=none,mkcolor=black, thick, size=0.6, fill=blue!20, opacity=0.6](O,A,C)
+			\tkzMarkAngle[mark=none,mkcolor=black, thick, size=0.6, fill=blue!20, opacity=0.6](B,O,C)
+			\tkzLabelAngle[pos=1.1,circle](B,O,C){$?$}
+			\tkzLabelAngle[pos=1.1,circle](O,A,C){$y$}
+			%\tkzLabelAngle[pos=1.1,circle](A,C,O){$y$}
+			%\tkzLabelAngle[pos=0.5,circle](O,B,A){$x$}
+			
+			%\tkzLabelAngle[pos=0.9,circle](A,O,B){$2y$}
+			%\tkzLabelAngle[pos=0.5,circle](C,O,A){$2x$}
+			
+			\tkzDrawPoints(A,B,C, O) 
+			\tkzLabelPoints[below,font=\scriptsize]( O,B) 
+			\tkzLabelPoints[above,font=\scriptsize](A) 
+			\tkzLabelPoints[right,font=\scriptsize](C)   
+		\end{tikzpicture}  
+	} 
+\end{exercise}
+\begin{theorem}[théorème de l'angle inscrit dans un demi-cercle]
+	Si le point $A$ appartient au  cercle de diamètre $[BC]$ alors le triangle $ABC$ est rectangle en $A$.
+\end{theorem} 
+\noindent
+\begin{tikzpicture}[scale=1.0]
+	\def \a{2.4};
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+	\tkzDefPoint(0,0){B} 
+	\tkzDefPoint(2*\a,0){C}
+	\tkzDefPoint(\a,0){O}  
+	\tkzDefShiftPoint[O](130:\a){A}
+	\tkzDrawSector[fill = white, line width=1.2pt](O,C)(B)
+	\tkzDrawPolygon[ line width=1.0pt](A,B,C)
+	\tkzDrawSegments[ line width=0.75pt](O,B O,C)
+	%		\tkzMarkSegments[mark=s||,line     width=0.75pt](O,A O,B O,C)
+	\tkzMarkAngle[<->,>=latex,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,O,C)
+	\tkzLabelAngle[pos=1.0,circle](B,O,C){\ang{180}}
+	\tkzMarkRightAngle[size=0.4](B,A,C)
+	%		\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,O)
+	%		\tkzLabelAngle[pos=1.0,circle](B,A,O){$x$}
+	%		\tkzMarkAngle[mark=,mkcolor=black, thick, size=0.6, fill=blue!20, opacity=0.6](O,A,C)
+	%		\tkzLabelAngle[pos=1.1,circle](O,A,C){$y$}
+	%\tkzLabelAngle[pos=1.1,circle](A,C,O){$y$}
+	%\tkzLabelAngle[pos=0.5,circle](O,B,A){$x$}
+	
+	%\tkzLabelAngle[pos=0.9,circle](A,O,B){$2y$}
+	%\tkzLabelAngle[pos=0.5,circle](C,O,A){$2x$}
+	
+	\tkzDrawPoints(A,B,C, O) 
+	\tkzLabelPoints[below,font=\scriptsize](C,O,B) 
+	\tkzLabelPoints[above,font=\scriptsize](A)  
+\end{tikzpicture} \hfill 
+\begin{tikzpicture}[scale=1.0]
+	\def \a{2.4};
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+	\tkzDefPoint(\a,0){O}  
+	\tkzDefShiftPoint[O](-130:\a){B}
+	\tkzDefShiftPoint[O](-30:\a){C}  
+	\tkzDefShiftPoint[O](120:\a){A}
+	\tkzDefShiftPoint[O](10:\a){D}
+	\tkzDefShiftPoint[O](65:\a){E}
+	\tkzDrawArc[fill = white, line width=1.2pt](O,C)(B)
+	%		\tkzDrawPolygon[ line width=1.0pt](A,B,C)
+	\tkzDrawArc[line width=1.2pt, dashed](O,B)(C)
+	%		\tkzDrawCircle[fill = white, line width=1.2pt](O,A)
+	\tkzDrawSegments[ line width=1.0pt](A,B A,C)
+	\tkzDrawSegments[ line width=1.0pt](D,B D,C)
+	\tkzDrawSegments[ line width=1.0pt](E,B E,C)
+	\tkzDrawSegments[ line width=1.0pt,dashed](O,B O,C)
+	%	\tkzDrawSegments[ line width=0.75pt](O,A O,B O,C) 
+	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C) 
+	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,D,C) 
+	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,E,C) 
+	\tkzMarkAngle[mark=none,mkcolor=black, thick, size=0.6, fill=blue!20, opacity=0.6](B,O,C)
+	%	\tkzLabelAngle[pos=1.0,circle](B,A,O){$x$}
+	%	\tkzLabelAngle[pos=1.1,circle](B,O,C){$?$}
+	%	\tkzLabelAngle[pos=1.1,circle](O,A,C){$y$}
+	%\tkzLabelAngle[pos=1.1,circle](A,C,O){$y$}
+	%\tkzLabelAngle[pos=0.5,circle](O,B,A){$x$}
+	
+	%\tkzLabelAngle[pos=0.9,circle](A,O,B){$2y$}
+	%\tkzLabelAngle[pos=0.5,circle](C,O,A){$2x$}
+	
+	\tkzDrawPoints(A,B,C, O) 
+	\tkzLabelPoints[below,font=\scriptsize]( O,B) 
+	\tkzLabelPoints[above,font=\scriptsize](A) 
+	\tkzLabelPoints[right,font=\scriptsize](C)   
+\end{tikzpicture}    
+\begin{tikzpicture}[scale=1.0]
+	\def \a{2.4};
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+	\tkzDefPoint(\a,0){O}  
+	\tkzDefShiftPoint[O](-130:\a){B}
+	\tkzDefShiftPoint[O](-30:\a){C}  
+	\tkzDefShiftPoint[O](-92:\a){A}
+	\tkzDefShiftPoint[O](-55:\a){D}
+	\tkzDefShiftPoint[O](65:\a){E}
+	\tkzDrawArc[fill = white, line width=1.2pt, dashed](O,C)(B)
+	%		\tkzDrawPolygon[ line width=1.0pt](A,B,C)
+	\tkzDrawArc[line width=1.2pt](O,B)(C)
+	%		\tkzDrawCircle[fill = white, line width=1.2pt](O,A)
+	\tkzDrawSegments[ line width=1.0pt](A,B A,C)
+	\tkzDrawSegments[ line width=1.0pt](D,B D,C)
+	%	\tkzDrawSegments[ line width=1.0pt](E,B E,C)
+	\tkzDrawSegments[ line width=1.0pt,dashed](O,B O,C)
+	%	\tkzDrawSegments[ line width=0.75pt](O,A O,B O,C) 
+	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.3, fill=red!20, opacity=0.6](C,A,B) 
+	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.3, fill=red!20, opacity=0.6](C,D,B) 
+	%	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,E,C) 
+	\tkzMarkAngle[mark=none,mkcolor=black, thick, size=0.6, fill=blue!20, opacity=0.6](C,O,B)
+	%	\tkzLabelAngle[pos=1.0,circle](B,A,O){$x$}
+	%	\tkzLabelAngle[pos=1.1,circle](B,O,C){$?$}
+	%	\tkzLabelAngle[pos=1.1,circle](O,A,C){$y$}
+	%\tkzLabelAngle[pos=1.1,circle](A,C,O){$y$}
+	%\tkzLabelAngle[pos=0.5,circle](O,B,A){$x$}
+	
+	%\tkzLabelAngle[pos=0.9,circle](A,O,B){$2y$}
+	%\tkzLabelAngle[pos=0.5,circle](C,O,A){$2x$}
+	
+	\tkzDrawPoints(A,B,C, O) 
+	\tkzLabelPoints[below,font=\scriptsize]( O,B) 
+	\tkzLabelPoints[below,font=\scriptsize](A) 
+	\tkzLabelPoints[right,font=\scriptsize](C)   
+\end{tikzpicture}   
+
+
+
+\begin{theorem}[Théorème de l'angle inscrit]
+	Les angles inscrits interceptant le même arc de cercle ont la même mesure
+\end{theorem}
+\begin{exercise}\hfill 
+	
+\noindent\parbox{0.4\linewidth}{
+\begin{tikzpicture}[scale=1]
+	\def \a{2.4};
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+	\tkzDefPoint(\a,0){O} 
+	\tkzDrawPoint(O) 
+	
+	\tkzDefCircle[R](O,\a) \tkzGetPoint{a} 
+	\tkzDrawCircle[line width=1.2pt](O,a)
+	
+	\tkzDefShiftPoint[O](-130:\a){B}
+	\tkzDefShiftPoint[O](120:\a){C}  
+	\tkzDefShiftPoint[O](26:\a){A}
+	\tkzDefShiftPoint[O](-35:\a){D}
+	\tkzDrawSegments(A,B C,D)
+	\tkzDrawSegments[dashed](C,B A,D)
+	\tkzInterLL(A,B)(C,D)\tkzGetPoint{E}
+	
+	\tkzLabelSegment[above](A,E){\scriptsize$a$}
+	\tkzLabelSegment[above](B,E){\scriptsize$b$}
+	\tkzLabelSegment[right](C,E){\scriptsize$c$}
+	\tkzLabelSegment[right](D,E){\scriptsize$d$}  
+	
+	\tkzLabelPoints[left,font=\scriptsize](O) 
+	\tkzLabelPoints[right,font=\scriptsize](A) 
+	\tkzLabelPoints[below left,font=\scriptsize](B) 
+	\tkzLabelPoints[above left,font=\scriptsize](C)  
+	\tkzLabelPoints[below right,font=\scriptsize](D)   
+	\tkzLabelPoints[above,font=\scriptsize](E) 
+%	\tkzDefShiftPoint[O](65:\a){E}
+%	\tkzDrawArc[fill = white, line width=1.2pt](O,C)(B)
+%	%		\tkzDrawPolygon[ line width=1.0pt](A,B,C)
+%	\tkzDrawArc[line width=1.2pt, dashed](O,B)(C)
+%	%		\tkzDrawCircle[fill = white, line width=1.2pt](O,A)
+%	\tkzDrawSegments[ line width=1.0pt](A,B A,C)
+%	\tkzDrawSegments[ line width=1.0pt](D,B D,C)
+%	\tkzDrawSegments[ line width=1.0pt](E,B E,C)
+%	\tkzDrawSegments[ line width=1.0pt,dashed](O,B O,C)
+%	%	\tkzDrawSegments[ line width=0.75pt](O,A O,B O,C) 
+%	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,A,C) 
+%	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,D,C) 
+%	\tkzMarkAngle[mark=|,mkcolor=black, thick, size=0.6, fill=red!20, opacity=0.6](B,E,C) 
+%	\tkzMarkAngle[mark=none,mkcolor=black, thick, size=0.6, fill=blue!20, opacity=0.6](B,O,C)
+%	%	\tkzLabelAngle[pos=1.0,circle](B,A,O){$x$}
+%	%	\tkzLabelAngle[pos=1.1,circle](B,O,C){$?$}
+%	%	\tkzLabelAngle[pos=1.1,circle](O,A,C){$y$}
+%	%\tkzLabelAngle[pos=1.1,circle](A,C,O){$y$}
+%	%\tkzLabelAngle[pos=0.5,circle](O,B,A){$x$}
+%	
+%	%\tkzLabelAngle[pos=0.9,circle](A,O,B){$2y$}
+%	%\tkzLabelAngle[pos=0.5,circle](C,O,A){$2x$}
+%	
+%	\tkzDrawPoints(A,B,C, O)   
+\end{tikzpicture}   
+}\hfill
+\parbox{0.6\linewidth}{
+$A$, $B$, $C$ et $D$ sont des points d'un cercle de centre $O$. On suppose que les cordes $[AB]$ et $[CD]$ se coupent en $E$ situé à l'intérieur du cercle.
+\begin{enumerate}[label=\alph*), leftmargin=*]
+	\item À l'aide du théorème de l'angle inscrit, justifier que $\widehat{EDA}=\widehat{EBD}$.
+	\item Montrer que les triangles $EAD$ et $EBC$ sont semblables.
+	\item Écrire les égalités des rapports des côtés homologues.
+	\item En déduire que $ab=cd$.
+\end{enumerate}
+}
+\end{exercise}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+ 
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+}   
+\onehalfspacing  
+\section{Triangles rectangles}
+\begin{definition}
+	L'hypoténuse d'un triangle rectangle est le côté opposé à  l'angle droit.
+\end{definition}
+\begin{marginfigure}[-1cm]
+	\begin{tikzpicture}[scale=1.0]
+		\tkzDefPoint(0,0){A} \tkzDefPoint(4,0){B}
+		\tkzDefTriangle[pythagore,swap](A,B)\tkzGetPoint{C}
+		\tkzDrawPolygon(A,B,C) \tkzDrawPoints(A,B,C)
+		\tkzLabelPoints[below left](A)
+		\tkzLabelPoints[below right](B)
+		\tkzLabelPoints[above](C)
+		%		\tkzMarkAngle[ arc=l, size=0.5](B,A,C)
+		\tkzMarkRightAngle[ pos=.15, size=0.4](C,B,A)
+		%		\tkzLabelAngle[pos=1.5,circle](B,A,C){$\alpha$}
+		%		\tkzLabelSegment[below](A,B){\small adjacent Ã  $\alpha$}
+		\tkzLabelSegment[ above , sloped](A,C){hypoténuse}
+		%		\tkzLabelSegment[below, sloped](B,C){opposé Ã  $\alpha$}
+	\end{tikzpicture} 
+\end{marginfigure}
+\begin{theorem}[Théorème de Pythagore]  
+	Dans un triangle rectangle, le carré de l'hypoténuse est égal à  la somme des carrés des côtés de l'angle droit.
+\end{theorem}
+\begin{remark} Conséquence : l'hypoténuse est bien le plus grand côté.
+	\textcolor{white}{
+		\begin{align*}
+			AB^2 + BC^2 & = AC^2 && \text{$AB$, $BC$ et $AC\geqslant0$}\\
+			AB^2 & \leqslant AC^2 \\
+			AB & \leqslant AC
+		\end{align*}
+	}
+\end{remark}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+%\newpage 
+\begin{marginfigure} 
+	\begin{tikzpicture}[scale=1]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		%		 
+		\tkzDefPoint(0,0){B}  
+		\tkzDefShiftPoint[B](40:3.0){A}
+		\tkzDefShiftPoint[B](15:4.0){C}
+		\tkzDrawLine[add=0.2 and 0.2](B,C)
+		\tkzDefLine[orthogonal=through A](B,C) \tkzGetPoint{a}
+		\tkzLabelLine[pos=1.25,above left](B,C){$(\Delta)$}
+		\tkzInterLL(B,C)(A,a) \tkzGetPoint{H}
+		\tkzDrawLine[dashed](A,H)
+		\tkzMarkRightAngles[size=0.2](C,H,A)
+		\tkzDrawPoints(A,H)
+		\tkzLabelPoints[below left,font=\scriptsize](A)  
+		\tkzLabelPoints[below right,font=\scriptsize](H)   
+	\end{tikzpicture} 
+\end{marginfigure}  
+\begin{definition} Soit une droite $(\Delta)$ et un point $A$ du plan. Le \textbf{projeté orthogonal} $H$ de $A$ sur $(\Delta)$ est le point d'intersection de $\Delta$ et de la perpendiculaire à $(\Delta)$ passant par $A$.
+\end{definition} 
+\begin{theorem}
+	Soit une droite $(\Delta)$ et $A$ un point n'appartenant pas à $(\Delta)$. $H$ le projeté orthogonal de $A$ sur $(\Delta)$.\\
+	La distance ente $A$ et la droite $(\Delta)$ est égale à $AH$. C'est la plus petite distance entre $A$ et un point de la droite $(\Delta)$. 
+\end{theorem} 
+\begin{proof} \emph{au programme} ~ Pour tout point $M\in(Delta)$, $AMH$ est un triangle rectangle d'hypoténuse $AM$, et $AM\geqslant AH$.\hfill 
+	\begin{marginfigure}[-1cm] 
+		\captionsetup{type=figure} 
+		\begin{tikzpicture}[scale=1]
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			%		 
+			\tkzDefPoint(0,0){M}  
+			\tkzDefShiftPoint[M](45:3.0){A}
+			\tkzDefShiftPoint[M](15:4.0){C}
+			\tkzDrawLine[add=0.2 and 0.2](B,C)
+			\tkzDefLine[orthogonal=through A](M,C) \tkzGetPoint{a}
+			\tkzLabelLine[pos=1.25,above left](M,C){$(\Delta)$}
+			\tkzInterLL(M,C)(A,a) \tkzGetPoint{H}
+			\tkzDrawLine[dashed](A,H)
+			\tkzMarkRightAngles[size=0.2](C,H,A)
+			\tkzDrawPoints(A,H,M)
+			\tkzLabelPoints[above right,font=\scriptsize](A)  
+			\tkzLabelPoints[below right,font=\scriptsize](H)   
+			\tkzLabelPoints[below,font=\scriptsize](M)  
+			\tkzDrawSegments[dashed](A,M)
+			\tkzLabelSegment[font=\scriptsize](A,H){$\delta$}
+		\end{tikzpicture} 
+	\end{marginfigure}
+	
+	
+%	\vfill 
+	
+\end{proof}
+% \begin{remark} On note que le cercle de centre $A$ et de rayon $AH$ touche la droite $(\Delta)$ en un unique point $H$. On dit que la droite $(\Delta)$ est tangente au cercle.
+% \end{remark}
+% \begin{definition}	Soit un cercle de centre $O$ et de rayon $R$. En chacun de ses points, le cercle admet une tangente. 
+% 	
+% 	La tangente en $M$ au cercle est la droite passant par $M$ et perpendiculaire au rayon $OM$.
+% 	
+% 	La distance entre une tangente et le centre du cercle est égale au rayon $R$.
+% \end{definition}
+\begin{figure}[hb]\centering 
+	\begin{tikzpicture}[scale=1]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		%		 
+		\tkzDefPoint(0,0){O}
+		\tkzDefPoint(3,3){E}
+		\tkzDefShiftPoint[O](13:2.5){M}
+		%		\tkzDefRandPointOn[circle=center O radius 2.5cm]
+		%		\tkzGetPoint{M}
+		\tkzDefShiftPoint[O](150:2.5){N}
+		%		\tkzDefRandPointOn[circle=center O radius 2.5cm]
+		%		\tkzGetPoint{N}
+		
+		\tkzDefShiftPoint[O](-50:2.5){A}
+		\tkzDefShiftPoint[O](-120:2.5){B}
+		\tkzDrawSegments(O,M O,N)
+		\tkzDrawCircle(O,M) 
+		\tkzDefTangent[at=M](O)
+		\tkzGetPoint{h}
+		\tkzDefTangent[at=N](O)
+		\tkzGetPoint{i}
+		\tkzDrawLine[add = 2 and 1.5](M,h) 
+		\tkzLabelLine[pos=1.25,above left](M,h){$(\Delta)$}
+		\tkzDrawLine[add = 2 and 2](N,i)
+		\tkzLabelLine[pos=1.25,above left](N,i){$(\Delta')$}
+		\tkzDrawLine[dashed, add = 0.5 and 0.5](A,B)
+		\tkzMarkRightAngle[](O,M,h)
+		\tkzMarkRightAngle[](O,N,i)
+		\tkzLabelPoints[above right,font=\scriptsize](O)  
+		\tkzLabelPoints[below right,font=\scriptsize](M)  
+		\tkzLabelPoints[above left,font=\scriptsize](N)  
+		\tkzLabelPoints[below left,font=\scriptsize](B)  
+		\tkzLabelPoints[below right,font=\scriptsize](A)  
+		\tkzLabelSegments[font=\scriptsize](O,N O,M){$R$}    
+		\tkzLabelCircle[font=\scriptsize,  above](O,M)(80){$\mathscr{C}$}
+	\end{tikzpicture} 
+	\caption{La droite $(AB)$ est sécante au cercle $\mathscr{C}$.\\
+		Les droites $(\Delta)$ et $(\Delta')$ sont dites tangentes au cercle. \\
+		La tangente en $M$ au cercle en $M$ est perpendiculaire au rayon $OM$.\\
+		La distance entre une tangente et le centre du cercle est égale au rayon $R$.\\
+		$M$ est le projeté orthogonal du centre $O$ sur droite $(\Delta)$.
+	} 
+\end{figure}
+
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+\newpage 
+
+
+
+\begin{definition} Dans un triangle rectangle d'hypoténuse $1$. $\alpha$ un angle aigu.  On designe par :
+	\begin{enumerate}[label=\textbullet, leftmargin=*]
+		\item $\cos(\alpha)$ la longueur du côté adjacent à $\alpha$
+		\item $\sin(\alpha)$ la longueur du côté opposé à $\alpha$
+	\end{enumerate}
+	
+	\begin{marginfigure} 
+	\begin{tikzpicture}[scale=1.0]
+		\tkzDefPoint(0,0){A} \tkzDefPoint(4,0){B}
+		\tkzDefTriangle[school](A,B)\tkzGetPoint{C}
+		\tkzDrawPolygon(A,B,C) \tkzDrawPoints(A,B,C)
+		\tkzLabelPoints[below left](A)
+		\tkzLabelPoints[below right](B)
+		\tkzLabelPoints[above](C)
+		\tkzMarkAngle[mark=none, arc=l, size=0.5](B,A,C)
+		\tkzMarkRightAngle[ pos=.0.15, size=0.4](C,B,A)
+		\tkzLabelAngle[pos=1.5,circle](B,A,C){$\alpha$}
+		\tkzLabelSegment[below](A,B){\small  $\cos(\alpha)$}
+		\tkzLabelSegment[ above , sloped](A,C){$1$}
+		\tkzLabelSegment[below, sloped](B,C){\small  $\sin(\alpha)$}
+	\end{tikzpicture}  
+\end{marginfigure} 
+\end{definition}    
+\begin{theorem} Pour tout valeur de l'angle $\alpha$ on a :
+\[
+ \cos^2(\alpha) + \sin^2(\alpha) = 1
+\] 
+\end{theorem}
+\begin{proof}[démonstration] (\emph{au programme}) 
+	Conséquence directe du théorème de Pythagore ! 
+\end{proof}
+
+\begin{figure}[!h]
+	\begin{tikzpicture}[scale=3.0]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzInit[xmin=-1,xmax=1.0,ymin=-0.1,ymax=1,xstep=1, ystep=1];
+		%	\tkzGrid[ color=gray ](-3.0,-2.0)(6.0,5.0);   
+		\pgfmathsetmacro{\a}{55/360*2*pi*1}  
+		
+
+\tkzDefPoint(0,0){O} 
+\tkzDefPoint(1,0){I} 
+\tkzDefPoint(-1,0){I'} 
+\tkzDefPoint(0,1){J} 
+\tkzDefPoint({cos(\a)},{sin(\a)}){A} 
+\tkzDrawSegments[](O,A) 
+\tkzLabelSegment[above left](O,A){$1$}
+\tkzLabelPoints[below left](O){\scriptsize O}
+\tkzLabelPoint[  right](A){\scriptsize$A(\cos(\alpha);\sin(\alpha))$}   
+\tkzLabelAngle[pos=0.35](I,O,A){$\alpha$} 
+\tkzMarkAngle[ arc=l,arrows=->,>=latex, size=0.2cm,mkcolor=red, line width =1.2pt](I,O,A)  
+\tkzDefPointWith[orthogonal normed,K=1](O,A)
+\tkzGetPoint{N} 
+%\tkzDrawCircle[ line width=1.2pt](O,I) 
+\tkzDrawArc[ line width=1.2pt](O,I)(I') 
+\tkzPointShowCoord(A)%[ xlabel=$\cos(\alpha)$,ylabel=$\sin(\alpha)$, xstyle={below=7pt},ystyle={left=6pt}](A) 
+\tkzDrawX[above=5pt, label=$x$, font=\scriptsize, line width=1.2pt, right space=0.2pt] 
+\tkzDrawY[right=5pt, label=$y$, font=\scriptsize, line width=1.2pt , up space=0.2pt,]
+\end{tikzpicture} 
+	\caption{Pour des angles obtus.}
+\end{figure}
+\begin{marginfigure}[2cm]
+	\begin{tikzpicture}[scale=1.0]
+		\tkzDefPoint(0,0){A} \tkzDefPoint(4,0){B}
+		\tkzDefTriangle[school](A,B)\tkzGetPoint{C}
+		\tkzDrawPolygon(A,B,C) \tkzDrawPoints(A,B,C)
+		\tkzLabelPoints[below left](A)
+		\tkzLabelPoints[below right](B)
+		\tkzLabelPoints[above](C)
+		\tkzMarkAngle[ mark=none,arc=l, size=0.5](B,A,C)
+		\tkzMarkRightAngle[ pos=.15, size=0.4](C,B,A)
+		\tkzLabelAngle[pos=1.5,circle](B,A,C){$\alpha$}
+		\tkzLabelSegment[below](A,B){\small adjacent à  $\alpha$}
+		\tkzLabelSegment[ above , sloped](A,C){hypoténuse}
+		\tkzLabelSegment[below, sloped](B,C){opposé à  $\alpha$}
+	\end{tikzpicture}  
+	\caption{En 2\up{nd}, on calcule des rapports trigonométriques d'angles aigus.}
+\end{marginfigure}
+\begin{definition}
+	Soit le triangle $ABC$ rectangle en $B$. 
+	\begin{description} 
+		\item[le \textbf{sinus}]   de l'angle $\alpha$   
+		$$ \sin(\alpha) = \frac{\text{côté opposé à  $\alpha$}}{\text{hypoténuse}} = \frac{BC}{AC}  \leqslant  1$$ 
+		\item[le \textbf{cosinus}] de l'angle $\alpha$ : 
+		$$ \cos(\alpha) = \frac{\text{côté adjacent à  $\alpha$}}{\text{hypoténuse}} = \frac{AB}{AC} \leqslant  1 $$ 
+		\item[la \textbf{tangente}] de l'angle $\alpha$ :
+		$$ \tan(\alpha) = \frac{\text{côté opposé à  $\widehat{BAC}$}}{\text{côté adjacent à  $\alpha$}} = \frac{BC}{AB} $$
+	\end{description} 
+\end{definition}
+ 
+		\vfill 
+		
+		
+%%----------------------------------------------------------------------------------------
+%%	EXERCICES
+%%----------------------------------------------------------------------------------------
+%
+% 
+%
+%\newpage 
+%\loadgeometry{widelayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%	headwidth=textwithmarginpar,
+%	headsepline=true,
+%	headsepline= 0.5pt,
+%	footwidth=textwithmarginpar,
+%} 
+%\onehalfspacing
+%\section{Exercices Triplets pythagoriciens} 
+%\begin{exercise}\hfill 
+%	\begin{enumerate}[label=\alph*), leftmargin=*]
+%		\item \textbf{(Un classique de 3\ieme)}	Montrer que la différence des carrés de deux nombres entiers consécutifs est toujours un nombre impair.
+%		\item Choisir un nombre $b$ impair strictement supérieur à 3, et l'élever au carré.
+%		\item Trouver 2 nombres entiers consécutifs dont la différence des carrés est égale à $b^2$. 
+%	\end{enumerate}
+%\end{exercise}
+%\begin{tBox}
+%	Un triplet Pythagoricien est un triplet de trois nombres \textbf{entiers} $a\leqslant  b<c$ tels que $a^2+b^2=c^2$. 
+%\end{tBox} 
+% \begin{example}[Nous faisons] Cherchons des triplets pythagoriciens $(a; 15; c)$ :
+% 	
+% 	\noindent \parbox[t]{0.3\linewidth}{
+% 		$\begin{WithArrows}
+% 			a^2+ 15^2 &\rule{0pt}{1.8em} = c^2\\
+% 			15^2&\rule{0pt}{1.8em} = c^2-a^2\\
+% 			225& \rule{0pt}{1.8em} =
+% 		\end{WithArrows}$  
+% 	}
+% 	\parbox[t]{0.65\linewidth}{
+% 		$\operatorname{diviseurs(225)}=\{
+% 		1; 3; 5; 9; \phantom{15; \qquad 25; \qquad 45 ; \qquad ;75; \qquad ; 225 } \}$  
+% 		\begin{description}
+% 			\item[$c-a=1$];\rule{0pt}{1.8em} $c+a=225$ :
+% 			\item[$c-a=3$];\rule{0pt}{1.8em} $c+a=\qquad$ :
+% 			\item[$c-a=5$];\rule{0pt}{1.8em} $c+a=\qquad$ :
+% 			\item[$c-a=9$];\rule{0pt}{1.8em} $c+a=\qquad$ :
+% 			\item[$c-a=15$];\rule{0pt}{1.8em} $c+a=\qquad$ : 
+% 		\end{description}
+% 	}
+% \end{example} 
+%\begin{exercise}[À vous]\label{chapitre05:exercice:tripletspythagoriciens}   Combien pouvez vous trouver de triplets pythagoriciens $(a; 12; c)$ ?
+%\end{exercise} 
+%%\begin{eBox}
+%%	La tablette \href{https://en.wikipedia.org/wiki/Plimpton_322}{Plimpton 322} est la plus connue des  \numprint{500000} tablettes babyloniennes dans la collection G. A. Plimpton à l'université de Columbia. Rédigée dans de l'argile en 1800 av. J.-C., elle comporte un tableau de nombres rangés dans 4 colonnes et 15 lignes. Les valeurs des 3 premières colonnes sont associées à des triplets Pythagoriciens vérifiant $a^2+b^2=c^2$ (la 4\ieme étant le numéro de la ligne).  
+%%	
+%%	Une \href{https://www.maa.org/sites/default/files/pdf/upload_library/22/Ford/Robson105-120.pdf}{analyse minutieuse} a permis d'identifier la méthode utilisée pour obtenir chacune des lignes. Cet algorithme est abordé dans l'exercice suivant.
+%%\end{eBox}
+%\begin{exercise}[Comprendre la tablette Plimpton 322]\label{chapitre05:exercice:plimpton322}(figure \ref{chapter05:figure:plimpton322})\hfill  
+%	\begin{enumerate}[leftmargin=*,label=\alph*)]
+%		\item Montrer que pour toute valeur de $x>0$ le triangle ci-dessous est rectangle.
+%		
+%		%	\begin{figure*}[hb] 
+%		\noindent\parbox{1\linewidth}{\centering
+%			\begin{tikzpicture}[scale=.8]
+%				%			\tkzInit[xmin=-1.0,ymin=-1.0,xmax=6.5,ymax=2.8]
+%				%			\tkzClip
+%				\tkzDefPoint(0,0){A} \tkzDefPoint(5,0){C}
+%				\tkzDefTriangle[two angles = 27 and 90](A,C)\tkzGetPoint{B}
+%				\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+%				\tkzLabelSegment[below](A,C){$2$}
+%				\tkzLabelSegment[right](B,C){$\abs{x-\frac{1}{x}}$}
+%				\tkzLabelSegment[above left](A,B){$x+\frac{1}{x}$} 
+%			\end{tikzpicture}   
+%		}
+%		%	\end{figure*}  
+%		\item Expliquer pourquoi cette figure illustre l'inégalité pour tout $x> 0$ on a $2\leqslant x+\frac{1}{x}$.
+%		\item Donner, sous forme de fractions irréductibles, les longueurs des côtés du triangle rectangle correspondant à la valeur  $x=\tfrac{12}{5}$.
+%		
+%		Vérifier qu'il est semblable au triangle de côtés $169\colon 119\colon 120$ (1\iere ligne de la tablette).
+%		\item Même question pour $x=\tfrac{9}{4}$  et le triangle $97\colon 65\colon 72$ (11\ieme ligne de la tablette).
+%		\item Pouvez vous retrouver les triplets $(a;b;c)$ de la seconde ligne, qui correspond à $x=\tfrac{64}{27}$ ?
+%	\end{enumerate} 
+%\end{exercise} 
+%\begin{exercise}  
+%Les formules particulières suivantes génèrent des triplets pythagoriciens $(a;b;c)$ : 
+%%\setlength{\abovedisplayskip}{5pt}
+%%\setlength{\belowdisplayskip}{5pt}
+%%\begin{equation}
+%%\label{formules:tripletspythagore}
+%
+%$
+%p;q\in\mathbb{N} \qquad a=p^2-q^2 \qquad b = 2 pq \qquad c = p^2+q^2 
+%$
+%%\end{equation} 
+%	\begin{enumerate}[label=\alph*), leftmargin=*]
+%		\item Donner le triplet correspondant à $(p=8;q=7)$ et vérifier l'égalité $a^2+b^2=c^2$ 
+%		\item Retrouver le couple d'entiers $(p;q)$ qui donnent le triplet $(a=35;b=12;c=37)$. 
+%		\item Développer, réduire et montrer que pour tout $p,q\in\mathbb{N}$ : $a^2+b^2=p^4+2p^2q^2+q^4$.
+%		\item  Montrer que pour tout $p,q\in\mathbb{N}$, on a  $a^2+b^2=c^2$.
+%	\end{enumerate}
+%\end{exercise}
+% 
+%%----------------------------------------------------------------------------------------
+%%	 
+%%----------------------------------------------------------------------------------------
+%
+% \newpage  
+%\begin{exercise}\label{chapitre05:exercice:tripletspythagoriciensAlgorithme}\hfill 
+%	
+%	\begin{enumerate}[label=\arabic*),leftmargin=*]
+%		\item Voici 3 scripts Python. Cocher les cases correspondant aux scripts qui affichent le couple indiqué :
+%		\begin{multicols}{2} \setlength\columnseprule{.0pt}
+%\begin{lstlisting}[ language=python , 
+%title=Script A,   
+%linewidth=1\columnwidth,
+%style=python-code,    
+%aboveskip=0.2\topskip,
+%belowskip=0.2\topskip,
+%%xleftmargin=1.2em,
+%lineskip=1.1em,
+%tabsize=4, 
+%numbers=none,
+%%	firstnumber=10  
+%]
+%for a in range(100) :
+%	for b in range(100) :
+%		print(a,b) 
+%\end{lstlisting}  
+%\begin{lstlisting}[ language=python , 
+%title=Script B,   
+%linewidth=1\columnwidth,
+%style=python-code,    
+%aboveskip=0.2\topskip,
+%belowskip=0.2\topskip,
+%%xleftmargin=1.2em,
+%lineskip=1.1em,
+%tabsize=4, 
+%numbers=none,
+%%	firstnumber=10  
+%] 
+%for a in range(100) :
+%	for b in range(a,100-a) :
+%		print(a,b) 
+%		
+%\end{lstlisting} 
+%
+%\begin{lstlisting}[ language=python , 
+%title=Script C,   
+%linewidth=1\columnwidth,
+%style=python-code,    
+%aboveskip=0.2\topskip,
+%belowskip=0.2\topskip,
+%%xleftmargin=1.2em,
+%lineskip=1.1em,
+%tabsize=4, 
+%numbers=none,
+%	%	firstnumber=10  
+%	] 
+%for a in range(100) :
+%	b = 100 - a
+%	print(a,b)
+%\end{lstlisting}
+%\begin{lstlisting}[ language=python , 
+%title=Script D,   
+%linewidth=1\columnwidth,
+%style=python-code,    
+%aboveskip=0.2\topskip,
+%belowskip=0.2\topskip,
+%%xleftmargin=1.2em,
+%lineskip=1.1em,
+%tabsize=4, 
+%numbers=none,
+%	%	firstnumber=10  
+%	] 
+%for a in range(100) :
+%	for b in range(a,100) :
+%		if a**2+b**2 == 10**2 :
+%			print(a,b)  
+%\end{lstlisting}
+%		\end{multicols}
+%			 
+%\noindent \QCM[Multiple,Alterne,Reponses=4,Stretch=1.1,Largeur=3.0cm,%Solution,%
+%Noms={Script A/Script B/Script C/Script D}]{%\textbb{N} marche pas
+%{\lstinline|0, 10|} &1&1&0&1, 
+%{\lstinline|10, 0|} &1&0&0&0, 
+%{\lstinline|1, 99|} &1&0&1&0,
+%{\lstinline|3, 7|} &1&1&0&0, 
+%{\lstinline|4, 3|} &1&0&0&0, 
+%{\lstinline|6, 8|} &1&1&0&1,  
+%{\lstinline|8, 6|} &1&0&0&0, 
+%%{\lstinline|36, 64|} &1&0&1&0,
+%{\lstinline|75, 25|} &1&0&1&0, 
+%} 
+%\vfill 
+%		\item On cherche les triplets pythagoriciens $(a,b,c)$ correspondant à des triangles de périmètre 1000.
+% 
+%\noindent \begin{lstlisting}[ language=python , 
+%%	title=Script D,   
+%	linewidth=1\columnwidth,
+%	style=python-code,    
+%	aboveskip=0.2\topskip,
+%	belowskip=0.2\topskip,
+%	%xleftmargin=1.2em,
+%	lineskip=1.1em,
+%	tabsize=4, 
+%	numbers=none,
+%	%	firstnumber=10  
+%	] 
+%for a in ................       :
+%	for b in ................   :
+%		c = ...................
+%		if .................... :
+%			print(a,b,c)
+%\end{lstlisting} 
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%	\item Expliquer pourquoi $a$, $b$ et $c$ sont forcement inférieurs à 1000.
+%	\item Compléter le script ci-dessous afin qu'il affiche les bons triplets.
+%	\item Rentrer le script sur votre pythonette et l'exécuter. \\
+%	Vérifier qu'il n'affiche aucune valeur négative. puis relever les triplets solutions.
+%\end{enumerate} 
+%\end{enumerate}
+%\end{exercise}
+%%----------------------------------------------------------------------------------------
+%%	 
+%%----------------------------------------------------------------------------------------
+%
+%\newpage 
+%\begin{proof}[solution de l'exemple et de l'exercice \ref{chapitre05:exercice:tripletspythagoriciens}]\hfill  
+%	\begin{enumerate}[label=\alph*),leftmargin=*]
+%		\item Pour $b=15$ on trouve $117^2+15^2=118^2$, $36^2+15^2=39^2$, $20^2+15^2=25^2$ et $8^2+15^2=17^2$.
+%		\item Pour $b=12$ on trouve $35^2+12^2=37^2$, $16^2+12^2=20^2$, $9^2+12^2=15^2$ et $5^2+12^2=13^2$. 
+%	\end{enumerate}
+%\end{proof}
+% \begin{figure*}[hb]
+%	\includegraphics[width=0.60\linewidth]{Plimpton322-Drawing by Eleanor Robson.png} 
+%	\caption{La tablette \href{https://en.wikipedia.org/wiki/Plimpton_322}{Plimpton 322} est la plus connue des  \numprint{500000} tablettes babyloniennes dans la collection G. A. Plimpton à l'université de Columbia. Rédigée dans de l'argile en 1800 av. J.-C., elle comporte un tableau de nombres rangés dans 4 colonnes et 15 lignes. Les valeurs des 3 premières colonnes sont associées à des triplets pythagoriciens vérifiant $a^2+b^2=c^2$ (la 4\ieme étant le numéro de la ligne).  
+%	Une \href{https://www.maa.org/sites/default/files/pdf/upload_library/22/Ford/Robson105-120.pdf}{analyse minutieuse} a permis d'identifier la méthode utilisée pour obtenir chacune des lignes. Cet algorithme est abordé dans l'exercice \ref{chapitre05:exercice:plimpton322}.}\label{chapter05:figure:plimpton322}
+%\end{figure*} 
+%\begin{proof}[solution de l'exercice \ref{chapitre05:exercice:tripletspythagoriciensAlgorithme}]\hfill  
+%	
+%\noindent \QCM[Multiple,Alterne,Reponses=4,Stretch=1.0,Largeur=3.0cm,Solution,%
+%Noms={Script A/Script B/Script C/Script D}]{%\textbb{N} marche pas
+%	{\lstinline|0, 10|} &1&1&0&1, 
+%	{\lstinline|10, 0|} &1&0&0&0, 
+%	{\lstinline|1, 99|} &1&0&1&0,
+%	{\lstinline|3, 7|} &1&1&0&0, 
+%	{\lstinline|4, 3|} &1&0&0&0, 
+%	{\lstinline|6, 8|} &1&1&0&1,  
+%	{\lstinline|8, 6|} &1&0&0&0, 
+%	%{\lstinline|36, 64|} &1&0&1&0,
+%	{\lstinline|75, 25|} &1&0&1&0, 
+%} 
+%
+%\begin{lstlisting}[ language=python , 
+%	%	title=Script D,   
+%	linewidth=1\columnwidth,
+%	style=python-code,    
+%	aboveskip=0.2\topskip,
+%	belowskip=0.2\topskip,
+%	%xleftmargin=1.2em,
+%%	lineskip=1.0em,
+%	tabsize=4, 
+%	numbers=none,
+%	%	firstnumber=10  
+%	] 
+%for a in range(1000) :
+%	for b in range(a,1000-a)  :
+%		c = 1000 - a - b
+%		if a**2 + b**2 == c**2 :
+%			print(a,b,c)				# programme affiche 200, 375, 475
+%\end{lstlisting} 
+%\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+ 
+%%----------------------------------------------------------------------------------------
+%%	EXERCICES
+%%----------------------------------------------------------------------------------------
+%
+% 
+%
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+		headwidth=textwithmarginpar,
+		headsepline=true,
+		headsepline= 0.5pt,
+		footwidth=textwithmarginpar,
+	} 
+\onehalfspacing
+
+\subsection{Exercices : trigonométrie} 
+\begin{exercise}[Trigonométrie] \label{chapter05:exercices:trigonometrie:01} Écrire le rapport trigonométrique adapté et calculer les valeurs demandées.
+	
+	\noindent\parbox[position=t]{0.23\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0]
+			\tkzText(0.5,2.8){$(A)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](0:3.3){B}
+			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkRightAngle[](B,A,C)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+			%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+			%\tkzLabelSegment[above, font=\scriptsize](A,C){$10$} 
+			\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{7}{\centi\meter}}
+			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}} 
+		\end{tikzpicture}   
+	}
+%	\hfill 
+	\parbox[position=t]{0.23\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0]
+			\tkzText(0.5,2.8){$(B)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](0:3.3){B}
+			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkRightAngle[](B,A,C)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			%		\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+			\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){$?$}
+			%\tkzLabelSegment[above, font=\scriptsize](A,C){$10$} 
+			\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{4}{\centi\meter}}
+			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{5}{\centi\meter}} 
+		\end{tikzpicture}   
+	}
+%	\hfill 
+	\parbox[position=t]{0.23\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0]
+			\tkzText(0.5,2.8){$(C)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](0:3.3){B}
+			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkRightAngle[](B,A,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzLabelAngle[font=\footnotesize,pos=1.0](C,B,A){$\ang{40}$}
+			%		\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){$40$}
+			%\tkzLabelSegment[above, font=\scriptsize](A,C){$10$} 
+			\tkzLabelSegment[below, font=\footnotesize](A,B){$?$}
+			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{5}{\centi\meter}} 
+		\end{tikzpicture}   
+	}
+%	\hfill 
+	\parbox[position=t]{0.23\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0]
+			\tkzText(0.5,2.8){$(D)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](0:3.3){B}
+			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkRightAngle[](B,A,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzLabelAngle[font=\footnotesize,pos=1.0](C,B,A){$\ang{40}$}
+			%		\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){$40$}
+			%\tkzLabelSegment[above, font=\scriptsize](A,C){$10$} 
+			\tkzLabelSegment[below, font=\footnotesize](A,B){\SI{5}{\centi\meter}}
+			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){$?$} 
+		\end{tikzpicture}   
+	}
+	
+	\noindent
+	\parbox[position=t]{0.23\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0]
+			\tkzText(0.5,2.8){$(E)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](0:3.3){B}
+			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkRightAngle[](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			%		\tkzLabelAngle[font=\footnotesize,pos=1.0](C,B,A){$\ang{40}$}
+			\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){$\ang{40}$}
+			%\tkzLabelSegment[above, font=\scriptsize](A,C){$10$} 
+			\tkzLabelSegment[below, font=\footnotesize](A,B){\SI{3}{\centi\meter}}
+			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){$?$} 
+		\end{tikzpicture}   
+	}
+%	\hfill
+	\parbox[position=t]{0.23\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0]
+			\tkzText(0.5,2.8){$(F)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](0:3.3){B}
+			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			\tkzMarkRightAngle[](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			%		\tkzLabelAngle[font=\footnotesize,pos=1.0](C,B,A){$\ang{40}$}
+			\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){$?$}
+			\tkzLabelSegment[left, font=\scriptsize](A,C){$\SI{3}{\centi\meter}$} 
+			\tkzLabelSegment[below, font=\footnotesize](A,B){\SI{4}{\centi\meter}}
+			%		\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){$?$} 
+		\end{tikzpicture}   
+	} 
+%	\hfill
+	\parbox[position=t]{0.23\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0]
+			\tkzText(0.5,2.8){$(G)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](0:3.3){B}
+			\tkzDefTriangle[two angles=35 and 55](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			%		\tkzMarkRightAngle[](B,A,C)
+			\tkzMarkRightAngle[](A,C,B)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+			%		\tkzLabelAngle[font=\footnotesize,pos=1.0](C,B,A){$\ang{40}$}
+			%		\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){$?$}
+			\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){$?$}
+			\tkzLabelSegment[left, font=\scriptsize](A,C){$\SI{5}{\centi\meter}$} 
+			\tkzLabelSegment[below, font=\footnotesize](A,B){\SI{7}{\centi\meter}}
+			%		\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){$?$} 
+		\end{tikzpicture}   
+	}
+%	\hfill
+	\parbox[position=t]{0.23\textwidth}{
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0]
+			\tkzText(0.5,2.8){$(H)$}
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			\tkzDefPoint(1,0){A} 
+			\tkzDefShiftPoint[A](0:3.3){B}
+			\tkzDefTriangle[two angles=35 and 55](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			%		\tkzMarkRightAngle[](B,A,C)
+			\tkzMarkRightAngle[](A,C,B)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+			%		\tkzLabelAngle[font=\footnotesize,pos=1.0](C,B,A){$\ang{40}$}
+			%		\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){$?$}
+			\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){$?$}
+			%	\tkzLabelSegment[left, font=\scriptsize](A,C){$\SI{5}{\centi\meter}$} 
+			\tkzLabelSegment[above right, font=\scriptsize](B,C){$\SI{5}{\centi\meter}$} 
+			\tkzLabelSegment[below, font=\footnotesize](A,B){\SI{10}{\centi\meter}}
+			%		\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){$?$} 
+		\end{tikzpicture}   
+	}
+\end{exercise}
+\begin{example}[Calcul d'une aire] Calculer l'aire du triangle $ABC$ ci-dessous.
+	
+	
+\noindent\parbox[position=t]{0.3\textwidth}{\centering
+	%\begin{figure}[H]\centering
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzDefPoint(0,0){A} 
+		\tkzDefShiftPoint[A](0:4){B}
+		\tkzDefShiftPoint[A](40:3){C}
+		% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C)
+		%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+		% 			\tkzMarkRightAngle[](B,A,C)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+		% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+		%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzLabelAngle[font=\footnotesize,pos=.9](B,A,C){$\ang{40}$}
+		% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+		%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+		
+		\tkzDrawSegment[dim={\scriptsize \SI{6}{\centi\meter},+15pt,}](A,C)
+		\tkzDrawSegment[dim={\scriptsize \SI{8}{\centi\meter},-15pt,}](A,B)
+		
+		
+%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+
+		% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+		\tkzLabelPoints[below left,font=\scriptsize](A)
+		\tkzLabelPoints[below right,font=\scriptsize](B)
+		\tkzLabelPoints[above,font=\scriptsize](C)  
+		\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+		\tkzDrawSegment[dashed](C,H)
+		\tkzMarkRightAngle[size=0.2](B,H,C)
+		\tkzLabelPoints[below left,font=\scriptsize](H)
+	\end{tikzpicture}   
+} 
+\end{example}
+\vfill 
+\begin{exercise}[À vous]\label{chapitre05:exercice:calculdaires01} Calculer l'aire des triangles suivants :\hfill 
+	
+\noindent\parbox[position=t]{0.3\textwidth}{\centering
+	%\begin{figure}[H]\centering
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzDefPoint(0,0){A} 
+		\tkzDefShiftPoint[A](0:3){B}
+		\tkzDefShiftPoint[A](65:2.5){C}
+		% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C)
+		%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+		% 			\tkzMarkRightAngle[](B,A,C)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+		% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+		%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzLabelAngle[font=\footnotesize,pos=.9](B,A,C){$\ang{65}$}
+		% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+		%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+		
+		\tkzDrawSegment[dim={\scriptsize \SI{5}{\centi\meter},+15pt,}](A,C)
+		\tkzDrawSegment[dim={\scriptsize \SI{6}{\centi\meter},-15pt,}](A,B)
+		
+		
+		%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+		%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+		
+		% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+		\tkzLabelPoints[below left,font=\scriptsize](A)
+		\tkzLabelPoints[below right,font=\scriptsize](B)
+		\tkzLabelPoints[above,font=\scriptsize](C)  
+		\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+		\tkzDrawSegment[dashed](C,H)
+		\tkzMarkRightAngle[size=0.2](B,H,C)
+		\tkzLabelPoints[below left,font=\scriptsize](H)
+	\end{tikzpicture}   
+}\hfill \parbox[position=t]{0.3\textwidth}{\centering
+%\begin{figure}[H]\centering
+\begin{tikzpicture}[scale=1.0] 
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+	
+	\tkzDefPoint(0,0){A} 
+	\tkzDefShiftPoint[A](-10:5){B}
+	\tkzDefShiftPoint[A](28:3){C}
+	% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+	\tkzDrawPolygon[line width=1.2pt](A,B,C)
+	%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+	% 			\tkzMarkRightAngle[](B,A,C)
+	\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+	% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+	%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+	\tkzLabelAngle[font=\footnotesize,pos=.9](B,A,C){$\ang{38}$}
+	% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+	%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+	
+	\tkzDrawSegment[dim={\scriptsize \SI{6}{\centi\meter},+15pt,}](A,C)
+	\tkzDrawSegment[dim={\scriptsize \SI{10}{\centi\meter},-15pt,}](A,B)
+	
+	
+	%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+	%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+	
+	% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+%	\tkzLabelPoints[below left,font=\scriptsize](A)
+%	\tkzLabelPoints[below right,font=\scriptsize](B)
+%	\tkzLabelPoints[above,font=\scriptsize](C)  
+	\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+	\tkzDrawSegment[dashed](C,H)
+	\tkzMarkRightAngle[size=0.2](B,H,C)
+%	\tkzLabelPoints[below left,font=\scriptsize](H)
+\end{tikzpicture}   
+}\hfill \parbox[position=t]{0.3\textwidth}{\centering
+%\begin{figure}[H]\centering
+\begin{tikzpicture}[scale=1.0] 
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+	
+	\tkzDefPoint(0,0){A} 
+	\tkzDefShiftPoint[A](0:4.5){B}
+	\tkzDefShiftPoint[A](-76:3.5){C}
+	% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+	\tkzDrawPolygon[line width=1.2pt](A,B,C)
+	%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+	% 			\tkzMarkRightAngle[](B,A,C)
+	\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,A,B)
+	% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+	%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+	\tkzLabelAngle[font=\footnotesize,pos=.9](C,A,B){$\ang{76}$}
+	% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+	%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+	
+	\tkzDrawSegment[dim={\scriptsize \SI{6}{\centi\meter},-15pt,}](A,C)
+	\tkzDrawSegment[dim={\scriptsize \SI{10}{\centi\meter},+15pt,}](A,B)
+	
+	
+	%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+	%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+	
+	% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+	%	\tkzLabelPoints[below left,font=\scriptsize](A)
+	%	\tkzLabelPoints[below right,font=\scriptsize](B)
+	%	\tkzLabelPoints[above,font=\scriptsize](C)  
+	\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+	\tkzDrawSegment[dashed](C,H)
+	\tkzMarkRightAngle[size=0.2](B,H,C)
+	%	\tkzLabelPoints[below left,font=\scriptsize](H)
+\end{tikzpicture}   
+} 
+
+\noindent\parbox[position=t]{0.5\textwidth}{\centering
+	%\begin{figure}[H]\centering
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzDefPoint(0,0){A} 
+		\tkzDefShiftPoint[A](0:3){B}
+		\tkzDefShiftPoint[A](50:3){C}
+		% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C)
+		%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+		% 			\tkzMarkRightAngle[](B,A,C)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+		% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+		%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzLabelAngle[font=\footnotesize,pos=.9](B,A,C){\scriptsize$\ang{50}$}
+		% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+		%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+		
+%		\tkzDrawSegment[dim={\scriptsize \SI{4}{\centi\meter},+15pt,}](A,C)
+		\tkzDrawSegment[dim={\scriptsize \SI{5}{\centi\meter},-15pt,}](A,B)
+		
+		\tkzMarkSegments[mark=s||](A,B A,C)
+		
+		%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+		%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+		
+		% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+%		\tkzLabelPoints[below left,font=\scriptsize](A)
+%		\tkzLabelPoints[below right,font=\scriptsize](B)
+%		\tkzLabelPoints[above,font=\scriptsize](C)  
+		\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+		\tkzDrawSegment[dashed](C,H)
+		\tkzMarkRightAngle[size=0.2](B,H,C)
+%		\tkzLabelPoints[below left,font=\scriptsize](H) 
+		\begin{scope}[xshift=-2.5cm]
+					\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			
+			\tkzDefPoint(0,0){A} 
+			\tkzDefShiftPoint[A](-180:3){B}
+			\tkzDefShiftPoint[A](50:3){C}
+			% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			% 			\tkzMarkRightAngle[](B,A,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.4](C,A,B)
+			% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzLabelAngle[font=\footnotesize,pos=.9](C,A,B){\scriptsize$\ang{130}$}
+			\tkzLabelAngle[font=\footnotesize,pos=.9](H,A,C){\scriptsize$?$}
+			% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+			%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+			
+%		\tkzDrawSegment[dim={\scriptsize \SI{4}{\centi\meter},+15pt,}](A,C)
+%			\tkzDrawSegment[dim={\scriptsize \SI{4}{\centi\meter},-15pt,}](A,B) 
+			\tkzMarkSegments[mark=s||](A,B A,C) 
+			%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+			%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+			
+			% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+%			\tkzLabelPoints[below left,font=\scriptsize](A)
+%			\tkzLabelPoints[below right,font=\scriptsize](B)
+%			\tkzLabelPoints[above,font=\scriptsize](C)  
+			\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](H,A,C)
+			\tkzDrawSegment[dashed](C,H)
+			\tkzDrawLine[dashed](A,H)
+			\tkzMarkRightAngle[size=0.2](B,H,C)
+%			\tkzLabelPoints[below left,font=\scriptsize](H) 
+		\end{scope}
+	\end{tikzpicture}   
+}\hfill \parbox[position=t]{0.5\textwidth}{\centering
+%\begin{figure}[H]\centering
+\begin{tikzpicture}[scale=1.0] 
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+	
+	\tkzDefPoint(0,0){A} 
+	\tkzDefShiftPoint[A](0:2.5){B}
+	\tkzDefShiftPoint[A](-40:2.5){C}
+	% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+	\tkzDrawPolygon[line width=1.2pt](A,B,C)
+	%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+	% 			\tkzMarkRightAngle[](B,A,C)
+	\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,A,B)
+	% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+	%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+	\tkzLabelAngle[font=\footnotesize,pos=.9](C,A,B){\scriptsize$\ang{40}$}
+	% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+	%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+	
+	%		\tkzDrawSegment[dim={\scriptsize \SI{4}{\centi\meter},+15pt,}](A,C)
+	\tkzDrawSegment[dim={\scriptsize \SI{4}{\centi\meter},15pt,}](A,B)
+	
+	\tkzMarkSegments[mark=s|](A,B A,C)
+	
+	%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+	%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+	
+	% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+	%		\tkzLabelPoints[below left,font=\scriptsize](A)
+	%		\tkzLabelPoints[below right,font=\scriptsize](B)
+	%		\tkzLabelPoints[above,font=\scriptsize](C)  
+	\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+	\tkzDrawSegment[dashed](C,H)
+	\tkzMarkRightAngle[size=0.2](B,H,C)
+	%		\tkzLabelPoints[below left,font=\scriptsize](H) 
+	\begin{scope}[xshift=-2.5cm]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzDefPoint(0,0){A} 
+		\tkzDefShiftPoint[A](-180:2.5){B}
+		\tkzDefShiftPoint[A](-40:2.5){C}
+		% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C)
+		%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+		% 			\tkzMarkRightAngle[](B,A,C)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.4](B,A,C)
+		% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+		%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzLabelAngle[font=\footnotesize,pos=.7](B,A,C){\scriptsize$\ang{140}$}
+		% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+		%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+		
+		%		\tkzDrawSegment[dim={\scriptsize \SI{4}{\centi\meter},+15pt,}](A,C)
+		%			\tkzDrawSegment[dim={\scriptsize \SI{4}{\centi\meter},-15pt,}](A,B)
+		
+		\tkzMarkSegments[mark=s|](A,B A,C)
+		
+		%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+		%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+		
+		% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+		%			\tkzLabelPoints[below left,font=\scriptsize](A)
+		%			\tkzLabelPoints[below right,font=\scriptsize](B)
+		%			\tkzLabelPoints[above,font=\scriptsize](C)  
+		\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+		\tkzDrawSegment[dashed](C,H)
+		\tkzDrawLine[dashed](A,H)
+		\tkzMarkRightAngle[size=0.2](B,H,C)
+		%			\tkzLabelPoints[below left,font=\scriptsize](H) 
+	\end{scope}
+\end{tikzpicture}   
+}    
+\end{exercise}
+ \begin{remark}
+ 	On peut calculer des rapports trigonométriques d'angles obtus (>\ang{90}). Comparer $\sin(\ang{130})$,$\sin(\ang{50})$. 
+ \end{remark}
+\newpage 
+
+\begin{tBox}[frametitle=Formule de l'aire]
+
+\noindent\parbox[position=t]{0.35\textwidth}{\centering
+	%\begin{figure}[H]\centering
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](-10:4.2){A}
+		\tkzDefShiftPoint[C](45:3){B}
+		% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C)
+		%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+		% 			\tkzMarkRightAngle[](B,A,C)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+		%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzLabelAngle[font=\footnotesize,pos=.9](A,C,B){$\widehat{C}$}
+		% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+		%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+		
+		\tkzDrawSegment[dim={\scriptsize $b$,-15pt,}](C,A)
+		\tkzDrawSegment[dim={\scriptsize $a$,+15pt,}](C,B)
+		
+		
+		%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+		%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+		
+		% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+		\tkzLabelPoints[below left,font=\scriptsize](C)
+		\tkzLabelPoints[below right,font=\scriptsize](A)
+		\tkzLabelPoints[above,font=\scriptsize](B)  
+		\tkzDefPointBy[projection = onto C--B](A) \tkzGetPoint{H}
+		\tkzDrawSegment[dashed](C,H)
+		\tkzMarkRightAngle[size=0.2](B,H,C)
+%		\tkzLabelPoints[below left,font=\scriptsize](H)
+	\end{tikzpicture}   
+}\hfill 
+\parbox[position=t]{0.6\textwidth}{
+	La formule est valable pour des angles aigus, mais aussi des angles obtus !
+	\[
+		\mathscr{Aire}=\frac{1}{2}ab\sin(\widehat{C})
+	\]
+	On a aussi l'égalité : $\sin(\widehat{C})=\sin(\ang{180}-\widehat{C})$
+}
+\end{tBox}
+
+\begin{example}[je fais : loi des sinus]\hfill 
+	
+\noindent\parbox[position=t]{0.25\textwidth}{\centering
+	%\begin{figure}[H]\centering
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](-10:4.2){A}
+		\tkzDefShiftPoint[C](45:3){B}
+		% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C)
+		%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+		% 			\tkzMarkRightAngle[](B,A,C)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+		% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+		%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzLabelAngle[font=\footnotesize,pos=.9](A,C,B){\scriptsize$\widehat{C}$}
+		\tkzLabelAngle[font=\footnotesize,pos=.9](B,A,C){\scriptsize$\widehat{A}$}
+		\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){\scriptsize$\widehat{B}$}
+		% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+		%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+		
+		\tkzDrawSegment[dim={\scriptsize $b$,-15pt,}](C,A)
+		\tkzDrawSegment[dim={\scriptsize $a$,+15pt,}](C,B)
+		\tkzDrawSegment[dim={\scriptsize $c$,-15pt,}](A,B)
+		
+		
+		%		\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{5}{\centi\meter}} 
+		%		\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{6}{\centi\meter}}
+		
+		% 			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){\SI{9}{\centi\meter}}  
+		\tkzLabelPoints[below left,font=\small](C)
+		\tkzLabelPoints[below right,font=\small](A)
+		\tkzLabelPoints[above,font=\small](B)    
+	\end{tikzpicture}   
+}  
+\parbox[position=t]{0.55\textwidth}{ 
+$\begin{WithArrows}
+2\mathscr{Aire}&= ab\sin(\widehat{C}) =  \\
+&\\
+&\\
+&
+\end{WithArrows}$   
+} 
+
+\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](-10:2.1){A}
+		\tkzDefShiftPoint[C](45:1.5){B}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+		\tkzDrawSegment[dim={\scriptsize $\sin(\widehat{B})$,-20pt,}](C,A)
+		\tkzDrawSegment[dim={\scriptsize $\sin(\widehat{A})$,+20pt,}](C,B)
+		\tkzDrawSegment[dim={\scriptsize $\sin(\widehat{C})$,-20pt,}](A,B)  
+	\end{tikzpicture}   
+}\hfill 
+\end{example}
+\begin{exercise}\label{chapitre05:exercice:formuledesinus01}\hfill 
+	
+On considère la figure ci-dessous. Cocher les cases pour les formules vraies.
+
+\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](-20:3.0){A}
+		\tkzDefShiftPoint[C](35:2.0){B}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+		\tkzDrawSegment[dim={\scriptsize $c$,-20pt,}](C,A)
+		\tkzDrawSegment[dim={\scriptsize $a$,+20pt,}](C,B)
+		\tkzDrawSegment[dim={\scriptsize $b$,-20pt,}](A,B) 
+		\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){\scriptsize$\widehat{d}$}
+		\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){\scriptsize$\widehat{f}$}
+		\tkzLabelAngle[font=\footnotesize,pos=.8](C,B,A){\scriptsize$\widehat{e}$}  
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)   
+	\end{tikzpicture}   
+}\hfill 
+\parbox[position=t]{0.7\textwidth}{
+\QCM[VF,Alterne,Stretch=1.7, Largeur=0.75cm]{%
+	{$\frac{\sin(d)}{b}=\frac{\sin(e)}{c}$}&1,%
+	{$\frac{a}{\sin(f)}=\frac{b}{\sin(c)}$}&2,%
+	{$\frac{c}{\sin(e)}=\frac{b}{\sin(d)}$}&1,%
+} 
+}
+\end{exercise}
+\begin{exercise}\label{chapitre05:exercice:formuledesinus02}\hfill 
+	
+En utilisant la loi des sinus, trouver les valeurs de $x$, $y$ et $z$ pour chacune des figures suivantes.
+
+\noindent\parbox[position=t]{0.30\textwidth}{\centering 
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](0:3.3){A}
+		\tkzDefShiftPoint[C](52:2.33){B}  
+		
+		
+		\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+%		\tkzDrawSegment[dim={\scriptsize $c$,-20pt,}](C,A)
+		\tkzDrawSegment[dim={\small \SI{7}{\centi\meter},+20pt,}](C,B)
+		\tkzDrawSegment[dim={\small $x$,-20pt,}](A,B) 
+		\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){\scriptsize$\ang{52}$}
+		\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){\scriptsize$\ang{45}$}
+%		\tkzLabelAngle[font=\footnotesize,pos=.8](C,B,A){\scriptsize$\widehat{e}$}  
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)   
+	\end{tikzpicture}   
+}\hfill 
+\noindent\parbox[position=t]{0.3\textwidth}{\centering 
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](-20:4.2){A}
+		\tkzDefShiftPoint[C](36:3.0){B}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+%		\tkzDrawSegment[dim={\scriptsize $c$,-20pt,}](C,A)
+		\tkzDrawSegment[dim={\small \SI{6}{\centi\meter},+20pt,}](C,B)
+		\tkzDrawSegment[dim={\small \SI{7}{\centi\meter},-20pt,}](A,B) 
+		\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){\scriptsize$y^\circ$}
+		\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){\scriptsize$\ang{45}$}
+%		\tkzLabelAngle[font=\footnotesize,pos=.8](C,B,A){\scriptsize$\widehat{e}$}  
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)   
+	\end{tikzpicture}   
+}\hfill
+\noindent\parbox[position=t]{0.3\textwidth}{\centering 
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](-20:3.0){A}
+		\tkzDefShiftPoint[C](35:2.0){B}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+		\tkzDrawSegment[dim={\small \SI{8}{\centi\meter},-20pt,}](C,A)
+%		\tkzDrawSegment[dim={\scriptsize $a$,+20pt,}](C,B)
+		\tkzDrawSegment[dim={\small $z$,-20pt,}](A,B) 
+		\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){\scriptsize$\ang{52}$}
+		\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){\scriptsize$\ang{45}$}
+%		\tkzLabelAngle[font=\footnotesize,pos=.8](C,B,A){\scriptsize$\widehat{e}$}  
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)   
+	\end{tikzpicture}   
+}
+\end{exercise}
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\newpage
+\begin{proof}[solution de l'exercice \ref{chapter05:exercices:trigonometrie:01}] \hfill 	
+\begin{multicols}{3}
+	\begin{enumerate}[label=\Alph*),leftmargin=*]
+		\item $\cos(x)=\frac{7}{9}$.\\
+		$x= \arccos(\tfrac{7}{9})\approx\ang{39}$.
+		\item $\sin(x)=\frac{4}{5}$.\\
+		$x= \arcsin(\tfrac{4}{5})\approx \ang{53}$
+		\item $x=5\cos(\ang{40})\approx \numprint{3.83}$.
+		\item $x=\frac{5}{\cos(\ang{40})}\approx\numprint{6.53}$.
+		\item $x=\frac{3}{\sin(\ang{40})}\approx \numprint{4.67}$.
+		\item $\tan(x)=\frac{4}{3}$.\\
+		$x=\arctan(\tfrac{4}{3})\approx\ang{53.1}$.
+		\item $\cos(x)=\frac{5}{7}$\\
+			$x=\arccos(\tfrac{5}{7})=\ang{44.4}$.
+		\item $\sin(x)=\frac{5}{10}$, $x=\ang{30}$.
+	\end{enumerate}
+\end{multicols} 
+\end{proof}
+
+\begin{proof}[solution de l'exercice \ref{chapitre05:exercice:calculdaires01}] \hfill 	
+	
+$A\approx\SI{13.6}{\centi\meter^2}$; $B\approx\SI{18.5}{\centi\meter^2}$; $C\approx\SI{29.1}{\centi\meter^2}$; $D\approx\SI{9.58}{\centi\meter^2}$; $E\approx\SI{5.14}{\centi\meter^2}$; 
+\end{proof}
+
+\begin{proof}[solution de l'exercice \ref{chapitre05:exercice:formuledesinus01}] \hfill 	
+
+\QCM[VF,Alterne,Stretch=1.7, Solution, Largeur=0.75cm]{%
+	{$\frac{\sin(d)}{b}=\frac{\sin(e)}{c}$}&1,%
+	{$\frac{a}{\sin(f)}=\frac{b}{\sin(c)}$}&2,%
+	{$\frac{c}{\sin(e)}=\frac{b}{\sin(d)}$}&1,%
+} 
+\end{proof}
+\begin{proof}[solution de l'exercice \ref{chapitre05:exercice:formuledesinus02}] \hfill 	
+	
+\noindent $x=\SI{6.3}{\centi\meter} $, $y\approx \ang{55.6}$ et $z\approx \SI{6.35}{\centi\meter}$
+\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+ 
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+\newpage 
+\subsection{La loi des cosinus}
+
+\begin{exercise}[un classique de 3\ieme]\hfill 
+	
+	\noindent\parbox[position=t]{0.35\textwidth}{\centering
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			
+			\tkzDefPoint(0,0){A} 
+			\tkzDefShiftPoint[A](0:5){B}
+			\tkzDefShiftPoint[A](38:3.0){C}
+			% 			\tkzDefTriangle[two angles=90 and 35](A,B)\tkzGetPoint{C}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%		\tkzLabelPoints[font=\scriptsize](A,B,C)
+			% 			\tkzMarkRightAngle[](B,A,C)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+			% 			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)
+			%\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzLabelAngle[font=\footnotesize,pos=.9](B,A,C){$\ang{38}$}
+			% 			\tkzLabelAngle[font=\footnotesize,pos=.9](C,B,A){$?$}
+			%\tkzLabelAngle[font=\scriptsize,pos=.8](A,C,B){$\ang{55}$}
+			\tkzLabelSegment[above, font=\scriptsize,sloped](A,C){\SI{6}{\centi\meter}} 
+			\tkzLabelSegment[below, font=\scriptsize](A,B){\SI{10}{\centi\meter}}
+			\tkzLabelSegment[above,sloped,  font=\scriptsize](C,B){$x$}  
+			\tkzLabelPoints[below left,font=\scriptsize](A)
+			\tkzLabelPoints[below right,font=\scriptsize](B)
+			\tkzLabelPoints[above,font=\scriptsize](C)  
+			\tkzDefPointBy[projection = onto A--B](C) \tkzGetPoint{H}
+			\tkzDrawSegment[dashed](C,H)
+			\tkzMarkRightAngle[size=0.2](B,H,C)
+			\tkzLabelPoints[above left,font=\scriptsize](H)
+		\end{tikzpicture}   
+	}  \hfill 
+	\parbox[position=t]{0.6\textwidth}{
+		Dans la figure ci-contre, $H$ est le pied de la hauteur issue de $C$.
+		\begin{enumerate}[label=\alph*),leftmargin=*]
+			\item Calculer les longueurs $CH$ et $HB$.
+			\item En déduire $HB$, puis une valeur approchée de $x$ au dixième de \si{\centi\meter}.
+		\end{enumerate}	
+	}
+\end{exercise}	
+\begin{example}[je fais, loi des cosinus]\hfill 
+	
+	
+	\noindent\parbox[position=t]{0.4\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](0:6.10){A}
+			\tkzDefShiftPoint[C](52:2.70){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$b$,-10pt,}](C,A)
+			\tkzDrawSegment[dim={$a$,+10pt,}](C,B)
+			\tkzDrawSegment[dim={$c=?$,-10pt,}](A,B) 
+			\tkzLabelAngle[font=\small,pos=.8](A,C,B){$\widehat{C}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)  
+			\tkzDefPointBy[projection = onto C--A](B) \tkzGetPoint{H}
+			\tkzDrawSegment[dashed](B,H)
+			\tkzMarkRightAngle[size=0.2](A,H,B)  
+		\end{tikzpicture}   
+	} 
+	\vfill 
+\end{example}
+\begin{exercise}\hfill 
+	
+	\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-10:3.50){A}
+			\tkzDefShiftPoint[C](45:2.10){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{6}{\centi\meter}$,-10pt,}](C,A)
+			\tkzDrawSegment[dim={$a$,+20pt,}](C,B)
+			\tkzDrawSegment[dim={$\SI{5}{\centi\meter}$,-10pt,}](A,B) 
+			%		\tkzLabelAngle[font=\small,pos=.8](A,C,B){$\ang{40}$} 
+			%		\tkzLabelAngle[font=\small,pos=.8](C,A,B){$\ang{40}$}  
+			\tkzLabelAngle[font=\small,pos=.9](B,A,C){$\ang{40}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)    
+		\end{tikzpicture}   
+	} \hfill 
+	\parbox[position=t]{0.7\textwidth}{  
+		$\begin{WithArrows}
+			a^2&=\rule{0pt}{1.8em} 5^2+6^2-2\times 5\times 6 \times \cos(\ang{40})  \\
+			a& =\rule{0pt}{1.8em}  
+		\end{WithArrows}$  
+	}
+	
+	\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](5:4.10){A}
+			\tkzDefShiftPoint[C](-38:2.70){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$b$,+10pt,}](C,A)
+			\tkzDrawSegment[dim={$\SI{6}{\centi\meter}$,-10pt,}](C,B)
+			\tkzDrawSegment[dim={$\SI{5}{\centi\meter}$,+10pt,}](A,B)   
+			\tkzLabelAngle[font=\small,pos=.9](A,B,C){$\ang{85}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,B,C)    
+		\end{tikzpicture}   
+	} \hfill 
+	\parbox[position=t]{0.7\textwidth}{  
+		$\begin{WithArrows}
+			b^2&=\\
+			b& =\rule{0pt}{1.8em}  
+		\end{WithArrows}$  
+	}
+	
+	\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-17.5:3){A}
+			\tkzDefShiftPoint[C](-90:2){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{4.5}{\centi\meter}$,+10pt,}](C,A)
+			\tkzDrawSegment[dim={$c$,-10pt,}](C,B)
+			%		\tkzDrawSegment[dim={$ $,+10pt,}](A,B)   
+			\tkzLabelAngle[font=\small,pos=.9](C,A,B){$\ang{35}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,A,B)    
+			\tkzMarkSegments[mark=s||](A,B A,C)
+		\end{tikzpicture}   
+	} \hfill 
+	\parbox[position=t]{0.7\textwidth}{  
+		$\begin{WithArrows}
+			c^2&=\\
+			c& =\rule{0pt}{1.8em}  
+		\end{WithArrows}$  
+	}
+	
+	\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-17.5:3){A}
+			\tkzDefShiftPoint[C](-90:2){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{4.5}{\centi\meter}$,+10pt,}](C,A)
+			\tkzDrawSegment[dim={$c$,-10pt,}](C,B)
+			%		\tkzDrawSegment[dim={$ $,+10pt,}](A,B)   
+			\tkzLabelAngle[font=\small,pos=.9](C,A,B){$\ang{35}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,A,B)    
+			\tkzMarkSegments[mark=s||](A,B A,C)
+		\end{tikzpicture}   
+	} \hfill   
+	
+	
+	%----------------------------------------------------------------------------------------
+	%	
+	%----------------------------------------------------------------------------------------
+	\newpage 
+	
+	\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-10:3.5){A}
+			\tkzDefShiftPoint[C](42:2.5){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{5.2}{\centi\meter}$,-10pt,}](C,A)
+			\tkzDrawSegment[dim={$\SI{3}{\centi\meter}$,+10pt,}](C,B)
+			\tkzDrawSegment[dim={$\SI{8}{\centi\meter}$,-10pt,}](A,B) 
+			\tkzLabelAngle[font=\small,pos=.8](A,C,B){$A$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)  
+			%		\tkzDefPointBy[projection = onto C--A](B) \tkzGetPoint{H}
+			%		\tkzDrawSegment[dashed](B,H)
+			%		\tkzMarkRightAngle[size=0.2](A,H,B)  
+		\end{tikzpicture}   
+	} \hfill 
+	\parbox[position=t]{0.7\textwidth}{  
+		$\begin{WithArrows}
+			\big( \qquad \big)^2&=\big( \qquad \big)^2+\big( \qquad \big)^2-2\times \qquad \times \qquad \times \cos(A) \\
+			&= \rule{0pt}{1.8em} \\
+			\cos(A)& =\rule{0pt}{1.8em} \\
+			A& =\rule{0pt}{1.8em}  
+		\end{WithArrows}$  
+	}
+	\bigskip
+	
+	\noindent  \parbox[position=t]{0.30\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](0:3.5){A}
+			\tkzDefShiftPoint[C](115:2.5){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{4.3}{\centi\meter}$,-10pt,}](C,A)
+			\tkzDrawSegment[dim={$\SI{2.6}{\centi\meter}$,+10pt,}](C,B)
+			\tkzDrawSegment[dim={$\SI{6.1}{\centi\meter}$,-10pt,}](A,B) 
+			%		\tkzLabelAngle[font=\small,pos=.8](A,C,B){$A$}  
+			\tkzLabelAngle[font=\small,pos=.9](B,A,C){$B$} 
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](B,A,C)  
+			%		\tkzDefPointBy[projection = onto C--A](B) \tkzGetPoint{H}
+			%		\tkzDrawSegment[dashed](B,H)
+			%		\tkzMarkRightAngle[size=0.2](A,H,B)  
+		\end{tikzpicture}   
+	} \bigskip 
+	
+	
+	\noindent \parbox[position=t]{0.30\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-107.5:3){A}
+			\tkzDefShiftPoint[C](-180:2){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{1.8}{\centi\meter}$,+25pt,}](C,A)
+			\tkzDrawSegment[dim={$\SI{1.3}{\centi\meter}$,-10pt,}](C,B)
+			%		\tkzDrawSegment[dim={$ $,+10pt,}](A,B) 
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](C,A,B)    
+			\tkzLabelAngle[font=\small,pos=.9](C,A,B){$C$}    
+			\tkzMarkSegments[mark=s||](A,B A,C)
+		\end{tikzpicture}   
+	}  
+\end{exercise}
+\begin{exercise}\hfill 
+	
+	\noindent\parbox[position=t]{0.25\textwidth}{\centering
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			
+			\tkzDefPoint(0,0){P} 
+			\tkzDefShiftPoint[P](-5:3.6){Q}
+			\tkzDefShiftPoint[P](71:2.8){R} 
+			\tkzDrawPolygon[line width=1.2pt](P,Q,R) 
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](Q,P,R) 
+			\tkzLabelAngle[font=\footnotesize,pos=.9](Q,P,R){$\ang{76}$} 
+			\tkzLabelSegment[above, font=\scriptsize,sloped](P,R){\SI{7}{\centi\meter}} 
+			\tkzLabelSegment[below, font=\scriptsize](P,Q){\SI{9}{\centi\meter}}
+			
+			\tkzLabelPoints[below left,font=\scriptsize](P)
+			\tkzLabelPoints[below right,font=\scriptsize](Q)
+			\tkzLabelPoints[above,font=\scriptsize](R)    
+		\end{tikzpicture}   
+	}\hfill 
+	\parbox[position=t]{0.7\textwidth}{
+		Dans le triangle $PQR$, $\widehat{QPR}= \ang{76}$, $PQ=\SI{9}{\centi\meter}$ et $PR=\SI{7}{\centi\meter}$.  
+		\begin{enumerate}[label=\alph*), leftmargin=*]
+			\item Calculer $QR$ au millimètre près.
+			\item À l'aide de la loi des sinus, calculer les valeurs approchées à $10^{-1}$ près des angles $\widehat{PQR}$ et $\widehat{PRQ}$. 
+		\end{enumerate}
+		
+		
+	} 
+\end{exercise}
+
+\cleardoublepage
+ 
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\end{document}

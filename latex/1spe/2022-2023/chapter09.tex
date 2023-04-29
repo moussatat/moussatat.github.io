@@ -1,0 +1,1695 @@
+%!TEX program = lualatex 
+%!TEX encoding = UTF-8 Unicode  
+%!TEX root = chapter09.tex  
+\documentclass[main.tex]{subfiles} 
+\begin{document} 
+%----------------------------------------------------------------------------------------
+%	CHAPTER 9
+%----------------------------------------------------------------------------------------
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+}  
+\onehalfspacing 
+\setcounter{chapter}{8}
+\chapter{Produit scalaire}   
+\begin{marginfigure} 
+	\begin{tikzpicture}[scale=0.65]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzInit[xmin=-1, ymin=-1,  xmax=7,ymax=7]  
+		\begin{scope}[dashed] 
+			\tkzGrid 
+		\end{scope}  
+		\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+		\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+		\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$\overrightarrow{\imath}$}, ylabel={$\overrightarrow{\jmath}$}]
+		\tkzDefPoint(0,0){O}  
+		\tkzDefPoint(1,0){I}  
+		\tkzDefPoint(0,1){J}
+		\tkzDefPoint(2,6){P}
+		\tkzLabelPoint[below left, 	font=\scriptsize](O){$O$}
+		\tkzLabelPoint[above right, 	font=\scriptsize](P){$P$}
+		\tkzDefShiftPoint[O](2,1){U0}
+		\tkzDefShiftPoint[U0](4,3){U1}
+		\tkzDrawSegment[->,>=latex,line width=2pt,color=red](U0,U1)
+		\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](O,P)
+		%		\tkzLabelAngle[pos=1.25,font=\scriptsize](U,O,V){$\tfrac{\pi}{4}$}
+		%		\tkzMarkAngle[size=0.6](U,O,V)
+		\tkzLabelSegment[above,sloped, 	font=\scriptsize](U0,U1){$\vv{u}$}
+		\tkzLabelSegment[above,sloped, 	font=\scriptsize](O,P){$\vv{OP}$}
+%		\tkzLabelX[orig=false, 	font=\scriptsize]  
+%		\tkzLabelY[orig=false,  font=\scriptsize] 
+	\end{tikzpicture} 
+	\caption{Décomposition de vecteurs dans la base $(\protect\vv{\imath} ~;~\protect\vv{\jmath})$ \protect\newline $\protect\vv{OP}=2 \protect\vv{\imath}+ 6\protect\vv{\jmath} $\protect\newline 
+		$\protect\vv{u}=4 \protect\vv{\imath}+ 3\protect\vv{\jmath} $
+	}
+\end{marginfigure}
+\begin{definition} Soit trois points non alignés $O$, $I$ et $J$. Les vecteurs $\vv{OI}=\vv{\imath}$ et $\vv{OJ}=\vv{\jmath}$ ne sont pas colinéaires et forment une \textbf{base}.\\
+	Si on muni le plan du repère   $(O~;~I~,~J)$ (noté encore $(O~;~\vv{OI}~,~\vv{OJ})$ ou $(O~;~\vv{\imath}~,~\vv{\jmath})$) alors :
+	
+%	\begin{enumerate}[leftmargin=*,label=\textbullet]
+%		\item Tout point $P$ admet un unique couple de coordonnées $(x_P~;~y_P)$   :
+%		\setlength{\abovedisplayskip}{3pt}
+%		\setlength{\belowdisplayskip}{3pt}
+%		$$\vv{OP}=x_P\vv{\imath}+y_P\vv{\jmath}$$  
+%		\item 
+		\noindent Tout vecteur $\vv{u}$ admet un unique couple de coordonnées $\vv{u}\begin{pmatrix}
+			x\\ y
+		\end{pmatrix}$ dans la \textbf{base} $(\vv{\imath}~;~\vv{\jmath})$ tel que 
+		$\vv{u}=x\vv{\imath}+y\vv{\jmath}$ 
+%	\end{enumerate}  
+\end{definition} 
+\section{Approche géométrique} 
+\begin{definition}[Norme] Soit $\vv{u}$ un vecteur et un représentant $\vv{AB}$. La norme $\norm{\vv{u}}$ est la longueur du segment $[AB]$ :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	$$
+	\norm{\vv{u}}=\norm{\vv{AB}}=AB
+	$$
+\noindent Dans un repère orthonormé $(O~;~\vv{\imath},\vv{\jmath})$, si $\vv{u}\begin{pmatrix}
+	x\\y
+\end{pmatrix}$ alors :
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+$$
+\norm{\vv{u}}=\sqrt{x^2+y^2}
+$$
+\end{definition} 
+\begin{definition}[formule trigonométrique] Pour $\vv{u}$ et $\vv{v}$ deux vecteurs \textbf{non nuls}. Le produit scalaire est le nombre noté $\vv{u}\vdot\vv{v}$ donné par :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	$$
+	\vv{u}\vdot\vv{v}=\norm{\vv{u}}\norm{\vv{v}}\cos(\vv{u},\vv{v})
+	$$
+Si $\vv{v}=\vv{0}$ alors  $\vv{u}\vdot \vv{0}=\vv{0}\vdot \vv{u}=0$.
+\end{definition}
+\begin{remark} Pour l'angle orienté $(\vv{u}~;~\vv{v})$ on prendra des représentants de $\vv{u}$ et de $\vv{v}$ de même origine. 
+\end{remark}
+\begin{example}\label{chapter09:example:ps01} Déterminer $\vv{u}\vdot \vv{v}$ dans la figure ci-contre.
+\begin{marginfigure}[-1cm]
+\begin{tikzpicture}[scale=0.85]
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+	
+	\tkzInit[xmin=-1, ymin=-1,  xmax=5,ymax=4]  
+	\begin{scope}[dashed] 
+		\tkzGrid 
+	\end{scope}  
+	\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+	\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+	\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$\overrightarrow{\imath}$}, ylabel={$\overrightarrow{\jmath}$}]
+	\tkzDefPoint(0,0){O}  
+	\tkzDefPoint(1,0){I}  
+	\tkzDefPoint(0,1){J}
+	\tkzLabelPoint[below left](O){$O$}
+	\tkzDefShiftPoint[O](4,0){U}
+	\tkzDefShiftPoint[O](3,3){V}
+	\tkzDrawSegment[->,>=latex,line width=2pt,color=red](O,U)
+	\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](O,V)
+	\tkzLabelAngle[pos=1.25,font=\small](U,O,V){$\tfrac{\pi}{4}$}
+	\tkzMarkAngle[size=0.6](U,O,V)
+	\tkzLabelSegment[above,fill=white,sloped](O,U){$\vv{u}$}
+	\tkzLabelSegment[above,fill=white,sloped](O,V){$\vv{v}$}
+	\tkzLabelX[orig=false, 	font=\scriptsize]  
+	\tkzLabelY[orig=false,  font=\scriptsize] 
+\end{tikzpicture} 
+\caption{Figure de l'exemple \ref{chapter09:example:ps01}}
+\end{marginfigure} 
+\end{example}
+\begin{proof}[solution]
+ Par lecture graphique $\vv{u}\begin{pmatrix}
+	4\\0
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+	3\\3
+\end{pmatrix}$. \\
+\noindent $\norm{\vv{u}}=4$, $\norm{\vv{v}}=\sqrt{3^2+3^2}=3\sqrt{2}$, et $(\vv{u}~;~\vv{v})=\tfrac{\pi}{4}=\ang{45}$.\\
+Donc 
+$\begin{WithArrows}
+	\vv{u}\vdot\vv{v}& =\norm{\vv{u}}\norm{\vv{v}}\cos(\vv{u},\vv{v})\\
+		&= 4\times 3\sqrt{2}\times \cos\big(\tfrac{\pi}{4}\big) =12
+\end{WithArrows}$
+\end{proof}
+
+\begin{definition}$\overline{OH}=\norm{\vv{u}}\cos(\vv{u},\vv{v})$ est la projection scalaire de $\vv{u}$ le long de $\vv{v}$. 
+\\
+$\overline{OH}$ est une distance algébrique. $\overline{OH}\geqslant 0$ lorsque la mesure principale de l'angle $ (\vv{u},\vv{v})$ est dans $\interval[scaled ]{-\frac{\pi}{2}}{\frac{\pi}{2}}$. $\overline{OH}< 0$ dans les autres cas.
+\end{definition}
+\begin{figure}[!h]
+\begin{tikzpicture}[scale=1]
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+	\tkzDefPoint(0,0){O}
+	\tkzDefShiftPoint[O](25:4){V}
+	\tkzDefShiftPoint[O](80:3){U}
+	\tkzDrawSegments[->,>=latex,line width=2pt](O,U O,V)
+	\tkzLabelSegment[above,sloped, font=\small](O,U){$\vv{u}$}
+	\tkzLabelSegment[below,sloped, font=\small](O,V){$\vv{v}$}
+	\tkzLabelAngle[pos=1,font=\small](V,O,U){$\theta$}
+	\tkzMarkAngle[size=0.8](V,O,U)
+	\tkzDefPointBy[projection = onto O--V](U)
+	\tkzGetPoint{U'}
+	\tkzDrawLine[add=0 and 0.2,dashed](U,U')
+	\tkzDrawSegment[dim={\small  {$\norm{\vv{u}}\cos{\theta}$},-15pt,below=5pt,sloped}](O,U')
+	\tkzLabelPoint[below left,font=\small ](O){$O$}
+	\tkzLabelPoint[above=8pt,font=\small ](U'){$H$}
+	\tkzLabelPoint[above,font=\small ](U){$A$}
+	\tkzLabelPoint[right,font=\small ](V){$B$}
+	\tkzMarkRightAngle(V,U',U)
+	\begin{scope}[xshift=8cm]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		\tkzDefPoint(0,0){O}
+		\tkzDefShiftPoint[O](25:4){V}
+		\tkzDefShiftPoint[O](140:3){U}
+		\tkzDrawSegments[->,>=latex,line width=2pt](O,U O,V)
+		\tkzLabelSegment[above,sloped, font=\small](O,U){$\vv{u}$}
+		\tkzLabelSegment[below,sloped, font=\small](O,V){$\vv{v}$}
+		\tkzLabelAngle[pos=1,font=\small](V,O,U){$\theta$}
+		\tkzMarkAngle[size=0.8](V,O,U)
+		\tkzDefPointBy[projection = onto O--V](U)
+		\tkzGetPoint{U'}
+		\tkzDrawLine[add=0 and 0.2,dashed](U,U')
+		\tkzDrawSegment[dim={\small {$\norm{\vv{u}}\cos{\theta}$},20pt,below=5pt,sloped}](O,U')
+		\tkzLabelPoint[below,font=\small ](O){$O$}
+		\tkzLabelPoint[left,font=\small ](U'){$H$}
+		\tkzLabelPoint[above,font=\small ](U){$A$}
+		\tkzLabelPoint[right,font=\small ](V){$B$}
+		\tkzMarkRightAngle(V,U',U)
+	\end{scope}
+\end{tikzpicture} 
+\caption{ $H$ est le projeté orthogonal de $A$ sur $(O,B)$\protect\newline 
+\textbf{à gauche}
+ $\protect\overline{OH}\geqslant0$ avec la mesure principale de $\theta$ est dans $\interval[scaled ]{-\frac{\pi}{2}}{\frac{\pi}{2}}$
+  \protect\newline
+ \textbf{à droite}
+ $\protect\overline{OH}\leqslant0$
+}
+\end{figure}
+\begin{definition}[formule du projeté]
+Soit $O$, $A$ et $B$ trois points du plan. Si $H$ est projeté orthogonal de $A$ sur $(OB)$, alors :
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+$$
+\vv{OA}\vdot \vv{OB}=\overline{OH} \times \overline{OB}  
+$$
+\end{definition}
+\begin{example} Retrouver la valeur de $\vv{u}\vdot\vv{v}$ de l'exemple \ref{chapter09:example:ps01}.
+\end{example}
+\begin{example} On peut prendre le projeté scalaire d'un vecteur $\vv{u}$ le long de $\vv{v}$ même si les représentants choisis sont d'origine différentes :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+$$
+	\vv{AB}\vdot\vv{CD} =\vv{AB}\vdot \vv{C'D'}=\overline{AB}\times \overline{C'D'}
+$$
+\end{example}
+
+\begin{figure}[!h]
+\begin{tikzpicture}[scale=1]
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.2 and .2]  
+	\def\u{20}
+	\def\v{45}
+	\tkzDefPoint(0,0){A}
+	\tkzDefShiftPoint[A](\u:4){B}
+	\tkzDefPoint(0.5,2){C}
+	\tkzDefShiftPoint[C](\v:2.5){D}
+	\tkzDrawLine[line width=0.5pt](A,B)
+	\tkzDrawSegments[->,>=latex,line width=2pt](A,B C,D)
+	\tkzLabelPoints(A,B)
+	\tkzLabelPoints[above](C,D)
+	\tkzDrawPoints(A,B,C,D)
+	\tkzDefPointBy[projection = onto A--B](C)
+	\tkzGetPoint{C'}
+	\tkzDefPointBy[projection = onto A--B](D)
+	\tkzGetPoint{D'}
+	\tkzDrawSegments[dashed, line width=1pt](C,C' D,D')
+	\tkzMarkRightAngle[size=0.2](C,C',A)
+	\tkzMarkRightAngle[size=0.2](D,D',A)
+	\tkzLabelPoints(C',D')
+	\tkzLabelSegment[below,sloped, font=\small](A,B){$\vv{AB}$}
+	\tkzLabelSegment[above,sloped, font=\small](C,D){$\vv{CD}$} 
+	
+%	\tkzDefLine[parallel=through C](A,B) \tkzGetPoint{E} 
+	\tkzDefShiftPoint[C](\u:2.5){E}
+	\tkzDrawLine[line width=0.4pt,dashed](C,E)
+	\tkzMarkAngle[size=0.8](E,C,D)
+	\tkzLabelAngle[pos=1](E,C,D){$\theta$}
+%	\tkzDrawSegment[dim={\small  {$\norm{\vv{u}}\cos{\theta}$},-15pt,below=5pt,sloped}](O,U') 
+\begin{scope}[xshift=7cm]
+	\def\u{20}
+	\def\v{135}
+	\tkzDefPoint(0,0){A}
+	\tkzDefShiftPoint[A](\u:4){B}
+	\tkzDefPoint(0.9,2){C}
+	\tkzDefShiftPoint[C](\v:2.5){D}
+	\tkzDrawLine[line width=0.5pt](A,B)
+	\tkzDrawSegments[->,>=latex,line width=2pt](A,B C,D)
+	\tkzLabelPoints(A,B)
+	\tkzLabelPoints[above](C,D)
+	\tkzDrawPoints(A,B,C,D)
+	\tkzDefPointBy[projection = onto A--B](C)
+	\tkzGetPoint{C'}
+	\tkzDefPointBy[projection = onto A--B](D)
+	\tkzGetPoint{D'}
+	\tkzDrawSegments[dashed, line width=1pt](C,C' D,D')
+	\tkzMarkRightAngle[size=0.2](C,C',A)
+	\tkzMarkRightAngle[size=0.2](D,D',A)
+	\tkzLabelPoints(C',D')
+	\tkzLabelSegment[below,sloped, font=\small](A,B){$\vv{AB}$}
+	\tkzLabelSegment[above,sloped, font=\small](C,D){$\vv{CD}$} 
+	
+	%	\tkzDefLine[parallel=through C](A,B) \tkzGetPoint{E} 
+	\tkzDefShiftPoint[C](\u:2.5){E}
+	\tkzDrawLine[line width=0.4pt,dashed](C,E)
+	\tkzMarkAngle[size=0.8](E,C,D)
+	\tkzLabelAngle[pos=1](E,C,D){$\theta$}
+\end{scope}
+\end{tikzpicture} 
+\caption{$C'$ et $D'$ sont les projetés orthogonaux de $C$ et $D$ perpendiculairement sur la droite $(AB)$. \protect\newline 
+Le produit scalaire $\protect\vv{AB}\vdot\protect\vv{CD} = \overline{AB}\times \overline{C'D'}$ est (à gauche) positif si $\protect\vv{C'D'}$ est du même sens que $\protect\vv{AB}$ ,(à droite) et négatif sinon .
+}
+\end{figure}
+\marginnote{
+	\begin{tBox}[leftline=false]
+		pas de règle de l'\og équation produit scalaire nul \fg !
+	\end{tBox}
+}[0em]
+\begin{definition} Deux vecteurs $\vv{u}$ et $\vv{v}$ sont \textbf{orthogonaux} si $\vv{u}\vdot \vv{v}=0$. 
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+$$
+\vv{u}\vdot\vv{v}=0 \quad \iff 
+\quad
+\vv{u}=\vv{0}
+\quad \text{ou} \quad 
+\vv{v}=\vv{0}
+\quad \text{ou} \quad 
+(\vv{u}~;~\vv{v})=\pm \tfrac{\pi}{2}+2k\pi  
+%\begin{cases}
+%	\text{soit} \quad \vv{u}=\vv{0} \quad \text{ou} \quad \vv{v}=\vv{0}\\ 
+%	\text{soit} \quad   (\vv{u}~;~\vv{v})=\pm \tfrac{\pi}{2}+2k\pi  
+%\end{cases}
+$$ 
+\end{definition}
+\begin{proof}   $\begin{WithArrows}
+		0&=\vv{u}\vdot\vv{v} \\
+		\iff 0& = \norm{\vv{u}}\norm{\vv{v}}\cos(\vv{u},\vv{v})\\
+		\iff \quad &  \norm{\vv{u}} =0 \quad \text{ou} \quad \norm{\vv{v}} =0 \quad \text{ou} \quad \cos(\vv{u},\vv{v}) =0
+	\end{WithArrows}$
+\end{proof}
+\begin{notation} $\vv{u}$ et $\vv{v}$ orthogonaux s'écrit $\vv{u}\perp \vv{v}$ 
+\end{notation}
+
+
+\begin{theorem} Pour tous vecteurs $\vv{u}$, $\vv{v}$ , $\vv{w}$ et $k\in\mathbb{R}$  :
+	\begin{enumerate}[label={(PS\arabic*)},leftmargin=*]
+		\item \label{PS1-symetrie}  $\vv{u}\vdot\vv{v}=\vv{v}\vdot\vv{u}$
+		\marginnote{
+			\begin{tBox}[leftline=false]
+				produit scalaire symétrique
+			\end{tBox}
+		}[-2em]
+		\item \label{PS2-positive}  $\vv{u}^2=\vv{u}\vdot \vv{u}=\norm{\vv{u}}^2\geqslant 0$.
+		\marginnote{
+			\begin{tBox}[leftline=false]
+				carré scalaire est positif.
+			\end{tBox}
+		}[-2em]
+		\item \label{PS3-linear}   $   (k\vv{u})\vdot \vv{v}=k (\vv{u}\vdot \vv{v})=\vv{u}\vdot (k \vv{v})$.
+		\marginnote{
+			\begin{tBox}[leftline=false]
+				pas d'ambiguïté dans $k\vv{u}\vdot\vv{v}$
+			\end{tBox}
+		}[-2em]
+		\item \label{PS4-distributivite} $ \vv{u}\vdot (\vv{v}+\vv{w})=\vv{u}\vdot \vv{v}+\vv{u}\vdot \vv{w}$
+		\marginnote{
+			\begin{tBox}[leftline=false]
+				distributivité sur l'addition
+			\end{tBox}
+		}[-2em]
+	\end{enumerate}
+\end{theorem}
+\begin{proof}\hfill 
+	\begin{enumerate}[label={(PS\arabic*)},leftmargin=*]
+		\item $(\vv{v}~;~\vv{u})=-(\vv{u}~;~\vv{v})$, et la fonction $\cos$ est paire, donc $\cos(\vv{u}~;~\vv{v})=\cos(\vv{v}~;~\vv{u})$.
+		\item 	$\vv{u}\vdot\vv{u}=\norm{\vv{u}}\norm{\vv{u}}\cos(\vv{u},\vv{u})=\norm{\vv{u}}^2\cos(0)=\norm{\vv{u}}^2$
+\item  Illustration, figure \ref{chapter09:figure:ps3} 
+\begin{figure}[!h]
+	\begin{tikzpicture}[scale=1]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.2 and .1]  
+		\def\u{20}
+		\def\v{45}
+		\tkzDefPoint(0,0){A}
+		\tkzDefShiftPoint[A](\u:4.8){B}
+		\tkzDefPoint(0.4,2){C}
+		\tkzDefShiftPoint[C](\v:2.0){D}
+		\tkzDefShiftPoint[C](\v:3.2){E}
+		\tkzDrawLine[line width=0.5pt](A,B)
+		\tkzDrawSegments[->,>=latex,line width=2pt](A,B C,D C,E)
+%		\tkzDrawSegment[dim={\small  {$\vv{CE}$},-2pt,below=5pt,->, >=latex, sloped}](C,E) 
+		\tkzLabelPoints(A,B)
+		\tkzLabelPoints[above left](C,D,E)
+		\tkzDrawPoints(A,B,C,D,E)
+		\tkzDefPointBy[projection = onto A--B](C)
+		\tkzGetPoint{C'}
+		\tkzDefPointBy[projection = onto A--B](D)
+		\tkzGetPoint{D'}
+		\tkzDefPointBy[projection = onto A--B](E)
+		\tkzGetPoint{E'}
+		\tkzDrawSegments[dashed, line width=1pt](C,C' D,D' E,E')
+		\tkzMarkRightAngle[size=0.2](C,C',A)
+		\tkzMarkRightAngle[size=0.2](D,D',A)
+		\tkzMarkRightAngle[size=0.2](E,E',A)
+		\tkzLabelPoints(C',D',E')
+		\tkzLabelSegment[above,sloped, font=\small](A,B){$\vv{AB}$}
+		\tkzLabelSegment[below,sloped, font=\small](C,E){$\vv{CE}$} 
+		\tkzLabelSegment[above,sloped, font=\small](C,D){$\vv{CD}$}  
+		%	\tkzDefLine[parallel=through C](A,B) \tkzGetPoint{E} 
+		\tkzDefShiftPoint[C](\u:2.5){E}
+		\tkzDrawLine[line width=0.4pt,dashed](C,E)
+			\tkzMarkAngle[size=0.8](E,C,D)
+			\tkzLabelAngle[pos=1](E,C,D){$\theta$}
+		%	\tkzDrawSegment[dim={\small  {$\norm{\vv{u}}\cos{\theta}$},-15pt,below=5pt,sloped}](O,U')  
+	\begin{scope}[xshift=7cm,yshift=1cm]
+			\def\u{20}
+	\def\v{45}
+	\tkzDefPoint(0,0){A}
+	\tkzDefShiftPoint[A](\u:4.3){B}
+	\tkzDefPoint(0.4,2.3){C}
+	\tkzDefShiftPoint[C](\v:2.0){D}
+	\tkzDefShiftPoint[C]({\v+180}:2.9){E}
+	\tkzDrawLine[line width=0.5pt](A,B)
+	\tkzDrawSegments[->,>=latex,line width=2pt](A,B C,D C,E)
+	%		\tkzDrawSegment[dim={\small  {$\vv{CE}$},-2pt,below=5pt,->, >=latex, sloped}](C,E) 
+	\tkzLabelPoints(A,B)
+	\tkzLabelPoints[above left](C,D,E)
+	\tkzDrawPoints(A,B,C,D,E)
+	\tkzDefPointBy[projection = onto A--B](C)
+	\tkzGetPoint{C'}
+	\tkzDefPointBy[projection = onto A--B](D)
+	\tkzGetPoint{D'}
+	\tkzDefPointBy[projection = onto A--B](E)
+	\tkzGetPoint{E'}
+	\tkzDrawLine[line width=0.5pt](A,E')
+	\tkzDrawSegments[dashed, line width=1pt](C,C' D,D' E,E')
+	\tkzMarkRightAngle[size=0.2](C,C',A)
+	\tkzMarkRightAngle[size=0.2](D,D',A)
+	\tkzMarkRightAngle[size=0.2](E,E',A)
+	\tkzLabelPoints(C',D',E')
+	\tkzLabelSegment[above,sloped, font=\small](A,B){$\vv{AB}$}
+	\tkzLabelSegment[below,sloped, font=\small](C,E){$\vv{CE}$} 
+	\tkzLabelSegment[above,sloped, font=\small](C,D){$\vv{CD}$}  
+	%	\tkzDefLine[parallel=through C](A,B) \tkzGetPoint{E} 
+	\tkzDefShiftPoint[C](\u:2.5){F}
+	\tkzDrawLine[line width=0.4pt,dashed](C,F)
+	\tkzMarkAngle[size=0.8](F,C,E)
+	\tkzLabelAngle[pos=1](F,C,E){$\theta+\pi$}
+	\end{scope}
+	\end{tikzpicture}  
+	\caption{$k\protect\vv{CD}=\protect\vv{CE}$. \protect\newline
+		(\textbf{à gauche})  $k>0$, \protect\newline 
+		alors $(\protect\vv{AB}~;~k\protect\vv{CD})=(\protect\vv{AB}~;~\protect\vv{CD})=\theta$ \protect\newline
+		(\textbf{à droite}) 
+		 $k<0$ \protect\newline
+		alors 
+		$(\protect\vv{AB}~;~k\protect\vv{CD})= \theta +\pi$.
+	}
+\label{chapter09:figure:ps3}
+\end{figure} 
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+$$\begin{WithArrows}[format=rLrL]
+	\vv{AB}\vdot (k\vv{CD}) &  
+	=\norm{\vv{AB}}\times \norm{k\vv{CD}}\cos(\vv{AB}~;~k\vv{CD}) &&\\
+	& =\norm{\vv{AB}}\times\abs{k} \norm{\vv{CD}}\cos(\vv{AB}~;~\vv{CE}) &&\\
+	\text{si $k>0$}	 
+	& = \norm{\vv{AB}}\times k \norm{\vv{CD}}\cos(\theta)
+	&	\text{si $k<0$}	
+	& = \norm{\vv{AB}}\times (-k) \norm{\vv{CD}}\cos(\theta + \pi) \\
+	& = k \vv{AB}\vdot \vv{CD} & 
+	& = \norm{\vv{AB}}\times (-k) \norm{\vv{CD}}\times (-1)\cos(\theta)\\
+	&&	& = k \vv{AB}\vdot \vv{CD}
+\end{WithArrows}$$
+	\item On se ramène au cas de la  figure \ref{chapter09:figure:ps4} 
+\begin{figure}[!h]
+\begin{tikzpicture}[scale=1]
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.2 and .2]  
+	\def\u{20}
+	\def\v{45}
+	\tkzDefPoint(0,0){A}
+	\tkzDefShiftPoint[A](\u:4.5){B}
+	\tkzDefPoint(0.5,2){C}
+	\tkzDefShiftPoint[C](\v:2.5){D}
+	\tkzDrawLine[line width=0.5pt](A,B)
+	\tkzDrawSegments[->,>=latex,line width=2pt](A,B C,D A,C)
+	\tkzLabelPoints(A,B)
+	\tkzLabelPoints[above](C,D)
+	\tkzDrawPoints(A,B,C,D)
+	\tkzDefPointBy[projection = onto A--B](C)
+	\tkzGetPoint{C'}
+	\tkzDefPointBy[projection = onto A--B](D)
+	\tkzGetPoint{D'}
+	\tkzDrawSegments[dashed, line width=1pt](C,C' D,D')
+	\tkzMarkRightAngle[size=0.2](C,C',A)
+	\tkzMarkRightAngle[size=0.2](D,D',A)
+	\tkzLabelPoints(C',D')
+	\tkzLabelSegment[below,sloped, font=\small](A,B){$\vv{AB}$}
+	\tkzLabelSegment[above,sloped, font=\small](A,C){$\vv{AC}$} 
+	\tkzLabelSegment[above,sloped, font=\small](C,D){$\vv{CD}$}  
+	%	\tkzDefLine[parallel=through C](A,B) \tkzGetPoint{E} 
+	\tkzDefShiftPoint[C](\u:2.5){E}
+	\tkzDrawLine[line width=0.4pt,dashed](C,E)
+%	\tkzMarkAngle[size=0.8](E,C,D)
+%	\tkzLabelAngle[pos=1](E,C,D){$\theta$}
+	%	\tkzDrawSegment[dim={\small  {$\norm{\vv{u}}\cos{\theta}$},-15pt,below=5pt,sloped}](O,U')  
+	\begin{scope}[xshift=6cm]
+		\def\u{20}
+		\def\v{45}
+		\tkzDefPoint(0,0){A}
+		\tkzDefShiftPoint[A](\u:4.5){B}
+		\tkzDefPoint(0.5,2){C}
+		\tkzDefShiftPoint[C](\v:2.5){D}
+		\tkzDrawLine[line width=0.5pt](A,B)
+		\tkzDrawSegments[->,>=latex,line width=2pt](A,B A,D) 
+		\tkzLabelPoints(A,B)
+		\tkzLabelPoints[above](D)
+		\tkzDrawPoints(A,B,D)
+%		\tkzDefPointBy[projection = onto A--B](C)
+%		\tkzGetPoint{C'}
+		\tkzDefPointBy[projection = onto A--B](D)
+		\tkzGetPoint{D'}
+		\tkzDrawSegments[dashed, line width=1pt](D,D')
+%		\tkzMarkRightAngle[size=0.2](C,C',A)
+		\tkzMarkRightAngle[size=0.2](D,D',A)
+		\tkzLabelPoints(C',D')
+		\tkzLabelSegment[below,sloped, font=\small](A,B){$\vv{AB}$}
+		\tkzLabelSegment[above,sloped, font=\small](A,D){$\vv{AD}$}   
+		%	\tkzDrawSegment[dim={\small  {$\norm{\vv{u}}\cos{\theta}$},-15pt,below=5pt,sloped}](O,U')  
+	\end{scope} 
+\end{tikzpicture} 
+\caption{
+\textbf{
+cas où $\overline{AC'}$, $\overline{C'D'}$ et $\overline{AB}$ sont de même signe\\	
+(à gauche)}\\
+$\begin{WithArrows}
+	\protect\vv{AB}\vdot & \protect\vv{AC}+\protect\vv{AB}\vdot \protect\vv{CD}\\ 
+	& = \overline{AC'}\times \overline{AB} + \overline{C'D'}\times \overline{AB} \\
+	& = (\overline{AC'} + \overline{C'D'})\times \overline{AB} \\
+	& = \overline{AD}\times \overline{AB}
+\end{WithArrows}$ \newline
+\textbf{(à droite)} \\ $\begin{WithArrows}
+	\protect\vv{AB}\vdot \protect\vv{AD}  
+	& = \overline{AD}\times \overline{AB}
+\end{WithArrows}$
+} 
+\label{chapter09:figure:ps4}
+\end{figure}
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+$$\vv{AB}\vdot\vv{AC}+\vv{AB}\vdot\vv{CD}=\vv{AB}\vdot (\vv{AC}+\vv{CD})=\vv{AB}\vdot \vv{AD}$$
+\end{enumerate}
+\end{proof} 
+
+\section{Approche analytique}
+\begin{eBox}
+	On se place dans un plan muni d'un repère \textbf{orthonormé} $(O~;~\vv{\imath}~,~\vv{\jmath})$ :
+\end{eBox} 
+\begin{enumerate}[label=\textbullet, leftmargin=*]
+\item $\norm{\vv{\imath}}=1$ et $\norm{\vv{\jmath}}=1$ 
+\item $\vv{\imath}\vdot \vv{\jmath}=\vv{\jmath}\vdot \vv{\imath}=0$ car $\vv{i}\perp \vv{j}$.
+\end{enumerate}
+\begin{definition}[analytique du produit scalaire dans repère orthonormé] Soit les vecteurs $\vv{u}\begin{psmallmatrix}
+		x\\ \\y
+	\end{psmallmatrix}=x\vv{\imath}+y\vv{\jmath} $ et $\vv{v}\begin{psmallmatrix}
+		x'\\ \\y'
+	\end{psmallmatrix}=x'\vv{\imath}+y'\vv{\jmath} $.
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+$$
+\vv{u}\vdot\vv{v}=xx'+yy'
+$$
+\end{definition}
+\begin{proof} $\begin{WithArrows}
+		\vv{u}\vdot\vv{v}&=(x\vv{\imath}+y\vv{\jmath})\vdot (x'\vv{\imath}+y'\vv{\jmath}) \Arrow{d'après \ref{PS3-linear} et \ref{PS4-distributivite}   } \\
+			& = xx'\vv{\imath}\vdot\vv{\imath}+xy'\vv{\imath}\vdot\vv{\jmath}
+			+yx'\vv{\jmath}\vdot\vv{\imath} + yy'\vv{\jmath}\vdot\vv{\jmath} \\
+			& = xx'+ yy'
+	\end{WithArrows}$
+\end{proof}
+\begin{example} Calculer $\vv{u}\vdot\vv{v}$ pour $\vv{u}\begin{psmallmatrix}
+		1\\ \\1
+	\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+	3\\ \\2
+	\end{psmallmatrix}$.
+\end{example}
+\begin{proof}[solution] $\vv{u}\vdot\vv{v}=1\times 3+ 1\times 2=5$.
+\end{proof}
+\begin{example} Montrer que  $\vv{u}\begin{psmallmatrix}
+		3\\ \\2
+	\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+		-1\\ \\ \tfrac{3}{2}
+	\end{psmallmatrix}$ sont orthogonaux.
+\end{example}
+\begin{proof}[solution] $\vv{u}\vdot\vv{v}=3\times (-1)+ 2\times \tfrac{3}{2}=0$.
+\end{proof}
+\begin{property}[calculer un angle]  $\vv{u}$ et $\vv{v}$ sont deux vecteurs non nuls. Si $\theta=(\vv{u}~;~\vv{v})$ alors :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	$$
+	\cos(\theta)=\frac{\vv{u}\vdot\vv{v}}{\norm{\vv{u}}\norm{\vv{v}}}
+	$$
+\end{property}
+\begin{example}Soit $\vv{u}$ et $\vv{v}$ tel que $\norm{\vv{u}}=2$, $\norm{\vv{v}}=\sqrt{3}$ et $\vv{u}\vdot\vv{v}=\sqrt{6}$. Déterminer $(\vv{u}~;~\vv{v})$
+\end{example}
+\begin{proof}[solution] $\begin{WithArrows} 
+	\cos (\vv{u}~;~\vv{v})&=\frac{\vv{u}\vdot\vv{v}}{\norm{\vv{u}}\norm{\vv{v}}} =\frac{\sqrt{6}}{2\sqrt{3}}=\frac{\sqrt{2}}{2} \\
+	(\vv{u}~;~\vv{v})&=\tfrac{\pi}{4}+2k\pi \quad\text{ou}\quad -\tfrac{\pi}{4}+2k'\pi
+	\end{WithArrows}$
+\end{proof}
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+}  
+\onehalfspacing 
+\subsection{Exercices} 
+
+\begin{exercise}[\cancel{\faCalculator}] À l'aide de la formule trigonométrique, déterminer pour  $\vv{u}\vdot \vv{v}$ chaque cas le produit scalaire demandé :
+	\begin{enumerate}[label=\arabic*),leftmargin=*]
+	\item $\norm{\vv{u}}=5$, $\norm{\vv{v}}=\sqrt{3}$ et $(\vv{u}~;~\vv{v}) =\ang{135}$.  
+	\item $\norm{\vv{u}}=2$, $\norm{\vv{v}}=2$ et $(\vv{u}~;~\vv{v}) =\ang{-60}$.  
+	\item $\norm{\vv{u}}=2$, $\norm{\vv{v}}=2$ et $(\vv{u}~;~\vv{v})=\ang{120}$.
+	\end{enumerate}
+\end{exercise} 
+\begin{exercise} À l'aide de la formule du projeté, déterminer les produits scalaires suivants :\\
+\noindent 
+\begin{tikzpicture}[scale=0.85]
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+\tkzInit[xmin=-5, ymin=-2,  xmax=7,ymax=5]  
+\begin{scope}[dashed] 
+	\tkzGrid 
+\end{scope}  
+\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$\overrightarrow{\imath}$}, ylabel={$\overrightarrow{\jmath}$}]
+\tkzLabelX[orig=false, 	font=\scriptsize]  
+\tkzLabelY[orig=false,  font=\scriptsize] 
+\tkzDefPoint(0,0){O}  
+\tkzDefPoint(1,0){I}  
+\tkzDefPoint(0,1){J}
+\tkzLabelPoint[below left](O){$O$}
+\tkzDefShiftPoint[O](4,0){A}
+\tkzDefShiftPoint[O](2,4){B}
+\tkzLabelPoints[above,font=\small](A,B)
+\tkzDrawSegment[->,>=latex,line width=2pt,color=red](O,A)
+\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](O,B)
+\tkzDefPoint(3,2){C}
+\tkzDefShiftPoint[C](2,2){D}
+\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](C,D)
+\tkzLabelPoints[right,font=\small](C,D)
+\tkzDefPoint(4,5){E}
+\tkzDefShiftPoint[E](1,-3){F}
+\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](E,F)
+\tkzLabelPoints[left,font=\small](E,F)
+\tkzDefPoint(7,1){G}
+\tkzDefShiftPoint[G](-2,-3){H}
+\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](G,H)
+\tkzLabelPoints[above left, font=\small](G,H)
+\tkzDefPoint(4,-1){K}
+\tkzDefShiftPoint[K](-3,0){L}
+\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](K,L)
+\tkzLabelPoints[font=\small](K,L) 
+\tkzDefPoint(0,3){M}
+\tkzDefShiftPoint[M](-2,2){N}
+\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](M,N)
+\tkzLabelPoints[font=\small](M,N) 
+\tkzDefPoint(-4,4){U}
+\tkzDefShiftPoint[U](0,-3){V}
+\tkzDrawSegment[->,>=latex,line width=2pt,color=red](U,V)
+\tkzLabelPoints[left,font=\small](U,V)
+\tkzDefPoint(-3,-1){P}
+\tkzDefShiftPoint[P](0,2){Q}
+\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](P,Q)
+\tkzLabelPoints[right,font=\small](P,Q)
+\tkzDefShiftPoint[V](2,1){R}
+\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](V,R)
+\tkzLabelPoints[right,font=\small](R) 
+% 		\tkzLabelAngle[pos=1.25,font=\small](U,O,V){$\tfrac{\pi}{4}$}
+% 		\tkzMarkAngle[size=0.6](U,O,V)
+% 		\tkzLabelSegment[above,fill=white,sloped](O,U){$\vv{u}$}
+% 		\tkzLabelSegment[above,fill=white,sloped](O,V){$\vv{v}$}
+\end{tikzpicture}  
+\parbox[b]{0.4\linewidth}{
+\begin{multicols}{2}
+\begin{spacing}{2}
+	\begin{enumerate}[label={},leftmargin=*]
+		\item $\vv{OA}\vdot\vv{OB}=$\dotfill
+		\item $\vv{OA}\vdot\vv{OA}=$\dotfill 
+		\item $\vv{OA}\vdot\vv{CD}=$\dotfill
+		\item $\vv{OA}\vdot\vv{EF}=$\dotfill
+		\item $\vv{OA}\vdot\vv{GH}=$\dotfill
+		\item $\vv{OA}\vdot\vv{MN}=$\dotfill
+		\item $\vv{OA}\vdot\vv{UV}=$\dotfill 
+		\item $\vv{OA}\vdot \vv{KL}=$\dotfill 
+		\item $\vv{UV}\vdot\vv{PQ}=$\dotfill 
+		\item $\vv{MN}\vdot \vv{CD}=$\dotfill 
+		\item $\vv{OB}\vdot \vv{KL}=$\dotfill 
+		\item $\vv{OB}\vdot \vv{OB}=$\dotfill 
+		\item $\vv{OB}\vdot \vv{PQ}=$\dotfill 
+		\item $\vv{OB}\vdot \vv{UV}=$\dotfill 
+	\end{enumerate}
+\end{spacing}
+\end{multicols}
+}  
+\end{exercise}
+\begin{exercise}  À l'aide de la formule du projeté, déterminer les produits scalaires suivants :\\
+\noindent 
+\begin{tikzpicture}[scale=0.85]
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+\tkzInit[xmin=0, ymin=0,  xmax=8,ymax=5]  
+\begin{scope}[dashed] 
+	\tkzGrid 
+\end{scope}  
+%\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+%\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$1$}, ylabel={$1$}]
+%\tkzLabelX[orig=false, 	font=\scriptsize]  
+%\tkzLabelY[orig=false,  font=\scriptsize] 
+\tkzDefPoint(0,0){A}  
+\tkzDefPoint(4,0){B}  
+\tkzDefPoint(8,0){C} 
+\tkzDefPoint(8,4){D} 
+\tkzDefPoint(4,4){E} 
+\tkzDefPoint(4,2){F} 
+\tkzDefPoint(0,2){G} 
+\tkzDefPoint(2,5){H} 
+\tkzDefPoint(2,2){I} 
+\tkzDrawPoints(A,B,C,D,E,F,G,H)
+\tkzLabelPoints[above,font=\small](H,E,D)
+\tkzLabelPoints[below,font=\small](A,B,C,I)
+\tkzLabelPoints[left,font=\small](G)
+\tkzLabelPoints[right,font=\small](F)
+\tkzDrawSegments[line width=1.2pt](A,B B,C C,D D,E E,B F,G G,H H,F G,A) 
+\end{tikzpicture}  
+\parbox[b]{0.6\linewidth}{
+%\begin{multicols}{3}
+	\begin{spacing}{2}
+		\begin{enumerate}[label={},leftmargin=*]
+			\item $\vv{AB}\vdot\vv{AD}=\dotfill$ 
+			\item $\vv{BC}\vdot\vv{BI}=\dotfill$
+			\item $\vv{BH}\vdot\vv{CA}=\dotfill$ 
+			\item $\vv{CD}\vdot\vv{FH}=\dotfill$ 
+			\item $\vv{HG}\vdot\vv{BC}=\dotfill$ 
+			\item $\vv{GI}\vdot\vv{FD}=\dotfill$ 
+		\end{enumerate}
+	\end{spacing}
+%\end{multicols}
+}    
+\end{exercise}
+\begin{exercise} On considère le rectangle $ABCD$  et les points $I$, $J$, $K$ et $L$ milieux respectifs des côtés $[AB]$, $[BC]$, $[CD]$ et $[DA]$. Exprimer en fonction de $a=AI$ et $b=AL$ les produits scalaires suivants :\\
+\noindent 
+\begin{tikzpicture}[scale=1]
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+%	\tkzInit[xmin=-5, ymin=-2,  xmax=7,ymax=5]  
+%	\begin{scope}[dashed] 
+%		\tkzGrid 
+%	\end{scope}  
+%	\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+%	\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+%	\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$\overrightarrow{\imath}$}, ylabel={$\overrightarrow{\jmath}$}]
+%	\tkzLabelX[orig=false, 	font=\scriptsize]  
+%	\tkzLabelY[orig=false,  font=\scriptsize] 
+	\def\a{2}
+	\def\b{2.5}
+	\tkzDefPoint(0,0){A}  
+	\tkzDefPoint(\a,0){B}  
+	\tkzDefPoint(\a,\b){C} 
+	\tkzDefPoint(0,\b){D}
+	\tkzDrawPolygon[line width=2pt](A,B,C,D)
+	\tkzDefPoint(\a/2,0){I}
+	\tkzDefPoint(\a,\b/2){J}
+	\tkzDefPoint(\a/2,\b){K}
+	\tkzDefPoint(0,\b/2){L}
+	\tkzDrawPoints(I,J,K,L)
+	\tkzMarkSegments[mark=s||,](A,I I,B C,K K,D)
+	\tkzMarkSegments[mark=s|,](A,L L,D C,J J,B)
+	\tkzDrawSegment[dim={\small  {$a$},-10pt,below=5pt}](A,I)
+	\tkzDrawSegment[dim={\small  {$b$},10pt,left=5pt}](A,L)
+	\tkzLabelPoints[above, font=\small](K,I)
+	\tkzLabelPoints[right, font=\small](L,J)
+	\tkzLabelPoints[below left, font=\small](A)
+	\tkzLabelPoints[below right, font=\small](B)
+	\tkzLabelPoints[above right, font=\small](C)
+	\tkzLabelPoints[above left, font=\small](D)
+\end{tikzpicture}
+\parbox[b]{0.8\linewidth}{
+\begin{multicols}{3}
+	\begin{spacing}{2}
+		\begin{enumerate}[label={},leftmargin=*]
+			\item $\vv{AI}\vdot\vv{AI}=$\dotfill 
+			\item $\vv{IA}\vdot\vv{IB}=$\dotfill 
+			\item $\vv{IL}\vdot\vv{IL}=$\dotfill 
+			\item $\vv{AB}\vdot\vv{AK}=$\dotfill
+			\item $\vv{AC}\vdot\vv{AB}=$\dotfill 
+			\item $\vv{AB}\vdot\vv{BD}=$\dotfill  
+			\item $\vv{AB}\vdot\vv{CD}=$\dotfill  
+			\item $\vv{JL}\vdot\vv{AC}=$\dotfill  
+			\item $\vv{DJ}\vdot\vv{IK}=$\dotfill
+%			
+%			\item $\vv{DB}\vdot\vv{AK}=$\dotfill  
+%			\item $\vv{IL}\vdot\vv{IC}=$\dotfill 
+		\end{enumerate}
+	\end{spacing}
+\end{multicols}
+}   
+\end{exercise} 
+\begin{exercise} Complétez pour calculer les produits scalaires demandés :\\
+	\noindent 
+	\begin{tikzpicture}[scale=1]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		%	\tkzInit[xmin=-5, ymin=-2,  xmax=7,ymax=5]  
+		%	\begin{scope}[dashed] 
+			%		\tkzGrid 
+			%	\end{scope}  
+		%	\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+		%	\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+		%	\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$\overrightarrow{\imath}$}, ylabel={$\overrightarrow{\jmath}$}]
+		%	\tkzLabelX[orig=false, 	font=\scriptsize]  
+		%	\tkzLabelY[orig=false,  font=\scriptsize] 
+		\def\a{2}
+		\def\b{2.5}
+		\tkzDefPoint(0,0){A}  
+		\tkzDefPoint(\a,0){B}  
+		\tkzDefPoint(\a,\b){C} 
+		\tkzDefPoint(0,\b){D}
+		\tkzDrawPolygon[line width=2pt](A,B,C,D)
+		\tkzDefPoint(\a/2,0){I}
+		\tkzDefPoint(\a,\b/2){J}
+		\tkzDefPoint(\a/2,\b){K}
+		\tkzDefPoint(0,\b/2){L}
+		\tkzDrawPoints(I,J,K,L)
+		\tkzMarkSegments[mark=s||,](A,I I,B C,K K,D)
+		\tkzMarkSegments[mark=s|,](A,L L,D C,J J,B)
+		\tkzDrawSegment[dim={\small  {$a$},-10pt,below=5pt}](A,I)
+		\tkzDrawSegment[dim={\small  {$b$},10pt,left=5pt}](A,L)
+		\tkzLabelPoints[above, font=\small](K,I)
+		\tkzLabelPoints[right, font=\small](L,J)
+		\tkzLabelPoints[below left, font=\small](A)
+		\tkzLabelPoints[below right, font=\small](B)
+		\tkzLabelPoints[above right, font=\small](C)
+		\tkzLabelPoints[above left, font=\small](D)
+	\end{tikzpicture} 
+\parbox[b]{0.8\linewidth}{ 
+\begin{spacing}{2}
+\parbox{0.45\linewidth}{
+$\begin{WithArrows}
+	\vv{AC}\vdot \vv{BD}&=\vv{AC}\vdot (\vv{B\ldots}+\vv{\ldots D}) \\
+	&= \vv{AC}\vdot \ldots\ldots\ldots +\vv{AC}\vdot \ldots\ldots\ldots \\
+	& = \dotfill
+\end{WithArrows} $
+}
+\parbox{0.45\linewidth}{
+ $\begin{WithArrows}
+	\vv{DB}\vdot\vv{AK}&=(\vv{D\ldots}+\vv{\ldots B})\vdot \vv{AK}\\
+	&=\vv{DA}\vdot \ldots\ldots\ldots + \ldots\ldots\ldots\vdot \ldots\ldots\ldots  \\
+	& = \dotfill 
+\end{WithArrows}$  
+}\\
+\parbox{0.9\linewidth}{
+ $\begin{WithArrows}
+	\vv{IL}\vdot\vv{IC}&=(\vv{I\ldots}+\vv{\ldots L})\vdot(\vv{I\ldots}+\vv{\ldots C})   \\
+	& = \dotfill \\
+	& = \dotfill 
+\end{WithArrows}$ 
+} 
+\end{spacing} 
+}   
+\end{exercise}
+\begin{exercise} Dans chaque cas, utiliser les propriétés du produit scalaire pour déterminer :
+\begin{spacing}{2}
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+	\item Si $\vv{u}\vdot\vv{v}=2$,  $\vv{u}\vdot\vv{w}=-3$, $\vv{w}\vdot\vv{v}=0$, $\norm{\vv{u}}=1$, $\norm{\vv{v}}=2$ et $\norm{\vv{w}}=3$ alors :
+	\begin{enumerate}[label={},leftmargin=*]
+		\item $(-2\vv{u})\vdot \vv{w}=\dotfill $
+		\item $(3\vv{v})\vdot \vv{v}=\ldots\vv{v}\vdot\vv{v}=\ldots \norm{ \ldots\ldots}^{\ldots} =\dotfill  $
+		\item $(\vv{u}+\vv{v})\vdot \vv{w}=\vv{u}\vdot\ldots\ldots+\dotfill $
+		\item $(\vv{u}-3\vv{v})\vdot (2\vv{w})=\dotfill $
+		\item $(\vv{u}-\vv{v})\vdot (\vv{u}+\vv{v})=\dotfill $
+	\end{enumerate}
+	\item Si $\norm{\vv{u}}=3$, $\norm{\vv{v}}=5$ et $\vv{u}\vdot\vv{v}=12$, alors :
+	\begin{enumerate}[label={},leftmargin=*]
+		\item $\vv{u}\vdot(\vv{u}+\vv{v})=\vv{u}\vdot\vv{u}+\vv{u}\vdot\vv{v}=\norm{\vv{u}}^2+\ldots\ldots\ldots=$  \dotfill
+		\item $2\vv{u}\vdot (-3\vv{v}) = \dotfill$
+		\item $\begin{WithArrows}
+			\norm{\vv{u}+\vv{v}}^2& =(\vv{u}+\vv{v})^2=(\vv{u}+\vv{v})\vdot (\vv{u}+\vv{v})=   \\
+			& =\dotfill
+			\end{WithArrows} $\dotfill
+	\end{enumerate}
+\item Si $\norm{\vv{u}}=2$, $\norm{\vv{v}}=3$ et $\vv{u}\vdot\vv{v}=-4$, alors :\\
+%\parbox{0.48\linewidth}{
+$\begin{WithArrows}
+	\norm{\vv{u}+\vv{v}}^2&=(\vv{u}+\vv{v})^2=   \\
+	&=\dotfill  
+\end{WithArrows}$\dotfill
+%}
+\item Si $\norm{\vv{u}}=3$, $\norm{\vv{v}}=4$ et $\vv{u}\vdot\vv{v}=-6$, alors :\\
+%\parbox{0.48\linewidth}{
+	$\begin{WithArrows}
+		\norm{\vv{u}-\vv{v}}^2&=(\vv{u}-\vv{v})^2 =  \\
+		&=\dotfill  
+	\end{WithArrows}$\dotfill
+%}
+%\hfill  
+%\parbox{0.48\linewidth}{
+%$\begin{WithArrows}
+%	 \norm{2\vv{u}-\vv{v}}^2&= \dotfill \\
+%	&=\dotfill \\
+%	&=\dotfill \\
+%	&= \dotfill 
+%\end{WithArrows}$	
+%}  
+\end{enumerate} 
+\end{spacing} 
+\end{exercise}
+
+
+\newpage 
+\begin{eBox}
+On se place dans un plan muni d'un repère \textbf{orthonormé} $(O~;~\vv{\imath}~,~\vv{\jmath})$ :
+\end{eBox} 
+\begin{exercise} Calculer les produits scalaires demandés:
+	\vspace{-0.5em}
+\begin{multicols}{2}
+\begin{spacing}{1.8}
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+	\item $\vv{u}\vdot\vv{v}$ avec $ \vv{u}
+	 \displaystyle\begin{psmallmatrix}
+		1\\ \\3
+	\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+	-1\\ \\5
+\end{psmallmatrix}$.  
+\item $\vv{u}\vdot\vv{v}$ avec $\vv{u}\begin{psmallmatrix}
+	15\\ \\-8
+\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+	6\\ \\9
+\end{psmallmatrix}$.
+\item $\vv{u}\vdot\vv{v}$ avec $\vv{u}\begin{psmallmatrix}
+	2\\ \\4
+\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+	-1\\ \\3
+\end{psmallmatrix}$.
+\item $\vv{u}\vdot\vv{v}$ avec $\vv{u}\begin{psmallmatrix}
+	0\\ \\5
+\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+	-2\\ \\0
+\end{psmallmatrix}$.
+\item $\vv{u}\vdot\vv{v}$ avec $\vv{u}\begin{psmallmatrix}
+	-1\\ \\-3
+\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+	4\\ \\-4
+\end{psmallmatrix}$
+ \item $\vv{u}\vdot\vv{AB}$ avec $\vv{u}\begin{psmallmatrix}
+ 	-1\\ \\-2
+ \end{psmallmatrix}$, $A(2~;~-1)$ et $B( -1~;~-5)$. 
+\item  $\vv{u}\vdot\vv{AB}$ avec $\vv{u}\begin{psmallmatrix}
+	3\\ \\7
+\end{psmallmatrix}$, $A(-1~;~2)$ et $B(-3~;~6)$
+\item   $\vv{AB}\vdot\vv{CD}$ avec $A(5;\,6),~B(-1;\,4),~C(3;\,7),~D(8;9)$
+\item   $\vv{AB}\vdot\vv{CD}$ avec $A(0\,;\,1)$, $B(3\,;\,0)$, $C(8\,;\,8)$, $D(5\,;\,5)$  
+\item   $\vv{AB}\vdot\vv{CD}$ avec $A(3;7),\,B(2;-5),\,C(-5;2),\,D(-4;3)$  
+\end{enumerate}	
+\end{spacing}
+\end{multicols}
+\vspace{-0.5em}
+\end{exercise} 
+\begin{exercise} Déterminer si les vecteurs $\vv{u}$ et $\vv{v}$ sont orthogonaux.\vspace{-0.5em}
+\begin{multicols}{4}
+	\begin{spacing}{1.8}
+		\begin{enumerate}[label=\arabic*),leftmargin=*]
+			\item  $ \vv{u}
+			\displaystyle\begin{psmallmatrix}
+				4\\ \\5
+			\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+				10\\ \\-8
+			\end{psmallmatrix}$. 
+		\item  $ \vv{u}
+		\displaystyle\begin{psmallmatrix}
+			-2\\ \\7
+		\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+			-14\\ \\-4
+		\end{psmallmatrix}$. 
+	\item  $ \vv{u}
+	\displaystyle\begin{psmallmatrix}
+		a\\ \\b
+	\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+		-b\\ \\a
+	\end{psmallmatrix}$. 
+\item  $ \vv{u}
+\displaystyle\begin{psmallmatrix}
+	a\\ \\b
+\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+	3b\\ \\-3a
+\end{psmallmatrix}$. 
+		\end{enumerate}	
+		\end{spacing}
+	\end{multicols} 
+\vspace{-0.5em}
+\end{exercise}
+\begin{exercise}[entrainement équations] Pour chaque cas, déterminer les valeurs de $m$ pour lesquelles $\vv{u}\perp\vv{v}$.\vspace{-0.5em}
+\begin{multicols}{4}
+	\begin{spacing}{1.8}
+		\begin{enumerate}[label=\arabic*),leftmargin=*]
+			\item  $ \vv{u}
+			\displaystyle\begin{psmallmatrix}
+				m\\ \\2
+			\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+				-4\\ \\m
+			\end{psmallmatrix}$. 
+			\item  $ \vv{u}
+			\displaystyle\begin{psmallmatrix}
+				m\\ \\4
+			\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+				2m\\ \\6
+			\end{psmallmatrix}$. 
+			\item  $ \vv{u}
+			\displaystyle\begin{psmallmatrix}
+				m^2\\ \\2
+			\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+				3\\ \\m-4
+			\end{psmallmatrix}$. 
+			\item  $ \vv{u}
+			\displaystyle\begin{psmallmatrix}
+				\tfrac{1}{m}\\ \\2
+			\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+				2\\ \\m
+			\end{psmallmatrix}$. 
+		\end{enumerate}	
+	\end{spacing}
+\end{multicols} 
+\vspace{-0.5em}
+\end{exercise}
+\begin{exercise} Soit $P(3;4)$, $Q(-5;1)$, $M(7;3)$, and $N(4;11)$. Montrer que   $(PQ)\perp (MN)$. 
+\end{exercise}
+\begin{exercise}[entrainement] Soit $A(1\ ;\ 3)$, $B(3\ ;\ 1)$, $C(-2\ ;\ -2)$, $D(13\ ;\ -5)$ et $E(4\ ;\ 3)$. Justifiez si les droites données sont perpendiculaires ou pas :
+	\vspace{-1.0em}
+\begin{multicols}{3}
+\begin{spacing}{1.6}
+	\begin{enumerate}[label=\arabic*),leftmargin=*]
+		\item $(AC)$ et $(AB)$
+		\item $(AC)$ et $(BD)$
+		\item $(BE)$ et $(CD)$
+	\end{enumerate}	
+\end{spacing}
+\end{multicols}  \vspace{-1.0em}
+\end{exercise}
+\begin{exercise}[nature d'un triangle] Soit $J(6\ ;\ 1)$, $K(2\ ;\ 4)$, $L(1\ ;\ -5)$ et $M\left(-\tfrac{5}{2}\ ;\ -2\right)$.
+	\begin{enumerate}[label=\arabic*),leftmargin=*]
+		\item Le triangle $JKL$ est-il rectangle en $J$ ?
+		\item Montrer que $JKM$ est  rectangle.
+	\end{enumerate}
+\end{exercise}
+\begin{exercise}[nature d'un quadrilatère] Soit $F(-2\ ;\ -3)$, $A(-8\ ;\ 4)$, $K(-29\ ;\ -14)$ et $E\left(-23\ ;\ -21\right)$.
+	\begin{enumerate}[label=\arabic*),leftmargin=*]
+		\item Montrer que $\vv{FA}=\vv{EA}$. Que peut-on en déduire ?
+		\item Montrer que $(FA)\perp (FE)$. Que peut-on en déduire ?
+	\end{enumerate}
+\end{exercise}
+\begin{exercise}[entrainement] Soit $T(-3\ ;\ 8)$, $R(8\ ;\ 0)$, $U(16\ ;\ 11)$ et $E\left(5\ ;\ 19\right)$.
+		\begin{enumerate}[label=\arabic*),leftmargin=*]
+		\item Montrer que $TRUE$ est un parallélogramme.
+		\item Montrer que $TRUE$ est un parallélogramme rectangle.
+		\item Montrer que $TRUE$ est un parallélogramme carré.
+	\end{enumerate}
+\end{exercise}
+\begin{exercise}[entrainement] Soit $C(2\ ;\ -9)$, $H(5\ ;\ -21)$, $E(8\ ;\ -9)$ et $F\left(5\ ;\ 3\right)$. Montrer que $CHEF$ est un parallélogramme losange.
+\end{exercise}
+\begin{exercise}[révision] Déterminer si les vecteurs $\vv{u}$ et $\vv{v}$ sont colinéaires.
+	\vspace{-0.5em}
+	\begin{multicols}{4}
+		\begin{spacing}{1.8}
+			\begin{enumerate}[label=\arabic*),leftmargin=*]
+				\item  $ \vv{u}
+				\displaystyle\begin{psmallmatrix}
+					-2\\ \\3
+				\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+					3\\ -\tfrac{9}{2}
+				\end{psmallmatrix}$. 
+				\item  $ \vv{u}
+				\displaystyle\begin{psmallmatrix}
+					7\\ \\-2
+				\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+					14\\ \\4
+				\end{psmallmatrix}$. 
+				\item  $ \vv{u}
+				\displaystyle\begin{psmallmatrix}
+					6a\\ \\3b
+				\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+					4a\\ \\2b
+				\end{psmallmatrix}$. 
+				\item  $ \vv{u}
+				\displaystyle\begin{psmallmatrix}
+					3a\\ \\-a
+				\end{psmallmatrix}$ et $\vv{v}\begin{psmallmatrix}
+					-15a\\ \\5a
+				\end{psmallmatrix}$. 
+			\end{enumerate}	
+		\end{spacing}
+	\end{multicols} 
+\vspace{-0.5em}
+\end{exercise}
+\begin{exercise}[revision] Soit $P(-3;1)$, $Q(6;4)$, $M(2;-2)$, and $N(5;-1)$. Montrer que  $(PQ)\mathbin{\!/\mkern-2mu/\!}(MN)$. 
+\end{exercise}
+\begin{exercise}Dans chaque cas donner les valeurs possibles de $(\vv{AB}~;~\vv{AC})$. Arrondir au degré près.
+\vspace{-0.5em}
+	\begin{multicols}{2}
+%		\begin{spacing}{1.8}
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+	\item  $AB=6$, $AC=2\sqrt{3}$ et $\vv{AB}\vdot \vv{AC}=18$
+	\item $AB=\sqrt{6}$, $AC=\sqrt{2}$ et $\vv{AB}\vdot \vv{AC}=5$
+	\item $AB=1$, $AC=3$ et $\vv{AB}\vdot \vv{AC}=-3$
+	\item $AB=2$, $AC=\tfrac{1}{2}$ et $\vv{AB}\vdot \vv{AC}=0$ 
+\end{enumerate}	
+%\end{spacing}
+\end{multicols}
+\vspace{-0.5em}
+\end{exercise} 
+\begin{exercise}[entrainement] Déterminer $\widehat{BAC}$ au degré près.
+	\vspace{-0.5em}
+\begin{multicols}{3}
+%		\begin{spacing}{1.8}
+	\begin{enumerate}[label=\arabic*),leftmargin=*] 
+		\item $A(-3;2)$, $B(3; 0)$ et $C(0;6)$
+		\item $A(-2;2)$, $B(3; 1)$ et $C(-1;2)$
+		\item $A(1;3)$, $B(0; -2)$ et $C(1;-2)$ 
+	\end{enumerate}	
+	%\end{spacing}
+\end{multicols}
+\vspace{-0.5em}
+\end{exercise} 
+\begin{exerciseT}[identités de polarisation] Soit deux vecteurs $\vv{u}$ et $\vv{v}$ non nuls.
+	\begin{enumerate}[label=\arabic*),leftmargin=*] 
+		\item Développer $\norm{\vv{u}+\vv{v}}^2$ et $\norm{\vv{u}-\vv{v}}^2$ à l'aide des propriétés du produit scalaire.
+		\item En déduire que : $\begin{WithArrows}
+			 \vv{u}\vdot\vv{v}&=\tfrac{1}{2}\left(\norm{\vv{u}+\vv{v}}^2-\norm{\vv{u}}^2-\norm{\vv{v}}^2\right) \\
+			 \vv{u}\vdot\vv{v}&=\tfrac{1}{2}\left(\norm{\vv{u}}^2+\norm{\vv{v}}^2 - \norm{\vv{u}-\vv{v}}^2\right)\\
+			 \vv{u}\vdot\vv{v}&=\tfrac{1}{4}\left( \norm{\vv{u}+\vv{v}}^2 - \norm{\vv{u}-\vv{v}}^2\right)
+		\end{WithArrows} $   
+	\end{enumerate}
+\end{exerciseT}
+\begin{example} On peut calculer $\vv{AB}\vdot\vv{BC}$ à partir des longueurs $AB$, $BC$ et $AC$, ou à partir des longueurs des diagonales $AC$ et $BD$ du parallélogramme $ABCD$.\\
+\noindent 
+\begin{tikzpicture}[scale=1]
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+%	\tkzInit[xmin=-5, ymin=-2,  xmax=7,ymax=5]  
+%	\begin{scope}[dashed] 
+	%		\tkzGrid 
+	%	\end{scope}  
+%	\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+%	\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+%	\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$\overrightarrow{\imath}$}, ylabel={$\overrightarrow{\jmath}$}]
+%	\tkzLabelX[orig=false, 	font=\scriptsize]  
+%	\tkzLabelY[orig=false,  font=\scriptsize] 
+\def\a{10}
+\def\b{4.5}
+\def\c{75}
+\def\d{3}
+\tkzDefPoint(0,0){A}  
+\tkzDefShiftPoint[A](\a:\b){B}   
+\tkzDefShiftPoint[A](\c:\d){D}  
+\tkzDefShiftPoint[B](\c:\d){C}  
+\tkzDrawPolygon[line width=0.5pt,dashed](A,B,C,D)
+\tkzDrawSegment[->,>=latex, line width=1.2pt](A,B)
+\tkzLabelSegment[below,sloped](A,B){$\vv{u}$}
+\tkzDrawSegment[->,>=latex, line width=1.2pt](B,C)
+\tkzLabelSegment[above,sloped](A,D){$\vv{v}$}
+\tkzDrawSegment[->,>=latex, line width=1.2pt](A,C)
+\tkzLabelSegment[above,sloped](A,C){$\vv{u}+\vv{v}$}
+\tkzLabelPoint[below left,font=\small](A){$A$}
+\tkzLabelPoint[below right,font=\small](B){$B$}
+\tkzLabelPoint[above right,font=\small](C){$C$}
+\tkzLabelPoint[above left,font=\small](D){$D$}
+\begin{scope}[xshift=6cm]
+	\tkzDefPoint(0,0){A}  
+	\tkzDefShiftPoint[A](\a:\b){B}   
+	\tkzDefShiftPoint[A](\c:\d){D}  
+	\tkzDefShiftPoint[B](\c:\d){C}  
+	\tkzDrawPolygon[line width=0.5pt,dashed](A,B,C,D)
+	\tkzDrawSegment[->,>=latex, line width=1.2pt](A,B)
+	\tkzLabelSegment[below,sloped](A,B){$\vv{u}$}
+	\tkzDrawSegment[->,>=latex, line width=1.2pt](A,D)
+	\tkzLabelSegment[above,sloped](A,D){$\vv{v}$}
+	\tkzDrawSegment[->,>=latex, line width=1.2pt](D,B)
+	\tkzLabelSegment[above,sloped](D,B){$\vv{u}-\vv{v}$}
+	\tkzLabelPoint[below left,font=\small](A){$A$}
+	\tkzLabelPoint[below right,font=\small](B){$B$}
+	\tkzLabelPoint[above right,font=\small](C){$C$}
+	\tkzLabelPoint[above left,font=\small](D){$D$}
+\end{scope}
+\begin{scope}[xshift=12cm]
+	\tkzDefPoint(0,0){A}  
+	\tkzDefShiftPoint[A](\a:\b){B}   
+	\tkzDefShiftPoint[A](\c:\d){D}  
+	\tkzDefShiftPoint[B](\c:\d){C}  
+	\tkzDrawPolygon[line width=0.5pt,dashed](A,B,C,D)
+	%		\tkzDrawSegment[->,>=latex, line width=1.2pt](A,B)
+	\tkzLabelSegment[below,sloped](A,B){$\vv{u}$}
+	%		\tkzDrawSegment[->,>=latex, line width=1.2pt](A,D)
+	\tkzLabelSegment[above,sloped](A,D){$\vv{v}$} 
+	\tkzDrawSegment[->,>=latex, line width=1.2pt](A,C)
+	\tkzLabelSegment[pos=0.25,above,sloped,font=\small](A,C){$\vv{u}+\vv{v}$}
+	\tkzDrawSegment[->,>=latex, line width=1.2pt](D,B)
+	\tkzLabelSegment[pos=0.25,above,sloped,font=\small](D,B){$\vv{u}-\vv{v}$}
+	\tkzLabelPoint[below left,font=\small](A){$A$}
+	\tkzLabelPoint[below right,font=\small](B){$B$}
+	\tkzLabelPoint[above right,font=\small](C){$C$}
+	\tkzLabelPoint[above left,font=\small](D){$D$}
+\end{scope}
+%	 
+\end{tikzpicture} 
+\end{example} 
+\begin{exercise} Compléter afin de calculer le produit scalaire $\vv{AB}\vdot\vv{AC}$ :\\
+\noindent
+\parbox{0.25\linewidth}{
+\noindent 
+\begin{tikzpicture}[scale=1]
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+	%	\tkzInit[xmin=-5, ymin=-2,  xmax=7,ymax=5]  
+	%	\begin{scope}[dashed] 
+		%		\tkzGrid 
+		%	\end{scope}  
+	%	\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+	%	\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+	%	\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$\overrightarrow{\imath}$}, ylabel={$\overrightarrow{\jmath}$}]
+	%	\tkzLabelX[orig=false, 	font=\scriptsize]  
+	%	\tkzLabelY[orig=false,  font=\scriptsize] 
+	\def\a{10}
+	\def\b{4.5}
+	\def\c{70}
+	\def\d{2.5}
+	\tkzDefPoint(0,0){A}  
+	\tkzDefShiftPoint[A](\a:\b){B}   
+	\tkzDefShiftPoint[A](\c:\d){C}     
+	\tkzDrawPolygon[line width=1pt,dashed](A,B,C) 
+	\tkzLabelSegment[below,sloped](A,B){$8$} 
+	\tkzLabelSegment[above,sloped](A,C){$4$} 
+	\tkzLabelSegment[above,sloped](B,C){$6.$}
+	\tkzLabelPoint[below left,font=\small](A){$A$}
+	\tkzLabelPoint[below right,font=\small](B){$B$}
+	\tkzLabelPoint[above right,font=\small](C){$C$} 
+\end{tikzpicture}
+}
+\hfill
+\parbox{0.7\linewidth}{
+\begin{spacing}{2}
+\begin{enumerate}[label={},leftmargin=*]
+	\item $\vv{BC}=\vv{B\ldots}+\vv{\ldots C}= - \vv{\ldots B}+\vv{\ldots C}$\dotfill  
+	\item $BC^2=\norm{\vv{BC}}^2=\norm{\vv{\BoiteFlash[0.4cm]{}} -\vv{\BoiteFlash[0.4cm]{}} }^2$ 
+	\item $BC^2= \norm{\BoiteFlash[0.4cm]{}}^2 -2\BoiteFlash[0.4cm]{}\vdot \BoiteFlash[0.4cm]{} + \norm{\BoiteFlash[0.4cm]{}}^2 $
+	\item $BC^2=\BoiteFlash[0.4cm]{} -2 \BoiteFlash[0.8cm]{} + \BoiteFlash[0.4cm]{} $
+	\item $6^2=4^2- 2\vv{AB}\vdot\vv{AC} + 8^2$ 
+	\item $\vv{AB}\vdot\vv{AC}=\dotfill $
+\end{enumerate} 
+\end{spacing}
+}	
+\end{exercise}
+\begin{exercise} Compléter afin de calculer le produit scalaire $\vv{AB}\vdot\vv{AD}$ :\\
+\noindent
+\parbox{0.25\linewidth}{
+	\noindent  
+\begin{tikzpicture}[scale=0.75]
+	\tkzSetUpPoint[size=3, fill=black]
+	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+	\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+	%
+	\tkzDefPoint(0,0){A} 
+	\tkzDefPoint(4,0){B}
+	\tkzInterCC[R](A,6cm)(B,3cm) \tkzGetFirstPoint{C}
+	\tkzInterCC[R](A,3cm)(C,4cm) \tkzGetFirstPoint{D}
+	
+	\def\a{10}
+	\def\b{4.5}
+	\def\c{70}
+	\def\d{2.5}
+	\def\a{10} 
+	\tkzDefPoint(0,0){A}  
+	\tkzDefShiftPoint[A](\a:\b){B}   
+	\tkzDefShiftPoint[A](\c:\d){D}  
+	\tkzDefShiftPoint[B](\c:\d){C}    
+	\tkzDrawPolygon[line width=1.2pt](A,B,C,D) 
+	\tkzLabelPoint[below left](A){\small$A$}
+	\tkzLabelPoint[above right](C){\small$C$}
+	\tkzLabelPoint[below right](B){\small$B$}
+	\tkzLabelPoint[above left](D){\small$D$}
+	\tkzLabelSegment[below](A,B){\small $\num{4}$}
+	\tkzLabelSegment[below right](C,B){\small$\num{3}$}
+	\tkzLabelSegment[above left](C,A){\small$\num{6}$}
+	\tkzDrawSegment[line width=1.2pt,dashed](A,C)
+	\tkzLabelSegment[above left](A,D){\small$\num{3}$}
+	\tkzLabelSegment[above right](C,D){\small$\num{4}$} 
+\end{tikzpicture} 
+}
+\hfill
+\parbox{0.7\linewidth}{
+\begin{spacing}{2}
+	\begin{enumerate}[label={},leftmargin=*]
+		\item $\vv{AC}=\vv{A\ldots}+\vv{\ldots C} =\vv{A\ldots}+\vv{AD}$\dotfill  
+		\item $AC^2=\BoiteFlash[0.4cm]{}=\norm{\vv{\BoiteFlash[0.4cm]{}} +\vv{\BoiteFlash[0.4cm]{}} }^2$ 
+		\item $AC^2= \dotfill  $
+		\item $AC^2= \dotfill $
+		\item $6^2= \dotfill$  
+		\item $\vv{AB}\vdot\vv{AD}= \dotfill $
+	\end{enumerate}  
+\end{spacing}
+}
+\end{exercise}
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\newpage 
+\begin{exerciseT}[\emoji{heart} Loi des cosinus ou Formule d'Al-Kashi] au programme\hfill\\
+\noindent
+ \parbox[position=t]{0.3\textwidth}{\centering 
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](0:4.10){A}
+		\tkzDefShiftPoint[C](70:2.70){B}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+		\tkzDrawSegment[line width=1.2pt,](C,A)
+		\tkzLabelSegment[below](C,A){$b$}
+		\tkzDrawSegment[line width=1.2pt,](C,B)
+		\tkzLabelSegment[above left](C,B){$a$}
+		\tkzDrawSegment[line width=1.2pt,](A,B) 
+		\tkzLabelSegment[above](A,B){$c$}
+		\tkzLabelAngle[font=\small,pos=.8](A,C,B){$\widehat{C}$}  
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)    
+		\tkzLabelPoint[below right](A){$A$}
+		\tkzLabelPoint[above](B){$B$} 
+		\tkzLabelPoint[below left](C){$C$}
+	\end{tikzpicture}   
+}
+\hfill 
+\parbox{0.65\linewidth}{
+Dans le triangle $ABC$ ci-contre :
+$a$, $b$ et $c$ est la longueur du côté opposé au sommet $A$, $B$ et $C$ respectivement.\\
+On a la relation :
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+$$c^2   =a^2+b^2 -2ab\cos(\widehat{C}) $$ 
+}
+\end{exerciseT}
+\begin{proof}[démonstration guidée et conclusion] 
+\begin{spacing}{2}
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+	\item Complétez afin de démontrer l'égalité : 
+		\begin{enumerate}[label={},leftmargin=*]
+			\item $\vv{AB}=\vv{A\ldots}+\vv{\ldots B} =-\vv{\ldots A}+\vv{\ldots B} $\dotfill  
+			\item $AB^2=\norm{\vv{\BoiteFlash[0.4cm]{}} - \vv{\BoiteFlash[0.4cm]{}} }^2=\dotfill $ 
+			\item $AB^2= \dotfill  $
+			\item $c^2= a^2+ b^2 -\dotfill =a^2+b^2-2ab\cos(\widehat{C})  \hfill $   
+		\end{enumerate}  
+	\item Complétez par $=$, $>$ et $<$ 
+\begin{enumerate}[label={},leftmargin=*] 
+\item Si $0\leqslant \widehat{C}<\tfrac{\pi}{2}$ alors $\cos(\widehat{C})\ldots 0$ et $c^2\ldots a^2+b^2$.
+\item Si $\widehat{C}=\tfrac{\pi}{2}$, alors $\cos(\widehat{C})\ldots 0$ et $c^2\ldots a^2+b^2$. C'est la relation de P\dotfill
+\item Si $\tfrac{\pi}{2} < \widehat{C}\leqslant \pi$ alors $\cos(\widehat{C})\ldots 0$ et $c^2\ldots a^2+b^2$.
+\end{enumerate}  
+ 	\item Écrire les lois du cosinus pour les côtés $BC$ et $AC$ :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	$$BC^2   =\ldots +\ldots-2\ldots\cos(\widehat{\ldots\ldots}) \qquad AC^2   =\ldots +\ldots-2\ldots\cos(\widehat{\ldots\ldots})  $$  
+\end{enumerate}
+\end{spacing}
+\end{proof}
+\begin{exercise}À l'aide de la loi des cosinus déterminer les longueurs demandées de chaque cas. 
+	
+	\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-10:3.50){A}
+			\tkzDefShiftPoint[C](45:2.10){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{6}{\centi\meter}$,-10pt,}](C,A)
+			\tkzDrawSegment[dim={$a$,+20pt,}](C,B)
+			\tkzDrawSegment[dim={$\SI{5}{\centi\meter}$,-10pt,}](A,B) 
+			%		\tkzLabelAngle[font=\small,pos=.8](A,C,B){$\ang{40}$} 
+			%		\tkzLabelAngle[font=\small,pos=.8](C,A,B){$\ang{40}$}  
+			\tkzLabelAngle[font=\small,pos=.9](B,A,C){$\ang{40}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)    
+		\end{tikzpicture}   
+	} \hfill 
+	\parbox[position=t]{0.7\textwidth}{  
+		$\begin{WithArrows}
+			a^2&=\rule{0pt}{1.8em} 5^2+6^2-2\times 5\times 6 \times \cos(\ang{40})  \\
+			a& =\rule{0pt}{1.8em}  
+		\end{WithArrows}$  
+	}
+	
+	\noindent\parbox[position=t]{0.3\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](5:4.10){A}
+			\tkzDefShiftPoint[C](-38:2.70){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$b$,+10pt,}](C,A)
+			\tkzDrawSegment[dim={$\SI{6}{\centi\meter}$,-10pt,}](C,B)
+			\tkzDrawSegment[dim={$\SI{5}{\centi\meter}$,+10pt,}](A,B)   
+			\tkzLabelAngle[font=\small,pos=.9](A,B,C){$\ang{85}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,B,C)    
+		\end{tikzpicture}   
+	}  
+\hfill
+ \parbox[position=t]{0.3\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-17.5:3){A}
+			\tkzDefShiftPoint[C](-90:2){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{4.5}{\centi\meter}$,+10pt,}](C,A)
+			\tkzDrawSegment[dim={$c$,-10pt,}](C,B)
+			%		\tkzDrawSegment[dim={$ $,+10pt,}](A,B)   
+			\tkzLabelAngle[font=\small,pos=.9](C,A,B){$\ang{35}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,A,B)    
+			\tkzMarkSegments[mark=s||](A,B A,C)
+		\end{tikzpicture}   
+	} \hfill  
+\parbox[position=t]{0.3\textwidth}{\centering 
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		\tkzDefPoint(0,0){C} 
+		\tkzDefShiftPoint[C](40.0:2.3){A}
+		\tkzDefShiftPoint[C](0:4){B}  
+		\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+		\tkzDrawSegment[dim={\small$\SI{4.5}{\centi\meter}$,+10pt,}](C,A)
+		\tkzDrawSegment[dim={$d$,-10pt,}](C,B)
+				\tkzDrawSegment[dim={$\SI{4}{\centi\meter}$,+10pt,}](A,B)   
+		\tkzLabelAngle[font=\small,pos=.9](C,A,B){$\ang{120}$}  
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,A,B)    
+%			\tkzMarkSegments[mark=s||](A,B A,C)
+	\end{tikzpicture}   
+}    
+\end{exercise}
+\begin{exercise}À l'aide de la loi des cosinus déterminer les angles (au degré près) demandées de chaque cas. \\
+	\noindent\parbox[position=t]{0.25\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-10:3.5){A}
+			\tkzDefShiftPoint[C](42:2.5){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{5.2}{\centi\meter}$,-10pt,}](C,A)
+			\tkzDrawSegment[dim={$\SI{3}{\centi\meter}$,+10pt,}](C,B)
+			\tkzDrawSegment[dim={$\SI{8}{\centi\meter}$,-10pt,}](A,B) 
+			\tkzLabelAngle[font=\small,pos=.8](A,C,B){$A$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)  
+			%		\tkzDefPointBy[projection = onto C--A](B) \tkzGetPoint{H}
+			%		\tkzDrawSegment[dashed](B,H)
+			%		\tkzMarkRightAngle[size=0.2](A,H,B)  
+		\end{tikzpicture}   
+	} \hfill 
+	\parbox[position=t]{0.7\textwidth}{  
+		$\begin{WithArrows}
+			\big( \qquad \big)^2&=\big( \qquad \big)^2+\big( \qquad \big)^2-2\times \qquad \times \qquad \times \cos(A) \\
+			&= \rule{0pt}{1.8em} \\
+			\cos(A)& =\rule{0pt}{1.8em} \\
+			A& =\rule{0pt}{1.8em}  
+		\end{WithArrows}$  
+	}
+	\bigskip
+	
+	\noindent  \parbox[position=t]{0.45\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](0:3.5){A}
+			\tkzDefShiftPoint[C](115:2.5){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{4.3}{\centi\meter}$,-10pt,}](C,A)
+			\tkzDrawSegment[dim={$\SI{2.6}{\centi\meter}$,+10pt,}](C,B)
+			\tkzDrawSegment[dim={$\SI{6.1}{\centi\meter}$,-10pt,}](A,B) 
+			%		\tkzLabelAngle[font=\small,pos=.8](A,C,B){$A$}  
+%			\tkzLabelAngle[font=\small,pos=.9](B,A,C){$B$} 
+%			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](B,A,C)  
+			\tkzLabelAngle[font=\small,pos=.5](A,C,B){$B$}    
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.3](A,C,B)   
+			%		\tkzDefPointBy[projection = onto C--A](B) \tkzGetPoint{H}
+			%		\tkzDrawSegment[dashed](B,H)
+			%		\tkzMarkRightAngle[size=0.2](A,H,B)  
+		\end{tikzpicture}   
+	} 
+\hfill
+ \parbox[position=t]{0.45\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-107.5:3){A}
+			\tkzDefShiftPoint[C](-180:2){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={$\SI{1.8}{\centi\meter}$,+25pt,}](C,A)
+			\tkzDrawSegment[dim={$\SI{1.3}{\centi\meter}$,-10pt,}](C,B)
+			%		\tkzDrawSegment[dim={$ $,+10pt,}](A,B) 
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.6](C,A,B)    
+			\tkzLabelAngle[font=\small,pos=.9](C,A,B){$C$}    
+			\tkzMarkSegments[mark=s||](A,B A,C)
+		\end{tikzpicture}   
+	}  
+\end{exercise} 
+
+
+\begin{exerciseT}[\emoji{heart} Loi des sinus] approfondissement\hfill\\
+	\noindent
+	\parbox[position=t]{0.3\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](0:4.10){A}
+			\tkzDefShiftPoint[C](70:2.70){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[line width=1.2pt,](C,A)
+			\tkzLabelSegment[below](C,A){$b$}
+			\tkzDrawSegment[line width=1.2pt,](C,B)
+			\tkzLabelSegment[above left](C,B){$a$}
+			\tkzDrawSegment[line width=1.2pt,](A,B) 
+			\tkzLabelSegment[above](A,B){$c$}
+			\tkzLabelAngle[font=\small,pos=.8](A,C,B){$\widehat{C}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)    
+			\tkzLabelAngle[font=\small,pos=.8](B,A,C){$\widehat{A}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)    
+			\tkzLabelAngle[font=\small,pos=.8](C,B,A){$\widehat{B}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)    
+			\tkzLabelPoint[below right](A){$A$}
+			\tkzLabelPoint[above](B){$B$} 
+			\tkzLabelPoint[below left](C){$C$}
+		\end{tikzpicture}   
+	}
+	\hfill 
+	\parbox{0.65\linewidth}{
+		Dans le triangle $ABC$ ci-contre :
+		$a$, $b$ et $c$ est la longueur du côté opposé au sommet $A$, $B$ et $C$ respectivement.\\
+		On a la relation :
+		\setlength{\abovedisplayskip}{3pt}
+		\setlength{\belowdisplayskip}{3pt}
+		$$\frac{\sin(\widehat{A})}{a}=\frac{\sin(\widehat{B})}{b}=\frac{\sin(\widehat{C})}{c}$$ 
+	}
+\end{exerciseT}
+\begin{proof}[démonstration] On utilise la formule de l'aire  : 
+		$\begin{WithArrows}
+			\mathscr{Aire}& = \tfrac{1}{2}ab\sin(\widehat{C}) \\
+			2\mathscr{Aire}&= ab\sin(\widehat{C}) =  bc\sin(\widehat{A})=  ca\sin(\widehat{B}) \Arrow{$\times\tfrac{1}{abc}$} \\
+			&\frac{\sin(\widehat{A})}{a}=\frac{\sin(\widehat{B})}{b}=\frac{\sin(\widehat{C})}{c} 
+		\end{WithArrows}$    
+\end{proof}
+
+\begin{exercise}\label{chapitre05:exercice:formuledesinus02} 
+	En utilisant la loi des sinus, trouver les valeurs de $x$, $y$ et $z$ pour chacune des figures suivantes.
+	
+	\noindent\parbox[position=t]{0.30\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](0:3.3){A}
+			\tkzDefShiftPoint[C](52:2.33){B}  
+			
+			
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			%		\tkzDrawSegment[dim={\scriptsize $c$,-20pt,}](C,A)
+			\tkzDrawSegment[dim={\small \SI{7}{\centi\meter},+20pt,}](C,B)
+			\tkzDrawSegment[dim={\small $x$,-20pt,}](A,B) 
+			\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){\scriptsize$\ang{52}$}
+			\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){\scriptsize$\ang{45}$}
+			%		\tkzLabelAngle[font=\footnotesize,pos=.8](C,B,A){\scriptsize$\widehat{e}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)   
+		\end{tikzpicture}   
+	}\hfill 
+	\noindent\parbox[position=t]{0.3\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-10:4.2){A}
+			\tkzDefShiftPoint[C](46:3.0){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			%		\tkzDrawSegment[dim={\scriptsize $c$,-20pt,}](C,A)
+			\tkzDrawSegment[dim={\small \SI{6}{\centi\meter},+20pt,}](C,B)
+			\tkzDrawSegment[dim={\small \SI{7}{\centi\meter},-20pt,}](A,B) 
+			\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){\scriptsize$y^\circ$}
+			\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){\scriptsize$\ang{45}$}
+			%		\tkzLabelAngle[font=\footnotesize,pos=.8](C,B,A){\scriptsize$\widehat{e}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)   
+		\end{tikzpicture}   
+	}\hfill
+	\noindent\parbox[position=t]{0.3\textwidth}{\centering 
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			\tkzDefPoint(0,0){C} 
+			\tkzDefShiftPoint[C](-20:3.0){A}
+			\tkzDefShiftPoint[C](35:2.0){B}  
+			\tkzDrawPolygon[line width=1.2pt](A,B,C) 
+			\tkzDrawSegment[dim={\small \SI{8}{\centi\meter},-20pt,}](C,A)
+			%		\tkzDrawSegment[dim={\scriptsize $a$,+20pt,}](C,B)
+			\tkzDrawSegment[dim={\small $z$,-20pt,}](A,B) 
+			\tkzLabelAngle[font=\footnotesize,pos=.8](A,C,B){\scriptsize$\ang{52}$}
+			\tkzLabelAngle[font=\footnotesize,pos=.8](B,A,C){\scriptsize$\ang{45}$}
+			%		\tkzLabelAngle[font=\footnotesize,pos=.8](C,B,A){\scriptsize$\widehat{e}$}  
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](A,C,B)
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](B,A,C)
+			%		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](C,B,A)   
+		\end{tikzpicture}   
+	}
+
+\begin{exercise} Déterminer $QR$ à l'aide de la loi des cosinus, puis  l'angle $\widehat{RQP}$    à l'aide de la loi des sinus.
+	 
+ \end{exercise}
+	\noindent\parbox[position=t]{0.30\textwidth}{\centering
+		%\begin{figure}[H]\centering
+		\begin{tikzpicture}[scale=1.0] 
+			\tkzSetUpPoint[size=3, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+			
+			\tkzDefPoint(0,0){P} 
+			\tkzDefShiftPoint[P](-5:3.6){Q}
+			\tkzDefShiftPoint[P](71:2.8){R} 
+			\tkzDrawPolygon[line width=1.2pt](P,Q,R) 
+			\tkzMarkAngle[mark=none,-, >=latex, size =0.5](Q,P,R) 
+			\tkzLabelAngle[font=\footnotesize,pos=.9](Q,P,R){$\ang{76}$} 
+			\tkzLabelSegment[above, font=\scriptsize,sloped](P,R){\SI{7}{\centi\meter}} 
+			\tkzLabelSegment[below, font=\scriptsize](P,Q){\SI{9}{\centi\meter}}
+			
+			\tkzLabelPoints[below left,font=\scriptsize](P)
+			\tkzLabelPoints[below right,font=\scriptsize](Q)
+			\tkzLabelPoints[above,font=\scriptsize](R)    
+		\end{tikzpicture}   
+	}\hfill 
+\parbox[position=t]{0.30\textwidth}{\centering
+	%\begin{figure}[H]\centering
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzDefPoint(0,0){P} 
+		\tkzDefShiftPoint[P](-5:3.6){Q}
+		\tkzDefShiftPoint[P](104:2.8){R} 
+		\tkzDrawPolygon[line width=1.2pt](P,Q,R) 
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](Q,P,R) 
+		\tkzLabelAngle[font=\footnotesize,pos=.9](Q,P,R){$\ang{109}$} 
+		\tkzLabelSegment[above, font=\scriptsize,sloped](P,R){\SI{7}{\centi\meter}} 
+		\tkzLabelSegment[below, font=\scriptsize](P,Q){\SI{8}{\centi\meter}}
+		
+		\tkzLabelPoints[below left,font=\scriptsize](P)
+		\tkzLabelPoints[below right,font=\scriptsize](Q)
+		\tkzLabelPoints[above,font=\scriptsize](R)    
+	\end{tikzpicture}   
+}\hfill
+\parbox[position=t]{0.30\textwidth}{\centering
+	%\begin{figure}[H]\centering
+	\begin{tikzpicture}[scale=1.0] 
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzDefPoint(0,0){P} 
+		\tkzDefShiftPoint[P](-5:3.6){Q}
+		\tkzDefShiftPoint[P](110:2.8){R} 
+		\tkzDrawPolygon[line width=1.2pt](P,Q,R) 
+		\tkzMarkAngle[mark=none,-, >=latex, size =0.5](Q,P,R) 
+		\tkzLabelAngle[font=\footnotesize,pos=.9](Q,P,R){$\ang{115}$} 
+		\tkzLabelSegment[above, font=\scriptsize,sloped](P,R){\SI{3}{\centi\meter}} 
+		\tkzLabelSegment[below, font=\scriptsize](P,Q){\SI{9}{\centi\meter}}
+		
+		\tkzLabelPoints[below left,font=\scriptsize](P)
+		\tkzLabelPoints[below right,font=\scriptsize](Q)
+		\tkzLabelPoints[above,font=\scriptsize](R)    
+	\end{tikzpicture}   
+} 
+\end{exercise}
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\end{document}

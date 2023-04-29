@@ -1,0 +1,1218 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode  
+%!TEX root = chapter15.tex  
+\documentclass[main.tex]{subfiles} 
+\begin{document} 
+%----------------------------------------------------------------------------------------
+%	CHAPTER 15
+%---------------------------------------------------------------------------------------- 
+\cleardoublepage 
+\loadgeometry{marginlayout} 
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+}   
+\onehalfspacing 
+\setcounter{chapter}{14} 
+
+
+\chapter{Factoriser pour résoudre des équations produit et quotient}
+
+
+%%----------------------------------------------------------------------------------------
+%%	   
+%%----------------------------------------------------------------------------------------
+% 
+%
+%\newpage 
+%\loadgeometry{marginlayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%	headwidth=textwithmarginpar,
+%	headsepline=true,
+%	headsepline= 0.5pt,
+%	footwidth=textwithmarginpar,
+%} 
+%\onehalfspacing
+\section{Équations produit nul} 
+\begin{theorem}[produit nul] Si $AB=0$ alors $A=0$ ou $B=0$
+\end{theorem}
+\begin{proof}On suppose $AB=0$. Par disjonction de cas :
+\begin{enumerate}[leftmargin=*,label=\textbullet]
+	\item Soit $A=0$. Rien à démontrer.
+	\item Soit $ A\neq 0$. On va démontrer que $B=0$.
+	
+	En effet :  $A$ admet un inverse $\frac{1}{A}$ et son inverse est non nul.\\
+	\noindent \parbox[position=t]{0.85\linewidth}{	\color{white}
+		$\begin{WithArrows}
+			AB &=0\Arrow{$\times \frac{1}{A}$}\\
+		 \frac{1}{A}\times A \times B&=\rule{0pt}{3em} \frac{1}{A}\times  0\Arrow{$\frac{1}{A}\times A=1$}\\
+			B& =0 \rule{0pt}{2em}  
+		\end{WithArrows}$ 	
+	} 
+\end{enumerate} 
+\end{proof}
+\begin{eBox}
+	La forme développée simplifiée réduite d'une expression du second degré  $f(x)=ax^2+bx+c$ n'est pas adaptée dans la recherche des zéros de $f(x)=0$. 
+\end{eBox}
+\begin{eBox} 
+	Trouver $r_1$ et $r_2$ tel que pour tout : $x\in\mathbb{R}$ on a $f(x)=a(x-r_1)(x-r_2)$ (forme factorisée), c'est trouver les zéros de $f$ : $f(r_1)=0$ et $f(r_2)=0$. 
+\end{eBox}
+\begin{eBox} 
+	Si une expression du second degré ne s'annulle pas, alors elle n'est pas factorisable sous la forme $a(x-r_1)(x-r_2)$ avec $r_1$ et $r_2\in\mathbb{R}$ !
+\end{eBox}
+\begin{example}
+Les expressions $A(x)=5x^2+3$ et $B(x)=-2(3x+5)^2-1$ ne sont pas factorisables dans $\mathbb{R}$. En effet  pour tout $x\in\mathbb{R}$ on a $A(x) \geqslant 3$ et $B(x) \leqslant -1$.  
+%$C(x)=5x^2-3$ est factorisable.% Les solutions de $C(x)=0$ sont $\sqrt{\tfrac{3}{5}}$ et $-\sqrt{\tfrac{3}{5}}$ et $C(x)=5(x-\sqrt{\tfrac{3}{5}})(x+\sqrt{\tfrac{3}{5}})$
+\end{example}
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\subsection{Exercices : équations produit nul, forme factorisée pour résoudre}
+
+
+
+\begin{example}  Factoriser/réduire le membre de gauche et résoudre dans $\mathbb{R}$ les équations inconnue $x$: 
+
+\noindent  \parbox{0.24\linewidth}{	
+$\begin{WithArrows}
+4x^2-9x&=0 \\
+&  \rule{0pt}{1.3em} \\
+&   \rule{0pt}{1.3em}  \\
+&    \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.0em}  
+\end{WithArrows}$ 
+}  \hfill \parbox{0.24\linewidth}{	
+$\begin{WithArrows}
+4x^2-9&=0 \\
+&  \rule{0pt}{1.3em} \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.0em}  
+\end{WithArrows}$ 
+}  \hfill \parbox{0.24\linewidth}{	
+$\begin{WithArrows}
+	4x^2+9&=0 \\
+	&  \rule{0pt}{1.3em} \\
+	&   \rule{0pt}{1.3em}  \\
+	&   \rule{0pt}{1.3em}  \\
+	&   \rule{0pt}{1.0em}  
+\end{WithArrows}$ 
+}    \hfill \parbox{0.24\linewidth}{	
+$\begin{WithArrows}
+(-2x-7)^{15}&=0 \\
+&  \rule{0pt}{1.3em} \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.0em}   
+\end{WithArrows}$ 
+}      
+
+
+
+\noindent \parbox{0.31\linewidth}{	
+$\begin{WithArrows}
+x^2&=12x-36 \\
+&  \rule{0pt}{1.3em} \\
+&  \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}    \\
+&   \rule{0pt}{1.0em}  
+\end{WithArrows}$ 	
+}\hfill \parbox{0.31\linewidth}{	
+$\begin{WithArrows}
+9x^2+24x+4&=0 \\
+&  \rule{0pt}{1.3em} \\
+&   \rule{0pt}{1.3em}  \\
+&    \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}   \\
+&   \rule{0pt}{1.0em}  
+\end{WithArrows}$ 
+}  \hfill \parbox{0.31\linewidth}{	
+$\begin{WithArrows}
+(x+1)(2x+3)+5(x+1)&=0 \\
+&  \rule{0pt}{1.3em} \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}  \\
+&  \rule{0pt}{1.3em}   \\
+&   \rule{0pt}{1.0em}  
+\end{WithArrows}$ 
+}    
+\end{example} 
+\vspace{-0.5em}
+\begin{exercise}\label{chapter07:exercice:equationproduitA} Résoudre dans $\mathbb{R}$ les équations suivantes, inconnue $x$. 
+\vspace{-0.5em}
+\begin{multicols}{3}
+\begin{enumerate}[leftmargin=*,label={$(E_{\arabic*})$}]
+\item $(5x-10)(8x+5)=0$
+\item $(8x-1)(7x-4)=0$
+\item $(8x-1)+(7x-4)=0$ 
+\item $5x^2+2x=0$
+\item $ 9x^2-4=0$
+\item $36x^2+100=0$
+\item $x^2+10x+25=0$ 
+\item $-3x^2=5x$
+\item $x^2=2x-1$
+\item $x^2+4x=-4$
+\item $(x-3)^2(2x-1)^4=0$  
+\item $x^2-6x=-9$
+\end{enumerate}
+\end{multicols} 
+\end{exercise}  
+\vspace{-0.5em}
+\begin{exercise}\label{chapter07:exercice:equationproduitB} Mêmes consignes \vspace{-0.5em}
+\begin{multicols}{2}
+\begin{enumerate}[leftmargin=*,label={$(E_{\arabic*})$}]
+\item $(3x+2)(8x+5)+(3x+2)(2x+3)=0$ 
+\item $(3x-1)^2+(3x-1)(5x-4)=0$ 
+\item $(3x-1)^2-(5x-4)^2=0$ 
+%			\item  $0=(3x+2)(8x+5)+(3x+2)(2x+3)$
+\item $(2x-5)(5x-4)=(2x-5)(8x-1)$ 
+\item $(6x-4)(-3x+2)=(10x-2)(6x-4)$  
+\item $(2x+3)^2=(5x+4)^2$ 
+\end{enumerate}
+\end{multicols} 
+\end{exercise}
+\vspace{-0.5em} 
+\begin{exercise}[une cubique] Soit $f$ et $g$ définies sur $\mathbb{R}$ par $f(x)=x^3-7x+6$ et $g(x)=x^2+2x-3$.
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+	\item Vérifiez que $g(-3)=0$.
+	\item Déterminer $a$ et $b$ tel que  pour tout $x\in\mathbb{R}$ on a $g(x)=(x+3)(ax+b)$.
+	\item Vérifiez que $f(2)=0$.
+	\item Déterminer $A$, $B$ et $C$ tel que pour tout $x\in\mathbb{R}$ on a $f(x)=(x-2)(Ax^2+Bx+C)$
+	\item En déduire toutes les solutions de l'équation $f(x)=0$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Un grand classique : choisir la forme algébrique la plus adaptée]
+
+On considère l'expression définie pour tout $x$ appartenant à $\mathbb{R}$ par $A(x) =(x+3)^2+2(x+1)(x+3)$.
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+\item Développer, réduire et ordonner $A(x)$  (forme développée). 
+\item Factoriser $A(x)$ et montrer que $A(x)=(x+3)(3x+5)$ (forme factorisée).
+\item Calculer $A(0)$.
+\item En utilisant la forme développée donner la valeur exacte de $A(\sqrt{2})$. 
+\item En utilisant la forme factorisée, résoudre l'équation $A(x)=0$.
+\item Utiliser la forme la plus adaptée pour déterminer la valeur des deux solutions de $A(x)=15$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[rebelotte] Soit la fonction $B$ définie sur $\mathbb{R}$ par    $B(x) =(2x-4)^2-3(x-2)(x+5)$.
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+\item Développer, réduire et ordonner $B(x)$ (forme développée). 
+\item Montrer que pour tout $x\in\mathbb{R}$,  $B(x)=(x-23)(x-2)$ (forme factorisée).
+\item En utilisant la forme la plus adaptée calculer $B(0)$ et $B(-\sqrt{2})$.  
+\item En utilisant la forme la plus adaptée résoudre dans $\mathbb{R}$ l'équation $B(x)=0$ d'inconnue $x$.  
+\item En utilisant la forme la plus adaptée résoudre dans $\mathbb{R}$ l'équation $B(x)=46$ d'inconnue $x$.  
+\item Montrer que pour tout $x\in\mathbb{R}$, $B(x)=(x-\numprint{12.5})^2- \numprint{110.25}$ (forme canonique).
+\item En utilisant la forme canonique résoudre dans $\mathbb{R}$ l'équation $B(x)=- \numprint{110.25}$ d'inconnue $x$. 
+\item En utilisant la forme canonique résoudre dans $\mathbb{R}$ l'équation $B(x)=\numprint{10.75}$ d'inconnue $x$. 
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[un dernier]Soit la fonction $C$ définie sur $\mathbb{R}$ par $C(x) =(3x+5)^2-(2x+3)^2$.
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+\item Développer, réduire et ordonner $C(x)$. 
+\item Factoriser $C(x)$ à l'aide d'une identité remarquable et montrer que $C(x)=(5x+8)(x+2)$.
+\item Calculer $C(0)$.
+%\item En utilisant la forme développée donner la valeur exacte de $C(-\sqrt{2})$. 
+\item En utilisant la forme factorisée, résoudre l'équation $C(x)=0$.
+\item L'équation  $C(x)=16$ a deux solutions. En utilisant la forme la plus adaptée, déterminer les.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise} \hfill 
+	
+	
+	\noindent\parbox{0.30\linewidth}{\centering 
+		\begin{tikzpicture}[scale=0.7]
+			\tkzDefPoint(-2,-1.5){A}
+			\tkzDefPoint(2.5,-1.5){B}
+			\tkzDefPoint(2.5,1){C}
+			\tkzDefPoint(-2,1){D}
+			\tkzDrawSegments[line width=1.2pt](A,B B,C C,D D,A)
+			\tkzLabelSegment[below](A,B){\small$x+4$}
+			\tkzLabelSegment[right](B,C){\small$x$}
+			\tkzLabelSegment[below](A,C){\small Aire = \SI{60}{\centi\meter^2}}
+			%		\tkzLabelSegment[above](D,C){\scriptsize$4x+2$}
+			\tkzMarkRightAngle[  size=0.25](B,A,D) 
+			\tkzMarkRightAngle[  size=0.25](C,B,A) 
+			\tkzMarkRightAngle[  size=0.25](D,C,B) 
+			\tkzMarkRightAngle[  size=0.25](A,D,C) 
+		\end{tikzpicture} 
+	}\hfill \parbox{0.65\linewidth}{ 
+		\begin{enumerate}[label=\arabic*), leftmargin=*]
+			\item  Montrer que $x$ vérifie $x^2+4x-60=0$. 
+			\item Factoriser par essai-erreur et identifier les solutions admissibles.
+		\end{enumerate} 
+	}   
+\end{exercise}
+\begin{exercise} \hfill 
+	
+	\noindent\parbox{0.30\linewidth}{\centering 
+		\begin{tikzpicture}[scale=0.7]
+			\tkzDefPoint(-2,-1.5){A}
+			\tkzDefPoint(2.5,-1.5){B}
+			\tkzDefPoint(2.5,1){C}
+			\tkzDefPoint(-2,1){D}
+			\tkzDrawSegments[line width=1.2pt](A,B B,C C,D D,A)
+			\tkzLabelSegment[below](A,B){\small$x+5$}
+			\tkzLabelSegment[below, sloped](B,C){\small$x-4$}
+			\tkzLabelSegment[below](A,C){\small Aire = \SI{36}{\centi\meter^2}}
+			%		\tkzLabelSegment[above](D,C){\scriptsize$4x+2$}
+			\tkzMarkRightAngle[  size=0.25](B,A,D) 
+			\tkzMarkRightAngle[  size=0.25](C,B,A) 
+			\tkzMarkRightAngle[  size=0.25](D,C,B) 
+			\tkzMarkRightAngle[  size=0.25](A,D,C) 
+		\end{tikzpicture}  
+	}\hfill \parbox{0.65\linewidth}{ 
+		\begin{enumerate}[label=\arabic*), leftmargin=*] 
+			\item  Montrer que $x$ vérifie $x^2+x-56=0$. 
+			\item Factoriser par essai-erreur et identifier les solutions admissibles.
+		\end{enumerate} 
+	}   
+\end{exercise}
+\begin{exercise} \hfill 
+
+
+\noindent\parbox{0.30\linewidth}{\centering 
+	\begin{tikzpicture}[scale=.75]
+		\tkzSetUpPoint[size=2, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+		%			\tkzInit[xmin=-1.0,ymin=-1.0,xmax=6.5,ymax=2.8]
+		%			\tkzClip
+		\tkzDefPoint(0,0){A} 
+		\tkzDefPoint(4.5,0){B}
+		\tkzDefPoint(4.5,2){C}
+		\tkzDefPoint(0,2){D} 
+		\tkzDrawPolygon[line width=1.2pt](A,B,C,D)  
+		
+		\tkzDrawSegment[dim={\small$x+2$,-15pt,}](A,B)
+		\tkzLabelSegment[above,font=\small](A,C){$58$}
+		\tkzDrawSegments[dashed, line width=1.2pt](A,C)  
+		\tkzDrawSegment[dim={\small$x$,15pt,},dashed](A,D)  
+%		\tkzMarkRightAngle[  size=0.25](B,A,F) 
+	\end{tikzpicture}  
+}\hfill \parbox{0.65\linewidth}{ 
+	La figure ci-contre est un   rectangle. 
+	\begin{enumerate}[label=\arabic*), leftmargin=*]
+		\item Montrer que $x$ vérifie  $x^2+2x-1680=0$.
+		\item Développer $(x-40)(x+42)$.
+		\item En déduire le(s) valeur(s) possibles de $x$.
+	\end{enumerate}
+}  
+
+\end{exercise}	
+\begin{exercise} \hfill 
+	
+	\noindent\parbox{0.30\linewidth}{\centering 
+		\begin{tikzpicture}[scale=.8]
+			\tkzSetUpPoint[size=2, fill=black]
+			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+			\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+			%			\tkzInit[xmin=-1.0,ymin=-1.0,xmax=6.5,ymax=2.8]
+			%			\tkzClip
+			\tkzDefPoint(0,0){A} 
+			\tkzDefPoint(5,0){B}
+			\tkzDefPoint(0.8,2.25){D}
+			\tkzDefPoint(3.25,2.25){C}
+			\tkzDrawPolygon[line width=1.2pt](A,B,C,D)
+			\tkzDefPoint(2,0){I}
+			\tkzDefPoint(2,2.25){J}
+			\tkzDrawSegments[dashed,line width=0.4pt](I,J A,C)
+			
+			\tkzDrawSegment[dim={\small$3x-2$,-15pt,}](A,B))
+			\tkzDrawSegment[dim={\small$x+5$,-15pt,}](C,D))
+			\tkzDrawSegment[dim={\small$2x-3$,-75pt,},dashed](I,J))
+			%			\tkzDefTriangle[two angles = 27 and 90](A,C)\tkzGetPoint{B}
+			%			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+			%			% 			\tkzLabelSegment[below](A,C){$2\sqrt{xy}$}
+			%			\tkzLabelSegment[below](A,C){$x$}
+			%			\tkzLabelSegment[right](B,C){$x-4$}
+			%			\tkzLabelSegment[above left](A,B){$x+4$}
+			%			%    	\tkzDrawPoints[color=red](A,B,C)
+			%			%   	 \tkzLabelPoints[below](A,C)
+			%			%    		\tkzLabelPoints[above right](B)
+			\tkzMarkRightAngle[  size=0.25](B,I,J)
+			\tkzMarkRightAngle[  size=0.25](I,J,C)
+		\end{tikzpicture}  
+	}\hfill \parbox{0.65\linewidth}{  
+		L'aire du trapèze ci-dessous est de \SI{133}{\centi\meter^2}. Les longueurs sont en \si{\centi\meter}.
+		\begin{enumerate}[label=\arabic*), leftmargin=*]
+			\item Montrer que $x$ vérifie  $8x^2-6x-275=0$.
+			\item Développer $(4x-25)(2x+11)$.
+			\item Résoudre en $x$ et préciser la solution admissible.
+		\end{enumerate}
+	}  
+	
+\end{exercise}	
+\begin{exercise} \hfill 
+
+\noindent\parbox{0.30\linewidth}{\centering 
+\begin{tikzpicture}[scale=.75]
+\tkzSetUpPoint[size=2, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+%			\tkzInit[xmin=-1.0,ymin=-1.0,xmax=6.5,ymax=2.8]
+%			\tkzClip
+\tkzDefPoint(0,0){A} 
+\tkzDefPoint(6,0){B}
+\tkzDefPoint(6,2.05){C}
+\tkzDefPoint(2,2.05){D}
+\tkzDefPoint(2,3.2){E}
+\tkzDefPoint(0,3.2){F}
+\tkzDrawPolygon[line width=1.2pt](A,B,C,D,E,F)  
+
+\tkzDrawSegment[dim={\small$10$,-10pt,}](A,B))
+\tkzDrawSegment[dim={\small$3x+1$,-20pt,}](B,C))
+\tkzDrawSegment[dim={\small$9$,15pt,},dashed](A,F))
+\tkzDrawSegment[dim={\small$x$,-10pt,},dashed](E,F))
+%			\tkzDefTriangle[two angles = 27 and 90](A,C)\tkzGetPoint{B}
+%			\tkzDrawPolygon[line width=1.2pt](A,B,C)
+%			% 			\tkzLabelSegment[below](A,C){$2\sqrt{xy}$}
+%			\tkzLabelSegment[below](A,C){$x$}
+%			\tkzLabelSegment[right](B,C){$x-4$}
+%			\tkzLabelSegment[above left](A,B){$x+4$}
+%			%    	\tkzDrawPoints[color=red](A,B,C)
+%			%   	 \tkzLabelPoints[below](A,C)
+%			%    		\tkzLabelPoints[above right](B) 
+\tkzMarkRightAngle[  size=0.25](B,A,F)
+\tkzMarkRightAngle[  size=0.25](C,B,A)
+\tkzMarkRightAngle[  size=0.25](D,C,B)
+\tkzMarkRightAngle[  size=0.25](C,D,E)
+\tkzMarkRightAngle[  size=0.25](F,E,D)
+\tkzMarkRightAngle[  size=0.25](A,F,E)
+\end{tikzpicture}  
+}\hfill \parbox{0.65\linewidth}{ 
+L'aire de la figure en L ci-contre est   \SI{65}{\centi\meter^2}. Les longueurs  sont en \si{\centi\meter}. 
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+\item Montrer que $x$ vérifie    $3x^2-38x+55=0$.
+\item Développer $(3x-5)(x-11)$.
+\item Résoudre en $x$ et préciser quelles solutions sont admissibles.
+\end{enumerate}
+}    
+\end{exercise}
+
+
+%----------------------------------------------------------------------------------------
+%	   
+%----------------------------------------------------------------------------------------
+
+
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+ \section{Fractions algébriques}
+ \begin{eBox}
+ 	Pour certaines expressions de $x$, il convient avant de procéder à leur manipulation de préciser leur \textbf{domaine de définition}. Il s'agit des valeurs de la variable $x$ pour lesquelles l'expression a un sens, en particulier les \textbf{dénominateurs} ne doivent pas s'annuler.   
+ \end{eBox}
+ \begin{example}Préciser le domaine de définition des expressions suivantes :
+ 	
+ 	\noindent  \parbox{0.45\linewidth}{	
+ 		$\begin{WithArrows}
+ 			A(x)&=\frac{3x-15}{6x-18} \\
+ 			\textbf{Valeur Interdite : }	&   6x-18=0 \rule{0pt}{1.3em} \\
+ 			&  6x = 18 \rule{0pt}{1.3em}  \\
+ 			&  x=3 \rule{0pt}{1.3em}  
+ 		\end{WithArrows}$ \\
+ 		Le domaine de $A$ est $D=\mathbb{R}\setminus \{3\}$.
+ 	}  \hfill \parbox{0.45\linewidth}{	
+ 		$\begin{WithArrows}
+ 			B(x)&=\frac{x-3}{x^2-2x} \\ 
+ 			\textbf{V.I. : }	& x^2-2x=0  \rule{0pt}{1.3em}  \\
+ 			& \color{white} x(x-2) = 0 \rule{0pt}{1.3em}  \\
+ 			& \color{white} x=0 \; \text{ou} \;x= 2 \rule{0pt}{1.3em}    
+ 		\end{WithArrows}$ \\
+ 		Le domaine de $B$ est \color{white} $D=\mathbb{R}\setminus \{0~;~2\}$.
+ 	}     
+ \end{example} 
+ 
+ \section{Équations rationnelles}
+ 
+ 
+ \begin{theorem}[Équation quotient nul] Si $\frac{A}{B}=0$ alors $A=0$ et $B\neq0$
+ \end{theorem}
+ \begin{proof}\color{white} Comme $\frac{A}{B}=A\times \frac{1}{B}$, $B$ doit avoir un inverse. D'où $B\neq0$. 
+ 	
+ 	\noindent \parbox{0.85\linewidth}{	
+ 		$\begin{WithArrows}
+ 			\frac{A}{B} &=0 \\
+ 			A\times \frac{1}{B}&=  0\Arrow{$\times B$}\\
+ 			A\times \frac{1}{B}\times B & = 0\times B\\
+ 			A & = 0
+ 		\end{WithArrows}$ 	
+ 	} 
+ \end{proof}
+ \begin{corollaryT} Si $\frac{A}{B}=\frac{C}{D}$ alors $AD=BC$, $C\neq 0$ et $D\neq0$. 
+	\end{corollaryT}
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+
+\subsection{Exercices : fractions algébriques}
+\begin{eBox}
+\textbf{Simplification de fractions}	Pour $a$ et $c\neq 0$ on a  $\frac{ab}{ac}=\frac{b}{c}$
+\end{eBox}
+\begin{example}[Simplifier]  les expressions suivantes en trouvant un facteur commun :
+
+\noindent\hfill\parbox{0.43\linewidth}{	
+$\begin{WithArrows}
+A(x)&= \frac{5x^2+2x}{3x} \rule{0pt}{1.8em} \\ % 
+&= \frac{x(5x+2)}{3x}\rule{0pt}{1.8em}  \\  
+& =\frac{5x+2}{3} \rule{0pt}{1.8em}  
+\end{WithArrows}$ 	
+$\begin{WithArrows}
+\textbf{V.I. : }& 3x =0 \\
+ & D=\mathbb{R}\setminus\{3\}  
+\end{WithArrows}$ 	
+}    \hfill\parbox{0.55\linewidth}{	
+$\begin{WithArrows}
+B(x)&= \frac{x^2+4x+4}{x^2-4}  \rule{0pt}{1.8em} \\ 
+&= \frac{(x+2)^2}{(x-2)(x+2)}\rule{0pt}{1.8em}  \\  
+& =\frac{x+2}{x-2}\rule{0pt}{1.8em}  
+\end{WithArrows}$
+$\begin{WithArrows}
+\textbf{V.I. : }& x^2-4 =0 \\
+& (x-2)(x+2) =0 \\
+& x =2 \text{ ou } x=-2 \\
+ & D=\mathbb{R}\setminus\{2~;~-2\}  
+\end{WithArrows}$
+}   
+\end{example} 
+%\parbox{0.31\linewidth}{	
+%	$\begin{WithArrows}
+%		A(x)& =\frac{14x+8}{2x^2+2} \rule{0pt}{1.8em} \\
+%		\textbf{V.I. : }& 2x^2+2 =0 \\
+%		\textbf{Domaine est }& D=\mathbb{R} \\
+%		A(x)&= \frac{2(7x+4)}{2(x^2+1)}\rule{0pt}{1.8em} \\
+%		& =\frac{7x+4}{x^2+1}\rule{0pt}{1.8em}     
+%	\end{WithArrows}$ 	
+%} \hfill
+%\vfill 
+% \hfill\parbox{0.24\linewidth}{	
+%	$\begin{WithArrows}
+%		C&= \frac{8+4x}{6x+12}  \rule{0pt}{1.8em} \\ 
+%		&=\rule{0pt}{1.8em}  \\  
+%		& =\rule{0pt}{1.8em}   \\
+%		& =\rule{0pt}{1.8em}   
+%	\end{WithArrows}$
+\begin{exercise} \label{chapitre02:fractionalgebriques:simplification} Pour chaque fraction, déterminer le domaine $D$ et simplifier la pour $x\in D$. :\hfill \vspace{-0.5em}
+\begin{multicols}{4} 
+\begin{enumerate}[label={$\Alph*(x)=$\rule{0pt}{1.8em}}, leftmargin=*] 
+%\item $\frac{2x-8}{12x-4}$
+\item $\frac{2x^2+8x}{4x}$ 
+\item $\frac{5x-15}{6x-18}$
+\item $\frac{x^2-9}{x+3}$
+\item $\frac{x-2}{x^2-2x}$  
+\item $\frac{x^2-10x+25}{x-5}$
+%\item $\frac{x^2+4x^2}{x^2-x}$
+%\item $\frac{x^3+4x^2}{6x^2+4x}$
+\item $\frac{x+5}{x^2-25}$ 
+\item $\frac{x^2+x}{x^2-1}$  	
+%\item $\frac{x^2+x^2}{3x^3}$
+\item $\frac{9x^2-12x+4}{9x^2-4}$  
+\end{enumerate}
+\end{multicols}
+\end{exercise} 
+\begin{eBox}
+	\textbf{Sommes de fractions}	Pour $b$ et $d\neq 0$ on a  $\frac{a}{b}+\frac{c}{d}=\frac{ad}{bd}+\frac{bc}{bd}=\frac{ad+bc}{bd}$
+\end{eBox}
+\begin{example} Préciser le domaine et ramener au même dénominateur les expressions suivantes.
+
+\noindent\hfill\parbox{0.45\linewidth}{	
+$\begin{WithArrows}
+A& = \frac{2}{x+1}-1 \rule{0pt}{1.6em} \\
+& = \frac{2}{x+1} - \frac{x+1}{x+1}\rule{0pt}{1.6em} \\
+& = \frac{2-(x+1)}{x+1} \rule{0pt}{1.6em}   \\  
+& = \frac{1-x}{x+1}  \rule{0pt}{1.6em}  
+\end{WithArrows}$ 	 	
+$\begin{WithArrows}
+\textbf{V.I. : }& x+1 =0 \\
+& D=\mathbb{R}\setminus\{-1\}  
+\end{WithArrows}$ 	
+}  \hfill\parbox{0.52\linewidth}{	
+$\begin{WithArrows}
+B&=  \frac{1}{x}+\frac{2}{x-1}  \rule{0pt}{1.6em} \\ 
+& =\frac{1(x-1)}{x(x-1)}+\frac{2x}{(x-1)x} \rule{0pt}{1.6em}  \\  
+& =\frac{x-1 + 2x}{(x-1)x} \rule{0pt}{1.6em}  \\  
+& =\frac{3x-1}{(x-1)x}  \rule{0pt}{1.6em}   
+\end{WithArrows}$ 
+$\begin{WithArrows}
+	\textbf{V.I. : }& x =0 \text{ et } x-1=0\\
+	& D=\mathbb{R}\setminus\{0~;~1\}  
+\end{WithArrows}$ 	
+}    
+\end{example}   
+\begin{exercise} \label{chapitre02:fractionalgebriques:memedenominateur}  
+Même consignes :\vspace{-0.75em}
+\begin{multicols}{3}
+\begin{enumerate}[label={$\Alph*(x)=$\rule{0pt}{1.8em}}, leftmargin=*] 
+\item $\frac{2}{x+3}+\frac{2}{x-3}$
+\item $\frac{4}{x}+\frac{x-1}{3x-5}$
+\item $\frac{3}{5x}+\frac{11x}{x+1}$
+\item $\frac{3x-2}{5x-3}-\frac{2-3x}{7x-2}$  
+\item $\frac{5}{2x-1}-1$ 
+\item $2x+1-\frac{2}{2x+1}$
+\item $\frac{2}{x-2}-\frac{5}{x+3}$
+\item $\frac{1}{x}-\frac{3}{x-5}$
+\item $\frac{1}{2x-7} -\frac{1}{2x+9}$
+%\item $\frac{3x+4}{2x-9}\times \frac{4x^2-36x+81}{9x^2-16}$
+%\item $\frac{x^2-2x+1}{(23x-5)^2}\times \frac{46x-10}{1-x}$
+%%\item $\frac{-2}{x+3}+\frac{2}{x-5}$
+%%\item $\frac{1}{2(x-1)}+\frac{1}{6(x+1)}$
+%%\item $\frac{-2}{3(x+3)}+\frac{1}{x+2}$
+%%\item $\frac{3}{4(x-3)}-\frac{5}{8(x-4)}$ 
+\end{enumerate}
+\end{multicols}  
+\end{exercise}
+ \begin{eBox}
+ 	\textbf{Produit et quotient de fractions}	Pour $a, b, c,$ et $d\neq 0$ on a  $\frac{a}{b}\times\frac{c}{d}=\frac{ac}{bd}$ \hfill et \hfill $\frac{a}{b}\divisionsymbol\frac{c}{d}=\frac{a}{b}\times\frac{d}{c}$
+ \end{eBox}
+\begin{exercise} \label{chapitre02:fractionalgebriques:produit}  
+	Même consignes :\vspace{-0.5em}
+	\begin{multicols}{3}
+		\begin{enumerate}[label={$\Alph*(x)=$\rule{0pt}{1.8em}}, leftmargin=*]  
+			\item $\frac{3x+4}{2x-9}\times \frac{4x^2-36x+81}{9x^2-16}$
+			\item $\frac{x^2-2x+1}{(23x-5)^2}\times \frac{46x-10}{1-x}$
+			\item $\frac{1}{\frac{x+2}{x-5}}  (x+5)$ 
+		\end{enumerate}
+	\end{multicols}  
+\end{exercise}
+
+
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+%\newpage
+%\loadgeometry{marginlayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%		headwidth=textwithmarginpar,
+%		headsepline=true,
+%		headsepline= 0.5pt,
+%		footwidth=textwithmarginpar,
+%	}   
+%\onehalfspacing   
+%
+%
+%\section{Équations rationnelles}
+%
+% 
+% \begin{theorem}[Équation quotient nul] Si $\frac{A}{B}=0$ alors $A=0$ et $B\neq0$
+% \end{theorem}
+% \begin{proof} Comme $\frac{A}{B}=A\times \frac{1}{B}$, $B$ doit avoir un inverse. D'où $B\neq0$. 
+% 	
+% 	\noindent \parbox{0.85\linewidth}{	
+% 		$\begin{WithArrows}
+% 			\frac{A}{B} &=0 \\
+% 			A\times \frac{1}{B}&=  0\Arrow{$\times B$}\\
+% 			A\times \frac{1}{B}\times B & = 0\times B\\
+% 			A & = 0
+% 		\end{WithArrows}$ 	
+% 	} 
+% \end{proof}
+
+
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\subsection{Exercices : résolution d'équations rationnelles}
+\begin{example}Résoudre dans $\mathbb{R}$ les équations rationnelles suivantes
+
+\noindent  \parbox{0.31\linewidth}{	
+$\begin{WithArrows}
+\frac{9x-5}{8x-3} &=   0\\
+&  \rule{0pt}{1.3em} \\
+&   \rule{0pt}{1.3em}  \\
+&    \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}   \\
+&   \rule{0pt}{1.3em}   \\
+&   \rule{0pt}{1.3em}   
+\end{WithArrows}$ 
+}  \hfill \parbox{0.31\linewidth}{	
+$\begin{WithArrows}
+\frac{-9x-5}{3x-4}	&= 5  \\
+&  \rule{0pt}{1.3em} \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}  \\
+&  \rule{0pt}{1.3em}   \\
+&   \rule{0pt}{1.3em}    \\
+&   \rule{0pt}{1.3em}   
+\end{WithArrows}$ 
+}    \hfill \parbox{0.31\linewidth}{	
+$\begin{WithArrows} 
+\frac{2}{6x-1}&= \frac{3}{5x-7}  \\
+&  \rule{0pt}{1.3em} \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}  \\
+&   \rule{0pt}{1.3em}   \\
+&   \rule{0pt}{1.3em}    \\
+&   \rule{0pt}{1.3em}   
+\end{WithArrows}$ 
+}  
+\end{example}  
+\vfill 
+\begin{exercise}  \label{chapter08:exercice:equationrationnelles02}  
+Préciser le domaine de résolution puis résoudre  dans $\mathbb{R}$ les équations suivantes : 
+\begin{multicols}{4}
+\begin{enumerate}[label={$(E_\arabic*)$\rule{0pt}{2em}},leftmargin=*]
+\item $\frac{7x-6}{3x-5}=0$
+\item $\frac{4x+6}{2x-5}=0$
+\item $\frac{20x^2-8x}{2x-2}=0$
+\item $\frac{6x^2-15x}{2x-5}=0$ 
+\end{enumerate}
+\end{multicols}  
+\end{exercise} 
+\begin{exercise}  \label{chapter08:exercice:equationrationnelles02b}  
+Préciser le domaine de résolution puis résoudre  dans $\mathbb{R}$ les équations suivantes : 
+\begin{multicols}{4}
+\begin{enumerate}[label={$(E_\arabic*)$\rule{0pt}{2em}},leftmargin=*] 
+\item $\frac{x+4}{-3x-3} =\frac{7}{2}$ % -29/23
+\item $\frac{-x-6}{3-2x} =5$ 
+\item $\frac{-6x-1}{-3x-3}=11$
+\item $\frac{2x-6}{2x+1}=-11$
+\end{enumerate}
+\end{multicols}  
+\end{exercise} 
+ 
+
+\begin{exercise}   \label{chapter08:exercice:equationrationnelles03} 
+Préciser le domaine de résolution, mettre au même dénominateur puis résoudre  dans $\mathbb{R}$ les équations suivantes  : 
+\begin{multicols}{3}
+\begin{enumerate}[label={$(E_\arabic*)$\rule{0pt}{2em}},leftmargin=*]
+\item $1-\frac{2x}{2x+1}=\frac{3}{2x}$ 
+\item $\frac{1}{x}-\frac{1}{x+1}=\frac{1}{x^2}$  
+\item$x-\frac{1}{x}=0$ 
+\item  $x-1=\frac{4}{x-1}$  
+\item $1-\frac{3}{x-1}= \frac{x-4}{x-5} $ 
+\item $\frac{3}{x+3}-\frac{15}{3x-5} =\frac{3}{2(x+3)}$ 
+%\item $	\frac{7}{2x-1}  =\frac{3}{7x}$ 
+\end{enumerate}
+\end{multicols}   
+\end{exercise}
+
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+
+\begin{proof}[solutions de l'exercice \ref{chapter07:exercice:equationproduitA}]  
+	 \scriptsize  
+\begin{pycode}
+from re import sub
+import sympy as sp
+from sympy.core.sympify import kernS
+
+x, y, z, t , a, b = sp.symbols('x y z t a b', real=True)
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcs = [
+' (5*x-10)*(8*x+5)' ,
+' (8*x-1)*(7*x-4)' ,
+' (8*x-1)+(7*x-4)' ,
+' 5*x**2+2*x' ,
+'  9*x**2-4' ,
+' 36*x**2+100' ,
+' x**2+10*x+25' ,
+' -3*x**2-5*x' ,
+' -x**2+2*x-1' ,
+' x**2+4*x+4' ,
+' (x-3)**2*(2*x-1)**4' ,
+' x**2-6*x+9' ,
+]
+n=1 
+for func in funcs: 
+	solution = set(sp.solve(eval(func), x))
+	string =  '$S_{'+str(n)+'}='+   sp.latex(solution ) + '$; '
+	print(string) 
+	n = n+1
+\end{pycode}   
+\end{proof}
+
+\begin{proof}[solutions de l'exercice \ref{chapter07:exercice:equationproduitB}]  
+	 \scriptsize  
+\begin{pycode}
+from re import sub
+import sympy as sp
+from sympy.core.sympify import kernS
+
+x, y, z, t , a, b = sp.symbols('x y z t a b', real=True)
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcs = [
+' (3*x+2)*(8*x+5)+(3*x+2)*(2*x+3)' ,
+' (3*x-1)**2+(3*x-1)*(5*x-4)' ,
+' (3*x-1)**2-(5*x-4)**2' ,
+' (2*x-5)*(5*x-4)-(2*x-5)*(8*x-1)' ,
+' (6*x-4)*(-3*x+2)-(10*x-2)*(6*x-4)' ,
+' (2*x+3)**2-(5*x+4)**2' ,
+]
+n=1 
+for func in funcs: 
+	solution = set(sp.solve(eval(func), x))
+	string =  '$S_{'+str(n)+'}='+   sp.latex(solution ) + '$; '
+	print(string) 
+	n = n+1
+\end{pycode}  
+\end{proof}
+\begin{proof}[solution de l'exercice \ref{chapitre02:fractionalgebriques:simplification}] \hfill 
+%\begin{multicols}{4} 
+ 
+\begin{multicols}{2}  
+\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [
+#'(2*x-8)/(12*x-4)',
+'(2*x**2+8*x)/(4*x)',
+'(5*x-15)/(6*x-18)',
+'(x**2-9)/(x+3)',
+'(x-2)/(x**2-2*x)',
+'(x**2-10*x+25)/(x-5)',
+#'(x**2+4*x**2)/(x**2+x)',
+#'(x**3+4*x**2)/(6*x**2+4*x)',
+'(x+5)/(x**2-25)',
+'(x**2+x)/(x**2-1)',
+#'(x**2+x**2)/(3*x**3)',
+'(9*x**2-12*x+4)/(9*x**2-4)'
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
+for func in funcsfac :
+	num, den =  sp.fraction(sp.together(func))
+	roots = set(sp.solve(den, x))
+	nums, dens = sp.cancel(sp.together(func)).as_numer_denom()
+	myfactor =  eval('nums/dens')
+	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; pour $x\in\mathbb{R}\setminus'+ sp.latex(roots ) + '$; \n' )
+	n     = n + 1
+\end{pycode}
+\end{multicols}
+\end{proof}
+
+
+
+\begin{proof}[solution de l'exercice \ref{chapitre02:fractionalgebriques:memedenominateur} ] \hfill 
+\begin{multicols}{2}  
+\begin{pycode} 
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [
+'2/(x+3)+2/(x-3)',
+'4/x+(x-1)/(3*x-5)',
+'3/(5*x)+(11*x)/(x+1)',
+'(3*x-2)/(5*x-3)-(2-3*x)/(7*x-2)',
+'5/(2*x-1)-1',
+'2*x+1-2/(2*x+1)',
+'2/(x-2)-5/(x+3)',
+'1/x-3/(x-5)',
+'1/(2*x-7)-1/(2*x+9)',
+#'(3*x+4)/(2*x-9)*(4*x**2-36*x+81)/(9*x**2-16)', 
+#'(x**2-2*x+1)/(23*x-5)**2 *(46*x-10)/(1-x)',
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
+for func in funcsfac :
+	num, den =  sp.fraction(sp.together(func))
+	roots = set(sp.solve(den, x))
+	nums, dens = sp.cancel(sp.together(func)).as_numer_denom()
+	myfactor =  eval('nums/dens')
+	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; pour $x\in\mathbb{R}\setminus'+ sp.latex(roots ) + '$; \n' )
+	n     = n + 1
+\end{pycode}
+\end{multicols}
+\end{proof}  
+\begin{proof}[solution de l'exercice \ref{chapitre02:fractionalgebriques:produit} ] \hfill 
+\begin{multicols}{2}  
+\begin{pycode} 
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [ 
+'(3*x+4)/(2*x-9)*(4*x**2-36*x+81)/(9*x**2-16)', 
+'(x**2-2*x+1)/(23*x-5)**2 *(46*x-10)/(1-x)',
+'1/((x+2)/(x-5))*(x+5)'
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
+for func in funcsfac :
+	num, den =  sp.fraction(sp.together(func))
+	roots = set(sp.solve(den, x))
+	nums, dens = sp.cancel(sp.together(func)).as_numer_denom()
+	myfactor =  eval('nums/dens')
+	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; pour $x\in\mathbb{R}\setminus'+ sp.latex(roots ) + '$; \n' )
+	n     = n + 1
+\end{pycode}
+\end{multicols}
+\end{proof}  
+
+
+
+\begin{multicols}{3}
+\begin{proof}[solution de l'exercice  \ref{chapter08:exercice:equationrationnelles02} ] \hfill \footnotesize
+
+\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [
+'(7*x-6)/(3*x-5)',
+'(4*x+6)/(2*x-5)',
+'(20*x**2-8*x)/(2*x-2)',
+'(6*x**2-15*x)/(2*x-5)',
+]
+n=0
+L=['S_1','S_2','S_3','S_4','S_5','S_6', 'S_7', 'S_8', 'S_9', 'S_{10}', 'S_{11}', 'S_{12}']
+for func in funcsfac :
+	num, den = sp.fraction(func)
+	roots = set(sp.solve(den, x))
+	string =  "\\noindent$(E_"+ str(n+1) + ")$  D.R.  $=\mathbb{R}\setminus" + sp.latex(roots ) + '$;   '
+	print(string)
+	solution = set(sp.solve(func, x))
+	string =  '$'+ str(L[n])  + '=' + sp.latex(solution ) + '$; \n '
+	print(string)
+\end{pycode}
+\end{proof}
+\begin{proof}[solution de l'exercice \ref{chapter08:exercice:equationrationnelles02b} ] \hfill \footnotesize
+
+\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [
+'(x+4)/(-3*x-3)-7/2',
+'(-x-6)/(3-2*x)-5',
+'(-6*x-1)/(-3*x-3)-11',
+'(2*x-6)/(2*x+1)+11',
+]
+n=0
+L=['S_1','S_2','S_3','S_4','S_5','S_6', 'S_7', 'S_8', 'S_9', 'S_{10}', 'S_{11}', 'S_{12}']
+for func in funcsfac :
+	num, den = sp.together(func).as_numer_denom()
+	roots = set(sp.solve(den, x))
+	string =  "\\noindent$(E_"+ str(n+1) + ")$  D.R.  $=\mathbb{R}\setminus" + sp.latex(roots ) + '$;   ' 
+	print(string)
+	solution = set(sp.solve(func, x))
+	string =  '$'+ str(L[n])  + '=' + sp.latex(solution ) + '$; \n '
+	print(string)
+	n     = n + 1
+\end{pycode}
+\end{proof} 
+ 
+\begin{proof}[solution de l'exercices \ref{chapter08:exercice:equationrationnelles03} ] \hfill \footnotesize
+
+\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [ 
+'1-(2*x)/(2*x+1)-3/(2*x)',
+'1/x-1/(x+1)-1/(x**2)',
+'x-1/x',
+'x-1-4/(x-1)',
+'1-3/(x-1)-(x-4)/(x-5)',
+'3/(x+3)-15/(3*x-5)-3/(2*x+6)',
+#'-2+(5*x-4)/(2*x-5)-(x+6)/(x-5)',
+#'(25*x)/(x+2)-25/(3*x+1)+2/((3*x+1)*(x+2))' 
+]
+n=0
+L=['S_1','S_2','S_3','S_4','S_5','S_6', 'S_7', 'S_8', 'S_9', 'S_{10}', 'S_{11}', 'S_{12}']
+for func in funcsfac :
+	num, den = sp.together(func).as_numer_denom()
+	roots = set(sp.solve(den, x))
+	string =  "\\noindent$(E_"+ str(n+1) + ")$  D.R.  $=\mathbb{R}\setminus" + sp.latex(roots ) + '$;   ' 
+	print(string)
+	solution = set(sp.solve(func, x))
+	string =  '$'+ str(L[n])  + '=' + sp.latex(solution ) + '$; \n '
+	print(string)
+	n     = n + 1
+\end{pycode}
+\end{proof} 
+\end{multicols} 
+ 
+
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+\newpage  
+\section{Club de Maths : équations simples et moins simples}
+
+
+\begin{problem}
+\label{chapter07:problem:01}\hfill 
+
+\noindent\parbox{0.35\linewidth}{\centering 
+\begin{tikzpicture}[scale=0.6]
+\tkzSetUpPoint[size=2, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.5 and .5]  
+%			\tkzInit[xmin=-1.0,ymin=-1.0,xmax=6.5,ymax=2.8]
+%			\tkzClip
+\tkzDefPoint(0,0){B} 
+\tkzDefPoint(6,0){C}
+\tkzDefPoint(6,1.25){D}
+\tkzDefPoint(2,1.25){E}
+\tkzDefPoint(2,4.2){F}
+\tkzDefPoint(0,4.2){A}
+\tkzDrawPolygon[fill=gray!15, line width=1.2pt](A,B,C,D,E,F)  
+
+\tkzDrawSegment[dim={\scriptsize$10$,-15pt,}](D,E))
+\tkzDrawSegment[dim={\scriptsize$5$,+10pt,}](A,F))
+\tkzDrawSegment[dim={\scriptsize$2$,-10pt,},dashed](C,D))
+\tkzDrawSegment[line width=1.2pt](A,C)
+
+
+\tkzLabelPoints[above right,font=\scriptsize](D,F)
+\tkzLabelPoints[above left,font=\scriptsize](A)
+\tkzLabelPoints[below right,font=\scriptsize](C)
+\tkzLabelPoints[below left,font=\scriptsize](B,E)
+
+
+\tkzMarkRightAngle[  size=0.25](B,A,F)
+\tkzMarkRightAngle[  size=0.25](C,B,A)
+\tkzMarkRightAngle[  size=0.25](D,C,B)
+\tkzMarkRightAngle[  size=0.25](C,D,E)
+\tkzMarkRightAngle[  size=0.25](F,E,D)
+\tkzMarkRightAngle[  size=0.25](A,F,E)
+\end{tikzpicture}  
+}\hfill \parbox{0.6\linewidth}{ 
+Quelle doit être la longueur $EF$ pour que l'aire de la partie colorée soit égale à l'aire du triangle $ABC$ ?
+}    
+
+\end{problem}
+
+\begin{problem}\label{chapter07:problem:02} 
+Un père et son fils ont $35$ et $3$ ans, respectivement. Dans combien d'années le père aura-t-il le double de l'âge de son fils ?
+% 35+x=2(3+x) , x=29$.
+\end{problem}
+\begin{problem}\label{chapter07:problem:03} 
+Un joueur obtient huit fois le score $7$ puis $x$ fois le score $10$. À la fin du jeu, son score moyen est de $9$. Combien vaut alors $x$ ?
+
+% $\frac{8\times 7 +10x}{x+8}=9$, $x=16$.
+\end{problem}
+\begin{problem}\label{chapter07:problem:04}  
+Résoudre dans $\mathbb{R}$ en développant et en simplifiant les équations suivantes d'inconnue $x$ :\vspace{-0.5em}
+\begin{multicols}{2}
+\begin{enumerate}[label={$(E_\arabic*)$},leftmargin=*]
+\item $(x-1)^2+(x+3)^2=2(x-2)(x+1)+38$
+\item $5(x^2-2x-1)+2(3x-2)=5(x+1)^2$ 
+\end{enumerate}
+\end{multicols} 
+\end{problem}
+\begin{problem}\label{chapter07:problem:05} 
+Résoudre dans $\mathbb{R}$ en factorisant   les équations suivantes d'inconnue $x$ :\vspace{-0.5em}
+\begin{multicols}{2}
+\begin{enumerate}[label={$(E_\arabic*)$},leftmargin=*]
+\item $-\frac{3x^2}{5}+x=0$
+\item $-\frac{5x^2}{7}-\frac{3x}{4}=0$ 
+\end{enumerate}
+\end{multicols} 
+\end{problem}
+\begin{problem}\label{chapter07:problem:06} 
+Résoudre dans $\mathbb{R}$ en factorisant   les équations suivantes d'inconnue $x$ :\vspace{-0.5em}
+\begin{multicols}{2}
+\begin{enumerate}[label={$(E_\arabic*)$},leftmargin=*]
+\item $(x+5)(4x-1)+x^2-25=0$
+\item $(x+4)(5x+9)-x^2+16=0$ 
+\end{enumerate}
+\end{multicols} 
+\end{problem}
+\begin{problem}\label{chapter07:problem:07} 
+Résoudre dans $\mathbb{R}$ en factorisant   les équations suivantes d'inconnue $x$ :\vspace{-0.5em}
+\begin{multicols}{2}
+\begin{enumerate}[label={$(E_\arabic*)$},leftmargin=*]
+\item $7x^3-175x=0$
+\item $(x+5)(3x+2)^2=x^2(x+5)$ 
+\end{enumerate}
+\end{multicols} 
+\end{problem}
+\begin{problem}\label{chapter07:problem:08} 
+Résoudre dans $\mathbb{R}$   les équations suivantes d'inconnue $x$ :\vspace{-0.5em}
+\begin{multicols}{3}
+\begin{enumerate}[label={$(E_\arabic*)$},leftmargin=*]
+\item $\frac{4x+7}{x-1}=\frac{12x+5}{3x+4}$
+\item $\frac{7}{x-5}=\frac{4}{x+1} +\frac{3}{x-2}$ 
+\item $\frac{9}{x}=\frac{8}{x+1}+\frac{1}{x-1}$ 
+\end{enumerate}
+\end{multicols} 
+\end{problem}
+\begin{problem}\label{chapter07:problem:09}  
+On note $a$ une longueur, pour l’instant inconnue. Un rectangle de largeur $a$ et de longueur
+$a+1$ a la même aire qu’un autre rectangle qui lui est de largeur $a−1$ et de longueur $a+3$. Est-ce possible et si oui, combien de valeurs possibles de $a$ existe-t-il ?
+\end{problem}
+\begin{problem}\label{chapter07:problem:10} 
+Une boîte de café coûte \EUR{100} à l'achat et se vend \EUR{140} : elle permet une marge de 40\%.\\
+Pour une boîte de cacao, la marge est de 20\%. Si le nombre de boîtes de café vendues est le double du nombre de boîte de cacao vendues, et si la marge totale est de 36\% (par rapport au prix d'achat), à quel prix s'est vendue chaque boîte de cacao ? 
+\end{problem} 
+\begin{problem}\label{chapter07:problem:11} 
+Si $\frac{a}{b}=\frac{1}{2}$ et $\frac{b}{c}=\frac{1}{4}$, donner la valeur de $\frac{a-b}{b-c}$.
+
+% $\frac{1}{6} $ 
+\end{problem} 
+\begin{problem}\label{chapter07:problem:12} 
+Trouver $x$ sachant que $\frac{5}{9}=\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{x}}}$.
+\end{problem}
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+%\newpage  
+\begin{remark} Ces exercices sont pour une grande partie tirés d'un recueil du club de Maths de Nancy.
+	\end{remark}
+\begin{proof}[solution du problème \ref{chapter07:problem:01}]  
+
+$x=EF$. $7.5(x+2)=5x+30$. $x=6$.  
+
+\end{proof} 
+\begin{proof}[solution du problème \ref{chapter07:problem:02}]  
+
+$35+x=2(3+x)$ , $x=29$.  
+
+\end{proof} 
+\begin{proof}[solution du problème \ref{chapter07:problem:03}]  
+
+$\frac{8\times 7 +10x}{x+8}=9$, $x=16$.
+\end{proof} 
+\begin{proof}[solution du problème \ref{chapter07:problem:04}]  
+
+Pour vérification, chacune des deux équations admet une solution, et leur somme faut $3$.
+
+\end{proof} 
+\begin{proof}[solution du problème \ref{chapter07:problem:05}]  
+
+Pour vérification : chacune des deux équations admet deux solutions et la somme des quatre solutions vaut $\frac{37}{60}$.
+
+\end{proof} 
+\begin{proof}[solution du problème \ref{chapter07:problem:06}]  
+
+Pour vérification : chacune des deux équations admet deux solutions et la somme des quatre solutions vaut $\frac{-171}{20}$.
+
+\end{proof} 
+\begin{proof}[solution du problème \ref{chapter07:problem:07}]  
+
+Pour vérification : chacune des deux équations admet trois solutions et la somme des six solutions vaut $\frac{-13}{2}$.
+
+\end{proof}  
+\begin{proof}[solution du problème \ref{chapter07:problem:08}]  
+
+Pour vérification : chacune des trois équations admet une solution et la somme des trois solutions vaut $\frac{529}{308}$.
+
+\end{proof} 
+\begin{proof}[solution du problème \ref{chapter07:problem:09}]  
+
+Les termes quadratiques (en $a^2$) se simplifient et $a=3$.
+
+\end{proof} 
+\begin{proof}[solution du problème \ref{chapter07:problem:10}]  
+
+$x=$ prix d'achat de la boîte de cacao, $n=$ nombre de boîtes de cacao vendues.  $0.20\times nx+2n\times 40 =0.36\times \underbrace{(nx+2n\times 100)}_{\text{prix d'achat total} }$.\\
+$x$ est donc solution de $0.20x+80=0.36(x+200)$. $x=50$. 
+Le prix de vente est de \EUR{60} .
+
+\end{proof} 
+ 
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+	
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\cleardoublepage 
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\end{document}

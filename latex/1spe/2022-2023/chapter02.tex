@@ -24,8 +24,9 @@ Une \textbf{expérience aléatoire}  est une expérience \textbf{renouvelable à
 Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 \begin{description}
 	\item[$\bullet$ une issue] est notée  $\omega$, ou $\omega_1$, $\omega_2, \ldots$. à lire \og oméga \fg{}
-	\item[$\bullet$ l'univers $\Omega$] désigne l'ensemble des issues possibles  $\Omega=\{ \omega_1; \omega_2; \omega_3;\ldots ;\omega_n\}$. \\
-	$n$ désigne le nombre total d'issues.
+	\item[$\bullet$ l'univers $\Omega$] désigne l'ensemble des issues possibles\\
+$\Omega=\{ \omega_1; \omega_2; \omega_3;\ldots ;\omega_n\}$. \\
+$n$ désigne le nombre total d'issues.
 	\item[$\bullet$ un événement $E$] est une partie de $\Omega$ : $E\subset \Omega$
 	\item[$\bullet$  $\omega$ \textbf{réalise} l'événement $E$]  signifie $\omega\in E$. 
 \end{description} 
@@ -46,14 +47,17 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 			\begin{tBox}[leftline=false]\centering
 				$P(\{\omega\}) =p(\omega)$
 				
-				$P(E)=\sum_{\omega \in E} p(\omega)$
+%				$P(E)=\sum_{\omega \in E} p(\omega)$
 			\end{tBox}
 		}     
 		\item Pour tout événement $E$, la probabilité $P(E)$ est égale à la probabilité des événements élémentaires qui le composent.
-		
+		$$P(E)=\sum_{\omega \in E} p(\omega)$$
 	\end{enumerate}	 
 \end{definition}  
+
+\newpage 
 \textbf{Convention lycée} Dans tout exercice où figurent des expressions tel que \og dés équilibrés \fg{}, \og tirage au hasard \fg{}, \og urnes opaque et jetons indiscernables au toucher \fg{}... le modèle choisi sera celui de l’équiprobabilité : tous les événements élémentaires ont la même probabilité.
+
 
 \begin{definition}[situation d'équiprobabilité] Pour un univers $\Omega=\{ \omega_1, \omega_2, \ldots , \omega_n\}$.
 	\marginnote{
@@ -127,12 +131,15 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 	
 	Quand on répète un grand nombre de fois l'expérience, la proportion d'apparition de chaque résultat est voisine de sa probabilité.
 \end{postulat}
+$$
+\text{frequence\sidenote{fréquence absolue $\neq$ fréquence relative}}(\text{événement})\approx P(\text{événement})\times \text{nbr de répétition}
+$$
 %----------------------------------------------------------------------------------------
 %	 
 %----------------------------------------------------------------------------------------
 
 \newpage 
-\loadgeometry{marginlayout}  
+\loadgeometry{widelayout}  
 \pagestyle{scrheadings} % Print headers again  
 \KOMAoptions{
 	headwidth=textwithmarginpar,
@@ -145,10 +152,140 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 
 \onehalfspacing  
 
-\subsection{Exercices : Rappel de seconde}
+\subsection{Exercices : rappels de seconde}
 
+\begin{exercise}\hfill \\
+ On lance un dé équilibré à 10 faces. On considère les événements $A=$\og obtenir des carrés parfaits \fg et $B=$\og obtenir des nombres impairs \fg.\\
+\noindent\parbox{0.7\linewidth}{ 
+	\begin{enumerate}[label=\arabic*), leftmargin=*]
+		\item Quelles sont les issues possibles ? Sont-elles équiprobables ?
+		\item Placer les issues dans le diagramme de Venn.
+		\item Enumérer les événements et donner leur probabilité.
+	\begin{enumerate} [label={\alph*)},leftmargin=*]
+		\item $A=\{ \hfill \}$; $P(A)=\qquad\qquad$ 
+		\item $\overline{B}=\{ \hfill \}$; $P(\overline{B})=\qquad\qquad$  
+		\item $A\cap B=\{ \hfill \}$; $P(A\cap B)=\qquad\qquad$ 
+		\item $A\cap \overline{B}=\{ \hfill \}$; $P(A\cap \overline{B})=\qquad\qquad$ 
+		\item $\overline{A\cup B}=\{ \hfill \}$; $P(\overline{A\cup B})=\qquad\qquad$ 
+	\end{enumerate} 
+	\end{enumerate}
+}\hfill 
+\parbox{025\linewidth}{ 
+\begin{venndiagram2sets}[tikzoptions={scale=1,thick}]
+	% \fillA \fillB 
+	labelA={},
+	labelB={}, 
+	\setpostvennhook
+	{
+			\draw[<-] (labelA) -- ++(135:2cm) node[above] {$A$};
+			\draw[<-] (labelB) -- ++(45:2cm) node[above] {$B$}; 
+		%	\draw[<-] (labelC) -- ++(45:3cm) node[above] {$C$}; 
+		\draw (venn bottom left) -- (venn bottom right) node[midway, below ]{$\Omega$}; 
+	}
+\end{venndiagram2sets} 
+}
 
+\end{exercise} 
+\begin{exercise}\hfill \\
+	 Le tableau croisé montre la répartition des effectifs selon leur déjeuner et le moyen utilisé pour venir à l'école. On considère l'expérience aléatoire : \og choisir un élève au hasard \fg.
+	
+	\noindent\parbox{0.45\linewidth}{
+		On considère les événements suivants.
+		\begin{enumerate}[leftmargin=*,label=\textbullet]
+			\item $F$: \og l'élève prend un déjeuner froid \fg;
+			\item $C:$ \og l'élève prend un déjeuner chaud \fg; 
+			\item $R:$ \og l'élève ne prend pas de déjeuner   \fg; 
+			\item $M:$ \og l'élève vient à l'école à pied \fg;
+			\item $B:$ \og l'élève vient à l'école en bus \fg;
+			\item $V:$ \og l'élève est déposé en voiture \fg.
+		\end{enumerate}
+	}\hfill 
+	\parbox{0.50\linewidth}{
+		\renewcommand{\arraystretch}{1.5} 
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			& Froid & Chaud & Aucun & Total \\\hline
+			à Pied & 0 & 6 &  & 24\rule{1.8em}{0pt} \\\hline
+			en Bus &  & 14 & 5 & 32 \\\hline
+			en Voiture & 20 &  & 10 &   \\\hline
+			Total &33  &94  &  \rule{1.8em}{0pt}& 160\\\hline
+		\end{tabular}
+	}
 
+	\begin{enumerate}[label=\arabic*), leftmargin=*] 
+		\item Compléter le tableau des effectifs.
+		\item Décrire les événements suivants par une courte phrase puis déterminer leur probabilité. \vspace{-0.5em}
+		\begin{enumerate}[label={\rule{0pt}{1.8em}\alph*)},leftmargin=*]
+			\item $P(F)= $ \dotfill $P(B)=$\dotfill\null 
+			\item $\overline{B}$= \dotfill $P(\overline{B})=\qquad\qquad$
+			\item $\overline{R}$= \dotfill $P(\overline{R})=\qquad\qquad$
+			\item $B\cup M=$ \dotfill $P(B\cup M)=\qquad\qquad$
+			\item $F\cap M=$ \dotfill $P(F\cap M)=\qquad\qquad$
+			\item $R\cap \overline{M}=$ \dotfill $P(R\cap \overline{M})=\qquad\qquad$
+			\item $C\cap V=$ \dotfill $P(C\cap V)=\qquad\qquad$
+			\item $\overline{C\cap V}=$ \dotfill $P(\overline{C\cap V})=\qquad\qquad$
+			\item $F\cup B=$ \dotfill $P(F\cup B)=\qquad\qquad$ 
+			\item $\overline{F\cup B}=$ \dotfill $P(\overline{F\cup B})=\qquad\qquad$ 
+		\end{enumerate} 
+		\end{enumerate}  
+\end{exercise}
+\newpage 
+\begin{exercise}Complétez \vspace{-0.75em}
+	\begin{spacing}{2}
+		\begin{enumerate}[label=\arabic*), leftmargin=*]
+			\item $P(\Omega)=$\dotfill L'événement impossible est noté \dotfill Sa probabilité est \dotfill
+			\item Deux événements $A$ et $B$ sont disjoints lorsque \dotfill
+			\item Si $A$ et $B$ sont incompatibles alors $P(A\cup B)=\ldots\ldots+\ldots\ldots$
+			\item $\overline{B}$ est l'événement \dotfill. $P(\overline{B})=1-\dotfill$ 
+			\item Si $P(A)=0.3$, $P(A\cap B)=0.2$  et $P(B)=0.5$  alors $P(\overline{B})=1-P(\ldots\ldots)=\dotfill$\\
+			et  $P(A\cup B)=P(\ldots\ldots) + P(\ldots\ldots) - P(\ldots\ldots)=$\dotfill  
+			\item Les événements $A\cap B$ et $\overline{A}\cap B$ sont \dotfill, et $P(A\cap B)+P(\overline{A}\cap B)=\dotfill $
+			\item Si $P(A)=0,7$, $P(B)=0,5$, $P(A\cap B)=0,3$ alors :\\ $P(\overline{A})=1-P(\ldots\ldots)=\dotfill$\\
+			$P(\overline{A}\cap B)=P(\ldots\ldots\ldots)-P(\ldots\ldots\ldots) =\dotfill $\\
+			$P(\overline{A}\cup B)=P(\ldots\ldots)+P(\ldots\ldots)-P(\ldots\ldots)=\dotfill $
+		\end{enumerate}
+	\end{spacing}  \vspace{-0.75em}
+\end{exercise}
+\begin{exercise}\hfill \\ 
+\noindent\parbox{0.52\linewidth}{ 
+	On lance un dé cubique pipé. Le tableau ci-contre  représente la loi de probabilité de cette expérience.
+}	
+	\parbox{0.46\linewidth}{ \centering
+		\renewcommand{\arraystretch}{1.5} 
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			$\omega$&1&2&3&4&5&6\\\hline
+			$P(\omega)$&0.1&0,15&0,2&$\qquad$&0,3&0,05\\\hline
+		\end{tabular} 
+}  
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+	\item Calculer $P(4)$.
+	\item Calculer la probabilités des événements suivants : $A=$\og La face obtenue est paire \fg{}\\
+ $B=$ \og la face obtenue est supérieur ou égale à 4 \fg{} et 
+		$C=$ \og La face obtenue est un carré parfait \fg 
+	\item On lance ce dé 50 fois. Estimer le nombre d'observation de l'événement $C$.  
+\end{enumerate} 
+\end{exercise}
+\begin{exercise}\hfill \\ 
+On considère la loi de probabilité suivante  ( $0<a<1$ ) :
+\begin{center}
+	\renewcommand{\arraystretch}{1.5} 
+	\begin{tabular}{|L{1.5cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+		\hline
+		$x_i$ &	1	& 2	& 3 &	4 &	5\\ \hline
+		$p(x_i)$ &	$3a$ &	$2a$ &	$0,01$ &	$a$ &	$3a$ \\ \hline
+	\end{tabular}
+\end{center} 
+Calculer la valeur de $a$.
+\end{exercise}
+\begin{exercise}[Entrainement formules]\hfill 
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+	\item $P(E)=0,34$, $P(E\cup F)=0,65$ et $P(E\cap F)=0,23$. Calculer $P(F)$.
+	\item $P(E)=0.3$, $P(F)=0.6$ et $P(E\cup F)=0.8$. Calculer $P(E\cap F)$
+	\item $P(E)=0.3$, $P(\overline{F})=0.65$ et $P(E\cap F)=0.2$. Calculer $P(E\cup F)$.
+	\item $P(E)=0,5$, $P(F)=0,24$ et $P(E\cap F)=0,1$. Calculer $P(\overline{E\cup F})$.
+\end{enumerate} 
+\end{exercise}
 
 %----------------------------------------------------------------------------------------
 %	 
@@ -386,7 +523,7 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 %----------------------------------------------------------------------------------------
 
 
-\begin{exercise}
+\begin{exercise}\label{chapter02:exercise:A01}
 	Un laboratoire pharmaceutique a réalisé des essais sur 800 patients afin d'analyser l'efficacité de leurs tests de dépistage contre le sida. Le tableau présente les résultats de l'étude : 
 	\begin{center}
 		\renewcommand{\arraystretch}{1.8}
@@ -413,7 +550,7 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 		\end{enumerate} 
 	\end{spacing}  \vspace{-0.5em}
 \end{exercise} 
-\begin{exercise}\hfill \\
+\begin{exercise}\label{chapter02:exercise:A02}\hfill \\
 	Dans une rue, 10 maisons ont un chat (C), 8 ont un chien (D), 3 ont les 2, et 7 n'ont pas d'animaux.\smallskip
 	
 	\noindent
@@ -445,7 +582,8 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 %----------------------------------------------------------------------------------------
 \newpage 
 %----------------------------------------------------------------------------------------
-\begin{exercise} On étudie la possession de smartphones ($S$) et tablettes ($T$) auprès d'un groupe d'étudiants.\\
+\begin{exercise}\label{chapter02:exercise:A03}\hfill \\ 
+	 On étudie la possession de smartphones ($S$) et tablettes ($T$) auprès d'un groupe d'étudiants.\\
 	\noindent
 	\parbox{0.35\linewidth}{\centering
 		\begin{tabular}{|*4{c|}}
@@ -469,7 +607,7 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 		\end{enumerate} 
 	}
 \end{exercise} 
-\begin{exercise} \hfill\\
+\begin{exercise} \label{chapter02:exercise:A04}\hfill\\
 	\noindent
 	\parbox{0.65 \linewidth}{
 		Une enquête sur l'ensemble des clients d'un garage durant l'année passée, montre que $55\%$ des acheteurs potentiels d'un modèle automobile souhaitent qu'il soit équipé d'un GPS intégré ($G$), $65\%$ souhaitent la climatisation ($C$) et $30\%$ souhaitent les deux.\\
@@ -504,7 +642,7 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 		\end{enumerate}  
 	\end{enumerate} 
 \end{exercise}
-\begin{exercise} \hfill\\
+\begin{exercise}\label{chapter02:exercise:A05} \hfill\\
 	\noindent
 	\parbox{0.65 \linewidth}{
 		Lors d'une sortie scolaire les élèves devaient choisir entre faire du kayak ($K$) ou de l'accrobranche. $52\%$ des élèves sont des garçons ($G$). $64\%$ des élèves ont fait de l'accrobranche. $16\%$ des élèves sont des filles ayant fait de l'accrobranche.   \\
@@ -540,8 +678,8 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 \newpage 
 %----------------------------------------------------------------------------------------
 
-
-\begin{proof}[solution de l'exercice ]\hfill 
+\subsection{Solutions et indications des exercices : probabilité conditionnelle}
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:A01}]\hfill 
 	\begin{enumerate}[leftmargin=*,label=\arabic*)]
 		\item $P(M) = \dfrac{357}{800} = 0.44625$
 		
@@ -565,7 +703,58 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 		
 		$P_N(M) = \dfrac{3}{444} \simeq 0,00675$. Sachant que le test est négatif, il y a $0,675\%$ de chance que la personne soit séropositive.  
 	\end{enumerate}
+\end{proof}  
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:A02}]\hfill 
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+	\item\begin{tabular}{|*4{c|}}
+		\cline{2-4} 
+		\multicolumn{1}{c|}{\rule{0pt}{1.8em}\rule{2em}{0em}}   & $C$ &  $\overline{C}$ & \textbf{Total} \\ \hline
+		\rule{0pt}{1.8em}	$D$			 &  $3$    & 	$5$ & $8$   \\ \cline{1-4}
+		\rule{0pt}{1.8em} $\overline{D}$ &   $7$	&  $7$  &  $14$\\ \hline  
+		\multicolumn{1}{|c|}{\textbf{\rule{0pt}{1.8em}Total}} &   $10$   &   $12$  &   $22$ \\\hline
+	\end{tabular}  
+	\item $P(C)=3/22$, $P_C(D)=P(D\cap C)/P(C)=3/10$, $P_D(C)=3/8$, $P_C(\overline{D})=1-P_C(D)=7/10$, et $P_{\overline{C}}(D)=5/12$.
+	\end{enumerate} 
 \end{proof} 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:A03}]\hfill 
+\begin{enumerate}[leftmargin=*,label=\arabic*)]
+	\item \begin{tabular}{|*4{c|}}
+		\cline{2-4} 
+		\multicolumn{1}{c|}{\rule{0pt}{1.8em}\rule{2em}{0em}}   & $S$ &  $\overline{S}$ & \textbf{Total} \\ \hline
+		\rule{0pt}{1.8em}	$T$			 &  $23$    & 	$8$ & $31$    \\ \cline{1-4}
+		\rule{0pt}{1.8em} $\overline{T}$ &   $64$	&  $3$  & $67$  \\ \hline  
+		\multicolumn{1}{|c|}{\textbf{\rule{0pt}{1.8em}Total}} & $87$   &    $11$ &  $98$  \\\hline
+	\end{tabular} 
+	\item $P_T(S)=23/87$, $P_{\overline{T}}(S)=64/67$, $P_S(T)=23/31$ et $P_{\overline{S}}(T)=8/11$.
+\end{enumerate} 
+\end{proof} 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:A04}]\hfill 
+\begin{enumerate}[leftmargin=*,label=\arabic*)]
+	\item 
+	\item \begin{tabular}{|*4{c|}}
+		\cline{2-4} 
+		\multicolumn{1}{c|}{\rule{0pt}{1.8em}\rule{2em}{0em}}   & $C$ &  $\overline{C}$ & \textbf{Total} \\ \hline
+		\rule{0pt}{1.8em}	$G$			 &  $0.30$    & 	$0.25$ &  $0.55$   \\ \cline{1-4}
+		\rule{0pt}{1.8em} $\overline{G}$ &   $0.35$	&  $0.10$  &  $0.45$ \\ \hline  
+		\multicolumn{1}{|c|}{\textbf{\rule{0pt}{1.8em}Total}} & $0.65$    &    $0.35$ &  $1$  \\\hline
+	\end{tabular}  
+	\item $P(\overline{G})=1-0.65=0.35$, $P(G\cap C)=0.30$
+	\item $P_C(G)=P(G\cap C)/P(C)=0.30/0.65$ et $P_C(\overline{G})=1-P_C(G)=0.35/0.65$
+\end{enumerate} 
+\end{proof} 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:A05}]\hfill 
+\begin{enumerate}[leftmargin=*,label=\arabic*)]
+	\item
+	\item\begin{tabular}{|*4{c|}}
+		\cline{2-4} 
+		\multicolumn{1}{c|}{\rule{0pt}{1.8em}\rule{2em}{0em}}   & $K$ &  $\overline{K}$ & \textbf{Total} \\ \hline
+		\rule{0pt}{1.8em}	$G$			 &  $\quad$    & 	$\quad$ &  $0.52$   \\ \cline{1-4}
+		\rule{0pt}{1.8em} $\overline{G}$ &   $\quad$	&  $0.16$  &  \rule{2.2em}{0em} \\ \hline  
+		\multicolumn{1}{|c|}{\textbf{\rule{0pt}{1.8em}Total}} & \rule{2.0em}{0em}    &  $0.64$ &  $1$  \\\hline
+	\end{tabular}  	
+	\item  $P(K)=1-P(\overline{K})=1-0.64=0.36$; $P(G\cap K)=P(K)+P(G)-P(K\cup G)=0.04$; $P_G(K)=0.04/0.52=1/13$ et $P_K(G)=0.04/0.36=1/9$;
+\end{enumerate} 
+\end{proof}   
 %----------------------------------------------------------------------------------------
 %	 
 %----------------------------------------------------------------------------------------
@@ -583,8 +772,10 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 }     
 
 \onehalfspacing  
-\section{La Formule des probabilités composés  et arbres de probabilités}
-\vspace{-2em}
+\section{La Formule des probabilités composés  et arbres de probabilités} 
+
+Avec les problèmes associés aux tableaux à double entrée, on connait souvent les probabilités $P(A)$, $P(B)$ et celles des intersections $P(A\cap B)$... et on souhaite obtenir celles de $P_A(B)$ ou $P_B(A)$. Dans d'autres problèmes, on connait certaines probabilités conditionnelles et on souhaite calculer des probabilités $P(B)$...
+%\vspace{-2em}
 \marginnote{
 	\begin{tBox}[leftline=false]
 		règle de multiplication généralisée
@@ -600,13 +791,7 @@ Chaque renouvellement de l'expérience s'appelle \textbf{épreuve}.
 \end{proposition}
 \begin{remark} La probabilité de réalisation de \og $A$ et $E$\fg est égale au produit de la probabilité de $A$ par la probabilité sachant $A$ de $E$.
 \end{remark} 
-\begin{theorem}[Théorème de Bayes] Pour deux événements $A$ et $B$ (avec $P\left(A\right)$ et $P(B)  \neq 0$), on a :
-	\setlength{\abovedisplayskip}{3pt}
-	\setlength{\belowdisplayskip}{3pt}
-	$$
-	P(A\cap B)= P(A)P_A(B)=P(B)P_B(A)
-	$$
-\end{theorem}
+
 Dans les cas où les données des problèmes portent sur des probabilités conditionnelles il est plus facile d'exploiter un arbre de probabilité qu'un tableau double entrée.
 \begin{figure*}[!h]
 	\begin{tikzpicture}[xscale=1,yscale=1]
@@ -626,8 +811,8 @@ Dans les cas où les données des problèmes portent sur des probabilités condi
 		\def\NiveauE{(4.0)*\DistanceInterNiveaux}
 		\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
 		% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-		\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Causes};
-		\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Conséquences}; 
+		\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Causes/a priori};
+		\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Conséquences/observation}; 
 		\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
 		\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
 		% 
@@ -670,14 +855,20 @@ Dans les cas où les données des problèmes portent sur des probabilités condi
 		& = P(A)P_A(B)  + P(\overline{A})P_{\overline{A}}(B)
 	\end{align*} 
 \end{proposition}
+\begin{theorem}[Théorème de Bayes] Pour deux événements $A$ et $B$ (avec $P\left(A\right)$ et $P(B)  \neq 0$), on a :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	$$
+	P(A\cap B)= P(A)P_A(B)=P(B)P_B(A)
+	$$
+\end{theorem}
 %  \begin{corollary}[Formule de Bayes] (Hors. Programme).\\
-	%  	\setlength{\abovedisplayskip}{3pt}
-	%  	\setlength{\belowdisplayskip}{3pt}
-	%$$
-	%  		P_B(A)  = \frac{P(A)P_A(B)}{ P(A)P_A(B)  + P(\overline{A})P_{\overline{A}}(B)}
-	%$$
-	%  	\end{corollary}
-
+%  	\setlength{\abovedisplayskip}{3pt}
+%  	\setlength{\belowdisplayskip}{3pt}
+%$$
+%  		P_B(A)  = \frac{P(A)P_A(B)}{ P(A)P_A(B)  + P(\overline{A})P_{\overline{A}}(B)}
+%$$
+%  	\end{corollary}
 %----------------------------------------------------------------------------------------
 
 \newpage 
@@ -839,11 +1030,11 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 \subsection{Exercices : formule des probabilités composées et arbres de probabilités}
 
 
-\begin{exercise}  Complétez\vspace{-.75em}
+\begin{exercise}\label{chapter02:exercise:B01}  Complétez\vspace{-.75em}
 	\begin{spacing}{2}
 		\begin{enumerate}[label=\arabic*), leftmargin=*]
 			\item $B\subset A$, $P_B(A)=\frac{P(\ldots \cap \ldots)}{P(\ldots)}=\frac{P(\ldots)}{P(\ldots)}=\dotfill $
-			\item  $P(A)=\numprint{0.22}$, $P(B)=\numprint{0.42}$ et $P(A\cap B)=\numprint{0.0836}$.\\
+			\item  $P(A)=\numprint{0.22}$, $P(B)=\numprint{0.42}$ et $P(A\cap B)=\numprint{0.0924}$.\\
 			$P_B(A)=\frac{P(\ldots\cap \ldots)}{P(\ldots)}=\dotfill $\\
 			$P_B(A)=P(B)$, donc  l'événement \dotfill est indépendant de l'événement \dotfill
 			\item $P(C)=\numprint{0.59}$, $P(D)=\numprint{0.25}$ et $P(C\cap D)=\numprint{0.1062}$.\\
@@ -859,7 +1050,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\end{enumerate}
 	\end{spacing}\vspace{-0.75em}
 \end{exercise}  
-\begin{exercise}[Entrainement formules]
+\begin{exercise}[Entrainement formules]\label{chapter02:exercise:B02} 
 	Dans chacun des cas suivants, calculer les probabilités demandées.
 	\begin{enumerate}[label=\arabic*),leftmargin=*]
 		\item 	$P(A)=\numprint{0.75}$, $P(B)=\numprint{0.54}$ et $P(A\cap B)=\numprint{0.405}$. Calculer $P_A(B)$.
@@ -869,18 +1060,136 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\item $P(A\cap B)=\numprint{0.18}$ et $P_A(B)=\numprint{0.6}$. Calculer $P(A)$.
 	\end{enumerate}
 \end{exercise}
-\begin{exercise} $P(L)=\numprint{0.17}$, $P(B)=\numprint{0.12}$ et $P(L\cap M)=\numprint{0.0204}$. Montrer que $M$ est indépendant de $L$. 
+\begin{exercise}\label{chapter02:exercise:B03}  $P(L)=\numprint{0.17}$, $P(M)=\numprint{0.12}$ et $P(L\cap M)=\numprint{0.0204}$. Montrer que $M$ est indépendant de $L$. 
 \end{exercise}
-\begin{exercise} $P(X)=\numprint{0.3}$, $P(Y)=\numprint{0.42}$ et $P(X\cup Y)=\numprint{0.594}$. Montrer que $Y$ est indépendant de $X$. 
+\begin{exercise}\label{chapter02:exercise:B04}  $P(X)=\numprint{0.3}$, $P(Y)=\numprint{0.42}$ et $P(X\cup Y)=\numprint{0.594}$. Montrer que $Y$ est indépendant de $X$. 
 \end{exercise} 
-\begin{exercise} Une batterie de missiles a une probabilité de $\numprint{0.75}$ d'atteindre une cible. La batterie a une probabilité de $\numprint{0.65}$ d'atteindre deux cibles successives. Quelle est la probabilité d'atteindre la deuxième cible sachant que la première cible est atteinte ?
+\begin{exercise}\label{chapter02:exercise:B05}  \hfill \\ Une batterie de missiles a une probabilité de $\numprint{0.75}$ d'atteindre une cible. La batterie a une probabilité de $\numprint{0.65}$ d'atteindre deux cibles successives. Quelle est la probabilité d'atteindre la deuxième cible sachant que la première cible est atteinte ?
 \end{exercise}
-\begin{exercise} Quark a $80\%$ de chance de réussir son premier examen de Maths, et $45\%$ de chance de réussir les deux premiers examens de maths. Quelle est la probabilité de réussir le second examen sachant qu'il a réussi le premier examen ? 
+\begin{exercise}\label{chapter02:exercise:B06}  Quark a $80\%$ de chance de réussir son premier examen de Maths, et $45\%$ de chance de réussir les deux premiers examens de maths. Quelle est la probabilité de réussir le second examen sachant qu'il a réussi le premier examen ? 
 \end{exercise}
+
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage  
+\begin{example}  On dispose d'un lot d'urnes chacune contenant 3 boules indiscernables au toucher. Certaines urnes contiennent 2 boules Blanches et 1 Noire, d'autres contiennent 1 Blanche et 2 Noires. On choisit au hasard une urne, et on tire une boule de cette urne.
+	
+	Soit les événements $A=$\og l'urne contient 2 Blanches et 1 Noire\fg, et $B=$\og la boule tirée est Blanche\fg. On suppose $P(A)=\tfrac{1}{2}$.\\
+	\begin{tikzpicture}[xscale=1,yscale=1]
+		% Styles (MODIFIABLES)
+		\tikzstyle{fleche}=[-,>=latex,thick]
+		\tikzstyle{noeud}=[rounded corners=5pt]
+		\tikzstyle{feuille}=[]
+		\tikzstyle{commentaire}=[black]
+		% Dimensions (MODIFIABLES)
+		\def\DistanceInterNiveaux{4}
+		\def\DistanceInterFeuilles{2}
+		% Dimensions calculées (NON MODIFIABLES)
+		\def\NiveauA{(0)*\DistanceInterNiveaux}
+		\def\NiveauB{(1.0)*\DistanceInterNiveaux}
+		\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+		\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+		\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+		\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+		% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+		\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize a priori};
+		\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Observation}; 
+		\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+		\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+		% 
+		\node[noeud] (R) at ({\NiveauA},{(2.00)*\InterFeuilles}) {};
+		\node[noeud] (Ra) at ({\NiveauB},{(1)*\InterFeuilles}) {$A$};
+		\node[feuille] (Raa) at ({\NiveauC},{(0.5)*\InterFeuilles}) {$B$}; 
+		\node[feuille] (Rab) at ({\NiveauC},{(1.5)*\InterFeuilles}) {$\overline{B}$}; 
+		\node[noeud] (Rb) at ({\NiveauB},{(2.75)*\InterFeuilles}) {$\overline{A}$};
+		\node[feuille] (Rba) at ({\NiveauC},{(2.25)*\InterFeuilles}) {$B$}; 
+		\node[feuille] (Rbb) at ({\NiveauC},{(3.25)*\InterFeuilles}) {$\overline{B}$}; 
+		%
+		\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+		\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+		\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+		\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+		%
+		\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+		\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+		%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+		\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+		%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+		\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+		%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+		%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+		
+		% Arcs (MODIFIABLES : Styles)
+		\draw[fleche] (R.east)--(Ra.west) node[midway, above,sloped]{$P(A)=\quad$};
+		\draw[fleche] (Ra.east)--(Raa.west) node[midway, above,sloped]{$P_A(B)=\quad$};
+		\draw[fleche] (Ra.east)--(Rab.west) node[midway, below,sloped]{$P_A(\overline{B})=\quad$};
+		\draw[fleche] (R.east)--(Rb.west) node[midway, below,sloped]{$P(\overline{A})=\quad$};
+		\draw[fleche] (Rb.east)--(Rba.west) node[midway, above,sloped]{$P_{\overline{A}}(B)=\quad$};
+		\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below,sloped]{$P_{\overline{A}}(\overline{B})=$};
+	\end{tikzpicture} 
+	
+	
+	\paragraph{Formule des probabilités totales} \hfill \\
+	\noindent 
+	\parbox{0.58\linewidth}{
+		$\begin{WithArrows}
+			P(B)& =P(\ldots\cap \ldots ) + P(\ldots\cap \ldots)  \rule{0pt}{1.6em}\\
+			& =  \rule{0pt}{1.6em}\\
+			& =  \rule{0pt}{1.6em}\\
+			& =  \rule{0pt}{1.6em}
+		\end{WithArrows}$ 
+	}  
+	\parbox{0.38\linewidth}{
+		$\begin{WithArrows}
+			P(\overline{B})& = \rule{0pt}{1.6em} \\
+			& =  \rule{0pt}{1.6em}\\
+			& =  \rule{0pt}{1.6em}\\
+			& =  \rule{0pt}{1.6em}
+		\end{WithArrows}$ 
+	} 	
+	
+	\paragraph{Probabilités a posteriori} \hfill \\
+	
+	\noindent 
+	\parbox{0.5\linewidth}{
+		$\begin{WithArrows}
+			P_B(A)& =\frac{P(\ldots\cap \ldots )}{P(\ldots \ldots)}  \rule{0pt}{1.6em}\\
+			& = \frac{P(\ldots)P_A(\ldots \ldots)}{P(\ldots \ldots)} \rule{0pt}{1.6em}\\
+			& =  \rule{0pt}{1.6em}\\
+			& =  \rule{0pt}{1.6em}
+		\end{WithArrows}$ 
+	} 
+\parbox{0.5\linewidth}{
+\noindent	\begin{tikzpicture}
+		\node [rectangle,text width=2.0cm, align=center]  at (2,-0.2) {\small probabilité a posteriori};
+	\end{tikzpicture}
+	\begin{tikzpicture}
+	\node [rectangle,text width=3.2cm, align=center]  at (2,0.2) {\small=  vraisemblance $\times$ };
+\end{tikzpicture}
+	\begin{tikzpicture}
+		\node [rectangle,text width=2cm, align=center]  at (2,-0.2) {\small probabilité a priori};
+	\end{tikzpicture}
+	  
+	  
+} 	 
+	
+	\noindent 
+	\parbox{0.58\linewidth}{
+		$\begin{WithArrows}
+			P_B(\overline{A})& =  \rule{0pt}{1.6em}\\
+			& =   \rule{0pt}{1.6em}\\
+			& =  \rule{0pt}{1.6em} 
+		\end{WithArrows}$ 
+	}  
+\end{example}
+%----------------------------------------------------------------------------------------
+%
 %----------------------------------------------------------------------------------------
 
 \newpage 
-\begin{example}[interpéter et exploiter un arbre de probabilité] Soit un univers $\Omega$ et un loi de probabilité $P$, et les événements $A$ et $B$ modélisé par l'arbre ci-dessous : \\
+\begin{exercise}[interpéter et exploiter un arbre de probabilité]  \hfill \\ Soit un univers $\Omega$ et un loi de probabilité $P$, et les événements $A$ et $B$ modélisé par l'arbre ci-dessous : \\
 	%\begin{figure*}[!h] 
 	\begin{tikzpicture}[xscale=1,yscale=1]
 		% Styles (MODIFIABLES)
@@ -956,7 +1265,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		}\hfill 
 		\parbox{0.33\linewidth}{
 			$\begin{WithArrows}
-				P_{\overline{A}}(\overline{B})& = 1- P_{\ldots}(\ldots ) \rule{0pt}{1.6em}\\
+				P_{\overline{A}}(B)& = 1- P_{\ldots}(\ldots ) \rule{0pt}{1.6em}\\
 				& = \rule{0pt}{1.6em}\\
 				& =	\rule{0pt}{1.6em}
 			\end{WithArrows}$\hfill
@@ -990,13 +1299,15 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\item \textbf{Calculer les probablités totales :} arrondir à $10^{-2}$\\
 		\parbox{0.58\linewidth}{
 			$\begin{WithArrows}
-				P(B)& =P(\ldots\cap \ldots ) + P(\ldots\cap \ldots)= \rule{0pt}{1.6em}\\
+				P(B)& =P(\ldots\cap \ldots ) + P(\ldots\cap \ldots) \rule{0pt}{1.6em}\\
+				& =  \rule{0pt}{1.6em}\\
 				& =  \rule{0pt}{1.6em}
 			\end{WithArrows}$ 
 		}  
 		\parbox{0.38\linewidth}{
 			$\begin{WithArrows}
 				P(\overline{B})& = \rule{0pt}{1.6em} \\
+				& =  \rule{0pt}{1.6em}\\
 				& =  \rule{0pt}{1.6em}
 			\end{WithArrows}$ 
 		} 	
@@ -1079,12 +1390,12 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 			\end{eBox} 
 		}
 	\end{enumerate} 
-\end{example}
+\end{exercise}
 
 %----------------------------------------------------------------------------------------
 
 \newpage  
-\begin{exercise}[] $0.1\%$ de la population est atteinte du cancer des poumons ($C$). $90\%$ des personnes atteintes de cancer sont des fumeurs ($F$). $21\%$ de ceux qui n'ont pas de cancer sont des fumeurs.  
+\begin{exercise}[]\label{chapter02:exercise:B07}  $0.1\%$ de la population est atteinte du cancer des poumons ($C$). $90\%$ des personnes atteintes de cancer sont des fumeurs ($F$). $21\%$ de ceux qui n'ont pas de cancer sont des fumeurs.  
 	\begin{enumerate}[label={\arabic*)},leftmargin=*]
 		\item Identifier les probabilités données dans l'énoncé et ajouter les dans l'arbre de probabilité \\
 		\rule{0pt}{1.8em}$P(\ldots)=$ \hfill $P_{\ldots}(\ldots)=$\hfill $P_{\ldots}(\ldots)=$\hfill \null \medskip\\
@@ -1196,7 +1507,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 
 \newpage 
 
-\begin{exercise}  
+\begin{exercise}\label{chapter02:exercise:B08}    \hfill \\
 	Une urne opaque contient des boules rouges et des boules vertes indiscernables au toucher. 	On tire au hasard une boule de l'urne, on note sa couleur sans la remettre. On tire de nouveau une boule de l'urne et on note sa couleur. \\
 	Soit les événement $R_1$   \og la boule tirée au premier est rouge\fg  et $R_2$   \og la boule tirée au second tour est rouge\fg. On modélise l'expérience aléatoire par l'arbre de probabilité incomplet ci-dessous.  \\
 	\parbox{0.38\linewidth}{
@@ -1301,7 +1612,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\end{WithArrows}$  
 	\end{enumerate}		 
 \end{exercise}
-\begin{exercise}	Une expérience aléatoire est modélisée par l'arbre ci-dessous. Calculer $P(B)$. \\
+\begin{exercise} \label{chapter02:exercise:B09} \hfill \\	Une expérience aléatoire est modélisée par l'arbre ci-dessous. Calculer $P(B)$. \\
 	\parbox{0.35\linewidth}{
 		\begin{tikzpicture}[xscale=1,yscale=1]
 			% Styles (MODIFIABLES)
@@ -1377,7 +1688,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 %----------------------------------------------------------------------------------------
 
 \newpage 
-\begin{exercise} 
+\begin{exercise} \label{chapter02:exercise:B10} 
 	On dispose des informations suivantes sur une société :
 	\begin{enumerate}[leftmargin=*, label=\textbullet]
 		\item Elle comporte $40\%$ de cadres.
@@ -1392,7 +1703,8 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\item Calculer la probabilité pour qu'un employé interrogé soit une femme cadre.
 	\end{enumerate}
 \end{exercise}
-\begin{exercise}[le taxi et le témoin] Un taxi est accusé de délit de fuite. Au tribunal le témoin confirme que le taxi était de couleur bleue. En ville, 85\% des taxis sont verts, et 15\% sont bleus. Le procureur teste la fiabilité du témoin dans des conditions de luminosité similaires à la nuit de l'incident. Il constate que le témoin identifie la bonne couleur dans 80\% des cas.\\
+\begin{exercise}[le taxi et le témoin] \label{chapter02:exercise:B11} \hfill \\
+	Un taxi est accusé de délit de fuite. Au tribunal le témoin confirme que le taxi était de couleur bleue. En ville, 85\% des taxis sont verts, et 15\% sont bleus. Le procureur teste la fiabilité du témoin dans des conditions de luminosité similaires à la nuit de l'incident. Il constate que le témoin identifie la bonne couleur dans 80\% des cas.\\
 	On considère les événements suivants :\\
 	$A$: \og le taxi est de couleur bleu\fg; \hspace*{5mm} $B$: \og le témoin affirme que la couleur du taxi est bleue\fg.
 	\begin{enumerate}[leftmargin=*, label=\arabic*)]
@@ -1402,7 +1714,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\item Quelle est la probabilité que le taxi soit vert sachant que le témoin affirme il est bleu ?
 	\end{enumerate}
 \end{exercise}
-\begin{exercise} 
+\begin{exercise} \label{chapter02:exercise:B12}  \hfill \\
 	Un revendeur achète des pièces à trois fournisseurs $A$, $B$ et $C$. $60\%$ de son stock provient de $A$, $15\%$ de $B$ et le reste de $C$. $2\%$ des pièces venant de $A$ sont défectueuses, ainsi que $1\%$ de celles venant de $B$ et $0,5\%$ de celles qui viennent de $C$. \\
 	\parbox{0.35\linewidth}{
 		\begin{tikzpicture}[xscale=1,yscale=1]
@@ -1473,7 +1785,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\end{enumerate}
 	}
 \end{exercise}
-\begin{exercise}[tirage sans remise] Une urne opaque contient 11 boules rouges et 12 boules vertes indiscernables au toucher. 	On tire au hasard une boule de l'urne, on note sa couleur sans la remettre, puis on tire de nouveau une boule de l'urne et on note sa couleur.  \\  
+\begin{exercise}[tirage sans remise] \label{chapter02:exercise:B13}  Une urne opaque contient 11 boules rouges et 12 boules vertes indiscernables au toucher. 	On tire au hasard une boule de l'urne, on note sa couleur sans la remettre, puis on tire de nouveau une boule de l'urne et on note sa couleur.  \\  
 	\parbox{0.38\linewidth}{
 		\begin{tikzpicture}[xscale=1,yscale=1]
 			% Styles (MODIFIABLES)
@@ -1537,7 +1849,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\end{enumerate}	
 	}
 \end{exercise}
-\begin{exercise}[tirage sans remise] \hfill   \\  
+\begin{exercise}[tirage sans remise]\label{chapter02:exercise:B14}  \hfill   \\  
 	\parbox{0.38\linewidth}{
 		\begin{tikzpicture}[xscale=1,yscale=1]
 			% Styles (MODIFIABLES)
@@ -1616,7 +1928,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\end{enumerate}	
 	}
 \end{exercise}
-\begin{exercise}\hfill \\
+\begin{exercise}\label{chapter02:exercise:B15} \hfill \\
 	On dispose de deux urnes, A et B. L'urne $A$ contient une boule rouge et trois vertes, et l'urne $B$ contient 3 boules rouges et une verte. On lance un dé cubique équilibré pour choisir une urne : s'il tombe sur le 6, on tire une boule de l'urne $A$, sinon de l'urne $B$.\\
 	\parbox{0.38\linewidth}{
 		\begin{tikzpicture}[xscale=1,yscale=1]
@@ -1681,7 +1993,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\end{enumerate}	
 	}
 \end{exercise}
-\begin{exercise} \hfill  \smallskip\\
+\begin{exercise}\label{chapter02:exercise:B16}  \hfill  \smallskip\\
 	\parbox{0.74\linewidth}{
 		On dispose de 3 urnes, $A$, $B$ et $C$.
 		\begin{enumerate}[leftmargin=*, label=\textbullet]
@@ -1757,17 +2069,544 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\end{tikzpicture} 
 	}
 \end{exercise}
-
+%----------------------------------------------------------------------------------------
+\newpage 
 %----------------------------------------------------------------------------------------
 
-\newpage 
+\subsection{Solutions et indications des exercices : règle de multiplication et arbres de probabilités}
 
 
 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B01}]\hfill 
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item  
+	\end{enumerate} 
+\end{proof} 
 
 
 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B02}]\hfill  
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+	\item $P_A(B)=P(A\cap B)/P(A)=0.405/0.75=0.54$
+	\item $P_B(A)=P(A\cap B)/P(B)=P(A)\times P_A(B)/P(B)=0.77\times 0.13/0.19\approx 0.52$
+	\item $P(A\cap B)=P(A)\times P_A(B)=0.35\times 0.42=0.147$; $P_A(\overline{B})=1-P_A(B)=1-0.42=0.58$
+	\item $P(A\cap B)=P(B)\times P_B(A)=0.17\times 0.24=0.0408$; $P_A(B)=P(A\cap B)/P(A)=0.0408/0.4=0.102$.
+	\item $P(A\cap B)=P(A)\times P_A(B)$ donc $P(A)=0.18/0.6=0.3$.
+\end{enumerate} 
 
+\end{proof} 
+
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B03}]\hfill 
+
+$P_L(M)=P(L\cap M)/P(L)=0.0204/0.17=0.12=P(M)$ donc ...
+
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B04}]\hfill 
+
+$P(X\cap Y)=P(X)+P(Y)-P(X\cup Y)=0.3+0.42-0.594=0.126$. $P_X(Y)=P(X\cap Y)/P(X)=0.126/0.3=0.42=P(Y)$ donc ...
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B05}]\hfill 
+
+$C1=$ \og la première cible est atteinte \fg{}. $C2=$\og la seconde cible est atteinte\fg{}.
+
+L'énoncé donne : $P(C1)=P(C2)=0.75$. $P(C1\cap C2)=0.65$. 
+
+$P_{C1}(C2)=0.65/0.75\approx 0.86$
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B06}]\hfill 
+
+$E1=$ \og réussir le premier examen \fg{}. $E2=$\og réussir le second examen \fg{}.
+
+$P(E1)=0.80$, $P(E1\cap E2)=0.45$. $P_{E1}(E2)=0.45/0.8=0.5625$.
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B07}]\hfill 
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item
+	\end{enumerate} 
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B08}]\hfill 
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item $P(R_1)=2/5$; $P_{R_1}(R_2)=7/16$ et $P_{\overline{R_1}}(R_2)=8/19$
+		\item $P(\overline{R_1})=3/5$; $P_{R_1}(\overline{R_2})=9/16$; $P_{\overline{R_1}}(\overline{R_2})=11/19$
+		\item $P(\overline{R_1}\cap \overline{R_2})=P(\overline{R_1})\times P_{\overline{R_1}}(\overline{R_2})=3/5\times 11/19 = 33/95$.
+		\item $P(R_2)=P(R_2\cap R_1)+P(R_2\cap \overline{R_1})=2/5\times 7/19+3/5\times 8/19=2/5=0.4$
+		\item $P(A)=P(R_1\cap \overline{R_2})+P(R_2\cap \overline{R_1}) =2/5\times 12/19 + 3/5\times 8/19=48/95$.
+	\end{enumerate} 
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B09}]\hfill 
+
+$\begin{WithArrows}
+	P(A_3)& = 1-0.25-0.7=0.05\\
+	P(B)& = P(A_1\cap B)+P(A_2\cap B)+P(A_3\cap B) \rule{0pt}{1.6em}\\
+	& =  P(A_1) P_{A_1}(B)+P(A_2) P_{A_2}(B) +P(A_3) P_{A_3}(B)\\
+	&= 0.25\times 0.6 + 0.7\times 0.3 + 0.05\times 0.8\\
+	&=  0.4
+\end{WithArrows}
+$
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B10}]\hfill  
+	\begin{multicols}{2}
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item $P(C)=0.40$; $P_C(F)=0.20$; $P_{\overline{C}}(F)=0.60$.
+		\item \begin{tikzpicture}[xscale=1,yscale=1]
+			% Styles (MODIFIABLES)
+			\tikzstyle{fleche}=[-,>=latex,thick]
+			\tikzstyle{noeud}=[rounded corners=5pt]
+			\tikzstyle{feuille}=[]
+			\tikzstyle{commentaire}=[black]
+			% Dimensions (MODIFIABLES)
+			\def\DistanceInterNiveaux{3}
+			\def\DistanceInterFeuilles{1.0}
+			% Dimensions calculées (NON MODIFIABLES)
+			\def\NiveauA{(0)*\DistanceInterNiveaux}
+			\def\NiveauB{(1.0)*\DistanceInterNiveaux}
+			\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+			\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+			\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+			\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+			% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+			%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+			%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+			%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+			%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+			% 
+			\node[noeud] (R) at ({\NiveauA},{(2.00)*\InterFeuilles}) {};
+			\node[noeud] (Ra) at ({\NiveauB},{(1)*\InterFeuilles}) {$C$};
+			\node[feuille] (Raa) at ({\NiveauC},{(0.5)*\InterFeuilles}) {$F$}; 
+			\node[feuille] (Rab) at ({\NiveauC},{(1.5)*\InterFeuilles}) {$\overline{F}$}; 
+			\node[noeud] (Rb) at ({\NiveauB},{(2.75)*\InterFeuilles}) {$\overline{C}$};
+			\node[feuille] (Rba) at ({\NiveauC},{(2.25)*\InterFeuilles}) {$F$}; 
+			\node[feuille] (Rbb) at ({\NiveauC},{(3.25)*\InterFeuilles}) {$\overline{F}$}; 
+			%
+			%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+			%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+			%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+			%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+			%	%
+			%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+			%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+			%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+			%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+			%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+			%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+			%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+			%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+			%	
+			% Arcs (MODIFIABLES : Styles)
+			\draw[fleche] (R.east)--(Ra.west) node[midway, above]{$0.40$};
+			\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$0.20$};
+			\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$0.80$};
+			\draw[fleche] (R.east)--(Rb.west) node[midway, below]{$0.60$};
+			\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$0.60$};
+			\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$0.40$};
+		\end{tikzpicture} 
+		\item formule des probabilités totales : $P(F)=P(C)P_C(F)+P(\overline{C})P_{\overline{C}}(F)=0.40\times 0.20+0.60\times 0.60=0.44$
+	\end{enumerate}
+\end{multicols} 
+\end{proof} 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B11}]\hfill 
+	\begin{multicols}{2}
+\begin{enumerate}[leftmargin=*,label=\arabic*)]
+ 	\item $P(A)=0.15$; $P_A(B)=0.80$; $P_{\overline{A}}(\overline{B})=0.80$ donc $P_{\overline{A}}(\overline{B})=0.80$.
+	\item \begin{tikzpicture}[xscale=1,yscale=1]
+		% Styles (MODIFIABLES)
+		\tikzstyle{fleche}=[-,>=latex,thick]
+		\tikzstyle{noeud}=[rounded corners=5pt]
+		\tikzstyle{feuille}=[]
+		\tikzstyle{commentaire}=[black]
+		% Dimensions (MODIFIABLES)
+		\def\DistanceInterNiveaux{3}
+		\def\DistanceInterFeuilles{1.0}
+		% Dimensions calculées (NON MODIFIABLES)
+		\def\NiveauA{(0)*\DistanceInterNiveaux}
+		\def\NiveauB{(1.0)*\DistanceInterNiveaux}
+		\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+		\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+		\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+		\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+		% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+		%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+		%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+		%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+		%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+		% 
+		\node[noeud] (R) at ({\NiveauA},{(2.00)*\InterFeuilles}) {};
+		\node[noeud] (Ra) at ({\NiveauB},{(1)*\InterFeuilles}) {$A$};
+		\node[feuille] (Raa) at ({\NiveauC},{(0.5)*\InterFeuilles}) {$B$}; 
+		\node[feuille] (Rab) at ({\NiveauC},{(1.5)*\InterFeuilles}) {$\overline{B}$}; 
+		\node[noeud] (Rb) at ({\NiveauB},{(2.75)*\InterFeuilles}) {$\overline{A}$};
+		\node[feuille] (Rba) at ({\NiveauC},{(2.25)*\InterFeuilles}) {$B$}; 
+		\node[feuille] (Rbb) at ({\NiveauC},{(3.25)*\InterFeuilles}) {$\overline{B}$}; 
+		%
+		%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+		%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+		%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+		%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+		%	%
+		%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+		%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+		%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+		%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+		%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+		%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+		%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+		%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+		%	
+		% Arcs (MODIFIABLES : Styles)
+		\draw[fleche] (R.east)--(Ra.west) node[midway, above]{$0.15$};
+		\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$0.80$};
+		\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$0.20$};
+		\draw[fleche] (R.east)--(Rb.west) node[midway, below]{$0.85$};
+		\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$0.20$};
+		\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$0.80$};
+	\end{tikzpicture} 
+	\item $P(B)=P(A)P_A(B) + P(\overline{A})P_{\overline{A}}(B)=0.15\times 0.80+0.85\times 0.20=0.29$
+	\item $P_B(\overline{A})=P(\overline{A}\cap B)/P(B)=0.85\times 0.20/0.29\approx 0.58$.
+\end{enumerate}
+\end{multicols} 
+\end{proof} 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B12}]\hfill 
+	\begin{multicols}{2}
+\begin{enumerate}[leftmargin=*,label=\arabic*)]
+	\item 	\begin{tikzpicture}[xscale=1,yscale=1]
+		% Styles (MODIFIABLES)
+		\tikzstyle{fleche}=[-,>=latex,thick]
+		\tikzstyle{noeud}=[rounded corners=5pt]
+		\tikzstyle{feuille}=[]
+		\tikzstyle{commentaire}=[black]
+		% Dimensions (MODIFIABLES)
+		\def\DistanceInterNiveaux{3}
+		\def\DistanceInterFeuilles{0.85}
+		% Dimensions calculées (NON MODIFIABLES)
+		\def\NiveauA{(0)*\DistanceInterNiveaux}
+		\def\NiveauB{(1.0)*\DistanceInterNiveaux}
+		\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+		\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+		\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+		\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+		% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+		%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+		%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+		%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+		%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+		% 
+		\node[noeud] (R) at ({\NiveauA},{(3.5)*\InterFeuilles}) {};
+		\node[noeud] (Ra) at ({\NiveauB},{(1.5)*\InterFeuilles}) {$A$};
+		\node[feuille] (Raa) at ({\NiveauC},{(1)*\InterFeuilles}) {$D$}; 
+		\node[feuille] (Rab) at ({\NiveauC},{(2)*\InterFeuilles}) {$\overline{D}$}; 
+		\node[noeud] (Rb) at ({\NiveauB},{(3.5)*\InterFeuilles}) {${B}$};
+		\node[feuille] (Rba) at ({\NiveauC},{(3)*\InterFeuilles}) {$D$}; 
+		\node[feuille] (Rbb) at ({\NiveauC},{(4)*\InterFeuilles}) {$\overline{D}$}; 
+		\node[noeud] (Rc) at ({\NiveauB},{(5.5)*\InterFeuilles}) {${C}$};
+		\node[feuille] (Rca) at ({\NiveauC},{(5)*\InterFeuilles}) {$D$}; 
+		\node[feuille] (Rcb) at ({\NiveauC},{(6)*\InterFeuilles}) {$\overline{D}$}; 
+		%
+		%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+		%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+		%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+		%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+		%	%
+		%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+		%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+		%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+		%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+		%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+		%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+		%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+		%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+		%	
+		% Arcs (MODIFIABLES : Styles)
+		\draw[fleche] (R.east)--(Ra.west) node[midway, above]{\small$0.60$};
+		\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$0.02$};
+		\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$0.98$};
+		\draw[fleche] (R.east)--(Rb.west) node[midway, above]{\small$0.15$};
+		\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$0.01$};
+		\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$0.99$};
+		\draw[fleche] (R.east)--(Rc.west) node[midway, below]{$0.25$};
+		\draw[fleche] (Rc.east)--(Rca.west) node[midway, above]{$0.005$};
+		\draw[fleche] (Rc.east)--(Rcb.west) node[midway, below]{$0.995$};
+	\end{tikzpicture} 
+	\item formule des probabilités totales : $P(D)=P(A)P_A(D)+P(B)P_B(D)+P(C)P_C(D)=0.60\times 0.02+ 0.15\times 0.01 + 0.25\times 0.005=0.0145$
+	\item $P_D(A)=P(A\cap D)/P(D)=P(A)\times P_A(D)/P(D)=0.60\times 0.02/0.0145\approx0.83$
+\end{enumerate} 
+\end{multicols}
+\end{proof} 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B13}]\hfill  
+	\begin{multicols}{2}
+\begin{enumerate}[leftmargin=*,label=\arabic*)]
+	\item \begin{tikzpicture}[xscale=1,yscale=1]
+		% Styles (MODIFIABLES)
+		\tikzstyle{fleche}=[-,>=latex,thick]
+		\tikzstyle{noeud}=[rounded corners=5pt]
+		\tikzstyle{feuille}=[]
+		\tikzstyle{commentaire}=[black]
+		% Dimensions (MODIFIABLES)
+		\def\DistanceInterNiveaux{3}
+		\def\DistanceInterFeuilles{1.2}
+		% Dimensions calculées (NON MODIFIABLES)
+		\def\NiveauA{(0)*\DistanceInterNiveaux}
+		\def\NiveauB{(1.0)*\DistanceInterNiveaux}
+		\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+		\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+		\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+		\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+		% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+		%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+		%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+		%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+		%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+		% 
+		\node[noeud] (R) at ({\NiveauA},{(2.00)*\InterFeuilles}) {};
+		\node[noeud] (Ra) at ({\NiveauB},{(1)*\InterFeuilles}) {$R_1$};
+		\node[feuille] (Raa) at ({\NiveauC},{(0.5)*\InterFeuilles}) {$R_2$}; 
+		\node[feuille] (Rab) at ({\NiveauC},{(1.5)*\InterFeuilles}) {$\overline{R_2}$}; 
+		\node[noeud] (Rb) at ({\NiveauB},{(2.75)*\InterFeuilles}) {$\overline{R_1}$};
+		\node[feuille] (Rba) at ({\NiveauC},{(2.25)*\InterFeuilles}) {$R_2$}; 
+		\node[feuille] (Rbb) at ({\NiveauC},{(3.25)*\InterFeuilles}) {$\overline{R_2}$}; 
+		%
+		%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+		%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+		%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+		%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+		%	%
+		%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+		%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+		%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+		%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+		%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+		%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+		%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+		%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+		%	
+		% Arcs (MODIFIABLES : Styles)
+		\draw[fleche] (R.east)--(Ra.west) node[midway, above]{$\tfrac{11}{23}$};
+		\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$\tfrac{10}{22}$};
+		\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$\tfrac{12}{22}$};
+		\draw[fleche] (R.east)--(Rb.west) node[midway, below]{$\tfrac{12}{23}$};
+		\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$\tfrac{11}{22}$};
+		\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$\tfrac{11}{22}$};
+	\end{tikzpicture} 
+	\item formule des probabilités totales $P(R_2)=P(R_1)\times P_{R_1}(R_2)+P(\overline{R_1})P_{\overline{R_1}}(R_2)=\frac{11}{23}\times\frac{10}{22}+\frac{12}{23}\times\frac{11}{22}= \frac{11}{23}$
+\end{enumerate} 
+\end{multicols}
+\end{proof} 
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B14}]\hfill 
+\begin{multicols}{2}
+\begin{enumerate}[leftmargin=*,label=\arabic*)]
+	\item\begin{tikzpicture}[xscale=1,yscale=1]
+		% Styles (MODIFIABLES)
+		\tikzstyle{fleche}=[-,>=latex,thick]
+		\tikzstyle{noeud}=[rounded corners=5pt]
+		\tikzstyle{feuille}=[]
+		\tikzstyle{commentaire}=[black]
+		% Dimensions (MODIFIABLES)
+		\def\DistanceInterNiveaux{3}
+		\def\DistanceInterFeuilles{1.2}
+		% Dimensions calculées (NON MODIFIABLES)
+		\def\NiveauA{(0)*\DistanceInterNiveaux}
+		\def\NiveauB{(0.75)*\DistanceInterNiveaux}
+		\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+		\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+		\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+		\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+		% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+		%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+		%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+		%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+		%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+		% 
+		\node[noeud] (R) at ({\NiveauA},{(5)*\InterFeuilles}) {};
+		\node[noeud] (Ra) at ({\NiveauB},{(2)*\InterFeuilles}) {$N_1$};
+		\node[feuille] (Raa) at ({\NiveauC},{(1)*\InterFeuilles}) {$N_2$}; 
+		\node[feuille] (Rab) at ({\NiveauC},{(2)*\InterFeuilles}) {$B_2$}; 
+		\node[feuille] (Rac) at ({\NiveauC},{(3)*\InterFeuilles}) {$R_2$}; 
+		\node[noeud] (Rb) at ({\NiveauB},{(5)*\InterFeuilles}) {$B_1$};
+		\node[feuille] (Rba) at ({\NiveauC},{(4)*\InterFeuilles}) {$N_2$}; 
+		\node[feuille] (Rbb) at ({\NiveauC},{(5)*\InterFeuilles}) {$B_2$};
+		\node[feuille] (Rbc) at ({\NiveauC},{(6)*\InterFeuilles}) {$R_2$}; 
+		\node[noeud] (Rc) at ({\NiveauB},{(8)*\InterFeuilles}) {$R_1$};
+		\node[feuille] (Rca) at ({\NiveauC},{(7)*\InterFeuilles}) {$N_2$}; 
+		\node[feuille] (Rcb) at ({\NiveauC},{(8)*\InterFeuilles}) {$B_2$}; 
+		\node[feuille] (Rcc) at ({\NiveauC},{(9)*\InterFeuilles}) {$R_2$}; 
+		%
+		%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+		%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+		%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+		%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+		%	%
+		%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+		%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+		%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+		%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+		%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+		%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+		%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+		%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+		%	
+		% Arcs (MODIFIABLES : Styles)
+		\draw[fleche] (R.east)--(Ra.west) node[midway, above]{\small$\tfrac{8}{20}$};
+		\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$\tfrac{7}{19}$};
+		\draw[fleche] (Ra.east)--(Rab.west) node[midway, above]{$\tfrac{7}{19}$};
+		\draw[fleche] (Ra.east)--(Rac.west) node[midway, below]{$\tfrac{5}{19}$};
+		\draw[fleche] (R.east)--(Rb.west) node[midway, above]{\small$\tfrac{7}{20}$};
+		\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$\tfrac{8}{19}$};
+		\draw[fleche] (Rb.east)--(Rbb.west) node[midway, above]{$\tfrac{6}{19}$};
+		\draw[fleche] (Rb.east)--(Rbc.west) node[midway, below]{$\tfrac{5}{19}$};
+		\draw[fleche] (R.east)--(Rc.west) node[midway, below]{$\tfrac{5}{20}$};
+		\draw[fleche] (Rc.east)--(Rca.west) node[midway, above]{$\tfrac{8}{19}$};
+		\draw[fleche] (Rc.east)--(Rcb.west) node[midway, above]{$\tfrac{7}{19}$};
+		\draw[fleche] (Rc.east)--(Rcc.west) node[midway, below]{$\tfrac{4}{19}$};
+	\end{tikzpicture} 
+	\item $P(B_1\cap B_2)=P(B_1)P_{B_1}(B_2)=\tfrac{7}{20}\tfrac{6}{19}=\frac{43}{380}=\frac{21}{196}$
+	\item $P(B_1\cap R_2)=P(B_1)P_{B_1}(R_2)=\tfrac{7}{20}\tfrac{5}{19}=\frac{35}{380}=\frac{7}{76}$
+	\item $P(B_1\cap R_2)+P(R_1\cap B_2)=\frac{35}{380}+ \tfrac{5}{20}\tfrac{4}{19}=\frac{55}{380}$
+	\item formule des probabilités totales $P(R_2)=P(N_1)P_{N_1}(R_2)+P(B_1)P_{B_1}(R_2)+P(R_1)P_{R_1}(R_2) = \tfrac{95}{380}$
+\end{enumerate}
+\end{multicols} 
+\end{proof} 
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B15}]\hfill 
+	\begin{multicols}{2}
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item \begin{tikzpicture}[xscale=1,yscale=1]
+			% Styles (MODIFIABLES)
+			\tikzstyle{fleche}=[-,>=latex,thick]
+			\tikzstyle{noeud}=[rounded corners=5pt]
+			\tikzstyle{feuille}=[]
+			\tikzstyle{commentaire}=[black]
+			% Dimensions (MODIFIABLES)
+			\def\DistanceInterNiveaux{3}
+			\def\DistanceInterFeuilles{1.25}
+			% Dimensions calculées (NON MODIFIABLES)
+			\def\NiveauA{(0)*\DistanceInterNiveaux}
+			\def\NiveauB{(1.0)*\DistanceInterNiveaux}
+			\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+			\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+			\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+			\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+			% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+			%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+			%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+			%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+			%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+			% 
+			\node[noeud] (R) at ({\NiveauA},{(2.00)*\InterFeuilles}) {};
+			\node[noeud] (Ra) at ({\NiveauB},{(1)*\InterFeuilles}) {$D$};
+			\node[feuille] (Raa) at ({\NiveauC},{(0.5)*\InterFeuilles}) {$R$}; 
+			\node[feuille] (Rab) at ({\NiveauC},{(1.5)*\InterFeuilles}) {${V}$}; 
+			\node[noeud] (Rb) at ({\NiveauB},{(2.75)*\InterFeuilles}) {$\overline{D}$};
+			\node[feuille] (Rba) at ({\NiveauC},{(2.25)*\InterFeuilles}) {$R$}; 
+			\node[feuille] (Rbb) at ({\NiveauC},{(3.25)*\InterFeuilles}) {$ {V}$}; 
+			%
+			%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+			%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+			%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+			%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+			%	%
+			%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+			%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+			%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+			%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+			%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+			%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+			%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+			%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+			%	
+			% Arcs (MODIFIABLES : Styles)
+			\draw[fleche] (R.east)--(Ra.west) node[midway, above]{$\tfrac{1}{6}$};
+			\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$\tfrac{1}{4}$};
+			\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$\tfrac{3}{4}$};
+			\draw[fleche] (R.east)--(Rb.west) node[midway, below]{$\tfrac{5}{6}$};
+			\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$\tfrac{3}{4}$};
+			\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$\tfrac{1}{4}$};
+		\end{tikzpicture} 
+	\item probabilités totales $P(V)=P(D)P_V(V)+P(\overline{D})P_{\overline{D}}(V)=\frac{1}{6}\times \frac{3}{4}+\frac{5}{6}\times \frac{1}{4}=\frac{8}{24}$
+	\end{enumerate} 
+\end{multicols}
+\end{proof} 
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:B16}]\hfill 
+	\begin{multicols}{2}
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item \begin{tikzpicture}[xscale=1,yscale=1]
+			% Styles (MODIFIABLES)
+			\tikzstyle{fleche}=[-,>=latex,thick]
+			\tikzstyle{noeud}=[rounded corners=5pt]
+			\tikzstyle{feuille}=[]
+			\tikzstyle{commentaire}=[black]
+			% Dimensions (MODIFIABLES)
+			\def\DistanceInterNiveaux{3}
+			\def\DistanceInterFeuilles{1.1}
+			% Dimensions calculées (NON MODIFIABLES)
+			\def\NiveauA{(0)*\DistanceInterNiveaux}
+			\def\NiveauB{(0.70)*\DistanceInterNiveaux}
+			\def\NiveauC{(1.45)*\DistanceInterNiveaux}
+			\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+			\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+			\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+			% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+			%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+			%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+			%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+			%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+			% 
+			\node[noeud] (R) at ({\NiveauA},{(3.5)*\InterFeuilles}) {};
+			\node[noeud] (Ra) at ({\NiveauB},{(1.5)*\InterFeuilles}) {$A$};
+			\node[feuille] (Raa) at ({\NiveauC},{(1)*\InterFeuilles}) {$R$}; 
+			\node[feuille] (Rab) at ({\NiveauC},{(2)*\InterFeuilles}) {${V}$}; 
+			\node[noeud] (Rb) at ({\NiveauB},{(3.5)*\InterFeuilles}) {${B}$};
+			\node[feuille] (Rba) at ({\NiveauC},{(3)*\InterFeuilles}) {$R$}; 
+			\node[feuille] (Rbb) at ({\NiveauC},{(4)*\InterFeuilles}) {${V}$}; 
+			\node[noeud] (Rc) at ({\NiveauB},{(5.5)*\InterFeuilles}) {${C}$};
+			\node[feuille] (Rca) at ({\NiveauC},{(5)*\InterFeuilles}) {$R$}; 
+			\node[feuille] (Rcb) at ({\NiveauC},{(6)*\InterFeuilles}) {${V}$}; 
+			%
+			%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+			%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+			%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+			%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+			%	%
+			%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+			%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+			%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+			%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+			%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+			%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+			%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+			%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+			%	
+			% Arcs (MODIFIABLES : Styles)
+			\draw[fleche] (R.east)--(Ra.west) node[midway, above]{\small$\tfrac{4}{6}$};
+			\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$\tfrac{11}{17}$};
+			\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$\tfrac{6}{17}$};
+			\draw[fleche] (R.east)--(Rb.west) node[midway, above]{\small$\tfrac{1}{6}$};
+			\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$\tfrac{10}{13}$};
+			\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$\tfrac{3}{13}$};
+			\draw[fleche] (R.east)--(Rc.west) node[midway, below]{$\tfrac{1}{6}$};
+			\draw[fleche] (Rc.east)--(Rca.west) node[midway, above]{$\tfrac{3}{9}$};
+			\draw[fleche] (Rc.east)--(Rcb.west) node[midway, below]{$\tfrac{6}{9}$};
+		\end{tikzpicture} 
+	\item probabilités totales $P(R)=P(A)P_A(R)+P(B)P_B(R)+P(C)P_C(R)=\frac{4}{6}\times \frac{11}{17}+\frac{1}{6}\times \frac{10}{13}+\frac{1}{6}\times \frac{3}{9}\approx 0.61$
+	\item  $P_R(C)=P(R\cap C)/P(C)\approx0.09$
+	\end{enumerate} 
+\end{multicols}
+\end{proof} 
 %----------------------------------------------------------------------------------------
 %	 
 %----------------------------------------------------------------------------------------
@@ -1793,30 +2632,40 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 	P(A\cap B)= P(A)P_A(B)=P(B)P_B(A)
 	$$
 \end{theorem}
+
 \marginnote{
 	\begin{tBox}[leftline=false]
 		On peut désormais dire que $A$ et $B$ sont indépendants.
 	\end{tBox}
 }  
+\begin{proof} Pour $P(A)\neq 0$ et $P(B)\neq 0$ on a :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	$$
+	\frac{P(A\cap B)}{P(A)P(B)}= \frac{P_A(B)}{P(B)}=\frac{P_B(A)}{P(A)}
+	$$
+\end{proof}
 \begin{corollary} Pour deux événements $A$ et $B$ de probabilité non nulle. Les affirmations suivantes sont équivalentes :
 	
-	\begin{enumerate}[label={(\alph*)}]
+	\begin{enumerate}[label={(\roman*)},]
 		\item $B$ est indépendant de $A$ ($P_A(B)=P(B)$)
 		\item $A$ est indépendant de $B$ ($P_B(A)=P(A)$)
 		\item $P(A\cap B) =P(A)\times P(B)$
 	\end{enumerate} 
 \end{corollary}
-\begin{proof}$(a\Rightarrow c)$ : Si $P_A(B)=P(B)$ alors d'après Bayes $P(A\cap B)=P(A)P_A(B)= P(A)P(B)$.\\ 
-	$(c\Rightarrow (a)$ :
-	Si  $P(A\cap B) =P(A)\times P(B)$ alors $P_A(B)=\tfrac{P(A\cap B)}{P(A)}=\tfrac{P(A)P(B)}{P(A)}=P(B)$.
-\end{proof}
+%\begin{proof}$(a\Rightarrow c)$ : Si $P_A(B)=P(B)$ alors d'après Bayes $P(A\cap B)=P(A)P_A(B)= P(A)P(B)$.\\ 
+%	$(c\Rightarrow (a)$ :
+%	Si  $P(A\cap B) =P(A)\times P(B)$ alors $P_A(B)=\tfrac{P(A\cap B)}{P(A)}=\tfrac{P(A)P(B)}{P(A)}=P(B)$.
+%\end{proof}
 \begin{remark} Pour simplifier on considère que deux événments sont indépendants si $P(A\cap B)=P(A)P(B)$ même si leur probabilités sont nulles.
 \end{remark}
-\begin{theorem} $A^*$ est égal à $A$ ou à $\overline{A}$, $B^*$ est égal à $B$ ou à $\overline{B}$.
-	
-	Si les événements $A$ et $B$ sont indépendants, alors $A^*$ et $B^*$ sont aussi indépendants.
-	
-	En particulier $P_A(B)=P_{\overline{A}}(B)=P(B)$.
+\begin{theorem} Les énoncés suivants sont équivalents :
+\begin{enumerate}[label={(\roman*)},leftmargin=*]
+	\item $A$ et $B$ sont indépendants : $P(A\cap B)=P(A)P(B)$
+	\item $A$ et $\overline{B}$ sont indépendants : $P(A\cap \overline{B})=P(A)P(\overline{B})$
+	\item $\overline{A}$ et $B$ sont indépendants : $P(\overline{A}\cap B)=P(\overline{A})P(B)$
+	\item  $\overline{A}$ et $\overline{B}$ sont indépendants : $P(\overline{A}\cap \overline{B})=P(\overline{A})P(\overline{B})$
+\end{enumerate} 
 \end{theorem}
 \begin{proof} Si $A$ et $B$ sont indépendants. Nous allons montrer que $\overline{A}$ et $B$ sont indépendants.
 	
@@ -1845,7 +2694,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 \onehalfspacing
 \subsection{Exercices : Indépendance de deux événements. Application}
 
-\begin{exercise} Cochez si les événements $A$ et $B$ sont indépendants ou non.
+\begin{exercise}\label{chapter02:exercise:C01} Cochez si les événements $A$ et $B$ sont indépendants ou non.
 	
 	\noindent\QCM[VF,Alterne,Stretch=1.0,NomV=Indépendants,NomF={\small Non indépendants},  Largeur=3.0cm]{% 
 		{
@@ -1855,7 +2704,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		{$P(A)=0,4$, $P(B)=0,8$ et $P(A \cap B)=0,32$.}&1,%  
 	} 
 \end{exercise} \smallskip
-\begin{exercise}\hfill \\ Les événements $A$ et $B$ sont indépendants, calculez les probabilités demandées dans chaque cas.
+\begin{exercise}\label{chapter02:exercise:C02}\hfill \\ Les événements $A$ et $B$ sont indépendants, calculez les probabilités demandées dans chaque cas.
 	\begin{enumerate}[leftmargin=*,label=\arabic*)]
 		\item $P(A)=0,8$ et $P(A \cap B)=0,45$. Calculer $P(B)$.
 		\item $P(A)=P(B)$ et $P(A \cap B)=0,25$. Calculer $P(A)$
@@ -1864,16 +2713,16 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 	\end{enumerate} 
 \end{exercise}
 
-\begin{exercise}  \hfill \\
-	$P(X)=0.5$, $P(Y)=0.3$ et $P(X\cup Y)=0.95$. Montrer que $X$ et $Y$ sont indépendants.
+\begin{exercise} \label{chapter02:exercise:C03} \hfill \\
+	$P(X)=0.5$, $P(Y)=0.3$ et $P(X\cup Y)=0.65$. Montrer que $X$ et $Y$ sont indépendants.
 \end{exercise}
-\begin{exercise} \hfill \\
+\begin{exercise}\label{chapter02:exercise:C04} \hfill \\
 	$P(X)=0.3$, $P(Y)=0.42$ et $P(X\cup Y)=0.594$. Montrer que $X$ et $Y$ sont indépendants.
 \end{exercise}
-\begin{exercise} \hfill \\
+\begin{exercise}\label{chapter02:exercise:C05} \hfill \\
 	On lance un dé cubique équilibré. Soit les événements $A=$  \og le résultat est $\geqslant 4$ \fg{} et $B=$ \og le résultat est un nombre pair \fg{}. Les événements $A$ et $B$ sont-ils indépendants ?
 \end{exercise}\smallskip
-\begin{exercise} \hfill \\
+\begin{exercise}\label{chapter02:exercise:C06} \hfill \\
 	On rappelle que, dans un jeu de 32 cartes, on trouve quatre couleurs (Carreau $\diamondsuit$ et Coeur $\heartsuit$ sont de couleur rouge. Trèfle $\clubsuit$ et Pique $\spadesuit$) et, dans chaque couleur, on a une série de 8 cartes (7, 8, 9, 10, Valet, Dame, Roi, As). \\
 	On tire au hasard une carte d'un jeu de 32~cartes. Soit les événements   $A=$ \og la carte tirée est un roi \fg,  $B=$ \og la carte tirée est un as\fg  et  $C=$ \og la carte tirée est rouge\fg   
 	\begin{enumerate}[label=\arabic*),leftmargin=*]
@@ -1882,7 +2731,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\item Les événements $A\cup C$ et $B$ sont-ils indépendants ?
 	\end{enumerate}
 \end{exercise}
-\begin{exercise} \hfill \\
+\begin{exercise} \label{chapter02:exercise:C07}\hfill \\
 	Les élèves d'un collège doivent choisir une option parmi \og latin \fg{} et  \og théâtre \fg{} et une langue vivantes parmi \og allemand \fg{} et \og italien \fg{}. Le tableau ci-dessous donne la répartition des élèves.\smallskip\\
 	\noindent\parbox{0.6\linewidth}{ 
 		\begin{enumerate}[leftmargin=*,label=\arabic*)]
@@ -1901,7 +2750,8 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\end{tabular}
 	}  \smallskip
 \end{exercise}
-\begin{exercise}[tirage avec remise]\hfill \\
+\newpage
+\begin{exercise}[tirage avec remise]\label{chapter02:exercise:C08}\hfill \\
 	Une urne opaque contient 11 boules rouges et 12 boules vertes indiscernables au toucher. 	On tire au hasard une boule de l'urne, on note sa couleur avant de la remettre, puis on tire de nouveau une boule de l'urne et on note sa couleur.  \\  
 	\parbox{0.38\linewidth}{
 		\begin{tikzpicture}[xscale=1,yscale=1]
@@ -1969,7 +2819,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 \end{exercise}
 %---------------------------------------------------------------------------------------- 
 % \newpage 
-\begin{exercise}\hfill \\
+\begin{exercise}\label{chapter02:exercise:C09}\hfill \\
 	\parbox{0.6\linewidth}{
 		On lance un dé cubique équilibré 2 fois consécutives. Soit l'événement $D_1=$\og obtenir un 6 au premier lancer\fg et $D_2=$ \og obtenir un 6 au second lancer\fg. 
 		\begin{enumerate}[leftmargin=*, label=\arabic*)]
@@ -2035,7 +2885,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 	} 
 \end{exercise}
 
-\begin{exercise}[Problème du Grand-Duc de Toscane]\hfill \\
+\begin{exercise}[Problème du Grand-Duc de Toscane]\label{chapter02:exercise:C10}\hfill \\
 	On lance 3 dés cubiques équilibrés ($D_1$, $D_2$ et $D_3$), et on note la face obtenue pour chaque dans l'ordre. On suppose que les résultats des lancers de chaque dé sont indépendants.
 	\begin{enumerate}[leftmargin=*, label=\arabic*)]
 		\item Quelle est la probabilité $P(D_2=5)$  que le second dé tombe sur $5$ ?
@@ -2045,11 +2895,204 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 		\item Identifier toutes les différentes façons d'obtenir une somme des 3 dés égale à $9$.
 		\item Démontrer que la probablité d'obtenir une somme égale à $9$ est $\frac{25}{216}$.
 		\item Démontrer que la probabilité d'obtenir une somme égale à $10$ est de $\frac{27}{216}$.
-	\end{enumerate}
-	
-	
-\end{exercise}
+	\end{enumerate} 
+\end{exercise} 
 
+%----------------------------------------------------------------------------------------
+\newpage 
+%----------------------------------------------------------------------------------------
+
+\subsection{Solutions et indications des exercices : indépendance}
+
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C01}]\hfill 
+
+\noindent\QCM[VF,Alterne,Stretch=1.0,NomV=Indépendants,NomF={\small Non indépendants},  Largeur=3.0cm,Solution]{% 
+{$P(A)=\tfrac{7}{8}$, $P(B)=\tfrac{2}{7}$ et $P(A\cap B)=\tfrac{1}{4}$.}&1,% 
+{$P(A)=0,2$, $P(B)=0,8$ et $P(A \cap B)=0,9$.}&2,% 
+{$P(A)=0,48$, $P(B)=0,25$.  $A$ et $B$ sont incompatibles.}&2,% 
+{$P(A)=0,4$, $P(B)=0,8$ et $P(A \cap B)=0,32$.}&1,%  
+} 
+\end{proof} 
+
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C02}]\hfill 
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item $P(B)=0.45/0.8=0.5625$
+		\item $P(A)P(B)=P(A\cap B)$, donc $P(A)^2=0.25$ ; $P(A)=0.5$.
+		\item $P(A)=1-P(\overline{A})=1-0.6=0.4$, $P(B)=P(A\cap B)/P(A)=0.3/0.4=0.75$
+		\item $P(A\cap B)=P(A)P(B)=0.5\times 0.7=0.35$. $\overline{A}$ et $B$ sont indépendants : $P(\overline{A}\cap B)=P(\overline{A})P(B)=(1-0.5)0.7=0.35$.
+	\end{enumerate} 
+\end{proof} 
+
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C03}]\hfill 
+
+$P(X\cap Y)=P(X)+P(Y)-P(X\cup Y)=0.5+0.3-0.65=0.15$, $P(X)P(Y)=0.5\times0.3=0.15$.
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C04}]\hfill 
+
+$P(X\cap Y)=P(X)+P(Y)-P(X\cup Y)=0.3+0.42-0.594=0.126$, $P(X)P(Y)=0.3\times 0.42=0.126$. Donc $P(X\cap Y)=P(X)P(Y)$ et les événements $X$ et $Y$ sont indépendants.
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C05}]\hfill 
+
+$P(A)=0.5$; $P(B)=0.5$ et $P(A\cap B)=2/6=\tfrac{1}{3}$. $A$ et $B$ ne sont pas indépendants.
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C06}]\hfill 
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item $P(A)=1/8$; $P(C)=1/2$; $P(A\cap C)=2/32=1/16=P(A)P(C)$.
+		\item $P(A)=1/8$; $P(B)=1/8$. $P(A\cap B)=0$, $A$ et $B$ ne sont pas indépendants. $A$ et $\overline{B}$ ne sont pas indépendants.
+		\item $P(A\cup C)=P(A)+P(C)-P(A\cap C)=18/32=9/16$. $P(B)=1/8$ et $P((A\cup C)\cap B) = 2/32=1/16$. Les événements ne sont pas indépendants.
+	\end{enumerate} 
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C07}]\hfill 
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item $P(I\cap T)=90/320$ et $P(T)=170/320$. NON
+		\item $P(L)=150/320$ et $P_A(L)=120/200$. NON
+		\item $P(L)=150/320$ et $P_T(L)=90/170$. NON
+	\end{enumerate} 
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C08}]\hfill 
+	\begin{multicols}{2}
+	\begin{enumerate}[leftmargin=*,label=\arabic*)]
+		\item \begin{tikzpicture}[xscale=1,yscale=1]
+			% Styles (MODIFIABLES)
+			\tikzstyle{fleche}=[-,>=latex,thick]
+			\tikzstyle{noeud}=[rounded corners=5pt]
+			\tikzstyle{feuille}=[]
+			\tikzstyle{commentaire}=[black]
+			% Dimensions (MODIFIABLES)
+			\def\DistanceInterNiveaux{3}
+			\def\DistanceInterFeuilles{1.35}
+			% Dimensions calculées (NON MODIFIABLES)
+			\def\NiveauA{(0)*\DistanceInterNiveaux}
+			\def\NiveauB{(1.0)*\DistanceInterNiveaux}
+			\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+			\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+			\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+			\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+			% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+			%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+			%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+			%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+			%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+			% 
+			\node[noeud] (R) at ({\NiveauA},{(2.00)*\InterFeuilles}) {};
+			\node[noeud] (Ra) at ({\NiveauB},{(1)*\InterFeuilles}) {$R_1$};
+			\node[feuille] (Raa) at ({\NiveauC},{(0.5)*\InterFeuilles}) {$R_2$}; 
+			\node[feuille] (Rab) at ({\NiveauC},{(1.5)*\InterFeuilles}) {$\overline{R_2}$}; 
+			\node[noeud] (Rb) at ({\NiveauB},{(2.75)*\InterFeuilles}) {$\overline{R_1}$};
+			\node[feuille] (Rba) at ({\NiveauC},{(2.25)*\InterFeuilles}) {$R_2$}; 
+			\node[feuille] (Rbb) at ({\NiveauC},{(3.25)*\InterFeuilles}) {$\overline{R_2}$}; 
+			%
+			%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+			%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+			%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+			%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+			%	%
+			%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+			%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+			%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+			%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+			%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+			%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+			%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+			%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+			%	
+			% Arcs (MODIFIABLES : Styles)
+			\draw[fleche] (R.east)--(Ra.west) node[midway, above]{$\tfrac{11}{23}$};
+			\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$\tfrac{11}{23}$};
+			\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$\tfrac{12}{23}$};
+			\draw[fleche] (R.east)--(Rb.west) node[midway, below]{$\tfrac{12}{23}$};
+			\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$\tfrac{11}{23}$};
+			\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$\tfrac{12}{23}$};
+		\end{tikzpicture} 
+	\item probabilité totale $P(R_2)=P(R_1)P_{R_1}(R_2)+P(\overline{R_1})P_{\overline{R_1}}(R_2)=\frac{11}{23}\times \frac{11}{23}+\frac{12}{23}\times \frac{11}{23}=\frac{11}{23}$
+	\item $P(R_2)=\frac{11}{23}=P_{R_1}(R_2)$
+	\end{enumerate} 
+\end{multicols}
+\end{proof} 
+
+
+\begin{proof}[solution de l'exercice ]\ref{chapter02:exercise:C09}\hfill 
+	\begin{multicols}{2}
+		\begin{enumerate}[leftmargin=*,label=\arabic*)]
+			\item\begin{tikzpicture}[xscale=1,yscale=1]
+				% Styles (MODIFIABLES)
+				\tikzstyle{fleche}=[-,>=latex,thick]
+				\tikzstyle{noeud}=[rounded corners=5pt]
+				\tikzstyle{feuille}=[]
+				\tikzstyle{commentaire}=[black]
+				% Dimensions (MODIFIABLES)
+				\def\DistanceInterNiveaux{3}
+				\def\DistanceInterFeuilles{1.35}
+				% Dimensions calculées (NON MODIFIABLES)
+				\def\NiveauA{(0)*\DistanceInterNiveaux}
+				\def\NiveauB{(1.0)*\DistanceInterNiveaux}
+				\def\NiveauC{(2.0)*\DistanceInterNiveaux}
+				\def\NiveauD{(2.750)*\DistanceInterNiveaux}
+				\def\NiveauE{(3.5)*\DistanceInterNiveaux}
+				\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+				% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+				%	\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Observation};
+				%	\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Cause}; 
+				%	\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+				%	\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+				% 
+				\node[noeud] (R) at ({\NiveauA},{(2.00)*\InterFeuilles}) {};
+				\node[noeud] (Ra) at ({\NiveauB},{(1)*\InterFeuilles}) {$D_1$};
+				\node[feuille] (Raa) at ({\NiveauC},{(0.5)*\InterFeuilles}) {$D_2$}; 
+				\node[feuille] (Rab) at ({\NiveauC},{(1.5)*\InterFeuilles}) {$\overline{D_2}$}; 
+				\node[noeud] (Rb) at ({\NiveauB},{(2.75)*\InterFeuilles}) {$\overline{D_1}$};
+				\node[feuille] (Rba) at ({\NiveauC},{(2.25)*\InterFeuilles}) {$D_2$}; 
+				\node[feuille] (Rbb) at ({\NiveauC},{(3.25)*\InterFeuilles}) {$\overline{D_2}$}; 
+				%
+				%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+				%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+				%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+				%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+				%	%
+				%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+				%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+				%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+				%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+				%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+				%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+				%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+				%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+				%	
+				% Arcs (MODIFIABLES : Styles)
+				\draw[fleche] (R.east)--(Ra.west) node[midway, above]{$\frac{1}{6}$};
+				\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$\frac{1}{6}$};
+				\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$\frac{5}{6}$};
+				\draw[fleche] (R.east)--(Rb.west) node[midway, below]{$\frac{5}{6}$};
+				\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$\frac{1}{6}$};
+				\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$\frac{5}{6}$};
+			\end{tikzpicture} 
+		\item $P(D_1\cap D_2)=P(D_1)P_{D_1}(D_2)= 1/36$
+		\item $P_{\overline{D_1}}(D_2)=1/6=P(D_2)$. Les événements sont indépendants.
+		\end{enumerate} 
+	\end{multicols}
+\end{proof} 
+
+
+
+\begin{proof}[solution de l'exercice \ref{chapter02:exercise:C10}]   
+réponses données dans l'énoncé.
+\end{proof} 
 
 %----------------------------------------------------------------------------------------
 %	EXERCICES
@@ -2078,7 +3121,7 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 %	\item Pour les musiciens jouant un instrument à corde, quel sexe semble être légérement discriminé  dans ces auditions ? Même question pour les musiciens jouant un instrument à vent.
 %\end{enumerate}
 %\end{exercise}
-\begin{exercise}[paradoxe de Simpson] \hfill \\
+\begin{problem}[Paradoxe de Simpson] \hfill \\
 	Un test clinique vise à étudier l'efficacité d'un nouveau traitement thérapeutique à des malades atteints de cancer. On choisit un participant au hasard parmi les 21100. Soit les événements 	$A  = $ \og le patient est vivant  \fg{}, $T =  $ \og le patient a suivi le traitement \fg{} et $V =  $ \og le patient réside en ville \fg{}. Les effectifs sont rassemblés dans le tableau : \\
 		\begin{tabular}{|*5{c|}}
 		\cline{2-5}
@@ -2090,308 +3133,140 @@ $P(E)=P(A_1)P_{A_1}(E)+P(A_2)P_{A_2}(E)+P(A_3)P_{A_3}(E)+\ldots$
 	
 	 
 	\begin{enumerate}[leftmargin=*, label=\arabic*)]
-		\item Déterminez $P_T(A)$ et $P_{\overline{T}}(A)$. 
-		\item Quel semble l'effet du traitement sur les chances de survie ?
+		\item Déterminez $P_T(A)$ et $P_{\overline{T}}(A)$.   Quel semble l'effet du traitement sur les chances de survie ?
 		\item Déterminez  $P_{T\cap V}(A)$, $P_{T\cap \overline{V}}(A)$.
 		\item Déterminez $P_{\overline{T}\cap V}(A)$, $P_{\overline{T}\cap \overline{V}}(A)$. 
 		\item Quel est l'effet du traitement  lorsqu'on prend en compte le lieu de résidence ? 
+		\item Les événements $T$ et $V$ sont-ils indépendants ? Justifier.
 	\end{enumerate} 
-\end{exercise} 
-\begin{exercise}[le rouge et le noir] \hfill \\
+\end{problem} 
+\begin{problem}[le rouge et le noir] \hfill \\
 	Trois boites contiennent chacune une carte. Une des cartes a deux faces rouges, une a deux faces noires, et la troisième une rouge et une noire. On choisit au hasard une boite, et l'on    voit que la face visible de la carte qu'elle contient est rouge. Quelle est la probabilité que l'autre soit noire ?
 	% ce n'est pas 1/2, mais 1/3
-\end{exercise}
-\begin{exercise}[Monty Hall]
-	
-\end{exercise}
+\end{problem} 
+\begin{problem}[Paradoxe des prisonniers]\hfill 
 
+\begin{quote}
+	 Trois prisonniers sont dans une cellule. Ils savent que deux vont être condamnés à mort et un gracié, mais ils ne savent pas qui. L'un d'entre eux va voir le gardien et lui demande : « Je sais bien que tu ne peux rien me dire, mais tu peux au moins me montrer un de mes compagnons qui sera exécuté ». Le gardien réfléchit, se dit que de toute manière au moins l'un des deux autres prisonniers sera condamné, et s'exécute. Le prisonnier lui répond alors : « Merci, avant, j'avais une chance sur trois d'être gracié, et maintenant, j'ai une chance sur deux. 
+\end{quote}
 
-
-%----------------------------------------------------------------------------------------
-%	EXERCICES
-%----------------------------------------------------------------------------------------
-
-\newpage 
-\loadgeometry{widelayout}  
-\pagestyle{scrheadings} % Print headers again  
-\KOMAoptions{
-	headwidth=textwithmarginpar,
-	headsepline=true,
-	headsepline= 0.5pt,
-	footwidth=textwithmarginpar,
-} 
-\onehalfspacing
-
-\section{Banque pour évaluation}
-
-\begin{exercise} 
-	Soit $A$ et $B$ deux événements.
-	\begin{enumerate}[leftmargin=*, label=\arabic*)]
-		\item On donne: $P\left(A\right)=0,45$ et  $P\left( A \cap B\right)=0,15$. Calculer $P_A\left(B\right)$.
-		\item On donne: $P\left(A\right)=0,38$ et  $P_A\left(B\right)=0,5$. Calculer $P\left( A \cap B\right)$.
-		\item On donne:  $P\left( A \cap B\right)=0,18$ et  $P_A\left(B\right)=0,6$. Calculer $P\left(A\right)$.
+A-t-il raison de croire que sa probabilité d'être exécuté a varié ?\\
+Désignons par $r$ le prisonnier qui demande (le raisonneur), $d$ le prisonnier désigné et $t$ le troisième. Notons $G$ le prisonnier qui est gracié et $I$ la réponse du guardien à la demande du raisonneur.
+ 
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+	\item Décrire les événements suivants par une courte phrase :
+	\vspace{-0.25em}
+	\begin{spacing}{2}
+	\begin{enumerate}[leftmargin=*,label={}]
+		\item $G=r$ est l'événement \dotfill 
+		\item $I=t$ est l'événement \dotfill 
+		\item $\{G=d\} \cap \{I=t\}$ est l'événement \dotfill  
+		\item $\{G=r\} \cap \{I=d\}$ est l'événement \dotfill  
 	\end{enumerate}
-\end{exercise}
-\begin{exercise} Dans une forêt il y a 30\% d'épicéas, le reste est formé de sapins. 10\% des arbres sont malades, et 20\% des arbres malades sont des épicéas. Quelle est la probabilité qu'un épicéa tiré au hasard soit malade ? 
-\end{exercise}
-\begin{exercise} 
-	L'arbre pondéré modélise une situation où $A$ et $B$ sont deux événements.
+	\end{spacing}
+\vspace{-0.75em}
+	\item On modélise la situation par une expérience aléatoire. On suppose  que le gracié est choisit au hasard, et que le guardien choisit au hasard un prisonnier qui sera exécuté à l'exception du raisonneur lui même. Complétez l'arbre de probabilité 
 	
-	\parbox{0.6\linewidth}{  
-		\begin{enumerate}[leftmargin=*, label=\arabic*)]
-			\item Lire les valeurs de $P_A\left(B\right)$ et de $P_{\overline{A}}\left(B\right)$.
-			\item Compléter l'arbre pondéré.
-			\item En déduire les probabilités   $P\left( A \cap B\right)$;  $P\left( A \cap \overline{B}\right)$; $P\left( \overline{A} \cap B\right)$ et $P\left( \overline{A} \cap\overline{B}\right)$.
-			\item Vérifier que la somme des quatre probabilités précédentes est égale à $1$.
-		\end{enumerate}
-	}
-	\hfill 
-	\parbox{0.35\linewidth}{ 
-		% Racine à Gauche, développement vers la droite
 		\begin{tikzpicture}[xscale=1,yscale=1]
-			% Styles (MODIFIABLES)
-			\tikzstyle{fleche}=[-,>=latex,thick]
-			\tikzstyle{noeud}=[fill=white]
-			\tikzstyle{feuille}=[fill=white]
-			\tikzstyle{etiquette}=[midway,above]
-			\tikzstyle{etiquette1}=[midway,below]
-			% Dimensions (MODIFIABLES)
-			\def\DistanceInterNiveaux{2}
-			\def\DistanceInterFeuilles{1.3}
-			% Dimensions calculées (NON MODIFIABLES)
-			\def\NiveauA{(0)*\DistanceInterNiveaux}
-			\def\NiveauB{(1.5)*\DistanceInterNiveaux}
-			\def\NiveauC{(2.5)*\DistanceInterNiveaux}
-			\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
-			% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-			\node[noeud] (R) at ({\NiveauA},{(1.5)*\InterFeuilles}) {};
-			\node[noeud] (Ra) at ({\NiveauB},{(0.5)*\InterFeuilles}) {$A$};
-			\node[feuille] (Raa) at ({\NiveauC},{(0)*\InterFeuilles}) {$B$};
-			\node[feuille] (Rab) at ({\NiveauC},{(1)*\InterFeuilles}) {$\bar{B}$};
-			\node[noeud] (Rb) at ({\NiveauB},{(2.5)*\InterFeuilles}) {$\bar{A}$};
-			\node[feuille] (Rba) at ({\NiveauC},{(2)*\InterFeuilles}) {$B$};
-			\node[feuille] (Rbb) at ({\NiveauC},{(3)*\InterFeuilles}) {$\bar{B}$};
-			% Arcs (MODIFIABLES : Styles)
-			\draw[fleche] (R)--(Ra) node[etiquette] {$0.3$};
-			\draw[fleche] (Ra)--(Raa) node[etiquette] {$0.2$};
-			\draw[fleche] (Ra)--(Rab) node[etiquette1] {$\cdots$};
-			\draw[fleche] (R)--(Rb) node[etiquette1] {$\cdots$};
-			\draw[fleche] (Rb)--(Rba) node[etiquette] {$0.4$};
-			\draw[fleche] (Rb)--(Rbb) node[etiquette1] {$\cdots$};
-		\end{tikzpicture} 
-	}
-\end{exercise}
+		% Styles (MODIFIABLES)
+		\tikzstyle{fleche}=[-,>=latex,thick]
+		\tikzstyle{noeud}=[rounded corners=5pt]
+		\tikzstyle{feuille}=[]
+		\tikzstyle{commentaire}=[black]
+		% Dimensions (MODIFIABLES)
+		\def\DistanceInterNiveaux{3}
+		\def\DistanceInterFeuilles{1.1}
+		% Dimensions calculées (NON MODIFIABLES)
+		\def\NiveauA{(0)*\DistanceInterNiveaux}
+		\def\NiveauB{(1)*\DistanceInterNiveaux}
+		\def\NiveauC{(2)*\DistanceInterNiveaux}
+		\def\NiveauD{(3)*\DistanceInterNiveaux}
+		\def\NiveauE{(4)*\DistanceInterNiveaux}
+		\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
+		% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+			\node[commentaire] (epreuve1) at ({\NiveauB},{(0)*\InterFeuilles}) {\scriptsize Gracié};
+			\node[commentaire] (epreuve2) at ({\NiveauC},{(0)*\InterFeuilles}) {\scriptsize Indiqué}; 
+			\node[commentaire] (issues) at ({\NiveauD},{(0)*\InterFeuilles}) {\scriptsize Issues};
+			\node[commentaire] (probas) at ({\NiveauE},{(0)*\InterFeuilles}) {\scriptsize Probabilités};
+		% 
+		\node[noeud] (R) at ({\NiveauA},{(3.5)*\InterFeuilles}) {};
+		\node[noeud] (Ra) at ({\NiveauB},{(1.5)*\InterFeuilles}) {$r$};
+		\node[feuille] (Raa) at ({\NiveauC},{(1)*\InterFeuilles}) {$d$}; 
+		\node[feuille] (Rab) at ({\NiveauC},{(2)*\InterFeuilles}) {${t}$}; 
+		\node[noeud] (Rb) at ({\NiveauB},{(3.5)*\InterFeuilles}) {${d}$};
+		\node[feuille] (Rba) at ({\NiveauC},{(3)*\InterFeuilles}) {$r$}; 
+		\node[feuille] (Rbb) at ({\NiveauC},{(4)*\InterFeuilles}) {${t}$}; 
+		\node[noeud] (Rc) at ({\NiveauB},{(5.5)*\InterFeuilles}) {${t}$};
+		\node[feuille] (Rca) at ({\NiveauC},{(5)*\InterFeuilles}) {$r$}; 
+		\node[feuille] (Rcb) at ({\NiveauC},{(6)*\InterFeuilles}) {${d}$}; 
+		%
+		%	\node[commentaire] (I1) at ({\NiveauD},{(0.5)*\InterFeuilles}) {$A\cap B$}; 
+		%	\node[commentaire] (I2) at ({\NiveauD},{(1.5)*\InterFeuilles}) {$A\cap \overline{B}$}; 
+		%	\node[commentaire] (I3) at ({\NiveauD},{(2.25)*\InterFeuilles}) {$\overline{A}\cap B$}; 
+		%	\node[commentaire] (I4) at ({\NiveauD},{(3.25)*\InterFeuilles}) {$\overline{A}\cap \overline{B}$};
+		%	%
+		%	\node[commentaire] (P1) at ({\NiveauE},{(0.5)*\InterFeuilles}) {$P(A\cap B)= $}; 
+		%	\node[commentaire] (P2) at ({\NiveauE},{(1.5)*\InterFeuilles}){$P(A\cap \overline{B})= $}; 
+		%	%	\draw (P2.east) node[anchor=west, commentaire] {Faux négatif};
+		%	\node[commentaire] (P3) at ({\NiveauE},{(2.25)*\InterFeuilles}){$P(\overline{A}\cap B)= $}; 
+		%	%	\draw (P3.east) node[anchor=west, commentaire] {Faux positif};
+		%	\node[commentaire] (P4) at ({\NiveauE},{(3.25)*\InterFeuilles}) {$P(\overline{A}\cap \overline{B})=$}; 
+		%	%		\draw[ ultra thick] ({\NiveauE-1},{(3.55)*\InterFeuilles}) -- ({\NiveauE+1},{(3.55)*\InterFeuilles}) ;
+		%	%		\node[commentaire] (P5) at ({\NiveauE},{(3.75)*\InterFeuilles})  {\textbf{Total}$=\ldots $}; 
+		%	
+		% Arcs (MODIFIABLES : Styles)
+		\draw[fleche] (R.east)--(Ra.west) node[midway, above]{\small$\ldots$};
+		\draw[fleche] (Ra.east)--(Raa.west) node[midway, above]{$\ldots$};
+		\draw[fleche] (Ra.east)--(Rab.west) node[midway, below]{$\ldots$};
+		\draw[fleche] (R.east)--(Rb.west) node[midway, above]{\small$\ldots$};
+		\draw[fleche] (Rb.east)--(Rba.west) node[midway, above]{$\ldots$};
+		\draw[fleche] (Rb.east)--(Rbb.west) node[midway, below]{$\ldots$};
+		\draw[fleche] (R.east)--(Rc.west) node[midway, below]{$\ldots$};
+		\draw[fleche] (Rc.east)--(Rca.west) node[midway, above]{$\ldots$};
+		\draw[fleche] (Rc.east)--(Rcb.west) node[midway, below]{$\ldots$};
+	\end{tikzpicture} 
+\item Détérminez les probabilités suivantes. \vspace{-0.25em} 
+\begin{spacing}{2}
+\begin{enumerate}[leftmargin=*] 
+	\item $P(G=r)=$ \dotfill$P(G=d)=$\dotfill $P(G=r)=$\dotfill 
+	\item $P_{G\neq d}(G=r)=$\dotfill 
+	\item $P_{G=r}(I=d)=$\dotfill 
+			$P_{G=r}(I=d)=$\dotfill 
+	\item $P_{G=d}(I=r)=$\dotfill 
+	$P_{G=d}(I=r)=$\dotfill 
+	\item $P(\{G=d\} \cap \{I=t\})=$   \dotfill  
+	\item  $P(\{G=t\} \cap \{I=d\})=$   \dotfill 
+\end{enumerate}
+\end{spacing}\vspace{-0.75em}
+\item Déterminez $P(I=d)$. En déduire $P_{I=d}(G=r)$ et $P_{I=d}(G=t)$.
+\item Quelle confusion dans le calcul de probabilité commet le prisonnier ?
+\end{enumerate}
+\end{problem}
+\begin{problem}[Problème du Monty Hall]\hfill \\
+Deux joueurs participent à un jeu :
+\begin{enumerate}[label=\textbullet, leftmargin=*]
+	\item Le joueur A (maitre du jeu) cache un jeton sous une de 3 tasses à l'abri du regard du joueur B.
+	\item Le joueur B pointe une des 3 tasses.
+	\item Le joueur A révèle une tasse parmi les 2 restantes qui est vide. Si les deux tasses sont vides, il en choisit une au hasard.
+	\item Le joueur A propose au joueur B de se tenir à son premier choix, ou bien de le changer.
+	\item Le joueur B valide son choix définitif et note s'il a gagné ou perdu.
+\end{enumerate}
+Le joueur B a-t-il intérêt  à garder ou à modifier son choix de départ ?
 
-\begin{exercise} On dispose des informations suivantes d'une usine de production de jouets :
-	\begin{enumerate}[leftmargin=*, label=\textbullet]
-		\item Si le superviseur est de service, la probabilité qu'une pièce soit défectueuse   est de $2\%$.
-		\item Si le superviseur n'est pas de service, la probabilité qu'une pièce soit défectueuse est de $3\%$.
-		\item   Le superviseur est de service $39\%$ du temps.
-	\end{enumerate}  
-	On prend au hasard un nouveau jouet et on considère les événements suivants :\\
-	$S$: \og le superviseur est de service \fg; \hspace*{5mm} $D$: \og le jouet est déféctueux\fg.
-	\begin{enumerate}[leftmargin=*, label=\arabic*)]
-		\item Traduire les données en termes de probabilités, en utilisant les événements $D$ et $S$.
-		\item Représenter la situation par un arbre de probabilité.
-		\item Quelle est la probabilité que la pièce soit déféctueuse ?
-		\item Quelle est la probabilité que le superviseur soit de service sachant que la pièce est déféctueuse ?
-	\end{enumerate}  
-\end{exercise} 
+\emph{Avant de vous précipiter dans une modélisation par expérience aléatoire, jouez une dizaine de parties avec votre binôme. Quelle tendance décelez vous ?}
 
-\begin{exercise} 
-	Une agence de voyage propose deux durées de séjours, le week-end ou la semaine, et deux types de destinations, France ou étranger.   Parmi les dossiers de l'agence on constate que: 
-	\begin{enumerate}[leftmargin=*, label=\textbullet]
-		\item  $60\%$ des séjours ont lieu en France;
-		\item  $45\%$ des séjours en France durent une semaine;
-		\item $75\%$ des séjours à l'étranger durent une semaine.
-	\end{enumerate} 
-	On choisit un dossier au hasard et on note:
-	$F$ l’événement : \og Le séjour a lieu en France\fg et $S$ l'événement: \og Le séjour dure une semaine\fg.   
-	\begin{enumerate}[leftmargin=*, label=\arabic*)]
-		\item En utilisant les données de l'énoncé, précisez   $P\left(F\right)$;   $P_F\left(S\right)$ et $P_{\overline{F}}\left(S\right)$.
-		\item Représenter la situation par un arbre de probabilité.
-		\item Calculer $P_{\overline{F}}\left( \overline{S} \right)$, $P\left( F \cap \overline{S} \right)$ et  $P\left(S\right)$.
-	\end{enumerate} 
-\end{exercise}
+%\begin{table*}[hb]
+\noindent
+\begin{tabularx}{1\linewidth}{cccYY}\toprule
+		\textbf{Joueur A}&\textbf{Joueur B}
+		&\textbf{\scriptsize Nbrs de parties} &\textbf{\scriptsize nbr de victoires\newline si B change d'avis}&\textbf{\scriptsize nbr de victoires\newline si B se tient à son choix} \\ \toprule 
+\rule{0pt}{1.6em}		 	& &  &  \\ \hline
+\rule{0pt}{1.8em}	 	& &  &  \\ \hline 
+	\end{tabularx}
+%\end{table*}
 
-\begin{exercise} 
-	Dans l'ensemble des classes de terminale générale, en $2011$, il y avait $45\%$ de garçons. $88\%$ des filles ont été reçues au bac et seulement $86\%$ des garçons. On rencontre au hasard un élève qui était en terminale cette année-là. On note :
-	\begin{enumerate}[label=\textbullet]
-		\item $G$ l’événement : \og l'élève rencontré est un garçon \fg;
-		\item $F$ l’événement : \og l'élève rencontré est une fille \fg;
-		\item $R$ l’événement : \og l'élève rencontré a été reçu au bac \fg;
-	\end{enumerate}
-	\begin{enumerate}[leftmargin=*, label=\arabic*)]
-		\item En utilisant les notations ci-dessus, traduire en langage des probabilités la phrase : \og $88\%$ des filles ont été reçues au bac\fg.
-		\item Représenter la situation par un arbre de probabilité.
-		\item Calculer les probabilités $P\left(G\cap R\right)$ et $P\left(F\cap R\right)$.
-		\item En déduire $P\left(R\right)$.
-	\end{enumerate}
-\end{exercise}
+\end{problem}
 
-
-\begin{exercise} 
-	Une maladie affecte le cheptel bovin d'une région. On estime que $10\%$ des bovins sont atteints.
-	
-	Un test permet de diagnostiquer la maladie et on établit que :
-	\begin{enumerate}[label=\textbullet,leftmargin=*]
-		\item quand un animal est malade, le test est positif dans $85\%$ des cas;
-		\item quand un animal n'est pas malade, le test est négatif dans $95\%$ des cas.
-	\end{enumerate}
-	Un animal est pris au hasard dans le cheptel bovin de cette région.
-	\begin{enumerate}[leftmargin=*, label=\arabic*)]
-		\item Représenter la situation par un arbre de probabilité.
-		\item Déterminer la probabilité que le test soit erroné.
-	\end{enumerate}
-\end{exercise}
-
-\begin{exercise} 
-	On teste l'efficacité d'un médicament sur un échantillon d'individus  ayant un taux de glycémie anormalement élevé.
-	
-	\begin{enumerate}[label=\textbullet,leftmargin=*]
-		\item Dans cette expérimentation, $50\%$ des individus prennent le médicament, les autres reçoivent un placébo. 
-		\item On constate une baisse significative de ce taux chez $80\%$ des individus ayant pris le médicament.
-		\item  On ne constate aucune baisse significative pour $90\%$ des individus ayant pris le placébo.
-	\end{enumerate}
-	On tire au hasard la fiche d'un participant à l'étude clinique. Calculer la probabilité que son taux de glycémie ait baissé significativement.
-\end{exercise}
-
-
-\begin{exercise} 
-	A l'entrée d'un parc d'attraction, on peut acheter son billet soit à un guichet, soit à une caisse automatique.
-	Dans les deux cas, on peut payer soit par carte bancaire, soit en argent liquide.
-	
-	$80\%$ des clients choisissent d'aller au guichet et utilisent alors leur carte bancaire dans $5\%$ des cas.
-	
-	Les utilisateurs de la caisse automatique paient par carte bancaire dans $65\%$ des cas.
-	
-	Chaque jour, on tire au hasard une des contremarques pour désigner l'heureux bénéficiaire du remboursement de son billet.
-	
-	Calculer la probabilité pour que le gagnant ait payé par carte bancaire.
-\end{exercise}
-
-\begin{exercise}
-	Une entreprise vend des calculatrices. Le service après-vente s'est aperçu qu'elles pouvaient présenter deux types de défauts, l'un lié au clavier et l'autre lié à l'affichage.
-	
-	Des études statistiques ont permis à l'entreprise d'utiliser la modélisation suivante:
-	\begin{enumerate}[label=\textbullet,leftmargin=*]
-		\item La probabilité pour une calculatrice tirée au hasard de présenter un défaut de clavier est égale à $0,04$.
-		\item En présence du défaut de clavier, la probabilité que la calculatrice soit en panne d'affichage est de $0,03$.
-		\item En l'absence de défaut clavier, la probabilité de ne pas présenter de défaut d'affichage est de $0,94$.
-	\end{enumerate} 
-	On note $C$ l'événement \og la calculatrice présente un défaut de clavier \fg \hspace*{1mm} et $A$ l'événement \og la calculatrice présente un d\'efaut d'affichage \fg.
-	\begin{enumerate}[leftmargin=*, label=\arabic*)]
-		\item Déterminer les probabilités suivantes: $P_{\overline{C}}\left(\overline{A}\right)$, $P_C\left(A\right)$ et $P\left(C\right)$.
-		\item Construire un arbre pondéré décrivant cette situation. 
-		\item On choisit une calculatrice au hasard.
-		\begin{enumerate}[leftmargin=*]
-			\item Calculer la probabilité pour que la calculatrice présente les deux défauts.
-			\item Calculer la probabilité pour que la calculatrice présente au-moins un défaut.
-			\item Calculer la probabilité pour que la calculatrice présente le défaut d'affichage mais pas le défaut de clavier.
-		\end{enumerate}
-	\end{enumerate}	
-\end{exercise}
-
-
-
-
-\begin{exercise} 
-	Pour recruter des stagiaires, une entreprise organise  des tests de sélection. Parmi les candidats qui se présentent aux épreuves, il y a $60\%$ de garçons. Après avoir pris connaissance des résultats aux tests, l'entreprise engage $70\%$ des garçons candidats et $80\%$ des filles candidates.
-	
-	On rencontre au hasard un candidat qui s'est présenté aux tests.
-	\begin{enumerate}[leftmargin=*, label=\arabic*)]
-		\item Quelle est la probabilité que ce candidat soit un garçon et qu'il soit engagé comme stagiaire?
-		\item Quelle est la probabilité que ce candidat soit une fille et qu'elle soit engagée comme stagiaire?
-		\item Calculer la probabilité que ce candidat soit engagé.
-	\end{enumerate}
-\end{exercise}
-
-\begin{exercise} 
-	Une situation est modélisée par l'arbre ci-dessous. $A$ et $B$ désignant deux événements. En utilisant l'arbre de gauche, compléter l'arbre de droite:\\
-	\parbox{0.5\linewidth}{ 
-		% Racine à Gauche, développement vers la droite
-		\begin{tikzpicture}[xscale=1,yscale=1]
-			% Styles (MODIFIABLES)
-			\tikzstyle{fleche}=[-,>=latex,thick]
-			\tikzstyle{noeud}=[fill=white]
-			\tikzstyle{feuille}=[fill=white]
-			\tikzstyle{etiquette}=[midway,above]
-			\tikzstyle{etiquette1}=[midway,below]
-			% Dimensions (MODIFIABLES)
-			\def\DistanceInterNiveaux{2}
-			\def\DistanceInterFeuilles{1.3}
-			% Dimensions calculées (NON MODIFIABLES)
-			\def\NiveauA{(0)*\DistanceInterNiveaux}
-			\def\NiveauB{(1.5)*\DistanceInterNiveaux}
-			\def\NiveauC{(2.5)*\DistanceInterNiveaux}
-			\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
-			% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-			\node[noeud] (R) at ({\NiveauA},{(1.5)*\InterFeuilles}) {};
-			\node[noeud] (Ra) at ({\NiveauB},{(0.5)*\InterFeuilles}) {$A$};
-			\node[feuille] (Raa) at ({\NiveauC},{(0)*\InterFeuilles}) {$B$};
-			\node[feuille] (Rab) at ({\NiveauC},{(1)*\InterFeuilles}) {$\overline{B}$};
-			\node[noeud] (Rb) at ({\NiveauB},{(2.5)*\InterFeuilles}) {$\overline{A}$};
-			\node[feuille] (Rba) at ({\NiveauC},{(2)*\InterFeuilles}) {$B$};
-			\node[feuille] (Rbb) at ({\NiveauC},{(3)*\InterFeuilles}) {$\overline{B}$};
-			% Arcs (MODIFIABLES : Styles)
-			\draw[fleche] (R)--(Ra) node[etiquette] {$0.3$};
-			\draw[fleche] (Ra)--(Raa) node[etiquette] {$0.4$};
-			\draw[fleche] (Ra)--(Rab) node[etiquette1] {$0.6$};
-			\draw[fleche] (R)--(Rb) node[etiquette1] {$0.7$};
-			\draw[fleche] (Rb)--(Rba) node[etiquette] {$0.5$};
-			\draw[fleche] (Rb)--(Rbb) node[etiquette1] {$0.5$};
-		\end{tikzpicture}
-	}
-	\hfill
-	\parbox{0.5\linewidth}{  
-		% Racine à Gauche, développement vers la droite
-		\begin{tikzpicture}[xscale=1,yscale=1]
-			% Styles (MODIFIABLES)
-			\tikzstyle{fleche}=[-,>=latex,thick]
-			\tikzstyle{noeud}=[fill=white]
-			\tikzstyle{feuille}=[fill=white]
-			\tikzstyle{etiquette}=[midway,above]
-			\tikzstyle{etiquette1}=[midway,below]
-			% Dimensions (MODIFIABLES)
-			\def\DistanceInterNiveaux{2}
-			\def\DistanceInterFeuilles{1.3}
-			% Dimensions calculées (NON MODIFIABLES)
-			\def\NiveauA{(0)*\DistanceInterNiveaux}
-			\def\NiveauB{(1.5)*\DistanceInterNiveaux}
-			\def\NiveauC{(2.5)*\DistanceInterNiveaux}
-			\def\InterFeuilles{(-1)*\DistanceInterFeuilles}
-			% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-			\node[noeud] (R) at ({\NiveauA},{(1.5)*\InterFeuilles}) {};
-			\node[noeud] (Ra) at ({\NiveauB},{(0.5)*\InterFeuilles}) {$B$};
-			\node[feuille] (Raa) at ({\NiveauC},{(0)*\InterFeuilles}) {$A$};
-			\node[feuille] (Rab) at ({\NiveauC},{(1)*\InterFeuilles}) {$\overline{A}$};
-			\node[noeud] (Rb) at ({\NiveauB},{(2.5)*\InterFeuilles}) {$\overline{B}$};
-			\node[feuille] (Rba) at ({\NiveauC},{(2)*\InterFeuilles}) {$A$};
-			\node[feuille] (Rbb) at ({\NiveauC},{(3)*\InterFeuilles}) {$\overline{A}$};
-			% Arcs (MODIFIABLES : Styles)
-			\draw[fleche] (R)--(Ra) node[etiquette] {$\cdots$};
-			\draw[fleche] (Ra)--(Raa) node[etiquette] {$\cdots$};
-			\draw[fleche] (Ra)--(Rab) node[etiquette1] {$\cdots$};
-			\draw[fleche] (R)--(Rb) node[etiquette1] {$\cdots$};
-			\draw[fleche] (Rb)--(Rba) node[etiquette] {$\cdots$};
-			\draw[fleche] (Rb)--(Rbb) node[etiquette1] {$\cdots$};
-		\end{tikzpicture}
-	}
-\end{exercise} 
-\begin{exercise} 
-	On considère deux événements $A$ et $B$ tels que $P(A)=p$, $P(B)=P(\overline{A})$ et $P(A \cap B)=0,2p+0,15$.
-	\begin{enumerate}
-		\item Montrer que, pour tout $p \in \mathbb{R}$, $-p^2+0,8p-0,15=(0,3-p)(p-0,5)$
-		\item Trouver la probabilité $p$ telle que $A$ et $B$ soient indépendants.
-	\end{enumerate}
-\end{exercise} 
-\begin{exercise} 
-	On considère deux événements $A$ et $B$ tels que $P(A \cap B)=0,8$ et $P(A \cup B)=0,9$.
-	\begin{enumerate}
-		\item Montrer que, pour tout $p \in \mathbb{R}$, $x^2-1,7x+0,8=(x-0,85)^2+0,0775$.
-		\item Montre que $A$ et $B$ ne peuvent pas être indépendants.
-	\end{enumerate}
-\end{exercise} 
 %----------------------------------------------------------------------------------------
 %	 
 %----------------------------------------------------------------------------------------

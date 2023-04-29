@@ -1,0 +1,1233 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode  
+%!TEX root = chapter01.tex  
+\documentclass[main.tex]{subfiles}
+\begin{document} 
+%----------------------------------------------------------------------------------------
+%	CHAPTER 10
+%----------------------------------------------------------------------------------------
+\cleardoublepage
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+}   
+\onehalfspacing 
+\setcounter{chapter}{0}
+
+%\begingroup
+%% Set the style for section entries
+%\etocsetstyle{section} 
+%{\parindent -5pt \parskip 0pt}
+%{\leftskip 0pt}
+%{\makebox[.8cm]{\etocnumber\autodot}
+%	\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\nobreak
+%	\etocpage\par}
+%{}
+%% Set the style for subsection entries
+%\etocsetstyle{subsection}
+%{\parindent -5pt \parskip 0pt}
+%{\leftskip 0pt}
+%{\makebox[.5cm]{}
+%	\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\nobreak
+%	\etocpage\par}
+%{}
+%% Set the global style of the toc
+%%\etocsettocstyle{}{}
+%%\etocsettocstyle{\normalfont\sffamily\normalsize}{} 
+%\etocsettocstyle{\usekomafont{section}\small}{}
+%\etocsetnexttocdepth{\themargintocdepth}
+%% Print the table of contents in the margin 
+%\marginnote[#1]{}
+%\endgroup
+
+
+\chapter{Pourcentages et évolutions}
+
+%---------------------------------------------------------------------------------------- 
+%	 
+%----------------------------------------------------------------------------------------
+\begingroup
+% Set the style for section entries
+\etocsetstyle{section} 
+{\parindent -5pt \parskip 0pt}
+{\leftskip 0pt}
+{\makebox[.8cm]{\etocnumber\autodot}
+	\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\nobreak
+	\etocpage\par}
+{}
+% Set the style for subsection entries
+\etocsetstyle{subsection}
+{\parindent -5pt \parskip 0pt}
+{\leftskip 0pt}
+{\makebox[.5cm]{}
+	\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\nobreak
+	\etocpage\par}
+{}
+% Set the global style of the toc
+%\etocsettocstyle{}{}
+%\etocsettocstyle{\normalfont\sffamily\normalsize}{} 
+\etocsettocstyle{\usekomafont{section}\small}{}
+\etocsetnexttocdepth{\themargintocdepth}
+% Print the table of contents in the margin 
+\localtableofcontents
+\endgroup
+%---------------------------------------------------------------------------------------- 
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage
+\section{Taux d'évolution et coefficient multiplicateur}
+
+\begin{definition}[Le $P$\%] désigne $P$ centièmes$=\frac{P}{100}$. 
+\end{definition}
+\begin{definition}[$U$ de $V$] désigne $U\times V$.
+\end{definition}
+ \begin{proof} L'évolution de taux $TE$ appliquée à $X$ donne $X+TE\times X=(1+TE)X$.
+	\end{proof}
+\begin{definition}[taux d'évolution et coefficient multiplicateur] Une évolution de taux $TE$ correspond à un multiplication par $CM=1+TE$  
+	\setlength{\abovedisplayskip}{3pt} 
+	\setlength{\belowdisplayskip}{3pt} 
+	$$
+	\text{coefficient multiplicateur}  =  1 +\text{taux d'évolution}
+	$$ 
+\end{definition}
+\begin{marginfigure} 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.5cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_I=x$}; 
+		\node[noeud](C)at(3.5,0){$V_F=y$}; 
+		\node(D)at(1.75,1.5){$\times CM =\frac{y}{x}$};
+		\draw[->,>=latex](A)to[bend right=-30](C); 
+		\node(E)at(2,-1.5){$\times (1+TE)$};
+	\end{tikzpicture}
+	\caption{Evolution, CM et TE}
+	\label{fig:carreproduit}
+\end{marginfigure}
+
+ 
+\noindent
+\begin{tabularx}{0.95\linewidth}{XXX}
+\toprule
+\textbf{Journalistes} & \textbf{TE} & \textbf{CM}$=1+TE$ \\ \toprule
+augmentation de 12\% & 12\% =\numprint{0.12}& $CM=\numprint{1.12}$ \\ \hline
+diminution de 12\% &  $-12\%=-\numprint{0.12}$ & \numprint{0.88} \\\hline
+ pas de changement & $0$ & $1$ \\   \bottomrule 
+\end{tabularx}
+
+ \begin{proposition}Dans une évolution $V_I\mapsto V_F$ on a :
+ 	\[
+ 	V_F= CM\times V_I \qquad V_F = (1+TE) \times V_I
+ 	\]
+ 	
+ 	\[
+ 	CM= \frac{V_F}{V_I} \qquad TE = CM - 1 = \frac{V_F-V_I}{V_I}
+ 	\]
+\end{proposition}
+
+
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\def\espacecarre{\begin{tikzpicture}
+		\node [rectangle,draw,dashed, minimum size=0.7cm]  at (2,-0.2) {\qquad\qquad};\end{tikzpicture}}
+\subsection{Exercices : taux d'évolution et coefficient multiplicateur} 
+\begin{exercise} Complétez.\vspace{-1em}
+	\begin{spacing}{2}
+		\begin{enumerate}[label=\alph*),leftmargin=*]
+			\item  Une augmentation de $3\%$ est une évolution de taux $TE= $\dotfill.\\ Elle correspond à une multiplication par $CM=\ldots +\ldots\ldots =$\dotfill  
+			\item Une diminution de $7\%$ est une évolution de taux $TE=-$\dotfill.\\
+			 Elle correspond à une multiplication par $CM=\ldots +\ldots\ldots =$\dotfill  
+			\item Multiplier par $CM=1.2$ correspond à une évolution de taux $TE=$\dotfill. \\
+			C'est une (augmentation/diminution)  de $\ldots\ldots \%$.
+			\item Multiplier par $CM=0.95$ correspond à une évolution de taux $TE=\ldots \ldots- \ldots\ldots=$\dotfill.\\
+			 C'est une (augmentation/diminution)  de $\ldots\ldots  \%$.
+			 \item Une évolution de \EUR{1.50} à \EUR{1.86} correspond à une multiplication par $CM=\frac{\espacecarre}{\espacecarre}=\espacecarre$. C'est une évolution de taux $TE=\espacecarre -1=\espacecarre\%$.
+			 \item Une évolution de \EUR{40} à  EUR{24} correspond à une multiplication par $CM=\frac{\espacecarre}{\espacecarre}=\espacecarre$. C'est une évolution de taux $TE=\espacecarre-1=\espacecarre\%$.
+			 \item Une évolution de \EUR{320} à \EUR{288} est de taux $TE=\frac{\espacecarre-\espacecarre}{\espacecarre\null}=\espacecarre=\espacecarre\%$.
+			 \item Une évolution de \EUR{90} à \EUR{100} est de taux $TE=\frac{\espacecarre-\espacecarre}{\espacecarre\null}=\espacecarre=\espacecarre\%$.
+		\end{enumerate} 
+	\end{spacing}
+\end{exercise}
+\vspace{-2.5em}
+\begin{eBox}
+\noindent Les  exercices suivants illustrent des   formulations de   problèmes d'évolutions. 
+\end{eBox}
+\begin{exercise}\hfill 
+	
+	\noindent\parbox{0.70\linewidth}{
+Prix initial est de \EUR{80}. Après augmentation le prix est de \EUR{125}. \\
+Quel est le taux d'augmentation ? 
+}\parbox{0.23\linewidth}{
+\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+\begin{tikzpicture}
+	\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+	\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+%	\node(D)at(1.75,1.5){\scriptsize$\times CM =$};
+%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+		\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+	\draw[->,>=latex](A)to[bend right=-30](C); 
+	\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+	\node(F)at(1.2,-1.3){\scriptsize$\nearrow$ de}; 
+\end{tikzpicture}
+}	 
+\end{exercise}
+\begin{exercise}\hfill 
+	
+	\noindent\parbox{0.70\linewidth}{
+	Le prix initial est de \EUR{16}. 
+	
+	Après réduction le prix est de \EUR{12.5}.
+	
+	Donner le taux de diminution   
+	}\parbox{0.23\linewidth}{
+\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+		\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+		\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+		\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+		\draw[->,>=latex](A)to[bend right=-30](C); 
+		\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+		\node(F)at(1.2,-1.3){\scriptsize$\nearrow$ de}; 
+		\end{tikzpicture}
+	}	 
+\end{exercise}
+ \begin{exercise}\hfill 
+ 	 
+	\noindent\parbox{0.70\linewidth}{
+Le montant de la redevance audiovisuel en France est passé de \EUR{114.49}  en 2001 à \EUR{123}  en 2011.\\
+Quel est le taux d’évolution de cette taxe de 2001 à 2011 ?
+}\parbox{0.23\linewidth}{
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+		\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+		%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+		\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+	\end{tikzpicture}
+}
+ \end{exercise}
+\begin{exercise}\hfill 
+	
+	\noindent\parbox{0.70\linewidth}{
+	Le prix initial de \EUR{60} subit une augmentation de 35\%. \\
+	Sans calculer le montant de l'augmentation retrouver le prix final ? 
+}\parbox{0.23\linewidth}{
+\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+\begin{tikzpicture}
+	\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+	\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+	\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+	\draw[->,>=latex](A)to[bend right=-30](C);
+	\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+\end{tikzpicture}
+}	
+\end{exercise}
+\begin{exercise}\hfill 
+	
+	\noindent\parbox{0.70\linewidth}{
+Le prix initial de \EUR{35} subit une diminution de 60\%.\\
+Sans calculer le montant de l'augmentation retrouver le prix final ?  
+}\parbox{0.23\linewidth}{
+\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+\begin{tikzpicture}
+\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+\draw[->,>=latex](A)to[bend right=-30](C); 
+\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+\end{tikzpicture}
+}	 
+\end{exercise}
+\begin{exercise}\hfill 
+	
+	\noindent\parbox{0.70\linewidth}{
+En appliquant une augmentation de 12.5\% du prix initial, le prix augmente de \EUR{15}. 
+	\begin{enumerate}[label=\alph*), leftmargin=*]
+		\item Donner une équation vérifiée par le prix initial. \dotfill 
+		\item Quel est le prix initial.\dotfill
+	\end{enumerate} 
+ }\parbox{0.23\linewidth}{
+\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+\begin{tikzpicture}
+\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+\draw[->,>=latex](A)to[bend right=-30](C); 
+\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+\end{tikzpicture}
+}	 
+\end{exercise}
+\begin{exercise}\hfill 
+	
+	\noindent\parbox{0.70\linewidth}{
+Après augmentation de 12.5\%, le prix final est de \EUR{45}.  
+\begin{enumerate}[label=\alph*), leftmargin=*]
+	\item Donner une équation vérifiée par le prix initial. \dotfill 
+	\item Quel est le prix initial.\dotfill
+\end{enumerate} 
+ }\parbox{0.23\linewidth}{
+\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+\begin{tikzpicture}
+\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+\draw[->,>=latex](A)to[bend right=-30](C); 
+\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+\end{tikzpicture}
+}	 
+\end{exercise} 
+
+\begin{exercise} \hfill 
+	
+		\noindent\parbox{0.70\linewidth}{
+	Après diminution de 12.5\%, le prix final est de \EUR{80.5}. 
+	
+	Quel était le prix initial ?
+	 }\parbox{0.23\linewidth}{
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+		\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+		%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+		\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+		\draw[->,>=latex](A)to[bend right=-30](C); 
+		\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+	\end{tikzpicture}
+}
+\end{exercise} 
+\begin{exercise} \hfill 
+	
+ 		\noindent\parbox{0.70\linewidth}{
+	En appliquant une diminution de 15\%, le prix final est \EUR{100}. \\
+Quel est le montant de la diminution ?  
+ }\parbox{0.23\linewidth}{
+ 	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+ 	\begin{tikzpicture}
+ 		\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+ 		\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+ 		%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+ 		\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+ 		\draw[->,>=latex](A)to[bend right=-30](C); 
+ 		\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+ 	\end{tikzpicture}
+ }
+\end{exercise}  
+\begin{exercise}\hfill 
+ 
+\noindent\parbox{0.70\linewidth}{
+Le prix d’un appareil ménager a augmenté de 15 \% en 2 ans. Il coûte maintenant \EUR{460}.\\
+ Quel est montant de l'augmentation en deux ans ? 
+}\parbox{0.23\linewidth}{
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+		\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+		%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+		\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+		\draw[->,>=latex](A)to[bend right=-30](C); 
+		\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+	\end{tikzpicture}
+}
+\end{exercise}
+\begin{exercise}\hfill 
+	 
+\noindent\parbox{0.70\linewidth}{
+	Les prix des aliments ont diminué de 20\%. Un aliment coûte maintenant 240. Quel est le montant de la diminution? 
+}\parbox{0.23\linewidth}{
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=2.0cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_I=\qquad $}; 
+		\node[noeud](C)at(3.5,0){$V_F=\qquad$}; 
+		%		\node(E)at(1.75,1.2){\scriptsize$\times \overbrace{(1+TE)}^{CM}=$};
+		\node(E)at(1.75,1.0){\scriptsize$\times CM=$};
+		\draw[->,>=latex](A)to[bend right=-30](C); 
+		\node(F)at(1.2,-0.8){\scriptsize$TE=\qquad$};
+	\end{tikzpicture}
+}
+\end{exercise}
+ 
+ \begin{eBox}
+ 	Dans un plan d'épargne, les intérêts sont dit \textbf{simples} lorsqu'ils sont calculés chaque année sur la base de la \textbf{somme placée au départ}. 
+ \end{eBox}   
+ 
+\begin{eBox}
+	Dans un plan d'épargne, les intérêts sont dit \textbf{composés} lorsqu'ils sont calculés chaque année sur la base de la \textbf{somme totale  accumulée l'année précédente}. De manière générale, les gains ou pertes d'un placement sont exprimés en pourcentage par rapport à l'année écoulée. 
+\end{eBox} 
+\begin{example}\hfill 
+
+\noindent
+\parbox{0.48\linewidth}{
+Un placement  \EUR{200} en intérêts \textbf{simples} de 3\%, rapporte $3\%\times 200$ chaque année.
+
+Au terme de 5 ans, la somme épargnée est 
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+$$
+200+ 5\times 0.03\times 200=200\times 1.15
+$$
+Le montant de départ est multiplié par $CM_\text{global}=1.15$, soit une augmentation globale $TE_\text{global}=15\%$.
+}\hfill 
+\parbox{0.48\linewidth}{
+Un placement  \EUR{200} en intérêts \textbf{composés} de 3\%, augmente de $3\%$ chaque année. Le placement est multiplié par $1.03$ chaque année.
+
+Au terme de 5 ans, la somme épargnée est 
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+$$
+200\times 1.03^5\approx 200\times 1.159
+$$
+Le montant de départ est multiplié par $CM_\text{global}\approx 1.159$, soit une augmentation globale $TE_\text{global}\approx16\%$.
+} 
+\end{example}
+\begin{exercise}  Complétez le tableau. 
+	
+	\noindent	
+	\begin{tabularx}{1\columnwidth}{|c|c|c|X|X|} \hline
+		Placement initial &  taux d'intêret  &  nombre d'années &  Calcul &   Montant final \\ \hline\hline  
+		\rule{0pt}{1.8em}\EUR{2000} & $5\%$ composés & 6 & $2000\times 1.05^{\ldots}$ & \\ \hline
+		\rule{0pt}{1.8em}\EUR{4000} & $2\%$ composés & 8 &  & \\ \hline
+		\rule{0pt}{1.8em}\EUR{3500} & $6\%$ composés & 10 &   & \\ \hline
+		\rule{0pt}{1.8em}\EUR{10000} & $1\%$ composés & 11 &   & \\ \hline
+		\rule{0pt}{1.8em}  &  &  & $5000 \times 1.07^{14}$  & \\ \hline
+		\rule{0pt}{1.8em}  &  &  & $600 \times 1.1^{8}$  & \\ \hline
+		\rule{0pt}{1.8em}\EUR{4000}  &  $2\%$ simples& 5 &    & \\ \hline
+	\end{tabularx} 
+\end{exercise} 
+\begin{exercise} Entourez les bonnes réponses.\hfill 
+	
+	\noindent \QCM[  Alterne, Stretch=1.0, Reponses=3, Titre,AlphT, Largeur=2.5cm]{%
+		%		{$70$ est solution de l'équation $x^{300}=1$ d'inconnue $x$}&2,%
+		{Un placement de \EUR{1000}  se déprécie de $7\%$ par an. Le montant après 5 ans est ...}&{$1000\times 0.07\times 5 $}&{$1000\times 0.07^5 $}&{$1000\times 0.93^5 $}&3,%
+		%		{Un placement de \EUR{2000}  rapporte $4\%$ d'intérêts composés par an. Le montant après 5 ans est ...}&{$2000\times 1.04\times 5 $}&{$2000\times 1.04^5 $}&{$2000\times 4^5 $}&2,% 
+		{Un placement de \EUR{100}  rapporte $8\%$ d'intérêts composés par an. Le montant après 10 ans est ...}&{$100\times 1.8\times 10 $}&{$100\times 1.08^{10} $}&{$100\times 0.8^{10} $}&2,%
+		{Un placement de \EUR{100}  rapporte $3.5\%$ d'intérêts composés par an. Le montant après 2 ans est ...}&{$100\times 0.07 $}&{$100\times 1.07^{2} $}&{$107.1225$}&2,%
+		{Un placement de \EUR{1000}  se déprécie de $9\%$ par an. Le montant après 10 ans est ...}&{$1000\times 0.91^{10} $}&{$1000\times 0.9^{10} $}&{$1000\times 1.09^{10}$}&1,%
+		{Un placement de \EUR{5000}  se déprécie de $12\%$ par an. Le montant après 6 ans est ...}&{$5000\times 0.12^{6} $}&{$1000\times 0.88^{6} $}&{$\scriptsize 1000(1-6\times 0.12)$}&2,%
+		%		{Un placement de \EUR{11000}  rapporte $4\%$ d'intérêts composés par an. Le total des intérêts après 4 ans est ...}&{$\approx$\EUR{12700}}&{$\approx$\EUR{1700}}&{$\approx$\EUR{1868}}&1,%
+%		{Un placement de \EUR{1000}  rapporte  $10\%$ d'intérêts composés par an. Le placement initial est doublé  au bout de...}&{$6$ ans}&{$8$ ans}&{$10$ ans}&2,%
+		%		{Un placement de \EUR{1000}  se déprécie de $5\%$ par an. Le placement  initial est diminuée de moitié au bout de...}&{$13$ ans}&{$14$ ans}&{$15$ ans}&2,%
+	}
+\end{exercise} 
+\begin{exercise}\hfill \\
+	 Quark souhaite investir \EUR{10000} sur 10 ans. Le placement $A$ rapporte $4\%$ taux d'intérêts simples. Le placement $B$ rapporte $3.5\%$ d'intérêts composés.\\
+	 Quel placement est le plus avantageux ? Montrer les calculs.
+\end{exercise}
+\begin{exercise}\hfill \\
+	Une banque propose un placement à intérêts composés. La première année est à 7\%, et les suivantes sont à 5\%. \\
+Quelle est le \textbf{taux d'}augmentation globale d'un placement après 3 années ? 
+\end{exercise}
+
+\begin{exercise} \hfill \\
+	 Un placement de \EUR{1000} sur 10 ans se déprécie de $4\%$ par an. Calculer le \textbf{taux de} diminution globale sur $10$ ans.
+\end{exercise}
+
+
+
+
+%----------------------------------------------------------------------------------------
+ 
+
+
+
+\begin{exercise}[bilan]  	Compléter le tableau (Variation absolue = Prix final - Prix initial).  
+	
+%	\begin{table*}[h] 
+	\noindent	\begin{tabularx}{1\columnwidth}{|X|c|c|c|c|c|} \hline
+			\scriptsize Augmentation/diminution &\scriptsize taux d'évolution  &\scriptsize Coefficient Multiplicateur &\scriptsize Prix initial& \scriptsize Prix final &\scriptsize Variation absolue \\ \hline\hline  
+			\rule[-0.6em]{0em}{1.9em} 	 &  +100\%   &&\EUR{98.40}&   &   \\ \hline
+			\rule[-0.6em]{0em}{1.9em} 	 &  +160\%   &&\EUR{196.80} &  &   \\ \hline  
+			%			\rule[-0.6em]{0em}{1.8em} \EUR{50}& +20\% & & & & \\ \hline
+			\rule[-0.6em]{0em}{1.9em}  &+20\%  & & \EUR{60}&& \\ \hline
+			\rule[-0.6em]{0em}{1.9em} & -20\%  & & \EUR{72}& & \\ \hline
+			\rule[-0.6em]{0em}{1.9em}  & & & \EUR{72}& \EUR{54} & \\ \hline
+			\rule[-0.6em]{0em}{1.9em}  Augmentation de 50\% &	&  & &\EUR{54} & \\ \hline
+			\rule[-0.6em]{0em}{1.9em} Diminution de 50\%&	&     & &\EUR{54} & \\ \hline
+			\rule[-0.6em]{0em}{1.9em} 	& +20\% &  & &\EUR{54} & \\ \hline
+			\rule[-0.6em]{0em}{1.9em}  	& -20\% & & &\EUR{54} & \\ \hline
+			\rule[-0.6em]{0em}{1.9em} 	   & & &\EUR{54}& & +\EUR{54}\\ \hline
+			\rule[-0.6em]{0em}{1.9em} 	    & & $\times \numprint{0.7}$ &\EUR{40} &   &   \\ \hline 
+			\rule[-0.6em]{0em}{1.9em} 	&   & & &\EUR{108} & $-$\EUR{27}\\ \hline
+			\rule[-0.6em]{0em}{1.9em} 	&    &  $\times \numprint{1.3}$& & \EUR{91} &   \\ \hline 
+			\rule[-0.6em]{0em}{1.9em} 	   & & &\EUR{96}&\EUR{108} &  \\ \hline
+			\rule[-0.6em]{0em}{1.9em}  &+\numprint{1.25}\%   & &	\EUR{96}&  &  \\ \hline
+			\rule[-0.6em]{0em}{1.9em} 	 &+\numprint{25}\% &  & &\EUR{98.40}  &  \\ \hline
+			\rule[-0.6em]{0em}{1.9em} 	   & & $\times \numprint{1.007}$ &\EUR{130}   &   &   \\ \hline 
+			\rule[-0.6em]{0em}{1.9em} 	    & & & \EUR{98.40}& &  $-$\EUR{19.68}\\ \hline 
+			\rule[-0.6em]{0em}{1.9em} 	 &  +42\% & & \EUR{17} & &   \\ \hline  
+		\end{tabularx}
+%	\end{table*} 
+\end{exercise} 
+
+
+%----------------------------------------------------------------------------------------
+%	cours
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\section{Evolutions successives}
+
+
+\begin{theorem}[Évolutions successives]
+	Plusieurs évolutions successives vont avoir le même effet qu'une seule dont le \textbf{CM global est le produit des CM  des évolutions intermédiaires qui la composent}.  
+\end{theorem}  
+\begin{theorem} [Évolutions successives de même TE] 
+	Pour une succession de $n$ évolutions de  même TE, le taux d'évolution global est donné par :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	\begin{align*} 
+		CM_{\text{global}}   &= (CM)^n \\
+		1+TE_{\text{global}}  &= (1+TE )^n
+	\end{align*} 
+\end{theorem}
+	\begin{marginfigure} 
+		\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+		\begin{tikzpicture}[scale=0.7]
+			\node[noeud](A)at(0,0){$V_D=?$};
+			\node[noeud](B)at(3,0){$V_I=?$};
+			\node[noeud](C)at(6,0){$V_A=?$};
+			\node(D)at(1.5,-1.5){$\times CM_1=\ldots$};
+			\node(D1)at(1.5,-2.5){$TE_1=\ldots$};
+			\node(D)at(4.5,-1.5){$\times CM_2=\ldots$};
+			\node(D1)at(4.5,-2.5){$TE_2=\ldots$};
+			\node(D)at(3,1.5){$\times CM_\text{global}=\ldots$};
+			\node(D1)at(3,2.5){$TE_\text{global}=\ldots$};
+			\draw[->,>=latex](A)to[bend right=-30](C);
+			\draw[->,>=latex](B)to[bend right=60](C);
+			\draw[->,>=latex](A)to[bend right=60](B);
+		\end{tikzpicture}
+	\caption{Pour deux évolutions successives   de CM $3$ et $7$, vont avoir le même effet qu'une seule  dont le CM est $3\times 7$.}
+	\end{marginfigure} 
+\begin{theorem}[Cas de 2   évolutions successives] 
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+\begin{align} 
+	CM_{\text{global}}   &= CM_1 \times CM_2   \label{eq.successives.1}\\
+	1+TE_{\text{global}}  &= (1+TE_1 ) \times (1+TE_2)  \label{eq.successives.2}
+\end{align}
+\end{theorem} 
+
+
+\subsection{Taux d'évolution réciproque}
+ 
+\begin{figure}[h]
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_0$};
+		\node[noeud, text width=2cm](B)at(3,0){$V_1$};
+		\node[noeud](C)at(6,0){\small $V_2=V_0$};
+		\node(D)at(1.5,-1.5){$\times CM_1=\frac{5}{4}$};
+		\node(D)at(4.5,-1.5){$\times CM_2=\frac{4}{5}$};
+		\node(D)at(3,1.5){$\times CM_\text{global}=1$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+		\node(D1)at(1.5,-2.5){$TE_1=+25\%$}; 
+		\node(D1)at(4.5,-2.5){$TE_2=-20\%$}; 
+		\node(D1)at(3,2.5){$TE_\text{global}=0$};
+	\end{tikzpicture}
+	\caption{L'évolution $100\mapsto 125$ et l'évolution $125\mapsto 100$ sont réciproques.}
+\end{figure}
+\begin{definition}[Évolution réciproque] de l'évolution $V_0\mapsto V_1$ est l'évolution $V_1\mapsto V_0$. 
+	
+	Les CM multiplicateurs sont inverses l'un de l'autre. 	Les formules \ref{eq.successives.1} et  \ref{eq.successives.2} donnent  : 
+	\begin{align}  
+		1 &  = CM \times CM_\text{reciproque} \\
+		1 &  = (1+TE ) \times (1+TE_\text{reciproque}) 
+	\end{align}
+\end{definition}
+\newpage 
+\subsection{Approfondissement : Taux d'évolutions moyens}
+\begin{definition}[CM et TE moyens] Deux évolutions successives de taux d'évolutions $TE_1$ et $TE_2$.
+	
+	On appelle \textbf{coefficient multiplicateur moyen} et \textbf{taux d'évolution moyen} les nombres : 
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	\begin{align*} 
+		CM_{\text{moyen}}^2  & = CM_1 \times CM_2 \\
+		\big(1+TE_{\text{moyen}}\big)^2  &= (1+TE_1 ) \times (1+TE_2)
+	\end{align*}  
+	Donc $2$ évolutions successives de même taux $TE_{\text{moyen}}$ conduisent à une même évolution globale que les deux évolutions successives de $TE_1$ et $TE_2$.
+\end{definition} 
+\begin{proposition}[Cas de   3 évolutions successives] 
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	\begin{align} 
+		CM_{\text{global}}   &= CM_1 \times CM_2 \times CM_3 \label{eq.successives.3}\\
+		1+TE_{\text{global}}  &= (1+TE_1 ) \times (1+TE_2) \times (1+TE_3)\label{eq.successives.4} \\
+		\big(1+TE_{\text{moyen}}\big)^3  &= (1+TE_1 ) \times (1+TE_2)\times (1+TE_3)
+	\end{align}
+\end{proposition}  
+\begin{example} Est-ce que trois augmentations de 12\%, puis 17\%, puis 10\% correspondent à une augmentation moyenne annuelle d'exactement 13\% ? 
+\end{example}
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\subsection{Exercices évolutions successives et réciproques} 
+\begin{exercise} Déterminez le taux d'évolution global associé à la succession d'évolutions :
+	\begin{enumerate}[label=\arabic*), leftmargin=*]
+		\item augmentation de $8\%$, suivie d'une augmentation de $10\%$ \\
+\noindent
+\parbox{0.48\linewidth}{
+ 
+$\begin{WithArrows}
+CM_{\text{global}} &= CM_1\times CM_2 \rule{0pt}{1.9em}\\
+1+TE_{\text{global}}& = (1+TE_1)(1+TE_2) \rule{0pt}{1.9em}\\
+ 1+TE_{\text{global}} &= \ldots\ldots\ldots  \times \ldots\ldots\ldots \rule{0pt}{1.8em} =\ldots\ldots\rule{0pt}{1.8em}\\
+TE_{\text{global}} &=   \ldots\ldots\ldots-1 = \rule{0pt}{1.9em} 
+\end{WithArrows}$  
+}\hfill 
+\parbox{0.48\linewidth}{ 
+		\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+\begin{tikzpicture}
+	\node[noeud](A)at(0,0){$V_D=?$};
+	\node[noeud](B)at(3,0){$V_I=?$};
+	\node[noeud](C)at(6,0){$V_A=?$};
+%	\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+	\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+%	\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+	\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+%	\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+	\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+	\draw[->,>=latex](A)to[bend right=-30](C);
+	\draw[->,>=latex](B)to[bend right=60](C);
+	\draw[->,>=latex](A)to[bend right=60](B);
+\end{tikzpicture}\\	
+} \medskip\\
+L'évolution globale correspond à une \dotfill  de $\ldots\ldots\%$.
+ 
+
+	\item augmentation de 10\%  suivie d'une augmentation de 5\%  \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+		1+TE_{\text{global}}& = (1+TE_1)(1+TE_2) \rule{0pt}{1.9em}\\
+		1+TE_{\text{global}} &= \ldots\ldots\ldots  \times \ldots\ldots\ldots  =\ldots\ldots\rule{0pt}{1.9em} \\
+		TE_{\text{global}} &=   \ldots\ldots\ldots-1 = \rule{0pt}{1.9em} 
+	\end{WithArrows}$  
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+%		\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+		\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution globale correspond à une \dotfill de $\ldots\ldots\%$
+	\item diminution de 30\%  suivie d'une diminution de 10\%  \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+		1+TE_{\text{global}}& =   \rule{0pt}{1.9em}\\
+		1+TE_{\text{global}} &= \ldots\ldots\ldots  \times \ldots\ldots\ldots  =\ldots\ldots\rule{0pt}{1.9em} \\
+		TE_{\text{global}} &=   \ldots\ldots\ldots-1 = \rule{0pt}{1.9em} 
+	\end{WithArrows}$  
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+		%		\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+		\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution globale correspond à une \dotfill  de $\ldots\ldots\%$
+	\item diminution de 40\%  suivie d'une diminution de 10\% \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+		1+TE_{\text{global}}& =  \rule{0pt}{1.9em}\\
+		1+TE_{\text{global}} &= \ldots\ldots\ldots  \times \ldots\ldots\ldots  =\ldots\ldots\rule{0pt}{1.9em} \\
+		TE_{\text{global}} &=   \ldots\ldots\ldots-1 = \rule{0pt}{1.9em} 
+	\end{WithArrows}$  
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+		%		\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+		\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution globale correspond à une \dotfill  de $\ldots\ldots\%$
+
+\newpage
+	\item diminution de 25\%  suivie d'une diminution de 20\%  \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+		 & =   \rule{0pt}{1.9em}\\
+	  &= \ldots\ldots\ldots  \times \ldots\ldots\ldots  =\ldots\ldots\rule{0pt}{1.9em} \\
+		TE_{\text{global}} &=   \ldots\ldots\ldots-1 = \rule{0pt}{1.9em} 
+	\end{WithArrows}$  
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}[scale=0.80]
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+		%		\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+		\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution globale correspond à une \dotfill  de $\ldots\ldots\%$
+	\item augmentation de 25\%  suivie d'une diminution de 20\% \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+		 & =   \rule{0pt}{1.9em}\\
+	  &= \rule{0pt}{1.9em} \\
+		TE_{\text{global}} &=     \rule{0pt}{1.9em} 
+	\end{WithArrows}$  
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}[scale=0.80]
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+		%		\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+		\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution globale correspond à une \dotfill  de $\ldots\ldots\%$
+	\item augmentation de 25\%  suivie d'une diminution de 25\% \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+		 & =   \rule{0pt}{1.9em}\\
+	  &=  \rule{0pt}{1.9em} \\
+		TE_{\text{global}} &=     \rule{0pt}{1.9em} 
+	\end{WithArrows}$  
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}[scale=0.80]
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+		%		\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+		\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution globale correspond à une \dotfill  de $\ldots\ldots\%$
+	\item diminution de 20\%  suivie d'une augmentation de 25\%  \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+	& =   \rule{0pt}{1.9em}\\
+	&=  \rule{0pt}{1.9em} \\
+	TE_{\text{global}} &=     \rule{0pt}{1.8em} 
+\end{WithArrows}$  
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}[scale=0.80]
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+		%		\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+		\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution globale correspond à une \dotfill  de $\ldots\ldots\%$
+	\item augmentation de 22\%  suivie d'une diminution de 15\% \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+	& =   \rule{0pt}{1.9em}\\
+	&=  \rule{0pt}{1.9em} \\
+	TE_{\text{global}} &=     \rule{0pt}{1.9em} 
+\end{WithArrows}$   
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}[scale=0.80]
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE_1=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_2=\ldots\ldots$};
+		%		\node(D)at(3,2.5){$\times CM_\text{global}=\ldots\ldots$};
+		\node(D1)at(3,1.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution globale correspond à une \dotfill  de $\ldots\ldots\%$
+\end{enumerate} 
+%\scriptsize augmentation de 200\% 
+%& \scriptsize augmentation de 300\%   
+	\end{exercise} 
+\newpage 
+\begin{exercise}[3 évolutions successives] 	Dans chaque cas, calculer le TE global correspondants aux évolutions successives ci-dessous :
+\begin{enumerate}[label={\arabic*)},leftmargin=*] 
+	\item une diminution de 30\% suivie d'une augmentation de 20\% suivie d'une diminution de 10\% 
+	\item  une augmentation de 12\% suivie de deux baisses successives de 5\%
+	\item trois augmentations successives de 10\%.
+	\item trois diminutions successives de 5\%. 
+	\end{enumerate} 
+\end{exercise}
+
+\begin{eBox}  Deux évolutions successives de taux d'évolutions $TE_1$ et $TE_2$.\\
+	 On appelle   \textbf{taux d'évolution moyen} le nombre vérifiant : 
+	\setlength{\abovedisplayskip}{3pt} 
+	\setlength{\belowdisplayskip}{3pt} 
+	\begin{gather*} 
+	\big(1+TE_{\text{moyen}}\big)^2   = (1+TE_1 )   (1+TE_2)\\
+	1+TE_{\text{moyen}}=\sqrt{ (1+TE_1 )   (1+TE_2)}
+	\end{gather*}
+	Donc $2$ évolutions successives de même taux $TE_{\text{moyen}}$ conduisent à une même évolution globale que les deux évolutions successives de $TE_1$ et $TE_2$.
+%	\\
+%Le concept se généralise à 3 évolutions de taux $TE_1$, $TE_2$ et $TE_3$ à l'aide de la racine cubique :
+%	\setlength{\abovedisplayskip}{3pt} 
+%	\setlength{\belowdisplayskip}{3pt} 
+%	\begin{gather*} 
+%		\big(1+TE_{\text{moyen}}\big)^3   = (1+TE_1 )   (1+TE_2) (1+TE_3)\\
+%		1+TE_{\text{moyen}}=\sqrt[3]{ (1+TE_1 )   (1+TE_2)  (1+TE_3)}
+%		\end{gather*}
+\end{eBox}  
+
+\begin{exercise} \hfill 
+	
+	\noindent		Le nombre de nouvelles inscriptions Netflix à augmenté de 21\% durant le moi d'octobre, puis de 36\% durant le mois de novembre.
+	Calculer le taux évolution mensuel moyen.
+\end{exercise}  
+
+\begin{exercise}\hfill 
+	
+	\noindent	 Le prix d'un article  augmente de $20\%$ la première année, et diminue de $4\%$ l'année suivante. Calculer le taux d'évolution annuel moyen.
+\end{exercise}  
+\begin{exercise} \hfill 
+	
+	\noindent Le montant d'un placement passe de \EUR{2000} en 2020 à   \EUR{2142.45} en 2022. Calculer le taux d'évolution annuel moyen.
+\end{exercise} 
+\begin{eBox} 
+Le concept de taux moyen se généralise à 3 évolutions de taux $TE_1$, $TE_2$ et $TE_3$ à l'aide de la racine cubique :
+\setlength{\abovedisplayskip}{3pt} 
+\setlength{\belowdisplayskip}{3pt} 
+\begin{gather*} 
+	\big(1+TE_{\text{moyen}}\big)^3   = (1+TE_1 )   (1+TE_2) (1+TE_3)\\
+	1+TE_{\text{moyen}}=\sqrt[3]{ (1+TE_1 )   (1+TE_2)  (1+TE_3)}
+\end{gather*}
+\end{eBox} 
+\begin{exercise} \hfill 
+	
+	\noindent La taxe d'importations de patates-douces égyptiennes a augmenté de 9,75\% entre 2020 et 2022. Calculer le taux d'évolution annuel moyen de cette taxe.  
+\end{exercise} 
+\begin{exercise}\hfill 
+	
+	En Juin 2017, Farid achète une voiture pour \EUR{12000}. En Juin 2020, sa voiture est évaluée à \EUR{8600}.
+	\begin{enumerate}[label={\alph*)},leftmargin=*] 
+		\item Calculer le taux d'évolution annuel moyen.
+		\item Si la voiture se déprécie à ce même taux. Quel est la valeur de la voiture en Juin 2022 ?
+	\end{enumerate} 
+\end{exercise}
+
+\begin{exercise}\hfill 
+	
+	\noindent	Une moto achetée \EUR{2300} est revendue 3 ans plus tard à \EUR{1300}. Calculer le taux de dépréciation annuel moyen.
+\end{exercise}
+
+%-------------------------------------------------------------------------------
+\newpage 
+\begin{example}[Taux d'évolution réciproque] Pour chacune des évolutions suivantes, donner le taux d'évolution réciproque. Arrondir à $10^{-4}$ près si nécsssaire. 
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+	\item augmentation de 25\% \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+	1	& =  (1+TE)(1+TE_{\text{reciproque}}) \rule{0pt}{1.9em}\\
+		&=  \rule{0pt}{1.9em} \\
+		&=  \rule{0pt}{1.9em} \\
+		TE_{\text{reciproque}} &=     \rule{0pt}{1.9em} 
+	\end{WithArrows}$   
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}[scale=0.80]
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_{\text{reciproque}}=\ldots\ldots$};
+				\node(D)at(3,1.5){$\times CM_\text{global}=1$};
+%		\node(D1)at(3,2.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution réciproque d'une  augmentation de $25\%$ est une \dotfill de $\ldots\ldots\%$.
+	\item diminution de 25\% \\
+\noindent
+\parbox{0.58\linewidth}{ 
+	$\begin{WithArrows} 
+		1	& =  (1+TE)(1+TE_{\text{reciproque}}) \rule{0pt}{1.9em}\\
+		&=  \rule{0pt}{1.9em} \\
+		&=  \rule{0pt}{1.9em} \\
+		TE_{\text{reciproque}} &=     \rule{0pt}{1.9em} 
+	\end{WithArrows}$   
+}\hfill 
+\parbox{0.40\linewidth}{ 
+	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+	\begin{tikzpicture}[scale=0.80]
+		\node[noeud](A)at(0,0){$V_D$};
+		\node[noeud](B)at(3,0){$V_I$};
+		\node[noeud](C)at(6,0){$V_A$};
+		%		\node(D)at(1.5,-2.5){$\times CM_1=\ldots\ldots$};
+		\node(D1)at(1.5,-1.5){$TE=\ldots\ldots$};
+		%		\node(D)at(4.5,-2.5){$\times CM_2=\ldots\ldots$};
+		\node(D1)at(4.5,-1.5){$TE_{\text{reciproque}}=\ldots\ldots$};
+		\node(D)at(3,1.5){$\times CM_\text{global}=1$};
+		%		\node(D1)at(3,2.5){$TE_\text{global}=\ldots\ldots$};
+		\draw[->,>=latex](A)to[bend right=-30](C);
+		\draw[->,>=latex](B)to[bend right=60](C);
+		\draw[->,>=latex](A)to[bend right=60](B);
+	\end{tikzpicture}\\	
+}\\
+L'évolution réciproque d'une  diminution de $25\%$ est une \dotfill de $\ldots\ldots\%$.
+\end{enumerate} 
+\end{example}
+\begin{exercise} Même consignes\vspace{-1em}
+	\begin{multicols}{3} 
+		\begin{enumerate}[label={\arabic*)},leftmargin=*] 
+			\item augmentation de 50\%
+			\item diminution de 20\%
+			\item diminution de 90\%
+			%			\item augmentation de 200\%
+			\item augmentation de 300\%
+			\item augmentation de $10$\%
+			\item diminution de $10$\%
+%			\item augmentation de $33$\%
+%			\item augmentation de $13$\%
+%			\item diminution de $27,2$\%
+		\end{enumerate}
+	\end{multicols}
+\end{exercise}
+\begin{exercise} \hfill 
+	
+	\noindent	Le prix TTC est 20\% du prix HT. Quelle évolution appliquer au prix TTC pour obtenir le prix HT ?
+\end{exercise}
+
+
+\begin{exercise}[Indice de base 100]\hfill 
+	
+	Le tableau ci-dessous donne le chiffre d'affaire annuel d'une entreprise pour les années comprises entre 2015 et 2021. 
+	
+	\noindent \begin{tabularx}{0.95\linewidth}{|c|X|X|X|X|X|X|X|}\hline 
+		\textbf{Année} &2015 &2016 &2017 &2018 & 2019 & 2020 &2021 \\ \hline 
+		\textbf{Chiffre d'affaire en miliers d'euros} & 134 & 138 & 138.3 & 135.6 & 133.2 & 138.2 &140.4 \\ \hline 
+		\textbf{Indice (base 100)} & 97.1 & 100 & & &&&
+		\\ \hline 
+	\end{tabularx}
+	\begin{enumerate}[label=\arabic*), leftmargin=*]
+		\item Complétez la ligne des indices sachant qu'elle est proportionnellle à celle des chiffre d'affaire.
+		\item Sans aucun calculs supplémentaires donner le taux d'augmentation en \% qui permet de passer du chiffre d'affaire de 2016 à celui de 2021.
+		\item Même question avec le taux de diminution du chiffre d'affaire de 2016 à 2019.
+	\end{enumerate}
+\end{exercise}
+
+
+%----------------------------------------------------------------------------------------
+%	cours
+%----------------------------------------------------------------------------------------
+%
+%\newpage 
+%\loadgeometry{marginlayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%	headwidth=textwithmarginpar,
+%	headsepline=true,
+%	headsepline= 0.5pt,
+%	footwidth=textwithmarginpar,
+%} 
+\onehalfspacing
+%\section{Taux d'évolution réciproque}
+% 
+%
+%
+%
+%
+%
+%\begin{figure}[h]
+%	\tikzstyle{noeud}=[rounded corners=3pt,fill=gray!35, text centered,text width=1.2cm]
+%	\begin{tikzpicture}
+%		\node[noeud](A)at(0,0){$V_D=3$};
+%		\node[noeud, text width=2cm](B)at(3,0){$V_A=15$};
+%		\node[noeud](C)at(6,0){$V_D=3$};
+%		\node(D)at(1.5,-1.5){$\times CM_1=5$};
+%		\node(D)at(4.5,-1.5){$\times CM_2=\frac{1}{5}$};
+%		\node(D)at(3,1.5){$\times CM_\text{global}=1$};
+%		\draw[->,>=latex](A)to[bend right=-30](C);
+%		\draw[->,>=latex](B)to[bend right=60](C);
+%		\draw[->,>=latex](A)to[bend right=60](B);
+%	\end{tikzpicture}
+%	\caption{L'évolution $3\mapsto 15$ et l'évolution $15\mapsto 3$ sont réciproques.}
+%\end{figure}
+%\begin{definition}[Évolution réciproque] de l'évolution $V_D\mapsto V_A$ est l'évolution $V_A\mapsto V_D$. 
+%	
+%	Les CM multiplicateurs sont inverses l'un de l'autre. 	Les formules \ref{eq.successives.1} et  \ref{eq.successives.2} donnent  : 
+%	\begin{align}  
+%		1 &  = CM \times CM_\text{reciproque} \\
+%		1 &  = (1+TE ) \times (1+TE_\text{reciproque}) 
+%	\end{align}
+%\end{definition}
+
+%----------------------------------------------------------------------------------------
+%	cours
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\section{Club de Maths : Problèmes}
+ 
+
+\begin{exercise}\hfill
+	
+	\noindent Une augmentation de 5\% suivie d’une augmentation de taux $t$ correspond à une augmentation globale de  17,6\%.
+	Montrer que $t$ est solution de l'équation $\numprint{1.05}(1+t)=\numprint{1.176}$
+	et trouver $t$. 
+\end{exercise}
+\begin{exercise} \hfill
+	
+	\noindent Une diminution de  15 \%  suivie d’une diminution de taux $t$ correspond à une diminution globale de 32 \%. Trouver $t$.
+\end{exercise}
+\begin{exercise}[\emoji{cactus}]\hfill
+	
+	\noindent Après deux augmentations successives de taux $t$, le prix d’un produit a globalement augmenté de 32,25\%. 
+	Trouver $t$.
+\end{exercise} 
+\begin{exercise}[\emoji{cactus}] \hfill 
+	
+	\noindent	Après une augmentation de  taux  $t$ suivie d’une baisse de taux $t$, le prix d'une chemise a diminué de  4\%.  
+	\begin{enumerate}[label={\arabic*)},leftmargin=*] 
+		\item Montrer que $\numprint{0.96}=1-t^2$.  
+		\item Trouver $t$.
+	\end{enumerate} 
+\end{exercise}  
+\begin{eBox}
+	\textbf{Vrai ou Faux ?} \og une augmentation de $t\%$ suivie d'une diminution de $t\%$ est toujours une diminution\fg{}.
+\end{eBox} 
+
+
+\begin{problem}  \hfill
+	
+	\noindent On aggrandit les côtés d'un carré de 20\%, quel est le taux d'agrandissement des aires.
+\end{problem}
+
+\begin{problem} \hfill
+	
+	\noindent Soit un carré de côté $c$. On augmente deux côtés opposés d'un taux $t_1$, et les deux autres d'un taux $t_2$. 
+	\begin{enumerate}[label=\arabic*), leftmargin=*]
+		\item Exprimer l'aire du rectangle obtenu en fonction de $c$. 
+		\item En déduire que le taux d'évolution de l'aire par cette transformation est $t_1+t_2+t_1t_2$.
+		\item Si $t_1=25\%$ et $t_2=-22\%$, l'aire a-t-elle augmenté ou diminué ?
+		\item Si $t_1=15\%$. Comment choisir $t_2$ pour que l'aire soit conservée ?
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}  \hfill
+	
+	\noindent Deux offres sont proposées pour une bouteille de lessive : 15\% de produit en plus, ou 15\% de réduction sur le prix.	Laquelle choisissez-vous et pourquoi ?
+\end{problem}
+\begin{problem} \label{chapter11:problem:01}  \hfill
+	
+	\noindent	Le coût du pétrole représente 24\% du coût de production de l'essence, qui représente lui-même 35\% du prix de l'essence. Si le coût du pétrole augmente de 10\%, et que les autres composants du prix de l'essence ne subissent aucun changement, quel sera le pourcentage d'augmentation du prix de l'essence. 
+\end{problem}
+\begin{problem}\label{chapter11:problem:02} \hfill
+	
+	\noindent Après une année d'entrainement, Minnie augmente sa vitesse moyenne au  Marathon de Londres de 25\%. Quel est le taux de diminution de son temps total ?
+\end{problem}
+\begin{problem}\label{chapter11:problem:03}  \hfill
+	
+	\noindent Coincée dans le trafic, Emilie's met 25\% de plus que d'habitude pour arriver chez elle. Quel est le pourcentage de réduction de sa vitesse par rapport à un trajet sans embouteillage.
+\end{problem}
+
+\begin{problem} \label{chapter11:problem:04} \hfill
+	
+	\noindent	Si un tapis roulant avançait 10\% plus rapidement, alors le trajet prendrait 5 s de moins. Quelle est la durée du trajet ?
+\end{problem}
+\begin{proof}[indication pour le problème \ref{chapter11:problem:01}] $x=$ prix de l'essence. Quel est le coût du pétrole ? 
+\end{proof} 
+\begin{proof}[indication pour le  problème \ref{chapter11:problem:04}]    Traduire l'énoncé en une équation utilisant $l$ et $t$ la longueur du tapis roulant et le temps normal de trajet.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+%\newpage 
+\begin{exercise}\hfill 
+	
+\begin{multicols}{2}
+\begin{lstlisting}[ language=python , 
+%	title=Script C,   
+linewidth=0.99\columnwidth,
+style=python-code,    
+aboveskip=0.0\topskip,
+belowskip=0.0\topskip,
+xleftmargin=1.2em,
+%	lineskip=1.0em,
+tabsize=4, 
+%numbers=none,
+%	firstnumber=10  
+] 
+def mafonction(t1, t2) :
+	cm1 = 1 + t1 / 100
+	cm2 = 1 + t2 / 100
+	cmg = cm1 * cm2
+	tg = (cmg - 1) * 100
+	return tg
+	
+def cm(t) :
+	cm = ...
+	return ...
+def reciproque(t) :
+	...
+	...
+	return ...
+\end{lstlisting}
+\end{multicols}
+\begin{enumerate}[label=\arabic*), leftmargin=*]
+	\item Que retourne l'instruction \lstinline|mafonction(100,-29)| ?
+	\item Quel est l'objet de la fonction \lstinline|mafonction()| ?
+	\item Complétez les lignes 9 et 10 afin que la fonction d'appel \lstinline|cm()| et d'argument \lstinline|t| retourne le coefficient multiplicateur de l'évolution de taux \lstinline|t| donné en \%.
+	\item Complétez les lignes 12, 13 et 14 afin que la fonction d'appel \lstinline|reciproque()| et d'argument \lstinline|t| retourne le taux reciproque de l'évolution de taux \lstinline|t| donné en \%.
+\end{enumerate}
+\end{exercise} 
+
+%----------------------------------------------------------------------------------------
+%	cours
+%----------------------------------------------------------------------------------------
+
+%\newpage 
+%\loadgeometry{widelayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%	headwidth=textwithmarginpar,
+%	headsepline=true,
+%	headsepline= 0.5pt,
+%	footwidth=textwithmarginpar,
+%} 
+%\onehalfspacing
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\cleardoublepage 
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+\end{document}

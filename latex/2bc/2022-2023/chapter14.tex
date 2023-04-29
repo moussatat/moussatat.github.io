@@ -1,0 +1,762 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode  
+%!TEX root = chapter14.tex  
+\documentclass[main.tex]{subfiles}
+\begin{document} 
+%----------------------------------------------------------------------------------------
+%	CHAPTER  14
+%----------------------------------------------------------------------------------------
+\cleardoublepage
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+}   
+\onehalfspacing 
+\setcounter{chapter}{13}
+
+\chapter{Calculs algébriques (2) : factorisations}
+
+
+\begin{eBox}
+	La factorisation est le procédé qui consiste à écrire une expression algébrique comme produit d'expressions (facteurs) plus simples.
+\end{eBox}
+
+\section{Factoriser  par extraction du plus grand facteur commun}
+\noindent  L'approche la plus simple est d'\textbf{extraire le plus grand facteur commun} à tous les termes d'une somme.\sidenote{Utiliser l'exerciseur en ligne \url{https://www.mathix.org/exerciseur_calcul_litteral/}}
+\\
+Pour tout nombres relatifs $a$,$b$ et $c$ :  
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+$$ 	   (a c)+(b c)   =c(a+b) 	$$ 
+Pour $c\neq 0$ :
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+$$ 	   a+b = c\left(\frac{a}{c}+\frac{b}{c}\right)	$$  
+\begin{example}[Application directe]\hfill 
+	
+	\noindent
+	\parbox{0.3\linewidth}{
+		$\begin{WithArrows}
+			A&=3x-15\\
+			&=3x-3\times 5\\
+			&=3(x-5)
+		\end{WithArrows}$
+	}\parbox{0.3\linewidth}{
+		$\begin{WithArrows}
+			B&=2xy+3xz\\
+			&=x(2y+3z)
+		\end{WithArrows}$
+	}\parbox{0.3\linewidth}{
+		$\begin{WithArrows}
+			C&=2x(3x+2)+3x(2x-1)\\
+			&=x\big(2(3x+2)+3(2x-1)\big)\\
+			& = x\big(6x+4 + 6x-3\big)\\
+			& = x\left(12x+1\right)
+		\end{WithArrows}$
+	}	 
+\end{example}
+\begin{example}[Puissances] Développer les puissances :
+	
+	\noindent
+	\parbox{0.3\linewidth}{
+		$\begin{WithArrows}
+			A&=3x+3^2\\
+			&=3x-3\times 3\\
+			&=3(x+3)
+		\end{WithArrows}$
+	}\parbox{0.3\linewidth}{
+		$\begin{WithArrows}
+			B&=x^2+3x\\
+			&=xx+3x\\
+			&=x(x+3)
+		\end{WithArrows}$
+	}\parbox{0.3\linewidth}{
+		$\begin{WithArrows}
+			C&=(2x-3)^2- 5(2x-3) \\
+			&=(2x-3)\times(2x-3)-5(2x-3)\\
+			& = (2x-3) (2x-3-5)\\
+			& = (2x-3) (2x-8)
+		\end{WithArrows}$
+	}		  
+\end{example}
+\begin{example}[règle du 1]\hfill \\
+	\noindent
+	\parbox{0.6\linewidth}{
+		$\begin{WithArrows}
+			A&={\color{red}3}x+{\color{red}3}\\
+			&={\color{red}3}x+{\color{red}3}{\color{blue} \times 1}\\
+			&={\color{red}3}(x+1)
+		\end{WithArrows}$
+	}\parbox{0.3\linewidth}{
+		$\begin{WithArrows}
+			B&=2\textcolor{red}{(x-3)}y-\textcolor{red}{(x-3)}\\
+			&=\textcolor{red}{(x-3)} (2 y -1)
+		\end{WithArrows}$
+	} 
+\end{example}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+	paper=A4,
+	paper=portrait,
+}     
+
+\onehalfspacing    
+\subsection{Exercices : factoriser par extraction du plus grand facteur commun} 
+\begin{exercise} Trouver le plus grand facteur commun pour chaque paire :
+	
+	\renewcommand{\arraystretch}{1.6}
+	\noindent
+	\begin{tabularx}{0.48\linewidth}{|Y|Y|}\hline
+		\textbf{Paire} & \textbf{PGFC}   \\ \hline  
+		$24x^5$	et $32x^3$ & $8x^3$\\ \hline 
+		$6x$	et  $9x$ &\\ \hline  
+		$18$	et $12x$ &\\ \hline   
+		$12x$	et $20x^2$ &\\ \hline 
+		$12x^3$	et $15x^2$ &\\ \hline 
+	\end{tabularx}  
+	\begin{tabularx}{0.48\linewidth}{|Y|Y|}\hline
+		\textbf{Paire} & \textbf{PGFC}   \\ \hline 
+		$10x$	et $15x$ &\\ \hline 
+		$3x^2$	et $5x^2$ &\\ \hline  
+		$24x^2$ et $30x^3$ &\\ \hline 
+		$15x^4$	et $45x$ &\\ \hline 
+		$27x^4$	et $45x^3$ &\\ \hline  
+	\end{tabularx}	
+\end{exercise} 
+\begin{eBox} 
+	Extraire le plus grand facteur commun d'une somme de termes, donne une somme de termes ayant pour facteurs communs  $1$ ou $-1$. 
+	On parle alors de \textbf{factorisation au maximum}
+\end{eBox} 
+\begin{exercise} Factoriser au maximum les expressions suivantes : \vspace{-1.5em}
+	\begin{spacing}{1.8}
+		\begin{multicols}{2}
+			\begin{enumerate}[label={},leftmargin=*]%$\Alph*(x)=$
+				\item $x^2+4x=\dotfill $
+				\item $2x^2+6x=\dotfill$
+				\item $3x^2-15x=\dotfill$
+				\item $4x^2+24x=\dotfill $
+				\item $15x^2-25x=\dotfill $
+				\item $30x-24x^2=\dotfill $ 
+				\item $20x^2-15x^3=\dotfill $ 
+				\item $49x^2-x=\dotfill$  
+			\end{enumerate} 
+		\end{multicols}
+	\end{spacing}\vspace{-1.5em} 
+\end{exercise}  
+
+\begin{tBox}
+	\begin{enumerate}[label=\textbullet,leftmargin=*]
+		\item On regroupe la somme à l'aide du facteur commune $ab+ac=a(b+c)$.
+		\item En présence de puissances, les transformer en produit de termes 
+		\item   \og Règle du 1 \fg{}
+	\end{enumerate} 
+\end{tBox}
+\begin{example}[Précautions] \hfill avec les puissances \hfill  règle du 1\hfill\null
+	
+	\noindent
+	\parbox{0.36\linewidth}{
+		$\begin{WithArrows}
+			A&=2x(3x+2)+3x(2x-1)\\
+			&=x\big(2(3x+2)+3(2x-1)\big)\\
+			& = x\big(6x+4 + 6x-3\big)\\
+			& = x\left(12x+1\right)
+		\end{WithArrows}$
+	}	 
+	\parbox{0.4\linewidth}{
+		$\begin{WithArrows}
+			B&=(2x-3)^2- 5(2x-3) \\
+			&=(2x-3)\times(2x-3)-5(2x-3)\\
+			& = (2x-3) (2x-3-5)\\
+			& = (2x-3) (2x-8)
+		\end{WithArrows}$
+	}\parbox{0.25\linewidth}{
+		$\begin{WithArrows}
+			C&={\color{red}3}x+{\color{red}3} ={\color{red}3}x+{\color{red}3}{\color{blue} \times 1}\\
+			&={\color{red}3}(x+1)
+		\end{WithArrows}$\\
+		$\begin{WithArrows}
+			D&=2\textcolor{red}{(x-3)}y-\textcolor{red}{(x-3)}\\
+			&=\textcolor{red}{(x-3)} (2 y -1)
+		\end{WithArrows}$
+	} 
+\end{example}
+\begin{exercise}[Guidé] Factoriser au maximum  les expressions suivantes : 
+	
+	\noindent \parbox{0.48\linewidth}{	
+		$\begin{WithArrows}
+			A(x)& = 2(x+5)+(2x-3)(x+5) \rule{0pt}{1.8em}  \\
+			& =  \rule{0pt}{1.8em}  \\
+			&= \rule{0pt}{1.8em}  \\
+			& =  \rule{0pt}{1.8em}   \\
+			&    \rule{0pt}{1.8em}    
+		\end{WithArrows}$ 	
+	}  \hfill  \parbox{0.48\linewidth}{	
+		$\begin{WithArrows}
+			B(x)& = (2-8x)(7-x)-3(7-x)(3-x)\rule{0pt}{1.8em}  \\
+			& =  \rule{0pt}{1.8em}  \\
+			&= \rule{0pt}{1.8em}  \\
+			& =  \rule{0pt}{1.8em}  \\
+			& =  \rule{0pt}{1.8em}  
+		\end{WithArrows}$ 	
+	} 
+\end{exercise} 
+
+%2(3x-2)(5x-1)-(3x-1)(3x-2) 
+%(2x-3)(5x+1)- (2x-3)
+\begin{exercise}  \label{chap02:exo:factoriser:niveau1}
+	Pour $x\in\mathbb{R}$. Factoriser au maximum les expressions suivantes : \vspace{-0.5em}
+	\begin{multicols}{2} 
+		\begin{enumerate}[label={$\Alph*(x)=$}, leftmargin=*] 
+			\item$25x(2x+1)+15(2x+1)$ 
+			\item $(2x-3)(5x-1)+2(3x-1)(2x-3) $
+			\item $(2x-3)^2 +(3x-1)(2x-3)$
+			\item$25(2x+1)^2-5x(2x+1)$    
+			\item $(3x+5)(7x-4)-(5x-3)(3x+5)$ 
+			\item$5(2x-1)^2+(3x-4)(2x-1)$
+%			\item$5(2x-1)^2-(3x-4)(2x-1)$   
+		\end{enumerate}
+	\end{multicols} 
+\end{exercise} 
+\begin{exercise} \label{chap02:exo:factoriser:niveau2} 
+  Même consignes : \vspace{-0.5em}
+	\begin{multicols}{2} 
+		\begin{enumerate}[label={$\Alph*(x)=$}, leftmargin=*]
+			\item $(2x+5)(2x+7)+4(2x+5)(x+2)$ 
+%			\item $(2x+3)(5x+7)+3(2x+3)(-2x+9) $
+			\item $(2x+5)(2x+7)-(6x+15)(x+2)$
+			\item $2(2x+5)(7x+5)-3(2x+5)(x+2)$ 
+			\item $3(2+3x)-2(5+2x)(2+3x)$  
+			\item $(9x + 10) (8x + 7) + 8x + 7$
+			\item $2(x+3)^2-x-3$    
+		\end{enumerate}
+	\end{multicols} 
+\end{exercise} 
+\begin{eBox}
+	Typiquement on cherche à factoriser des expressions du second degré sous la forme $a(x+p)(x+q)$ 
+\end{eBox}
+\begin{example}  \hfill\null
+	
+	\noindent
+	\parbox{0.34\linewidth}{
+		$\begin{WithArrows}
+			A&=x\left(12x+1\right)\\
+			&=12x\big(x+\tfrac{1}{12} \big) 
+		\end{WithArrows}$
+	}	 
+	\parbox{0.45\linewidth}{
+		$\begin{WithArrows}
+			B&=(2x-3) (3x-8) \\
+			&=2(x-\tfrac{3}{2})3(x-\tfrac{8}{3}) =6 (x-\tfrac{3}{2}) (x-\tfrac{8}{3})
+		\end{WithArrows}$
+	}\parbox{0.20\linewidth}{
+		$\begin{WithArrows}
+			C&=(-x+2) \\
+			&=-1(x-2)
+		\end{WithArrows}$ 
+	} 
+\end{example} 
+\begin{exercise} Mettre sous la forme $a(x+p)(x+q)$ les expressions factorisées suivantes :\vspace{-0.5em}
+\begin{multicols}{2} 
+	\begin{enumerate}[label={$\Alph*(x)=$}, leftmargin=*] 
+		\item $(2x+5)(3x-4)$
+		\item $3(-2x+1)(3x+5)$
+		\item $5(2-x)(9x+5)$
+		\item $5(3x-2)^2$  
+	\end{enumerate}
+\end{multicols}  
+\end{exercise}
+\begin{exercise}  Complétez les factorisations  suivantes :
+
+
+\begin{spacing}{2}
+	\noindent
+	\parbox{0.48\linewidth}{
+		$\begin{WithArrows}
+			2x^2-x-3& = 2x^2+ 2x - \ldots x -3\\
+			& = 2 x (\ldots x + \ldots ) - 3(\ldots x + \ldots )\\
+			&=(2x-3) (\ldots x+\ldots)
+		\end{WithArrows}$
+	}
+	\hfill
+	\parbox{0.48\linewidth}{
+		$\begin{WithArrows}
+			12x^2-20 x+3&=12x^2-18x-\ldots x +\ldots \\ 
+			 & = 6x (\ldots x +\ldots) - (\ldots x +\ldots)\\
+			 & = (6x - \ldots)(\ldots x +\ldots)
+		\end{WithArrows}$
+	}
+	
+	
+	\noindent
+	\parbox{0.48\linewidth}{
+		$\begin{WithArrows}
+			x^2+2x-8&=x^2+4x - \ldots x -\ldots \\
+			&= x(\ldots x +\ldots) -\ldots (\ldots x +\ldots)\\
+			& =(  x -\ldots)(\ldots x +\ldots)
+		\end{WithArrows}$
+	}	
+	\hfill
+	%\noindent
+	\parbox{0.48\linewidth}{
+		$\begin{WithArrows}
+			2x^2+ x-3&=2x^2-2x + \ldots x -3\\
+			&=x(\ldots x -\ldots) +\ldots (\ldots x -\ldots) \\
+			& =(\ldots x +\ldots) (\ldots x -\ldots) 
+		\end{WithArrows}$
+	}
+
+\noindent
+\parbox{0.48\linewidth}{
+	$\begin{WithArrows}
+		4x^2+3x-1&=4x^2+4x - \ldots x -\ldots \\
+		&= 4x(\ldots x +\ldots) -\ldots (\ldots x +\ldots)\\
+		& =( \ldots x -\ldots)(\ldots x +\ldots)
+	\end{WithArrows}$
+}	
+\hfill
+%\noindent
+\parbox{0.48\linewidth}{
+	$\begin{WithArrows}
+		2x^2+ 7x+3&=2x^2+\ldots x + \ldots x +3\\
+		&=x(2 x +\ldots) +\ldots (2 x +\ldots) \\
+		& =(2 x +\ldots) (\ldots x +\ldots) 
+	\end{WithArrows}$
+}
+\end{spacing}\vspace{-1em}
+\end{exercise}  
+\begin{proof}[solution de l'exercice \ref{chap02:exo:factoriser:niveau1} ]   
+\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [ 
+'25*x*(2*x+1)+15*(2*x+1)',  
+'(2*x-3)*(5*x-1)+2*(3*x-1)*(2*x-3)',
+'(2*x-3)**2 +(3*x-1)*(2*x-3)', 
+'25*(2*x+1)**2-5*x*(2*x+1)',   
+'(3*x+5)*(7*x-4)-(5*x-3)*(3*x+5)', 
+'5*(2*x-1)**2+(3*x-4)*(2*x-1)',  
+#'5*(2*x-1)**2-(3*x-4)*(2*x-1)',
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H']
+for func in funcsfac :  
+	myfactor =  eval('sp.factor(func)')
+	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
+	n     = n + 1
+\end{pycode}
+\end{proof}
+\begin{proof}[solution de l'exercice \ref{chap02:exo:factoriser:niveau2} ]  
+\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [ '(2*x+5)*(2*x+7)+4*(2*x+5)*(x+2)',
+#'(2*x+3)*(5*x+7)+3*(2*x+3)*(-2*x+9)'  ,
+'(2*x+5)*(2*x+7)-(6*x+15)*(x+2)',
+'2*(2*x+5)*(7*x+5)-3*(2*x+5)*(x+2)',
+'3*(2+3*x)-2*(5+2*x)*(2+3*x)',
+'(9*x+10)*(8*x+7)+8*x+7',
+'2*(x+3)**2-x-3'
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H']
+for func in funcsfac :  
+	myfactor =  eval('sp.factor(func)')
+	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
+	n     = n + 1
+\end{pycode}
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+
+\newpage
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+}   
+\onehalfspacing   
+
+
+\section[Exercices : Factorisations par essai-erreur de $1x**2+sx+p$]{Exercices : Factorisations par essai-erreur de $1x^2+sx+p$}
+
+
+\noindent\parbox{0.45\linewidth}{
+	Pour $x$, $a$ et $b\in\mathbb{R}$ :\\	
+	$\begin{WithArrows}
+		A& = (x+a)(x+b)\Arrow{développer}  \rule{0pt}{1.8em} \\
+		&= \rule{0pt}{1.8em}\Arrow{réduire} \\
+		& = x^2 + \ldots\ldots\ldots x + \ldots\ldots\ldots  \rule{0pt}{1.8em}    
+	\end{WithArrows}$ 	
+} \hfill\parbox{0.50\linewidth}{ Pour factoriser :	
+	$\begin{WithArrows}
+		B&= 1x^2+ sx +p \rule{0pt}{1.8em} \\ % 
+		&  \rule{0pt}{1.8em}  \\  
+		&   \rule{0pt}{1.8em}  \\  
+		&   \rule{0pt}{1.8em} 
+	\end{WithArrows}$ 	
+}   \vspace{-1em}
+\begin{eBox}
+	Les expressions suivantes se factorisent sous la forme $(x+a)(x+b)$  avec $a$ et $b\in\mathbb{Z}$. Retrouver les!
+\end{eBox}
+\begin{example}[Cas p>0]  On cherche des entiers $a$ et $b$ de même signe.
+	
+	\noindent\parbox{0.45\linewidth}{	
+		$\begin{WithArrows}
+			A&= x^2+7x+10 \rule{0pt}{1.8em} \\ 
+			& \rule{0pt}{1.8em}  \\  
+			&  \rule{0pt}{1.8em}     
+		\end{WithArrows}$
+	}   \hfill\parbox{0.48\linewidth}{	
+		$\begin{WithArrows}
+			B&=  x^2-9x+20  \rule{0pt}{1.8em} \\ 
+			& \rule{0pt}{1.8em}  \\  
+			&  \rule{0pt}{1.8em}      
+		\end{WithArrows}$
+	}  
+\vfill
+\end{example}
+\begin{exercise}[À vous]\label{chapitre03:factorisation:essaierreur01}\label{chapitre03:exercice:factorisationparessaierreur:niveau01}  Mêmes consignes\vspace{-1em}
+	\begin{multicols}{4} 
+		\begin{enumerate}[label={$\Alph*(x)=$\rule{0pt}{1.8em}}, leftmargin=*] 
+			\item $x^2+6x+5$
+			\item $x^2+10x+16$
+			\item $x^2-17x+16$
+			\item $x^2+6x+8$
+			\item $x^2+7x+10$
+			\item $x^2-7x+12$
+			\item $x^2+8x+12$
+			%			\item $x^2-5x+6$
+			%			\item $x^2+23x+22$
+			%			\item $x^2+8x+15$
+			\item $x^2-13x+40$
+		\end{enumerate}
+	\end{multicols}
+\end{exercise}
+%\begin{exercise}\hfill 
+%	
+%	En remarquant que $x^2+25=x^2+0x+25$, expliquer pourquoi il n'est pas possible de trouver $a, b\in\mathbb{R}$ tel que \og pour tout $x\in\mathbb{R}$ on a $x^2+25=(x+a)(x+b)$\fg{}.
+%\end{exercise}
+\begin{example}[Cas p<0] On cherche des entiers $a$ et $b$ de signes contraires.
+	
+	\noindent\parbox{0.45\linewidth}{	
+		$\begin{WithArrows}
+			A&= x^2+2x-3 \rule{0pt}{1.8em} \\ 
+			& \rule{0pt}{1.8em}  \\  
+			&  \rule{0pt}{1.8em}  \\  
+			&  \rule{0pt}{1.8em}     
+		\end{WithArrows}$
+	}   \hfill\parbox{0.48\linewidth}{	
+		$\begin{WithArrows}
+			B&=  x^2-14x-15  \rule{0pt}{1.8em} \\ 
+			& \rule{0pt}{1.8em}  \\  
+			&  \rule{0pt}{1.8em}   \\  
+			&  \rule{0pt}{1.8em}    
+		\end{WithArrows}$
+	}   
+\vfill
+\end{example}
+\begin{exercise}[À vous]\label{chapitre03:exercice:factorisationparessaierreur:niveau02} \label{chapitre03:factorisation:essaierreur02} Mêmes consignes\vspace{-0.5em}
+	\begin{multicols}{4} 
+		\begin{enumerate}[label={$\Alph*(x)=$\rule{0pt}{1.8em}}, leftmargin=*] 
+			\item $x^2+x-6$
+			\item $x^2-5x-14$
+			\item $x^2-6x-40$
+			\item $x^2-x-12$ 
+			\item $x^2+2x-8$
+			\item $x^2+5x-24$
+			\item $x^2+x-30$
+			\item $x^2-19x-20$
+			%			\item $x^2-4x-32$
+			%			\item $x^2+4x-5$
+			%			\item $x^2+x-2$
+			%			\item $x^2+3x-10$
+		\end{enumerate}
+	\end{multicols}\vspace{-1.5em}
+\end{exercise}
+
+\vfill 
+\begin{proof}[solution de l'exercice \ref{chapitre03:exercice:factorisationparessaierreur:niveau01} ]  \hfill
+	
+\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [ 
+'x**2+6*x+5',
+'x**2+10*x+16',
+'x**2-17*x+16',
+'x**2+6*x+8',
+'x**2+7*x+10', 
+'x**2-7*x+12', 
+'x**2+8*x+12', 
+'x**2-13*x+40'
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H']
+for func in funcsfac :  
+	myfactor =  eval('sp.factor(func)')
+	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
+	n     = n + 1
+\end{pycode}
+\end{proof}
+\begin{proof}[solution de l'exercice \ref{chapitre03:exercice:factorisationparessaierreur:niveau02} ]  \hfill
+	
+\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [ 
+'x**2+1*x-6',
+'x**2-5*x-14',
+'x**2-6*x-40',
+'x**2-1*x-12',
+'x**2+2*x-8', 
+'x**2+5*x-24', 
+'x**2+1*x-30', 
+'x**2-19*x-20'
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H']
+for func in funcsfac :  
+	myfactor =  eval('sp.factor(func)')
+	print( '$'+ str(L[n])  + "(x)=" + sp.latex(myfactor) + '$; ' ) 
+	n     = n + 1
+\end{pycode}
+	\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	 
+%---------------------------------------------------------------------------------------- 
+ \newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+	paper=A4,
+	paper=portrait,
+}     
+
+\onehalfspacing    
+\section{Exercices : factorisation à l'aide d'identités remarquables}
+ 
+\begin{example}[factoriser des expressions sous la forme $a^2\pm 2ab+b^2$ ou $a^2-b^2$]\hfill  
+	
+\noindent\parbox{0.45\linewidth}{	
+$\begin{WithArrows}
+A& = x^2 +8x +16 \rule{0pt}{1.6em} \\
+&= \big ( \qquad \big)^2 \ldots 2\times\big ( \qquad \big)\times \big ( \qquad \big) \ldots \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+& =\big ( \qquad\qquad\qquad \big)^2\rule{0pt}{1.6em}   
+\end{WithArrows}$ 	
+}\hfill\parbox{0.45\linewidth}{	
+$\begin{WithArrows}
+	B& = x^2 -6x +9 \rule{0pt}{1.6em} \\
+	&= \big ( \qquad \big)^2 \ldots 2\times\big ( \qquad \big)\times \big ( \qquad \big) \ldots \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+	& =\big ( \qquad\qquad\qquad \big)^2\rule{0pt}{1.6em}   
+\end{WithArrows}$ 	
+}
+\noindent\parbox{0.45\linewidth}{	
+	$\begin{WithArrows}
+		C& = 25x^2 +80x +64 \rule{0pt}{1.6em} \\
+		&= \big ( \qquad \big)^2 \ldots 2\times\big ( \qquad \big)\times \big ( \qquad \big) \ldots \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+		& =\big ( \qquad\qquad\qquad \big)^2\rule{0pt}{1.6em}   
+	\end{WithArrows}$ 	
+}\hfill\parbox{0.45\linewidth}{	
+	$\begin{WithArrows}
+		D& = \frac{1}{4}x^2+x+1 \rule{0pt}{1.6em} \\
+		&= \big ( \qquad \big)^2 \ldots 2\times\big ( \qquad \big)\times \big ( \qquad \big) \ldots \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+		& =\big ( \qquad\qquad\qquad \big)^2\rule{0pt}{1.6em}   
+	\end{WithArrows}$ 	
+}
+
+
+\noindent\parbox{0.45\linewidth}{	
+	$\begin{WithArrows}
+		E& = 4x^2-5 \rule{0pt}{1.6em} \\
+		&= \big ( \qquad \big)^2 -  \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+		& =\big ( \qquad x -\qquad \big)\big ( \qquad x+\qquad \big)\rule{0pt}{1.6em}   
+	\end{WithArrows}$ 	
+}\hfill\parbox{0.45\linewidth}{	
+	$\begin{WithArrows}
+		F& = 36(x-1)^2-10 \rule{0pt}{1.6em} \\
+		&= \big ( \qquad (x-1)   \big)^2 -  \big ( \qquad \big)^2  \rule{0pt}{1.6em} \\
+		& = \big ( \qquad x -\qquad\qquad\qquad \big)\big ( \qquad x+\qquad\qquad  \big) \rule{0pt}{1.6em}   
+	\end{WithArrows}$ 	
+}	  
+\end{example}   
+\begin{exercise}\label{chap02:exo:factoriser:identite:niveau1} Pour $x\in\mathbb{R}$. Factoriser au maximum les expressions suivantes à l'aide d'identités remarquables :
+	\begin{multicols}{3}
+		\begin{enumerate}[label={$\Alph*(x)=$},left= 0pt]
+			\item $x^2 + 2x + 1$ 
+%			\item $1 - 2x + x^2$ 
+			\item $x^2 + 6x + 9$
+			\item $4x^2-36$
+			\item $4x^2 + 4x + 1$ 
+%			\item $4x^2 + 12x + 9$ 
+			\item $4x^2 - 12x + 9$
+			\item $36x^2-4$ 
+			\item $x^2 + x + \tfrac{1}{4}$  
+			\item $9x^2-6\sqrt{5}x + 5$  
+			\item $3x^2-2\sqrt{3}x + 1$  
+		\end{enumerate}
+	\end{multicols}
+\end{exercise}
+\begin{exercise}\label{chap02:exo:factoriser:identite:niveau2}  Pour $x\in\mathbb{R}$. Factoriser au maximum  :
+	\begin{multicols}{3}
+		\begin{enumerate}[label={$\Alph*(x)=$},left= 0pt]
+%			\item $x^2-36$ 
+			\item $(2x-1)^2-25$
+			\item $(3x+7)^2-16$
+			\item $4(2x-1)^2-100$  
+			\item $9(2x-1)^2-4x^2$
+			\item $4(2x-1)^2-25x^2$  
+			\item $4(2x-1)^2-25(x+3)^2$  
+		\end{enumerate}
+	\end{multicols}
+\end{exercise}
+
+\begin{exercise} Compléter pour factoriser les deux expressions données :
+	
+	\noindent
+	\parbox{0.48\linewidth}{
+		\noindent
+		$\begin{WithArrows} 
+			x^2-7x+5	& = x(x - \ldots) +5  \\
+			& =(x - \tfrac{7}{2} + \ldots)(x - \tfrac{7}{2} - \ldots) + 5 \\
+			& =\big( x- \tfrac{7}{2}\big)^2 - \big(\ldots \big)^2 + 5 \\
+			& =\big( x- \tfrac{7}{2}\big)^2 - \numprint{2.25} \\
+			& =\big( x- \tfrac{7}{2}\big)^2 - \big(\ldots \big)^2   \\
+			& = \big( x- \tfrac{7}{2}+ \qquad\big)\big( x- \tfrac{7}{2}+ \qquad\big)\\
+			& = \big( x \qquad \qquad\qquad\big)\big( x\qquad\qquad \qquad\big)
+		\end{WithArrows}$
+	}	\hfill 
+	\parbox{0.48\linewidth}{
+		\noindent
+		$\begin{WithArrows} 
+			x^2-12x+2	& = x(x - \ldots) +2  \\
+			& =(x - 6 + \ldots)(x - 6 - 6 \ldots) + 2 \\
+			& =\big( x- 6\big)^2 - \big(\ldots \big)^2 + 2 \\
+			& =\big( x- 6\big)^2 - 34\\
+			& =\big( x-  6\big)^2 - \big(\ldots \big)^2   \\
+			& = \big( x- 6+ \qquad\big)\big( x- 6+ \qquad\big) \\
+			& = 
+		\end{WithArrows}$
+	}
+	
+\end{exercise}
+\begin{proof}[solution de l'exercice \ref{chap02:exo:factoriser:identite:niveau1} ]  \scriptsize
+	\begin{pycode}
+from re import sub
+import sympy as sp
+from sympy.core.sympify import kernS
+
+x, y, z, t = sp.symbols('x y z t', real=True)
+a, alpha, beta  = sp.symbols('a alpha beta', real=True)
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [ 
+'x*x+2*x+1',
+#'1-2*x+x**2',
+'x*x+6*x+9',
+'4*x**2-36',
+'4*x**2+4*x+1',
+#'4*x**2+12*x+9',
+'4*x**2-12*x+9' ,
+'36*x**2-4', 
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H', 'I']
+for func in funcsfac :  
+	myfactor =  eval('sp.factor(func)')
+	print( '$'+ str(L[n])  + "=" + sp.latex(myfactor) + '$; ' ) 
+	n     = n + 1
+\end{pycode}
+$G=(x+\tfrac{1}{2})^2$; $H=(3x-\sqrt{5})^2$; $I=(\sqrt{3} x-1)^2$.
+\end{proof}
+\begin{proof}[solution de l'exercice \ref{chap02:exo:factoriser:identite:niveau2} ]  \scriptsize
+	\begin{pycode}
+from re import sub
+import sympy as sp
+
+x, y, z, t = sp.symbols('x y z t')
+k, m, n = sp.symbols('k m n', integer=True)
+f, g, h = sp.symbols('f g h', cls=sp.Function)
+
+# Create a list of functions to include in the table
+funcsfac = [
+#'x**2-36',
+'(2*x-1)**2-25',
+'(3*x+7)**2-16',
+'4*(2*x-1)**2-100',
+'9*(2*x-1)**2-4*x**2',
+'4*(2*x-1)**2-25*x**2',
+'4*(2*x-1)**2-25*(x+3)**2'
+]
+n=0
+L=['A','B','C','D','E','F', 'G', 'H', 'I']
+for func in funcsfac :
+	myfactor =  eval('sp.factor(func)')
+	print( '$'+ str(L[n])  + "=" + sp.latex(myfactor) + '$; ' )
+	n     = n + 1
+	\end{pycode}
+\end{proof}
+
+
+ 
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\cleardoublepage 
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+\end{document}

@@ -1,0 +1,3788 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode  
+%!TEX root = chapter13.tex  
+\documentclass[main.tex]{subfiles}
+\begin{document} 
+%----------------------------------------------------------------------------------------
+%	CHAPTER 13
+%----------------------------------------------------------------------------------------
+\cleardoublepage
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+}   
+\onehalfspacing 
+\setcounter{chapter}{12}
+
+
+
+\chapter{Vecteurs (2) Opérations et colinéarité}
+ 
+\section{Produit d'un vecteur par un réel}
+
+\begin{definition}[interprétation géométrique] $\vv{u}\neq \vv{0}$. 
+Le produit d'un réel $k$ par un vecteur $\vv{u}$ est un vecteur noté $k\vv{u}$ : 
+\begin{description}
+\item[P1]  $0\vv{u}=\vv{0}$.
+\item[P2]  Si $k \neq  0$,  \og $k\vv{u}$ \fg{} désigne le vecteur :
+\begin{enumerate}[label=\textbullet, leftmargin=*]
+\item ayant même direction que $\vv{u}$ 
+\item $\norm{k\vv{u}}=\abs{k}\times \norm{\vv{u}}$
+\item Si $k>0$ alors $k\vv{u}$ et $\vv{u}$ ont \textbf{même sens}.\\
+Si $k<0$ alors $k\vv{u}$ et $\vv{u}$ sont de \textbf{sens contraires}
+\end{enumerate}
+\end{description} 
+\end{definition}
+
+
+\vfill
+
+\begin{definition}[vecteurs opposés]  $\vv{v}=-\vv{u}$ signifie que les vecteurs $\vv{u}$ et $\vv{v}$  ont  même direction ,  même norme mais sont de sens contraires. 
+En particulier : 	$-\vv{AB}=\vv{BA}$
+\end{definition} 
+\begin{example} $I$ est le milieu du segment $[AB]$. En utilisant uniquement des vecteurs d'extrémités  $A$, $B$ ou $I$ :
+\begin{enumerate}[label=\alph*), leftmargin=*]
+\item Énumérer 2 égalités de vecteurs.
+\vfill
+\item Énumérer 3 paires de vecteurs opposés $\vv{v}=-\vv{u}$
+\vfill
+\item Énumérer 3 paires de vecteurs qui peuvent s'écrire $\vv{v}=2\vv{u}$
+\vfill
+\item Énumérer 3 paires de vecteurs qui peuvent s'écrire $\vv{v}=\frac{1}{2}\vv{u}$
+\vfill
+\end{enumerate}
+\end{example}
+\vfill 
+\begin{tBox} Soit un repère $(O;I,J)$, et le vecteur $\vv{u}\begin{pmatrix}
+x\\y
+\end{pmatrix}$.
+
+\noindent	Le vecteur $k\vv{u}$ a pour coordonnées $k\vv{u}\begin{pmatrix}
+kx\\ky
+\end{pmatrix}$. 
+%\noindent On pose $\vec{\imath}=\vv{OI}\begin{pmatrix}
+%	1\\0
+%\end{pmatrix}$ et $\vec{\jmath}=\vv{OJ}\begin{pmatrix}
+%0\\1
+%\end{pmatrix}$. 
+%
+%\noindent Le couple de vecteurs $(\vec{\imath}, \vec{\jmath}=\vv{OJ})$ est une base. Le vecteur $\vv{u}\begin{pmatrix}
+%	x\\y
+%\end{pmatrix}$ s'écrit comme la combinaison linéaire  $\vv{u}=x\vec{\imath}+y\vec{\jmath}$.
+\end{tBox}   
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+
+
+\subsection*{Exercices : produit d'un vecteur par un réel}
+\begin{example}\hfill \\
+Les vecteurs ci-dessous ont tous la même direction.\\
+\begin{tikzpicture}[scale=1]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xa{3}; 
+\def \ya{0}; 
+
+\def \xb{5};
+\def \yb{0};
+
+\tkzDefPoint(1,0){A} \tkzDefShiftPoint[A](\xa,\ya){B}
+\tkzDefPoint(0,-1){C} \tkzDefShiftPoint[C](\xb,\yb){D}
+
+\tkzDrawSegments[->, >=latex, line width=1.2pt](A,B C,D)
+
+
+\tkzLabelPoints[below, font=\scriptsize](C,D) 
+\tkzLabelPoints[above, font=\scriptsize](A,B) 
+
+\foreach \i in {1,2}{%
+\tkzMarkSegment[pos=\i/3,mark=|,  size=2pt](A,B)
+}
+
+\foreach \i in {1,...,4}{%
+\tkzMarkSegment[pos=\i/5,mark=|,  size=2pt](C,D)
+} 
+\end{tikzpicture} 
+\hfill 
+\begin{tikzpicture}[scale=1]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xa{3.6}; 
+\def \ya{0}; 
+
+\def \xb{2.4};
+\def \yb{0};
+
+\tkzDefPoint(0,0){A} \tkzDefShiftPoint[A](\xa,\ya){B}
+\tkzDefPoint(3,-1){C} \tkzDefShiftPoint[C](-\xb,\yb){D}
+\tkzDrawSegments[->, >=latex, line width=1.2pt](A,B C,D)
+
+\tkzLabelPoints[below, font=\scriptsize](C,D) 
+\tkzLabelPoints[above, font=\scriptsize](A,B) 
+
+\foreach \i in {1,2}{%
+\tkzMarkSegment[pos=\i/3,mark=|,  size=2pt](A,B)
+}
+
+\foreach \i in {1}{%
+\tkzMarkSegment[pos=\i/2,mark=|,  size=2pt](C,D)
+} 
+\end{tikzpicture} 
+\hfill 
+\begin{tikzpicture}[scale=1]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xa{3}; 
+\def \ya{0}; 
+
+\def \xb{3};
+\def \yb{0};
+
+\tkzDefPoint(0,0){A} \tkzDefShiftPoint[A](\xa,\ya){B}
+\tkzDefPoint(2,-1){C} \tkzDefShiftPoint[C](-\xb,\yb){D}
+\tkzDrawSegments[->, >=latex, line width=1.2pt](A,B C,D)
+\tkzDrawSegments[dashed, line width=0.5pt](A,D C,B)
+\tkzLabelPoints[below, font=\scriptsize](C,D) 
+\tkzLabelPoints[above, font=\scriptsize](A,B) 
+\end{tikzpicture}  
+\begin{minipage}{0.3\columnwidth} 
+\begin{align*}
+\frac{CD}{AB}&=\frac{5}{3} \\
+CD & = \tfrac{5}{3}AB \\
+\vv{CD}& =\tfrac{5}{3}\vv{AB}   
+\end{align*}
+\end{minipage}
+\end{example}
+
+\begin{exercise}\hfill 
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item Sur la figure ci-dessous : 
+\begin{minipage}{0.8\columnwidth}%
+\centering
+\begin{tikzpicture} 
+\tkzInit[xmin=-3.5, xmax=6.5]
+\tkzDrawX[label={}, line width=1.2pt] %noticks, 
+\tkzSetUpPoint[size=7, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+\foreach \x/\xtext in {-3/A, -1/B, 6/C} {
+\draw (\x,0.1cm) -- (\x,-0.1cm) node[above] {$\xtext\strut$};
+} 
+\end{tikzpicture}
+\end{minipage} 
+%	
+\begin{align*}
+{AC}&= \ldots \ldots  {BC}
+& {BC}&=\ldots \ldots  {AC}
+&  {BC}&=\ldots \ldots  {BA} \\
+\vv{AC}&= \ldots \ldots \vv{BC}
+&\vv{BC}&=\ldots \ldots \vv{AC}
+& \vv{BC}&=\ldots \ldots \vv{BA} \\
+{CA}&=\ldots \ldots {BA}
+& {AB}&=\ldots \ldots {BC} 
+& {BA}&=\ldots \ldots {BC} \\
+\vv{CA}&=\ldots \ldots \vv{BA}
+& \vv{AB}&=\ldots \ldots \vv{BC} 
+& \vv{BA}&=\ldots \ldots \vv{BC}  
+\end{align*}  
+\item À partir de la figure ci-dessous, compléter les égalités vectorielles suivantes:
+\\
+\begin{minipage}{1\columnwidth}%
+\centering
+\begin{tikzpicture} 
+\tkzInit[xmin=-3.5, xmax=6.5]
+\tkzDrawX[label={}, line width=1.2pt] %noticks, 
+\foreach \x/\xtext in {-2/A, 1/B, 6/C} {
+\draw[thick] (\x,0.1cm) -- (\x,-0.1cm) node[above] {$\xtext\strut$};
+}
+\end{tikzpicture}
+\end{minipage} 
+\begin{align*}
+\vv{AC}& = \ldots \ldots \vv{BC}
+&\vv{BC}& = \ldots \ldots \vv{BA}
+& \vv{CA}& = \ldots \ldots \vv{AB}\\
+% 		\\
+\vv{BC}& = \ldots \ldots \vv{AC}
+& \vv{BA}& = \ldots \ldots \vv{BC}
+& \vv{BA}& = \ldots \ldots \vv{AB}
+\end{align*} 
+\item Le point $B$ est le milieu de $[AC]$. Compléter les égalités vectorielles suivantes :
+\begin{align*}
+\vv{BA}& = \ldots \ldots \vv{AC}
+&\vv{CB}& = \ldots \ldots \vv{AC}
+& \vv{AC}& = \ldots \ldots \vv{AB} 
+\end{align*}  
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise} 	Placer les points $M$, $N$, $P$ pour chacun des cas suivants  :
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item $\vv{AM}=2\vv{AB}$; $\vv{AN}=-3\vv{AB}$ et $\vv{OP}=4\vv{AB}$
+
+\vspace{0.5cm}
+
+\begin{tikzpicture}[scale=0.8]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xo{0.5}; 
+\def \xa{4}; 
+\def \xb{6};  
+\tkzDefPoint(0,0){O}
+\tkzDefShiftPoint[O](\xa,0){A} 
+\tkzDefShiftPoint[O](\xb,0){B} 
+\tkzDefPoint(12,0){C}  
+\tkzDefPoint(-6,0){D}  
+\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+
+
+\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+
+\foreach \i in {0,...,18}{%
+%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+} 
+\end{tikzpicture}
+
+\vspace{1cm}
+\item $\vv{AM}=\tfrac{2}{5}\vv{AB}$; $\vv{BN}=-\tfrac{7}{5}\vv{AB}$ et $\vv{OP}=-\tfrac{1}{5}\vv{AB}$
+
+\vspace{0.5cm}
+
+\begin{tikzpicture}[scale=0.8]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xo{2.5}; 
+\def \xa{1}; 
+\def \xb{6};  
+\tkzDefPoint(0,0){O}
+\tkzDefShiftPoint[O](\xa,0){A} 
+\tkzDefShiftPoint[O](\xb,0){B} 
+\tkzDefPoint(12,0){C}  
+\tkzDefPoint(-6,0){D}  
+\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+
+
+\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+
+\foreach \i in {0,...,18}{%
+%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+} 
+\end{tikzpicture}	
+
+\vspace{1cm}
+\item $\vv{AM}=\tfrac{5}{3}\vv{AB}$; $\vv{BN}=-\tfrac{1}{6}\vv{AB}$ et $\vv{OP}=-\tfrac{4}{3}\vv{AB}$ 
+
+
+\vspace{0.5cm}
+\begin{tikzpicture}[scale=0.8]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xo{5.0}; 
+\def \xa{0}; 
+\def \xb{6};  
+\tkzDefPoint(\xo,0){O}
+\tkzDefPoint(\xa,0){A} 
+\tkzDefPoint(\xb,0){B} 
+\tkzDefPoint(12,0){C}  
+\tkzDefPoint(-6,0){D}  
+\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+
+
+\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+
+\foreach \i in {0,...,18}{%
+%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+} 
+\end{tikzpicture}	
+
+\vspace{0.5cm}
+\item $2\vv{AM}=-\vv{AB}$; $4\vv{BN}=3\vv{AB}$ et $2\vv{OP}=-3\vv{AB}$
+
+
+\vspace{0.5cm}
+\begin{tikzpicture}[scale=0.8]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xo{0.0}; 
+\def \xa{3}; 
+\def \xb{7};  
+\tkzDefPoint(\xo,0){O}
+\tkzDefPoint(\xa,0){A} 
+\tkzDefPoint(\xb,0){B}  
+\tkzDefPoint(12,0){C}  
+\tkzDefPoint(-6,0){D}  
+\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+
+
+\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+
+\foreach \i in {0,...,18}{%
+%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+} 
+\end{tikzpicture}	
+
+
+\vspace{0.5cm}
+\item $3\vv{AM}=2\vv{AB}$; $6\vv{BN}=11\vv{BA}$ et $6\vv{OP}=-\vv{BA}$
+
+
+\vspace{0.5cm}
+\begin{tikzpicture}[scale=0.8]
+\tkzInit[xmax=6,ymin=-2,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xo{5.0}; 
+\def \xa{0}; 
+\def \xb{6};  
+\tkzDefPoint(\xo,0){O}
+\tkzDefPoint(\xa,0){A} 
+\tkzDefPoint(\xb,0){B}  
+\tkzDefPoint(12,0){C}  
+\tkzDefPoint(-6,0){D}  
+\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+
+
+\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+
+\foreach \i in {0,...,18}{%
+%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+} 
+\end{tikzpicture}	
+
+
+\vspace{0.5cm}
+
+%		\item $\vv{AP}=\frac{7}{2}\vv{AB}$
+%		\item $\vv{AW}=-\frac{9}{2}\vv{AB}$
+%		\item $\vv{AS}=-\frac{4}{5}\vv{AB}$
+%		\item $\vv{AT}=-\frac{1}{4}\vv{AB}$
+%		\item $\vv{AU}= \frac{12}{5}\vv{AB}$
+%		\item $\vv{AV}= \frac{3}{2}\vv{AB}$
+%		\item $\vv{BM}=\frac{12}{5}\vv{AB}$
+%		\item $\vv{BN}=4\vv{AB}$
+%		\item $\vv{BP}=\frac{8}{5}\vv{AB}$
+%		\item $\vv{BQ}=-3\vv{AB}$
+%		\item $\vv{BS}=-\frac{6}{5}\vv{AB}$
+%		\item $\vv{BT}=-\frac{1}{4}\vv{AB}$ 
+\end{enumerate}
+\end{exercise} 
+%\begin{tikzpicture}[scale=0.8]
+%	\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%	\tkzSetUpPoint[size=4, fill=black]
+%	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%	
+%	\def \xa{6}; 
+%	\def \ya{0};  
+%	\tkzDefPoint(0,0){A} \tkzDefShiftPoint[A](\xa,\ya){B} 
+%	\tkzDefPoint(12,0){C}  
+%	\tkzDefPoint(-6,0){D}  
+%	\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+%	
+%	
+%	\tkzLabelPoints[above, font=\scriptsize](A,B) 
+%	
+%	\foreach \i in {0,...,6}{%
+%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,B)
+%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](B,C)
+%	} 
+%\end{tikzpicture} 
+
+
+\begin{example}\hfill   
+
+\noindent	\begin{minipage}{1.0\columnwidth}\centering
+\begin{tikzpicture}[scale=0.95]
+
+\def \xmin{-7}; 
+\def \xmax{11}; 
+
+\def \ymin{-3};
+\def \ymax{4};	
+\def \alpha{75}
+
+\pgftransformcm{1}{0}{1*cos(\alpha)}{1*sin(\alpha)}{\pgfpointorigin}
+\path[clip,preaction = {draw=gray}] 
+({\xmax-\ymin*cos(\alpha)} , {\ymin}) -- ({\xmax-\ymax*cos(\alpha)},{\ymax}) -- ({\xmin-\ymax*cos(\alpha)},{\ymax}) -- ({\xmin-\ymin*cos(\alpha)},{\ymin}) -- cycle; 
+\tkzInit[xmin=-8, ymin=-8,  xmax=8.5,ymax=9.5]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-11,-9)(13,15)
+\end{scope}
+%	\foreach \i in {-10, -9,...,10} {
+%		\draw[ color =gray, dashed] (-11,-\i-10) -- (11,12-\i);
+%		%		\tkzFct[domain = -10:10]{-\x-\i};
+%	}
+
+\def \xa{5}; 
+\def \ya{0}; 
+
+\def \xb{0};
+\def \yb{2};
+
+\def \xc{2};
+\def \yc{3};
+
+\tkzDefPoint(-7,3){U0} \tkzDefShiftPoint[U0](\xa,\ya){U1}
+\tkzDefPoint(-3,-2){V0} \tkzDefShiftPoint[V0](\xb,\yb){V1} 
+\tkzDefPoint(-6,-2){W0} \tkzDefShiftPoint[W0](\xc,\yc){W1}
+\tkzDrawSegments[->,>=latex,line width =2 pt, color = Maroon](U0,U1 V0,V1  W0,W1)
+\tkzLabelSegment[above](U0,U1){$\vv{v}$}
+\tkzLabelSegment[left](V0,V1){$\vv{u}$}
+\tkzLabelSegment[left](W1,W0){$\vv{w}$}
+
+% 	\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+% 	\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+
+
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(4,-2){B}  
+\tkzDrawPoints(A,B)
+\tkzLabelPoints[font=\scriptsize](A,B) 
+
+\end{tikzpicture} 
+\end{minipage}  \\
+Placer les points $A_0$, $A_1$,  $B_0$, $B_1$ tel que $\vv{AA_0}=\tfrac{3}{2}\vv{u}$; $\vv{AA_1}=-\vv{u}$; $\vv{BB_0}=\tfrac{3}{5}\vv{v}$ et $\vv{B_0B_1}=-\tfrac{7}{5}\vv{v}$.
+%	\begin{enumerate}[label=\alph*),leftmargin=*]
+%		\item Placer les points $A_0$, $A_1$ tel que $\vv{AA_0}=\tfrac{3}{2}\vv{u}$ et $\vv{AA_1}=-\vv{u}$. 
+%		\item Placer les points $B_0$, $B_1$ tel que $\vv{BB_0}=\tfrac{3}{5}\vv{v}$ et $\vv{B_0B_1}=-\frac{7}{5}\vv{v}$.
+%		\item Placer les points $C_0$, $C_1$, $C_2$ et $C_3$ tel que $\vv{AC_0}=\vv{w}$, $\vv{AC_1}=-\frac{1}{2}\vv{w}$,  $\vv{BC_2}=\frac{2}{3}\vv{w}$ et  $\vv{BC_3}=\frac{5}{3}\vv{w}$
+%		\item  Compléter : $\vv{A_0A_1}=\ldots\ldots\vv{u}$; $\vv{B_0B_1}=\ldots\ldots\vv{v}$ et $\vv{C_2C_3}=\ldots\ldots\vv{w}$.
+%	\end{enumerate} 
+\end{example}
+\begin{exercise} 
+Pour chacun des cas suivants, dites s'il existe un réel $k$ tel que  $\vv{PQ}=k\vv{AB}$ puis préciser si les droites $(PQ)$ et $(AB)$ sont parallèles.
+\begin{multicols}{2} 
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item $\vv{PQ}\begin{pmatrix}
+4\\6
+\end{pmatrix}$ et $\vv{AB}\begin{pmatrix}
+-16\\-24
+\end{pmatrix} $
+\item $P(1\; ;\;-1)$, $Q(4\; ;\;3)$, $A(-1\; ;\;5)$ et $B(7\; ;\;1)$ 
+\item $\vv{PQ}\begin{pmatrix}
+-3\\5
+\end{pmatrix}$ et $\vv{AB}\begin{pmatrix}
+-9\\14
+\end{pmatrix}$
+%			\item $P(6;20)$, $Q(18;2)$ et $\vv{AB}\begin{pmatrix}
+%				28\\-42
+%			\end{pmatrix}$ 
+\item $P(1\; ;\;4)$, $Q(-3\; ;\;5)$, $A(5\; ;\;7)$ et $B(9\; ;\;6)$ 
+%			\item $P(1\; ;\;-1)$, $Q(-2\; ;\; 3)$, $A(3\; ;\;1)$ et $B(-3\; ;\;9)$ 
+%			\item $P(-1\; ;\;5)$, $Q(3\; ;\; -4)$, $A(1 \; ;\;1)$ et $B(9\; ;\;-17)$ 
+%			\item $P(2\; ;\;3)$, $Q(-1\; ;\; 3)$, $A(-2\; ;\;3)$ et $B(-11\; ;\;3)$ 
+%			\item $P(3\; ;\;-4)$, $Q(3\; ;\; 5)$, $A(3\; ;\;-1)$ et $B(3\; ;\;-28)$  
+%			\item $P(−2;1)$, $Q(1;3)$, $A(4;5)$ et $B(13;-13)$
+\end{enumerate}
+\end{multicols}
+\end{exercise}
+\begin{example}[Je fais] Dans un repère $(O;~I,J)$ on définit $A(-15~;~12)$ et $B(8~;~-4)$.\\ Sachant que $\vv{CO}=10\vv{AB}$, déterminer les coordonnées de $C$.
+
+\vfill
+\end{example}
+\begin{exercise} Mêmes consignes
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item $A(15~;~-10)$ et $B(-1~;~-4)$ et $\vv{OC}=-11\vv{AB}$. %176;-66
+\item $A(1~;~-16)$ et $B(-9~;~9)$ et $\vv{CB}=-14\vv{AB}$.%-149;359
+\item  $A(5~;~9)$ et $B(-13~;~-14)$ et $\vv{CB}=-5\vv{AB}$.%-103;-129
+\end{enumerate} 
+\end{exercise}
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+
+\section{Colinéarité de deux vecteurs}
+\begin{definition}$\vv{u}\neq \vv{0}$.  Les vecteurs colinéaires à $\vv{u}$ sont tous les multiples $k\vv{u}$ ou $k\in\mathbb{R}$.\\
+Il s'agit du vecteur nul $\vv{0}$ et de tous les vecteurs de même direction que $\vv{u}$. 
+\end{definition} 
+\begin{tBox} Deux vecteurs $\vv{u}$ et $\vv{v}$  sont \textbf{colinéaires}\fg{} (en abrégé $\vv{u}\propto\vv{v}$) si l'un est un multiple de l'autre. 
+\end{tBox} 
+%Les vecteurs colinéaires n'ont pas forcément la même longueur, ni le même sens.
+%\begin{tBox} Deux vecteurs $\vv{u}$ et $\vv{v}$ \textbf{ne sont pas colinéaires} signifie :
+%\begin{enumerate}[label=\alph*)]
+%\item $\vv{u}\neq \vv{0}$ et $\vv{v}\neq \vv{0}$
+%\item ils ont des directions différentes
+%\end{enumerate}
+%\end{tBox}
+
+\begin{postulatT} trois points $A$, $B$ et $C$ sont alignés si et seulement si deux parmi les vecteurs $\vv{AB}$, $\vv{AC}$ ou $\vv{BC}$ sont colinéaires.
+\end{postulatT}
+\begin{postulatT} les droites $(AB)$ et  $(CD)$ sont parallèles si et seulement si  les vecteurs $\vv{AB}$ et $\vv{CD}$ sont colinéaires.
+\end{postulatT}
+\begin{definition}
+Dans un repère quelconque $(O;\vec{\imath},\vec{\jmath})$. Soit deux vecteurs $\vv{u}\begin{pmatrix}
+x\\y
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+x'\\y'
+\end{pmatrix}$.\\
+On appelle \og déterminant de $\vv{u}$ et $\vv{v}$ \fg{} le nombre noté :
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt} 
+\[
+\det(\vv{u}\; ; \; \vv{v}) = \mdet{x & x' \\ y & y'} = xy'- x'y
+\]
+\end{definition}
+\begin{theorem}[Colinéarité à l'aide des coordonnées] Deux vecteurs $\vv{u}$ et $\vv{v}$ sont colinéaires si et seulement si $\det(\vv{u};\vv{v})=0$.
+\end{theorem}
+\begin{proof}\hfill \vfill 
+\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\subsection*{Exercices : Colinéarité de vecteurs}
+\begin{example}
+Calculer les déteriminant des vecteurs suivants :
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item \rule{0pt}{2em}
+$\vv{u}\begin{pmatrix}
+3\\2
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+4\\5
+\end{pmatrix}$. \quad $\det(\vv{u};\vv{v})=\mdet{3 & 4 \\ 2 & 5}=$\vfill $\det(\vv{v};\vv{u})=$
+\item  \rule{0pt}{2em}
+$\vv{u}\begin{pmatrix}
+-3\\2
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+-1\\4
+\end{pmatrix}$.\quad $\det(\vv{u};\vv{v})=$
+\item  \rule{0pt}{2em}
+$\vv{u}\begin{pmatrix}
+-4\\5
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+8\\-10
+\end{pmatrix}$. 
+\end{enumerate}
+\end{example}
+
+\begin{example}[Interprétation géométrique du déterminant dans un repère orthonormé]\hfill 
+
+Soit un repère \textbf{orthonormé} $(O;I,J)$, et les points $M(a,b)$ et $N(c,d)$ et $P$ tel que $OPMN$ est un parallélogramme. Pour simplifier on suppose que $a$, $b$, $c$ et $d$  sont des réels strictement positifs.
+
+\noindent\parbox{0.5\linewidth}{
+\begin{tikzpicture}[scale=0.8]
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+\tkzInit[xmin=-0.5,xmax=7.5,ymin=-0.5,ymax=6.5  ]
+\tkzDrawX[  noticks , label=$x$,  font=\small, line width=1.2pt ] %, style=dashed
+\tkzDrawY[  noticks , label=$y$,  font=\small, line width=1.2pt]  %, style=dashed
+\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={}, ylabel={}]
+
+\tkzDefPoint(0,0){O};
+\tkzDefPoint(2,4){N};
+\tkzDefPoint(2,6){xN};
+\tkzDefPoint(0,4){yN};
+\tkzDefPoint(5,2){M};
+\tkzDefPoint(5,0){xM};
+\tkzDefPoint(7,2){yM};
+\tkzDefPoint(7,6){P};
+\tkzDefPoint(7,0){xP};
+\tkzDefPoint(0,6){yP};
+\tkzDrawPolygon[fill=gray!20](O,M,P,N);
+\tkzDrawSegments[dashed](N,xN);
+\tkzDrawSegments[dashed](M,yM);
+%	\tkzDrawSegments[dashed](P,xP P,yP);
+\tkzPointShowCoord(P)
+\tkzPointShowCoord[noydraw](M)
+\tkzPointShowCoord[noxdraw](N)
+\tkzDrawSegment[thick,->, >=latex](O,M);
+\tkzDrawSegment[->,  >=latex  ](O,N);
+\tkzDrawSegment[- , dashed, >=latex](M,P);
+\tkzLabelPoint[above left,font=\small](M){$M(a,b)$}
+\tkzLabelPoint[below right,font=\small](N){$N(c,d)$}
+\tkzLabelPoint[above,font=\small](P){$P(\qquad,\qquad)$}
+\tkzLabelPoints[below left,font=\small](O)
+\end{tikzpicture} 
+}
+
+\end{example}
+\begin{example} Déterminer si les vecteurs $\vv{u}$ et $\vv{v}$ sont colinéaires. 
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item \rule{0pt}{2em}
+$\vv{u}\begin{pmatrix}
+2\\3
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+6\\9
+\end{pmatrix}$. 
+\item \rule{0pt}{2em}
+$\vv{u}\begin{pmatrix}
+\sqrt{3}+\sqrt{2}\\1
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+1\\\sqrt{3}-\sqrt{2}
+\end{pmatrix}$. 
+\end{enumerate}
+\end{multicols}
+\end{example}
+\vfill 
+\begin{example}
+Soient un repère orthonormé et les points $A(0~;~-2)$, $B(1~;~1)$ et $C(2~;~-1)$. Calculer l'aire du triangle $ABC$.
+\end{example}
+\vfill 
+\begin{example}
+Montrer que les points $A(2~;~5)$, $B(3~;~8)$ et $C(-5~;~-16)$ sont alignés.
+\end{example}
+\vfill 
+
+\newpage
+\begin{example}
+Soient $A(1~;~3)$, $B(5~;~-2)$, $C(-1~;~6)$ et $D(7~;~-4)$. 
+Montrer que les droites (AB) et (CD) sont parallèles.
+\end{example}
+\vfill 
+
+
+\begin{multicols}{2} 
+\begin{exercise}
+
+
+Dans chaque cas, dire si les vecteurs sont colinéaires. 
+%	\begin{multicols}{3}
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item  $\vv{u}\begin{pmatrix}
+2\\-3 
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+-1\\\tfrac{3}{2} 
+\end{pmatrix}$  
+\vspace{0.5cm}
+\item  $\vv{u}\begin{pmatrix}
+\tfrac{1}{2}\\\tfrac{1}{3} 
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+\tfrac{4}{5}\\ -\tfrac{1}{3}
+\end{pmatrix}$  
+\vspace{0.5cm}
+\item  $\vv{u}\begin{pmatrix}
+\sqrt{2}\\\sqrt{3} 
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+2\\ -\sqrt{6}
+\end{pmatrix}$  
+\vspace{0.5cm} 
+\end{enumerate}
+%\end{multicols}
+\end{exercise}
+\begin{exercise}Dans chaque cas les vecteurs $\vv{u}$ et $\vv{v}$ sont colinéaires. Écrire une équation vérifiée par $m$ et la résoudre.   
+%		\begin{multicols}{3}
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item  $\vv{u}\begin{pmatrix}
+2\\6
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+m\\ 3
+\end{pmatrix}$  
+\vspace{0.5cm}
+\item  $\vv{u}\begin{pmatrix}
+-m\\4m-3
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+1\\ -3
+\end{pmatrix}$  
+\vspace{0.5cm}
+\item  $\vv{u}\begin{pmatrix}
+27\\2m
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+2m\\ 3
+\end{pmatrix}$  
+\vspace{0.5cm} 
+\end{enumerate} 
+%\end{multicols}
+\end{exercise}
+\begin{exercise} 
+Dans un repère orthonormé $( O ; \vec{\imath} , \vec{\jmath} )$.
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item Montrer que $A\left(-2;1\right)$, $B\left(3;3\right)$ , $C\left(1;\tfrac{11}{5}\right)$ sont alignés.
+%		\vfill
+\item Trouver $a$ pour que $A(1 ; 2)$, $B(-3 ; 0)$ et $C(-14 ; a)$ soient alignés.
+%		\vfill 
+\end{enumerate} 
+\end{exercise}  
+\begin{exercise} 
+Dans un repère, soit les points: $A(-2~;~1)$, $B(3~;~3)$, $C\left(1~;~\tfrac{11}{5}\right)$ et $D\left(\tfrac{45}{2}~;~\tfrac{54}{5}\right)$
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item Démontrer que les points $A$, $B$ et $C$ sont alignés. 
+%		\vspace{2cm}
+\item Les points $A$, $B$ et $D$ sont-ils alignés ?
+%		\vspace{2cm}
+\end{enumerate}
+
+\end{exercise}
+%\newpage 
+
+\begin{exercise} 
+Pour chaque cas, justifier si les points donnés sont alignés.
+\begin{enumerate}[label=\alph*)]
+\item $A(5;10)$, $B(-5;5)$ et $C(-1;7)$
+\item $D(-3;-4)$, $E(-6;-6)$ et $F(1;-1)$
+\item $K(-9;4)$, $L(0;3)$ et $M(9,2)$
+\item $P(-3;2)$, $Q(-6;-2)$ et $R(-10,-6)$
+\end{enumerate}  
+\end{exercise}
+\begin{exercise}  
+Dans un repère, on donne les points : $M(0~;~-3)$, $N(2~;~3)$, $P(-9~;~0)$ et $Q(-1~;~-1)$
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+\item Calculer les coordonnées des points $A$ et $B$ tels que: 
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item $\vv{NA}=\dfrac{1}{2}~\vv{MN}$
+%			\vspace{2cm}
+\item $\vv{MB}=3~\vv{MQ}$
+%			\vspace{2cm}
+\end{enumerate}
+\item Calculer les coordonnées des vecteurs $\vv{PA}$ et $\vv{PB}$.
+%		\vspace{2cm} 
+\item Démontrer que les points $P$, $A$ et $B$ sont alignés.
+%		\vspace{3cm}
+\end{enumerate}
+\end{exercise}
+\begin{exercise} 
+Soit les points  $A(1 ; 2)$, $B(-3 ; 0)$ et $C(-7 ; a)$ dans un repère orthonormé. Trouver 2 valeurs de $a$ pour lesquelles le triangle $ABC$ est d'aire $12$.  
+\end{exercise}
+\end{multicols}
+%\vfill 
+%\begin{exercise} 
+%	Dans un repère, on donne les points: $A(1~;~-1)$, $B(-1~;~-2)$ et $C(-2~;~2)$
+%	\begin{enumerate}[label=\arabic*),leftmargin=*]
+%		\item Déterminer les coordonnées du point $G$ vérifiant $\vv{GA}+2\vv{GB}+\vv{GC}=\vv{0}$.
+%%		\vspace{2.5cm} 
+%		\item Déterminer les coordonnées du point $D$ vérifiant $\vv{BD}=\vv{BA}+\vv{BC}$.
+%%		\vspace{2.5cm} 
+%		\item Faire une figure. Que peut-on conjecturer pour les points $B$, $G$ et $D$ ?  
+%		Démontrer cette conjecture.
+%	\end{enumerate} 
+%\end{exercise}
+
+%\vfill 
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+	headwidth=textwithmarginpar,
+	headsepline=true,
+	headsepline= 0.5pt,
+	footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+
+
+\section{Somme de vecteurs}
+\begin{theorem}
+L'enchainement d'une translation de vecteur $\vv{u}$ puis d'une translation de vecteur $\vv{v}$ est aussi une translation.
+
+Le vecteur $\vv{u}+\vv{v}$ est le vecteur associé à la translation obtenue.
+\end{theorem} 
+%\begin{remark} C'est la conséquence du théorème  \ref{thm.transitif.para} 
+%\end{remark}  
+
+\begin{figure}[!h]
+\begin{tikzpicture}[scale=1.3]
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]   
+
+\def \xa{0.8}; 
+\def \ya{2.4}; 
+
+\def \xb{4};
+\def \yb{0};
+
+\tkzDefPoint(-0.7,0){U0} \tkzDefShiftPoint[U0](\xa,\ya){U1}
+\tkzDefPoint(1.0,3.5){V0} \tkzDefShiftPoint[V0](\xb,\yb){V1}
+
+\tkzDrawSegments[->, >=latex, line width=1.2pt](U0,U1 V0,V1)
+\tkzLabelSegment(U0,U1){\small $\vv{u}$}
+\tkzLabelSegment(V0,V1){\small $\vv{v}$}
+
+\tkzDefPoint(0.8,0){A}  
+\tkzDefPointBy[translation=from U0 to U1](A)\tkzGetPoint{B}
+\tkzDefPointBy[translation=from V0 to V1](B)\tkzGetPoint{C}
+
+\tkzDrawSegments[->, >=latex, line width=0.6pt, dashed](A,B)
+\tkzDrawSegments[-, line width=0.6pt, dashed](B,C)
+\tkzDrawSegments[->, >=latex, line width=1.2pt](A,C)
+
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[above left](B){\scriptsize$B$}
+\tkzLabelPoint[right](C){\scriptsize$C$}
+\tkzLabelSegment[left](A,B){\small$\vv{AB}$}
+\tkzLabelSegment[above](B,C){\small$\vv{BC}$}
+\tkzLabelSegment[below, sloped](A,C){\small$\vv{AC}=\vv{AB}+\vv{BC}$}
+
+\tkzDefPoint(2.0,-3.5){A0}  
+\tkzDefPointBy[translation=from U0 to U1](A0)\tkzGetPoint{B0}
+\tkzDefPointBy[translation=from V0 to V1](B0)\tkzGetPoint{C0}
+
+\tkzDrawSegments[->, >=latex, line width=0.6pt, dashed](A0,B0)
+\tkzDrawSegments[-, line width=0.6pt, dashed](B0,C0)
+\tkzDrawSegments[->, >=latex, line width=1.2pt](A0,C0)
+
+\tkzLabelPoint[below](A0){\scriptsize$X$}
+\tkzLabelPoint[above left](B0){\scriptsize$Y$}
+\tkzLabelPoint[right](C0){\scriptsize$Z$}
+\tkzLabelSegment[left](A0,B0){\small$\vv{XY}$}
+\tkzLabelSegment[above](B0,C0){\small$\vv{YZ}$}
+\tkzLabelSegment[below right](A0,C0){\small$\vv{XZ}$} 
+\end{tikzpicture}
+\caption{ 
+$C$ est l'image de $A$ par l'enchaînement des translation de vecteur $\protect\vv{u}$ puis $\protect\vv{v}$. \\
+$\protect\vv{u}+\protect\vv{v} = \protect\vv{AB}+\protect\vv{BC}=\protect\vv{AC}$.\\
+En prenant un autre point de départ $A'$ on obtient un autre représentant de $\protect\vv{u}+\protect\vv{v}$ :
+$\protect\vv{XZ}= \protect\vv{AC}=\protect\vv{u}+\protect\vv{v}$
+}
+\end{figure}
+
+\begin{tBox}[frametitle={Relation de Chasles}]
+Pour tout points $A$, $B$ et $C$ :
+\(  \vv{AC}=\vv{AB}+\vv{BC} \) 
+\end{tBox}   
+\begin{example}Placer les points $B$ et $Q$ tel que $\protect\vv{AB}=\protect\vv{u}+\protect\vv{v}$ et $\protect\vv{PQ}=\protect\vv{v}+\protect\vv{w}$
+
+
+\end{example} 
+\begin{figure}[!h]\centering 
+\begin{tikzpicture}[scale=0.8] 
+
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\def \xmin{-6}; 
+\def \xmax{7.5}; 
+\def \ymin{-3};
+\def \ymax{5};	
+\def \alpha{-00}
+\def \beta{80}
+\def \xnorm{1.2};
+\def \ynorm{0.8}; 
+\pgftransformcm{\xnorm*cos(\alpha)}{\xnorm*sin(\alpha)}{\ynorm*cos(\beta)}{\ynorm*sin(\beta)}{\pgfpointorigin}
+\path[clip,preaction = {draw=gray}] 
+({(\xmax*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}	) -- ( 
+{(\xmax*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmax*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+{(\xmin*\ynorm*sin(\beta)-\ymin*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymin*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) -- (
+{(\xmin*\ynorm*sin(\beta)-\ymax*\ynorm*cos(\beta))/(\xnorm*\ynorm*sin(\beta-\alpha))},{(-\xmin*\xnorm*sin(\alpha)+\ymax*\xnorm*cos(\alpha))/(\xnorm*\ynorm*sin(\beta-\alpha))}) --   cycle; 
+\tkzInit[xmin=-8, ymin=-8,  xmax=8.5,ymax=9.5]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-11,-9)(10,15)
+\end{scope}  
+%		\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ]  
+%		\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt] 
+%		\tkzRep[color  = Maroon,xlabel=,ylabel=, line width = 2pt,xnorm=1, ynorm=1]  
+%		\tkzDefPoint(0,0){O} 
+%		\tkzDefPoint(1,0){I} 
+%		\tkzDefPoint(0,1){J} 
+%		\tkzLabelPoints[below left,  font=\scriptsize](O)
+%		\tkzLabelPoints[below,  font=\scriptsize](I)
+%		\tkzLabelPoints[left,  font=\scriptsize](J)
+
+\def \xa{2}; 
+\def \ya{3}; 
+
+\def \xb{4};
+\def \yb{1};
+
+\def \xc{-3};
+\def \yc{0};
+
+\tkzDefPoint(-4,-2){U0} \tkzDefShiftPoint[U0](\xa,\ya){U1}
+\tkzDefPoint(-5,3){V0} \tkzDefShiftPoint[V0](\xb,\yb){V1}
+\tkzDefPoint(5,5){W0} \tkzDefShiftPoint[W0](\xc,\yc){W1}
+\tkzDrawSegments[->,>=latex,line width =2 pt, color = Maroon](U0,U1 V0,V1 W0,W1)
+\tkzLabelPoint[below, font=\small](U0){$A$}
+\tkzDrawPoint(4,-2)
+\tkzDrawPoint(U0)
+\tkzLabelPoint[below, font=\small](4,-2){$P$}
+\tkzLabelSegment[font=\small,above](U0,U1){$\vv{v}$}
+\tkzLabelSegment[font=\small,above](V0,V1){$\vv{u}$}
+\tkzLabelSegment[font=\small,above](W0,W1){$\vv{w}$}
+\end{tikzpicture}
+%		\caption{Placer les points $B$ et $Q$ tel que $\protect\vv{AB}=\protect\vv{u}+\protect\vv{v}$ et $\protect\vv{PQ}=\protect\vv{v}+\protect\vv{w}$}
+\end{figure} 
+ 
+\begin{definition}[Opposé du vecteur]
+se note $-\vv{u}$ et vérifie :
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt} 
+$$\vv{u}+(-\vv{u}) =\vv{0}$$ 
+Deux vecteurs opposés ont même direction, même longueur, mais sont de sens contraires.
+\end{definition}
+\begin{example}Pour les points $A$ et $B$, $\vv{BA}$ est l'opposé du vecteur $\vv{AB}$ :
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt} 
+$$\vv{AB}+\vv{BA}=\vv{AA}=\vv{0}$$  
+On écrira : $\vv{BA}=-\vv{AB}$
+\end{example}
+\begin{tBox}
+Soit un repère $(O;I,J)$ et les vecteurs $\vv{v}\begin{pmatrix}
+x\\y
+\end{pmatrix}$ et $\vv{u}\begin{pmatrix}
+x'\\y'
+\end{pmatrix}$.\\
+Le vecteur $\vv{u}+\vv{v}$ a pour coordonnées 
+$(\vv{u}+\vv{v})\begin{pmatrix}
+x+x'\\y+y '
+\end{pmatrix}$\\
+Le vecteur $-\vv{u}\begin{pmatrix}
+-x\\-y
+\end{pmatrix}$
+\end{tBox}
+\begin{figure}[!h]
+	\begin{tikzpicture}[scale=0.85]
+		\tkzSetUpPoint[size=3, fill=black]
+		\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+		\tkzSetUpLine[line width= 1.2pt, add=.5 and .5] 
+		
+		\tkzInit[xmin=-1, ymin=-1,  xmax=7,ymax=7]  
+		\begin{scope}[dashed] 
+			\tkzGrid 
+		\end{scope}  
+		\tkzDrawX[   label=$x$, font=\scriptsize, line width=1.2pt ] %, style=dashed
+		\tkzDrawY[  label=$y$, font=\scriptsize, line width=1.2pt]  %, style=dashed
+		\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={$\overrightarrow{\imath}$}, ylabel={$\overrightarrow{\jmath}$}]
+		\tkzDefPoint(0,0){O}  
+		\tkzDefPoint(1,0){I}  
+		\tkzDefPoint(0,1){J}
+		\tkzDefPoint(2,6){P}
+		\tkzLabelPoint[below left](O){$O$}
+		\tkzLabelPoint[above right](P){$P$}
+		\tkzDefShiftPoint[O](2,1){U0}
+		\tkzDefShiftPoint[U0](4,3){U1}
+		\tkzDrawSegment[->,>=latex,line width=2pt,color=red](U0,U1)
+		\tkzDrawSegment[->,>=latex,line width=1.2pt,color=blue](O,P)
+%		\tkzLabelAngle[pos=1.25,font=\scriptsize](U,O,V){$\tfrac{\pi}{4}$}
+%		\tkzMarkAngle[size=0.6](U,O,V)
+		\tkzLabelSegment[above,sloped](U0,U1){$\vv{u}$}
+		\tkzLabelSegment[above,sloped](O,P){$\vv{OP}$}
+		\tkzLabelX[orig=false, 	font=\scriptsize]  
+		\tkzLabelY[orig=false,  font=\scriptsize] 
+	\end{tikzpicture} 
+\caption{Décomposition de vecteurs dans la base $(\protect\vv{\imath} ~;~\protect\vv{\jmath})$ \protect\newline $\protect\vv{OP}=2 \protect\vv{\imath}+ 6\protect\vv{\jmath} $\protect\newline 
+$\protect\vv{u}=4 \protect\vv{\imath}+ 3\protect\vv{\jmath} $
+}
+\end{figure}
+\begin{definition} Soit trois points non alignés $O$, $I$ et $J$. Les vecteurs $\vv{OI}=\vv{\imath}$ et $\vv{OJ}=\vv{\jmath}$ ne sont pas colinéaires et forment une \textbf{base}.\\
+	Si on muni le plan du repère   $(O~;~I~,~J)$ (noté encore $(O~;~\vv{OI}~,~\vv{OJ})$ ou $(O~;~\vv{\imath}~,~\vv{\jmath})$) alors :
+\begin{enumerate}[leftmargin=*,label=\textbullet]
+	\item Tout point $P$ admet un unique couple de coordonnées $(x_P~;~y_P)$   :
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	$$\vv{OP}=x_P\vv{\imath}+y_P\vv{\jmath}$$  
+	\item \noindent Tout vecteur $\vv{u}$ admet un unique couple de coordonnées $\begin{pmatrix}
+		x\\ y
+	\end{pmatrix}$ dans la \textbf{base} $(\vv{\imath}~;~\vv{\jmath})$ tel que 
+	$\vv{u}=x\vv{\imath}+y\vv{\jmath}$ 
+\end{enumerate}  
+\end{definition} 
+%----------------------------------------------------------------------------------------
+%	EXERCICES
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+\section{Exercices : sommes de vecteurs}
+
+
+\begin{example} Placer les points $B$, $D$ et $F$ tel que $\protect\vv{AB}=\protect\vv{u}+\protect\vv{v}$, $\protect\vv{CD}=\protect\vv{u}-\protect\vv{v}$ et $\protect\vv{EF}=\protect\vv{v}-\protect\vv{u}$ 
+
+
+\end{example} 
+\begin{figure}[h]\centering 
+\begin{tikzpicture}[scale=0.8]
+
+\def \xmin{-7}; 
+\def \xmax{11}; 
+
+\def \ymin{-3};
+\def \ymax{4};	
+\def \alpha{75}
+
+\pgftransformcm{1}{0}{1*cos(\alpha)}{1*sin(\alpha)}{\pgfpointorigin}
+\path[clip,preaction = {draw=gray}] 
+({\xmax-\ymin*cos(\alpha)} , {\ymin}) -- ({\xmax-\ymax*cos(\alpha)},{\ymax}) -- ({\xmin-\ymax*cos(\alpha)},{\ymax}) -- ({\xmin-\ymin*cos(\alpha)},{\ymin}) -- cycle; 
+\tkzInit[xmin=-8, ymin=-8,  xmax=17.5,ymax=9.5]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-11,-9)(18,15)
+\end{scope}
+%	\foreach \i in {-10, -9,...,10} {
+%		\draw[ color =gray, dashed] (-11,-\i-10) -- (11,12-\i);
+%		%		\tkzFct[domain = -10:10]{-\x-\i};
+%	}
+
+\def \xa{4}; 
+\def \ya{0}; 
+
+\def \xb{0};
+\def \yb{3};
+
+\tkzDefPoint(-5,3){U0} \tkzDefShiftPoint[U0](\xa,\ya){U1}
+\tkzDefPoint(-6,-1){V0} \tkzDefShiftPoint[V0](\xb,\yb){V1}
+\tkzDrawSegments[->,>=latex,line width =2 pt, color = Maroon](U0,U1 V0,V1)
+\tkzLabelSegment[above](U0,U1){$\vv{u}$}
+\tkzLabelSegment[left](V0,V1){$\vv{v}$}
+
+% 	\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+% 	\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+
+
+\tkzDefPoint(-1,-2){A}
+\tkzDefPoint(5,2){C} 
+\tkzDefPoint(10,-1){E}
+\tkzDrawPoints(A,C,E)
+\tkzLabelPoints[font=\scriptsize](A,C,E) 
+
+\end{tikzpicture} 
+%	\caption{Placer les points $B$, $D$ et $F$ tel que $\protect\vv{AB}=\protect\vv{u}+\protect\vv{v}$, $\protect\vv{CD}=\protect\vv{u}-\protect\vv{v}$ et $\protect\vv{EF}=\protect\vv{v}-\protect\vv{u}$}
+\end{figure}
+
+
+\noindent Pour les exercices 1 à 4,  $ABCDEF$ est un hexagone régulier de centre $O$ et rayon $1$. Écrire le plus simplement possible les sommes ci-dessous en utilisant des points de la figure ou le vecteur nul, ou un nombre.
+\begin{exercise}\hfill 
+
+\noindent
+\parbox{0.40\linewidth}{\centering
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{3.0};  
+\tkzDefShiftPoint[O](0:\rayon){A}
+\tkzDefShiftPoint[O](60:\rayon){B}
+\tkzDefShiftPoint[O](120:\rayon){C}
+\tkzDefShiftPoint[O](180:\rayon){D}
+\tkzDefShiftPoint[O](240:\rayon){E}
+\tkzDefShiftPoint[O](300:\rayon){F}
+\tkzDrawPolygon(A,B,C,D,E,F)
+\tkzLabelPoint[right](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[above left](C){$C$}
+\tkzLabelPoint[left](D){$D$}
+\tkzLabelPoint[below left](E){$E$}
+\tkzLabelPoint[below right](F){$F$}
+\tkzDrawSegments[dashed, line width=1pt](O,A O,B O,C O,D O,E O,F) 
+\end{tikzpicture} 
+}\hfill 
+\parbox{0.55\linewidth}{
+\begin{enumerate}[label=\alph*)]
+\item\rule{0pt}{2.1em} $\vv{OA}+\vv{AB}=$
+\item\rule{0pt}{2.1em} $\vv{OA}+\vv{OC}=$
+\item\rule{0pt}{2.1em} $\vv{OA}+\vv{OB}=$
+\item\rule{0pt}{2.1em} $OA+OV=$
+\item\rule{0pt}{2.1em} $\vv{EF}+\vv{FA}+\vv{AB}=$
+\item\rule{0pt}{2.1em} $\vv{CD}+\vv{FA}=$
+%	\item\rule{0pt}{2.1em} $\vv{OB}-\vv{OA}=$
+%	\item\rule{0pt}{2.1em} $OB-OA=$
+%	\item\rule{0pt}{2.1em} $\vv{CB}-\vv{FA}=$
+%	\item\rule{0pt}{2.1em} $\vv{DO}-\vv{AB}=$
+\end{enumerate}
+}
+\end{exercise}
+\vfill 
+\begin{exercise}\hfill  
+
+\noindent
+\parbox{0.40\linewidth}{\centering
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{3.0};  
+\tkzDefShiftPoint[O](0:\rayon){A}
+\tkzDefShiftPoint[O](60:\rayon){B}
+\tkzDefShiftPoint[O](120:\rayon){C}
+\tkzDefShiftPoint[O](180:\rayon){D}
+\tkzDefShiftPoint[O](240:\rayon){E}
+\tkzDefShiftPoint[O](300:\rayon){F}
+\tkzDrawPolygon(A,B,C,D,E,F)
+\tkzLabelPoint[right](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[above left](C){$C$}
+\tkzLabelPoint[left](D){$D$}
+\tkzLabelPoint[below left](E){$E$}
+\tkzLabelPoint[below right](F){$F$}
+\tkzDrawSegments[dashed, line width=1pt](O,A O,B O,C O,D O,E O,F) 
+\end{tikzpicture} 
+}\hfill 
+\parbox{0.55\linewidth}{
+\begin{enumerate}[label=\alph*)]
+\item\rule{0pt}{2.1em} $\vv{EB}+\vv{AF}=$
+\item\rule{0pt}{2.1em} $\vv{BC}+\vv{AF}+\vv{DE}=$
+\item\rule{0pt}{2.1em} $\vv{OB}+\vv{OE}=$
+\item\rule{0pt}{2.1em} $\vv{OA}+\vv{OE}+\vv{OC}=$
+\item\rule{0pt}{2.1em} $OA+OE+OC=$
+\item\rule{0pt}{2.1em} $\vv{OA}+\vv{OC}+\vv{DE}=$ 
+\end{enumerate}
+}
+\end{exercise}
+\vfill 
+\begin{exercise}\hfill  
+
+\noindent
+\parbox{0.40\linewidth}{\centering
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{3};  
+\tkzDefShiftPoint[O](0:\rayon){A}
+\tkzDefShiftPoint[O](60:\rayon){B}
+\tkzDefShiftPoint[O](120:\rayon){C}
+\tkzDefShiftPoint[O](180:\rayon){D}
+\tkzDefShiftPoint[O](240:\rayon){E}
+\tkzDefShiftPoint[O](300:\rayon){F}
+\tkzDrawPolygon(A,B,C,D,E,F)
+\tkzLabelPoint[right](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[above left](C){$C$}
+\tkzLabelPoint[left](D){$D$}
+\tkzLabelPoint[below left](E){$E$}
+\tkzLabelPoint[below right](F){$F$}
+\tkzDrawSegments[dashed, line width=1pt](O,A O,B O,C O,D O,E O,F) 
+\end{tikzpicture} 
+}\hfill 
+\parbox{0.55\linewidth}{
+\begin{enumerate}[label=\alph*)] 
+\item\rule{0pt}{2.1em} $\vv{OB}-\vv{OA}=$
+\item\rule{0pt}{2.1em} $OB-OA=$
+\item\rule{0pt}{2.1em} $\vv{CB}-\vv{FA}=$
+\item\rule{0pt}{2.1em} $\vv{DO}-\vv{AB}=$
+%				\item\rule{0pt}{2.1em} $\vv{DF}-\vv{CB}+\vv{DB}=$
+%				\item\rule{0pt}{2.1em} $\vv{OC}-\vv{EC}+\vv{DE}=$
+%				\item\rule{0pt}{2.1em} $\vv{OC}-\big(\vv{EO}+\vv{DE}\big)=$
+\end{enumerate}
+}
+\end{exercise}
+
+\begin{exercise}\hfill 
+
+\noindent
+\parbox{0.40\linewidth}{\centering
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{3.0};  
+\tkzDefShiftPoint[O](0:\rayon){A}
+\tkzDefShiftPoint[O](60:\rayon){B}
+\tkzDefShiftPoint[O](120:\rayon){C}
+\tkzDefShiftPoint[O](180:\rayon){D}
+\tkzDefShiftPoint[O](240:\rayon){E}
+\tkzDefShiftPoint[O](300:\rayon){F}
+\tkzDrawPolygon(A,B,C,D,E,F)
+\tkzLabelPoint[right](A){$A$}
+\tkzLabelPoint[above right](B){$B$}
+\tkzLabelPoint[above left](C){$C$}
+\tkzLabelPoint[left](D){$D$}
+\tkzLabelPoint[below left](E){$E$}
+\tkzLabelPoint[below right](F){$F$}
+\tkzDrawSegments[dashed, line width=1pt](O,A O,B O,C O,D O,E O,F) 
+\end{tikzpicture} 
+}\hfill 
+\parbox{0.55\linewidth}{
+\begin{enumerate}[label=\alph*)]
+\item\rule{0pt}{2.1em} $\vv{DF}-\vv{CB}+\vv{DB}=$
+\item\rule{0pt}{2.1em} $\vv{OC}-\vv{EC}+\vv{DE}=$
+\item\rule{0pt}{2.1em} $\vv{OC}-\big(\vv{EO}+\vv{DE}\big)=$
+\end{enumerate}
+}
+\end{exercise}
+
+\begin{example} En utilisant la relation de Chasles, compléter les égalités suivantes où \og $\ldots$\fg{}  représente le nom d'un point :
+
+\begin{enumerate}[label=\alph*)]
+\item\rule{0pt}{1.8em} $\vv{AC}=\vv{AB}+\vv{\ldots\phantom{A} C}$ %avant \lstar
+
+\item\rule{0pt}{1.8em} $\vv{FE}=\vv{F\phantom{A}\ldots}+\vv{U\phantom{A}\ldots }$
+
+\item\rule{0pt}{1.8em} $\vv{OU}+\vv{RS}+\vv{UR}=\vv{\ldots\phantom{A}\ldots }$
+
+\item\rule{0pt}{1.8em} $\vv{RT}=\vv{\ldots\phantom{A} I}+\vv{I\phantom{A}\ldots }$
+
+\item\rule{0pt}{1.8em} $\vv{XY}=\vv{\ldots\phantom{A} M}+\vv{\ldots\phantom{A} N}+\vv{\ldots\phantom{A}\ldots }$
+\end{enumerate}
+\end{example}
+\begin{exercise}\label{chap07.exo.chasles01}   
+Simplifier les expressions suivantes à l'aide de la relation de Chasles :
+\begin{multicols}{2} 
+\begin{enumerate} [label=\alph*),leftmargin=*]
+\item\rule{0pt}{1.8em} $\vv{BD}+\vv{DA}=\dotfill$
+\item\rule{0pt}{1.8em} $\vv{BD}+\vv{DB}=\dotfill$
+\item\rule{0pt}{1.8em} $\vv{BD}+\vv{AA}=\dotfill$
+\item\rule{0pt}{1.8em} $\vv{BD}-\vv{BA}=\dotfill$
+\item\rule{0pt}{1.8em} $\vv{MB}-\vv{MD}=\dotfill$
+\item\rule{0pt}{1.8em} $\vv{BD}+\vv{AD}+\vv{BA}=\dotfill$
+\item\rule{0pt}{1.8em}  $\vv{KT}+\vv{TD}+\vv{KT}=\dotfill$
+\item\rule{0pt}{1.8em}  $\vv{BQ}-\vv{BA}+\vv{QA}-\vv{QB}=\dotfill$
+\end{enumerate}
+\end{multicols}
+\end{exercise}
+
+\begin{exercise}\label{chap07.exo.chasles02}   \hfill 
+
+\noindent
+En utilisant la relation de Chasles, compléter les égalités suivantes où \og $\ldots$\fg{}  représente le nom d'un point :
+\begin{multicols}{2} 
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item\rule{0pt}{1.8em} $\vv{IB}=\vv{\ldots A}+\vv{A\ldots}$
+\item\rule{0pt}{1.8em} $\vv{HG}+\vv{\rule[1em]{0cm}{0pt} \ldots\ldots}= \vv{HF}$ 
+\item\rule{0pt}{1.8em} $\vv{D\ldots}+\vv{C\ldots}=\vv{\ldots B}$
+\item\rule{0pt}{1.8em} $\vv{A\ldots}=\vv{A\ldots}+\vv{B\ldots}+\vv{CM}$
+\item\rule{0pt}{1.8em} $\vv{FE}+\vv{\ldots\rule[1em]{0cm}{0pt}\ldots}=\vv{0}$ 
+
+\item\rule{0pt}{1.8em} $\vv{DC} - \vv{\ldots\rule[1em]{0cm}{0pt} \ldots}=\vv{AC}$
+\item\rule{0pt}{1.8em} $\vv{DC} - \vv{\ldots\rule[1em]{0cm}{0pt} \ldots}=\vv{DE}$ 
+\end{enumerate}
+\end{multicols}
+\end{exercise}
+\begin{exercise}\label{chap07.exo.chasles03} \hfill 
+
+\noindent	Simplifier les expressions suivantes à l'aide de la relation de Chasles :
+%\begin{multicols}{2} 
+\begin{enumerate} [label=\alph*)] 
+\item\rule{0pt}{1.8em} $\vv{BD}-\vv{BA}+\vv{DA}-\vv{DB}=$
+\item\rule{0pt}{1.8em} $\vv{CB}-\vv{CD}-\vv{BD}=$
+\item\rule{0pt}{1.8em} $\vv{BD}-\vv{BA}+\vv{MA}-\vv{MD}=$
+\item\rule{0pt}{1.8em} $\vv{BD}-\vv{MC}-\vv{BM}+\vv{DB}=$
+\item\rule{0pt}{1.8em} $\vv{MA}+\vv{EM}-\vv{CA}-\vv{EC}=$
+\item\rule{0pt}{1.8em} $-\vv{AU}+\vv{SM}-\vv{ST}+\vv{MU}=$
+\end{enumerate}
+%\end{multicols}
+\end{exercise}
+
+\begin{exercise} \hfill 
+
+\noindent Écrire les sommes demandées à l'aide de vecteurs dont les extrémités sont des points de la figure.
+
+
+\noindent 
+\parbox{0.5\linewidth}{
+\begin{enumerate}[label=\alph*)\rule{0pt}{1.9em}, leftmargin=*]
+\item $\vv{GF}+\vv{CB}=\dotfill$
+\item $\vv{BG}-\vv{HG}=\dotfill$
+\item $\vv{HF}+\vv{FH}+\vv{HF}=\dotfill$
+\item $\vv{IJ}+\vv{CF}+\vv{JC}+\vv{FE}=\dotfill$
+\item $\vv{HF}-\vv{BC}+\vv{CD}=\dotfill$
+\item $\vv{BD}+\vv{IH}-\vv{BH}-\vv{FD}=\dotfill$
+\end{enumerate}
+}\hfill 
+\parbox{0.45\linewidth}{\centering
+\begin{tikzpicture}[scale=0.75]
+\tkzInit[xmax=10,ymin=1, ymax=8]\tkzGrid 
+\tkzDefPoint(5,7){A} 
+\tkzDefPoint(6,6){B} 
+\tkzDefPoint(8,6){C} 
+\tkzDefPoint(6,4){D} 
+\tkzDefPoint(7,2){E} 
+\tkzDefPoint(6,2){F} 
+\tkzDefPoint(5,3){G} 
+\tkzDefPoint(4,2){H} 
+\tkzDefPoint(3,2){I} 
+\tkzDefPoint(2,4){J} 
+\tkzDrawPolygon[line width=1.2 pt](A,B,C,D,E,F,G,H,I,J)
+\tkzLabelPoints(B,C,E,F,H,I)
+\tkzLabelPoint[above](A){$A$}
+\tkzLabelPoint[left](J){$J$}
+\tkzLabelPoint[right](D){$D$}
+\tkzLabelPoint[above](G){$G$} 
+\end{tikzpicture} 
+} 	
+\end{exercise}
+
+\begin{multicols}{3}
+\begin{proof}[solution de l'exercice \ref{chap07.exo.chasles01}]\hfill 
+\begin{enumerate} [label=\alph*), leftmargin=*]\scriptsize
+\item $\vv{BA}$
+\item $\vv{0}$
+\item $\vv{BD}$
+\item $\vv{AD}$
+\item $\vv{DB}$
+\item $2\vv{BD}$
+\end{enumerate} 
+\end{proof} 
+\begin{proof}[solution de  \ref{chap07.exo.chasles02}]\hfill  
+\begin{enumerate}[label=\alph*), leftmargin=*]\scriptsize
+\item $\vv{IB}=\vv{IA}+\vv{AB}$
+\item $\vv{HG}+\vv{GF}=\vv{HF}$
+\item $\vv{DC}+\vv{CB}=\vv{DB}$
+\item $\vv{AM}=\vv{AB}+\vv{BC}+\vv{CM}$
+\item $\vv{FE}+\vv{EF}=\vv{0}$
+\item $\vv{DC} - \vv{DA} =\vv{AC}$
+\item $\vv{DC} - \vv{EC}  =\vv{DE}$ 
+\end{enumerate} 
+\end{proof}  
+\begin{proof}[solution de  \ref{chap07.exo.chasles03}]\hfill  
+\begin{enumerate}[label=\alph*), leftmargin=*]\scriptsize
+\item $\vv{BD}$
+\item $2\vv{DB}$
+\item $\vv{0}$
+\item $\vv{CB}$
+\item $\vv{0}$
+\item $\vv{TA}$
+\end{enumerate} 
+\end{proof}   
+\end{multicols}
+
+\newpage  
+\begin{exercise}\hfill\\
+Pour chaque cas, représentez $\vv{u}+\vv{v}$ (en bleu) et $\vv{u}-\vv{v}$ (en rouge). Aucune restriction sur l'orgine du représentant choisi.  
+%Enfin sur les 3 cas de droite représenter $\vv{v}-\vv{u}$.\\
+%	\begin{minipage}{1\columnwidth}\centering
+%		\begin{tikzpicture}[scale=0.5]
+%			\tkzInit[xmax=34,ymax=30]
+%			%	\begin{scope}[dashed]
+%			\tkzGrid 
+%			%	\end{scope}
+%			\tkzSetUpPoint[size=7, fill=black]
+%			\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+%			\tkzDefPoint(1,25){P1}
+%			\tkzDefShiftPoint[P1](6,3){Q1}
+%			\tkzDefShiftPoint[Q1](3,-2){R1}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](P1,Q1) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](Q1,R1) 
+%			\tkzLabelSegment[above left](P1,Q1){$\vv{u}$}
+%			\tkzLabelSegment[above right](Q1,R1){$\vv{v}$}	
+%			
+%			\tkzDefPoint(15,26){P2}
+%			\tkzDefShiftPoint[P2](3,2){Q2}
+%			\tkzDefShiftPoint[Q2](5,-1){R2}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](Q2,P2) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](Q2,R2) 
+%			\tkzLabelSegment[above left](P2,Q2){$\vv{u}$}
+%			\tkzLabelSegment[above right](Q2,R2){$\vv{v}$}		
+%			
+%			\tkzDefPoint(33,29){P3}
+%			\tkzDefShiftPoint[P3](-6,0){Q3}
+%			\tkzDefShiftPoint[Q3](0,-4){R3}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](P3,Q3) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](Q3,R3) 
+%			\tkzLabelSegment[above left](P3,Q3){$\vv{v}$}
+%			\tkzLabelSegment[above right](Q3,R3){$\vv{u}$}	
+%			
+%			\tkzDefPoint(1,15){P4}
+%			\tkzDefShiftPoint[P4](6,3){Q4}
+%			\tkzDefPoint(7,16){R4}
+%			\tkzDefShiftPoint[R4](4,-1){S4}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](P4,Q4) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](R4,S4) 
+%			\tkzLabelSegment[above left](P4,Q4){$\vv{u}$}
+%			\tkzLabelSegment[above right](R4,S4){$\vv{v}$}	
+%			
+%			\tkzDefPoint(18,17){P5}
+%			\tkzDefShiftPoint[P5](-4,0){Q5}
+%			\tkzDefPoint(22,12){R5}
+%			\tkzDefShiftPoint[R5](-2,5){S5}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](P5,Q5) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](R5,S5) 
+%			\tkzLabelSegment[above left](P5,Q5){$\vv{u}$}
+%			\tkzLabelSegment[above right](R5,S5){$\vv{v}$}	
+%			
+%			\tkzDefPoint(1, 3){P6}
+%			\tkzDefShiftPoint[P6](5,0){Q6}
+%			\tkzDefPoint(8,6){R6}
+%			\tkzDefShiftPoint[R6](-2,-3){S6}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](P6,Q6) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](R6,S6) 
+%			\tkzLabelSegment[above left](P6,Q6){$\vv{u}$}
+%			\tkzLabelSegment[below right](R6,S6){$\vv{v}$}	
+%			
+%			\tkzDefPoint(33, 16){P7}
+%			\tkzDefShiftPoint[P7](-6,0){Q7}
+%			\tkzDefPoint(33, 13){R7}
+%			\tkzDefShiftPoint[R7](-4,0){S7}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](P7,Q7) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](R7,S7) 
+%			\tkzLabelSegment[above left](P7,Q7){$\vv{u}$}
+%			\tkzLabelSegment[below right](R7,S7){$\vv{v}$}
+%			
+%			
+%			\tkzDefPoint(20, 2){P8}
+%			\tkzDefShiftPoint[P8](-4,0){Q8}
+%			\tkzDefPoint(14, 4){R8}
+%			\tkzDefShiftPoint[R8](6,0){S8}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](P8,Q8) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](R8,S8) 
+%			\tkzLabelSegment[ below](P8,Q8){$\vv{u}$}
+%			\tkzLabelSegment[above  ](R8,S8){$\vv{v}$}
+%			
+%			
+%			\tkzDefPoint(31, 3){P9}
+%			\tkzDefShiftPoint[P9](-3,0){Q9}
+%			\tkzDefPoint(25, 3){R9}
+%			\tkzDefShiftPoint[R9](3,0){S9}
+%			\tkzDrawSegment[->,>=latex, line width=1.2](P9,Q9) 
+%			\tkzDrawSegment[->,>=latex, line width=1.2](R9,S9) 
+%			\tkzLabelSegment[ below](P9,Q9){$\vv{u}$}
+%			\tkzLabelSegment[above  ](R9,S9){$\vv{v}$}
+%			
+%			%		\tkzAxeX[orig=false,above=5pt, label=$x$, font=\scriptsize, line width=2pt, right space=0.2,5 cm] 
+%			%		\tkzAxeY[orig=false,right=5pt, label=$y$, font=\scriptsize, line width=2pt, up space=0.2,5 cm]
+%		\end{tikzpicture} 
+%	\end{minipage}  
+\begin{figure}[H]
+\begin{tikzpicture}[scale=0.5]
+\tkzInit[xmax=34,ymax=42]
+%	\begin{scope}[dashed]
+\tkzGrid 
+%	\end{scope}
+\tkzSetUpPoint[size=7, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+\tkzDefPoint(1,37){P1}
+\tkzDefShiftPoint[P1](6,3){Q1}
+\tkzDefShiftPoint[Q1](3,-2){R1}
+\tkzDrawSegment[->,>=latex, line width=1.2](P1,Q1) 
+\tkzDrawSegment[->,>=latex, line width=1.2](Q1,R1) 
+\tkzLabelSegment[above left](P1,Q1){$\vv{u}$}
+\tkzLabelSegment[above right](Q1,R1){$\vv{v}$}	
+
+\tkzDefPoint(15,38){P2}
+\tkzDefShiftPoint[P2](3,2){Q2}
+\tkzDefShiftPoint[Q2](5,-1){R2}
+\tkzDrawSegment[->,>=latex, line width=1.2](Q2,P2) 
+\tkzDrawSegment[->,>=latex, line width=1.2](Q2,R2) 
+\tkzLabelSegment[above left](P2,Q2){$\vv{u}$}
+\tkzLabelSegment[above right](Q2,R2){$\vv{v}$}		
+
+\tkzDefPoint(33,41){P3}
+\tkzDefShiftPoint[P3](-6,0){Q3}
+\tkzDefShiftPoint[Q3](0,-4){R3}
+\tkzDrawSegment[->,>=latex, line width=1.2](P3,Q3) 
+\tkzDrawSegment[->,>=latex, line width=1.2](Q3,R3) 
+\tkzLabelSegment[above left](P3,Q3){$\vv{v}$}
+\tkzLabelSegment[above right](Q3,R3){$\vv{u}$}	
+
+\tkzDefPoint(1,21){P4}
+\tkzDefShiftPoint[P4](6,3){Q4}
+\tkzDefPoint(7,22){R4}
+\tkzDefShiftPoint[R4](4,-1){S4}
+\tkzDrawSegment[->,>=latex, line width=1.2](P4,Q4) 
+\tkzDrawSegment[->,>=latex, line width=1.2](R4,S4) 
+\tkzLabelSegment[above left](P4,Q4){$\vv{u}$}
+\tkzLabelSegment[above right](R4,S4){$\vv{v}$}	
+
+\tkzDefPoint(18,23){P5}
+\tkzDefShiftPoint[P5](-4,0){Q5}
+\tkzDefPoint(22,18){R5}
+\tkzDefShiftPoint[R5](-2,5){S5}
+\tkzDrawSegment[->,>=latex, line width=1.2](P5,Q5) 
+\tkzDrawSegment[->,>=latex, line width=1.2](R5,S5) 
+\tkzLabelSegment[above left](P5,Q5){$\vv{u}$}
+\tkzLabelSegment[above right](R5,S5){$\vv{v}$}	
+
+\tkzDefPoint(1, 3){P6}
+\tkzDefShiftPoint[P6](5,0){Q6}
+\tkzDefPoint(8,6){R6}
+\tkzDefShiftPoint[R6](-2,-3){S6}
+\tkzDrawSegment[->,>=latex, line width=1.2](P6,Q6) 
+\tkzDrawSegment[->,>=latex, line width=1.2](R6,S6) 
+\tkzLabelSegment[above left](P6,Q6){$\vv{u}$}
+\tkzLabelSegment[below right](R6,S6){$\vv{v}$}	
+
+\tkzDefPoint(33, 22){P7}
+\tkzDefShiftPoint[P7](-6,0){Q7}
+\tkzDefPoint(33, 19){R7}
+\tkzDefShiftPoint[R7](-4,0){S7}
+\tkzDrawSegment[->,>=latex, line width=1.2](P7,Q7) 
+\tkzDrawSegment[->,>=latex, line width=1.2](R7,S7) 
+\tkzLabelSegment[above left](P7,Q7){$\vv{u}$}
+\tkzLabelSegment[below right](R7,S7){$\vv{v}$}
+
+
+\tkzDefPoint(20, 2){P8}
+\tkzDefShiftPoint[P8](-4,0){Q8}
+\tkzDefPoint(14, 4){R8}
+\tkzDefShiftPoint[R8](6,0){S8}
+\tkzDrawSegment[->,>=latex, line width=1.2](P8,Q8) 
+\tkzDrawSegment[->,>=latex, line width=1.2](R8,S8) 
+\tkzLabelSegment[ below](P8,Q8){$\vv{u}$}
+\tkzLabelSegment[above  ](R8,S8){$\vv{v}$}
+
+
+\tkzDefPoint(31, 3){P9}
+\tkzDefShiftPoint[P9](-3,0){Q9}
+\tkzDefPoint(25, 3){R9}
+\tkzDefShiftPoint[R9](3,0){S9}
+\tkzDrawSegment[->,>=latex, line width=1.2](P9,Q9) 
+\tkzDrawSegment[->,>=latex, line width=1.2](R9,S9) 
+\tkzLabelSegment[ below](P9,Q9){$\vv{u}$}
+\tkzLabelSegment[above  ](R9,S9){$\vv{v}$}
+
+%		\tkzAxeX[orig=false,above=5pt, label=$x$, font=\scriptsize, line width=2pt, right space=0.2,5 cm] 
+%		\tkzAxeY[orig=false,right=5pt, label=$y$, font=\scriptsize, line width=2pt, up space=0.2,5 cm]
+\end{tikzpicture} 
+\end{figure} 
+\end{exercise}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\begin{exercise}\hfill \\
+Pour chacun des cas suivants placer le point $M$ tel que $\vv{OM}=\vv{OA}+\vv{OB}$ et représenter le parallélogramme $OAMB$ puis écrire le vecteur $\vv{AB}$ sous la forme $a\vv{\imath}+b\vv{\jmath}$. 
+\begin{multicols}{3} 
+\begin{enumerate}[label=\alph*)]
+\item $A (1;4)$ et $B  (3;2)$.
+\item $A (-1;2)$ et $B  (3;1)$. 
+\item $A (-1;1)$ et $B  (-1;2)$. 
+\item $A (1;5)$ et $B  (1;1)$. 
+\item $A (-2;1)$ et $B  (1;2)$. 
+\item $A (-3;-2)$ et $B  (-1;-1)$.  
+\end{enumerate} 
+\end{multicols}
+\end{exercise}
+%\end{minipage}
+
+\begin{minipage}{0.45\columnwidth} \centering
+\begin{tikzpicture}[xscale=0.75, yscale=0.65]
+
+\tkzInit[xmin=-4, ymin=-3,  xmax=6,ymax=6 ]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-4,-3)(6,6)
+\end{scope}
+
+\def \xa{1}; 
+\def \ya{4}; 
+
+\def \xb{3};
+\def \yb{2};
+
+\tkzDefPoint(0,0){O} \tkzDefShiftPoint[O](\xa,\ya){A}
+\tkzDefShiftPoint[O](\xb,\yb){B}
+\tkzDrawSegments[- ,>=latex,line width =1.2 pt, color = Maroon](O,A O,B)
+%\tkzLabelSegment[above](U0,U1){$\vv{u}$}
+%\tkzLabelSegment[left](V0,V1){$\vv{v}$}
+
+\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+\tkzLabelXY[orig = false,  font=\scriptsize]
+
+\tkzDrawPoints(A,B,O)
+\tkzLabelPoints[below left, font=\scriptsize](O)
+\tkzLabelPoints[font=\scriptsize](A,B)  
+\tkzRep[line width=2pt, color=Maroon]
+\end{tikzpicture} 
+\end{minipage} 
+\hfill 
+\begin{minipage}{0.45\columnwidth} \centering
+\begin{tikzpicture}[xscale=0.75, yscale=0.65]
+
+\tkzInit[xmin=-4, ymin=-3,  xmax=6,ymax=6 ]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-4,-3)(6,6)
+\end{scope}
+
+\def \xa{1}; 
+\def \ya{4}; 
+
+\def \xb{3};
+\def \yb{2};
+
+%\tkzDefPoint(0,0){O} \tkzDefShiftPoint[O](\xa,\ya){A}
+% \tkzDefShiftPoint[O](\xb,\yb){B}
+%\tkzDrawSegments[- ,>=latex,line width =2 pt, color = Maroon](O,A O,B)
+%\tkzLabelSegment[above](U0,U1){$\vv{u}$}
+%\tkzLabelSegment[left](V0,V1){$\vv{v}$}
+
+\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+\tkzLabelXY[orig = false,  font=\scriptsize]
+
+\tkzLabelPoints[below left, font=\scriptsize](O) 
+\tkzRep[line width=2pt, color=Maroon]
+\end{tikzpicture} 
+\end{minipage} 
+
+\begin{minipage}{0.45\columnwidth} \centering
+\begin{tikzpicture}[xscale=0.75, yscale=0.65]
+
+\tkzInit[xmin=-4, ymin=-3,  xmax=6,ymax=6 ]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-4,-3)(6,6)
+\end{scope}
+
+\def \xa{1}; 
+\def \ya{4}; 
+
+\def \xb{3};
+\def \yb{2};
+
+%\tkzDefPoint(0,0){O} \tkzDefShiftPoint[O](\xa,\ya){A}
+% \tkzDefShiftPoint[O](\xb,\yb){B}
+%\tkzDrawSegments[- ,>=latex,line width =2 pt, color = Maroon](O,A O,B)
+%\tkzLabelSegment[above](U0,U1){$\vv{u}$}
+%\tkzLabelSegment[left](V0,V1){$\vv{v}$}
+
+\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+\tkzLabelXY[orig = false,  font=\scriptsize]
+
+\tkzLabelPoints[below left, font=\scriptsize](O)
+\tkzRep[line width=2pt, color=Maroon]
+\end{tikzpicture} 
+\end{minipage} 
+\hfill 
+\begin{minipage}{0.45\columnwidth} \centering
+\begin{tikzpicture}[xscale=0.75, yscale=0.65]
+
+\tkzInit[xmin=-4, ymin=-3,  xmax=6,ymax=6 ]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-4,-3)(6,6)
+\end{scope}
+
+\def \xa{1}; 
+\def \ya{4}; 
+
+\def \xb{3};
+\def \yb{2};
+
+%\tkzDefPoint(0,0){O} \tkzDefShiftPoint[O](\xa,\ya){A}
+% \tkzDefShiftPoint[O](\xb,\yb){B}
+%\tkzDrawSegments[- ,>=latex,line width =2 pt, color = Maroon](O,A O,B)
+%\tkzLabelSegment[above](U0,U1){$\vv{u}$}
+%\tkzLabelSegment[left](V0,V1){$\vv{v}$}
+
+\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+\tkzLabelXY[orig = false,  font=\scriptsize]
+
+\tkzLabelPoints[below left, font=\scriptsize](O) 
+\tkzRep[line width=2pt, color=Maroon]
+\end{tikzpicture} 
+\end{minipage} 
+
+
+\begin{minipage}{0.45\columnwidth} \centering
+\begin{tikzpicture}[xscale=0.75, yscale=0.65]
+
+\tkzInit[xmin=-4, ymin=-3,  xmax=6,ymax=6 ]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-4,-3)(6,6)
+\end{scope}
+
+\def \xa{1}; 
+\def \ya{4}; 
+
+\def \xb{3};
+\def \yb{2};
+
+%\tkzDefPoint(0,0){O} \tkzDefShiftPoint[O](\xa,\ya){A}
+% \tkzDefShiftPoint[O](\xb,\yb){B}
+%\tkzDrawSegments[- ,>=latex,line width =2 pt, color = Maroon](O,A O,B)
+%\tkzLabelSegment[above](U0,U1){$\vv{u}$}
+%\tkzLabelSegment[left](V0,V1){$\vv{v}$}
+
+\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+\tkzLabelXY[orig = false,  font=\scriptsize]
+
+\tkzLabelPoints[below left, font=\scriptsize](O)
+\tkzRep[line width=2pt, color=Maroon]
+\end{tikzpicture} 
+\end{minipage} 
+\hfill 
+\begin{minipage}{0.45\columnwidth} \centering
+\begin{tikzpicture}[xscale=0.75, yscale=0.65]
+
+\tkzInit[xmin=-4, ymin=-3,  xmax=6,ymax=6 ]
+\begin{scope}[dashed] 
+\tkzGrid[ xstep=1, ystep=1](-4,-3)(6,6)
+\end{scope}
+
+\def \xa{1}; 
+\def \ya{4}; 
+
+\def \xb{3};
+\def \yb{2};
+
+%\tkzDefPoint(0,0){O} \tkzDefShiftPoint[O](\xa,\ya){A}
+% \tkzDefShiftPoint[O](\xb,\yb){B}
+%\tkzDrawSegments[- ,>=latex,line width =2 pt, color = Maroon](O,A O,B)
+%\tkzLabelSegment[above](U0,U1){$\vv{u}$}
+%\tkzLabelSegment[left](V0,V1){$\vv{v}$}
+
+\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+\tkzLabelXY[orig = false,  font=\scriptsize]
+
+\tkzLabelPoints[below left, font=\scriptsize](O) 
+\tkzRep[line width=2pt, color=Maroon]
+\end{tikzpicture} 
+\end{minipage} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\begin{exercise}[décomposer un vecteur en fonction de deux autres]\label{chapter16:vecteur:decompositionA}\hfill 
+
+\noindent La figure ci-dessous (répétée 3 fois) est formée de triangles équilatéraux. On pose $\vv{OC}=\vv{\imath}$ et $\vv{OD}=\vv{\jmath}$. Écrire chacun des vecteurs suivants sous la forme $a\vv{\imath}+b\vv{\jmath}$.
+
+\noindent
+\parbox{0.32\linewidth}{
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{1.8};  
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDefShiftPoint[O](240:\rayon){A}
+\tkzDefShiftPoint[O](300:\rayon){B}
+\tkzDefShiftPoint[B](0:\rayon){H}
+\tkzDefShiftPoint[E](60:\rayon){I}
+\tkzDefShiftPoint[A](180:\rayon){G}
+%	\tkzDrawPolygon(A,B,C,D,E,F,G,H,I)
+\tkzLabelPoint[above](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[above right](C){\scriptsize$C$}
+\tkzLabelPoint[above right](D){\scriptsize$D$}
+\tkzLabelPoint[above left](E){\scriptsize$E$}
+\tkzLabelPoint[above left](F){\scriptsize$F$} 
+\tkzLabelPoint[below](G){\scriptsize$G$}
+\tkzLabelPoint[below](H){\scriptsize$H$}
+\tkzLabelPoint[above ](I){\scriptsize$I$}
+\tkzDrawSegments[dashed, line width=1pt](G,H G,I I,H E,B F,A A,D B,C F,C E,D) 
+\tkzDrawSegments[->, >=latex,color=red,line width=1.2pt](O,C O,D)
+\tkzLabelSegment[below](O,C){$\vv{\imath}$}
+\tkzLabelSegment[below](O,D){$\vv{\jmath}$} 
+\end{tikzpicture}
+}
+\hfill
+\parbox{0.32\linewidth}{
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{1.8};  
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDefShiftPoint[O](240:\rayon){A}
+\tkzDefShiftPoint[O](300:\rayon){B}
+\tkzDefShiftPoint[B](0:\rayon){H}
+\tkzDefShiftPoint[E](60:\rayon){I}
+\tkzDefShiftPoint[A](180:\rayon){G}
+%	\tkzDrawPolygon(A,B,C,D,E,F,G,H,I)
+\tkzLabelPoint[above](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[above right](C){\scriptsize$C$}
+\tkzLabelPoint[above right](D){\scriptsize$D$}
+\tkzLabelPoint[above left](E){\scriptsize$E$}
+\tkzLabelPoint[above left](F){\scriptsize$F$} 
+\tkzLabelPoint[below](G){\scriptsize$G$}
+\tkzLabelPoint[below](H){\scriptsize$H$}
+\tkzLabelPoint[above ](I){\scriptsize$I$}
+\tkzDrawSegments[dashed, line width=1pt](G,H G,I I,H E,B F,A A,D B,C F,C E,D) 
+\tkzDrawSegments[->, >=latex,color=red,line width=1.2pt](O,C O,D)
+\tkzLabelSegment[below](O,C){$\vv{\imath}$}
+\tkzLabelSegment[below](O,D){$\vv{\jmath}$} 
+\end{tikzpicture}
+}\hfill
+\parbox{0.32\linewidth}{
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{1.8};  
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDefShiftPoint[O](240:\rayon){A}
+\tkzDefShiftPoint[O](300:\rayon){B}
+\tkzDefShiftPoint[B](0:\rayon){H}
+\tkzDefShiftPoint[E](60:\rayon){I}
+\tkzDefShiftPoint[A](180:\rayon){G}
+%	\tkzDrawPolygon(A,B,C,D,E,F,G,H,I)
+\tkzLabelPoint[above](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[above right](C){\scriptsize$C$}
+\tkzLabelPoint[above right](D){\scriptsize$D$}
+\tkzLabelPoint[above left](E){\scriptsize$E$}
+\tkzLabelPoint[above left](F){\scriptsize$F$} 
+\tkzLabelPoint[below](G){\scriptsize$G$}
+\tkzLabelPoint[below](H){\scriptsize$H$}
+\tkzLabelPoint[above ](I){\scriptsize$I$}
+\tkzDrawSegments[dashed, line width=1pt](G,H G,I I,H E,B F,A A,D B,C F,C E,D) 
+\tkzDrawSegments[->, >=latex,color=red,line width=1.2pt](O,C O,D)
+\tkzLabelSegment[below](O,C){$\vv{\imath}$}
+\tkzLabelSegment[below](O,D){$\vv{\jmath}$} 
+\end{tikzpicture}
+}
+\begin{multicols}{3}
+\begin{enumerate}[label={\alph*)\rule{0pt}{2.1em}},leftmargin=*] 
+\item $\vv{BI}=$ \phantom{$-2\vv{\imath}+3\vv{\jmath}$} 
+\item $\vv{IA}=$ \phantom{$\vv{\imath}-3\vv{\jmath}$} 
+\item $\vv{IH}=$ \phantom{$3\vv{\imath}-3\vv{\jmath}$} 
+\item $\vv{EB}=$ \phantom{$2\vv{\imath}-2\vv{\jmath}$} 
+\item $\vv{OG}=$ \phantom{$-\vv{\imath}-\vv{\jmath}$} 
+\item $\vv{DG}=$ \phantom{$-\vv{\imath}-2\vv{\jmath}$} 
+\item $\vv{GC}=$ \phantom{$2\vv{\imath}+\vv{\jmath}$} 
+\item $\vv{HE}=$ \phantom{$-3\vv{\imath}+2\vv{\jmath}$} 
+\item $\vv{AE}=$ \phantom{$-\vv{\imath}+2\vv{\jmath}$} 
+\item $\vv{AF}=$ \phantom{$-\vv{\imath}+\vv{\jmath}$} 
+\item $\vv{BD}=$ \phantom{$-\vv{\imath}+2\vv{\jmath}$} 
+\item $\vv{FB}=$ \phantom{$2\vv{\imath}-\vv{\jmath}$}  
+\end{enumerate}
+\end{multicols}
+
+
+
+
+\end{exercise}
+\begin{exercise}[décomposer un vecteur en fonction de deux autres]\label{chapter16:vecteur:decompositionB}  La figure ci-dessous est formée de deux hexagones réguliers de centre $O$. $I$, $J$, $K$, $L$, $M$ et $N$ sont les milieux respectifs des segements $[OA]$, $[OB]$, $[OC]$, $[OD]$, $[OE]$ et $[OF]$. 
+
+
+\noindent
+\parbox{0.32\linewidth}{	
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{2.3};  
+\tkzDefShiftPoint[O](-120:\rayon){A}
+\tkzDefShiftPoint[O](-60:\rayon){B}
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDrawPoints(O,A,B,C,D,E,F)
+\tkzDrawPolygon(A,B,C,D,E,F)  
+\tkzLabelPoint[below](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[right](C){\scriptsize$C$}
+\tkzLabelPoint[above](D){\scriptsize$D$}
+\tkzLabelPoint[above](E){\scriptsize$E$}
+\tkzLabelPoint[left](F){\scriptsize$F$}
+\tkzDefShiftPoint[O](0:{0.5*\rayon}){K}
+\tkzDefShiftPoint[O](60:{0.5*\rayon}){L}
+\tkzDefShiftPoint[O](120:{0.5*\rayon}){M}
+\tkzDefShiftPoint[O](180:{0.5*\rayon}){N}
+\tkzDefShiftPoint[O](240:{0.5*\rayon}){I}
+\tkzDefShiftPoint[O](300:{0.5*\rayon}){J}
+\tkzDrawPolygon(I,J,K,L,M,N)
+\tkzLabelPoint[below](I){\scriptsize$I$}
+\tkzLabelPoint[below](J){\scriptsize$J$}
+\tkzLabelPoint[above](M){\scriptsize$M$}
+\tkzLabelPoint[above](L){\scriptsize$L$}
+\tkzLabelPoint[above right](K){\scriptsize$K$}
+\tkzLabelPoint[above left](N){\scriptsize$N$}
+\tkzDrawSegments[dashed, line width=1pt](O,A O,B O,C O,D O,E O,F)  
+%		\tkzDrawSegments[->, >=latex, line width=1.2pt](O,I O,J)
+%		\tkzLabelSegment[below](O,I){$\vv{\imath}$}
+%		\tkzLabelSegment[below](O,J){$\vv{\jmath}$} 
+\end{tikzpicture}	
+} \hfill 
+\parbox{0.65\linewidth}{
+Décomposer chacun des vecteurs suivants selon les vecteurs donnés.
+\begin{multicols}{2}
+\begin{enumerate}[label={\alph*)\rule{0pt}{2.1em}},leftmargin=*] 
+\item $\vv{BF}=\ldots \vv{OI}+\ldots\vv{OJ}$ %\phantom{$2\vv{OI}-4\vv{OJ}$} 
+\item $\vv{JD}=\ldots \vv{OI}+\ldots\vv{OK}$ %\phantom{$-3\vv{OI}-\vv{OK}$} 
+\item $\vv{CO}=\ldots \vv{OI}+\ldots\vv{OJ}$ %\phantom{$2\vv{OI}-2\vv{OJ}$} 
+\item $\vv{EA}=\ldots \vv{OI}+\ldots\vv{OK}$ %\phantom{$4\vv{OI}+2\vv{OK}$}  
+\end{enumerate}
+\end{multicols}
+}
+
+
+\noindent
+\parbox{0.32\linewidth}{	
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{2.3}; 
+\tkzDefShiftPoint[O](-120:\rayon){A}
+\tkzDefShiftPoint[O](-60:\rayon){B}
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDrawPoints(O,A,B,C,D,E,F)
+\tkzDrawPolygon(A,B,C,D,E,F)  
+\tkzLabelPoint[below](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[right](C){\scriptsize$C$}
+\tkzLabelPoint[above](D){\scriptsize$D$}
+\tkzLabelPoint[above](E){\scriptsize$E$}
+\tkzLabelPoint[left](F){\scriptsize$F$}
+\tkzDefShiftPoint[O](0:{0.5*\rayon}){K}
+\tkzDefShiftPoint[O](60:{0.5*\rayon}){L}
+\tkzDefShiftPoint[O](120:{0.5*\rayon}){M}
+\tkzDefShiftPoint[O](180:{0.5*\rayon}){N}
+\tkzDefShiftPoint[O](240:{0.5*\rayon}){I}
+\tkzDefShiftPoint[O](300:{0.5*\rayon}){J}
+\tkzDrawPolygon(I,J,K,L,M,N)
+\tkzLabelPoint[below](I){\scriptsize$I$}
+\tkzLabelPoint[below](J){\scriptsize$J$}
+\tkzLabelPoint[above](M){\scriptsize$M$}
+\tkzLabelPoint[above](L){\scriptsize$L$}
+\tkzLabelPoint[above right](K){\scriptsize$K$}
+\tkzLabelPoint[above left](N){\scriptsize$N$}
+\tkzDrawSegments[dashed, line width=1pt](O,A O,B O,C O,D O,E O,F)  
+%		\tkzDrawSegments[->, >=latex, line width=1.2pt](O,A O,B)
+%		\tkzLabelSegment[below](O,I){$\vv{\imath}$}
+%		\tkzLabelSegment[below](O,J){$\vv{\jmath}$} 
+\end{tikzpicture}	
+} \hfill 
+\parbox{0.65\linewidth}{
+Écrire chacun des vecteurs suivants sous la forme $a\vv{OA}+b\vv{OB}$.
+\begin{multicols}{2}
+\begin{enumerate}[label={\alph*)\rule{0pt}{2.1em}},leftmargin=*] 
+\item $\vv{JF}=\ldots \vv{OA}+\ldots\vv{OB}$ %\phantom{$\vv{OA}-\tfrac{3}{2}\vv{OB}$} 
+\item $\vv{EK}=\ldots \vv{OA}+\ldots\vv{OC}$ %\phantom{$\vv{OA}+\tfrac{3}{2}\vv{OC}$} 
+\item $\vv{CI}=\ldots \vv{OA}+\ldots\vv{OB}$ %\phantom{$\tfrac{3}{2}\vv{OA}-\vv{OB}$} 
+\item $\vv{JD}=\ldots \vv{OA}+\ldots\vv{OC}$ %\phantom{$-\tfrac{3}{2}\vv{OA}-\tfrac{1}{2}\vv{OC}$}   
+\end{enumerate}
+\end{multicols}
+} 
+\end{exercise}
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\begin{proof}[solution de \ref{chapter16:vecteur:decompositionA}]\hfill 
+
+\noindent
+\parbox{0.32\linewidth}{
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{1.8};  
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDefShiftPoint[O](240:\rayon){A}
+\tkzDefShiftPoint[O](300:\rayon){B}
+\tkzDefShiftPoint[B](0:\rayon){H}
+\tkzDefShiftPoint[E](60:\rayon){I}
+\tkzDefShiftPoint[A](180:\rayon){G}
+%	\tkzDrawPolygon(A,B,C,D,E,F,G,H,I)
+\tkzLabelPoint[above](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[above right](C){\scriptsize$C$}
+\tkzLabelPoint[above right](D){\scriptsize$D$}
+\tkzLabelPoint[above left](E){\scriptsize$E$}
+\tkzLabelPoint[above left](F){\scriptsize$F$} 
+\tkzLabelPoint[below](G){\scriptsize$G$}
+\tkzLabelPoint[below](H){\scriptsize$H$}
+\tkzLabelPoint[above ](I){\scriptsize$I$}
+\tkzDrawSegments[dashed, line width=1pt](G,H G,I I,H E,B F,A A,D B,C F,C E,D) 
+\tkzDrawSegments[->, >=latex,color=red,line width=1.2pt](O,C O,D)
+\tkzLabelSegment[below](O,C){$\vv{\imath}$}
+\tkzLabelSegment[below](O,D){$\vv{\jmath}$} 
+\end{tikzpicture}
+}
+\hfill
+\parbox{0.32\linewidth}{
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{1.8};  
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDefShiftPoint[O](240:\rayon){A}
+\tkzDefShiftPoint[O](300:\rayon){B}
+\tkzDefShiftPoint[B](0:\rayon){H}
+\tkzDefShiftPoint[E](60:\rayon){I}
+\tkzDefShiftPoint[A](180:\rayon){G}
+%	\tkzDrawPolygon(A,B,C,D,E,F,G,H,I)
+\tkzLabelPoint[above](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[above right](C){\scriptsize$C$}
+\tkzLabelPoint[above right](D){\scriptsize$D$}
+\tkzLabelPoint[above left](E){\scriptsize$E$}
+\tkzLabelPoint[above left](F){\scriptsize$F$} 
+\tkzLabelPoint[below](G){\scriptsize$G$}
+\tkzLabelPoint[below](H){\scriptsize$H$}
+\tkzLabelPoint[above ](I){\scriptsize$I$}
+\tkzDrawSegments[dashed, line width=1pt](G,H G,I I,H E,B F,A A,D B,C F,C E,D) 
+\tkzDrawSegments[->, >=latex,color=red,line width=1.2pt](O,C O,D)
+\tkzLabelSegment[below](O,C){$\vv{\imath}$}
+\tkzLabelSegment[below](O,D){$\vv{\jmath}$} 
+\end{tikzpicture}
+}\hfill
+\parbox{0.32\linewidth}{
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{1.8};  
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDefShiftPoint[O](240:\rayon){A}
+\tkzDefShiftPoint[O](300:\rayon){B}
+\tkzDefShiftPoint[B](0:\rayon){H}
+\tkzDefShiftPoint[E](60:\rayon){I}
+\tkzDefShiftPoint[A](180:\rayon){G}
+%	\tkzDrawPolygon(A,B,C,D,E,F,G,H,I)
+\tkzLabelPoint[above](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[above right](C){\scriptsize$C$}
+\tkzLabelPoint[above right](D){\scriptsize$D$}
+\tkzLabelPoint[above left](E){\scriptsize$E$}
+\tkzLabelPoint[above left](F){\scriptsize$F$} 
+\tkzLabelPoint[below](G){\scriptsize$G$}
+\tkzLabelPoint[below](H){\scriptsize$H$}
+\tkzLabelPoint[above ](I){\scriptsize$I$}
+\tkzDrawSegments[dashed, line width=1pt](G,H G,I I,H E,B F,A A,D B,C F,C E,D) 
+\tkzDrawSegments[->, >=latex,color=red,line width=1.2pt](O,C O,D)
+\tkzLabelSegment[below](O,C){$\vv{\imath}$}
+\tkzLabelSegment[below](O,D){$\vv{\jmath}$} 
+\end{tikzpicture}
+}
+\begin{multicols}{3}
+\begin{enumerate}[label={\alph*)\rule{0pt}{2.1em}},leftmargin=*] 
+\item $\vv{BI}= -2\vv{\imath}+3\vv{\jmath}$
+\item $\vv{IA}= \vv{\imath}-3\vv{\jmath}$
+\item $\vv{IH}= 3\vv{\imath}-3\vv{\jmath}$
+\item $\vv{EB}= 2\vv{\imath}-2\vv{\jmath}$
+\item $\vv{OG}= -\vv{\imath}-\vv{\jmath}$
+\item $\vv{DG}= -\vv{\imath}-2\vv{\jmath}$
+\item $\vv{GC}= 2\vv{\imath}+\vv{\jmath}$
+\item $\vv{HE}= -3\vv{\imath}+2\vv{\jmath}$ 
+\item $\vv{AE}= -\vv{\imath}+2\vv{\jmath}$ 
+\item $\vv{AF}= -\vv{\imath}+\vv{\jmath}$
+\item $\vv{BD}= -\vv{\imath}+2\vv{\jmath}$
+\item $\vv{FB}= 2\vv{\imath}-\vv{\jmath}$ 
+\end{enumerate}
+\end{multicols}
+
+
+\end{proof}
+
+\begin{proof}[solution de \ref{chapter16:vecteur:decompositionB}]\hfill 
+
+
+\noindent
+\parbox{0.32\linewidth}{	
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{2.3};  
+\tkzDefShiftPoint[O](-120:\rayon){A}
+\tkzDefShiftPoint[O](-60:\rayon){B}
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDrawPoints(O,A,B,C,D,E,F)
+\tkzDrawPolygon(A,B,C,D,E,F)  
+\tkzLabelPoint[below](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[right](C){\scriptsize$C$}
+\tkzLabelPoint[above](D){\scriptsize$D$}
+\tkzLabelPoint[above](E){\scriptsize$E$}
+\tkzLabelPoint[left](F){\scriptsize$F$}
+\tkzDefShiftPoint[O](0:{0.5*\rayon}){K}
+\tkzDefShiftPoint[O](60:{0.5*\rayon}){L}
+\tkzDefShiftPoint[O](120:{0.5*\rayon}){M}
+\tkzDefShiftPoint[O](180:{0.5*\rayon}){N}
+\tkzDefShiftPoint[O](240:{0.5*\rayon}){I}
+\tkzDefShiftPoint[O](300:{0.5*\rayon}){J}
+\tkzDrawPolygon(I,J,K,L,M,N)
+\tkzLabelPoint[below](I){\scriptsize$I$}
+\tkzLabelPoint[below](J){\scriptsize$J$}
+\tkzLabelPoint[above](M){\scriptsize$M$}
+\tkzLabelPoint[above](L){\scriptsize$L$}
+\tkzLabelPoint[above right](K){\scriptsize$K$}
+\tkzLabelPoint[above left](N){\scriptsize$N$}
+\tkzDrawSegments[dashed, line width=1pt](O,A O,B O,C O,D O,E O,F)  
+\tkzDrawSegments[->, >=latex, line width=1.2pt](O,I O,J)
+%		\tkzLabelSegment[below](O,I){$\vv{\imath}$}
+%		\tkzLabelSegment[below](O,J){$\vv{\jmath}$} 
+\end{tikzpicture}	
+} \hfill 
+\parbox{0.65\linewidth}{
+Décomposer chacun des vecteurs suivants selon les vecteurs donnés.
+\begin{multicols}{2}
+\begin{enumerate}[label={\alph*)\rule{0pt}{2.1em}},leftmargin=*] 
+\item $\vv{BF}= 2\vv{OI}-4\vv{OJ}$
+\item $\vv{JD}=-3\vv{OI}-\vv{OK}$
+\item $\vv{CO}=2\vv{OI}-2\vv{OJ}$
+\item $\vv{EA}=4\vv{OI}+2\vv{OK}$
+\end{enumerate}
+\end{multicols}
+}
+
+
+\noindent
+\parbox{0.32\linewidth}{	
+\begin{tikzpicture} 
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+
+\tkzDefPoint(0,0){O}
+\def \rayon{2.3}; 
+\tkzDefShiftPoint[O](-120:\rayon){A}
+\tkzDefShiftPoint[O](-60:\rayon){B}
+\tkzDefShiftPoint[O](0:\rayon){C}
+\tkzDefShiftPoint[O](60:\rayon){D}
+\tkzDefShiftPoint[O](120:\rayon){E}
+\tkzDefShiftPoint[O](180:\rayon){F}
+\tkzDrawPoints(O,A,B,C,D,E,F)
+\tkzDrawPolygon(A,B,C,D,E,F)  
+\tkzLabelPoint[below](O){\scriptsize$O$}
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[below](B){\scriptsize$B$}
+\tkzLabelPoint[right](C){\scriptsize$C$}
+\tkzLabelPoint[above](D){\scriptsize$D$}
+\tkzLabelPoint[above](E){\scriptsize$E$}
+\tkzLabelPoint[left](F){\scriptsize$F$}
+\tkzDefShiftPoint[O](0:{0.5*\rayon}){K}
+\tkzDefShiftPoint[O](60:{0.5*\rayon}){L}
+\tkzDefShiftPoint[O](120:{0.5*\rayon}){M}
+\tkzDefShiftPoint[O](180:{0.5*\rayon}){N}
+\tkzDefShiftPoint[O](240:{0.5*\rayon}){I}
+\tkzDefShiftPoint[O](300:{0.5*\rayon}){J}
+\tkzDrawPolygon(I,J,K,L,M,N)
+\tkzLabelPoint[below](I){\scriptsize$I$}
+\tkzLabelPoint[below](J){\scriptsize$J$}
+\tkzLabelPoint[above](M){\scriptsize$M$}
+\tkzLabelPoint[above](L){\scriptsize$L$}
+\tkzLabelPoint[above right](K){\scriptsize$K$}
+\tkzLabelPoint[above left](N){\scriptsize$N$}
+\tkzDrawSegments[dashed, line width=1pt](O,A O,B O,C O,D O,E O,F)  
+\tkzDrawSegments[->, >=latex, line width=1.2pt](O,A O,B)
+%		\tkzLabelSegment[below](O,I){$\vv{\imath}$}
+%		\tkzLabelSegment[below](O,J){$\vv{\jmath}$} 
+\end{tikzpicture}	
+} \hfill 
+\parbox{0.65\linewidth}{
+Écrire chacun des vecteurs suivants sous la forme $a\vv{OA}+b\vv{OB}$.
+\begin{multicols}{2}
+\begin{enumerate}[label={\alph*)\rule{0pt}{2.1em}},leftmargin=*] 
+\item $\vv{JF}= \vv{OA}-\tfrac{3}{2}\vv{OB}$  
+\item $\vv{EK}= \vv{OA}+\tfrac{3}{2}\vv{OC}$
+\item $\vv{CI}= \tfrac{3}{2}\vv{OA}-\vv{OB}$
+\item $\vv{JD}= -\tfrac{3}{2}\vv{OA}-\tfrac{1}{2}\vv{OC}$  
+\end{enumerate}
+\end{multicols}
+} 
+
+
+\end{proof}
+
+%%----------------------------------------------------------------------------------------
+%%	 
+%%----------------------------------------------------------------------------------------
+%
+%\newpage 
+%\loadgeometry{marginlayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%headwidth=textwithmarginpar,
+%headsepline=true,
+%headsepline= 0.5pt,
+%footwidth=textwithmarginpar,
+%} 
+%\onehalfspacing
+%
+%\section{Produit d'un vecteur par un réel}
+%
+%\begin{definition}[interprétation géométrique] $\vv{u}\neq \vv{0}$. 
+%Le produit d'un réel $k$ par un vecteur $\vv{u}$ est un vecteur noté $k\vv{u}$ : 
+%\begin{description}
+%\item[P1]  $0\vv{u}=\vv{0}$.
+%\item[P2]  Si $k \neq  0$,  \og $k\vv{u}$ \fg{} désigne le vecteur :
+%\begin{enumerate}[label=\textbullet, leftmargin=*]
+%\item ayant même direction que $\vv{u}$ 
+%\item $\norm{k\vv{u}}=\abs{k}\times \norm{\vv{u}}$
+%\item Si $k>0$ alors $k\vv{u}$ et $\vv{u}$ ont \textbf{même sens}.\\
+%Si $k<0$ alors $k\vv{u}$ et $\vv{u}$ sont de \textbf{sens contraires}
+%\end{enumerate}
+%\end{description} 
+%\end{definition}
+%
+%
+%\vfill
+%
+%\begin{definition}[vecteurs opposés]  $\vv{v}=-\vv{u}$ signifie que les vecteurs $\vv{u}$ et $\vv{v}$  ont  même direction ,  même norme mais sont de sens contraires. 
+%En particulier :
+%\end{definition}
+%\begin{tBox}
+%$-\vv{AB}=\vv{BA}$
+%\end{tBox}
+%\begin{example} $I$ est le milieu du segment $[AB]$. En utilisant uniquement des vecteurs d'extrémités  $A$, $B$ ou $I$ :
+%\begin{enumerate}[label=\alph*), leftmargin=*]
+%\item Énumérer 2 égalités de vecteurs.
+%\vfill
+%\item Énumérer 3 paires de vecteurs opposés $\vv{v}=-\vv{u}$
+%\vfill
+%\item Énumérer 3 paires de vecteurs qui peuvent s'écrire $\vv{v}=2\vv{u}$
+%\vfill
+%\item Énumérer 3 paires de vecteurs qui peuvent s'écrire $\vv{v}=\frac{1}{2}\vv{u}$
+%\vfill
+%\end{enumerate}
+%\end{example}
+%\vfill 
+%\begin{tBox} Soit un repère $(O;I,J)$, et le vecteur $\vv{u}\begin{pmatrix}
+%x\\y
+%\end{pmatrix}$.
+%
+%\noindent	Le vecteur $k\vv{u}$ a pour coordonnées $k\vv{u}\begin{pmatrix}
+%kx\\ky
+%\end{pmatrix}$. 
+%%\noindent On pose $\vec{\imath}=\vv{OI}\begin{pmatrix}
+%%	1\\0
+%%\end{pmatrix}$ et $\vec{\jmath}=\vv{OJ}\begin{pmatrix}
+%%0\\1
+%%\end{pmatrix}$. 
+%%
+%%\noindent Le couple de vecteurs $(\vec{\imath}, \vec{\jmath}=\vv{OJ})$ est une base. Le vecteur $\vv{u}\begin{pmatrix}
+%%	x\\y
+%%\end{pmatrix}$ s'écrit comme la combinaison linéaire  $\vv{u}=x\vec{\imath}+y\vec{\jmath}$.
+%\end{tBox}   
+%%----------------------------------------------------------------------------------------
+%%	 
+%%----------------------------------------------------------------------------------------
+%
+%\newpage 
+%\loadgeometry{widelayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%headwidth=textwithmarginpar,
+%headsepline=true,
+%headsepline= 0.5pt,
+%footwidth=textwithmarginpar,
+%} 
+%\onehalfspacing
+%
+%
+%\subsection*{Exercices : produit par un réel}
+%\begin{example}\hfill \\
+%Les vecteurs ci-dessous ont tous la même direction.\\
+%\begin{tikzpicture}[scale=1]
+%\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%\tkzSetUpPoint[size=4, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%
+%\def \xa{3}; 
+%\def \ya{0}; 
+%
+%\def \xb{5};
+%\def \yb{0};
+%
+%\tkzDefPoint(1,0){A} \tkzDefShiftPoint[A](\xa,\ya){B}
+%\tkzDefPoint(0,-1){C} \tkzDefShiftPoint[C](\xb,\yb){D}
+%
+%\tkzDrawSegments[->, >=latex, line width=1.2pt](A,B C,D)
+%
+%
+%\tkzLabelPoints[below, font=\scriptsize](C,D) 
+%\tkzLabelPoints[above, font=\scriptsize](A,B) 
+%
+%\foreach \i in {1,2}{%
+%\tkzMarkSegment[pos=\i/3,mark=|,  size=2pt](A,B)
+%}
+%
+%\foreach \i in {1,...,4}{%
+%\tkzMarkSegment[pos=\i/5,mark=|,  size=2pt](C,D)
+%} 
+%\end{tikzpicture} 
+%\hfill 
+%\begin{tikzpicture}[scale=1]
+%\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%\tkzSetUpPoint[size=4, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%
+%\def \xa{3.6}; 
+%\def \ya{0}; 
+%
+%\def \xb{2.4};
+%\def \yb{0};
+%
+%\tkzDefPoint(0,0){A} \tkzDefShiftPoint[A](\xa,\ya){B}
+%\tkzDefPoint(3,-1){C} \tkzDefShiftPoint[C](-\xb,\yb){D}
+%\tkzDrawSegments[->, >=latex, line width=1.2pt](A,B C,D)
+%
+%\tkzLabelPoints[below, font=\scriptsize](C,D) 
+%\tkzLabelPoints[above, font=\scriptsize](A,B) 
+%
+%\foreach \i in {1,2}{%
+%\tkzMarkSegment[pos=\i/3,mark=|,  size=2pt](A,B)
+%}
+%
+%\foreach \i in {1}{%
+%\tkzMarkSegment[pos=\i/2,mark=|,  size=2pt](C,D)
+%} 
+%\end{tikzpicture} 
+%\hfill 
+%\begin{tikzpicture}[scale=1]
+%\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%\tkzSetUpPoint[size=4, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%
+%\def \xa{3}; 
+%\def \ya{0}; 
+%
+%\def \xb{3};
+%\def \yb{0};
+%
+%\tkzDefPoint(0,0){A} \tkzDefShiftPoint[A](\xa,\ya){B}
+%\tkzDefPoint(2,-1){C} \tkzDefShiftPoint[C](-\xb,\yb){D}
+%\tkzDrawSegments[->, >=latex, line width=1.2pt](A,B C,D)
+%\tkzDrawSegments[dashed, line width=0.5pt](A,D C,B)
+%\tkzLabelPoints[below, font=\scriptsize](C,D) 
+%\tkzLabelPoints[above, font=\scriptsize](A,B) 
+%\end{tikzpicture}  
+%\begin{minipage}{0.3\columnwidth} 
+%\begin{align*}
+%\frac{CD}{AB}&=\frac{5}{3} \\
+%CD & = \tfrac{5}{3}AB \\
+%\vv{CD}& =\tfrac{5}{3}\vv{AB}   
+%\end{align*}
+%\end{minipage}
+%\end{example}
+%
+%\begin{exercise}\hfill 
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item Sur la figure ci-dessous : 
+%\begin{minipage}{0.8\columnwidth}%
+%\centering
+%\begin{tikzpicture} 
+%\tkzInit[xmin=-3.5, xmax=6.5]
+%\tkzDrawX[label={}, line width=1.2pt] %noticks, 
+%\tkzSetUpPoint[size=7, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}} 
+%\foreach \x/\xtext in {-3/A, -1/B, 6/C} {
+%\draw (\x,0.1cm) -- (\x,-0.1cm) node[above] {$\xtext\strut$};
+%} 
+%\end{tikzpicture}
+%\end{minipage} 
+%%	
+%\begin{align*}
+%{AC}&= \ldots \ldots  {BC}
+%& {BC}&=\ldots \ldots  {AC}
+%&  {BC}&=\ldots \ldots  {BA} \\
+%\vv{AC}&= \ldots \ldots \vv{BC}
+%&\vv{BC}&=\ldots \ldots \vv{AC}
+%& \vv{BC}&=\ldots \ldots \vv{BA} \\
+%{CA}&=\ldots \ldots {BA}
+%& {AB}&=\ldots \ldots {BC} 
+%& {BA}&=\ldots \ldots {BC} \\
+%\vv{CA}&=\ldots \ldots \vv{BA}
+%& \vv{AB}&=\ldots \ldots \vv{BC} 
+%& \vv{BA}&=\ldots \ldots \vv{BC}  
+%\end{align*}  
+%\item À partir de la figure ci-dessous, compléter les égalités vectorielles suivantes:
+%\\
+%\begin{minipage}{1\columnwidth}%
+%\centering
+%\begin{tikzpicture} 
+%\tkzInit[xmin=-3.5, xmax=6.5]
+%\tkzDrawX[label={}, line width=1.2pt] %noticks, 
+%\foreach \x/\xtext in {-2/A, 1/B, 6/C} {
+%\draw[thick] (\x,0.1cm) -- (\x,-0.1cm) node[above] {$\xtext\strut$};
+%}
+%\end{tikzpicture}
+%\end{minipage} 
+%\begin{align*}
+%\vv{AC}& = \ldots \ldots \vv{BC}
+%&\vv{BC}& = \ldots \ldots \vv{BA}
+%& \vv{CA}& = \ldots \ldots \vv{AB}\\
+%% 		\\
+%\vv{BC}& = \ldots \ldots \vv{AC}
+%& \vv{BA}& = \ldots \ldots \vv{BC}
+%& \vv{BA}& = \ldots \ldots \vv{AB}
+%\end{align*} 
+%\item Le point $B$ est le milieu de $[AC]$. Compléter les égalités vectorielles suivantes :
+%\begin{align*}
+%\vv{BA}& = \ldots \ldots \vv{AC}
+%&\vv{CB}& = \ldots \ldots \vv{AC}
+%& \vv{AC}& = \ldots \ldots \vv{AB} 
+%\end{align*}  
+%\end{enumerate}
+%\end{exercise}
+%
+%\begin{exercise}\hfill 
+%
+%Placer les points $M$, $N$, $P$ pour chacun des cas suivants  :
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item $\vv{AM}=2\vv{AB}$; $\vv{AN}=-3\vv{AB}$ et $\vv{OP}=4\vv{AB}$
+%
+%\begin{tikzpicture}[scale=0.8]
+%\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%\tkzSetUpPoint[size=4, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%
+%\def \xo{0.5}; 
+%\def \xa{4}; 
+%\def \xb{6};  
+%\tkzDefPoint(0,0){O}
+%\tkzDefShiftPoint[O](\xa,0){A} 
+%\tkzDefShiftPoint[O](\xb,0){B} 
+%\tkzDefPoint(12,0){C}  
+%\tkzDefPoint(-6,0){D}  
+%\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+%
+%
+%\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+%
+%\foreach \i in {0,...,18}{%
+%%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+%\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+%} 
+%\end{tikzpicture}
+%
+%\vspace{1cm}
+%\item $\vv{AM}=\tfrac{2}{5}\vv{AB}$; $\vv{BN}=-\tfrac{7}{5}\vv{AB}$ et $\vv{OP}=-\tfrac{1}{5}\vv{AB}$
+%
+%\begin{tikzpicture}[scale=0.8]
+%\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%\tkzSetUpPoint[size=4, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%
+%\def \xo{2.5}; 
+%\def \xa{1}; 
+%\def \xb{6};  
+%\tkzDefPoint(0,0){O}
+%\tkzDefShiftPoint[O](\xa,0){A} 
+%\tkzDefShiftPoint[O](\xb,0){B} 
+%\tkzDefPoint(12,0){C}  
+%\tkzDefPoint(-6,0){D}  
+%\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+%
+%
+%\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+%
+%\foreach \i in {0,...,18}{%
+%%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+%\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+%} 
+%\end{tikzpicture}	
+%
+%\vspace{1cm}
+%\item $\vv{AM}=\tfrac{5}{3}\vv{AB}$; $\vv{BN}=-\tfrac{1}{6}\vv{AB}$ et $\vv{OP}=-\tfrac{4}{3}\vv{AB}$ 
+%
+%
+%\vspace{1cm}
+%\begin{tikzpicture}[scale=0.8]
+%\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%\tkzSetUpPoint[size=4, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%
+%\def \xo{5.0}; 
+%\def \xa{0}; 
+%\def \xb{6};  
+%\tkzDefPoint(\xo,0){O}
+%\tkzDefPoint(\xa,0){A} 
+%\tkzDefPoint(\xb,0){B} 
+%\tkzDefPoint(12,0){C}  
+%\tkzDefPoint(-6,0){D}  
+%\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+%
+%
+%\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+%
+%\foreach \i in {0,...,18}{%
+%%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+%\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+%} 
+%\end{tikzpicture}	
+%
+%\vspace{0.5cm}
+%\item $2\vv{AM}=-\vv{AB}$; $4\vv{BN}=3\vv{AB}$ et $2\vv{OP}=-3\vv{AB}$
+%
+%
+%\vspace{0.5cm}
+%\begin{tikzpicture}[scale=0.8]
+%\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%\tkzSetUpPoint[size=4, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%
+%\def \xo{0.0}; 
+%\def \xa{3}; 
+%\def \xb{7};  
+%\tkzDefPoint(\xo,0){O}
+%\tkzDefPoint(\xa,0){A} 
+%\tkzDefPoint(\xb,0){B}  
+%\tkzDefPoint(12,0){C}  
+%\tkzDefPoint(-6,0){D}  
+%\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+%
+%
+%\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+%
+%\foreach \i in {0,...,18}{%
+%%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+%\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+%} 
+%\end{tikzpicture}	
+%
+%
+%\vspace{0.5cm}
+%\item $3\vv{AM}=2\vv{AB}$; $6\vv{BN}=11\vv{BA}$ et $6\vv{OP}=-\vv{BA}$
+%
+%
+%\vspace{0.5cm}
+%\begin{tikzpicture}[scale=0.8]
+%\tkzInit[xmax=6,ymin=-2,ymax=1.5]%\tkzGrid[sub]
+%\tkzSetUpPoint[size=4, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%
+%\def \xo{5.0}; 
+%\def \xa{0}; 
+%\def \xb{6};  
+%\tkzDefPoint(\xo,0){O}
+%\tkzDefPoint(\xa,0){A} 
+%\tkzDefPoint(\xb,0){B}  
+%\tkzDefPoint(12,0){C}  
+%\tkzDefPoint(-6,0){D}  
+%\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+%
+%
+%\tkzLabelPoints[above, font=\scriptsize](A,B,O) 
+%
+%\foreach \i in {0,...,18}{%
+%%		\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B)
+%%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+%\tkzMarkSegment[pos=\i/18,mark=|,  size=3pt](C,D)
+%} 
+%\end{tikzpicture}	
+%
+%
+%\vspace{0.5cm}
+%
+%%		\item $\vv{AP}=\frac{7}{2}\vv{AB}$
+%%		\item $\vv{AW}=-\frac{9}{2}\vv{AB}$
+%%		\item $\vv{AS}=-\frac{4}{5}\vv{AB}$
+%%		\item $\vv{AT}=-\frac{1}{4}\vv{AB}$
+%%		\item $\vv{AU}= \frac{12}{5}\vv{AB}$
+%%		\item $\vv{AV}= \frac{3}{2}\vv{AB}$
+%%		\item $\vv{BM}=\frac{12}{5}\vv{AB}$
+%%		\item $\vv{BN}=4\vv{AB}$
+%%		\item $\vv{BP}=\frac{8}{5}\vv{AB}$
+%%		\item $\vv{BQ}=-3\vv{AB}$
+%%		\item $\vv{BS}=-\frac{6}{5}\vv{AB}$
+%%		\item $\vv{BT}=-\frac{1}{4}\vv{AB}$ 
+%\end{enumerate}
+%\end{exercise} 
+%%\begin{tikzpicture}[scale=0.8]
+%%	\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+%%	\tkzSetUpPoint[size=4, fill=black]
+%%	\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+%%	
+%%	\def \xa{6}; 
+%%	\def \ya{0};  
+%%	\tkzDefPoint(0,0){A} \tkzDefShiftPoint[A](\xa,\ya){B} 
+%%	\tkzDefPoint(12,0){C}  
+%%	\tkzDefPoint(-6,0){D}  
+%%	\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+%%	
+%%	
+%%	\tkzLabelPoints[above, font=\scriptsize](A,B) 
+%%	
+%%	\foreach \i in {0,...,6}{%
+%%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,B)
+%%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+%%		\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](B,C)
+%%	} 
+%%\end{tikzpicture} 
+%
+%
+%\begin{example}\hfill  
+%
+%\noindent	\begin{minipage}{1.0\columnwidth}\centering
+%\begin{tikzpicture}[scale=0.95]
+%
+%\def \xmin{-7}; 
+%\def \xmax{11}; 
+%
+%\def \ymin{-3};
+%\def \ymax{4};	
+%\def \alpha{75}
+%
+%\pgftransformcm{1}{0}{1*cos(\alpha)}{1*sin(\alpha)}{\pgfpointorigin}
+%\path[clip,preaction = {draw=gray}] 
+%({\xmax-\ymin*cos(\alpha)} , {\ymin}) -- ({\xmax-\ymax*cos(\alpha)},{\ymax}) -- ({\xmin-\ymax*cos(\alpha)},{\ymax}) -- ({\xmin-\ymin*cos(\alpha)},{\ymin}) -- cycle; 
+%\tkzInit[xmin=-8, ymin=-8,  xmax=8.5,ymax=9.5]
+%\begin{scope}[dashed] 
+%\tkzGrid[ xstep=1, ystep=1](-11,-9)(13,15)
+%\end{scope}
+%%	\foreach \i in {-10, -9,...,10} {
+%%		\draw[ color =gray, dashed] (-11,-\i-10) -- (11,12-\i);
+%%		%		\tkzFct[domain = -10:10]{-\x-\i};
+%%	}
+%
+%\def \xa{5}; 
+%\def \ya{0}; 
+%
+%\def \xb{0};
+%\def \yb{2};
+%
+%\def \xc{2};
+%\def \yc{3};
+%
+%\tkzDefPoint(-7,3){U0} \tkzDefShiftPoint[U0](\xa,\ya){U1}
+%\tkzDefPoint(-3,-2){V0} \tkzDefShiftPoint[V0](\xb,\yb){V1} 
+%\tkzDefPoint(-6,-2){W0} \tkzDefShiftPoint[W0](\xc,\yc){W1}
+%\tkzDrawSegments[->,>=latex,line width =2 pt, color = Maroon](U0,U1 V0,V1  W0,W1)
+%\tkzLabelSegment[above](U0,U1){$\vv{v}$}
+%\tkzLabelSegment[left](V0,V1){$\vv{u}$}
+%\tkzLabelSegment[left](W1,W0){$\vv{w}$}
+%
+%% 	\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] %, style=dashed
+%% 	\tkzDrawY[below =5pt, label=, font=\scriptsize, line width=1.2pt]  %, style=dashed
+%
+%
+%\tkzDefPoint(0,0){A}
+%\tkzDefPoint(4,-2){B}  
+%\tkzDrawPoints(A,B)
+%\tkzLabelPoints[font=\scriptsize](A,B) 
+%
+%\end{tikzpicture} 
+%\end{minipage}  
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item Placer les points $A_0$, $A_1$ tel que $\vv{AA_0}=\frac{3}{2}\vv{u}$ et $\vv{AA_1}=-\vv{u}$. 
+%\item Placer les points $B_0$, $B_1$ tel que $\vv{BB_0}=\frac{3}{5}\vv{v}$ et $\vv{B_0B_1}=-\frac{7}{5}\vv{v}$.
+%\item Placer les points $C_0$, $C_1$, $C_2$ et $C_3$ tel que $\vv{AC_0}=\vv{w}$, $\vv{AC_1}=-\frac{1}{2}\vv{w}$,  $\vv{BC_2}=\frac{2}{3}\vv{w}$ et  $\vv{BC_3}=\frac{5}{3}\vv{w}$
+%\item  Compléter : $\vv{A_0A_1}=\ldots\ldots\vv{u}$; $\vv{B_0B_1}=\ldots\ldots\vv{v}$ et $\vv{C_2C_3}=\ldots\ldots\vv{w}$.
+%\end{enumerate} 
+%\end{example}
+%\begin{exercise}\hfill 
+%
+%Pour chacun des cas suivants, dites s'il existe un réel $k$ tel que  $\vv{PQ}=k\vv{AB}$ puis préciser si les droites $(PQ)$ et $(AB)$ sont parallèles.
+%\begin{multicols}{2} 
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item $\vv{PQ}\begin{pmatrix}
+%4\\6
+%\end{pmatrix}$ et $\vv{AB}\begin{pmatrix}
+%-16\\-24
+%\end{pmatrix} $
+%\item $\vv{PQ}\begin{pmatrix}
+%-3\\5
+%\end{pmatrix}$ et $\vv{AB}\begin{pmatrix}
+%-9\\14
+%\end{pmatrix}$
+%\item $P(6;20)$, $Q(18;2)$ et $\vv{AB}\begin{pmatrix}
+%28\\-42
+%\end{pmatrix}$
+%\item $P(1\; ;\;-1)$, $Q(4\; ;\;3)$, $A(-1\; ;\;5)$ et $B(7\; ;\;1)$
+%\item $P(1\; ;\;4)$, $Q(-3\; ;\;5)$, $A(5\; ;\;7)$ et $B(9\; ;\;6)$ 
+%%			\item $P(1\; ;\;-1)$, $Q(-2\; ;\; 3)$, $A(3\; ;\;1)$ et $B(-3\; ;\;9)$ 
+%%			\item $P(-1\; ;\;5)$, $Q(3\; ;\; -4)$, $A(1 \; ;\;1)$ et $B(9\; ;\;-17)$ 
+%%			\item $P(2\; ;\;3)$, $Q(-1\; ;\; 3)$, $A(-2\; ;\;3)$ et $B(-11\; ;\;3)$ 
+%%			\item $P(3\; ;\;-4)$, $Q(3\; ;\; 5)$, $A(3\; ;\;-1)$ et $B(3\; ;\;-28)$  
+%%			\item $P(−2;1)$, $Q(1;3)$, $A(4;5)$ et $B(13;-13)$
+%\end{enumerate}
+%\end{multicols}
+%\end{exercise}
+%
+%%----------------------------------------------------------------------------------------
+%%	 
+%%----------------------------------------------------------------------------------------
+%
+%\newpage 
+%\loadgeometry{marginlayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%headwidth=textwithmarginpar,
+%headsepline=true,
+%headsepline= 0.5pt,
+%footwidth=textwithmarginpar,
+%} 
+%\onehalfspacing
+%
+%\section{Colinéarité de deux vecteurs}
+%\begin{definition}$\vv{u}\neq \vv{0}$.  Les vecteurs colinéaires à $\vv{u}$ sont tous les multiples $k\vv{u}$ ou $k\in\mathbb{R}$.
+%
+%Il s'agit du vecteur nul $\vv{0}$ et de tous les vecteurs de même direction que $\vv{u}$. 
+%\end{definition} 
+%\begin{tBox} Deux vecteurs $\vv{u}$ et $\vv{v}$  sont \textbf{colinéaires}\fg{} (en abrégé $\vv{u}\propto\vv{v}$) si l'un est un multiple de l'autre. 
+%\end{tBox} 
+%%Les vecteurs colinéaires n'ont pas forcément la même longueur, ni le même sens.
+%%\begin{tBox} Deux vecteurs $\vv{u}$ et $\vv{v}$ \textbf{ne sont pas colinéaires} signifie :
+%%\begin{enumerate}[label=\alph*)]
+%%\item $\vv{u}\neq \vv{0}$ et $\vv{v}\neq \vv{0}$
+%%\item ils ont des directions différentes
+%%\end{enumerate}
+%%\end{tBox}
+%
+%\begin{postulatT} trois points $A$, $B$ et $C$ sont alignés si et seulement si deux parmi les vecteurs $\vv{AB}$, $\vv{AC}$ ou $\vv{BC}$ sont colinéaires.
+%\end{postulatT}
+%\begin{postulatT} les droites $(AB)$ et  $(CD)$ sont parallèles si et seulement si  les vecteurs $\vv{AB}$ et $\vv{CDC}$ sont colinéaires.
+%\end{postulatT}
+%\begin{definition}[Colinéarité à l'aide des coordonnées]
+%Dans un repère quelconque $(O;\vec{\imath},\vec{\jmath})$. Soit deux vecteurs $\vv{u}\begin{pmatrix}
+%x\\y
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%x'\\y'
+%\end{pmatrix}$.
+%
+%On appelle \og déterminant de $\vv{u}$ et $\vv{v}$ \fg{} le nombre noté :
+%\[
+%\det(\vv{u}\; ; \; \vv{v}) = \mdet{x & x' \\ y & y'} = xy'- x'y
+%\]
+%\end{definition}
+%\begin{theorem} Deux vecteurs $\vv{u}$ et $\vv{v}$ sont colinéaires si et seulement si $\det(\vv{u};\vv{v})=0$.
+%\end{theorem}
+%\begin{proof}\hfill \vfill 
+%\end{proof}
+%
+%
+%%----------------------------------------------------------------------------------------
+%%	 
+%%----------------------------------------------------------------------------------------
+%
+%\newpage 
+%\loadgeometry{widelayout}  
+%\pagestyle{scrheadings} % Print headers again  
+%\KOMAoptions{
+%headwidth=textwithmarginpar,
+%headsepline=true,
+%headsepline= 0.5pt,
+%footwidth=textwithmarginpar,
+%} 
+%\onehalfspacing
+%
+%\subsection*{Exercices Colinéarité}
+%\begin{example}
+%Calculer les déteriminant des vecteurs suivants :
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item \rule{0pt}{2em}
+%$\vv{u}\begin{pmatrix}
+%3\\2
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%4\\5
+%\end{pmatrix}$. \quad $\det(\vv{u};\vv{v})=\mdet{3 & 4 \\ 2 & 5}=$
+%\item  \rule{0pt}{2em}
+%$\vv{u}\begin{pmatrix}
+%-3\\2
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%-1\\4
+%\end{pmatrix}$.\quad $\det(\vv{u};\vv{v})=$
+%\item  \rule{0pt}{2em}
+%$\vv{u}\begin{pmatrix}
+%-4\\5
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%8\\-10
+%\end{pmatrix}$. 
+%\end{enumerate}
+%\end{example}
+%
+%\begin{example}[Interprétation géométrique du déterminant dans un repère orthonormé]\hfill 
+%
+%Soit un repère \textbf{orthonormé} $(O;I,J)$, et les points $M(a,b)$ et $N(c,d)$ et $P$ tel que $OPMN$ est un parallélogramme. Pour simplifier on suppose que $a$, $b$, $c$ et $d$  sont des réels strictement positifs.
+%
+%\noindent\parbox{0.5\linewidth}{
+%\begin{tikzpicture}[scale=0.8]
+%\tkzSetUpPoint[size=3, fill=black]
+%\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}   
+%\tkzSetUpLine[line width= 1.2pt, add=.2 and .2] 
+%\tkzInit[xmin=-0.5,xmax=7.5,ymin=-0.5,ymax=6.5  ]
+%\tkzDrawX[  noticks , label=$x$,  font=\small, line width=1.2pt ] %, style=dashed
+%\tkzDrawY[  noticks , label=$y$,  font=\small, line width=1.2pt]  %, style=dashed
+%\tkzRep[color  = Maroon,line width = 2pt, posxlabel=below, posylabel=left, xnorm=1,ynorm=1, xlabel={}, ylabel={}]
+%
+%\tkzDefPoint(0,0){O};
+%\tkzDefPoint(2,4){N};
+%\tkzDefPoint(2,6){xN};
+%\tkzDefPoint(0,4){yN};
+%\tkzDefPoint(5,2){M};
+%\tkzDefPoint(5,0){xM};
+%\tkzDefPoint(7,2){yM};
+%\tkzDefPoint(7,6){P};
+%\tkzDefPoint(7,0){xP};
+%\tkzDefPoint(0,6){yP};
+%\tkzDrawPolygon[fill=gray!20](O,M,P,N);
+%\tkzDrawSegments[dashed](N,xN);
+%\tkzDrawSegments[dashed](M,yM);
+%%	\tkzDrawSegments[dashed](P,xP P,yP);
+%\tkzPointShowCoord(P)
+%\tkzPointShowCoord[noydraw](M)
+%\tkzPointShowCoord[noxdraw](N)
+%\tkzDrawSegment[thick,->, >=latex](O,M);
+%\tkzDrawSegment[->,  >=latex  ](O,N);
+%\tkzDrawSegment[- , dashed, >=latex](M,P);
+%\tkzLabelPoint[above left,font=\small](M){$M(a,b)$}
+%\tkzLabelPoint[below right,font=\small](N){$N(c,d)$}
+%\tkzLabelPoint[above,font=\small](P){$P(\qquad,\qquad)$}
+%\tkzLabelPoints[below left,font=\small](O)
+%\end{tikzpicture} 
+%}
+%
+%\end{example}
+%\begin{example} Déterminer si les vecteurs $\vv{u}$ et $\vv{v}$ sont colinéaires. 
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item \rule{0pt}{2em}
+%$\vv{u}\begin{pmatrix}
+%2\\3
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%6\\9
+%\end{pmatrix}$. 
+%\item \rule{0pt}{2em}
+%$\vv{u}\begin{pmatrix}
+%\sqrt{3}+\sqrt{2}\\1
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%1\\\sqrt{3}-\sqrt{2}
+%\end{pmatrix}$. 
+%\end{enumerate}
+%\end{example}
+%
+%\begin{example}
+%Montrer que les points $A(2~;~5)$, $B(3~;~8)$ et $C(-5~;~-16)$ sont alignés.
+%\end{example}
+%\vfill 
+%\begin{example}
+%Soient un repère orthonormé et les points $A(0~;~-2)$, $B(1~;~1)$ et $C(2~;~-1)$. Calculer l'aire du triangle $ABC$.
+%\end{example}
+%\vfill 
+%\begin{example}
+%Soient $A(1~;~3)$, $B(5~;~-2)$, $C(-1~;~6)$ et $D(7~;~-4)$. 
+%Montrer que les droites (AB) et (CD) sont parallèles.
+%\end{example}
+%\vfill 
+%
+%\newpage 
+%\begin{exercise}
+%
+%
+%Dans chaque cas, dire si les vecteurs sont colinéaires. 
+%
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item  $\vv{u}\begin{pmatrix}
+%2\\-3 
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%-1\\\tfrac{3}{2} 
+%\end{pmatrix}$  
+%\vspace{0.5cm}
+%\item  $\vv{u}\begin{pmatrix}
+%\tfrac{1}{2}\\\tfrac{1}{3} 
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%\tfrac{4}{5}\\ -\tfrac{1}{3}
+%\end{pmatrix}$  
+%\vspace{0.5cm}
+%\item  $\vv{u}\begin{pmatrix}
+%\sqrt{2}\\\sqrt{3} 
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%2\\ -\sqrt{6}
+%\end{pmatrix}$  
+%\vspace{0.5cm} 
+%\end{enumerate}
+%\end{exercise}
+%\begin{exercise}Dans chaque cas, déterminer le réel $m$ pour que les vecteurs $\vv{u}$ et $\vv{v}$ soient colinéaires.  
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item  $\vv{u}\begin{pmatrix}
+%2\\6
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%m\\ 3
+%\end{pmatrix}$  
+%\vspace{0.5cm}
+%\item  $\vv{u}\begin{pmatrix}
+%-m\\4m-3
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%1\\ -3
+%\end{pmatrix}$  
+%\vspace{0.5cm}
+%\item  $\vv{u}\begin{pmatrix}
+%27\\2m
+%\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%2m\\ 3
+%\end{pmatrix}$  
+%\vspace{0.5cm} 
+%\end{enumerate} 
+%\end{exercise}
+%\begin{exercise} 
+%Dans un repère orthonormé $( O ; \vec{\imath} , \vec{\jmath} )$.
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item Montrer que $A\left(-2;1\right)$, $B\left(3;3\right)$ , $C\left(1;\tfrac{11}{5}\right)$ sont alignés.\vfill
+%\item Trouver $a$ pour que $A(1 ; 2)$, $B(-3 ; 0)$ et $C(-14 ; a)$ soient alignés.\vfill 
+%\end{enumerate} 
+%\end{exercise}  
+%\begin{exercise}
+%
+%Dans un repère, soit les points: $A(-2~;~1)$, $B(3~;~3)$, $C\left(1~;~\tfrac{11}{5}\right)$ et $D\left(\tfrac{45}{2}~;~\tfrac{54}{5}\right)$
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item Démontrer que les points $A$, $B$ et $C$ sont alignés. 
+%\vspace{2cm}
+%\item Les points $A$, $B$ et $D$ sont-ils alignés ?
+%\vspace{2cm}
+%\end{enumerate}
+%
+%\end{exercise}
+%\newpage 
+%\begin{exercise} Soit les points  $A(1 ; 2)$, $B(-3 ; 0)$ et $C(-7 ; a)$ dans un repère orthonormé. Trouver 2 valeurs de $a$ pour lesquelles le triangle $ABC$ est d'aire $12$.  
+%\end{exercise}
+%\begin{exercise} \hfill 
+%
+%Dans un repère, on donne les points : $M(0~;~-3)$, $N(2~;~3)$, $P(-9~;~0)$ et $Q(-1~;~-1)$
+%\begin{enumerate}[label=\arabic*),leftmargin=*]
+%\item Calculer les coordonnées des points $A$ et $B$ tels que: 
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%\item $\vv{NA}=\dfrac{1}{2}~\vv{MN}$
+%\vspace{2cm}
+%\item $\vv{MB}=3~\vv{MQ}$
+%\vspace{2cm}
+%\end{enumerate}
+%\item Calculer les coordonnées des vecteurs $\vv{PA}$ et $\vv{PB}$.
+%\vspace{2cm} 
+%\item Démontrer que les points $P$, $A$ et $B$ sont alignés.
+%\vspace{3cm}
+%\end{enumerate}
+%\end{exercise}
+%\vfill 
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{marginlayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+
+
+\section{Propriétés des opérations}   
+
+\begin{tBox} 
+\textbf{Élément nul}\quad	Pour tout vecteur $\vv{u}$, \qquad $\vv{0}+\vv{u}=\vv{u}+\vv{0}=\vv{u}$. 
+\end{tBox}
+\begin{tBox}[frametitle={La somme de 2 vecteurs est indépendante de l'ordre}]
+Pour tout vecteur $\vv{u}$ et  $\vv{v}$ \qquad $\vv{u}+\vv{v}=\vv{v}+\vv{u}$.
+\end{tBox}
+
+\begin{minipage}{0.47\columnwidth} 
+\begin{tikzpicture}[scale=0.85]
+%\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xa{0.8}; 
+\def \ya{2.4}; 
+
+\def \xb{4};
+\def \yb{0};
+
+\tkzDefPoint(-0.7,0){U0} \tkzDefShiftPoint[U0](\xa,\ya){U1}
+\tkzDefPoint(1.0,3.1){V0} \tkzDefShiftPoint[V0](\xb,\yb){V1}
+
+\tkzDrawSegments[->, >=latex, line width=1.2pt](U0,U1 V0,V1)
+\tkzLabelSegment(U0,U1){\small $\vv{u}$}
+\tkzLabelSegment(V0,V1){\small $\vv{v}$}
+
+\tkzDefPoint(0.8,0){A}  
+\tkzDefPointBy[translation=from U0 to U1](A)\tkzGetPoint{B}
+\tkzDefPointBy[translation=from V0 to V1](B)\tkzGetPoint{C}
+
+\tkzDrawSegments[->, >=latex, line width=0.6pt, dashed](A,B)
+\tkzDrawSegments[-, line width=0.6pt, dashed](B,C)
+\tkzDrawSegments[->, >=latex, line width=1.2pt](A,C)
+
+\tkzLabelPoint[below](A){\scriptsize$A$}
+\tkzLabelPoint[above left](B){\scriptsize$B$}
+\tkzLabelPoint[right](C){\scriptsize$C$}
+\tkzLabelSegment[left](A,B){\small$\vv{AB}$}
+\tkzLabelSegment[above](B,C){\small$\vv{BC}$}
+\tkzLabelSegment[below, sloped](A,C){\small$\vv{u}+\vv{v}$}
+
+
+\tkzDefPointBy[translation=from V0 to V1](A)\tkzGetPoint{D} 
+
+\tkzDrawSegments[->, >=latex, line width=0.6pt, dashed](A,D) 
+\tkzDrawSegments[line width=0.6pt, dashed](D,C)
+
+\tkzLabelPoint[below right](D){\scriptsize$D$}
+\tkzLabelSegment[below](A,D){\small$\vv{AD}$}
+\tkzLabelSegment[right](D,C){\small$\vv{DC}$} 
+\end{tikzpicture}
+\end{minipage} 
+\hfill
+\begin{minipage}{0.47\columnwidth} 
+\begin{align*}
+\vv{u}+\vv{v}& = \vv{AB}+\vv{BC} =\vv{AC}\\
+\vv{v}+\vv{u}& = \vv{AD}+\vv{DC} = \vv{AC}
+\end{align*}
+\end{minipage} 
+\begin{tBox} 
+La somme de plusieurs vecteurs quelconques $\vv{u}$, $\vv{v}$ et $\vv{w}$ est aussi indépendante de l'ordre : 
+\end{tBox}
+
+
+
+\begin{figure*}[!h] 
+\begin{tikzpicture}[scale=1]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xa{1.0};
+\def \ya{1.2};
+
+
+\def \xb{1.8};
+\def \yb{-2.5};
+
+\def \xc{2.2}; 
+\def \yc{0.5}; 
+
+
+\tkzDefPoint(-1.0,0.8){U0} \tkzDefShiftPoint[U0](\xa,\ya){U1}
+\tkzDefPoint(0.0,3.5){V0} \tkzDefShiftPoint[V0](\xb,\yb){V1}
+\tkzDefPoint(1.0,3.5){W0} \tkzDefShiftPoint[W0](\xc,\yc){W1}
+
+\tkzDrawSegments[->, >=latex, line width=1.2pt](U0,U1 V0,V1 W0,W1)
+\tkzLabelSegment(U0,U1){\small $\vv{u}$}
+\tkzLabelSegment(V0,V1){\small $\vv{v}$}
+\tkzLabelSegment(W0,W1){\small $\vv{w}$}
+
+\tkzDefPoint(4.0,2){A}  
+\tkzDefPointBy[translation=from U0 to U1](A)\tkzGetPoint{B}
+\tkzDefPointBy[translation=from V0 to V1](B)\tkzGetPoint{C}
+\tkzDefPointBy[translation=from W0 to W1](C)\tkzGetPoint{D}
+
+
+\tkzDrawSegments[->, >=latex, line width=1.0pt](A,C)
+\tkzDrawSegments[->, >=latex, line width=2pt](A,D)
+\tkzDrawSegments[ line width=0.5pt, dashed](A,B B,C C,D)
+\tkzLabelSegment[below , sloped](A,C){\small $\vv{u}+\vv{v}$}
+\tkzLabelSegment[below , sloped](C,D){\small $\vv{w}$}
+
+\tkzDefPoint(10,2){E}  
+\tkzDefPointBy[translation=from U0 to U1](E)\tkzGetPoint{F}
+\tkzDefPointBy[translation=from V0 to V1](F)\tkzGetPoint{G}
+\tkzDefPointBy[translation=from W0 to W1](G)\tkzGetPoint{H}
+
+
+
+\tkzDrawSegments[->, >=latex, line width=2pt](E,H)
+\tkzDrawSegments[->, >=latex, line width=1pt](F,H)
+\tkzDrawSegments[ line width=0.5pt, dashed](E,F F,G G,H)
+
+\tkzLabelSegment[above, sloped](E,F){\small $\vv{u}$}
+\tkzLabelSegment[above , sloped](F,H){\small $\vv{v}+\vv{w}$}
+
+\tkzText(9,4){$\vv{u}+\vv{v}+\vv{w} = (\vv{u}+\vv{v})+\vv{w} = \vv{u}+(\vv{v}+\vv{w})$}
+\end{tikzpicture}
+\end{figure*}
+
+\begin{tBox}
+Pour tout vecteurs $\vv{u}$,  et réel $a$ et $b$,   \qquad  $a(b\vv{u})=(ab)\vv{u} $. 
+\end{tBox}
+\begin{tBox}
+\vfill 
+Pour tout $a$ et $b\in\mathbb{R}$ et vecteur $\vv{u}$ on a : $a\vv{u}+b\vv{u}= (a+b)\vv{u}$
+\end{tBox}
+\begin{tBox}
+Pour tout vecteurs $\vv{u}$, $\vv{v}$  et réel $k$,   \qquad  $k(\vv{u}+\vv{v}  ) =k\vv{u}+k\vv{v} $.
+%\begin{align*}
+%k(\vv{u}+\vv{v}  )&=k\vv{u}+k\vv{v} 
+%%&k(\vv{u}-\vv{v})&=k\vv{u}-k\vv{v}
+%\end{align*} 
+\end{tBox}
+\begin{proof} La figure correspond au cas $k>0$.  Le cas $k<0$ est similaire.\\
+\begin{minipage}{0.42\columnwidth} 
+\begin{tikzpicture}[scale=0.90]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=3, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xa{-0.22};
+\def \ya{1.4};
+
+
+\def \xb{2.08};
+\def \yb{1.04};
+
+\tkzDefPoint(1,0){O}  
+
+\tkzDefPoint(-4.0,-0.5){A} \tkzDefShiftPoint[A](\xa,\ya){B}
+\tkzDefShiftPoint[B](\xb,\yb){C} 
+
+\tkzDrawSegments[->, >=latex, line width=1.2pt](A,B B,C)
+\tkzDrawSegments[->, style={->,shorten >=3pt,>=latex'}, >=latex, line width=1.2pt](A,C) 
+\tkzLabelSegment(A,B){\small $\vv{u}$}
+\tkzLabelSegment(B,C){\small $\vv{v}$} 
+\tkzLabelSegment[below, sloped](A,C){\small $\vv{u}+\vv{v}$} 
+
+
+\tkzDefPointBy[homothety=center O ratio 1.5](A) \tkzGetPoint{D}
+\tkzDefPointBy[homothety=center O ratio 1.5](B) \tkzGetPoint{E}
+\tkzDefPointBy[homothety=center O ratio 1.5](C) \tkzGetPoint{F}
+% 
+\tkzDrawSegments[->, >=latex, line width=1.2pt](D,E E,F) 
+\tkzDrawSegments[->, style={->,shorten >=3pt,>=latex'}, >=latex, line width=1.2pt](D,F) 
+\tkzDrawSegments[-, >=latex, line width=0.5pt, dashed](O,D O,E O,F) 
+% 
+\tkzLabelPoints[below , font=\scriptsize](A,D)
+\tkzLabelPoints[above right , font=\scriptsize](C,F)
+\tkzLabelPoints[above left , font=\scriptsize](E)
+\tkzLabelPoints[above , font=\scriptsize](B)
+\tkzLabelPoints[ font=\scriptsize](O)
+\tkzDrawPoints(O) 
+\end{tikzpicture}
+\end{minipage}  
+\end{proof}
+
+
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+
+\subsection*{Exercices bilan opérations sur vecteurs}
+\begin{example} \hfill 
+
+\noindent Dans le repère 	$(O~;~ \vec{\imath}~,~ \vec{\jmath})$ on   donne  $\vv{u}\begin{pmatrix}
+-2\\5
+\end{pmatrix}$ ; $A(1~;~-3)$ et $B(4~;~-5)$.  \\
+\noindent Calculer les coordonnées de chacun des vecteurs suivants :\\
+\noindent \parbox{0.24\linewidth}{
+$-3~\vv{AB}$\\
+%\vspace{4cm}	
+}
+\parbox{0.24\linewidth}{
+$\vv{u}+\vv{AB}$\\
+%\vspace{4cm}
+}
+\parbox{0.24\linewidth}{
+$-3\vv{u}+2\vv{AB}$ \\
+%\vspace{4cm}
+}
+\parbox{0.24\linewidth}{
+$2~\vv{u}+5~\vv{BA}$\\
+%	\vspace{4cm}
+} 
+\end{example} 
+\vfill 
+%\begin{exercise}\hfill 
+%	
+%	\noindent Soient $\vv{u}\begin{pmatrix}
+%		-2\\5
+%	\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+%		3\\ \tfrac{1}{4}
+%	\end{pmatrix}$ deux vecteurs définis par leurs coordonnées dans le repère
+%	$(O~;~ \vec{\imath}~,~ \vec{\jmath})$.
+%	
+%	\noindent  Calculer les coordonnées de chacun des vecteurs suivants :
+%	\begin{multicols}{5}
+%		\begin{enumerate}[label=\alph*),leftmargin=*]
+%			\item $\vv{u}+\vv{v}$
+%			%\vspace{0.5cm}
+%			\item $2\vv{u}$
+%			%\vspace{0.5cm}
+%			\item $-\dfrac{3}{7}~\vv{v}$
+%			%\vspace{0.5cm}
+%			\item $-3\vv{u}+\vv{v}$
+%			%\vspace{0.5cm}
+%			\item $\dfrac{3}{2}~\vv{u}-\dfrac{3}{5}~\vv{v}$
+%		\end{enumerate}
+%	\end{multicols}
+%\end{exercise}
+\begin{exercise}\hfill 
+
+\noindent Soient $\vv{u}\begin{pmatrix}
+2\\6
+\end{pmatrix}$ et $\vv{v}\begin{pmatrix}
+-5\\ 3
+\end{pmatrix}$ deux vecteurs définis par leurs coordonnées dans le repère
+$(O~;~ \vec{\imath}~,~ \vec{\jmath})$.
+
+\noindent  Calculer les coordonnées de chacun des vecteurs suivants :
+\begin{multicols}{5}
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item $-\vv{u}$
+\item $\vv{u}+\vv{v}$
+%\vspace{0.5cm}
+\item $3\vv{u}+2\vv{v}$
+%\vspace{0.5cm}
+\item  $-5\vv{u}-\vv{v}$
+%\vspace{0.5cm}
+%			\item $5\vv{u}-2\vv{v}$
+%\vspace{0.5cm}
+\item $\tfrac{1}{2}~(\vv{u}- \vv{v})$
+\end{enumerate}
+\end{multicols}
+\end{exercise}
+\begin{exercise} \hfill 
+
+\noindent Le plan est muni du repère orthonormé $(O~;~ \vec{\imath}~,~ \vec{\jmath})$ et des points $A(-3~;~2)$, $B(1~;~-2)$, $C(-5~;~3)$.  Déterminer les coordonnées des vecteurs :
+\begin{multicols}{5}
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item $\vv{AB}$
+\item $\vv{AC}$
+%\vspace{0.5cm}
+\item $\vv{AB}+2\vv{AC}$
+%\vspace{0.5cm}
+\item  $2\vv{AB}-3\vv{BC}$
+%\vspace{0.5cm}
+\item $\tfrac{1}{3}\vv{AC}+\tfrac{1}{5}\vv{BC}$ 
+\end{enumerate}
+\end{multicols}  
+\end{exercise}
+\begin{exercise}[révision] \hfill 
+
+\noindent Le plan est muni du repère   $(O~;~ \vec{\imath}~,~ \vec{\jmath})$. Soient les points $T(1~;~-2)$, $R(0~;~-1)$, $U(5~;~3)$. Déterminer les coordonnées du point $E(x;y)$ tel que $TRUE$ est un parallélogramme, ainsi que celles du centre $F$ du parallélogramme.
+\end{exercise}
+\begin{exercise}  Le plan est muni du repère   $(O~;~ \vec{\imath}~,~ \vec{\jmath})$. Soient les points $A(2~;~-3)$, $B(1~;~-1)$, $C(4~;~5)$
+
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item  Le point $M(x;y)$ est tel que $\vv{AM}=-2\vv{BC}$. \\
+\noindent Écrire les équations vérifiées par $x$ et $y$ et retrouver les coordonnées de $M$.
+%\vspace{3cm}
+\item Déterminer les coordonnées du point $N(x;y)$ tel que $\vv{CN}=2~\vv{AB}-3~\vv{AC}$
+%\vspace{3cm}
+\item Déterminer les coordonnées du point $G(x;y)$ tel que $\vv{GA}+\vv{GB}+\vv{GC}=\vv{0}$
+\end{enumerate} 
+\end{exercise}
+
+
+
+
+
+%\begin{exercise}\hfill 
+%
+%Soient $A(-2;-1)$, $B(3;2)$ et $C(1;5)$ trois points dans un repère orthonormé $(O~;~ \vec{\imath}~,~ \vec{\jmath})$.
+%\begin{enumerate}[label=\alph*),leftmargin=*]
+%%\item Déterminer les coordonnées du vecteur $\vv{AB}$ puis celles du vecteur $\vv{AC}$.
+%\item Déterminer les coordonnées du point $I$ milieu de $[AB]$.
+%%\item Calculer la longueur $AC$.
+%%\item Déterminer les coordonnées de $\vv{AB}+\vv{AC}$, de $3~\vv{AB}$ et de $2~\vv{AB}+3~\vv{AC}$ .
+%\item Déterminer les coordonnées du point $K(x;y)$  tel que  $\vv{CK}=3~\vv{AB}$. 
+%\item Déterminer les coordonnées du point $L$ tel que $\vv{AL}+2~\vv{BL}+\vv{CL}=\vv{0}$.
+%\end{enumerate} 
+%\end{exercise}
+
+\begin{exercise}\hfill 
+
+\noindent Le plan est muni du repère orthonormé $(O~;~ \vec{\imath}~,~ \vec{\jmath})$. Soient les points $A(3~;~-3)$, $B(2~;~-4)$, $C(-5~;~1)$
+
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item Déterminer les coordonnées des vecteurs $\vv{AB}$, $\vv{AC}$ et $\vv{BC}$.
+%\vspace{3cm}
+\item  Déterminer les coordonnées des vecteurs $\vv{u}=\vv{AC}+2~\vv{AB}$, $\vv{v}=-3\vv{AB}+4\vv{AC}$. 
+%\vspace{3cm}
+\item Déterminer les coordonnées du point $D$ tel que $\vv{BD}=2~\vv{u}-\vv{v}$.
+%\vspace{3cm}
+\item Déterminer les coordonnées du point $E$ tel que $\vv{AE}=2~\vv{BE}+2~\vv{u}$
+%\vspace{3cm}
+\end{enumerate} 
+\end{exercise}
+\newpage
+\begin{exercise}[révision] \hfill 
+
+\noindent	 Soit les points $A(-1~;~3)$; $B(-1~;~2)$; $C(\tfrac{5}{2}~;~2)$ et  $D(-8~;~4)$ dans le repère $(O~;~ \vec{\imath}~,~ \vec{\jmath})$. Montrer que les droites $(AC)$ et $(BD)$ sont parallèles.
+\end{exercise}
+\begin{exercise}[révision]  \hfill 
+
+\noindent	Soit les points $M(1~;~-2)$; $N(0~;~-1)$ et $P(3~;~-4)$  dans le repère $(O~;~ \vec{\imath}~,~ \vec{\jmath})$. Montrer que les points $M$, $N$ et $P$ sont alignés.
+\end{exercise}
+\begin{exercise}[révision]  \hfill 
+
+\noindent	Soit les points $A(1~;~1)$; $B(2~;~-3)$; $C(4~;~x)$  dans le repère $(O~;~ \vec{\imath}~,~ \vec{\jmath})$. Trouvez $x$ tel que les points  $A$, $B$ et $C$ sont alignés.
+\end{exercise}
+\begin{exercise} \hfill 
+
+\noindent 	Dans un repère, on donne les points: $A(1~;~-1)$, $B(-1~;~-2)$ et $C(-2~;~2)$
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+\item Déterminer les coordonnées du point $G$ vérifiant $\vv{GA}+2\vv{GB}+\vv{GC}=\vv{0}$.
+%		\vspace{2.5cm} 
+\item Déterminer les coordonnées du point $D$ vérifiant $\vv{BD}=\vv{BA}+\vv{BC}$.
+%		\vspace{2.5cm} 
+\item Les points $B$, $G$ et $D$ sont-ils alignés ?
+\end{enumerate} 
+\end{exercise}
+\begin{exercise} \hfill 
+
+\noindent 	Dans un repère, on donne les points: $A(-2~;~2)$, $B(0~;~-3)$ et $C(4~;~5)$.
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+\item Déterminer les coordonnées du point $M$ vérifiant $\vv{AM}=2\vv{AB}-3\vv{AC}$.
+%		\vspace{2.5cm} 
+\item $I$ est le milieu de $[AB]$. Calculer les coordonnées de $I$
+\item Montrer que les points $C$, $I$ et $M$ sont alignés.
+\end{enumerate} 
+\end{exercise}
+\begin{exercise} \hfill 
+
+\noindent 	Dans un repère, on donne les points: $A(2~;~4)$, $B(-2~;~2)$ et $C(6~;~-1)$. $I$ est le milieu de $[AC]$. $G$ et $H$ sont tels que $\vv{AG}=2\vv{AB}-\tfrac{1}{2}\vv{AC}$ et $\vv{BH}=-\tfrac{1}{3}\vv{BC}$.
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+\item Déterminer les coordonnées de $I$, $G$ et $H$.
+\item Prouver que $B$ est le milieu de $[GI]$
+\item Montrer que les points $A$, $G$ et $H$ sont alignés.
+\end{enumerate} 
+\end{exercise}
+
+\begin{exercise}[un classique : approche vectorielle]\hfill 
+
+\noindent Sur la figure ci-contre, $ABCD$ est un carré et les triangles $BCE$ et $ABF$ sont équilatéraux. On considère le repère orthonormé $(A~;~B~,~D)$.\\
+\noindent\parbox{0.55\linewidth}{ 
+\begin{enumerate}[label=\arabic*),leftmargin=*]
+\item Représenter les axes du repère.
+\item Donner les coordonnées des points $A$, $B$, $C$ et $D$.
+\item Déterminer les coordonnées de $F$ et $E$.\\
+\noindent  \emph{indice : trigonométrie} 
+\item Démontrer que les points $D$, $F$ et $E$ sont alignés.
+\end{enumerate}   
+}
+\parbox{0.4\linewidth}{
+\begin{tikzpicture}
+\tkzDefPoints{0/0/A,4/0/B,4/4/C,0/4/D}
+\tkzDrawPolygon[line width = 1pt](A,B,C,D)
+\tkzDefEquilateral(C,B) \tkzGetPoint{E}
+\tkzDefEquilateral(A,B) \tkzGetPoint{F}
+\tkzDrawPoints(A,B,C,D,E,F)
+\tkzDrawPolygon[line width = 1pt](B,C,E)
+\tkzDrawPolygon[line width = 1pt](A,B,F)
+\tkzLabelPoints(B)
+\tkzLabelPoints[below left](A)
+\tkzLabelPoints[above right](C)	
+\tkzLabelPoints[above left](D)			
+\tkzLabelPoint[right](E){$E$}
+\tkzLabelPoint[above](F){$F$}
+%\tkzDrawPolygon[dashed](A,E,F)
+\end{tikzpicture}
+}
+\end{exercise}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\begin{example}[Équation vectorielle sur une droite]\hfill \\
+Soit les points $A$, $B$. Soit $P$ et $Q$  tel que $\vv{PA}+3\vv{PB}=\vv{0}$ et $\vv{QA}-3\vv{QB}=\vv{0}$. Placer $P$ et $Q$.
+
+%\begin{minipage}{0.5\columnwidth}
+%%	\begin{enumerate}[label=\alph*),leftmargin=*]
+%%		\item Justifier que $A$, $B$ et $P$ sont alignés.
+%%		\item Montrer que $4\vv{PA}+\vv{AB}=\vv{0}$
+%%		\item En déduire que $\vv{AP}=\frac{1}{4}\vv{AB}$.
+%%	\end{enumerate}
+%\end{minipage}
+\noindent\parbox{1.0\columnwidth}{
+\centering
+\begin{tikzpicture}[scale=1.0]
+\tkzInit[xmin=-3, xmax=9,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+\tkzDrawX[left=5pt, label=, font=\scriptsize, line width=1.2pt ] 
+\def \xa{4}; 
+\def \ya{0};  
+\tkzDefPoint(0,0){A} \tkzDefShiftPoint[A](\xa,\ya){B}  
+\tkzDrawSegments[-, >=latex, line width=1.2pt](A,B)
+
+
+\tkzLabelPoints[above, font=\scriptsize](A,B) 
+
+\foreach \i in {0,...,4}{%
+	\tkzMarkSegment[pos=\i/4,mark=|,  size=3pt](A,B) 
+} 
+\end{tikzpicture} 
+}
+
+\vfill 
+%\vfill 
+
+\end{example}
+\begin{exercise}\hfill\\
+Pour chaque cas, exprimer $\vv{AP}$ en fonction de $\vv{AB}$, et placer le point $P$ sur la figure.
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item $P$ est tel que $ 2\vv{PA}+\vv{PB}=\vv{0}$.
+\item $Q$ est tel que $\vv{QA}+2\vv{QB}=\vv{0}$.
+\item $R$ est tel que $\vv{RA}+5\vv{RB}=\vv{0}$.
+\item $S$ est tel que $-3\vv{SA}+\vv{SB}=\vv{0}$.
+\item $T$ est tel que $ -\vv{TA}+3\vv{TB}=\vv{0}$.
+\item $M$ est tel que $ \vv{MA}+\vv{MB}=\vv{0}$.
+\end{enumerate} 
+\end{multicols}
+\begin{minipage}{1\columnwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+\tkzInit[xmax=6,ymax=1.5]%\tkzGrid[sub]
+\tkzSetUpPoint[size=4, fill=black]
+\tkzfctset{tan style/.style={->,>=latex, color=red, line width=1.2pt}}  
+
+\def \xa{6}; 
+\def \ya{0};  
+\tkzDefPoint(0,0){A} \tkzDefShiftPoint[A](\xa,\ya){B} 
+\tkzDefPoint(12,0){C}  
+\tkzDefPoint(-6,0){D}  
+\tkzDrawSegments[-, >=latex, line width=1.2pt](C,D)
+
+
+\tkzLabelPoints[above, font=\scriptsize](A,B) 
+
+\foreach \i in {0,...,6}{%
+	\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,B)
+	\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](A,D)
+	\tkzMarkSegment[pos=\i/6,mark=|,  size=3pt](B,C)
+} 
+\end{tikzpicture} 
+\end{minipage}
+\end{exercise}
+%\vfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+\begin{example}[Équation vectorielle dans le plan]\hfill \\
+Soit les points $A(1;2)$ , $B(3;1)$ et $C(4;5)$ dans le repère $(O,\vec{\imath},\vec{\jmath})$.\\
+On cherche les coordonnées des points $M(x;y)$ et $N(x;y)$ tel que 
+\begin{align*}
+3\vv{BM} +2\vv{AM}&=\vv{BC} & \vv{BN}+3\vv{NA}&=\vv{BC} 
+% 3(\vv{BO}+\vv{OM}) + 2 (\vv{AO}+\vv{OM})& = \vv{BC}\\
+% 3\vv{BO}+3\vv{OM} + 2\vv{AO}+2\vv{OM}& = \vv{BC}\\
+% 3\vv{OM}+2\vv{OM} + 3\vv{BO}+ 2\vv{AO}& = \vv{BC}\\
+%  5\vv{OM} + 3\vv{BO}+ 2\vv{AO}& = \vv{BC}\\
+%    5\vv{OM} & = \vv{BC}- 3\vv{BO}- 2\vv{AO}\\
+%    5\vv{OM} & = \vv{BC}+ 3\vv{OB}+ 2\vv{OA}\\
+%    \vv{OM} & = \frac{1}{5}\left(\vv{BC}+ 3\vv{OB}+ 2\vv{OA}\right)\\
+\end{align*}  
+\vfill
+\end{example}  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage 
+\begin{exercise} \hfill \\
+On donne les points $A(-5;2)$. $B(3;0)$ et $C(-1;4)$. Calculer les coordonnées du point $M(x;y)$ qui vérifie l'équation donné.
+\begin{multicols}{3} 
+\begin{enumerate}[label=\alph*),leftmargin=*]
+\item $\vv{CM}=\vv{AB}-3\vv{AC}$
+\item  $\vv{MA}+\vv{MB}=\vv{BC}$ 
+\item  $\vv{MA}+\vv{MC}=\vv{CB}$
+\item $\vv{MA}=3\vv{BM}+\vv{AC}$
+\item $2\vv{AM}+\vv{BM}=2\vv{CM}$ 
+\item $\vv{MA}+\vv{MB}+\vv{MC}=\vv{0}$
+\end{enumerate}
+\end{multicols}
+\end{exercise}
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+
+\newpage 
+\loadgeometry{widelayout}  
+\pagestyle{scrheadings} % Print headers again  
+\KOMAoptions{
+headwidth=textwithmarginpar,
+headsepline=true,
+headsepline= 0.5pt,
+footwidth=textwithmarginpar,
+} 
+\onehalfspacing
+
+
+\section{Club maths : Cas particuliers du théorème de Menelaus}
+\begin{exercise}\hfill \\
+$ABC$ est un triangle. $P$ est le milieu de $[AB]$, $Q$ est un point de $(AC)$ et $R$ est sur le segment $[BC]$.\\
+Les graduations sur les droites sont régulières.\\
+L'objectif de cet exercice est de démontrer que les points $P$, $Q$ et $R$ sont alignés.\\
+\begin{minipage}{0.5\columnwidth} 
+\begin{enumerate}
+\item Donner les valeurs des réels $a$, $b$ et $c$ tel que :
+\[
+\vv{AP}=a\vv{AB}\qquad \vv{AQ}=b\vv{AC}\qquad \vv{BR}=c\vv{BC}
+\]
+\item Montrer que $\vv{PQ}=-\tfrac{1}{2}\vv{AB}+\tfrac{5}{4}\vv{AC}$.
+\item Exprimer $\vv{PR}$ en fonction de $\vv{AB}$ et $\vv{AC}$.
+\item Montrer que $\vv{PQ}$ et $\vv{PR}$ sont multiples l'un de l'autre. Conclure.
+\end{enumerate}
+\end{minipage}
+\begin{minipage}{0.5\columnwidth}\centering
+\begin{tikzpicture}
+\tkzSetUpPoint[size=3, fill=black] 
+\tkzDefPoint(0,0){A} 
+\tkzDefPoint(1.35,3.25){C}
+\tkzDefPoint(5.59,0.47){B} 
+\tkzDefPointsBy[homothety=center A ratio 5/4](C){Q}
+\tkzDefPointsBy[homothety=center A ratio +1/2](B){P}
+\tkzDefPointsBy[homothety=center B ratio +5/6](C){R} 
+\tkzDrawPoints(A,B,C) 
+\tkzDrawPoints(P,Q,R)  
+\tkzLabelPoint[left](A){\scriptsize$A$}
+\tkzLabelPoint[right](B){\scriptsize$B$}
+\tkzLabelPoint[above left](C){\scriptsize $C$} 
+\tkzLabelPoint[below](P){\scriptsize$P$}
+\tkzLabelPoint[above](Q){\scriptsize$Q$}
+\tkzLabelPoint[above right](R){\scriptsize$R$}
+\foreach \i in {1,...,5}{%
+	\tkzMarkSegment[pos=\i/6,mark=*,  size=2pt](B,C)
+}
+\foreach \i in {1,...,5}{%
+	\tkzMarkSegment[pos=\i/4,mark=*,  size=2pt](A,C)
+}
+\tkzMarkSegments[mark=s||,  size=3pt](A,P P,B) 
+
+\tkzDrawSegments[line width=1.2pt](A,Q A,B B,C)
+\tkzDrawSegments[line width=0.6pt, dashed](P,Q)
+\end{tikzpicture}
+\end{minipage}
+
+\end{exercise}  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage 
+
+\begin{exercise}\hfill \\
+$ABC$ est un triangle. $P$ est le milieu de $[AB]$, $Q$ est un point de $(AC)$. 
+Les graduations sur les droites sont régulières.  
+$R$ est le point d'intersection des droites $(PQ)$ et $(BC)$. \\
+On sait que pour un certain nombre $k$ : $\vv{BR}=k\vv{BC}$.
+L'objectif de cet exercice est de trouver $k$.\\
+\begin{minipage}{0.5\columnwidth} 
+\begin{enumerate}
+\item Donner les valeurs des réels $a$ et $b$ tel que :
+\[
+\vv{AP}=a\vv{AB}\qquad \vv{AQ}=b\vv{AC} 
+\] 
+\item Montrer que $\vv{PQ}=-\tfrac{2}{3}\vv{AB}+\tfrac{5}{4}\vv{AC}$.
+\item Montrer que $\vv{PR}=\left(\tfrac{1}{3}-k\right)\vv{AB}+k\vv{AC}$.
+\item Trouver $k$ pour que les vecteurs $\vv{PQ}$ et $\vv{PR}$ soient multiples l'un de l'autre. 
+\end{enumerate}
+\end{minipage}
+\begin{minipage}{0.5\columnwidth}\centering
+\begin{tikzpicture}
+\tkzSetUpPoint[size=3, fill=black] 
+\tkzDefPoint(0,0){A} 
+\tkzDefPoint(1.35,3.25){C}
+\tkzDefPoint(5.59,0.47){B} 
+\tkzDefPointsBy[homothety=center A ratio 5/4](C){Q}
+\tkzDefPointsBy[homothety=center A ratio +2/3](B){P}
+\tkzDefPointsBy[homothety=center B ratio +5/7](C){R} 
+\tkzDrawPoints(A,B,C) 
+\tkzDrawPoints(P,Q,R)  
+\tkzLabelPoint[left](A){\scriptsize$A$}
+\tkzLabelPoint[right](B){\scriptsize$B$}
+\tkzLabelPoint[above left](C){\scriptsize $C$} 
+\tkzLabelPoint[below](P){\scriptsize$P$}
+\tkzLabelPoint[above](Q){\scriptsize$Q$}
+%\tkzLabelPoint[above right](R){\scriptsize$R$}
+%\foreach \i in {1,...,6}{%
+	%\tkzMarkSegment[pos=\i/7,mark=*,  size=2pt](B,C)
+	%}
+\foreach \i in {1,...,5}{%
+	\tkzMarkSegment[pos=\i/4,mark=*,  size=2pt](A,C)
+}
+\foreach \i in {1,...,2}{%
+	\tkzMarkSegment[pos=\i/3,mark=*,  size=2pt](A,B)
+}
+%\tkzMarkSegments[mark=s||,  size=3pt](A,P P,B) 
+
+\tkzDrawSegments[line width=1.2pt](A,Q A,B B,C)
+\tkzDrawSegments[line width=0.6pt, dashed](P,Q)
+\end{tikzpicture}
+\end{minipage} 
+\end{exercise} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage 
+\begin{exercise} \hfill\\	
+$ABC$ est un triangle ; $P$ est un point de $(AB)$, $Q$ un point de $(BC)$ et $R$ un point de $(AC)$ disposés comme sur le dessin (les graduations sur les droites sont régulières). \\
+\begin{minipage}{0.5\columnwidth}
+\begin{enumerate}
+\item Donner les valeurs des réels $a$, $b$, et $c$ tels que :
+\[
+\vv{AP}=a\vv{AB}\qquad \vv{AR}=b\vv{AC}\qquad\vv{BQ}=c\vv{BC} 
+\]  
+\item Exprimer $\vv{PR}$ en fonction de $\vv{AB}$ et $\vv{AC}$.
+\item Démontrer que $\vv{PQ}=\frac{9}{28}\vv{AB}+\frac{3}{7}\vv{AC}$
+\item Justifier que $\vv{PQ}=-\frac{9}{7}\vv{PR}$. Que conclure ?
+\end{enumerate} 
+\end{minipage}
+\begin{minipage}{0.5\columnwidth}\centering
+\begin{tikzpicture}
+\tkzSetUpPoint[size=3, fill=black] 
+\tkzDefPoint(0,0){A}
+%	\tkzDefPoint(1.37,1.33){T}
+%	\tkzDefPoint(2.11,0.21){E}
+\tkzDefPoint(1.35,3.25){C}
+\tkzDefPoint(5.59,0.47){B} 
+\tkzDrawPoints(A,B,C)
+\tkzLabelPoint[above](C){$C$}
+\tkzLabelPoint[left](A){$A$}
+\tkzLabelPoint[right](B){$B$}
+\tkzDefPointsBy[homothety=center A ratio -1/3](C){R1}
+\tkzDefPointsBy[homothety=center A ratio +1/3](C){R2}
+\tkzDefPointsBy[homothety=center A ratio +2/3](C){R3}
+\tkzDrawPoints(R1,R2,R3)
+\tkzLabelPoint[below](R1){$R$}
+
+\foreach \i in {1,2,3,4,5,6}{
+	\tkzDefPointsBy[homothety=center B ratio \i/7](C){Q\i}
+	\tkzDrawPoint(Q\i)
+}
+\foreach \i in {1,2,3}{
+	\tkzDefPointsBy[homothety=center B ratio \i/4](A){P\i}
+	\tkzDrawPoint(P\i)
+}
+\tkzLabelPoint[below right](P3){$P$}
+\tkzLabelPoint[above right](Q3){$Q$}
+\tkzDrawSegments[line width=1.2pt](A,B B,C C,R1 P3,Q3 P3,R1)
+\end{tikzpicture}
+\end{minipage}
+
+\end{exercise}
+
+
+
+%----------------------------------------------------------------------------------------
+%	 
+%----------------------------------------------------------------------------------------
+\cleardoublepage 
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+\end{document}
