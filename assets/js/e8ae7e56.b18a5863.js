@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjdb=self.webpackChunkjdb||[]).push([[8567],{8393:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/orientation","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjdb=self.webpackChunkjdb||[]).push([[4298],{1267:s=>{s.exports=JSON.parse('{"label":"secondes","permalink":"/blog/tags/secondes","allTagsPath":"/blog/tags","count":1}')}}]);
