@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website_2=self.webpackChunkmy_website_2||[]).push([[401],{2318:e=>{e.exports=JSON.parse('{"label":"orientation","permalink":"/blog/tags/orientation","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
