@@ -1,3 +1,22 @@
+<!--
+pyodide-mkdocs-theme
+Copyleft GNU GPLv3 🄯 2024 Frédéric Zinelli
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.
+If not, see <https://www.gnu.org/licenses/>.
+-->
+
 
 <!doctype html>
 <html lang="fr" class="no-js">
@@ -40,8 +59,42 @@
 
     
     
+
+
       
     
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.min.js" charset="utf-8" type="text/javascript" integrity="sha512-GQpIYSKNIPIC763JKTNALj+t18/nfLdzw5gITgFGa31aK/4NmjyPKsfqrjh7CuzpJaG3nqEleeVcWUhHad9Axg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js" charset="utf-8" type="text/javascript" integrity="sha512-iK7yTkCkv7MbFwTqRgHTbmIqoiiLq6BsyNjymnFyB5a7pEQwYThj9QIgqBy9+XPPwj7+hAEHyR2npOHL1bz4Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+<!-- PYODIDE - insertion token -->
+<script type="application/javascript" src="../../js-libs/0_config-libs.js"></script>
+<script type="application/javascript">
+
+  CONFIG.baseUrl = "../.."
+  CONFIG.buttonIconsDirectory = "../../assets/images"
+  CONFIG.pmtUrl = "https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
+  CONFIG.version = "1.2.1"
+  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "em": 15, "kbd": "Ctrl+I"}, "feedback": {"msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "em": 15, "kbd": ""}, "wrapTerm": {"msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "em": 15, "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9..."}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps..."}, "installDone": {"msg": "Installations termin\u00e9es!"}, "successMsg": {"msg": "Termin\u00e9 sans erreur !"}, "successHead": {"msg": "Bravo !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"msg": "Ex\u00e9cuter le code", "em": 9, "kbd": ""}, "play": {"msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "em": 9, "kbd": "Ctrl+S"}, "check": {"msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "em": 9, "kbd": "Ctrl+Enter"}, "download": {"msg": "T\u00e9l\u00e9charger", "em": 0, "kbd": ""}, "upload": {"msg": "T\u00e9l\u00e9verser", "em": 0, "kbd": ""}, "restart": {"msg": "R\u00e9initialiser l'\u00e9diteur", "em": 0, "kbd": ""}, "save": {"msg": "Sauvegarder dans le navigateur", "em": 0, "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"msg": "Les r\u00e9ponses resteront cach\u00e9es...", "em": 15, "kbd": ""}, "qcmCheckTip": {"msg": "V\u00e9rifier les r\u00e9ponses", "em": 11, "kbd": ""}, "qcmRedoTip": {"msg": "Recommencer", "em": 9, "kbd": ""}, "tipTrash": {"msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "em": 15, "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}}
+CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
+</script>
+<script type="application/javascript" src="../../js-libs/functools-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/jsLogger-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/mathjax-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/z_globalGuiButtons-libs.js"></script>
+<link rel="stylesheet" href="../../pyodide-css/0_generic-tooltips-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/header-btns-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/hourglass-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/ide-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/qcm-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/terminal-libs.css">
+<!-- PYODIDE - insertion token -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript" charset="utf-8"></script>
+
+
     
       
     
@@ -63,6 +116,13 @@
     
     
     
+
+
+  <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle"
+        data-ace-dark-mode="tomorrow_night_bright"
+        data-ace-light-mode="crimson_editor">
+
+
   </head>
   
   
@@ -88,17 +148,6 @@
       
     </div>
     <div data-md-component="announce">
-      
-        <aside class="md-banner">
-          <div class="md-banner__inner md-grid md-typeset">
-            
-            
-  <!-- Add announcement here, including arbitrary HTML --> 
-	<div class="banner">🎉️ C'est l'été 🥳️. Une mise à jour du site est en cours, notamment les onglets Python et SNT pour la rentrée prochaine 🚧 L'ancien site reste  <b><a target="_blank" href="https://zenxbear.github.io">accessible</a>  !</b> 🚧</div>
-
-          </div>
-          
-        </aside>
       
     </div>
     
@@ -2583,7 +2632,7 @@
 <div class="py_mk_hidden" id="solution_editor_d02197226863a106c0af2888301e4f2898e43acc"></div>
 <div id="cible_3" class="admonition center" style="display: flex;justify-content: center;align-content:center;flex-direction: column;margin:auto;min-height:5em;text-align:center">
 Le  tracé sera affiché ici
-</div><script >let PAGE_IDES_CONFIG = '.\x1ew,8{l0[*3)kHmu2/-M5f4BIL(t=.:x9Edps6hga\\]cbr_vT1iy"nje} o7\x1e070S0V0A0Q0t0Y0L0M0A090i0P0y0Z0i0i0D060D0c0G0P090D0J090G0n0i06140c090P0V0o12060y06190`0J0J0S0w0X0!0B0R0M0T0G0g0V1j0X0S0t0B170k0G0L0K0L0V0M0(0L0t0h0V0v1n0S051v0V0T0N0M0J0Y0T0t1R0t1u0S0n0L0Y0g0X0U0C0X0Q0g0B0)0t0X0A0Y0J0h1s1X0H0T0Q0n0X0H0S1E0C0t1B0t221-0T0X0F080Y0K0G080C0s0d0w1}0X2o0X24261I2k1O1Q1S1G0V0L0g1U1W1Y1X1#2v0S0h0C2z2C1X1Z1#1%1(0X1J1I080V1-1/1;0X0b1}0C0B0V0$0s0|0d1}1}0A0V201B1D0V0s080u0|091P0T0u0m2l2n2p0n0)041B0A2^2,2b2p1 0X2b020X092m3b2p2p2V0n0t0s0o30323l2o2=1E2^0j0i2}0k0P3a3u2p0L0Q0F0E3p0y093E3F0X3w2@083z3B3D3t3u3n3p3r3O2o2g0J0e392-1q1C3x0i092|0X302H0B0h0K080Q0J2y250C2G1P0S2K0J1E0t3~0t401k0S3@0Y252y2A2M2E1!4b4d4f1V2N2F4b1@0T2@3a1@1_1{0t0v0F0V0t0z2V4y0p0R0q38220J0Q3`1F0c220d0v0Q0T4t0L0f0O0l0r0X0u0X0C0N0F2u420V0x0J080h2/0A1u0a0I4,4.4:4=0M1s0t0E0Y0A4a0X4^421E3}3{0g0\'1u3C42040E0\'1F3{254@4_1v0G0t1Y1/490M3Z1#0q0T0n4U0\'0R2H0G0h0(5u0Y0F0M0G0C2K1I1u0t0L1K421V0L0*1E0g0C4~5L0e1u3;0S0E5L1U0E0V3(0M0K0t0T1u0n2h2K420Q5Z1R450R0B1Y4?1k5Q5S1v5{0M0N2z4k0X5@2i0V420g0G0x0M0Q2/5u4U0V5416422/450V5L1F5p5r605Z1W2C6m2z1\'0L5P5R6f1v2/0G0J0t0Q0N5p1F251@5F0M340*444654646K4351040M1W081o5L5N6P6C6F0)5Z6Y0M6!4C546d5_1v1n506C3{0K540a1w0h2U1t5n430t6V471_470Y0n0n1u3/090W0W.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
+</div><script >let PAGE_IDES_CONFIG = '.\x1enb,HxhB7\\di9[k"lEr(/.2_tguIa)o-je65=14}3{pw0]L yM*fcTv8:ms\x1e0I0i0A0d0e0r0x0l0q0d0L0p0E0f0b0p0p0B0W0B0H0v0E0L0B0T0L0v0S0p0W140H0L0E0A0F120W0f0W190`0T0T0i0X0O0!0J0P0q040v0Y0A1j0O0i0r0J170y0v0l050l0A0q0(0l0r0t0A0o1n0i061v0A040V0q0T0x040r1R0r1u0i0S0l0x0Y0O0z0Z0O0e0Y0J0)0r0O0d0x0T0t1s1X0c040e0S0O0c0i1E0Z0r1B0r221-040O0s0j0x050v0j0Z0m0w0X1}0O2o0O24261I2k1O1Q1S1G0A0l0Y1U1W1Y1X1#2v0i0t0Z2z2C1X1Z1#1%1(0O1J1I0j0A1-1/1;0O0R1}0Z0J0A0$0m0|0w1}1}0d0A201B1D0A0m0j0D0|0L1P040D0C2l2n2p0S0)0K1B0d2^2,2b2p1 0O2b020O0L2m3b2p2p2V0S0r0m0F30323l2o2=1E2^0n0p2}0y0E3a3u2p0l0e0s093p0f0L3E3F0O3w2@0j3z3B3D3t3u3n3p3r3O2o2g0T0h392-1q1C3x0p0L2|0O302H0J0t050j0e0T2y250Z2G1P0i2K0T1E0r3~0r401k0i3@0x252y2A2M2E1!4b4d4f1V2N2F4b1@042@3a1@1_1{0r0o0s0A0r0k2V4y0a0P0u38220T0e3`1F0H220w0o0e044t0l070U0Q0N0O0D0O0Z0V0s2u420A080T0j0t2/0d1u0g0M4,4.4:4=0q1s0r090x0d4a0O4^421E3}3{0Y0\'1u3C420K090\'1F3{254@4_1v0v0r1Y1/490q3Z1#0u040S4U0\'0P2H0v0t0(5u0x0s0q0v0Z2K1I1u0r0l1K421V0l0*1E0Y0Z4~5L0h1u3;0i095L1U090A3(0q050r041u0S2h2K420e5Z1R450P0J1Y4?1k5Q5S1v5{0q0V2z4k0O5@2i0A420Y0v080q0e2/5u4U0A5416422/450A5L1F5p5r605Z1W2C6m2z1\'0l5P5R6f1v2/0v0T0r0e0V5p1F251@5F0q340*444654646K43510K0q1W0j1o5L5N6P6C6F0)5Z6Y0q6!4C546d5_1v1n506C3{05540g1w0t2U1t5n430r6V471_470x0S0S1u3/0L0G0G.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_pyodideSectionsRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/2_btnRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/start-pyodide.js"></script><script type="application/javascript" src="../../js-per-pages/2_terminalRunner-terms.js"></script><script type="application/javascript" src="../../js-per-pages/3_ideRunner-ides.js"></script>
@@ -2665,7 +2714,7 @@ Le  tracé sera affiché ici
   <div class="md-copyright_pyodide">
     
       <div class="md-copyright__highlight"><a href="https://moussatat.github.io/about">Nizar MOUSSATAT, 2024</a>
-<a style="vertical-align:middle" rel="Sous licence CC BY-NC-SA 4.0" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Sous licence CC BY-NC-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a> 
+<a style="vertical-align:middle" rel="Sous licence CC BY-NC-SA 4.0" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Sous licence CC BY-NC-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>  
 </div>
     
     
@@ -2739,13 +2788,21 @@ Le  tracé sera affiché ici
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
+
+
       <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       
     
+<!-- PYODIDE - insertion token -->
+<script type="application/javascript" src="../../js-scripts/error-logs-generator-scripts.js"></script>
+<script type="application/javascript" src="../../js-scripts/z_doLast-subscriptions-scripts.js"></script>
+<!-- PYODIDE - insertion token -->
+
+
   </body>
 </html>

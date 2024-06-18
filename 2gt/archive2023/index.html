@@ -1,3 +1,22 @@
+<!--
+pyodide-mkdocs-theme
+Copyleft GNU GPLv3 🄯 2024 Frédéric Zinelli
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.
+If not, see <https://www.gnu.org/licenses/>.
+-->
+
 
 <!doctype html>
 <html lang="fr" class="no-js">
@@ -40,8 +59,42 @@
 
     
     
+
+
       
     
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.min.js" charset="utf-8" type="text/javascript" integrity="sha512-GQpIYSKNIPIC763JKTNALj+t18/nfLdzw5gITgFGa31aK/4NmjyPKsfqrjh7CuzpJaG3nqEleeVcWUhHad9Axg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js" charset="utf-8" type="text/javascript" integrity="sha512-iK7yTkCkv7MbFwTqRgHTbmIqoiiLq6BsyNjymnFyB5a7pEQwYThj9QIgqBy9+XPPwj7+hAEHyR2npOHL1bz4Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+<!-- PYODIDE - insertion token -->
+<script type="application/javascript" src="../../js-libs/0_config-libs.js"></script>
+<script type="application/javascript">
+
+  CONFIG.baseUrl = "../.."
+  CONFIG.buttonIconsDirectory = "../../assets/images"
+  CONFIG.pmtUrl = "https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
+  CONFIG.version = "1.2.1"
+  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "em": 15, "kbd": "Ctrl+I"}, "feedback": {"msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "em": 15, "kbd": ""}, "wrapTerm": {"msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "em": 15, "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9..."}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps..."}, "installDone": {"msg": "Installations termin\u00e9es!"}, "successMsg": {"msg": "Termin\u00e9 sans erreur !"}, "successHead": {"msg": "Bravo !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"msg": "Ex\u00e9cuter le code", "em": 9, "kbd": ""}, "play": {"msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "em": 9, "kbd": "Ctrl+S"}, "check": {"msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "em": 9, "kbd": "Ctrl+Enter"}, "download": {"msg": "T\u00e9l\u00e9charger", "em": 0, "kbd": ""}, "upload": {"msg": "T\u00e9l\u00e9verser", "em": 0, "kbd": ""}, "restart": {"msg": "R\u00e9initialiser l'\u00e9diteur", "em": 0, "kbd": ""}, "save": {"msg": "Sauvegarder dans le navigateur", "em": 0, "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"msg": "Les r\u00e9ponses resteront cach\u00e9es...", "em": 15, "kbd": ""}, "qcmCheckTip": {"msg": "V\u00e9rifier les r\u00e9ponses", "em": 11, "kbd": ""}, "qcmRedoTip": {"msg": "Recommencer", "em": 9, "kbd": ""}, "tipTrash": {"msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "em": 15, "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}}
+CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
+</script>
+<script type="application/javascript" src="../../js-libs/functools-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/jsLogger-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/mathjax-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/z_globalGuiButtons-libs.js"></script>
+<link rel="stylesheet" href="../../pyodide-css/0_generic-tooltips-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/header-btns-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/hourglass-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/ide-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/qcm-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/terminal-libs.css">
+<!-- PYODIDE - insertion token -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript" charset="utf-8"></script>
+
+
     
       
     
@@ -63,6 +116,13 @@
     
     
     
+
+
+  <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle"
+        data-ace-dark-mode="tomorrow_night_bright"
+        data-ace-light-mode="crimson_editor">
+
+
   </head>
   
   
@@ -88,17 +148,6 @@
       
     </div>
     <div data-md-component="announce">
-      
-        <aside class="md-banner">
-          <div class="md-banner__inner md-grid md-typeset">
-            
-            
-  <!-- Add announcement here, including arbitrary HTML --> 
-	<div class="banner">🎉️ C'est l'été 🥳️. Une mise à jour du site est en cours, notamment les onglets Python et SNT pour la rentrée prochaine 🚧 L'ancien site reste  <b><a target="_blank" href="https://zenxbear.github.io">accessible</a>  !</b> 🚧</div>
-
-          </div>
-          
-        </aside>
       
     </div>
     
@@ -3961,7 +4010,7 @@
   <div class="md-copyright_pyodide">
     
       <div class="md-copyright__highlight"><a href="https://moussatat.github.io/about">Nizar MOUSSATAT, 2024</a>
-<a style="vertical-align:middle" rel="Sous licence CC BY-NC-SA 4.0" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Sous licence CC BY-NC-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a> 
+<a style="vertical-align:middle" rel="Sous licence CC BY-NC-SA 4.0" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Sous licence CC BY-NC-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>  
 </div>
     
     
@@ -4035,13 +4084,21 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
+
+
       <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       
     
+<!-- PYODIDE - insertion token -->
+<script type="application/javascript" src="../../js-scripts/error-logs-generator-scripts.js"></script>
+<script type="application/javascript" src="../../js-scripts/z_doLast-subscriptions-scripts.js"></script>
+<!-- PYODIDE - insertion token -->
+
+
   </body>
 </html>
