@@ -1,22 +1,3 @@
-<!--
-pyodide-mkdocs-theme
-Copyleft GNU GPLv3 🄯 2024 Frédéric Zinelli
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.
-If not, see <https://www.gnu.org/licenses/>.
--->
-
 
 <!doctype html>
 <html lang="fr" class="no-js">
@@ -59,42 +40,8 @@ If not, see <https://www.gnu.org/licenses/>.
 
     
     
-
-
       
     
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.min.js" charset="utf-8" type="text/javascript" integrity="sha512-GQpIYSKNIPIC763JKTNALj+t18/nfLdzw5gITgFGa31aK/4NmjyPKsfqrjh7CuzpJaG3nqEleeVcWUhHad9Axg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js" charset="utf-8" type="text/javascript" integrity="sha512-iK7yTkCkv7MbFwTqRgHTbmIqoiiLq6BsyNjymnFyB5a7pEQwYThj9QIgqBy9+XPPwj7+hAEHyR2npOHL1bz4Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
-<!-- PYODIDE - insertion token -->
-<script type="application/javascript" src="../../js-libs/0_config-libs.js"></script>
-<script type="application/javascript">
-
-  CONFIG.baseUrl = "../.."
-  CONFIG.buttonIconsDirectory = "../../assets/images"
-  CONFIG.pmtUrl = "https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
-  CONFIG.version = "1.2.1"
-  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "em": 15, "kbd": "Ctrl+I"}, "feedback": {"msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "em": 15, "kbd": ""}, "wrapTerm": {"msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "em": 15, "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9..."}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps..."}, "installDone": {"msg": "Installations termin\u00e9es!"}, "successMsg": {"msg": "Termin\u00e9 sans erreur !"}, "successHead": {"msg": "Bravo !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"msg": "Ex\u00e9cuter le code", "em": 9, "kbd": ""}, "play": {"msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "em": 9, "kbd": "Ctrl+S"}, "check": {"msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "em": 9, "kbd": "Ctrl+Enter"}, "download": {"msg": "T\u00e9l\u00e9charger", "em": 0, "kbd": ""}, "upload": {"msg": "T\u00e9l\u00e9verser", "em": 0, "kbd": ""}, "restart": {"msg": "R\u00e9initialiser l'\u00e9diteur", "em": 0, "kbd": ""}, "save": {"msg": "Sauvegarder dans le navigateur", "em": 0, "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"msg": "Les r\u00e9ponses resteront cach\u00e9es...", "em": 15, "kbd": ""}, "qcmCheckTip": {"msg": "V\u00e9rifier les r\u00e9ponses", "em": 11, "kbd": ""}, "qcmRedoTip": {"msg": "Recommencer", "em": 9, "kbd": ""}, "tipTrash": {"msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "em": 15, "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}}
-CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
-</script>
-<script type="application/javascript" src="../../js-libs/functools-libs.js"></script>
-<script type="application/javascript" src="../../js-libs/jsLogger-libs.js"></script>
-<script type="application/javascript" src="../../js-libs/mathjax-libs.js"></script>
-<script type="application/javascript" src="../../js-libs/z_globalGuiButtons-libs.js"></script>
-<link rel="stylesheet" href="../../pyodide-css/0_generic-tooltips-libs.css">
-<link rel="stylesheet" href="../../pyodide-css/header-btns-libs.css">
-<link rel="stylesheet" href="../../pyodide-css/hourglass-libs.css">
-<link rel="stylesheet" href="../../pyodide-css/ide-libs.css">
-<link rel="stylesheet" href="../../pyodide-css/qcm-libs.css">
-<link rel="stylesheet" href="../../pyodide-css/terminal-libs.css">
-<!-- PYODIDE - insertion token -->
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript" charset="utf-8"></script>
-
-
     
       
     
@@ -116,13 +63,6 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
     
     
     
-
-
-  <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle"
-        data-ace-dark-mode="tomorrow_night_bright"
-        data-ace-light-mode="crimson_editor">
-
-
   </head>
   
   
@@ -133,7 +73,7 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -148,6 +88,17 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
       
     </div>
     <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <!-- Add announcement here, including arbitrary HTML --> 
+	<div class="banner">🎉️ C'est l'été 🥳️. Une mise à jour du site est en cours, notamment les onglets Python et SNT pour la rentrée prochaine 🚧 L'ancien site reste  <b><a target="_blank" href="https://zenxbear.github.io">accessible</a>  !</b> 🚧</div>
+
+          </div>
+          
+        </aside>
       
     </div>
     
@@ -188,7 +139,7 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Passer au mode nuit"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Passer au mode nuit"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Passer au mode nuit" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
@@ -2632,7 +2583,7 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
 <div class="py_mk_hidden" id="solution_editor_d02197226863a106c0af2888301e4f2898e43acc"></div>
 <div id="cible_3" class="admonition center" style="display: flex;justify-content: center;align-content:center;flex-direction: column;margin:auto;min-height:5em;text-align:center">
 Le  tracé sera affiché ici
-</div><script >let PAGE_IDES_CONFIG = '.\x1e9M3nuv:/yw8lHLsb=t,mgi 2jc5od"0.hr]e)B6\\_p4k7*Tf{xE}-a([1I\x1e0Q0x0D0w0p0l0v0B0I0w0y0r0Y040M0r0r0G0e0G060V0Y0y0G0t0y0V0P0r0e14060y0Y0D0K120e040e190`0t0t0x0a0q0!0J0c0I070V0n0D1j0q0x0l0J170U0V0B0j0B0D0I0(0B0l080D0z1n0x0m1v0D07090I0t0v070l1R0l1u0x0P0B0v0n0q0s0i0q0p0n0J0)0l0q0w0v0t081s1X0H070p0P0q0H0x1E0i0l1B0l221-070q0o0f0v0j0V0f0i0W0E0a1}0q2o0q24261I2k1O1Q1S1G0D0B0n1U1W1Y1X1#2v0x080i2z2C1X1Z1#1%1(0q1J1I0f0D1-1/1;0q0N1}0i0J0D0$0W0|0E1}1}0w0D201B1D0D0W0f0k0|0y1P070k0u2l2n2p0P0)0d1B0w2^2,2b2p1 0q2b020q0y2m3b2p2p2V0P0l0W0K30323l2o2=1E2^0b0r2}0U0Y3a3u2p0B0p0o0A3p040y3E3F0q3w2@0f3z3B3D3t3u3n3p3r3O2o2g0t0L392-1q1C3x0r0y2|0q302H0J080j0f0p0t2y250i2G1P0x2K0t1E0l3~0l401k0x3@0v252y2A2M2E1!4b4d4f1V2N2F4b1@072@3a1@1_1{0l0z0o0D0l0S2V4y0F0c0Z38220t0p3`1F06220E0z0p074t0B0g0O050h0q0k0q0i090o2u420D0R0t0f082/0w1u0X0C4,4.4:4=0I1s0l0A0v0w4a0q4^421E3}3{0n0\'1u3C420d0A0\'1F3{254@4_1v0V0l1Y1/490I3Z1#0Z070P4U0\'0c2H0V080(5u0v0o0I0V0i2K1I1u0l0B1K421V0B0*1E0n0i4~5L0L1u3;0x0A5L1U0A0D3(0I0j0l071u0P2h2K420p5Z1R450c0J1Y4?1k5Q5S1v5{0I092z4k0q5@2i0D420n0V0R0I0p2/5u4U0D5416422/450D5L1F5p5r605Z1W2C6m2z1\'0B5P5R6f1v2/0V0t0l0p095p1F251@5F0I340*444654646K43510d0I1W0f1o5L5N6P6C6F0)5Z6Y0I6!4C546d5_1v1n506C3{0j540X1w082U1t5n430l6V471_470v0P0P1u3/0y0T0T.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
+</div><script >let PAGE_IDES_CONFIG = '.\x1ew,8{l0[*3)kHmu2/-M5f4BIL(t=.:x9Edps6hga\\]cbr_vT1iy"nje} o7\x1e070S0V0A0Q0t0Y0L0M0A090i0P0y0Z0i0i0D060D0c0G0P090D0J090G0n0i06140c090P0V0o12060y06190`0J0J0S0w0X0!0B0R0M0T0G0g0V1j0X0S0t0B170k0G0L0K0L0V0M0(0L0t0h0V0v1n0S051v0V0T0N0M0J0Y0T0t1R0t1u0S0n0L0Y0g0X0U0C0X0Q0g0B0)0t0X0A0Y0J0h1s1X0H0T0Q0n0X0H0S1E0C0t1B0t221-0T0X0F080Y0K0G080C0s0d0w1}0X2o0X24261I2k1O1Q1S1G0V0L0g1U1W1Y1X1#2v0S0h0C2z2C1X1Z1#1%1(0X1J1I080V1-1/1;0X0b1}0C0B0V0$0s0|0d1}1}0A0V201B1D0V0s080u0|091P0T0u0m2l2n2p0n0)041B0A2^2,2b2p1 0X2b020X092m3b2p2p2V0n0t0s0o30323l2o2=1E2^0j0i2}0k0P3a3u2p0L0Q0F0E3p0y093E3F0X3w2@083z3B3D3t3u3n3p3r3O2o2g0J0e392-1q1C3x0i092|0X302H0B0h0K080Q0J2y250C2G1P0S2K0J1E0t3~0t401k0S3@0Y252y2A2M2E1!4b4d4f1V2N2F4b1@0T2@3a1@1_1{0t0v0F0V0t0z2V4y0p0R0q38220J0Q3`1F0c220d0v0Q0T4t0L0f0O0l0r0X0u0X0C0N0F2u420V0x0J080h2/0A1u0a0I4,4.4:4=0M1s0t0E0Y0A4a0X4^421E3}3{0g0\'1u3C42040E0\'1F3{254@4_1v0G0t1Y1/490M3Z1#0q0T0n4U0\'0R2H0G0h0(5u0Y0F0M0G0C2K1I1u0t0L1K421V0L0*1E0g0C4~5L0e1u3;0S0E5L1U0E0V3(0M0K0t0T1u0n2h2K420Q5Z1R450R0B1Y4?1k5Q5S1v5{0M0N2z4k0X5@2i0V420g0G0x0M0Q2/5u4U0V5416422/450V5L1F5p5r605Z1W2C6m2z1\'0L5P5R6f1v2/0G0J0t0Q0N5p1F251@5F0M340*444654646K4351040M1W081o5L5N6P6C6F0)5Z6Y0M6!4C546d5_1v1n506C3{0K540a1w0h2U1t5n430t6V471_470Y0n0n1u3/090W0W.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_pyodideSectionsRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/2_btnRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/start-pyodide.js"></script><script type="application/javascript" src="../../js-per-pages/2_terminalRunner-terms.js"></script><script type="application/javascript" src="../../js-per-pages/3_ideRunner-ides.js"></script>
@@ -2788,21 +2739,13 @@ Le  tracé sera affiché ici
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
-
-
       <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       
     
-<!-- PYODIDE - insertion token -->
-<script type="application/javascript" src="../../js-scripts/error-logs-generator-scripts.js"></script>
-<script type="application/javascript" src="../../js-scripts/z_doLast-subscriptions-scripts.js"></script>
-<!-- PYODIDE - insertion token -->
-
-
   </body>
 </html>
