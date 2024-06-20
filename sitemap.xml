@@ -2,277 +2,302 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>http://127.0.0.1:8000/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/about/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/liens/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/1eds/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/1eds/archive2023/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/1eds/archive2024/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/1eds/cours/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/1eds/evaluations/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/1eds/progression2022/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/1eds/progression2023/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/1eds/progression2024/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/2gt/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/2gt/archive2022/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/2gt/archive2023/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/2gt/archive2024/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/2gt/cours/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/2gt/evaluations/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/2gt/progression/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/3c/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/3c/archive2022/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/3c/archive2023/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/3c/archive2024/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/3c/cours/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/3c/evaluations/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/3c/progression2023/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/4b/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/4b/archive2022/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/4b/archive2023/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/4b/cours/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/4b/evaluations/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/4b/progression2023/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/dnl/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/dnl/archive2022/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/dnl/archive2023/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/dnl/archive2024/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/eotx/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/eotx/archive2024/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/eotx/cours/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/eotx/evaluations/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/eotx/progression2024/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/python/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/python/tp01/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/python/python-2gt-00/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/python/python-2gt-01/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/python/python-2gt-02/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/python/python-2gt-03/</loc>
+         <lastmod>2024-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/python/python-2gt-04/</loc>
+         <lastmod>2024-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/python/python-2gt-05/</loc>
+         <lastmod>2024-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/python/python-2gt-06/</loc>
+         <lastmod>2024-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/python/python-2gt-07/</loc>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/snt/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/snt/DonneesA/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/snt/DonneesB/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/snt/DonneesC/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/snt/DonneesD/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/teds/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/teds/cours/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/teds/evaluations/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/teds/progression2024/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/tags/</loc>
-         <lastmod>2024-06-19</lastmod>
+         <lastmod>2024-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
