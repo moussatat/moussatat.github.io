@@ -1751,6 +1751,17 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Les fonctions
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1760,6 +1771,52 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#definitions-et-premiers-exemples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définitions et premiers exemples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      QCM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercices
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2869,6 +2926,41 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#definitions-et-premiers-exemples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définitions et premiers exemples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      QCM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercices
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2916,20 +3008,27 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
 
 
 <h1 id="les-fonctions">Les fonctions<a class="headerlink" href="#les-fonctions" title="Permanent link">⚓︎</a></h1>
+<h2 id="definitions-et-premiers-exemples">Définitions et premiers exemples<a class="headerlink" href="#definitions-et-premiers-exemples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition coeur">
 <p class="admonition-title">fonction</p>
 <p>Une <strong>fonction</strong> est un sous-programme qui rajoute une fonctionnalité à python. 
-Elle comporte :<br />
-- le nom d'<em>appel</em> de la fonction : qui ordonne à l'interpréteur d'exécuter la fonction_<br />
-- des <em>paramètres d'entrée</em> (des noms de variables) à prendre en compte ou à modifier <br />
-- le <em>corps de la fonction</em> est l'ensemble des instructions du sous-programme<br />
-- un <em>renvoi</em> de valeurs en sortie.<br />
-    <div class="highlight"><span class="filename">syntaxe d'une fonction dans python</span><pre><span></span><code><span class="k">def</span> <span class="nf">nom_de_fontion</span><span class="p">(</span><span class="n">liste</span> <span class="n">de</span> <span class="n">paramètres</span> <span class="n">séparés</span> <span class="n">par</span> <span class="n">une</span> <span class="n">vigule</span><span class="p">)</span> <span class="p">:</span>  <span class="c1"># deux points obligatoires</span>
+Elle comporte :  </p>
+<ul>
+<li>le nom d'<em>appel</em> de la fonction : qui ordonne à l'interpréteur d'exécuter la fonction_  </li>
+<li>des <em>paramètres d'entrée</em> (des noms de variables) à prendre en compte ou à modifier   </li>
+<li>le <em>corps de la fonction</em> est l'ensemble des instructions du sous-programme  </li>
+<li>
+<p>un <em>renvoi</em> de valeurs en sortie.  </p>
+<div class="highlight"><span class="filename">syntaxe d'une fonction dans python</span><pre><span></span><code><span class="k">def</span> <span class="nf">nom_de_fontion</span><span class="p">(</span><span class="n">liste</span> <span class="n">de</span> <span class="n">paramètres</span> <span class="n">séparés</span> <span class="n">par</span> <span class="n">une</span> <span class="n">vigule</span><span class="p">)</span> <span class="p">:</span>  <span class="c1"># deux points obligatoires</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    les instructions à exécuter</span>
+<span class="sd">    le cors de la fonction est indenté</span>
+<span class="sd">    à l&#39;aide de la touche  ++tab++</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">resultat</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
+</li>
+</ul>
 <p>L'instruction <code class="highlight"><span class="n">nom_de_fontion</span><span class="p">()</span></code> avec les valeurs des paramètres d'entrée est un <strong>appel de fonction</strong>.</p>
 </div>
 <div class="admonition example">
@@ -2946,8 +3045,8 @@ L'interpréteur a juste pris en compte la définition de la fonction <code class
 </ol>
 <p><div id="global_editor_ae9444edd14e3fc95652a3cd5e0a62a3db1c6905" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_ae9444edd14e3fc95652a3cd5e0a62a3db1c6905"></div><span id="comment_editor_ae9444edd14e3fc95652a3cd5e0a62a3db1c6905" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:5;" id="term_editor_ae9444edd14e3fc95652a3cd5e0a62a3db1c6905" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_ae9444edd14e3fc95652a3cd5e0a62a3db1c6905">5</span>/5</div></div></div></div></p>
 <div markdown="1" id="solution_editor_ae9444edd14e3fc95652a3cd5e0a62a3db1c6905"      class="py_mk_hidden" data-search-exclude >
-.128013f/v:)png(rlku= Ps5
-4_bidh3"S7m*oa2yt1ec030s0G0E0B0r0f0l0j0H0f0B0l0l0i0v0E0r0a0v020n030l0h0y0y0B0e0D020w0A0f0h0Y0A0b03060(0*0,0.0%0a0203110`1406110%0s0r070Q0S0U0W0t0r0c0t0f1i0t0E0#030L0q0f0G1d0T0V0v1h1j1l1j0E1r1t1p0E0e120E0t0Q0;0l0a0B0b0W0C0v1v1f0v050N0G0b0B0y0G1p1O1Q1V1x1Y1t1#1%0#040j0k0e0A0a0A0l0r0@0b0j0J1M0e0e0G0H1~0`1)0b12061K2b1H1J1I1q0s1+0W1l0b1!1{1p1a1c0R1w2l0r2n0b0A2r1p0a2412292b2F0'1P1 2t1W2y0e0+0f0#0F282J0$2I1*2L1x2N2P0#0C2T1Q2V292k0v2!0B2Q020u2'2a0%2*2Y0W2-2/0o2=2)2J2+2{0#0m2~152D0`2r2e0s1J2j2_0v0H2z1'123913372H0{2U033g0J2E303e0g0#0J052~0j2W2K1e2Z050#050A0r0l0p0l0G0a0E352^3E0W0!020d3R3u3T2,0#0_3o2(3C2+3V093A3)3e3V082~0n0j3@3B3S2u3#020D3-3`1W0A0#0i3 3Z3{0y0r0#0x3=3^3_461W3w02240E0h0e3%2F4e2X3!0b3$454q3{42020z4u3D4749024b3'2?2@4f2Z3$0q0e4A2+4x444G024p4B2M3H3J3L3N3P3Y4v1W3V3X4S3.3!48334$4V1x3+3=0`3r0G2b2C4_381b3a2e2h2c0B1s4|06390%560K0M0O02.
+.128013a/hncp1Ps2evu:So 
+()ib4k_mgf=7d3"ty5lr*030z0f0C050p0F0d0l090F050d0d0x0B0C0p0a0B020m030d0h0u0u050G0D020j0k0F0h0Y0k0803060(0*0,0.0%0a0203110`1406110%0z0p0g0Q0S0U0W070p0v070F1i070C0#030L0q0F0f1d0T0V0B1h1j1l1j0C1r1t1p0C0G120C070Q0;0d0a05080W0e0B1v1f0B0w0N0f08050u0f1p1O1Q1V1x1Y1t1#1%0#040l0c0G0k0a0k0d0p0@080l0J1M0G0G0f091~0`1)0812061K2b1H1J1I1q0z1+0W1l081!1{1p1a1c0R1w2l0p2n080k2r1p0a2412292b2F0'1P1 2t1W2y0G0+0F0#0b282J0$2I1*2L1x2N2P0#0e2T1Q2V292k0B2!052Q020A2'2a0%2*2Y0W2-2/0r2=2)2J2+2{0#0E2~152D0`2r2e0z1J2j2_0B092z1'123913372H0{2U033g0J2E303e0s0#0J0w2~0l2W2K1e2Z0w0#0w0k0p0d0t0d0f0a0C352^3E0W0!020n3R3u3T2,0#0_3o2(3C2+3V0o3A3)3e3V0i2~0m0l3@3B3S2u3#020D3-3`1W0k0#0x3 3Z3{0u0p0#0y3=3^3_461W3w02240C0h0G3%2F4e2X3!083$454q3{42020H4u3D4749024b3'2?2@4f2Z3$0q0G4A2+4x444G024p4B2M3H3J3L3N3P3Y4v1W3V3X4S3.3!48334$4V1x3+3=0`3r0f2b2C4_381b3a2e2h2c051s4|06390%560K0M0O02.
 </div>
 </div>
 <div class="admonition coeur">
@@ -2955,26 +3054,211 @@ L'interpréteur a juste pris en compte la définition de la fonction <code class
 <p>Dans l'exemple précédent, la fonction <code class="highlight"><span class="n">fois_sept</span><span class="p">()</span></code> a pour <strong>paramètre</strong> la variable <code>n</code>.  </p>
 <p>Dans l'appel <code class="highlight"><span class="n">fois_sept</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span></code>, <span class="arithmatex">\(5\)</span> est l'<strong>argument</strong> de la fonction.  Il <strong>renvoie</strong> la valeur <span class="arithmatex">\(35\)</span>.</p>
 </div>
-<div class="admonition exemple">
+<div class="admonition example">
 <p class="admonition-title">fonction sans résultat renvoyé</p>
-<p>Une fonction peut ne pas avoir de résultat renvoyé</p>
+<p>La fonction <code class="highlight"><span class="n">carre</span><span class="p">()</span></code> ci-dessous :  </p>
+<ul>
+<li>prend pour paramètre <code>n</code>,   </li>
+<li><strong>affiche</strong> le carré de <code>n</code>  </li>
+<li>
+<p>ne <strong>renvoie</strong> rien.  </p>
+</li>
+<li>
+<p>Exécuter le script suivant.</p>
+</li>
+<li>Vérifier à l'aide d'une instruction <code>print()</code> que la variable <code>a</code> contient <code>None</code> (rien).</li>
+</ul>
 <p><div id="global_editor_1bea46e1fd58b7d8f55c6a52b57c274d623491ac" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_1bea46e1fd58b7d8f55c6a52b57c274d623491ac"></div><span id="comment_editor_1bea46e1fd58b7d8f55c6a52b57c274d623491ac" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:5;" id="term_editor_1bea46e1fd58b7d8f55c6a52b57c274d623491ac" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_1bea46e1fd58b7d8f55c6a52b57c274d623491ac">5</span>/5</div></div></div></div></p>
 <div markdown="1" id="solution_editor_1bea46e1fd58b7d8f55c6a52b57c274d623491ac"      class="py_mk_hidden" data-search-exclude >
-.128013f/v:)png(rlku= Ps
-bidh3"Sm*oa2yt1ec030p0C0A0x0o0f0l0j0D0f0x0l0l0i0s0A0o0a0s020m030l0h0u0u0x0e0z020t0w0f0h0U0w0b03060#0%0(0*0Z0a02030}0?10060}0Z0p0o070M0O0Q0S0q0o0c0q0f1e0q0A0X030H0n0f0C190P0R0s1d1f1h1f0A1n1p1l0A0e0~0A0q0M0-0l0a0x0b0S0y0s1r1b0s050J0C0b0x0u0C1l1K1M1R1t1U1p1X1Z0X040j0k0e0w0a0w0l0o0:0b0j0F1I0e0e0C0D1`0?1$0b0~061G271D1F1E1m0p1'0S1h0b1W1@1l16180N1s2h0o2j0b0w2n1l0a200~25272B0!1L1{2p1S2u0e0'0f0X0B242F0Y2E1%2H1t2J2L0X0y2P1M2R252g0s2W0x2M020r2!26112z0?2n2a0p1F2f2U0S0D2v1!0~2?0 2;2D0@2Q032}0F2A2F2'0g0X0F052.020j2S2G1a2V050X0D0(203h3k2'0W020d3t2%2{2(0X0=352#3u3B3w093h3j3A3m0S3w083h0m0j3U3M3b3B0b0n0X2y2s0A3L3H3O0s3w3y3F2/3N2q3C023E2D3:1S0w0X0v0v3z3X3*0u0o2Y3 2T3*3J3S3V3W463;3d02200A0h0e3@2Q0Z06380C272y4p2=172@2a2d280x1o4s062?4m0F0H0J0l02.
+.128013a/hncp1Ps2evu:So 
+()ib4kmgf=d3"ty5lr*030x0f0A050p0D0d0l090D050d0d0w0z0A0p0a0z020m030d0h0t0t050E0B020j0k0D0h0W0k0803060%0(0*0,0#0a02030 0^12060 0#0x0p0g0O0Q0S0U070p0u070D1g070A0Z030J0q0D0f1b0R0T0z1f1h1j1h0A1p1r1n0A0E100A070O0/0d0a05080U0e0z1t1d0z0v0L0f08050t0f1n1M1O1T1v1W1r1Z1#0Z040l0c0E0k0a0k0d0p0=080l0H1K0E0E0f091|0^1'0810061I291F1H1G1o0x1)0U1j081Y1_1n181a0P1u2j0p2l080k2p1n0a221027292D0$1N1}2r1U2w0E0)0D0Z0b262H0!2G1(2J1v2L2N0Z0e2R1O2T272i0z2Y052O020y2$280#2(2W0U2+2-0r2:2'2H2)2_0Z0C2|132B0^2p2c0x1H2h2@0z092x1$103711352F0_2S033e0H2C2~3c0s0Z0H0v2|0l2U2I1c2X0v0Z090*22332?3C0U0Y020n3J3s3L2*0Z0@3m2%3A2)3N0o3y3Y3c3N0i2|0m0l3,3z3K2s2*0q0Z2A2u0A3$3/1U3N3P3W283%3S083U3Q2V3S0k0Z0F0F453B3:0t0p2!4c3Z0Z3#3 0!3-3.3R3:3u02220A0h0E3V2D0l2=4q2K0Z053`4C1v48020w4G463:43023G210f4i3'0Z3~2F3{1v4f314U3S3!3*414O3=023@083_4m4*3|4W4%4O4E4^4?024l2D0#063p0f292A533619382c2f2a051q560637500H0J0L0d02.
 </div>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Une fonction qui renvoie rien en sortie s'appelle une <strong>procédure</strong>.<br />
-Le langage Python ne fait pas de différence dans la syntaxe entre fonction et procédure.</p>
+Le langage Python ne fait pas de différence dans la syntaxe entre fonction et procédure.<br />
+Il vaut par la suite rajouter une instruction <code>return</code> pour bien visualiser la fin de la fonction.
+Les résultats créés par la fonction et non renvoyé par une commande <code>return</code> sont effacés de la mémoire.</p>
 </div>
-<div class="admonition question">
-<p class="admonition-title">compléter le script afin </p>
-</div><script >let PAGE_IDES_CONFIG = '.\x1ef:v)prlku!=.}_CiASNx{oa2t\'e\\9Vng(w,[8q Is5-64zb]d3h"7Um*LF0y1Ec\x1e0o0T0u0Q0j0s0p090h0q0u0w0M0@0*0Q0$0M0u0R040\'0w0J0L0J0r0q0R0\'0Q0J0u0!0q0L150R0Q0O0$0\'0L0w0!0J0T050G0(080#0h0y0q0W0u1p0G0T1t0s0S0p0y0K0r0z0s0K0!0M0K0u0n1x080a1b0$0f1t0T0C1B0u0y060h0\'1G0s1$0s1A0T0\'0a0q0I0I0G0l0s0q0\'0b050v0y0G210G0v0T24240G0A0H0y1+09041{0u230c0!0!1b0G0Q0v2i2k0w0\'090j092g0Q0q0y1@0a0t2o2j0=0y1G0\'2D2q0723252N1 222m0u040G0h0h0j0y0,2V0A0I0u0a04071q2$2\'0f2V0I0s0b0e0D0P2P220Q2S0G080c0I0S2#2%041!062)0G2+042-0h2/0b0f0q08081$0Q0A352^212`2T080p08312\'362v0s0c0920383a3c1X3r0A073m2R2T0j0I0h0u0W080s0#3t2(1q3w3y202G0s37323C2:1Z1#1%0h2c0W1(1*1,1.3(0T2~0u0/1)2b3:1q0T3o0G040p3L3b0u3Q0A0y2L1~20220#0G0e0G0U3I3W3z0G200X4g3=2}0O0a0j0\'3+0u2/0I3;1!0T2$2s0u0s4v4x1.3 1+4x3G4a2Q41094l0G2X0G092y0z0u0A0$2j2)3I2Q060q0a4e4l0O094%221Q084+0U0X0J2P4/210W0I0z4+04241;0G4(1U3y2R4,4Q2`064V0,2h2E0q0s2v1r4;0g0G4E4l1G1r550g27010G0Y0q0G0-1`1U1 4{0G1=2$093!554e4f4;1!4}0z5D3{4L2L2Q2Q5v0m2g081=0G0p0c4r0j3^2m0t3f3h1U4Q53410y0\'0s0j5q2`5z4w0s0I0f600G0d0G0n3H0y2`4*4K5~5V215v0l0j545%1@0y2g065%1U0N2|5#1;3L5H585i2f5 604p0p2/4v093-3`1+2b4z1B3q6C6G3|1B5v5x3#5@5_206L3!6G5)2b2m0c0G1)5{5{246k0s0-0#0q4X241!2J2l5-4s0F0c5*0I0#2/6?0w0W5h0j6`3O1,1 5v3f4.2p0u0E1@750G1U6%0p5{5o1U1@6a1@0q6Z3!700s707h2y2I7c0w5 780G0i2g6N0y6$5}5n0n700\'0c7v7A0G0W6?1x2g0I6g0c6k5n092v575y7u7w1U06705Z7b2E2r702`0W1y2b1!0l0k0V0Z370j7D0\'4E1+7#7%4Q08090p067s58534C5^5q0%0m0x0f3=1Q1:0c2`0Q1A2?4A8n0a8p0*0h1y1E7k4y1q8t1B2v4u4s0W0,1A0K0$4A0B0S0,0u0h4s2/8s0P4A5h1+3P5~8U2S1-1q0J8Z7P0p8U0p0z0:1?3^8)5z096{4A1)7$0h2v4}8z1=0b1A8O1B0S1=1(0S0u1|0h0O0s0y1A5i8{1B431$2s0#3Q0*9i8`0u4A43068@1A2e0a2$4A720n2W2`8U2X4w950r4A2`4D1=8T8!3O3Q3M1G3.9H3^89099s9k3~0u1{5^4(1+3b0s0Q5%4F4P444D5~9$9u1B2 0p0B0h1G0a1u5G8@6U3N7$0.3M9=4C3w8D404)9C6K0#8B0y9I0Oad0D0T3x5I1U0T8Y9{9.9:1(7P9 04041A0r2j0g8u0+0-0/0$0O9(0M0L0u0$04190E0O0U0Q0E040J0J1k0q140O0J0U0\'0r0U0M0Q1e0R0M0w0$1{1A1s1u1w1y1.1D1F1H1J1L1N1P1R3P1U0!0r1X0#8m3*7H8^1/1;1?1^1`1|4N22262N282a2c2e825f2k0!2m7N2t5j2x2z7h2C7A2G5?702Lbp264b3n2{2V2X2Z0h3T363B2.2:2=2@bO3J2|2~303834bW3$bY3d5-3i3k662Q3 3q3s383v4E3X3#2,b.3E3sb?2_2{9m8$3Sb{3Vb}4k3Zb 39b.bd1\'3,3.3{6I3}3=3@3_3/cn1B3 0\'0q7$4Y480Gbn21882X3!470X0X0rc4214j9h4A4q4s4u7p6J4B9c3w4G9^3}4J5}0I4M3I4P4R4T4V0y4X4Z4#cC5V5K4f0y4-5E4;4?4^4`b$2Q5P50525y550u575{c^5a0u5c7r7t7c5h5j0o5l5n3!bI5r4)5t0T0G6Q5y5A4)0u5R6c21a35I544)5L7L085O4~5R7p3Gdy6d0G5Y6q1@5%5(5*0Q5,3g2%5*5;2H8g205{7p600f626466685|4xdy6e6g6m2~4l6l6n0u6p5!2A7r8?da8_6xd)6A6CckbfcU6Wcl6Hbgds6Sd$2|6B6X1*8c0Q6$6\'2w2g6*830p6.6:3(6?by6^746{4Q6}6 7A725^757^7v0y79886?7e0G7g7iepdk7h4wd/6b7r1,bw0=7Q7:7xbJ7A7CeM7E7Gcs7J2/7L7N7P7w7Tdf1y7 0G7Z2g9Zd64Q7(7Ae\'2qeW7,7A7.7N7=3OeK7`7|7~7X8183f0cy57888aem2g8e9ceh8i8k8m0n8o8q8X8ufz8w8q8z4E1F0Qanau0T8H9I8K8^8N8P8R9,8V8^8F0T9S8$3M1U048^8+1B0q8-8/8;dA8^9j9`1/0.0/903M720I941q960T983M0\'9b9d9f9h1qf;9v3M9n099p1+8rg89tga0h9x5I9zaff=9E9G8T4s6kad0$9McucW9(2$0:6,9T8%9Wepa69!9_9N9(6T9+8T2/9/azaagzcZ8_9%9|9~a0a2e1d$gIa80hgT9@ad9Aag1Caib0alanap3y0sasfMgQax7O4F0paBaDaF0g.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
+<div class="admonition example">
+<p class="admonition-title">gérer l'indentation</p>
+<p>La fonction <code class="highlight"><span class="n">somme</span><span class="p">()</span></code> doit :  </p>
+<ul>
+<li>prendre pour paramètres <code>x</code> et <code>y</code>,    </li>
+<li>
+<p><strong>renvoyer</strong> le résultat de <code>2x-3y</code>.  </p>
+</li>
+<li>
+<p>Exécuter le script. Une erreur <code class="highlight"><span class="ne">IndentationError</span></code> est signalée.  </p>
+</li>
+<li>Selectionner les lignes 2 et 3, puis appuyer sur la touche <span class="keys"><kbd class="key-tab">Tab</kbd></span> pour corriger l'indentation, et relancer le script.</li>
+<li>Saisir dans la console <code class="highlight"><span class="o">&gt;&gt;&gt;</span><span class="n">somme</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span></code>. Une erreur <code class="highlight"><span class="ne">TypeError</span></code> est signalée.</li>
+<li>Rajouter l'argument <code>y</code> dans la fonction <code>somme()</code>. Relancer et valider le script.</li>
+<li>Créer une variable <code>a</code> et lui affecter la valeur renvoyée par <code class="highlight"><span class="n">somme</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span></code></li>
+<li>Créer une variable <code>b</code> et lui affecter la valeur renvoyée par <code class="highlight"><span class="n">somme</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span></code></li>
+<li>Que renvoie la comparaison <code>a != b</code> ?</li>
+</ul>
+<p><div id="global_editor_4dbb2d81164e3ad29159b85ae9e11545a33b3a40" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_4dbb2d81164e3ad29159b85ae9e11545a33b3a40"></div><span id="comment_editor_4dbb2d81164e3ad29159b85ae9e11545a33b3a40" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:5;" id="term_editor_4dbb2d81164e3ad29159b85ae9e11545a33b3a40" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_4dbb2d81164e3ad29159b85ae9e11545a33b3a40">5</span>/5</div></div></div></div></p>
+<div markdown="1" id="solution_editor_4dbb2d81164e3ad29159b85ae9e11545a33b3a40"      class="py_mk_hidden" data-search-exclude >
+.128013a/hncp1Ps2e,vu:So 
+()ibkmgf=xd3-"tylr*030y0f0C050q0E0d0m090E050d0d0w0B0C0q0a0B020n030d0i0t0t050F0D020k0l0E0i0X0l0803060'0)0+0-0$0a0203100_1306100$0y0q0h0P0R0T0V070q0u070E1h070C0!030K0r0E0f1c0S0U0B1g1i1k1i0C1q1s1o0C0F110C070P0:0d0a05080V0e0B1u1e0B0v0M0f08050t0f1o1N1P1U1w1X1s1!1$0!040m0c0F0l0a0l0d0q0?080m0I1L0F0F0f091}0_1(0811061J2a1G1I1H1p0y1*0V1k081Z1`1o191b0Q1v2k0q2m080l2q1o0a2311282a2E0%1O1~2s1V2x0F0*0E0!0b272I0#2H1)2K1w2M2O0!0e2S1P2U282j0B2Z052P020z2%29142C0_2q2d0y1I2i2X0V092y1%112_122@2G0`2T03300I2D2I2*0s0!0I0v2;020m2V2J1d2Y0v0!0d0l0)0f3k3n2*0Z020o3x2)2~2+0!0x3D3e3F3A0g3J2W3p0V080!0D3O3o2t0B3A0p3k3m3E3Q3Y0!0j3k0n0m3-3$3K3'3S020F3#3y3F0l0!0w3^3%3X0t0q2#3V2*3{020G443F3=3I382'3_3'460A493'410!2:4d2=3 1V46484o3d3P3X3=3U4u0m3,3.4f3X3g3?0J0i0F0^4A4E2L0!3@4u0$063b0f2a2B4V2^1a2`2d2g2b051r4Y062_4S0I0K0M0d02.
+</div>
+</div>
+<div class="admonition coeur">
+<p class="admonition-title">Coeur</p>
+<p>Pour une fonction avec plusieurs <em>paramètres</em>, l'ordre dans lequel les <em>arguments</em> sont donnés est important.</p>
+</div>
+<h2 id="qcm">QCM<a class="headerlink" href="#qcm" title="Permanent link">⚓︎</a></h2>
+<div class="admonition tip py_mk_admonition_qcm qcm_single py_mk_qcm_id_00005">
+<p class="admonition-title">Je vérifie ma compréhension (bouton en bas pour recommencer)</p>
+<p></p KEEP><ol></p>
+<p></p KEEP><li class="qcm_single" correct="1" markdown>
+Soit la fonction suivante :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mafonction</span><span class="p">(</span>  <span class="n">a</span> <span class="p">)</span> <span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">b</span> 
+</code></pre></div></td></tr></table></div></p>
+<p>L'appel <code class="highlight"><span class="n">mafonction</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code> renvoie :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">6</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">7</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="kc">None</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="n">rien</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="3" markdown>
+Soit la fonction suivante :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mafonction</span> <span class="p">(</span> <span class="n">a</span> <span class="p">)</span> <span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">b</span> <span class="p">)</span>    
+</code></pre></div></td></tr></table></div></p>
+<p>L'appel <code class="highlight"><span class="n">mafonction</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></code> renvoie :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">0</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mf">0.0</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="kc">None</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="n">rien</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="3" markdown>
+Soit la fonction suivante :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mafonction</span><span class="p">(</span><span class="n">b</span> <span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>   
+<span class="n">c</span> <span class="o">=</span> <span class="n">mafonctionC</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">3</span> <span class="p">,</span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span> <span class="p">)</span>   
+</code></pre></div></td></tr></table></div></p>
+<p>La variable <code>c</code> a pour valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">16</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">17</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">18</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">21</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="2" markdown>
+Soit la fonction suivante :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span> <span class="p">,</span> <span class="n">b</span> <span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">b</span>  
+</code></pre></div></td></tr></table></div></p>
+<p>L'appel  <code>f(2,3,4)</code> renvoie :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">10</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">11</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">14</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">0</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="1" markdown>
+Soit la fonction suivante :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span> <span class="p">,</span> <span class="n">b</span> <span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">b</span>  
+</code></pre></div></td></tr></table></div></p>
+<p>La comparaison  <code>f(2,1,3)==7</code> renvoie :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="kc">True</span></code></p>
+<p></li>
+<li markdown="1">
+<code>``#!python False</code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP></ol></p>
+</div>
+<h2 id="exercices">Exercices<a class="headerlink" href="#exercices" title="Permanent link">⚓︎</a></h2>
+<details class="question" open="open">
+<summary>Exercice 1</summary>
+<p>Compléter le script ci-dessous de la fonction d'appel <code class="highlight"><span class="n">affine</span><span class="p">()</span></code> :   </p>
+<ul>
+<li>de paramètre <code>x</code>   </li>
+<li>qui renvoie <code>3*x-1</code>  </li>
+</ul>
+<p>Valider votre réponse (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span>) et lire la solution.</p>
+<p><div id="global_editor_d158571f15f0f2c129a823664e7d5384a172af58" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_d158571f15f0f2c129a823664e7d5384a172af58"></div><span id="comment_editor_d158571f15f0f2c129a823664e7d5384a172af58" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:5;" id="term_editor_d158571f15f0f2c129a823664e7d5384a172af58" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_d158571f15f0f2c129a823664e7d5384a172af58">5</span>/5</div></div></div></div></p>
+<div markdown="1" id="solution_editor_d158571f15f0f2c129a823664e7d5384a172af58"      class="py_mk_hidden" data-search-exclude >
+.128013a/hncp1Ps2evu:So 
+()ibkmgf=xd3-"tylr*030x0f0B050p0D0d0l090D050d0d0v0A0B0p0a0A020m030d0h0s0s050E0C020j0k0D0h0W0k0803060%0(0*0,0#0a02030 0^12060 0#0x0p0g0O0Q0S0U070p0t070D1g070B0Z030J0q0D0f1b0R0T0A1f1h1j1h0B1p1r1n0B0E100B070O0/0d0a05080U0e0A1t1d0A0u0L0f08050s0f1n1M1O1T1v1W1r1Z1#0Z040l0c0E0k0a0k0d0p0=080l0H1K0E0E0f091|0^1'0810061I291F1H1G1o0x1)0U1j081Y1_1n181a0P1u2j0p2l080k2p1n0a221027292D0$1N1}2r1U2w0E0)0D0Z0b262H0!2G1(2J1v2L2N0Z0e2R1O292A0f292p2c0x1H2h2W0U092x1$102+112B2U282$2}2=0H2C2H2i0A0r0Z0H0u2~020l2|34080u0Z050u1W2l3a3d2:0A0Y020n3m273e0Z0w3t333o3q0o3a3c3u3A0Z0i3a0m0l3L3E3z1c1v3602220B0h0E0@0_2S3N2V3P0U0s0p0Z0y3y3#2s0A0k0Z0F3+2I3$0A083w3=343/020z3{3o3'2P3J0^302)132{062_2a2-0^2d4e051q474a192T4a0I0K0M02.
+</div>
+</details>
+<details class="question" open="open">
+<summary>Exercice 1</summary>
+<p>Compléter le script ci-dessous de la fonction d'appel <code class="highlight"><span class="n">mystere</span><span class="p">()</span></code> :  </p>
+<ul>
+<li>de paramètres <code>x</code> et <code>y</code>   </li>
+<li>calcul <code>u = x + y</code>    </li>
+<li>calcul <code>v = 3*x</code>  </li>
+<li>renvoie <code>u-v</code>  </li>
+</ul>
+<p>Valider votre réponse (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span>) et lire la solution.</p>
+<p><div id="global_editor_5f626f9d1113f5481ede7be66151d8101b0a8772" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_5f626f9d1113f5481ede7be66151d8101b0a8772"></div><span id="comment_editor_5f626f9d1113f5481ede7be66151d8101b0a8772" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:5;" id="term_editor_5f626f9d1113f5481ede7be66151d8101b0a8772" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_5f626f9d1113f5481ede7be66151d8101b0a8772">5</span>/5</div></div></div></div></p>
+<div markdown="1" id="solution_editor_5f626f9d1113f5481ede7be66151d8101b0a8772"      class="py_mk_hidden" data-search-exclude >
+.128013a/hncp1Ps2e,vu:So 
+()ib+4kmgf=xd3-"tylr*030A0f0E050q0G0d0m090G050d0d0y0D0E0q0a0D020n030d0i0v0v050H0F020k0l0G0i0Z0l0803060)0+0-0/0'0a0203120{1506120'0A0q0h0R0T0V0X070q0w070G1j070E0$030M0r0G0f1e0U0W0D1i1k1m1k0E1s1u1q0E0H130E070R0=0d0a05080X0e0D1w1g0D0x0O0f08050v0f1q1P1R1W1y1Z1u1$1'0$040m0c0H0l0a0l0d0q0^080m0K1N0H0H0f091 0{1*0813061L2c1I1K1J1r0A1,0X1m081#1|1q1b1d0S1x2m0q2o080l2s1q0a25132a2c2G0(1Q202u1X2z0H0,0G0$0b292K0%2J1+2M1y2O2Q0$0e2U1R2W2a2l0D2#052R020B2(2b0'2+2Z0X2.2:0t2?2c2D0f2c2s2f0A1K2k2`0D092A1(1334142E2X2b2 033b0K2F2K2,0u0$0K0x2 0m3i2,080x0$0v0F0d0E0f253k2_1f1y0#020o3I3p39080$0z3P2Y3K0X3M0g3V2L3X2-0$0F3#2,3M0p0j2 0n0m3;3w3J2v3'020i3*390l0$0y3|3%3S023U0|2V3x3}0$0s413^433)462)3:3=48420$0h4c1X3~02404g3j3@1X0v0q0$2=4t3o3W3^4q0I4o2!3T3/3=3?3Q3%3r02250E0i0H0`4B4k3^3M3O4W4v4I3`4H0X4q0C4(3_4n4#4N4Y0$0p3/0{3m32163h063f2d360{2g51051t4`4}1c2W4}0L0N0P02.
+</div>
+</details><script >let PAGE_IDES_CONFIG = '.\x1eahnps26u: EwA)}kgf9{7.-5rl*]VL[0c1,evSo(ibN+4_\'m!F8=qxd\\3"tyUCIz\x1e0n0Z0D0W0I0!0G0s0N040D0m0M0^0+0W0B0M0D0Y0l0A0m0r0a0r09040Y0A0W0r0D0z040a160Y0W0J0B0A0a0m0z0r0Z0c0d0)070#0N06040P0D1q0d0Z1u0!050G060q090k0!0q0z0M0q0D0V1y070t1c0B0p1u0Z0C1C0D060E0N0A1H0!1%0!1B0Z0A0t0408080d0F0!040A0j0c0X060d220d0X0Z25250d0H0\'061,0s0l1|0D240b0z0z1c0d0W0X2j2l0m0A0s0I0s2h0W04061^0t0O2p2k0?061H0A2E2r0h24262O20232n0D0l0d0N0N0I060-2W0H080D0t0l0h1r2%2(0p2W080!0j0T0y0v2Q230W2T0d070b08052$2\'0l1#0E2*0d2,0l2.0N2:0j0p0407071%0W0H362_222{2U070G07322(372w0!0b0s21393b3d1Y3s0H0h3n2S2U0I080N0D0P070!0#3u2)1r3x3z212H0!38333D2;1!1$1\'0N2d0P1)1+1-1/3)0Z2 0D0:1*2c3;1r0Z3p0d0l0G3M3c0D3R0H062M1 21230#0d0T0d0o3J3X3A0d210u4h3?2~0J0t0I0A3,0D2:083=1#0Z2%2t0D0!4w4y1/401,4y3H1r3J0E040t4f4m0J0s3J1R074T0o0u0r203J0P080k4T0l251=0d4Q1V3z2S4U0s2S0E0s040-2i2F040!2w1s4Y0i0d4F4m1H1s4;0i28010d0x040d0.1{1V4\'4c221?2%0s3#4;4f4g4Y1#4)0k5n4L0!083H2R5G5f0K2h071?0d0G0b4s0I3_2n0O3g3i1V4_4/42060A0!0I5a2{5j4x5D0p5-0d0Q0d0V3I062{4S5C1^5G0d5f0F0I4:5O1^062h0E5O1V0(2}5M1=3M5r4@522g085-0p4q0G2:4w0s3.3{1,2c4A1C3r6n6r3}1C5f5h3$5$5\'216w3#6r5R2c2n0b0d1*5)5)25640!0.0#040k0D251#2K2m5V4t0U0b5S080#2:6$0m0P510I6)3P1-205f3g4W2q0D0S1^6@0d1V6O0G5)581V1^5`0d4}1-4 2r0!6/732z2J6~0m6i6`0d0%2h6y066N5+570V6/0A0b7h7m0d0P6$1y2h08600b64570s2w4?5i6/7C2F0m730D0E6/5K6}7U7l7U2{0P1z2c1#0F0g0$0R380I7p0A4F1,7N7P4_070s0G0E6K3#5)4/4D5%5a0e0K0w6k4B1R1;0b2{0W1B2@8c0V8e8g0N1z1F764z1r8j1C2w4v4t0P0-1B0q0B4B0f050-0D0N4t2:8i0v4B511,3Q5D8J2T1.1r0r8O7B0G8J0G0k0;1@3_8V5j0s6*4B1*7O0N2w4)8o1?0j1B8D1C051?1)050D1}0N0J0!061B528-1C441%2t0#3R0+978,0D4B440E8)1B2f0t2%4B6;0V2X2{8J2Y4x8`094B2{4E1?8I8P3P3R3N1H3/9w3_7~0s9h993 0D1|5%4Q1,3c0!0W5O4G420:4D3x8s8+9S300G0f0N1H0t1v5q8)6F3O7O0/3N9\'454E5D9o4R9r6v0#8q069x0J9+0y0Z3y5s1V0Z8N1C2:9#7B1)an0G0l0l1B092k0i8c0,0.0:0B0J9U0M0a0D0B0l1a0S0J0o0W0S0l0r0r1l04150J0r0o0A090o0M0W1f0Y0M0m0B1|1B1t1v1x1z1/1E1G1I1K1M1O1Q1S3Q1V0z091Y0#3?1%1(7t8*1:1=1@1_1{1}4b2R272O292b2d2f7@7f2m2o7m2t2v2x2z2B2D7m2H5#6/2Mbg275o3K2V2X2Z4G0N3U373C2/2;2?2^bE402~303U35bM3%bO3e5V3j3l5?2RbT3G393w4F3Y3$2-b!3F3tb(2`2|9b8R3Tb,3Wb.4l3!b:3ab!b33+3-3/3|6t3~3?3^3`3:cb1C400A047O0D484a3J7}2Y3#480u0u09b^224k21205i4gckcm0H0r0h4q5P4t4v5`6u4C913x4Ha23~4K5+5E373J9^5s7c5v0d0K1H6Z06205`5F5|225I5K5M5O5Q5S0W5U3h2\'5S5Z2I86215)5`6j5/5;5?5^5*4yc:5~60662 4m65670D695L2B4}8(4_d44|7@6i5-6l6nc8b6cP6Hc96sb76B5i856F2}6m6I1+816M756Q2h6S7^0G6W6Y6!bn0z7c3h6(6*4_6,6.7m6;5%6@7*7h066{7}6$700d72746P2h784xdb5D7cdO7S7i1=bz7m7od;7q7scg7v2:7x7z7B7i7F6~7H7;0d7Ld}cm7Qbn0m7T2r7W7Y7m7!7z6/7(d/7,7.7:7J7?7^eq7{2}7~807e83dH91d20d888ab38l0t8f9g8taj0*eZe#0W8o4F1G0Wace\'8w9x8z8*8C8E8G9Y8K8*8u0Z9H8R3N1V0l8*8X1C048Z8#8%c#8*989j1C8/0:8=3N6;088_1r8{0Z8}3N0A909294961rff9k3N9c0s9e1,8hfz9ifB0N9m5sa39qfg0Z9t9v8I4t649+0B9BcicR9U2%0;6U9I8S9Ld|9{9P9RfQ2{9V0I9X8Ial9$0N9 9)4F9+fAak1G9:9=9@dqd2f-9}f{0/a09*fOa51Da7a?aaacae3z0!ahe\'f_an7A4Gaqas1rau0zaw1$aygba#0J0J09aN0B0B0a0}0Y040W09a)0r0m0J0S0r0=0maG0B0r0MgV0Y0Y0JgM0M0za,gg1w7Ha;gh1H1J1L1N1P1R1Ta~0Yb1c6b5cgb71;5qbb1|1~3JbC0Zbi3|2e2gdZ2n7z2u532y2A73bw7Uby7%2L2NbCbS2|2W2Y2!bKb~c33\'2=2@3JbT2 3139bX2+bZ9Zb#c}5@b\'hF2|3r3thAcAhBb=hU3HhS3LfCb|bLb af3Z0G3#bNhNg 6o6qh1cPcedD6z9T2U080G7)cn5=0d4b4_4g090u0V0q0Y0u4e20hX9Q4B4rcMcT9+0Z3?f}4GcOcV2|c.2*3J9\'5;0d2Y0d4|066Y0H0B2kiubE2Riw4eiziBiDiF0ziHc:5G4Qi538h 1z0H0V0d1#0#cyiS7x4Zi6i8iaic3JiSfd4:clc\'4Yh8bEi;cD4g0q0ac!g60d0Jc\'0Mi_iti(c=6a1^c^4tc`c|5Wc 5i5!6E5(2hd55.5:5=20da7b5|de61dh7Mdg68ja7j6dc`jmdt4x6jdxip3_h?cab7jJh`ch0ZdG6DeU6H752cdO0W6Nd|4@dT6UdV6X6Z3)6$d!6\'6?d\'386-ev0?d,j:6^2c7p6|d@716*7WdQd}3#79e01^7d6Le47De6hq0?e95f7rjX6see3#1Rehj@7Vek501zenep7`0Deskb7Uex7ZeNeB7meD1-eF7/7;eJf(kw4?7}7 jZ2h84eTdJeW8b1$e)8g8M8k8m0+e,8qe/k#8v91e?8A1re_1C8F8H9x8Le%8Of(f28Tf51Bf7f0fa0t8$8\'5rfefJfh0/fj3Pfl8^8`4Bfs8 910j9395f/fKfDfFe$9,fQ9l9n1r9pgffS0I9wfV9zfpfZ9T9Ef%f19J9;a9f,9O0/lof!f=f@9Zam9%gbiof l94Cg2lM9?l69_9LlP0s9~lYf#cU41a4fQa=9L4tab8iglag1Agp9!f`gs9;aratavax0-gb0{0rgU0oaHgZ0l0z0l090AfY0m040S090Y0agK0DaM0r0Y0S0M040B0o16aP0Sg,1ug.a:3~l^a@g@a`1R3_0A4u1Wg~8c3+dA3~h3ba1`h6be23h9hbbkhej-hgbqhibthl2C6/hpbAhs2Phu2UhwbI2#hAh/3dbQh$2}hHbW4:bYb;hN3fhP3k3mm{dKhV33b-h+hYnbh!i\'40b{3Rb}njh*b/c2n13(mV1(dzh@cc4Bh_mXf!2U23m%czc096ihcL4uikcPionSir2Uit4ObEiw21iM2ziO0CiPcpiI235u4g04ar9ycoi/234Y4Tib1I0Bn@225z4,4.5i4;kxdr2h0l0H0n060i2M2{4{4}3#7G522h0n55573#by5b4R5dhajT5k4Rc+n~7cj1n.5w0V075y4*5BcXc/ddc(c?jbnQjeb$5X7j41d1dJd4cXd6jpd92\'k7oK5 jw63dj0bjAdnjCdq6fjGdvkX1DdLh=jQjOiho^nHjS5geSjk6GdLkjjZj#762xdS0Z6T6Vj*dYm,j/6@d(j?6/j_d.6_eaj~6~d^d`ec77k5d 7bk9oh7mkp7je77Ukgebkj1%klegbqei7Dkr2lem7Jeo7M9Oo5c%kzew1Vey7UeAbqeC3PeE1_eGkKea7@kMpVkOeOkRoSdI8789o?8de!k!k`kYk%e+8pe.e:4Be=8yk/0dk;0Zk?e|3Me~e\'lK8Sf4f68Y0.fbl)fNfI9Sfi8;ld8@fnlg8|8~fulklmfyltlp5#fE9ffHqG9a3NfM8*lyfQlAlC9y9+0a9Cf#9Ff\'8QlLf+p8g89Qqsf:9U6ElUgqlX9(l:l!9-l%g4qqg7l,l.q=a19+qRihg;a9l`gkafgnl 4Bq:aogtm5gwm7gAm90:0r0l1f0a0l0m0{gI0 g!0S0B0+muaCmsgZ0BgH0zaB1d0S0omCmGa.g/mKr4g?a_g_0VmQmSa mU3*h0jN1/mZ1^m#bdh82Pha2ahcbldS6~d!bp7$m/2nbuhmm?2Im^h9n4m}hyh)nmn2hEngbUhI33hKs22;nc3ihQnfb)hTb+nuiAnNsa3enon4nr3Ss1hXnxhM3dh;nCrZnE1CnGnDnIcK5QcNcXnTl:nVnIk74N24n!0/ixn%iCcn8Dn*i3oyiKiy21iNsVn)iGsYn,5|n.7Ej?3_i10Ci%oy2Rn_4giZ0Li%i-7ys+5Go04g4-0Z4/o44?5)0Ps/2wo90Vaw0n0#oc4`4|4~oi53oloD5658op0n5c5ep05jh-ow5ni(23i;oBi)oF5Ac,3|4M2MiSj9o-jc5Rdrjfc~5YjioUjlk7oYd8jro#jt5H1_df62dijwo,6bdp6eds6hjIo|dyjLo`dBo}sDo 6Cp_p3ef6JeQp7dR2Npcj)dXj,r/d#1Uj`pjd*7Upm6*d/j}d?prk0kSpuk47W7acXe27epY0?pDke7n0p7pki7tpKknpMpCpP9UktpSkvp;4_7RpBe57XkCun7$p(i07+p+kJeIp.eKkN7|p?eQkSp1eUkWeYq2k+e(q2k(q5u@q80Ie@8BfqqefUqgu@qjf38Ul0qn8!l4fcg6lR1:lbqv8?fmfo0dfqliqCfwlnq+qH9dqKvflvqrl=fP9s049ulBv3fW1BqXf!lI9Gk|q%lNq(l,vff;q.51f^m1anf|q?vf9.g306l(fd9`q}gaq gdlxl?r3a8gjl|r8gorbvW4Gm3gum6gy0i.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_pyodideSectionsRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/2_btnRunner-pyodide.js"></script>
-<script type="application/javascript" src="../../js-per-pages/start-pyodide.js"></script><script type="application/javascript" src="../../js-per-pages/2_terminalRunner-terms.js"></script><script type="application/javascript" src="../../js-per-pages/3_ideRunner-ides.js"></script>
+<script type="application/javascript" src="../../js-per-pages/start-pyodide.js"></script><script type="application/javascript" src="../../js-per-pages/2_terminalRunner-terms.js"></script><script type="application/javascript" src="../../js-per-pages/3_ideRunner-ides.js"></script><script type="application/javascript" src="../../js-per-pages/qcms-qcm.js"></script>
 
 
 
