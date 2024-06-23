@@ -1818,18 +1818,27 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
 </li>
       
         <li class="md-nav__item">
-  <a href="#instructions-conditionnelles" class="md-nav__link">
+  <a href="#instructions-conditionnelles-simples" class="md-nav__link">
     <span class="md-ellipsis">
-      Instructions conditionnelles
+      Instructions conditionnelles simples
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-syntaxe-par-lexemple" class="md-nav__link">
+  <a href="#instructions-conditionnelles-classiques" class="md-nav__link">
     <span class="md-ellipsis">
-      La syntaxe par l'exemple
+      Instructions conditionnelles classiques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instructions-conditionnelles-avec-plusieurs-cas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions conditionnelles avec plusieurs cas
     </span>
   </a>
   
@@ -1918,7 +1927,7 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
             
   
   <span class="md-ellipsis">
-    TP (seconde)
+    TD (seconde)
   </span>
   
 
@@ -1927,6 +1936,73 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            TD (seconde)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tp-2gt-01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fonctions et tests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    TP (seconde)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
             <span class="md-nav__icon md-icon"></span>
             TP (seconde)
           </label>
@@ -2942,18 +3018,27 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
 </li>
       
         <li class="md-nav__item">
-  <a href="#instructions-conditionnelles" class="md-nav__link">
+  <a href="#instructions-conditionnelles-simples" class="md-nav__link">
     <span class="md-ellipsis">
-      Instructions conditionnelles
+      Instructions conditionnelles simples
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-syntaxe-par-lexemple" class="md-nav__link">
+  <a href="#instructions-conditionnelles-classiques" class="md-nav__link">
     <span class="md-ellipsis">
-      La syntaxe par l'exemple
+      Instructions conditionnelles classiques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instructions-conditionnelles-avec-plusieurs-cas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instructions conditionnelles avec plusieurs cas
     </span>
   </a>
   
@@ -3112,15 +3197,15 @@ message d'erreur</p>
 </li></p>
 <p></p KEEP></ol></p>
 </div>
-<h2 id="instructions-conditionnelles">Instructions conditionnelles<a class="headerlink" href="#instructions-conditionnelles" title="Permanent link">⚓︎</a></h2>
+<h2 id="instructions-conditionnelles-simples">Instructions conditionnelles simples<a class="headerlink" href="#instructions-conditionnelles-simples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition coeur">
 <p class="admonition-title">syntaxe d'un test simple</p>
 <p>Une structure conditionnelle simple comporte :
-    - la clef de début <code class="highlight"><span class="k">if</span></code> suivi d'un <code>&lt;test&gt;</code> qui prend les valeurs <code class="highlight"><span class="kc">True</span></code> ou <code class="highlight"><span class="n">Valse</span></code>
-    - le cors du test contient les actions à exécuter si la valeur de <code>&lt;test&gt;</code> est <code class="highlight"><span class="kc">True</span></code>.<br />
+    - la clef de début <code class="highlight"><span class="k">if</span></code> suivie d'un <code>&lt;test&gt;</code> qui prend les valeurs <code class="highlight"><span class="kc">True</span></code> ou <code class="highlight"><span class="n">Valse</span></code>
+    - le corps du test contient les actions à exécuter si la valeur de <code>&lt;test&gt;</code> est <code class="highlight"><span class="kc">True</span></code>.<br />
         Les instructions sont indentés (comme pour les fonctions) à l'aide de la touche ++Tab++
     - la sortie de le la structure est signalée par l'absence d'<em>indentation</em>.</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span>  <span class="o">&lt;</span><span class="n">test</span><span class="o">&gt;</span> <span class="p">:</span>    <span class="c1"># (1) </span>
+<div class="highlight"><span class="filename">script python</span><pre><span></span><code><span class="k">if</span>  <span class="o">&lt;</span><span class="n">test</span><span class="o">&gt;</span> <span class="p">:</span>    <span class="c1"># (1) </span>
     <span class="n">action1</span><span class="p">()</span> 
     <span class="n">action2</span><span class="p">()</span>   <span class="c1"># (2) </span>
 <span class="n">action</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>       <span class="c1"># (3)  </span>
@@ -3143,10 +3228,10 @@ message d'erreur</p>
 <li>Exécuter le script ci-dessous et vérifier que la ligne 3 n'est pas exécutée.</li>
 <li>Modifier la ligne 1 afin d'affecter la valeur <code>20</code>. Vérifier que les lignes 3 et 4 sont exécutées.</li>
 </ol>
-<p><div id="global_editor_49ea0f20203d63caaed650a929436e947908add8" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_49ea0f20203d63caaed650a929436e947908add8"></div><span id="comment_editor_49ea0f20203d63caaed650a929436e947908add8" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:5;" id="term_editor_49ea0f20203d63caaed650a929436e947908add8" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_49ea0f20203d63caaed650a929436e947908add8">5</span>/5</div></div></div></div></p>
+<p><div id="global_editor_49ea0f20203d63caaed650a929436e947908add8" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_49ea0f20203d63caaed650a929436e947908add8"></div><span id="comment_editor_49ea0f20203d63caaed650a929436e947908add8" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_49ea0f20203d63caaed650a929436e947908add8" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_49ea0f20203d63caaed650a929436e947908add8">5</span>/5</div></div></div></div></p>
 <div markdown="1" id="solution_editor_49ea0f20203d63caaed650a929436e947908add8"      class="py_mk_hidden" data-search-exclude >
-.128013mSfq)éy8rbus2nVp/ze; v"=0
-lcg:Pa1idktoh43(030D0n0F0A0C0v0g0p0w0v0A0g0g0s0r0F0C0k0r020u030g0f05050A0d0b02060G0v0f0#0G0i030l0+0-0/0;0)0k0203140}170l140)0D0C0q0T0V0X0Z0H0C0x0H0v1l0H0F0'030O0e0v0n1g0W0Y0r1k1m1o1m0F1u1w1s0F0d150F0H0T0@0g0k0A0i0Z0h0r1y1i0r070Q0n0i0A050n1s1R1T1Y1A1#1w1'1)0'040p0z0d0G0k0G0g0C0`0i0p0M1P0d0d0n0w210}1,0i150l1N2e1K1M1L1t0D1.0Z1o0i1%1~1s1d1f0U1z2o0C2q0i0G2u1s0k27152c2e2I0*1S222w1Z2B0d0.0v0'0B2b2M0(2L1-2O1A2Q2S0'0h2W1T2Y2c2n0r2%0A2T020J2*2d0)2-2#0Z2:2=0I2^2e2F0n2e2u2h0D1M2m2|0r0w2C1*1536162G2Z2d31033d0M2H2M2.0i0'0A0x0n310p3k2.0G0'0s3y3A3b050C2(0t312`3r3b0E0'0C073F2{1h2$3u3w3U3O3W0Z3C02000x0F0o3E0~2X3z3V2x0r3I2U0c3!2!3$0r0%020y3y0p420u42423G3|0i0e0'2F2z0F3m3;1Z3~0K4f3#3=0g1W3(080f0G3+0j0G0f0S1}0f0q0n0m0p0q4s0n0d004q4s0o4k3{3=3~093y3N4N2P4a024c0i4e3.2+474O0'4j4!3l4g1A4n0'4I4r4t4v0S0G0e0g4G4A274C1w0p0d0a0+0v0O0F4/4K4M2N3|4P3M0}3o34183j0l3h2f380}2i5m0A1v5f5i1e2Y5i0N0P0R02.
+.128013ék:pd=8va"osz24)yftS3;1c m(nPVqg/u0rhbli
+e03090K0n0d0I0H0g0t0s0H0d0g0g0a0e0n0I080e020J030g0C0u0u0d0E0l020o0f0H0C0#0f0w030B0+0-0/0;0)080203140}170B140)090I0c0T0V0X0Z0F0I0A0F0H1l0F0n0'030O0G0H0K1g0W0Y0e1k1m1o1m0n1u1w1s0n0E150n0F0T0@0g080d0w0Z0i0e1y1i0e0m0Q0K0w0d0u0K1s1R1T1Y1A1#1w1'1)0'040t0x0E0f080f0g0I0`0w0t0M1P0E0E0K0s210}1,0w150B1N2e1K1M1L1t091.0Z1o0w1%1~1s1d1f0U1z2o0I2q0w0f2u1s0827152c2e2I0*1S222w1Z2B0E0.0H0'0r2b2M0(2L1-2O1A2Q2S0'0i2W1T2Y2c2n0e2%0d2T020p2*2d0)2-2#0Z2:2=0j2^2e2F0K2e2u2h091M2m2|0e0s2C1*1536162G2Z2d31033d0M2H2M2.0w0'0d0A0K310t3k2.0f0'0a3y3A3b0u0I2(0D312`3r3b060'0I0m3F2{1h2$3u3w3U3O3W0Z3C02000A0n0q3E0~2X3z3V2x0e3I2U0b3!2!3$0e0%02073y0t420J42423G3|0w0G0'2F2z0n3m3;1Z3~0v4f3#3=0g1W3(0z0C0f3+0y0f0C0S1}0C0c0K0h0t0c4s0K0E004q4s0q4k3{3=3~0k3y3N4N2P4a024c0w4e3.2+474O0'4j4!3l4g1A4n0'4I4r4t4v0S0f0G0g4G4A274C1w0t0E050+0H0O0n4/4K4M2N3|4P3M0}3o34183j0B3h2f380}2i5m0d1v5f5i1e2Y5i0N0P0R02.
 </div>
 </div>
 <div class="admonition example">
@@ -3222,7 +3307,7 @@ Le script B n'exécute pas la ligne 4 car elle fait partie du bloc de l'instruct
 </div>
 <div class="admonition example">
 <p class="admonition-title">controler le déroulement (2)</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">script python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -3408,17 +3493,15 @@ Soit le script suivant :
 </li></p>
 <p></p KEEP></ol></p>
 </div>
+<h2 id="instructions-conditionnelles-classiques">Instructions conditionnelles classiques<a class="headerlink" href="#instructions-conditionnelles-classiques" title="Permanent link">⚓︎</a></h2>
 <div class="admonition coeur">
-<p class="admonition-title">syntaxe d'une structure conditiionnelle</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Syntaxe classique</label><label for="__tabbed_4_2">Syntaxe complexe</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
+<p class="admonition-title">syntaxe d'une structure conditionnelle classique</p>
 <ul>
 <li>la clef de début <code class="highlight"><span class="k">if</span></code> suivi d'un <code>&lt;test&gt;</code> qui prend les valeurs <code class="highlight"><span class="kc">True</span></code> ou <code class="highlight"><span class="n">Valse</span></code></li>
 <li>la clef  <code class="highlight"><span class="k">else</span></code> suivi d'un <code>:</code>  </li>
 <li>la sortie de le la structure est signalée par l'absence d'<em>indentation</em>.</li>
 </ul>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">script python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -3438,15 +3521,383 @@ Soit le script suivant :
 </code></pre></div></td></tr></table></div>
 <ol>
 <li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</li>
-<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</li>
+<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires   </li>
 </ol>
 </div>
-<div class="tabbed-block">
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<ol>
+<li>Exécuter le script ci-dessous et vérifier qu'il affiche <code>"Vous pouvez voter"</code> et <code>Vous observerez le résultat</code></li>
+<li>Modifier la valeur de <code>age</code> pour la valeur <span class="arithmatex">\(15\)</span>. Qu'affiche le script ?</li>
+</ol>
+<p><div id="global_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f"></div><span id="comment_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f">5</span>/5</div></div></div></div></p>
+<div markdown="1" id="solution_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f"      class="py_mk_hidden" data-search-exclude >
+.128013ék:pd=8va"osz24)yftS3;16c m(5nPVqg/urhbli
+e03090L0n0d0J0I0g0u0t0I0d0g0g0a0e0n0J080e020K030g0E0v0v0d0F0l020o0f0I0E0$0f0y030D0,0.0:0=0*080203150~180D150*090J0c0U0W0Y0!0G0J0C0G0I1m0G0n0(030P0H0I0L1h0X0Z0e1l1n1p1n0n1v1x1t0n0F160n0G0U0^0g080d0y0!0i0e1z1j0e0m0R0L0y0d0v0L1t1S1U1Z1B1$1x1(1*0(040u0z0F0f080f0g0J0{0y0u0N1Q0F0F0L0t220~1-0y160D1O2f1L1N1M1u091/0!1p0y1'1 1t1e1g0V1A2p0J2r0y0f2v1t0828162d2f2J0+1T232x1!2C0F0/0I0(0r2c2N0)2M1.2P1B2R2T0(0i2X1U2Z2d2o0e2'0d2U020p2+2e0*2.2$0!2;2?0j2_2-2N2/2 0(0x322{342}2:0f2S2=0(0s32192H0~2v2i091N2n3c0t2D1+163n173l2L0 2Y033t0N2I3b1i2%0(0d0C0L320u2!2O3I0!0f0(0a3O3Q2/0v0J2V383B2,3a2#3S0e060(0J0m3X2|3+0y3K3M3;3H2y0e3U02000C0n0q3W3'2e3P3=3|3!2V0b3`3*3|0'02073O0u4k0K4k4k3Y3c0y0H0(2G2A0n3j481!4g0w4x3{1!0g1X3 0B0E0f420A0f0E0T1~0E0c0L0h0u0c4K0L0F004I4K0q4C4e4z0(0k3O3)3R3|3-020L0S3N4502474D1B4g4i4^4n0u4m4n4p3?4s024u0y4w4^544f0(4B5b4y1B4F0(4!4J4L4N0T2r0u4Q4S4U1T0T4W0n4Y5l4$4'4.4)024+4 4-3556585a2L5h0!4A5C2/5j4H5m0q4M4O0u0f0H0g4Y4S284U1x0u0F050,0I0P0n5A425R3c4g5G2J0*0D3E0L2f2G5 3m1f3o2i2l2g0d1w620D3n5|0N0P0R0g02.
+</div>
+</div>
+<div class="admonition tip py_mk_admonition_qcm qcm_single py_mk_qcm_id_00007">
+<p class="admonition-title">Je vérifie ma compréhension (bouton en bas pour recommencer)</p>
+<p></p KEEP><ol></p>
+<p></p KEEP><li class="qcm_single" correct="3" markdown>
+Soit le script suivant :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span><span class="o">=-</span><span class="mi">1</span>
+<span class="k">if</span> <span class="n">a</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="mi">11</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="mi">11</span>
+</code></pre></div></td></tr></table></div></p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">12</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">1</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">10</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">12</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="1" markdown>
+Soit le script suivant :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span><span class="o">=</span><span class="mi">5</span>
+<span class="k">if</span> <span class="n">a</span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="mi">5</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="mi">3</span>
+</code></pre></div></td></tr></table></div></p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">2</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">5</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">7</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">10</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="2" markdown>
+Soit le script suivant :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span><span class="o">=</span><span class="mi">21</span>
+<span class="k">if</span> <span class="n">a</span><span class="o">&gt;=</span><span class="mi">20</span><span class="p">:</span>
+  <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="mi">18</span>
+  <span class="k">if</span> <span class="n">a</span><span class="o">&lt;=</span><span class="mi">4</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="mi">4</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="mi">4</span>
+</code></pre></div></td></tr></table></div></p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">1</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">7</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">21</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">35</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="1" markdown>
+Soit le script suivant :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span><span class="o">=</span><span class="mi">25</span>
+<span class="k">if</span> <span class="n">a</span><span class="o">&gt;=</span><span class="mi">12</span><span class="p">:</span>
+  <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="mi">11</span>
+  <span class="k">if</span> <span class="n">a</span><span class="o">&lt;=</span><span class="mi">6</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="mi">3</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="mi">3</span>
+</code></pre></div></td></tr></table></div></p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">11</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">17</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">25</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">33</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="3" markdown>
+Soit le script suivant :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="k">if</span> <span class="n">a</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="p">:</span>
+    <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="o">-</span><span class="mi">7</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="o">+</span><span class="mi">7</span>
+<span class="k">if</span> <span class="n">b</span><span class="o">&gt;</span><span class="mi">0</span> <span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="mi">3</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="mi">3</span>
+</code></pre></div></td></tr></table></div></p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">2</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">5</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">8</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">9</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="2" markdown>
+Soit le script suivant :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span> 
+<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="k">if</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">6</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">6</span>
+</code></pre></div></td></tr></table></div></p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">17</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">16</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">13</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="2" markdown>
+Soit le script suivant :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">7</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">7</span>
+<span class="k">if</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">9</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">9</span>
+</code></pre></div></td></tr></table></div></p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">7</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">2</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">7</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">16</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="1" markdown>
+Soit le script suivant :
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">6</span> 
+<span class="k">if</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">7</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">7</span>
+<span class="k">if</span> <span class="n">b</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">9</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">9</span>
+</code></pre></div></td></tr></table></div>
+On rappelle que <code>x%n</code> (lire <span class="arithmatex">\(x\)</span> modulo <span class="arithmatex">\(n\)</span>) est le reste de la division de <code>x</code> par <code>n</code>.</p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">1</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">6</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">10</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">19</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP></ol></p>
+</div>
+<h2 id="instructions-conditionnelles-avec-plusieurs-cas">Instructions conditionnelles avec plusieurs cas<a class="headerlink" href="#instructions-conditionnelles-avec-plusieurs-cas" title="Permanent link">⚓︎</a></h2>
+<div class="admonition coeur">
+<p class="admonition-title">syntaxe d'une structure conditionnelle avec plusieurs cas</p>
 <ul>
 <li>la clef de début <code class="highlight"><span class="k">if</span></code> suivi d'un <code>&lt;test&gt;</code> qui prend les valeurs <code class="highlight"><span class="kc">True</span></code> ou <code class="highlight"><span class="n">Valse</span></code></li>
-<li>la clef  <code class="highlight"><span class="k">else</span></code> suivi d'un <code>:</code>  </li>
+<li>le(s) clef(s)  <code class="highlight"><span class="k">elif</span></code> (pour <code>sinon si</code>) suivies d'un <code>:</code>  </li>
+<li>la clef  <code class="highlight"><span class="k">else</span></code> suivie d'un <code>:</code>  </li>
 <li>la sortie de le la structure est signalée par l'absence d'<em>indentation</em>.</li>
 </ul>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">script python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">if</span>  <span class="o">&lt;</span><span class="n">test1</span><span class="o">&gt;</span> <span class="p">:</span>  <span class="c1"># (1)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; bloc indenté exécuté uniquement </span>
+<span class="sd">    lorsque &lt;test1&gt;==True &quot;&quot;&quot;</span>
+    <span class="n">action_1</span><span class="p">()</span>
+<span class="k">elif</span> <span class="o">&lt;</span><span class="n">test2</span><span class="o">&gt;</span> <span class="p">:</span>  <span class="c1"># (2)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; bloc indenté exécuté uniquement </span>
+<span class="sd">    lorsque &lt;test1&gt;==False et &lt;test2&gt;==True&quot;&quot;&quot;</span>
+    <span class="n">action_2</span><span class="p">()</span> 
+<span class="k">elif</span> <span class="o">&lt;</span><span class="n">test3</span><span class="o">&gt;</span> <span class="p">:</span>  <span class="c1"># (3)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; bloc indenté exécuté uniquement </span>
+<span class="sd">    lorsque &lt;test1&gt;==False et &lt;test2&gt;==False et &lt;test3&gt;==True&quot;&quot;&quot;</span><span class="s2">&quot;</span>
+    <span class="n">action_3</span><span class="p">()</span> 
+<span class="k">elif</span> <span class="o">&lt;</span><span class="n">test4</span><span class="o">&gt;</span> <span class="p">:</span>  <span class="c1"># (4)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; bloc indenté exécuté uniquement </span>
+<span class="sd">    lorsque &lt;test1&gt;==False et &lt;test2&gt;==False et &lt;test3&gt;==False et &lt;test4&gt;==True&quot;&quot;&quot;</span><span class="s2">&quot;</span>
+    <span class="n">action_4</span><span class="p">()</span> 
+<span class="k">else</span> <span class="p">:</span> <span class="c1"># (5)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; bloc indenté exécuté uniquement </span>
+<span class="sd">    lorsque &lt;test1&gt;==False et &lt;test2&gt;==False et &lt;test3&gt;==False et &lt;test4&gt;==False&quot;&quot;&quot;</span><span class="s2">&quot;</span>
+    <span class="n">action_5</span><span class="p">()</span> 
+<span class="n">action_6</span><span class="p">()</span>  <span class="c1"># non indenté et après l&#39;instruction conditionnelle, </span>
+            <span class="c1"># sera exécuté dans tous les cas.</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</li>
+<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</li>
+<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</li>
+<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</li>
+<li>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</p>
+</li>
+<li>
+<p>Le nombre de parties <code class="highlight"><span class="k">elif</span></code> est quelconque. </p>
+</li>
+<li>La partie <code class="highlight"><span class="k">else</span></code> n'est pas obligatoire.<br />
+<img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> Si la clef <code>else :</code> n'est pas utilisée, et si la valeur de tous les tests est <code>False</code>, alors l'instruction conditionnelle n'exécute aucun des blocs.</li>
+</ol>
+</div>
+<div class="admonition example">
+<p class="admonition-title">triangles rectangles</p>
+<ol>
+<li>Exécuter le script et vérifier qu'il affiche que le triangle est rectangle en <span class="arithmatex">\(C\)</span>.</li>
+<li>On considère le nouveau triangle <span class="arithmatex">\(ABC\)</span> tel que <span class="arithmatex">\(AC=13\)</span>, <span class="arithmatex">\(AB=5\)</span> et <span class="arithmatex">\(BC=12\)</span>. 
+    Modifier le scirpt afin de faire afficher la nature du nouveau triangle.</li>
+</ol>
+<p><div id="global_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_7ea47e15a124d65dec5cc1aed867b856e245da4a"></div><span id="comment_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a">5</span>/5</div></div></div></div></p>
+<div markdown="1" id="solution_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a"      class="py_mk_hidden" data-search-exclude >
+.128013k:9Bp7d=8va*"os)24yftS3;,16c m(5nPqg/+u0rAChbli
+e030b0R0p0f0P0O0j0x0w0O0f0j0j0c0h0p0P090h020Q030j0H0y0y0f0J0n020q0i0O0H0+0i0B030F0=0@0_0{0:0902031b141e0F1b0:0b0P0e0!0$0'0)0M0P0E0M0O1s0M0p0.030V0N0O0R1n0%0(0h1r1t1v1t0p1B1D1z0p0J1c0p0M0!0~0j090f0B0)0l0h1F1p0h0o0X0R0B0f0y0R1z1Y1!1(1H1+1D1.1:0.040x0C0J0i090i0j0P110B0x0T1W0J0J0R0w28141?0B1c0F1U2l1R1T1S1A0b1^0)1v0B1-251z1k1m0#1G2v0P2x0B0i2B1z092e1c2j2l2P0;1Z292D1)2I0J0^0O0.0x0u2i2T0/2S1@2V1H2X2Z2#0l2'1!2)2j2u0h2.0f2!020x0r2=2k0:2^2,0)2{2}0x0m312@2T2_372#0A3b333d352`0i2Y2|2#0v3i2*2U1o2-3n2/2~0a3s343v363x3p2~0d3B3k3D3m3o38073J2+3L3f020u0I3Q3u2E3M3y0u2%152(3j3R3Z3T0u2;3'2?1f2N142B2o0b1T2t3l0w2J1;1c3@1d3=2R3/2k033}0T2O3K3+0.0K0L3b0x3t2_0i0.0c4g4i3l0y0P0.0u30453c3*2W4d084n3C3Z4k024m4v4h4C1)4q0.3h4v3)3Y4y02084f4H4o3L4E4G2P4I4b4K4r3U3.2P4P3e0N0.2M2G0p3b4W3Z0-020z4=4J1H0j1%02000D0H0i0p0s0K080x0c0x5153554{4$1H4^0t4B5g364d4U2R4|0)5i5k4x4}4 5c54560L595b525y5f5u5r0.5j4V5q2`5n5F4Q5h5I5t5P0)4~0.5x554T5B5X0s5O2_5s5K5l5M4S5o2(4?1)4^0k3X2_050.0P0o5S3e4z5%3l4E0g0g5 3L4L024)2(4#5G0h4Y4Z695/2-5N4v6g0)61636j5L66682?6a5T6c0.0G5|3l0B0.4T644D0.626D4%0.6r2k0x6t5'0.063i6M6M6k2`4-024/0B4;6o5*4^4`6#6b5V505D55575A0R0j0p0x0H291R0P1!0E1D0x2e2g6{6}1-0x0L5#6H5Q025=4O6U5^020R1v5{5)6b6A024e776l6F6n5p5*6q6y4X4l6e6s6U7k577n6v026G6(6u7t7i6u4E6x7J5}5,7C6m7C7I4!6U4^6Q4O6S6N6z6W6Y6!7r6b6%7C6*5#6.0x6:6=6@0x6_711E6 0V0B6|1E7308767G6O795?3l7d7f5`7u4c7P82607p7S4'6K2~6U6d8a4R7B8d7v7E7q5.6p8h8m1H7L8w5m7l5-3:5L7R8p3Z7T6f5L7W6R6S7z7$0J4:7C7*8G1)7,6,565Z7:6?6^8Q7^6~2f7{7}7/290K817(6u5;853L870Y0R8z0h8L7Y8N5L0B8P8R8U786'8:2_8W5d0s6}7@7|6}0B00010r070s8!1Z0Z7`7^8/8t6$0.7a4*14480R2l2M9z3?1l3^2o2r2m0f1C9C0F3@0:9M0U0W0Y02.
+</div>
+</div>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> Si <code>&lt;test1&gt;==True</code> et <code>&lt;test3&gt;==True</code>, l'instruction exécute <code>action_1()</code> et ignore le reste des tests pour exécuter <code>action_6()</code>     </p>
+<div class="admonition tip py_mk_admonition_qcm qcm_single py_mk_qcm_id_00008">
+<p class="admonition-title">Je vérifie ma compréhension (bouton en bas pour recommencer)</p>
+<p></p KEEP><ol></p>
+<p></p KEEP><li class="qcm_single" correct="2" markdown>
+Soit le script suivant :
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -3454,30 +3905,98 @@ Soit le script suivant :
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">11</span>
+<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="k">elif</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">3</span>
+</code></pre></div></td></tr></table></div></p>
+<p>En fin de script, la variable <code>a</code> prend la valeur :</p>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">11</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">14</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">7</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="3" markdown>
+Soit le script suivant :
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">if</span>  <span class="o">&lt;</span><span class="n">test</span><span class="o">&gt;</span> <span class="p">:</span>  <span class="c1"># (1)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; bloc indenté exécuté uniquement lorsque &lt;test&gt;==True &quot;&quot;&quot;</span>
-    <span class="n">action_1</span><span class="p">()</span>
-    <span class="n">action_2</span><span class="p">()</span> 
-<span class="k">else</span> <span class="p">:</span>  <span class="c1"># (2)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; bloc indenté exécuté uniquement lorsque &lt;test&gt;==False &quot;&quot;&quot;</span>
-    <span class="n">action_3</span><span class="p">()</span> 
-    <span class="n">action_4</span><span class="p">()</span> 
-<span class="n">action_5</span><span class="p">()</span> <span class="c1"># non indenté et après l&#39;instruction conditionnelle, sera exécuté dans tous les cas.</span>
-</code></pre></div></td></tr></table></div>
-<ol>
-<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</li>
-<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> deux points obligatoires</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<h2 id="la-syntaxe-par-lexemple">La syntaxe par l'exemple<a class="headerlink" href="#la-syntaxe-par-lexemple" title="Permanent link">⚓︎</a></h2>
-<div class="admonition warning inline end">
-<p class="admonition-title">Important</p>
-<p>Cliquez sur les +</p>
-</div><script >let PAGE_IDES_CONFIG = '.\x1emqN7snpzeIv["U!xcgakth3,(f6S)y8.r\'bCu-2FVL]9 w_0={El}:1idAo45\\\x1e0R0g0o0c0A040O0!090T0x0O070C0$0G0P0P0L0C0u0#0t0Y0P0m0G0m0#0L0c0u0Y0y0m0L0q0L070$0q0P071k0L0G0C0P0$0$0#0g0V0M0\'0a0;090m040c1t0M0g1x0o0p0.0F0G0l0o0F1p0z1x0g0r1E0c090e0O0k0.0)090o1D0g1S1U1W0O0)0+1Y1!1V1%1u1(1T0g0E080*1/1$1;1\'1)1F0E0C0T0X0k1,0c080o08201^1{0k0A0c0o282a2c1?210a0!2a281.1Z1~1$2d1E2p2r2u1#1=1E210c0j0k0T0E0Y0c0Y1D0f0K1^2G2I2K2M0O1B1H0!0Y2m0M2P1^2h2725040X2D0F0W1^0N0p2,0c0O252a2O2Q2y0x2Y092^0X0C2#0f0(0E0A0o0T1C2|1F2h0t0X0T0T2s042x0g2a0Y0!0E2j0k3q0-0t0t1D0_0P0U2R0Y2,0!0A0O160c0m0P0t0_0_0q0Y0u0q0k0m0m2M0u0$121m0L0#0q0u0c3!070L0P1b0Y1a1D1w1y1A1C1?1G1I091K1M1O0$0F2G1A0a3a0P0W1Q0x2F1+2B1 1?2I0m08080M0v0o0m0k0n0V0%090M4q0M0%0g4t4t0M0s0d1~0A0t4k0c4s0E0`0c0P0M0Y0%4G0P3\'2g0X2h4K0m094g0T0B4M4H0L090.0k4Z4O0L0w4s4u4-4o4r4K0c0t0M0O0O0X092,4^0s1{0T0t0w1u4 0t0z4^2a0n0Q2P4/4r2L4?0a1`0p4~0c501T0e520M54560O580z0m0a0a1V0Y0s5n5c4q5e0M2p0a5j505o2h0o374p5q570o0n1Q0!5H0w5C4;4?0X080O0c040a0o0x5I511u5L5N0M4$0o5p5k555Q0n481X1-0,4a2w2n1^1`1|5 2D0g0m0l4E0Q0M0W0$4o0X4?684E026b0W0y0M1u4r5X0a0A4`0o0s4t0I3p4g2p0E0e0c0b0M0e0!1-4t4+4o6s6u6w0g6y1`0M0!330*6D2h6F3a0M0A4(3\'080E0T4j0o6K2o2325270)2l3l2f5L2k2b1\'5E6=2b0s5o4s4p4r0e0m0T0M6b6i5X2G0a780M0_5X04080l7e0t4t0T0m6G760c374;0M6i4;0e0A0m2,4F4H0m0o4S0R7c0U0M2i5:0.1v750T0U4w010M0J7p0o6I7r4o5X4e1{387q770Q6b7c1T7i0l7!1~2l704:7@7T064E0a4e6T6/0X0*4K0B5v5x3a0A0M7o0M0t4%0o0X7N2L0M6~080z8k0M0i0M0j5W092L778i7@4q7T0v0X6G6z5:4E6H6)6E5F7}7o5!7%7u7F4D8j8k2o2q2j5}1}2C3l2z3r1:601E7T7V5?0k8d7N8Y0M2B801$4K0E8-2Z4E8g4t092i7X0x7a1)6%4J8425050E81080x2a6%0L047E0X955%1;4o7T5v6$4N0c0y4g9g884E1Z8g7L3a4g8u7A1;7C4)6,9n0L884U4\'9F8j9j0M0D9t8!8=295=2G9b3s9E4!0M046%3=5p8z0E8{7K0A2h7t7p9b9X4)9s0e9b7{9m4!9J4!2L041B1$1T0v0Z0h0H9%9M0k8|4E0*9,876s0!0e8/5=8g892f8*4p0S060I0z2F2H2J2L2N1u2%1Uat2U0Y2W2i1I2!2{2\'0c2)0X2+2-2/1E2;2?312`ax3c7E0)5\'2b2^4=2D0$1^0m3q0!2^0!0l0O7$0*2D7F961^1Z9+0O2h7i2W4e5`1uaO0g0p4e1Y0paJ0n0O0C0o091Da=0c1^5!5$092g0x5(2Mbd0Aa?1Ebh6X2D4C0T1{1^9d0j4_2L318{2#0u1^2L2g3I1{a.0oaX5(5#0.1/bCab3Ebobq0g2L4k8d750)5s0o3o3t8b3F6^2i2#be2e1I0N0-0/0;a/388e30bU0A5#b+5saJ5L2#bvbx2}2 31332O36383a0g3c3n3p3r3t0!3v3x0`0U0U.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">7</span>
+<span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">elif</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">c</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">b</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">c</span>
+</code></pre></div></td></tr></table></div></p>
+<div class="highlight"><pre><span></span><code>En fin de script, la variable ```d``` prend la valeur :
+</code></pre></div>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">20</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">7</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">2</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP><li class="qcm_single" correct="2" markdown>
+Soit le script suivant :
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span>
+<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">elif</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">c</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">b</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">c</span>
+</code></pre></div></td></tr></table></div></p>
+<div class="highlight"><pre><span></span><code>En fin de script, la variable ```d``` prend la valeur :
+</code></pre></div>
+<p></p KEEP><ul>
+<li markdown="1">
+<code class="highlight"><span class="mi">10</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="mi">19</span></code></p>
+<p></li>
+<li markdown="1">
+<code class="highlight"><span class="o">-</span><span class="mi">15</span></code></p>
+<p></li>
+</ul>
+</li></p>
+<p></p KEEP></ol></p>
+</div><script >let PAGE_IDES_CONFIG = '.\x1e}EkI9xpB!d_a*"ozsw)tS-6(Unq{+u0iAhl\\:[7=8vLF.24yf3,1Nc m5VgrCb]\'e\x1e0v0h0n0)0#0X0e0i0t0C0P0e0G0%0Y0N0y0y080%0q0O0Q0d0y0f0N0f0O080)0q0d0I0f080R080G0Y0R0y0G1n080N0%0y0Y0Y0O0h0E0W0*0a0@0t0f0X0)1w0W0h1A0n0B0;0p0N0!0n0p1s0M1A0h0S1H0)0t0J0e0V0;0,0t0n1G0h1V1X1Z0e0,0.1#1%1Y1)1x1+1W0h0x0k0-1=1(1@1*1,1I0x0%0C0z0V1/0)0k0n0k231{1~0V0#0)0n2b2d2f1_240a0i2d2b1;1$211(2g1H2s2u2x1\'1^1H240)090V0C0x0d0)0d1G0F0\'1{2J2L2N2P0e1E1K0i0d2p0W2S1{2k2a280X0z2G0p0T1{0l0B2/0)0e282d2R2T2B0P2#0t2{0z0%2\'0F0+0x0#0n0C1F2 1I2k0Q0z0C0C2v0X2A0h2d0d0i0x2m0V3t0:0Q0Q1G0|0y042U0d2/0i0#0e190)0f0y0Q0|0|0R0d0q0R0V0f0f2P0q0Y151p080O0R0q0)3%0G080y1e0d1d1G1z1B1D1F1_1J1L0t1N1P1R0Y0p2J1D0a3d0y0T1T0P2I1.2E221_2L0f0k0k0W0o0n0f0V060E0D0t0W4t0W0D0h4w4w0W0r07210#0Q4n0)4v0x0}0)0y0W0d0D4J0y3*2j0z2k4N0f0t4j0C0(4P4K080t0;0V4$4R080m4v4x4:4r4u4N0)0Q0W0e0e0z0t2/4{0r1~0C0Q0m1x520Q0M4{2d060H2S4=4u2O4_0a1}0B510)531W0J550W57590e5b0M0f0a0a1Y0d0r5q5f4t5h0W2s0a5m535r2k0n3a4s5t5a0n061T0i5K0m5F4@4_0z0k0e0)0X0a0n0P5L541x5O5Q0W4(0n5s5n585T064b1!1:0/4d2z2q1{1}1 622G0h0f0!4H0H0W0T0Y4r0z4_6b4H026e0T0I0W1x4u5!0a0#4}0n0r4w0Z3s4j2s0x0J0)0j0W0J0i1:4w4.4r6v6x6z0h6B1}0W0i360-6G2k6I3d0W0#4+3*0k0x0C4m0n6N2r26282a0,2o3o2i5O2n2e1*5H6^2e0r5r4v4s4u0J0f0C0W6e6l5!2J0a7b0W0|5!0X0k0!7h0Q4w0C0f6J790)3a4@0W6l4@0J0#0f2/4I4K0f0n4V0v7f040W2l5?0;1y780C044z010W0K7s0n6L7u4r5!4h1~3b7t7a0H6e7f1W7l0!7%212o734?7`7W0U4H0a4h6W6=0z0-4N0(5y5A3d0#0W7r0W0Q4)0n0z7Q2O0W710k0M8n0W0c0W095Z0t2O7a8l7`4t7W0o0z6J6C5?4H6K6,6H5I807r5%7)7x7I4G8m8n2r2t2m60202F3o2C3u1?631H7W7Y5_0V8g7Q8#0W2E831(4N0x8:2$4H8j4w0t2l7!0P7d1,6)4M87280u0x840k0P2d6)080X7H0z985)1@4r7W5y6(4Q0)0I4j9j8b4H1$8j7O3d4j8x7D1@7F4,6/9q088b4X4*9I8m9m0W0$9w8%8^2c5^2J9e3v9H4%0W0X6)3^5s8C0x8~7N0#2k7w7s9e9!4,9v0J9e7~9p4%9M4%2O0X1E1(1W0o0A0s0L9)9P0V8 4H0-9/8a6v0i0J8=5^8j8c2i8-4s050U0Z0M2I2K2M2O2Q1x2)1Xaw2X0d2Z2l1L2%2~2*0)2,0z2.2:2=1H2@2_342}aA3f7H0,5*2e2{4^2G0Y1{0f3t0i2{0i0!0e7(0-2G7I991{1$9.0e2k7l2Z4h5}1xaR0h0B4h1#0BaM060e0%0n0t1Ga^0)1{5%5(0t2j0P5+2Pbg0#a_1Hbk6!2G4F0C1~1{9g094|2O348~2\'0T0y1{2O2j3L1~a;0na!5+5\'0;1=bFae3Hbrbt0h2O4n8g780,5v0n3r3w8e3I6{2l2\'bh2h1L0l0:0=0@a=3b8h33bY0#5\'b/5vaM5O2\'bybA303234362R393b3d0h3f3q3s3u3w0i3y3A0}3D1X3F7!3I0I0T180V0R130)0T0V1sbJ0Q0%4^0I3)0I0%1n0%0I0~0%3V0q0f0GcK0q3z1x3?0e1C1E1*3{1M1O1Q1s420944460N495~8Y4e1H4g4i4k4m4o4q764t4y4:4A4C1:4Fab9F4L4N9Y6w4V0d4X4Z4#9I4(bm9e6O4;4xd45#4`4|4~2m0e5.5r5Sb+5c5edu5H5j0k5l575pdC5`5u5w875B5D8t4?dI5XdB5:2l5=dD5w5J735!5Hbk5)5+5-575Nd#0#4s5@5_53dQ5Uc`8X683o663Id 1_7z6e7j4~6k6c0W6n6f6q6sd5du6Q1(6S6U6D3s6G6I6K6M0h6O8~bz4Hef754?ei6y6A8E9,6Eeo8K4jeq0-6N75eAek8E6X7)6!8J6%9|4,6+6-7H6:1{5j27296}2\'1`1Hb;8W9Ve)70e.736s5!7S7h7ddu7f7h6g7k7m7o7q7s7S7v8a8j7z2O7B7D5^9\'7I4H7K090a7M7Odo7R797U0h0W8)7Z7#3d7?4?b~5^e^7-7Nfh7:7m7?8l7_8y8z0W7}eH81e%840d865z5n848c8ebmap8Pe.8n0M8p8r8t8v8ke.fI8A8C8H4j9,8H3d6I7 4Z7D4ifP4H8Qab8Saue#8V3mc{8\'e*1Ig3e38(7X7saoc05I8V8_1(ak8@8_8j8|0h8~bR0i916c4w1W947y5z97998a9b9d9I9g8g9ja26/0t9n6v6)9s0W9u6%9xad5^9Af*2o7ygk9=9e9Kdp9N0M9P9Rgi1\'9U2dfB9Y3tg$9%9q9(0k9*9,aef57ydd089?3*9^9`5IeV4S9ea0gJa4a6a8g`aaac9-afh6aigkamgdaMfYaratav2WayaKaChu2Y2!aI373f2+34aP1G2;2?2^b*2|2GaB6abRd-a$3d0Qa(a*a,a.a:fxb!bic}3H3Ia~5\'9g0kb26f1{b65\'0Vb94obcbeh#bj5\'1Ybnbpaz8kbsh$0hbva?1Gcai3bCbE2`28bH1GbJbLc7bO2`aZhRbU33gT5(9.bZ1xb@1Hb%8,0zb)2`cmb.3Hc6bN6~iti2b^0ib`0;0?a;f{b bVc2c4iDe,c979cb1I313|ce37ch3c3e2hb,cn1#cpcr1x3Bcu0h2P3G3I0G3L0Oi`6g0f0T0N0O3S0YbM0Y0V0VcA2PcN0_0I0Y3)j1j4180f3=iZc(3^c+i!c-3 c:435*460Rc_2U4c8%69c~4j4l4n4p5!d64z4B4Ddb4Hgx4O9I4Tdidk8bdm4%do9~4,drjIdH4^dw4}4 dAd:56dP5|5d0\'d*j%dJdL5`dNj,d`5|5xfS8udUj;5idYj+6\'d=5Rj-dE5W5Yk10Wd,a#d/5`d;5Pd?7P5^d%d|jy5 0-61jAe07)g5690A0$7h0R4r0A0b7h6h0t0bkz6e0O6P6wej4wkD7hgv0Wkygw0hkykR1,kU4/kIkY1WkI8t6jkT0b0g0g0N7b6ekyk-k/0w0WkIk?4td3ezkNeBkWk$9V0W9+i10z4X0!eUhpl86%1Y9Q6N4r5nk*k=k.k:k+k{k^k`llk}4ueNkPl2g/l57Il70tl94H2+4mlBld4s0blgeuk*lqk/fAkDlokT0$k{ls4tlul1kzl3ly6wlclDlblGad4s0AlK5n1~6r6uk 6S6%lzl%5?0(l3f^k58,l%e!2B826@e.6`iie-6_1_e:7^74e@790ekXk;0$me3lkQk;lJdu7S0ek$6ekI7efhmgkJ6fkBe{mwmm0WkG4?7fmrmyj0ey4u7;mxf10h8c0C0;0!997w8jkXf97C7Efd7JmHkyfj5^fl0vmqm(7Vgc8kft0)e a:mD7pmQ7smSlBmVf64HmY0)fam#g^fe1ym\'0bm)7P4sm,mfkDfofqm:7!4mfudumNms8df28bmTm 7xn2n4fcn6m%mwkInbm+mqnCm/8*nk7$0t7\'iPfy79lm7/9$fEnL7@724.fInifLl}3sfOf6fR88fU7sfWix8if}f!8o8q8s4rf)8x8yf-8D6Vf;3sf?fM8MiP8P7Cf f#8U2ud~kt642Bg9obgb8*ge8.gh8;9E0d8^gT7x8}8 gs92gw9q95gz9igB5s9ch29f9hgI9lgLgyh7gPgR9S9ygV2cgX2egZ9Eg#9Ig%jY6*g)oIg+62g.9W09g;oD9$9\'1E9)l4g|9.g~9;9Io+3d9_9I9{9Yh95)hb4khda9oIabhQhig~ahajom4Hanhpgfhrg1hxaxbqaX2UaDayaG2#aJpm1HhE2-2/hHb4aThL5%hNaYhQa#5\'hThV1Ha+7!hYiO7)a@iIh%a|h)b0h,ifh/b7h=bah^bfiHb#d,bm0#bo0,i0iui45\'bwi7iXi90fbD0zbFid2cif0NihbN4hikpFbTb{bW2`c2h`iv3Lixizb+b-2mc5iVqb3pb_b{iNfxc0iq0#3HiTb:m7iWeve#jp3328cfaAi\'cjcli+3w9Z3xc$7ict04.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_pyodideSectionsRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/2_btnRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/start-pyodide.js"></script><script type="application/javascript" src="../../js-per-pages/2_terminalRunner-terms.js"></script><script type="application/javascript" src="../../js-per-pages/3_ideRunner-ides.js"></script><script type="application/javascript" src="../../js-per-pages/qcms-qcm.js"></script>
