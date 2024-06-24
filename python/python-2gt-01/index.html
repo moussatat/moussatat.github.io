@@ -3129,29 +3129,29 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
 <div class="admonition question">
 <p class="admonition-title">Question</p>
 <ol>
-<li>Taper l'instruction ci-dessous dans le terminal est vérifier que <code>#!python 4</code> est de type <code>#!python int</code>
+<li>Taper l'instruction ci-dessous dans le terminal est vérifier que <code class="highlight"><span class="mi">4</span></code> est de type <code class="highlight"><span class="nb">int</span></code>
     <div class="highlight"><span class="filename">console python</span><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></li>
-<li>À l'aide de l'instruction <code>#!python type()</code> déterminer le type des valeurs <code>#!python 4.0</code> et <code>#!python 3E5</code>.</li>
-<li>Déterminer le type des valeurs <code>#!python "Bonjour"</code>, <code>#!python '4'</code> et <code>#!python """entre guillemets triples"""</code></li>
-<li>Même question pour les valeurs <code>#!python True</code> et <code>#!python False</code>.</li>
+<li>À l'aide de l'instruction <code class="highlight"><span class="nb">type</span><span class="p">()</span></code> déterminer le type des valeurs <code class="highlight"><span class="mf">4.0</span></code> et <code class="highlight"><span class="mf">3E5</span></code>.</li>
+<li>Déterminer le type des valeurs <code class="highlight"><span class="s2">&quot;Bonjour&quot;</span></code>, <code class="highlight"><span class="s1">&#39;4&#39;</span></code> et <code class="highlight"><span class="sd">&quot;&quot;&quot;entre guillemets triples&quot;&quot;&quot;</span></code></li>
+<li>Même question pour les valeurs <code class="highlight"><span class="kc">True</span></code> et <code class="highlight"><span class="kc">False</span></code>.</li>
 </ol>
 <p><div class="term_wrapper"><div style="line-height:24px;--n-lines:10;" id="term_only_77de68daecd823babbb58edb1c8e14d7106e83bb" class="py_mk_terminal_solo py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">À retenir</p>
 <ul>
-<li>les entiers sont de type <code>#!python int</code> (pour <em>integers</em>)</li>
-<li>les nombres flottants sont de type <code>#!python float</code> (pour <em>floating point numbers</em>)  </li>
-<li>les séquences de texte (mots, phrases...) sont de type <code>#!python str</code> (pour <em>string</em>)</li>
-<li>les booléens représentant un des deux états, <code>#!python True</code> ou <code>#!python False</code> sont de type <code>#!python bool</code></li>
+<li>les entiers sont de type <code class="highlight"><span class="nb">int</span></code> (pour <em>integers</em>)</li>
+<li>les nombres flottants sont de type <code class="highlight"><span class="nb">float</span></code> (pour <em>floating point numbers</em>)  </li>
+<li>les séquences de texte (mots, phrases...) sont de type <code class="highlight"><span class="nb">str</span></code> (pour <em>string</em>)</li>
+<li>les booléens représentant un des deux états, <code class="highlight"><span class="kc">True</span></code> ou <code class="highlight"><span class="kc">False</span></code> sont de type <code class="highlight"><span class="nb">bool</span></code></li>
 </ul>
 </div>
 <div class="admonition tip py_mk_admonition_qcm qcm_shuffle qcm_hidden qcm_single py_mk_qcm_id_00001">
 <p class="admonition-title">Je vérifie ma compréhension (bouton en bas pour recommencer)</p>
 <p></p KEEP><ol></p>
 <p></p KEEP><li class="qcm_single" correct="2" markdown>
-La valeur <code>#!python 3.1</code> est de type :</p>
+La valeur <code class="highlight"><span class="mf">3.1</span></code> est de type :</p>
 <p></p KEEP><ul>
 <li markdown="1">
 integer</p>
@@ -3168,7 +3168,7 @@ string</p>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="4" markdown>
-La valeur <code>#!python 'pi'</code> est de type :</p>
+La valeur <code class="highlight"><span class="s1">&#39;pi&#39;</span></code> est de type :</p>
 <p></p KEEP><ul>
 <li markdown="1">
 integer</p>
@@ -3185,7 +3185,7 @@ string</p>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="1" markdown>
-La valeur <code>#!python 3</code> est de type :</p>
+La valeur <code class="highlight"><span class="mi">3</span></code> est de type :</p>
 <p></p KEEP><ul>
 <li markdown="1">
 integer</p>
@@ -3202,7 +3202,7 @@ string</p>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="2" markdown>
-La valeur <code>#!python 3.0</code> est de type :</p>
+La valeur <code class="highlight"><span class="mf">3.0</span></code> est de type :</p>
 <p></p KEEP><ul>
 <li markdown="1">
 integer</p>
@@ -3219,7 +3219,7 @@ string</p>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="4" markdown>
-La valeur <code>#!python '21'</code> est de type :</p>
+La valeur <code class="highlight"><span class="s1">&#39;21&#39;</span></code> est de type :</p>
 <p></p KEEP><ul>
 <li markdown="1">
 integer</p>
@@ -3256,32 +3256,32 @@ string</p>
 <tr>
 <td style="text-align: center;"><code>x-y</code></td>
 <td style="text-align: center;">différence de <code>x</code> et <code>y</code></td>
-<td style="text-align: center;"><code>#!python 80-38</code>  renvoie <code>42</code></td>
+<td style="text-align: center;"><code class="highlight"><span class="mi">80</span><span class="o">-</span><span class="mi">38</span></code>  renvoie <code>42</code></td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>x*y</code></td>
 <td style="text-align: center;">produit de <code>x</code> et <code>y</code></td>
-<td style="text-align: center;"><code>#!python 6*38</code>  renvoie <code>42</code></td>
+<td style="text-align: center;"><code class="highlight"><span class="mi">6</span><span class="o">*</span><span class="mi">38</span></code>  renvoie <code>42</code></td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>x/y</code></td>
 <td style="text-align: center;">quotient de <code>x</code> et <code>y</code></td>
-<td style="text-align: center;"><code>#!python 355/113</code>  renvoie 3.1415929203539825</td>
+<td style="text-align: center;"><code class="highlight"><span class="mi">355</span><span class="o">/</span><span class="mi">113</span></code>  renvoie 3.1415929203539825</td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>x**y</code></td>
 <td style="text-align: center;"><code>x</code> à la puissance <code>y</code></td>
-<td style="text-align: center;"><code>#!python 2**6</code>  renvoie 64 </br>   <code>#!python 6**2</code>  renvoie 36</td>
+<td style="text-align: center;"><code class="highlight"><span class="mi">2</span><span class="o">**</span><span class="mi">6</span></code>  renvoie 64 </br>   <code class="highlight"><span class="mi">6</span><span class="o">**</span><span class="mi">2</span></code>  renvoie 36</td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>x//y</code></td>
 <td style="text-align: center;">quotient entier de <code>x</code> par <code>y</code></td>
-<td style="text-align: center;"><code>#!python 42//11</code>  renvoie 3 </br> <code>#!python 42//6</code>  renvoie 7</td>
+<td style="text-align: center;"><code class="highlight"><span class="mi">42</span><span class="o">//</span><span class="mi">11</span></code>  renvoie 3 </br> <code class="highlight"><span class="mi">42</span><span class="o">//</span><span class="mi">6</span></code>  renvoie 7</td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>x%y</code></td>
 <td style="text-align: center;">reste de la division entière de <code>x</code> par <code>y</code></td>
-<td style="text-align: center;"><code>#!python 42%11</code>  renvoie 9 </br> <code>#!python 42%6</code>  renvoie 0</td>
+<td style="text-align: center;"><code class="highlight"><span class="mi">42</span><span class="o">%</span><span class="mi">11</span></code>  renvoie 9 </br> <code class="highlight"><span class="mi">42</span><span class="o">%</span><span class="mi">6</span></code>  renvoie 0</td>
 </tr>
 </tbody>
 </table>
@@ -3289,16 +3289,16 @@ string</p>
 <p class="admonition-title">La division entière</p>
 <p>La division entière de <code>42</code> par <code>11</code> s'écrit <span class="arithmatex">\(42=3\times 11+9\)</span>. </p>
 <ul>
-<li><code>#!python 42//11</code> se lit «  division entière de 42 par 11 » et renvoie <code>3</code>  </li>
-<li><code>#!python 42%11</code> se lit « 42 modulo 11 » et renvoie <code>9</code></li>
+<li><code class="highlight"><span class="mi">42</span><span class="o">//</span><span class="mi">11</span></code> se lit «  division entière de 42 par 11 » et renvoie <code>3</code>  </li>
+<li><code class="highlight"><span class="mi">42</span><span class="o">%</span><span class="mi">11</span></code> se lit « 42 modulo 11 » et renvoie <code>9</code></li>
 </ul>
 <p>La division entière d'entier renvoie un entier !</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">types des valeurs renvoyées par une opération</p>
 <ol>
-<li>Comparer le type des valeurs renvoyées par <code>#!python 18/3</code> et <code>#!python 18//3</code></li>
-<li>Comparer le type des valeurs renvoyées par <code>#!python 2**3</code> et <code>#!python 2.0**3</code>
+<li>Comparer le type des valeurs renvoyées par <code class="highlight"><span class="mi">18</span><span class="o">/</span><span class="mi">3</span></code> et <code class="highlight"><span class="mi">18</span><span class="o">//</span><span class="mi">3</span></code></li>
+<li>Comparer le type des valeurs renvoyées par <code class="highlight"><span class="mi">2</span><span class="o">**</span><span class="mi">3</span></code> et <code class="highlight"><span class="mf">2.0</span><span class="o">**</span><span class="mi">3</span></code>
 <div class="term_wrapper"><div style="line-height:24px;--n-lines:5;" id="term_only_1b6453892473a467d07372d45eb05abc2031647a" class="py_mk_terminal_solo py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></li>
 </ol>
 </div>
@@ -3313,11 +3313,11 @@ string</p>
 <tbody>
 <tr>
 <td style="text-align: center;">Concaténation</td>
-<td style="text-align: center;"><code>#!python "pa"+"pi"</code> renvoie  <code>#!python "papi"</code></td>
+<td style="text-align: center;"><code class="highlight"><span class="s2">&quot;pa&quot;</span><span class="o">+</span><span class="s2">&quot;pi&quot;</span></code> renvoie  <code class="highlight"><span class="s2">&quot;papi&quot;</span></code></td>
 </tr>
 <tr>
 <td style="text-align: center;">Répétition</td>
-<td style="text-align: center;"><code>#!python 3*"pom"</code> renvoie <code>#!python "pompompom"</code></td>
+<td style="text-align: center;"><code class="highlight"><span class="mi">3</span><span class="o">*</span><span class="s2">&quot;pom&quot;</span></code> renvoie <code class="highlight"><span class="s2">&quot;pompompom&quot;</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -3325,64 +3325,64 @@ string</p>
 <p class="admonition-title">Je vérifie ma compréhension (bouton en bas pour recommencer)</p>
 <p></p KEEP><ol></p>
 <p></p KEEP><li class="qcm_single" correct="1" markdown>
-L'expression <code>#!python 5**2</code> s'évalue à :</p>
+L'expression <code class="highlight"><span class="mi">5</span><span class="o">**</span><span class="mi">2</span></code> s'évalue à :</p>
 <p></p KEEP><ul>
 <li markdown="1">
-<code>#!python 25</code></p>
+<code class="highlight"><span class="mi">25</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 25.0</code></p>
+<code class="highlight"><span class="mf">25.0</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 10</code></p>
+<code class="highlight"><span class="mi">10</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 10.0</code></p>
+<code class="highlight"><span class="mf">10.0</span></code></p>
 <p></li>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="1" markdown>
-L'expression <code>#!python 5/2</code> s'évalue à :</p>
+L'expression <code class="highlight"><span class="mi">5</span><span class="o">/</span><span class="mi">2</span></code> s'évalue à :</p>
 <p></p KEEP><ul>
 <li markdown="1">
-<code>#!python 2.5</code></p>
+<code class="highlight"><span class="mf">2.5</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 2</code></p>
+<code class="highlight"><span class="mi">2</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 0.4</code></p>
+<code class="highlight"><span class="mf">0.4</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 52</code></p>
+<code class="highlight"><span class="mi">52</span></code></p>
 <p></li>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="2" markdown>
-L'expression <code>#!python 5//2</code> s'évalue à :</p>
+L'expression <code class="highlight"><span class="mi">5</span><span class="o">//</span><span class="mi">2</span></code> s'évalue à :</p>
 <p></p KEEP><ul>
 <li markdown="1">
-<code>#!python 2.5</code></p>
+<code class="highlight"><span class="mf">2.5</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 2</code></p>
+<code class="highlight"><span class="mi">2</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 0.4</code></p>
+<code class="highlight"><span class="mf">0.4</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 52</code></p>
+<code class="highlight"><span class="mi">52</span></code></p>
 <p></li>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="3" markdown>
-L'expression <code>#!python 5/0</code> s'évalue à :</p>
+L'expression <code class="highlight"><span class="mi">5</span><span class="o">/</span><span class="mi">0</span></code> s'évalue à :</p>
 <p></p KEEP><ul>
 <li markdown="1">
-<code>#!python 5</code></p>
+<code class="highlight"><span class="mi">5</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 0</code></p>
+<code class="highlight"><span class="mi">0</span></code></p>
 <p></li>
 <li markdown="1">
 message d'erreur</p>
@@ -3393,53 +3393,53 @@ on ne peut pas savoir</p>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="1" markdown>
-L'expression <code>#!python 0//5</code> s'évalue à :</p>
+L'expression <code class="highlight"><span class="mi">0</span><span class="o">//</span><span class="mi">5</span></code> s'évalue à :</p>
 <p></p KEEP><ul>
 <li markdown="1">
-<code>#!python 0</code></p>
+<code class="highlight"><span class="mi">0</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 0.0</code></p>
+<code class="highlight"><span class="mf">0.0</span></code></p>
 <p></li>
 <li markdown="1">
 message d'erreur</p>
 <p></li>
 <li markdown="1">
-<code>#!python 5.0</code></p>
+<code class="highlight"><span class="mf">5.0</span></code></p>
 <p></li>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="3" markdown>
-L'expression <code>#!python 2**4</code> s'évalue à :</p>
+L'expression <code class="highlight"><span class="mi">2</span><span class="o">**</span><span class="mi">4</span></code> s'évalue à :</p>
 <p></p KEEP><ul>
 <li markdown="1">
-<code>#!python 8</code></p>
+<code class="highlight"><span class="mi">8</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 8.0</code></p>
+<code class="highlight"><span class="mf">8.0</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 16</code></p>
+<code class="highlight"><span class="mi">16</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 32</code></p>
+<code class="highlight"><span class="mi">32</span></code></p>
 <p></li>
 </ul>
 </li></p>
 <p></p KEEP><li class="qcm_single" correct="3" markdown>
-L'expression <code>#!python 10%2</code> s'évalue à :</p>
+L'expression <code class="highlight"><span class="mi">10</span><span class="o">%</span><span class="mi">2</span></code> s'évalue à :</p>
 <p></p KEEP><ul>
 <li markdown="1">
-<code>#!python 5</code></p>
+<code class="highlight"><span class="mi">5</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 5.0</code></p>
+<code class="highlight"><span class="mf">5.0</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 0</code></p>
+<code class="highlight"><span class="mi">0</span></code></p>
 <p></li>
 <li markdown="1">
-<code>#!python 10.2%</code></p>
+<code class="highlight"><span class="mf">10.2</span><span class="o">%</span></code></p>
 <p></li>
 </ul>
 </li></p>
@@ -3453,7 +3453,7 @@ L'expression <code>#!python 10%2</code> s'évalue à :</p>
 <p>léger remix d'un travail de <a href="https://nsi.xyz/start-p3">Vincent Robert</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
-</div><script >let PAGE_IDES_CONFIG = '.\x1ecx_5,v-b{2yr:.91[whga}l7]6fn3pu8e04mosi t"d\x1e0c0J0I0A0f0D060E0v0q0e060r0r0K0A0t0z0K0o0A040K0z0d0w0b0o0b0:070z0A0K0b0j040?0j0C0K0r0j0B0t0A0z0-0b0J0g0H0L0x0V0v0o0D0A180H0J1c0I0m0S0a0d0n0I0a0B0j0h1c0J081j0A0v0906040S0N0v0I1i0J1y1A1C060N0P1E1G1B1J191L1z0J0y0F0O1S1I1U1K1M1k0y0b0q0G041P0A0F0I0F1)1Y1#040f0A0I1;1?1^1W1*0x0E1?1;1R1F1\'1I1_1j25272a1H1V1j1*0A05040q0y0Z0K1i0k0s1Y2m2o2q0@061g1m0E0K220H2u1Y1}1:1.0D0G2j0a0j1Y0l0m2O0A061.1?2t2v2e0e2D0v2X0G0b2G0k0M0y0f0I0q1h2#1k1}0u0G0q0q280D2d0J1?0K0E0y1 04350R0u0u1i0d0B0B0p1Y1Q0Q0S0U060j0b0t0C070w0z0i0d0C0r0w0o0C0t0Y0B3x0r0d0K3q0A0b0B070/043d0w0j3p0r0o1i1b1d1f1h1W1l1n0v1p1r1t1v1x2w1O2h1(233,1D3i1%2i301!1$3.2c3:2e1,1.1:0N21301{1}1 431@302f480O0Q3|2j1X2e26361T3}2k2w2n2p2r2!4p2y2r2B1~1n2F4t1j2K2)2N2P2R1j2T2V2)2Z192I2$2\'2)2+2t2.2:2=0J2@0x2_2{2}3i450I3338371 0E3a3c3e0p0p.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
+</div><script >let PAGE_IDES_CONFIG = '.\x1e_"80c,s1-i42bo7vh.lt[fn:m}dy3w{pg]u9rea 5x6\x1e0y050n0F0E0s040h0q0m0v040i0i0u0F0K060u0G0F080u060f0w0g0G0g0:0I060F0u0g0b080?0b0e0u0i0b070K0F060-0g050r0H0L0z0V0q0G0s0F180H051c0n0k0S0c0f0A0n0c070b0l1c05091j0F0q0j04080S0N0q0n1i051y1A1C040N0P1E1G1B1J191L1z050C0a0O1S1I1U1K1M1k0C0g0m0d081P0F0a0n0a1)1Y1#080E0F0n1;1?1^1W1*0z0h1?1;1R1F1\'1I1_1j25272a1H1V1j1*0F0J080m0C0Z0u1i0o0B1Y2m2o2q0@041g1m0h0u220H2u1Y1}1:1.0s0d2j0c0b1Y0x0k2O0F041.1?2t2v2e0v2D0q2X0d0g2G0o0M0C0E0n0m1h2#1k1}0p0d0m0m280s2d051?0u0h0C1 08350R0p0p1i0f07070t1Y1Q0Q0S0U040b0g0K0e0I0w060D0f0e0i0w0G0e0K0Y073x0i0f0u3q0F0g070I0/083d0w0b3p0i0G1i1b1d1f1h1W1l1n0q1p1r1t1v1x2w1O2h1(233,1D3i1%2i301!1$3.2c3:2e1,1.1:0N21301{1}1 431@302f480O0Q3|2j1X2e26361T3}2k2w2n2p2r2!4p2y2r2B1~1n2F4t1j2K2)2N2P2R1j2T2V2)2Z192I2$2\'2)2+2t2.2:2=052@0z2_2{2}3i450n3338371 0h3a3c3e0t0t.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_pyodideSectionsRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/2_btnRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/start-pyodide.js"></script><script type="application/javascript" src="../../js-per-pages/2_terminalRunner-terms.js"></script><script type="application/javascript" src="../../js-per-pages/qcms-qcm.js"></script>
