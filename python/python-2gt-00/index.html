@@ -120,7 +120,7 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
 
 <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-J15L88XLN5"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-J15L88XLN5",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-J15L88XLN5",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
   
-    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+    <script>var consent;"undefined"==typeof __md_analytics||(consent=__md_get("__consent"))&&consent.analytics&&__md_analytics()</script>
   
 
     
@@ -3098,7 +3098,7 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
 <li>Les lignes 1 et 2 affiches les objets séparés par un espace.</li>
 <li>La ligne 1 simplifie le <strong>nombre</strong> <code>0</code>, la ligne 2 garde le <strong>texte</strong> <code>"000"</code> en entier  car il est entre guillemets. </li>
 </ul>
-</div><script >let PAGE_IDES_CONFIG = '.\x1e,Eerm61283:jb-5sh[}k\\]7aopx!4{uqnyld9 )D.IVtfvB+i("w0gc_\x1e0x0S0L0607080X0s0A0C0B0X0d0i090r0a0E0b0g0q0E0a0d0g0U0w0W0i0w0i0q0w0D0a0c0W0b0c0D0w0906090d0E10190r0g0S0e0F0Y0t0+0A0r08061m0F0S1q0L0k0(0h0b0V0L0h0U0U0I1q0S041x060A0N0X0W0(0!0A0L1w0S1M1O1Q0X0!0$1S1U1P1X1n1Z1N0S0y0j0#1)1W1+1Y1!1y0y0g0C0Q0W1%060j0L0j1`1/1=0W07060L2224261-1{0t0s24221(1T1^1W271x2j2l2o1V1,1x1{060u0W0C0y0D060D1w0l0p1/2A2C2E2G0X1u1A0s0D2g0F2J1/2b211 080Q2x0h0a1/0T0k2%060X1 242I2K2s0B2S0A2/0Q0g2V0l0Z0y070L0C1v2?1y2b0M0Q0C0C2m082r0S240D0s0y2d0W3k0\'0M0M1w0b1I0m1/0g0L2`0(0*0X0D0r0w0g0=0d0q0g0r0W3L0D0M0;0W0U0q090U0W1k0q0r060W0w0r0c0-0E0U0a0U0|1w1p1r1t1v1-1z1B0A1D1F1H1J1L2L1$2v1_2h3~1R1\'0%402q421x1;1?472x1.2s1}1 210!2f3f292b2d4k253f2t4p0#461*482y1/4t1@2w3f2M2D2F2H1n2X1O2B4G2P2R1B2U2=2Y3Z2{2$2\'2)1x2+2-2{2;4J363?0(2{2}2I3032340S0p3u1O0D2%0s071S0M0W0a060b0W3Z4}0c0a0r0U06060q3N0M50091h0g0;0M0i160M0w0w500w0q3-1y3/1u1Y4)3^1E1G1I0h2A1t0t340J0H053)1K0B2z3 4x4e5N444v4C414z4a1=4{4d1Y010j2a0Q0t0L0F0z0y0Q0F0r3p200k060o0A5^0t070Q1W0R0o0S0O0(0f3j070F0L3j5*340F080(2F0F0v600G5`5|5~600o2E3%0D6o2F0U0E6i2i4h202e4r493g3Z4o6A2V4f1y2k4u2n5P4s6K5U4y6I4F2O4I2W366T4H2Q2c4Q2~362Z4V2%1w2(2*2,0!4$2x4K0S0r0L0!085)0j2/060M4e0J0A390A2%5M1/0r3k0s2/0s0V0X0r0j5Y2x0L070y061/1T074{2b086|087f0n1w0U1/0k7f1S5?0W0n0X3w0A1w0M0r0C1=1/0Q6|1P2a0B5)2G1w7j7l7O6|0N0#7i7k7m1x7u0u0X0Q2F2{0A231w0c1/2F2a067f2.6@6_6{0\'2`1T7.0#074`7W7\'7@7`0W0L0Q0N6@2.3h690X0M4`0X4n2c2V7X7(3g1B0T803A7f7h0Q4*844`6|8k4{8n6B0F7K7M8r5x4+2~4.3335280L3i3n3m2d0s3p3r3t2L4^684{0r130w3U3Q5o3F5q0g0w0E0W0g0W090q0a1d0E093L0c3K0r8~090D0d145s1q0X1s5v3=2^3@3_5A0U5C0u5E5G5I0U0b5L5R6Q5Q433d9t3f4b5Z6N1-010F5%5|5)5/5;0W5?0F5|1P5^0b0P0d0I0i6x1~6z4q6H1{8G6G6O2l459x6C4B5!6C6Y7V4\'2L4M6U6!2S4R9:1x6(2#6*1n6,4Z6.2.2:6;367}066`256}6 1Y7173751{78687b7d8x7$877Y1x7o7qa87t7v7x7z7B9K3Z7F7H7J7L7N1x7P0X7R077T0!6V8q7Z0X7#32ao8r7*7,7.1 7:2V7?1x7^2b7{7e6^a87 4*822.8B07aT893K8c8e6/8h3n8E8m6E8oa=1x0j8t8v0+am328z2`a:8D8l8G2V8JaF5t2_8N4-0L318Q4;8S8U3l3n8Y3q1n3s0U4?0S2G4_4{950q0?3X3J0b0q060d0U0i0D3V3X0 bM140a0W0c0g0d0r0i0g0c0q1IbP995u3;2@2_9h3{9k9m065H5J9S3}1#1R9,5WbA1$9(b}6I9z9)2s6l0L5 0S0K0s205.2F0j0F0A0s080g2bcg0e601N0a0b0d1N11091N0Fcy0F0q0c0Ecx0F1IcG0U6j0A5{5}c860055*0D0y672A0!0Fco1!czcZcz60cG60c!cZ0G9V4i9$6C9#9Y9%6L4w2p9u2s6Pc22z9=4H4S4L2N6Z4P2T6%4T2!0Q4W6+4Y0S4!6/a4c 6?a*a96|34ac1-ae5}ag7779ak7e7gan1naOaq4`as7s2Qav1n7y1x7A6|az7E7G3xaD8KaPaJaL9/6788aG7!dw8IaEaU0r7+7-a35}7;1na#0Sa%7`1=a)7~aaa-2Ta/7p86dxdVd-8aa^8f8m8T8ia}beb18s0s8u3zb6dvb88Ad`07bc8Fa 8Hbg8L9f4*1 4,4J8P4:36a{bs8X8Zbw3t0m.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
+</div><script >let PAGE_IDES_CONFIG = '.\x1e,ch]q2uw_fye- n7D{l9+3xm56a)ridpgVs[1t.oB8"!v}0E:bI\\4(kj\x1e0l0K0F0f0w0r0c0H0i0m0e0c0p0s0t0u0E0n090R0j0n0E0p0R0O0U050s0U0s0j0U0y0E0J05090J0y0U0t0f0t0p0n10190u0R0K0Q0h0Y0z0+0i0u0r0f1m0h0K1q0F060(0g090A0F0g0O0O0G1q0K041x0f0i0M0c050(0!0i0F1w0K1M1O1Q0c0!0$1S1U1P1X1n1Z1N0K0a0C0#1)1W1+1Y1!1y0a0R0m0x051%0f0C0F0C1`1/1=050w0f0F2224261-1{0z0H24221(1T1^1W271x2j2l2o1V1,1x1{0f0q050m0a0y0f0y1w0D071/2A2C2E2G0c1u1A0H0y2g0h2J1/2b211 0r0x2x0g0E1/0b062%0f0c1 242I2K2s0e2S0i2/0x0R2V0D0Z0a0w0F0m1v2?1y2b0d0x0m0m2m0r2r0K240y0H0a2d053k0\'0d0d1w091I0N1/0R0F2`0(0*0c0y0u0U0R0=0p0j0R0u053L0y0d0;050O0j0t0O051k0j0u0f050U0u0J0-0n0O0E0O0|1w1p1r1t1v1-1z1B0i1D1F1H1J1L2L1$2v1_2h3~1R1\'0%402q421x1;1?472x1.2s1}1 210!2f3f292b2d4k253f2t4p0#461*482y1/4t1@2w3f2M2D2F2H1n2X1O2B4G2P2R1B2U2=2Y3Z2{2$2\'2)1x2+2-2{2;4J363?0(2{2}2I3032340K073u1O0y2%0H0w1S0d050E0f09053Z4}0J0E0u0O0f0f0j3N0d500t1h0R0;0d0s160d0U0U500U0j3-1y3/1u1Y4)3^1E1G1I0g2A1t0z340S0k0P3)1K0e2z3 4x4e5N444v4C414z4a1=4{4d1Y010C2a0x0z0F0h080a0x0h0u3p20060f0T0i5^0z0w0x1W0V0T0K0I0(0X3j0w0h0F3j5*340h0r0(2F0h0L600v5`5|5~600T2E3%0y6o2F0O0n6i2i4h202e4r493g3Z4o6A2V4f1y2k4u2n5P4s6K5U4y6I4F2O4I2W366T4H2Q2c4Q2~362Z4V2%1w2(2*2,0!4$2x4K0K0u0F0!0r5)0C2/0f0d4e0S0i390i2%5M1/0u3k0H2/0H0A0c0u0C5Y2x0F0w0a0f1/1T0w4{2b0r6|0r7f0W1w0O1/067f1S5?050W0c3w0i1w0d0u0m1=1/0x6|1P2a0e5)2G1w7j7l7O6|0M0#7i7k7m1x7u0q0c0x2F2{0i231w0J1/2F2a0f7f2.6@6_6{0\'2`1T7.0#0w4`7W7\'7@7`050F0x0M6@2.3h690c0d4`0c4n2c2V7X7(3g1B0b803A7f7h0x4*844`6|8k4{8n6B0h7K7M8r5x4+2~4.3335280F3i3n3m2d0H3p3r3t2L4^684{0u130U3U3Q5o3F5q0R0U0n050R050t0j0E1d0n0t3L0J3K0u8~0t0y0p145s1q0c1s5v3=2^3@3_5A0O5C0q5E5G5I0O095L5R6Q5Q433d9t3f4b5Z6N1-010h5%5|5)5/5;055?0h5|1P5^090o0p0G0s6x1~6z4q6H1{8G6G6O2l459x6C4B5!6C6Y7V4\'2L4M6U6!2S4R9:1x6(2#6*1n6,4Z6.2.2:6;367}0f6`256}6 1Y7173751{78687b7d8x7$877Y1x7o7qa87t7v7x7z7B9K3Z7F7H7J7L7N1x7P0c7R0w7T0!6V8q7Z0c7#32ao8r7*7,7.1 7:2V7?1x7^2b7{7e6^a87 4*822.8B0waT893K8c8e6/8h3n8E8m6E8oa=1x0C8t8v0+am328z2`a:8D8l8G2V8JaF5t2_8N4-0F318Q4;8S8U3l3n8Y3q1n3s0O4?0K2G4_4{950j0?3X3J090j0f0p0O0s0y3V3X0 bM140E050J0R0p0u0s0R0J0j1IbP995u3;2@2_9h3{9k9m0f5H5J9S3}1#1R9,5WbA1$9(b}6I9z9)2s6l0F5 0K0B0H205.2F0C0h0i0H0r0R2bcg0Q601N0E090p1N110t1N0hcy0h0j0J0ncx0h1IcG0O6j0i5{5}c8600P5*0y0a672A0!0hco1!czcZcz60cG60c!cZ0v9V4i9$6C9#9Y9%6L4w2p9u2s6Pc22z9=4H4S4L2N6Z4P2T6%4T2!0x4W6+4Y0K4!6/a4c 6?a*a96|34ac1-ae5}ag7779ak7e7gan1naOaq4`as7s2Qav1n7y1x7A6|az7E7G3xaD8KaPaJaL9/6788aG7!dw8IaEaU0u7+7-a35}7;1na#0Ka%7`1=a)7~aaa-2Ta/7p86dxdVd-8aa^8f8m8T8ia}beb18s0H8u3zb6dvb88Ad`0wbc8Fa 8Hbg8L9f4*1 4,4J8P4:36a{bs8X8Zbw3t0N.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_pyodideSectionsRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/2_btnRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/start-pyodide.js"></script><script type="application/javascript" src="../../js-per-pages/2_terminalRunner-terms.js"></script><script type="application/javascript" src="../../js-per-pages/3_ideRunner-ides.js"></script>
@@ -3139,7 +3139,7 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
               
                 
               
-              Thanks for your feedback!
+              Merci pour votre avis !
             </div>
           
             <div data-md-value="0" hidden>
@@ -3293,6 +3293,84 @@ CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+  
+    
+  
+
+
+  
+    
+  
+
+
+
+
+<h4>Consentement aux cookies</h4>
+<p>Ce site intègre des cookies analytics (pour des statistiques de fréquentation anonymes, les requêtes faites dans la barre de recherche) et des cookies de l'hébergeur <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement#our-use-of-cookies-and-tracking-technologies">GitHub</a>.  Dès lors qu’une donnée est susceptible d’être collectée, vous pouvez vous y opposer dans les choix de paramètres ci-dessous.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="analytics" checked>
+          <span class="task-list-indicator"></span>
+          Google Analytics
+        </label>
+      </li>
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="github" checked>
+          <span class="task-list-indicator"></span>
+          GitHub
+        </label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Paramétrer vos choix</label>
+    
+  
+    
+      <button class="md-button md-button--primary">Accepter</button>
+    
+    
+    
+  
+    
+    
+      <button type="reset" class="md-button md-button--primary">Refuser</button>
+    
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
     
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
