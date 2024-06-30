@@ -3,8 +3,8 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'G-BYF4FEE2HD', 'auto'); 
-ga('send', 'file_download'  ); 
+ga('config', 'G-BYF4FEE2HD', 'auto'); 
+
 $(".pdf").on('click', function() {    
 		ga('send', 'file_download'  ); 
 	}); 
