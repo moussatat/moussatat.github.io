@@ -1,7 +1,7 @@
 
 <!-- Integrate with Google Analytics 4 -->
 <script id="__analytics">
-function __md_analytics2() {
+function __md_analytics() {
 	window.dataLayer = window.dataLayer || []
     function gtag() { dataLayer.push(arguments) }
 	  
