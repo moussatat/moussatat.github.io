@@ -1,6 +1,25 @@
+<!--
+pyodide-mkdocs-theme
+Copyleft GNU GPLv3 🄯 2024 Frédéric Zinelli
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.
+If not, see <https://www.gnu.org/licenses/>.
+-->
+
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="fr" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -48,15 +67,43 @@
 
     
     
+
+
       
     
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.min.js" charset="utf-8" type="text/javascript" integrity="sha512-GQpIYSKNIPIC763JKTNALj+t18/nfLdzw5gITgFGa31aK/4NmjyPKsfqrjh7CuzpJaG3nqEleeVcWUhHad9Axg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js" charset="utf-8" type="text/javascript" integrity="sha512-iK7yTkCkv7MbFwTqRgHTbmIqoiiLq6BsyNjymnFyB5a7pEQwYThj9QIgqBy9+XPPwj7+hAEHyR2npOHL1bz4Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+<!-- PYODIDE - insertion token -->
+<script type="application/javascript" src="../../js-libs/0_config-libs.js"></script>
+<script type="application/javascript">
+
+  CONFIG.baseUrl = "../.."
+  CONFIG.buttonIconsDirectory = "../../assets/images"
+  CONFIG.pmtUrl = "https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
+  CONFIG.version = "1.2.1"
+  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "em": 15, "kbd": "Ctrl+I"}, "feedback": {"msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "em": 15, "kbd": ""}, "wrapTerm": {"msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "em": 15, "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9..."}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps..."}, "installDone": {"msg": "Installations termin\u00e9es!"}, "successMsg": {"msg": "Termin\u00e9 sans erreur !"}, "successHead": {"msg": "Bravo !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"msg": "Ex\u00e9cuter le code", "em": 9, "kbd": ""}, "play": {"msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "em": 9, "kbd": "Ctrl+S"}, "check": {"msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "em": 9, "kbd": "Ctrl+Enter"}, "download": {"msg": "T\u00e9l\u00e9charger", "em": 0, "kbd": ""}, "upload": {"msg": "T\u00e9l\u00e9verser", "em": 0, "kbd": ""}, "restart": {"msg": "R\u00e9initialiser l'\u00e9diteur", "em": 0, "kbd": ""}, "save": {"msg": "Sauvegarder dans le navigateur", "em": 0, "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"msg": "Les r\u00e9ponses resteront cach\u00e9es...", "em": 15, "kbd": ""}, "qcmCheckTip": {"msg": "V\u00e9rifier les r\u00e9ponses", "em": 11, "kbd": ""}, "qcmRedoTip": {"msg": "Recommencer", "em": 9, "kbd": ""}, "tipTrash": {"msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "em": 15, "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}}
+CONFIG.lang.tests.as_pattern = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
+</script>
+<script type="application/javascript" src="../../js-libs/functools-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/jsLogger-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/mathjax-libs.js"></script>
+<script type="application/javascript" src="../../js-libs/z_globalGuiButtons-libs.js"></script>
+<link rel="stylesheet" href="../../pyodide-css/0_generic-tooltips-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/header-btns-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/hourglass-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/ide-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/qcm-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/terminal-libs.css">
+<!-- PYODIDE - insertion token -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript" charset="utf-8"></script>
+
+
     
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
@@ -79,6 +126,13 @@
     
     
     
+
+
+  <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle"
+        data-ace-dark-mode="tomorrow_night_bright"
+        data-ace-light-mode="crimson_editor">
+
+
   </head>
   
   
@@ -99,7 +153,7 @@
       
         
         <a href="#les-instructions-conditionnelles" class="md-skip">
-          Skip to content
+          Aller au contenu
         </a>
       
     </div>
@@ -111,7 +165,7 @@
       
 
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
     <a href="../.." title="Journal de bord de mathématiques au CSJA" class="md-header__button md-logo" aria-label="Journal de bord de mathématiques au CSJA" data-md-component="logo">
       
   <img src="../../images/logo.svg" alt="logo">
@@ -177,16 +231,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="Recherche">
         
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
@@ -199,7 +253,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Initializing search
+            Initialisation de la recherche
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -210,7 +264,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/moussatat/journal" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/moussatat/journal" title="Aller au dépôt" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -231,7 +285,7 @@
         
           
             
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -455,7 +509,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/moussatat/journal" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/moussatat/journal" title="Aller au dépôt" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -1743,7 +1797,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
   
   
   
@@ -1752,7 +1806,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      Table des matières
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -2952,7 +3006,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
   
   
   
@@ -2961,7 +3015,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      Table des matières
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -3042,7 +3096,7 @@
 
 
   
-    <a href="https://github.com/moussatat/journal/edit/main/docs/python/python-2gt-05/index.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/moussatat/journal/edit/main/docs/python/python-2gt-05/index.md" title="Editer cette page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -3051,7 +3105,7 @@
     
       
     
-    <a href="https://github.com/moussatat/journal/raw/main/docs/python/python-2gt-05/index.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/moussatat/journal/raw/main/docs/python/python-2gt-05/index.md" title="Consulter la source de cette page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
     </a>
@@ -3217,8 +3271,8 @@ message d'erreur</p>
 </ol>
 <p><div id="global_editor_49ea0f20203d63caaed650a929436e947908add8" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_49ea0f20203d63caaed650a929436e947908add8"></div><span id="comment_editor_49ea0f20203d63caaed650a929436e947908add8" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_49ea0f20203d63caaed650a929436e947908add8" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_49ea0f20203d63caaed650a929436e947908add8">5</span>/5</div></div></div></div></p>
 <div markdown="1" id="solution_editor_49ea0f20203d63caaed650a929436e947908add8"      class="py_mk_hidden" data-search-exclude >
-.128013béihs=1vn;c48t2S 0(fopy
-)qa"P:le3rzV/gdkmu030H0A0i0v070z090l0f0z0v09090a0w0i070q0w020s03090K0J0J0v0C0r020k0p0z0K0#0p0d030F0+0-0/0;0)0q0203140}170F140)0H070c0T0V0X0Z08070G080z1l080i0'030O050z0A1g0W0Y0w1k1m1o1m0i1u1w1s0i0C150i080T0@090q0v0d0Z0j0w1y1i0w0o0Q0A0d0v0J0A1s1R1T1Y1A1#1w1'1)0'040l0x0C0p0q0p09070`0d0l0M1P0C0C0A0f210}1,0d150F1N2e1K1M1L1t0H1.0Z1o0d1%1~1s1d1f0U1z2o072q0d0p2u1s0q27152c2e2I0*1S222w1Z2B0C0.0z0'0b2b2M0(2L1-2O1A2Q2S0'0j2W1T2Y2c2n0w2%0v2T020B2*2d0)2-2#0Z2:2=0g2^2e2F0A2e2u2h0H1M2m2|0w0f2C1*1536162G2Z2d31033d0M2H2M2.0d0'0v0G0A310l3k2.0p0'0a3y3A3b0J072(0m312`3r3b0I0'070o3F2{1h2$3u3w3U3O3W0Z3C02000G0i0e3E0~2X3z3V2x0w3I2U0h3!2!3$0w0%020y3y0l420s42423G3|0d050'2F2z0i3m3;1Z3~0n4f3#3=091W3(0u0K0p3+0E0p0K0S1}0K0c0A0D0l0c4s0A0C004q4s0e4k3{3=3~0t3y3N4N2P4a024c0d4e3.2+474O0'4j4!3l4g1A4n0'4I4r4t4v0S0p05094G4A274C1w0l0C060+0z0O0i4/4K4M2N3|4P3M0}3o34183j0F3h2f380}2i5m0v1v5f5i1e2Y5i0N0P0R02.
+.128013v Si=:o2r;)1l8atfhPqdcbé(4esn3
+Vugmk/0yp"z030p0v0k0j080h0w060q0h0j0w0w090J0k080I0J020z030w0B0D0D0j0d0H02070b0h0B0#0b0x030F0+0-0/0;0)0I0203140}170F140)0p08050T0V0X0Z0m080C0m0h1l0m0k0'030O0r0h0v1g0W0Y0J1k1m1o1m0k1u1w1s0k0d150k0m0T0@0w0I0j0x0Z0c0J1y1i0J0l0Q0v0x0j0D0v1s1R1T1Y1A1#1w1'1)0'04060n0d0b0I0b0w080`0x060M1P0d0d0v0q210}1,0x150F1N2e1K1M1L1t0p1.0Z1o0x1%1~1s1d1f0U1z2o082q0x0b2u1s0I27152c2e2I0*1S222w1Z2B0d0.0h0'0g2b2M0(2L1-2O1A2Q2S0'0c2W1T2Y2c2n0J2%0j2T020y2*2d0)2-2#0Z2:2=0u2^2e2F0v2e2u2h0p1M2m2|0J0q2C1*1536162G2Z2d31033d0M2H2M2.0x0'0j0C0v31063k2.0b0'093y3A3b0D082(0G312`3r3b0E0'080l3F2{1h2$3u3w3U3O3W0Z3C02000C0k0e3E0~2X3z3V2x0J3I2U0i3!2!3$0J0%020a3y06420z42423G3|0x0r0'2F2z0k3m3;1Z3~0t4f3#3=0w1W3(0o0B0b3+0A0b0B0S1}0B050v0K06054s0v0d004q4s0e4k3{3=3~0f3y3N4N2P4a024c0x4e3.2+474O0'4j4!3l4g1A4n0'4I4r4t4v0S0b0r0w4G4A274C1w060d0s0+0h0O0k4/4K4M2N3|4P3M0}3o34183j0F3h2f380}2i5m0j1v5f5i1e2Y5i0N0P0R02.
 </div>
 </div>
 <div class="admonition example">
@@ -3519,8 +3573,8 @@ Soit le script suivant :
 </ol>
 <p><div id="global_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f"></div><span id="comment_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f">5</span>/5</div></div></div></div></p>
 <div markdown="1" id="solution_editor_81a4c3fde1c0510fbef86e8b77b809bca6a7fb6f"      class="py_mk_hidden" data-search-exclude >
-.128013béihs=1vn;c458t2S (fopy6
-)qa"P:le3rzV/gdkmu030I0B0j0w070A090m0f0A0w09090a0x0j070q0x020t03090L0K0K0w0D0r020l0p0A0L0$0p0d030G0,0.0:0=0*0q0203150~180G150*0I070c0U0W0Y0!08070H080A1m080j0(030P050A0B1h0X0Z0x1l1n1p1n0j1v1x1t0j0D160j080U0^090q0w0d0!0k0x1z1j0x0o0R0B0d0w0K0B1t1S1U1Z1B1$1x1(1*0(040m0y0D0p0q0p09070{0d0m0N1Q0D0D0B0f220~1-0d160G1O2f1L1N1M1u0I1/0!1p0d1'1 1t1e1g0V1A2p072r0d0p2v1t0q28162d2f2J0+1T232x1!2C0D0/0A0(0b2c2N0)2M1.2P1B2R2T0(0k2X1U2Z2d2o0x2'0w2U020C2+2e0*2.2$0!2;2?0g2_2-2N2/2 0(0h322{342}2:0p2S2=0(0s32192H0~2v2i0I1N2n3c0f2D1+163n173l2L0 2Y033t0N2I3b1i2%0(0w0H0B320m2!2O3I0!0p0(0a3O3Q2/0K072V383B2,3a2#3S0x0J0(070o3X2|3+0d3K3M3;3H2y0x3U02000H0j0e3W3'2e3P3=3|3!2V0i3`3*3|0'020z3O0m4k0t4k4k3Y3c0d050(2G2A0j3j481!4g0n4x3{1!091X3 0v0L0p420F0p0L0T1~0L0c0B0E0m0c4K0B0D004I4K0e4C4e4z0(0u3O3)3R3|3-020B0S3N4502474D1B4g4i4^4n0m4m4n4p3?4s024u0d4w4^544f0(4B5b4y1B4F0(4!4J4L4N0T2r0m4Q4S4U1T0T4W0j4Y5l4$4'4.4)024+4 4-3556585a2L5h0!4A5C2/5j4H5m0e4M4O0m0p05094Y4S284U1x0m0D060,0A0P0j5A425R3c4g5G2J0*0G3E0B2f2G5 3m1f3o2i2l2g0w1w620G3n5|0N0P0R0902.
+.128013v S5i=:o2r;)1l8atfhPqdcbé(4esn3
+6uVgmk/yp"z030q0w0l0k090i0x060r0i0k0x0x0a0K0l090J0K020A030x0C0F0F0k0e0I02070c0i0C0$0c0y030H0,0.0:0=0*0J0203150~180H150*0q09050U0W0Y0!0n090E0n0i1m0n0l0(030P0s0i0w1h0X0Z0K1l1n1p1n0l1v1x1t0l0e160l0n0U0^0x0J0k0y0!0d0K1z1j0K0m0R0w0y0k0F0w1t1S1U1Z1B1$1x1(1*0(04060o0e0c0J0c0x090{0y060N1Q0e0e0w0r220~1-0y160H1O2f1L1N1M1u0q1/0!1p0y1'1 1t1e1g0V1A2p092r0y0c2v1t0J28162d2f2J0+1T232x1!2C0e0/0i0(0h2c2N0)2M1.2P1B2R2T0(0d2X1U2Z2d2o0K2'0k2U020z2+2e0*2.2$0!2;2?0v2_2-2N2/2 0(08322{342}2:0c2S2=0(0B32192H0~2v2i0q1N2n3c0r2D1+163n173l2L0 2Y033t0N2I3b1i2%0(0k0E0w32062!2O3I0!0c0(0a3O3Q2/0F092V383B2,3a2#3S0K0G0(090m3X2|3+0y3K3M3;3H2y0K3U02000E0l0f3W3'2e3P3=3|3!2V0j3`3*3|0'020b3O064k0A4k4k3Y3c0y0s0(2G2A0l3j481!4g0u4x3{1!0x1X3 0p0C0c420D0c0C0T1~0C050w0L06054K0w0e004I4K0f4C4e4z0(0g3O3)3R3|3-020w0S3N4502474D1B4g4i4^4n064m4n4p3?4s024u0y4w4^544f0(4B5b4y1B4F0(4!4J4L4N0T2r064Q4S4U1T0T4W0l4Y5l4$4'4.4)024+4 4-3556585a2L5h0!4A5C2/5j4H5m0f4M4O060c0s0x4Y4S284U1x060e0t0,0i0P0l5A425R3c4g5G2J0*0H3E0w2f2G5 3m1f3o2i2l2g0k1w620H3n5|0N0P0R0x02.
 </div>
 </div>
 <div class="admonition tip py_mk_admonition_qcm qcm_single py_mk_qcm_id_00007">
@@ -3875,8 +3929,8 @@ On rappelle que <code>x%n</code> (lire <span class="arithmatex">\(x\)</span> mod
 </ol>
 <p><div id="global_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_7ea47e15a124d65dec5cc1aed867b856e245da4a"></div><span id="comment_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a" class="comment tooltip">###<span style="--tool_shift: 95%;width:15em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div class="ide_separator"></div><div class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 90%;width:15em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="validate" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a">5</span>/5</div></div></div></div></p>
 <div markdown="1" id="solution_editor_7ea47e15a124d65dec5cc1aed867b856e245da4a"      class="py_mk_hidden" data-search-exclude >
-.128013bihs=1*vnC;c458t2S 0(+fopy,69A
-)qa7"P:le3r/gdBkmu030N0I0k0C060H080n0g0H0C0808090E0k060t0E020z03080R0Q0Q0C0K0u020m0s0H0R0+0s0d030L0=0@0_0{0:0t02031b141e0L1b0:0N060c0!0$0'0)07060M070H1s070k0.030V050H0I1n0%0(0E1r1t1v1t0k1B1D1z0k0K1c0k070!0~080t0C0d0)0l0E1F1p0E0r0X0I0d0C0Q0I1z1Y1!1(1H1+1D1.1:0.040n0F0K0s0t0s0806110d0n0T1W0K0K0I0g28141?0d1c0L1U2l1R1T1S1A0N1^0)1v0d1-251z1k1m0#1G2v062x0d0s2B1z0t2e1c2j2l2P0;1Z292D1)2I0K0^0H0.0n0a2i2T0/2S1@2V1H2X2Z2#0l2'1!2)2j2u0E2.0C2!020n0J2=2k0:2^2,0)2{2}0n0h312@2T2_372#0i3b333d352`0s2Y2|2#0w3i2*2U1o2-3n2/2~0D3s343v363x3p2~0j3B3k3D3m3o380x3J2+3L3f020a0o3Q3u2E3M3y0a2%152(3j3R3Z3T0a2;3'2?1f2N142B2o0N1T2t3l0g2J1;1c3@1d3=2R3/2k033}0T2O3K3+0.0y0e3b0n3t2_0s0.094g4i3l0Q060.0a30453c3*2W4d0O4n3C3Z4k024m4v4h4C1)4q0.3h4v3)3Y4y020O4f4H4o3L4E4G2P4I4b4K4r3U3.2P4P3e050.2M2G0k3b4W3Z0-020p4=4J1H081%02000B0R0s0k0f0y0O0n090n5153554{4$1H4^0v4B5g364d4U2R4|0)5i5k4x4}4 5c54560e595b525y5f5u5r0.5j4V5q2`5n5F4Q5h5I5t5P0)4~0.5x554T5B5X0f5O2_5s5K5l5M4S5o2(4?1)4^0A3X2_0P0.060r5S3e4z5%3l4E0b0b5 3L4L024)2(4#5G0E4Y4Z695/2-5N4v6g0)61636j5L66682?6a5T6c0.0q5|3l0d0.4T644D0.626D4%0.6r2k0n6t5'0.0G3i6M6M6k2`4-024/0d4;6o5*4^4`6#6b5V505D55575A0I080k0n0R291R061!0M1D0n2e2g6{6}1-0n0e5#6H5Q025=4O6U5^020I1v5{5)6b6A024e776l6F6n5p5*6q6y4X4l6e6s6U7k577n6v026G6(6u7t7i6u4E6x7J5}5,7C6m7C7I4!6U4^6Q4O6S6N6z6W6Y6!7r6b6%7C6*5#6.0n6:6=6@0n6_711E6 0V0d6|1E730O767G6O795?3l7d7f5`7u4c7P82607p7S4'6K2~6U6d8a4R7B8d7v7E7q5.6p8h8m1H7L8w5m7l5-3:5L7R8p3Z7T6f5L7W6R6S7z7$0K4:7C7*8G1)7,6,565Z7:6?6^8Q7^6~2f7{7}7/290y817(6u5;853L870Y0I8z0E8L7Y8N5L0d8P8R8U786'8:2_8W5d0f6}7@7|6}0d00010J0x0f8!1Z0Z7`7^8/8t6$0.7a4*14480I2l2M9z3?1l3^2o2r2m0C1C9C0L3@0:9M0U0W0Y02.
+.128013v S5i=:o2r;)1l8atf7hPqdcb(4e,sn3
+6uCg+mk/B*0yp9"A030r0w0l0k090i0y060s0i0k0y0y0a0Q0l090O0Q020B030y0D0H0H0k0e0N02070c0i0D0+0c0z030J0=0@0_0{0:0O02031b141e0J1b0:0r09050!0$0'0)0o090F0o0i1s0o0l0.030V0t0i0w1n0%0(0Q1r1t1v1t0l1B1D1z0l0e1c0l0o0!0~0y0O0k0z0)0d0Q1F1p0Q0m0X0w0z0k0H0w1z1Y1!1(1H1+1D1.1:0.04060p0e0c0O0c0y09110z060T1W0e0e0w0s28141?0z1c0J1U2l1R1T1S1A0r1^0)1v0z1-251z1k1m0#1G2v092x0z0c2B1z0O2e1c2j2l2P0;1Z292D1)2I0e0^0i0.060h2i2T0/2S1@2V1H2X2Z2#0d2'1!2)2j2u0Q2.0k2!02060A2=2k0:2^2,0)2{2}060v312@2T2_372#083b333d352`0c2Y2|2#0C3i2*2U1o2-3n2/2~0n3s343v363x3p2~0j3B3k3D3m3o380P3J2+3L3f020h0M3Q3u2E3M3y0h2%152(3j3R3Z3T0h2;3'2?1f2N142B2o0r1T2t3l0s2J1;1c3@1d3=2R3/2k033}0T2O3K3+0.0R0E3b063t2_0c0.0a4g4i3l0H090.0h30453c3*2W4d0K4n3C3Z4k024m4v4h4C1)4q0.3h4v3)3Y4y020K4f4H4o3L4E4G2P4I4b4K4r3U3.2P4P3e0t0.2M2G0l3b4W3Z0-020u4=4J1H0y1%02000q0D0c0l0f0R0K060a065153554{4$1H4^0x4B5g364d4U2R4|0)5i5k4x4}4 5c54560E595b525y5f5u5r0.5j4V5q2`5n5F4Q5h5I5t5P0)4~0.5x554T5B5X0f5O2_5s5K5l5M4S5o2(4?1)4^0g3X2_0I0.090m5S3e4z5%3l4E0L0L5 3L4L024)2(4#5G0Q4Y4Z695/2-5N4v6g0)61636j5L66682?6a5T6c0.0G5|3l0z0.4T644D0.626D4%0.6r2k066t5'0.0b3i6M6M6k2`4-024/0z4;6o5*4^4`6#6b5V505D55575A0w0y0l060D291R091!0F1D062e2g6{6}1-060E5#6H5Q025=4O6U5^020w1v5{5)6b6A024e776l6F6n5p5*6q6y4X4l6e6s6U7k577n6v026G6(6u7t7i6u4E6x7J5}5,7C6m7C7I4!6U4^6Q4O6S6N6z6W6Y6!7r6b6%7C6*5#6.066:6=6@066_711E6 0V0z6|1E730K767G6O795?3l7d7f5`7u4c7P82607p7S4'6K2~6U6d8a4R7B8d7v7E7q5.6p8h8m1H7L8w5m7l5-3:5L7R8p3Z7T6f5L7W6R6S7z7$0e4:7C7*8G1)7,6,565Z7:6?6^8Q7^6~2f7{7}7/290R817(6u5;853L870Y0w8z0Q8L7Y8N5L0z8P8R8U786'8:2_8W5d0f6}7@7|6}0z00010A0P0f8!1Z0Z7`7^8/8t6$0.7a4*14480w2l2M9z3?1l3^2o2r2m0k1C9C0J3@0:9M0U0W0Y02.
 </div>
 </div>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> Si <code>&lt;test1&gt;==True</code> et <code>&lt;test3&gt;==True</code>, l'instruction exécute <code>action_1()</code> et ignore le reste des tests pour exécuter <code>action_6()</code>     </p>
@@ -3991,7 +4045,7 @@ Soit le script suivant :
 <p><em>too long; didn’t read</em> pour trop long; pas lu.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
-</div><script >let PAGE_IDES_CONFIG = '.\x1e\'b-*vnc45t2SE0xFfoyp,69_)qa:le3rN/gd}BkIu![his=1C8 ](+{.A7"wUzVL\\m\x1e0W0!0d0x0z0*0r0l090w0m0r0k0u0y0c0x0P0q0e0P110x0u050k0y0D150k0q0k0}0u0p150D050a1j0P0h0Z0u0a0y050!0v0S0+0n0^090u0*0x1t0S0!1x0d0L0=060e0C0d060h0c0X1x0!0o1E0x09080r0a0=0-090d1D0!1T1V1X0r0-0/1Z1#1W1\'1u1)1U0!0I0N0.1:1%1=1(1*1F0I050w0M0a1-0x0N0d0N211_1|0a0z0x0d292b2d1@220n0l2b291/1!1 1%2e1E2q2s2v1$1?1E220x0i0a0w0I0D0x0D1D0K0T1_2H2J2L2N0r1B1H0l0D2n0S2Q1_2i28260*0M2E060P1_0#0L2-0x0r262b2P2R2z0m2Z092_0M052$0K0,0I0z0d0w1C2}1F2i0k0M0w0w2t0*2y0!2b0D0l0I2k0a3r0;0k0k1D0e0h0h0E1_1.0:0=0@0_0P1h0p0Z0h0|0R0x3N0p1q120q0p0x0p0p051r3Y1q0R0e1p3A0R121D1w1y1A1C1@1G1I091K1M1O1Q1S2S1,2C202o3~1Y3E1~2D3m1{1}402x422z2426280-2m3m2g2i2k4i2c3m2A4n0.0:4b2E1^2z2r3s1;4c2F2S2I2K2M2O1u2\'1V4F2V0D2X2j1I2#2|2(0x2*0M2,2.2:1E2=2@322{4J3d3?0=32342P37393b0!4*3f3h3j3E1(0P0B1m0S0O0O0S0h0X0P223o3q3s3u0l3w3y3A3C1E453G0^0P0c0Z0b050D1i0Z0c0a0Z0R1f0k0D0e0e0c0P0D0p0P0x0e0q0q1r5C0b0p3z0P0y0 3-1F3/1B1(4+3^1L1N1P1R0m2G3 4B4w5(444t46414D1E490z5/4C4x2325272l4p4d3n4V4m5~2$5`4r3k5^5+1_674v3m2T4G2N4T4L2U4H4P2Z4S4)4U4W4Y1D2/2;2?0-4\'2E4K5U304-354:3a3c6b4^3i3k1(0U540P0V540e0s5052540y570d3p3u3t2k5c3x1u3z3B3D5.5j0r1n0P0p0D0q3M0R0D0y113w051g3*0P0R5F0b0Z0Z0q0x755J5B0y0p5t5T1x0r1z5W3=2 3@3_5#3|5\'43696e1,456d605?7s600n4f5}4o6557622j644q4z687w5;1F7L7N5`6f4N6i0!7T6l2Y4R353d2)326s1u6u4#6w2^2`6z4*7l4,264.4J6F4=4@0x3g6K4{1@0S0k040W6W0v0X0y0h0k0E041E2f6Z591Z5b5d6)5f6,1/6.771g0c0c6~050b0c0p0y3X0c3(0e1r0x0q5E8C0a0u0c1P5t0|0p0q0b0h7f5V3;2~307n3{5%5,7z7O1W5-2u5*481|5@7R2p7C4h2a5 7O4l7I7E7K2s7v8)7A7Q8}8$4M4H7V7X2W7Z2!7#6q7\'2-6t4!0!4$6x7.7V5Y6D4/0d386G4?6I7|4_6L808284556Q0X0e86888a8c6Y6!5a6%8j0S6*5g0,6-0?0^3!0k0h5u0k3Z050Z8x0u0k0P058E5D775n14160x050 8F0a0P9$6(1v5U7h3:5X7;5Z3`5$3}1+1Y8-7r8|2w6a5=8+8#668/7J608@4s4j8~8{5.a54y2B907S926h6p6j6g4O976o2%7$4V9b4Z6v4%9iau6B3@9l7^9n4;6H2z6J4`4t1(0.2i3850530X3A3A0P0S010S0u0n0n0z0l0i4X0u0d0M090S0d0l0w0)0I3A8E0za|a~770)1X0u0zaY0ya!0S069L0X0Zb46Wbb0SaV0xaX030S08b60Sbnbh0Vbj0zaWb79G8g6$3v9^9M8m3F9Q0r0q1m6{0u0D0Z051j6~0a0k0Z0e0R5s0x3P3\'1n0DbS050u0R0h0P0Z0ybT0a8S9{7j8V7m5!8Ya27W5)a87t8\'4uaq227yan5{4gaf8?7Hai8=667La747ak4Ab}60954IaA4E6k964Q987V7%2+9c7)9e9g7-0M4(cmb?7=336EaN9p7{7}aS0/aUbwblb76Va!a#a%a(a*a,a.a:a=a@a_a{a}0ha b1c(b3b5cQ0Sb90hbi0ebeb4150N0Ubpb7bc6W6Tbnbk38bz6#8ibD8l1V0D2-0l5@0b770u893z3z188x8I0u2N7d0h0u108P7c8E740q0h5w5q0Rb:7i8UaJ1Jb^1P062H1A0n3bb*8Z7r7R2J0u0N0N0S0f0d1p0G0vb40Sd%0S0)0!d)d)0S0U0H1 0z0`0a0xd(c\'3Q0S0Dc*8E2h0M2id{0u09dV0w04d}0q090=0ae86Td+d*d*a@d\'2M0k0S0r0ra?2-en0U1|0w0k0s1uet0k0Xen2b0G0O2Qd$ej7|0S7B0N0Les0xeu1U08ew0SeyeA0reC0XcW1W0Dc{0seGd%ekeJ0l0neNeueS4m38a@eUeB0d0G1Re+0Ue%eie(eIcA0r0x0*0n0d0me-ev1ue:0za@ea0deTeOeze@0G8!ce5:5`c3aq0u0Cd@525lb40Melfrd@02fu0R0S1ud\'e\'eJ0za?0d0Ud)0\'3qdV2q0I080x0%bo0l1.d)ee09a,fKfM0!fO1{0S0l340.fT2ifV3b0Sb0d_0q0N0I0wdY0dfZ8.5|8:ajc82h8^8;65e)7Ee|fFfHbp0waYfzfH2H0naY3zfH0*0N0CaY0kd)0w0ubo0u3baX2Ma)fsd{0x080z0u2-d^a~a;e10Wgj0Ebjffeaa@0Wge0Ed,a(0(gva_dY3bb4fHdT8+ffge6Ubj0i0n1Ugo0Cg\'1 2me|d\'g{d%a(0Ad@0ndTf+7C0.d{04eZ3bb7gu81eba=0=gDa^g70Xhj0S0J0S0ie}2Mgf7Eg|g}dW0MfWf*09d@083q3bfVh1e5gHdUh5gA0dgGd?0Nhj0X2pcdamc16b8 ci1EgYgv2ghea@4r0S2C0M1=d{0Ih(2!d@gAd)hz0da_0mgh1*d}c;cW260t0Ih50N0m2be80*a;0Mi0f31=b4cVa,d}0RdVia0Sf=1!gA2jik2ahh2ma)h*1%gJc+f~f^ike3ecf^hOid0S0Qd@4bh-8;g.e86$e80S0*d}3:eThw0Ihzbvbxa)iw8Eiyb2ip08e8h0f@b2iCb22M0*1B1%1U0f0Y0$0jiUiFd?h@d@d2b7cX08iuffgAhbh#0Mhf0g0A0\'hQcnaw94asaxcqaz6Act4Xcvbbcx7,6y7Va;0-f42c2_7|2E0c1_0u3r0l2_0l0C0rg)0.2EhLi11_1!bw0r2igo2XdTfk1u9e0LdT1Z0L4V0G0r050d091DjP0x1_f11W2h0mf5ata^0zjQ1Ef1f/2E0`0w1|1_i70ieo2M32hz2$1m1_2Mg5dT2^jwf3f50N0;31im2^aVdcj/j}j;1E2M1pa=bp6x583u0kdceWc92$j:2f1I0#ko3HjM39ja31ks0zknkF5@ah2$k3k5cD317?cG9o7`8e9H8h9Jd76+d9db5@3+0u0b1q5y0~0a1P1m0k9\'0k72bY9YbOb)0q1j1f0u0Zl10p9^3.b;dE5Y8XdIdKf4dNc?b`8%acdSdUdWdY0ad!fHefd,d.d:d=d@h|d{iNfJe119e4ike7f^gSi.c+eeegd+e~gDelenep2k0rf8eSe?eWe^eE0TfHe)eKeMeyeQl(fheVeXeZ09e#eRl.eI2qe,eye/2je;fgeul_e^e`e,e}g{e)j?jyf7m3fam5fc0Sfem7fil*fka6hThXfoab7Rfzgl0hfwfygCfB0S71fEg{fHf$1%f\'f)fQ3qfTfVhBfY0!f!eO1|mIfGlXmLfLfNfPmnh0mQfUeJh2mT0.fZd(f#fJmMm\'f*f,8+f/m,f=i,c+f`f|a;f 6bae8_agc9c70!g9g7gbd%gdgxggfsgig/aYfvlXg=grgtgvgecPhgmz2MgFgHffiShLd@gNg/gPiogS1vgVgX0SgZa^fXgx0xg@g{kQg+ni51g.g:iQgpg@ga6Ththug m-dV3q5|hJh7a+eOh5hbkF090ah$hg7EhPhlhnhpeOir2cn)a(0fhwhBhyhAhCm,hFiAcA8+n}hM2ahPhRal8(mvonchcfhYnNh!4Vn|h\'h)h+0Dh-kqhgh=2jh^h`1UlHh~i9i1b7i3i5f^i7a=iai=f~09ien0bYiii1iph.inff3bdVhsgHh+e8i%c+iAn`e8iEoYiGiI4BiK2biMf^iOiziRd_iT0NiViXj1i!o:iP3bi)f^i+iNe8i:oWi@i_i{p7i}oHj0cOaXj3j5hgj8oxkS0Sjcje2Gjjjicojk6n991Ejo7(jraF9hcA7/jEi jykn3b0kjCjEjGjIjKnVkuj~0!jS5@jVkni70NjZmG1_j$kn0aj(lyj+j-p(kw0!j?n`0zj_0-clkKj knk11Dk#p k7k9czkc1Dkekx7HkijLpUkmko1:kakUp~kf14n{0MkB2^kD2kkXkHg58=q73nkMkO0^nVkSf2bwdckWkGkZqbgxk$dFk\'cF9mk*aP3n8fd5k/5ek;7Wdaa_5@0Z14740~0c0u120b5E0ckg5t9=dn0D72l78w5H8v190b0udC9|7k8WdH0cdJ0idLdNb9lrb|otp*gulvdXdZd#lXlB0!d-d/1.lFi#c;d|p1lKh:e3e5lPb2lRedd(lVehmeeIl!09eql%mjmpm9eDeFlXl/1{l;fhl?exl^fjeYn=l|e$l elm1l\'mkaNe=r+mrmbe|r;0Smgf5mifhm4r_mnfXrXfjflmurnc2mxaq0Y0Qb8b40Y0FaY0cb40Fsi520bb4m$f\'slaYd)1UshoK0!shsy1*sBrNsqsF1Usqe}fx0Ssl07070eg-shsRsTbusqsWd%rtg{svd)slsiiLiWj|0Me30Cm oxs/f=1WiGfZb4eOsOsVsSsU0Fs!sY0Qs!s$d\'s\'sDsJs+c#fJs?d@2)dY09s:j0a@0Fs`hz26elsZs nYsQs bus~sTt6d%t8s)bjo s,hLs.tis;n{tebja@0YtnmXd@tzfIf%gtd@tGtL0904iLoftgten54eg1nb7GqFnbndg_eSm=g{ge0rsE52shnh3jsxt`tmlXt@sJ52sqnl0nt^srmG0yu6t^sm52solXgj0ru3mGsTgngpu8nr0!hb0w0=0Ci1gzd@sEnygGgInCgMuishnHgRhfgUgxu8gWrwhZnPg$nSnpuot~81nsikuuuwb7gAuzgEuBnBp5nD1vuF0FuHs7gTt@sluNa\'ovuQnRunjKukgsurgvuttiu!hgu%nzuCu*uEg/uj0Qu/nJuK3jsqu@uPg#u{09g(hI39gwgfnYgjg;n$vng^2cg`n)u^n+ofn.26n:h8n@gvn_qxhfhKhihkhmhob4hqo4dVhto7o9m(iXoahDn,ogvpoj1polhjor7MhUaoosfnuPj9hfoz1#pwoCo(h:lG0!h?oInkh{d_h}a+h oOeTi4o;8EoToNib1%iFa*o!ih0Sijilh/gQipo,g7ito/f^wd0qo?lS8Eo_a(iHh.2wo~ff2HiN3riPp4gK1BiU0SiWpsiZgvpcizpei*fIpif^pk1=pmi`i|o`i~0-iYnvpvoBd@pyvMa@pCjfav7UaIck6m7!csaCcuaE7+aGpRjvqojzpXpZ1EjFa_p$jLvpjOkvjRdcp,f3p.jYqip?j%p_j)p|j.1uqHq1j^j`q6xlq80rqa1uqck60uk80Mka26qhj!0eqvkh1|qnjxqp4,kqqOa-0zquqkkzqya;qAq\'qCqSkIx(qI0lkN6.qM4,kUqRkYx;xJqVp 9kk(q!aO9q1EqBk.bCq*0E0E.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
+</div><script >let PAGE_IDES_CONFIG = '.\x1eES.i\\{o2r)_18tfq,4e(n\'LVu]Nk!/B*09pAv5 xF-=:lwa}7hdbc63sg+m[UIyC"z\x1e090)0h0m0c0!0e0a0o0M0\'0e0i0O0W0F0m0f0B0b0f110m0O0T0i0W0S150i0B0i0}0O0V150S0T0U1j0f0A0Q0O0U0W0T0)0L0G0+0C0^0o0O0!0m1t0G0)1x0h0R0=0J0b0Y0h0J0A0F061x0)0k1E0m0o0E0e0U0=0-0o0h1D0)1T1V1X0e0-0/1Z1#1W1\'1u1)1U0)0s0X0.1:1%1=1(1*1F0s0T0M070U1-0m0X0h0X211_1|0U0c0m0h292b2d1@220C0a2b291/1!1 1%2e1E2q2s2v1$1?1E220m0H0U0M0s0S0m0S1D0#0t1_2H2J2L2N0e1B1H0a0S2n0G2Q1_2i28260!072E0J0f1_0N0R2-0m0e262b2P2R2z0\'2Z0o2_070T2$0#0,0s0c0h0M1C2}1F2i0i070M0M2t0!2y0)2b0S0a0s2k0U3r0;0i0i1D0b0A0A0P1_1.0:0=0@0_0f1h0V0Q0A0|0g0m3N0V1q120B0V0m0V0V0T1r3Y1q0g0b1p3A0g121D1w1y1A1C1@1G1I0o1K1M1O1Q1S2S1,2C202o3~1Y3E1~2D3m1{1}402x422z2426280-2m3m2g2i2k4i2c3m2A4n0.0:4b2E1^2z2r3s1;4c2F2S2I2K2M2O1u2\'1V4F2V0S2X2j1I2#2|2(0m2*072,2.2:1E2=2@322{4J3d3?0=32342P37393b0)4*3f3h3j3E1(0f0x1m0G0K0K0G0A060f223o3q3s3u0a3w3y3A3C1E453G0^0f0F0Q0l0T0S1i0Q0F0U0Q0g1f0i0S0b0b0F0f0S0V0f0m0b0B0B1r5C0l0V3z0f0W0 3-1F3/1B1(4+3^1L1N1P1R0\'2G3 4B4w5(444t46414D1E490c5/4C4x2325272l4p4d3n4V4m5~2$5`4r3k5^5+1_674v3m2T4G2N4T4L2U4H4P2Z4S4)4U4W4Y1D2/2;2?0-4\'2E4K5U304-354:3a3c6b4^3i3k1(0n540f0Z540b0d5052540W570h3p3u3t2k5c3x1u3z3B3D5.5j0e1n0f0V0S0B3M0g0S0W113w0T1g3*0f0g5F0l0Q0Q0B0m755J5B0W0V5t5T1x0e1z5W3=2 3@3_5#3|5\'43696e1,456d605?7s600C4f5}4o6557622j644q4z687w5;1F7L7N5`6f4N6i0)7T6l2Y4R353d2)326s1u6u4#6w2^2`6z4*7l4,264.4J6F4=4@0m3g6K4{1@0G0i0p096W0L060W0A0i0P0p1E2f6Z591Z5b5d6)5f6,1/6.771g0F0F6~0T0l0F0V0W3X0F3(0b1r0m0B5E8C0U0O0F1P5t0|0V0B0l0A7f5V3;2~307n3{5%5,7z7O1W5-2u5*481|5@7R2p7C4h2a5 7O4l7I7E7K2s7v8)7A7Q8}8$4M4H7V7X2W7Z2!7#6q7\'2-6t4!0)4$6x7.7V5Y6D4/0h386G4?6I7|4_6L808284556Q060b86888a8c6Y6!5a6%8j0G6*5g0,6-0?0^3!0i0A5u0i3Z0T0Q8x0O0i0f0T8E5D775n14160m0T0 8F0U0f9$6(1v5U7h3:5X7;5Z3`5$3}1+1Y8-7r8|2w6a5=8+8#668/7J608@4s4j8~8{5.a54y2B907S926h6p6j6g4O976o2%7$4V9b4Z6v4%9iau6B3@9l7^9n4;6H2z6J4`4t1(0.2i385053063A3A0f0G010G0O0C0C0c0a0H4X0O0h070o0G0h0a0M080s3A8E0ca|a~77081X0O0caY0Wa!0G0J9L060Qb46Wbb0GaV0maX030G0Eb60Gbnbh0Zbj0caWb79G8g6$3v9^9M8m3F9Q0e0B1m6{0O0S0Q0T1j6~0U0i0Q0b0g5s0m3P3\'1n0SbS0T0O0g0A0f0Q0WbT0U8S9{7j8V7m5!8Ya27W5)a87t8\'4uaq227yan5{4gaf8?7Hai8=667La747ak4Ab}60954IaA4E6k964Q987V7%2+9c7)9e9g7-074(cmb?7=336EaN9p7{7}aS0/aUbwblb76Va!a#a%a(a*a,a.a:a=a@a_a{a}0Aa b1c(b3b5cQ0Gb90Abi0bbeb4150X0nbpb7bc6W6Tbnbk38bz6#8ibD8l1V0S2-0a5@0l770O893z3z188x8I0O2N7d0A0O108P7c8E740B0A5w5q0gb:7i8UaJ1Jb^1P0J2H1A0C3bb*8Z7r7R2J0O0X0X0G050h1p0v0Lb40Gd%0G080)d)d)0G0n0%1 0c0`0U0md(c\'3Q0G0Sc*8E2h072id{0O0odV0M0pd}0B0o0=0Ue86Td+d*d*a@d\'2M0i0G0e0ea?2-en0n1|0M0i0d1uet0i06en2b0v0K2Qd$ej7|0G7B0X0Res0meu1U0Eew0GeyeA0eeC06cW1W0Sc{0deGd%ekeJ0a0CeNeueS4m38a@eUeB0h0v1Re+0ne%eie(eIcA0e0m0!0C0h0\'e-ev1ue:0ca@ea0heTeOeze@0v8!ce5:5`c3aq0O0Yd@525lb407elfrd@02fu0g0G1ud\'e\'eJ0ca?0h0nd)0r3qdV2q0s0E0m0*bo0a1.d)ee0oa,fKfM0)fO1{0G0a340.fT2ifV3b0Gb0d_0B0X0s0MdY0hfZ8.5|8:ajc82h8^8;65e)7Ee|fFfHbp0MaYfzfH2H0CaY3zfH0!0X0YaY0id)0M0Obo0O3baX2Ma)fsd{0m0E0c0O2-d^a~a;e109gj0Pbjffeaa@09ge0Pd,a(0qgva_dY3bb4fHdT8+ffge6Ubj0H0C1Ugo0Yg\'1 2me|d\'g{d%a(0ud@0CdTf+7C0.d{0peZ3bb7gu81eba=0=gDa^g706hj0G0w0G0He}2Mgf7Eg|g}dW07fWf*0od@0E3q3bfVh1e5gHdUh5gA0hgGd?0Xhj062pcdamc16b8 ci1EgYgv2ghea@4r0G2C071=d{0sh(2!d@gAd)hz0ha_0\'gh1*d}c;cW260j0sh50X0\'2be80!a;07i0f31=b4cVa,d}0gdVia0Gf=1!gA2jik2ahh2ma)h*1%gJc+f~f^ike3ecf^hOid0G0(d@4bh-8;g.e86$e80G0!d}3:eThw0shzbvbxa)iw8Eiyb2ip0Ee8h0f@b2iCb22M0!1B1%1U050D0$0IiUiFd?h@d@d2b7cX0EiuffgAhbh#07hf040u0rhQcnaw94asaxcqaz6Act4Xcvbbcx7,6y7Va;0-f42c2_7|2E0F1_0O3r0a2_0a0Y0eg)0.2EhLi11_1!bw0e2igo2XdTfk1u9e0RdT1Z0R4V0v0e0T0h0o1DjP0m1_f11W2h0\'f5ata^0cjQ1Ef1f/2E0`0M1|1_i70Heo2M32hz2$1m1_2Mg5dT2^jwf3f50X0;31im2^aVdcj/j}j;1E2M1pa=bp6x583u0idceWc92$j:2f1I0Nko3HjM39ja31ks0cknkF5@ah2$k3k5cD317?cG9o7`8e9H8h9Jd76+d9db5@3+0O0l1q5y0~0U1P1m0i9\'0i72bY9YbOb)0B1j1f0O0Ql10V9^3.b;dE5Y8XdIdKf4dNc?b`8%acdSdUdWdY0Ud!fHefd,d.d:d=d@h|d{iNfJe119e4ike7f^gSi.c+eeegd+e~gDelenep2k0ef8eSe?eWe^eE0tfHe)eKeMeyeQl(fheVeXeZ0oe#eRl.eI2qe,eye/2je;fgeul_e^e`e,e}g{e)j?jyf7m3fam5fc0Gfem7fil*fka6hThXfoab7Rfzgl0AfwfygCfB0G71fEg{fHf$1%f\'f)fQ3qfTfVhBfY0)f!eO1|mIfGlXmLfLfNfPmnh0mQfUeJh2mT0.fZd(f#fJmMm\'f*f,8+f/m,f=i,c+f`f|a;f 6bae8_agc9c70)g9g7gbd%gdgxggfsgig/aYfvlXg=grgtgvgecPhgmz2MgFgHffiShLd@gNg/gPiogS1vgVgX0GgZa^fXgx0mg@g{kQg+ni51g.g:iQgpg@ga6Ththug m-dV3q5|hJh7a+eOh5hbkF0o0Uh$hg7EhPhlhnhpeOir2cn)a(05hwhBhyhAhCm,hFiAcA8+n}hM2ahPhRal8(mvonchcfhYnNh!4Vn|h\'h)h+0Sh-kqhgh=2jh^h`1UlHh~i9i1b7i3i5f^i7a=iai=f~0oien0bYiii1iph.inff3bdVhsgHh+e8i%c+iAn`e8iEoYiGiI4BiK2biMf^iOiziRd_iT0XiViXj1i!o:iP3bi)f^i+iNe8i:oWi@i_i{p7i}oHj0cOaXj3j5hgj8oxkS0Gjcje2Gjjjicojk6n991Ejo7(jraF9hcA7/jEi jykn3b0ijCjEjGjIjKnVkuj~0)jS5@jVkni70XjZmG1_j$kn0Uj(lyj+j-p(kw0)j?n`0cj_0-clkKj knk11Dk#p k7k9czkc1Dkekx7HkijLpUkmko1:kakUp~kf14n{07kB2^kD2kkXkHg58=q73nkMkO0^nVkSf2bwdckWkGkZqbgxk$dFk\'cF9mk*aP3n8fd5k/5ek;7Wdaa_5@0Q14740~0F0O120l5E0Fkg5t9=dn0S72l78w5H8v190l0OdC9|7k8WdH0FdJ0HdLdNb9lrb|otp*gulvdXdZd#lXlB0)d-d/1.lFi#c;d|p1lKh:e3e5lPb2lRedd(lVehmeeIl!0oeql%mjmpm9eDeFlXl/1{l;fhl?exl^fjeYn=l|e$l elm1l\'mkaNe=r+mrmbe|r;0Gmgf5mifhm4r_mnfXrXfjflmurnc2mxaq0D0(b8b40D0yaY0Fb40ysi520lb4m$f\'slaYd)1UshoK0)shsy1*sBrNsqsF1Usqe}fx0Gsl0z0z0bg-shsRsTbusqsWd%rtg{svd)slsiiLiWj|07e30Ym oxs/f=1WiGfZb4eOsOsVsSsU0ys!sY0(s!s$d\'s\'sDsJs+c#fJs?d@2)dY0os:j0a@0ys`hz26elsZs nYsQs bus~sTt6d%t8s)bjo s,hLs.tis;n{tebja@0DtnmXd@tzfIf%gtd@tGtL0o0piLoftgten54eg1nb7GqFnbndg_eSm=g{ge0esE52shnh3jsxt`tmlXt@sJ52sqnl0Ct^srmG0Wu6t^sm52solXgj0eu3mGsTgngpu8nr0)hb0M0=0Yi1gzd@sEnygGgInCgMuishnHgRhfgUgxu8gWrwhZnPg$nSnpuot~81nsikuuuwb7gAuzgEuBnBp5nD1vuF0yuHs7gTt@sluNa\'ovuQnRunjKukgsurgvuttiu!hgu%nzuCu*uEg/uj0(u/nJuK3jsqu@uPg#u{0og(hI39gwgfnYgjg;n$vng^2cg`n)u^n+ofn.26n:h8n@gvn_qxhfhKhihkhmhob4hqo4dVhto7o9m(iXoahDn,ogvpoj1polhjor7MhUaoosfnuPj9hfoz1#pwoCo(h:lG0)h?oInkh{d_h}a+h oOeTi4o;8EoToNib1%iFa*o!ih0Gijilh/gQipo,g7ito/f^wd0Bo?lS8Eo_a(iHh.2wo~ff2HiN3riPp4gK1BiU0GiWpsiZgvpcizpei*fIpif^pk1=pmi`i|o`i~0-iYnvpvoBd@pyvMa@pCjfav7UaIck6m7!csaCcuaE7+aGpRjvqojzpXpZ1EjFa_p$jLvpjOkvjRdcp,f3p.jYqip?j%p_j)p|j.1uqHq1j^j`q6xlq80eqa1uqck60Ok807ka26qhj!0bqvkh1|qnjxqp4,kqqOa-0cquqkkzqya;qAq\'qCqSkIx(qI0akN6.qM4,kUqRkYx;xJqVp 9kk(q!aO9q1EqBk.bCq*0P0P.'</script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_pyodideSectionsRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/2_btnRunner-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/start-pyodide.js"></script><script type="application/javascript" src="../../js-per-pages/2_terminalRunner-terms.js"></script><script type="application/javascript" src="../../js-per-pages/3_ideRunner-ides.js"></script><script type="application/javascript" src="../../js-per-pages/qcms-qcm.js"></script>
@@ -4063,7 +4117,7 @@ Soit le script suivant :
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-  Back to top
+  Retour en haut de la page
 </button>
         
       </main>
@@ -4072,17 +4126,17 @@ Soit le script suivant :
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
         
           
-          <a href="../python-2gt-04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Les fonctions">
+          <a href="../python-2gt-04/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Les fonctions">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Previous
+                Précédent
               </span>
               <div class="md-ellipsis">
                 Les fonctions
@@ -4092,10 +4146,10 @@ Soit le script suivant :
         
         
           
-          <a href="../python-2gt-06/" class="md-footer__link md-footer__link--next" aria-label="Next: Les boucles finies">
+          <a href="../python-2gt-06/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Les boucles finies">
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Next
+                Suivant
               </span>
               <div class="md-ellipsis">
                 Les boucles finies
@@ -4113,60 +4167,60 @@ Soit le script suivant :
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      <a href="https://moussatat.github.io/about">Nizar MOUSSATAT, 2024</a>
+  <div class="md-copyright_pyodide">
+    
+      <div class="md-copyright__highlight"><a href="https://moussatat.github.io/about">Nizar MOUSSATAT, 2024</a>
 <a style="vertical-align:middle" rel="Sous licence CC BY-NC-SA 4.0" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Sous licence CC BY-NC-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>  
-
-    </div>
-  
-  
 </div>
-      
-        <div class="md-social">
+    
+    
+      <div class="md-social">
   
     
     
     
     
-    <a href="mailto:nizar.moussatat@ac-grenoble.fr" target="_blank" rel="noopener" title="Écrire à l&#39;auteur" class="md-social__link">
+    <p><a href="mailto:nizar.moussatat@ac-grenoble.fr" target="_blank" rel="noopener" title="Écrire à l&#39;auteur" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16v22.1l172.5 141.6c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16h384c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128c0-35.3 28.7-64 64-64h384c35.3 0 64 28.7 64 64v256c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg>
-    </a>
+    </a></p>
   
     
     
     
     
-    <a href="https://x.com/zenxbear" target="_blank" rel="noopener" title="Tweeter à l&#39;auteur" class="md-social__link">
+    <p><a href="https://x.com/zenxbear" target="_blank" rel="noopener" title="Tweeter à l&#39;auteur" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
-    </a>
+    </a></p>
   
     
     
     
     
-    <a href="https://discord.gg/zyvrR4P5Rr" target="_blank" rel="noopener" title="Joindre le discord" class="md-social__link">
+    <p><a href="https://discord.gg/zyvrR4P5Rr" target="_blank" rel="noopener" title="Joindre le discord" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
-    </a>
+    </a></p>
   
     
     
     
     
-    <a href="https://github.com/moussatat" target="_blank" rel="noopener" title="Dépôt github" class="md-social__link">
+    <p><a href="https://github.com/moussatat" target="_blank" rel="noopener" title="Dépôt github" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-    </a>
+    </a></p>
   
     
     
     
     
-    <a href="https://www.csja.fr/" target="_blank" rel="noopener" title="Lycée Jeanne d&#39;Arc" class="md-social__link">
+    <p><a href="https://www.csja.fr/" target="_blank" rel="noopener" title="Lycée Jeanne d&#39;Arc" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M337.8 5.4c-10.8-7.2-24.8-7.2-35.6 0L166.3 96H48c-26.5 0-48 21.5-48 48v320c0 26.5 21.5 48 48 48h208v-96c0-35.3 28.7-64 64-64s64 28.7 64 64v96h208c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H473.7L337.8 5.4zM96 192h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16v-64zM96 320h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16v-64zM232 176a88 88 0 1 1 176 0 88 88 0 1 1-176 0zm88-48c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-16v-16c0-8.8-7.2-16-16-16z"/></svg>
-    </a>
+    </a></p>
   
 </div>
-      
+    
+  </div>
+  
+</div>
     </div>
   </div>
 </footer>
@@ -4234,18 +4288,18 @@ Soit le script suivant :
     
     
     
-      <label class="md-button" for="__settings">Manage settings</label>
+      <label class="md-button" for="__settings">Paramétrer vos choix</label>
     
   
     
-      <button class="md-button md-button--primary">Accept</button>
+      <button class="md-button md-button--primary">Accepter</button>
     
     
     
   
     
     
-      <button type="reset" class="md-button md-button--primary">Reject</button>
+      <button type="reset" class="md-button md-button--primary">Refuser</button>
     
     
   
@@ -4255,13 +4309,21 @@ Soit le script suivant :
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
+
+
       <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       
     
+<!-- PYODIDE - insertion token -->
+<script type="application/javascript" src="../../js-scripts/error-logs-generator-scripts.js"></script>
+<script type="application/javascript" src="../../js-scripts/z_doLast-subscriptions-scripts.js"></script>
+<!-- PYODIDE - insertion token -->
+
+
   </body>
 </html>
