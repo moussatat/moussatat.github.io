@@ -6,5 +6,5 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'G-BYF4FEE2HD', 'auto'); 
 
 $(".pdf").on('click', function() {    
-		gtag('event', 'file_download'  ); 
+		ga('event', 'file_download'  ); 
 	}); 
