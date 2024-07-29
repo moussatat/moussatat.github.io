@@ -1,2 +1,0 @@
-expediteur = "Alice"
-destinataire = Bob
