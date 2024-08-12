@@ -42,6 +42,8 @@ function inputWithPrompt(text) {
 }
 
 
+/**To access CONFIG data from pyodide (mermaid, cutFeedback, ...).
+ * */
 function config(){ return CONFIG }
 
 
@@ -72,6 +74,12 @@ del _hack_auto_run
 `,
 
 
+    version: `
+def version():
+    print("pyodide-mkdocs-theme v${ CONFIG.version }")
+`,
+
+
     inputPrompt: `
 @__builtins__.auto_run
 def _hack_input_prompt():
@@ -82,9 +90,24 @@ def _hack_input_prompt():
 `,
 
 
-    version: `
-def version():
-    print("pyodide-mkdocs-theme v${ CONFIG.version }")
+    copyFromServer: `
+@__builtins__.auto_run
+def _hack_input_prompt():
+    async def copy_from_server(
+        src: str,
+        dest: str=".",
+        name: str="",
+    ):
+        from pyodide.http import pyfetch
+        from pathlib import Path
+
+        response = await pyfetch(src)
+        content  = await response.bytes()
+        target   = Path(dest) / (name or Path(src).name)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(content)
+
+    __builtins__.copy_from_server = copy_from_server
 `,
 
 
@@ -455,38 +478,38 @@ const getFullStdIO =_=>{
  * wrong way (imports).
  *
  *
- * ## PROBLEMS:
+ * ## PROBLEMS & CONTEXT:
  *
  * 1. Pyodide itself uses various functions to run python code:
  *      - eval is used in pyodide.runPython
  *      - reversed and/or min and/or max may be used when building a stacktrace when an error is
  *        thrown in python
- * 2. This forbids to replace the __builtins__ versions of those functions (see about imports)
- * 3. but the __main__ script is run separately of pyodide actual "python runtime".
+ * 2. This forbids to replace the __builtins__ versions of those functions (see about imports)...
+ * 3. ...but the __main__ script is run separately of pyodide actual "python runtime".
  *
  *
  * ## SOLUTION FOR BUILTINS FUNCTIONS:
  *
  * - Redeclare forbidden things in the global scope, through `globals()`, using an object that will
  *   systematically throw an ExclusionError when it's called.
- * - Since those are in the global scope, they are visible through `dir()`, so add some make up on
- *   those, using a class that redefines its __qualname__ and __repr__, so that it's less obvious
- *   they are the anti-cheats (it will still remain obvious for those who know enough, but if they
- *   can find about that, they probably could solve the problem the right way anyway).
- * - The (hidden) function `__move_forward__('builtin_name')` can be used in the tests to get back the
- *   original builtin. If used, it must be done inside a closure, so that the original builtin
- *   doesn't override the "Raiser" in the global scope (see below).
- * - Pyodide runtime won't see those globals, so it is not affected in any way. Only the user's or
+ * - Since those are in the global scope, they are visible through `dir()`, so add some make up to
+ *   them, using a class that redefines its __qualname__ and __repr__, so that they are less obvious
+ *   as "anti-cheats" (it will still remain obvious for those who know enough. But if they can find
+ *   about that, they probably could solve the problem the right way anyway...).
+ * - Pyodide runtime won't see those globals, so it is not affected in any way, only the user's and
  *   tester's codes are.
+ * - The (hidden) function `__move_forward__('builtin_name')` (see documentation) can be used in the
+ *   tests to get back the original builtin. If used, it must be done inside a closure, so that the
+ *   original builtin doesn't override the "Raiser" in the global scope (see below).
  * - Since the hacked version are available to the user in the global runtime, they could just
  *   delete them to get back the access to the original  __builtins__ version. To limit this risk,
- *   an extra check is done after the user's code has been run, verifying that the hacked function
- *    is still defined in the global scope, and that it's still the original Raiser instance.
+ *   an extra check is done after the user's code has been run, verifying that the hacked functions
+ *   are still defined in the global scope, and that they still are the original Raiser objects.
  *
  *
  * ## SOLUTION FOR IMPORTS
  *
- * The main problem about `import` is that it actually go directly through `__builtins__`, using
+ * The main problem about `import` is that it actually goes directly through `__builtins__`, using
  * `__import__`. So in that case, there is no other choice than hacking directly the __builtins__,
  * and then put it back in place when not useful anymore.
  *
@@ -494,7 +517,7 @@ const getFullStdIO =_=>{
  * ## RECURSION LIMIT
  *
  * The sys module function is directly hacked, then put back in place: meaning, the function
- * setrecursionlimit is replaced at user's runtime with a Raiser object.
+ * setrecursionlimit is also replaced at user's runtime with a Raiser object.
  *
  * */
 const setupExclusions =(excluded, recLimit)=>{
@@ -505,8 +528,8 @@ const setupExclusions =(excluded, recLimit)=>{
      *  Keep in mind that the code of the Raiser instances will run "in context".
      *  This means it will be subject to existing exclusions, so it must never use a function that
      *  could be forbidden. Possibly...
-     *  Force this reason, copies of all the builtins used in the Raiser code are stored locally,
-     *  to be sure the Raiser won't use Raiser instances... XD
+     *  For this reason, copies of all the builtins used in the Raiser code are stored locally, to
+     *  be sure the Raiser won't use Raiser instances... XD
      * */
     const code = `
     @__builtins__.auto_run

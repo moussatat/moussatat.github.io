@@ -84,9 +84,6 @@ class PyodideSectionsRunner {
     }
     this.data.python_libs = new Set(this.data.python_libs)
     this.alreadyRanEnv = false    // Specific to terminals, but defined "for everyone"
-    this.importsSideKicks = {     // Pyodide code snippets/features to run when these are installed
-      matplotlib: 'pyodidePlot',
-    }
     this.pythonCodeRunnerWithCtx = async (ctx)=>{ pyodide.runPython(ctx.code) }
   }
 
@@ -174,133 +171,8 @@ class PyodideSectionsRunner {
    * @runtime :Same as `buildRunConfig`.
    * */
   async installAndImportMissingModules(code, runtime, isFromEnv=false){
-    jsLogger('[checkPoint] - installAndImportMissingModules', isFromEnv?'isFromEnv':'')
-
-    const installedModules = this._getAvailablePackages()
-    const neededModules    = this._getUserImportedModules(code).filter(
-      name => !installedModules.has(name) && (isFromEnv || !runtime.excluded.includes(name))
-    )
-
-    // Using this.pythonLibs because only the available ones can be downloaded
-    const pyLibsMissing = neededModules.filter( name => this.pythonLibs.has(name) )
-
-    // Using CONFIG.pythonLibs so that an unavailable custom lib doesn't trigger a
-    // "savage install" from PyPI.
-    const externalsMissing = neededModules.filter( name => !CONFIG.pythonLibs.has(name) )
-
-    const pkgReplacements = runtime.packagesAliases
-    const whiteList = runtime.whiteList.filter(name=>!installedModules.has(name))
-    externalsMissing.push(...whiteList)
-
-    // jsLogger(`[Imports]
-    //   needed:${ JSON.stringify(neededModules) }
-    //   py_libs: ${ JSON.stringify(pyLibsMissing) }
-    //   installs: ${ JSON.stringify(externalsMissing) }
-    //   errors: ${ runtime.stdErr }
-    // `)
-
-    /*Things to import whatever happens
-
-    Thing are complicated, here...:
-
-    * Installing packages via micropip doesn't actually import them in the environment (it works
-      the same for custom python libs).
-    * The theme needs to know up front what packages are missing or not, to decide when to display
-      installation messages or not.
-    * _Installed_ packages can be found through micropip, but not _loaded_ pythonLibs.
-
-    So, spotting missing packages relies on picking in sys.modules, BUT they actually end up there
-    _ONLY_ if a python code actually imported them, going through `import xxx`.
-
-    So far, so good. Problems arise with additional features:
-
-    * White lists:
-        - their content has to be actually imported in the global scope, so that they are actually
-          available to the user.
-    * Custom libs:
-        - They have to be imported in pyodide _right now_, so that they end up listed in sys.module
-        - This makes them are visible as "installed" on a next import attempt...
-        - ...which may occur right after the current call because imports in terminals commands amy
-          go through env, then envTerm, and BOTH will check if an import has to be done in the cmd.
-    * Exclusions:
-        - they are not applied on env sections, so modules _may_ be loaded there
-        - so they _have_ to be actually imported...
-        - ...but _HIDDEN_ inside a function, so that they do not leak in the global scope.
-        - Then the redactor's import from env or env_term will determine if the module ends up in
-          the global scope or not.
-    */
-
-    const preImport = whiteList.map(name=>'import '+name)
-    const hiddenImport=[]
-
-    const importLater=(name, import_as='')=>{
-      const arr = runtime.excluded.includes(name) ? hiddenImport : preImport
-      arr.push( import_as || 'import '+name )
-    }
-
-    if(externalsMissing.length || pyLibsMissing.length){
-      this.giveFeedback(CONFIG.lang.installStart.msg)
-
-      for(const lib of pyLibsMissing){
-        const archive = `${ CONFIG.baseUrl }/${ lib }.zip`
-        const zipResponse = await fetch(archive)
-        const zipBinary   = await zipResponse.arrayBuffer()
-        pyodide.unpackArchive(zipBinary, "zip", {extractDir: lib})
-        importLater(lib)
-      }
-
-      if(externalsMissing.length){
-
-        await pyodide.loadPackage("micropip");
-        let micropip = pyodide.pyimport("micropip");
-
-        for(let lib of externalsMissing){
-          if(lib in pkgReplacements){
-            importLater(lib, `import ${ pkgReplacements[lib] } as ${ lib }`)
-            lib = pkgReplacements[lib]
-          }else{
-            importLater(lib)
-          }
-          jsLogger("[Micropip] - Install", lib)
-          await micropip.install(lib)
-          if(this.importsSideKicks[lib]){
-            const code = pyodideFeatureCode(this.importsSideKicks[lib])
-            await pyodide.runPythonAsync(code)
-          }
-        }
-      }
-
-      this.giveFeedback(CONFIG.lang.installDone.msg)
-    }
-
-    // Import everything that is needed (either because module aliasing or because the code
-    // restrictions would forbid it later):
-    if(preImport.length){
-      pyodide.runPython(preImport.join('\n'))
-    }
-    if(hiddenImport.length){
-      const imports = `def _hack_imports():\n    ${ hiddenImport.join('\n    ') }\n_hack_imports() ; del _hack_imports`
-      pyodide.runPython(imports)
-    }
+    await installPythonPackages(this, code, runtime, isFromEnv)
   }
-
-
-
-  /**Rely on pyodide to analyze the code content and find the imports the user is trying to use.
-   * */
-  _getUserImportedModules(code){
-    code = pyodideFeatureCode("wantedImports", code)
-    return pyodide.runPython(code);
-  }
-
-
-  /**Extract all the packages names currently available in pyodide.
-   * */
-  _getAvailablePackages(){
-    const code = pyodideFeatureCode("alreadyImported")
-    return new Set( pyodide.runPython(code).split(' ') )
-  }
-
 
 
 
@@ -308,19 +180,19 @@ class PyodideSectionsRunner {
    * that are thrown up to this point and displaying them in a BigFail-fashion-way in the terminal.
    *
    * Contracts:
-   *    - `setup` takes the `e` argument only and returns a RuntimeManager instance.
+   *    - @setup takes the `e` (event) argument only and returns a RuntimeManager instance.
    *      The argument may be:
    *          * either an `Event`: then it has no use.
    *          * or the terminal current command (as `string`) that just got validated in the console.
-   *    - `action` takes the runtime argument and returns nothing
-   *    -  `finallyTeardown` takes the runtime argument and returns nothing
+   *    - @action takes the runtime argument and returns nothing
+   *    - @finallyTeardown takes the runtime argument and returns nothing
    *
    * About executions:
-   *      - `setup` is always run
-   *      - `action` is always called, and it's its job to decide if it has to actually run its
-   *         logic or not, depending on the `runtime` state.
-   *      - `finallyTeardown` is always called, and should contain all the operations that HAVE
-   *         to be run whatever happened before (success/error).
+   *    - @setup is always run
+   *    - @action is always called, and it's its job to decide if it has to actually run its
+   *       logic or not, depending on the `runtime` state.
+   *    - @finallyTeardown is always called, and should contain all the operations that HAVE
+   *       to be run whatever happened before (success/error).
    * */
   lockedRunnerWithBigFailWarningFactory(
     actionName, setup, action, finallyTeardown
@@ -364,7 +236,8 @@ class PyodideSectionsRunner {
   /**Generic main "action" runner for environment code.
    * */
   async installImportsAndRunEnvCode(ctx, runtime){
-    await this.installAndImportMissingModules(ctx.code, runtime, ctx.isEnvSection)
+    if(!ctx.code) return;
+    await installPythonPackages(this, ctx.code, runtime, ctx.isEnvSection)
     await pyodide.runPythonAsync(ctx.code, {filename: `<${ toSnake(ctx.section) }>`})
   }
 
@@ -399,12 +272,13 @@ class PyodideSectionsRunner {
   refreshPyodideFeatures(){
     const features = `
       autoRun
+      version
+      copyFromServer
       exclusionsTools
       inputPrompt
-      version
+      mermaidDrawer
       refresher
       upDownLoader
-      mermaidDrawer
     `.trim().split(/\s+/)
     for(const feature of features){
       const code = pyodideFeatureCode(feature)
@@ -418,12 +292,12 @@ class PyodideSectionsRunner {
 
 
 
-  /**Takes a code as argument, and run it in the pyodide environment, using various runtime logics.
-   * It mutates the RuntimeManager objects on the way, keeping track of the current state of the
-   * executions (error or not, keep running or not, ...).
+  /**Takes a user code as argument, and run it in the pyodide environment, using various runtime
+   * logics. It mutates the RuntimeManager objects on the way, keeping track of the current state
+   * of the executions (error or not, keep running or not, ...).
    *
-   * @throws: Any JS runtime Error, if something went very wrong... (python errors are swallowed
-   *          and just printed to the terminal)
+   * @throws: Any JS runtime Error if something went very wrong... (python errors are swallowed
+   *          and just printed to the jQuery.terminal)
    * */
   async runPythonCodeWithOptionsIfNoStdErr(code, runtime){
       jsLogger('[checkPoint] - Enter generic running function')
@@ -441,7 +315,8 @@ class PyodideSectionsRunner {
       await runtime.runWithCtx({...baseCtx, method: this.throwIfExcludedMethodsFound})
 
       // Detect possible user imports and install the packages to allow their imports:
-      await runtime.runWithCtx({...baseCtx, method: this.installAndImportMissingModules, methodArgs: [code, runtime]})
+      await runtime.runWithCtx({...baseCtx, method: this.installAndImportMissingModules,
+                                            methodArgs: [code, runtime]})
       if(runtime.stopped) return;
 
       baseCtx.logConfig.autoAssertExtraction = runtime.autoLogAssert

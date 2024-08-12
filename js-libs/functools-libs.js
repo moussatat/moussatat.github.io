@@ -333,7 +333,7 @@ function sleep(ms=0) {
 
 
 
-// Code issued from https://stackoverflow.com/questions/5379120/get-the-highlighted-selected-text
+// Code inspired by https://stackoverflow.com/questions/5379120/get-the-highlighted-selected-text
 function getSelectionText() {
     let text = "";
     if(window.getSelection) {
@@ -381,6 +381,10 @@ function getSelectionText() {
         console.warn("Unsupported copy from PMT terminal.")
         text = document.selection.createRange().text;
     }
+
+    // Just like usual, jQuery terminals are messing with the content, replacing spaces with \u00a0...:
+    text = text.replace(/\u00a0/ug, " ")
+
     return text;
 }
 
@@ -416,14 +420,15 @@ var [uploader, uploaderAsync] = (function(){
     // https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#example_showing_thumbnails_of_user-selected_images
 
     let jInput         = null
-    let readMethod    = null       // readAsText / readAsDataURL / readAsArrayBuffer / readAsBinaryString
+    let readMethod     = null       // readAsText / readAsDataURL / readAsArrayBuffer / readAsBinaryString
     let contentHandler = null       // Replaced on the fly at runtime
     let errorHandler   = null       // first error thrown during the reading process
 
+    const inputId      = 'pyodide-file-uploader'
     const resumeHandler=_=>{ contentHandler = null }
 
-    const inputId = 'pyodide-file-uploader'
-    const inputFactory=_=>{
+    ;(_=>{
+        // Defined in an isolated scope, to avoid the mistaken use of stuff defined here...
         jInput = $(`<input id="${ inputId }" name="file-uploader" type="file">`)
         $(document.head).append(jInput)
 
@@ -455,8 +460,7 @@ var [uploader, uploaderAsync] = (function(){
             },
             false
         )
-    }
-    inputFactory()
+    })()
 
 
     /**The showPicker method will raise an error, so possible to warn the user about what to do.

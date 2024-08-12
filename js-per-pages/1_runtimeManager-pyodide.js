@@ -45,7 +45,8 @@ class Ctx {
 
 
   static with(ctx, runtime){
-    let section = ctx.section || Ctx.BASE_CTX.section
+    let section = ctx && ctx.section || Ctx.BASE_CTX.section
+
     if(!ctx) ctx={}         // no argument
 
     else if(typeof(ctx)=='string'){   // environment name only
@@ -59,8 +60,8 @@ class Ctx {
     }
 
     return {
-      running: `${ ctx.section || '?' }_${ ctx.method.name }`,
       ...Ctx.BASE_CTX,
+      running: `${ section || '?' }_${ ctx.method.name }`,
       ...ctx,
       section,
     }
@@ -78,37 +79,46 @@ class Ctx {
  * */
 class RuntimeManager {
 
+  get excluded()        { return this.runner.excluded }
+  get excludedMethods() { return this.runner.excludedMethods }
+  get recLimit()        { return this.runner.recLimit }
+  get whiteList()       { return this.runner.whiteList }
+
   constructor(runner){
     this.runner = runner
 
-    // --- Python logistic related ---
-    this.excluded        = runner.excluded
-    this.excludedMethods = runner.excludedMethods
-    this.recLimit        = runner.recLimit
-    this.whiteList       = runner.whiteList
-    this.autoLogAssert   = true               // default for the PUBLIC tests...
-    this.purgeStackTrace = false              // default for the PUBLIC tests...
-    this.withStdOut      = true               // default for the PUBLIC tests...
-    this.packagesAliases = {                  // useless so far...
-      // turtle: "pyo_js_turtle",             // This never got finished => unusable.
-    },
-    // --- Runtime logistic related ---
-    this.stdErr          = ""                 // First encountered error message
-    this.finalMsg        = CONFIG.lang.successMsg.msg
-    this.isAssertErr     = false              // is the error an assertion error
-    this.ran             = {start:1}          // keep track of the successfully run env sections (or raising assertion errors)
-    this.dependencies    ={
+    // --- Python logistic related (may be mutated on the way) ---
+    this.autoLogAssert   = true     // default for the PUBLIC tests...
+    this.purgeStackTrace = false    // default for the PUBLIC tests...
+    this.withStdOut      = true     // default for the PUBLIC tests...
+
+    // --- Runtime logistic related (may be mutated on the way) ---
+    this.finalMsg     = CONFIG.lang.successMsg.msg
+    this.stdErr       = ""          // First encountered error message
+    this.isAssertErr  = false       // Is the error an assertion error
+    this.gotBigFail   = false       // If true, new errors won't replace the current one
+
+    this.ran = {start: true}        // Keep track of the successfully run env sections (or raising assertion errors)
+    this.dependencies = {
       env:      'start',
       envTerm:  'env',
-      code:     'env',        // actually not used as a condition for now
-      cmd:      'envTerm',    // actually not used as a condition for now
+      code:     'env',              // (actually not used as a condition for now)
+      cmd:      'envTerm',          // (actually not used as a condition for now)
       postTerm: 'envTerm',
       post:     'env',
     }
-    this.gotBigFail = false   // If true, new errors won't replace the current one
   }
 
   get stopped(){ return Boolean(this.stdErr) }
+
+
+  setRuntimeWith(runner={}){
+    // (not using this.runner to discriminate setup from teardown)
+    this.autoLogAssert   = runner.autoLogAssert ?? true
+    this.purgeStackTrace = runner.showOnlyAssertionErrorsForSecrets ?? false
+    this.withStdOut      = runner.deactivateStdoutForSecrets !== undefined ? !runner.deactivateStdoutForSecrets : true
+  }
+
 
   changeDependency(source, target){
     if(this.dependencies[source]===undefined){
@@ -120,16 +130,19 @@ class RuntimeManager {
   cleanup(){ return this.runner = this.runCodeAsync = null }
 
 
+
+
+
   stillRunnable(ctx){
-    const outcome = ctx.isEnvSection
-                  ? ctx.code && this.ran[ this.dependencies[ctx.section] ]
-                  : ctx.code && !this.stopped
-    return outcome && !this.gotBigFail
+    let outcome = ctx.isEnvSection
+                  ? this.ran[ this.dependencies[ctx.section] ]
+                  : !this.stopped
+    outcome &&= !this.gotBigFail
+    return outcome
   }
 
 
-
-  /**Run on Runner method (async), surrounding it with all necessary logics, like:
+  /**Run one Runner method (async), surrounding it with all necessary logics, like:
    *
    *    - setup+teardown stdout
    *    - setup+teardown exclusions
@@ -137,22 +150,22 @@ class RuntimeManager {
    *    - try/catch where appropriate (handling properly the exclusions removal case)
    *
    * This method should never actually throw, except in "BigFail" cases.
+   * Note: NOT this.stdErr, which is more global, while the current run could involve `post`
+   *       actions that should potentially occur even if an error has already occur previously
+   *       in the current user's action.
+   *
    * It uses a ctx object, which holds the local executions data, and will merge the data
    * when appropriate in the RunnerManager (which holds runtime information for the current
    * user's action).
    *
    * Inside this "runWithCtx" call, subsequent methods calls are skipped if an error has been
    * registered in the @ctx object, unless the method is specified as "should `always` happen"
-   *
-   * Note: NOT in this.stdErr, which is more global, while the current run could involve `post`
-   *       actions that should potentially occur even if an error has already occur previously
-   *       in the current user's action.
    * */
   async runWithCtx(ctx){
     ctx = Ctx.with(ctx, this)
 
     if(!this.stillRunnable(ctx)){
-      jsLogger('[Runtime] - SKIPPED')
+      jsLogger('[Runtime] - SKIPPED', ctx.running)
       ctx.skipped = true
       return ctx
     }
@@ -177,16 +190,15 @@ class RuntimeManager {
 
 
   needExclusions(ctx){
-    return ctx.applyExclusionsIfAny
-        && (this.excluded.length>0 || this.recLimit > 0)
+    return ctx.applyExclusionsIfAny && (this.excluded.length>0 || this.recLimit > 0)
   }
 
 
 
 
   /**1. Put the StringIO object in place if needed (stdout extraction).
-   * 1. If the method to run is asking for excluions "environment-related", STOP HERE.
-   * 1. OTHERWISE, if the ctx is asking for exclusions applications:
+   * 2. IF the method to run is asking for excluions "environment-related", STOP HERE.
+   * 3. OTHERWISE, if the ctx is asking for exclusions applications:
    *     1. Put in place exclusions if any
    *     1. Cleanup pyodide environment (`auto_run.clean`)
    * */
@@ -269,7 +281,7 @@ class RuntimeManager {
     try{
       await method.call(this, ctx)
     }catch(e){
-      jsLogger('[Runtime] - ERROR ', ctx.method.name, ctx.running)
+      jsLogger('[Runtime] - ERROR ', ctx.running)
       ctx.err = e
       if(conf.critical) throw e
     }

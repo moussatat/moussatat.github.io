@@ -20,7 +20,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
 
 /** Gather color theme data (once only). */
-(function createAceThemes(){
+;(function createAceThemes(){
 
   const getRGBChannels=colorString=>[
       colorString.slice(1, 3), colorString.slice(3, 5), colorString.slice(5, 7),

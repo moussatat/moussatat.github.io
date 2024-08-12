@@ -133,7 +133,7 @@ class _IdeEditorHandler extends TerminalRunner {
         navigateWithinSoftTabs:   false,              // this is _fucking_ actually "Atomic Soft Tabs"...
         printMargin:              false,              // hide ugly margins...
         maxLines:                 this.maxIdeLines,
-        minLines:                 3,
+        minLines:                 CONFIG.ideMinLines,
         mode:                     "ace/mode/python",
         theme:                    getTheme(),
     }
@@ -165,7 +165,7 @@ class _IdeEditorHandler extends TerminalRunner {
     // Editor content is saved every 30 keystrokes
     let nChange = 0;
     this.editor.addEventListener("input", _=>{
-        if(nChange++ >= 30){
+        if(nChange++ >= CONFIG.ideKeyStrokesSave){
           nChange=0
           this.save()
         }
@@ -239,7 +239,7 @@ class _IdeEditorHandler extends TerminalRunner {
    *      - save the code to the localStorage
    * */
   applyCodeToEditorAndSave(exerciseCode){
-    exerciseCode ||= "\n".repeat(6)
+    exerciseCode ||= "\n".repeat(CONFIG.ideMinLines)
     this.editor.getSession().setValue(exerciseCode);
     this.save(exerciseCode)
   }
@@ -377,6 +377,9 @@ class IdeRunner extends _IdeEditorHandler {
 
   async teardownRuntime(runtime) {
     jsLogger("[checkPoint] - IdeRunner teardownRuntime")
+
+    runtime.setRuntimeWith()  // Restore default state in case a validation occurred.
+
     if(runtime.finalMsg) this.giveFeedback(runtime.finalMsg)
     this.storeUserCodeInPython('__USER_CODE__', "")
     await super.teardownRuntime(runtime)
@@ -426,7 +429,6 @@ class IdeRunner extends _IdeEditorHandler {
         this.getCodeToTest = ()=>this.editorCode
         this.data.profile  = profile
       }
-
       return out
     }
     return wrapper
@@ -467,16 +469,15 @@ class IdeRunner extends _IdeEditorHandler {
       await this.runPythonCodeWithOptionsIfNoStdErr(this.getCodeToTest(), runtime)
       decrease_count &&= runtime.stopped
 
+
       // Run the validation tests only if the user's code succeeded at the previous step
       if(!runtime.stopped){
         jsLogger("[checkPoint] - Run tests + secrets")
 
         // If still running, run the original public tests and the secret ones...
-        const fullTests         = `${ this.publicTests }\n\n${ this.secretTests }`.trim()
-        runtime.withStdOut      = !this.deactivateStdoutForSecrets
-        runtime.autoLogAssert   = this.autoLogAssert
-        runtime.purgeStackTrace = this.showOnlyAssertionErrorsForSecrets
+        const fullTests = `${ this.publicTests }\n\n${ this.secretTests }`.trim()
 
+        runtime.setRuntimeWith(this)
         await this.runPythonCodeWithOptionsIfNoStdErr(fullTests, runtime)
         decrease_count = runtime.stopped
       }

@@ -24,16 +24,18 @@ CONFIG.loggerOptions={
     all:                false,
 
     AroundSearch:       false,
-    CheckPoint:         true,
+    CheckPoint:         false,
     Command:            false,
     HourGlass:          false,
     LOCK:               false,
     MathJax:            false,
-    OutCome:            true,
-    OutComeSolRemTxt:   true,
+    Micropip:           false,
+    OutCome:            false,
+    OutComeSolRemTxt:   false,
     Paint_ACEs:         false,
+    PythonLibs:         false,
     QCM:                false,
-    Runtime:            true,
+    Runtime:            false,
     Scroll:             false,
     SetupIDEs:          false,
     SetupLoneTerms:     false,
@@ -42,7 +44,7 @@ CONFIG.loggerOptions={
     Terminal:           false,
     TrashCan:           false,
     Unsubscribing:      false,
-    Validation:         true,
+    Validation:         false,
 }
 
 

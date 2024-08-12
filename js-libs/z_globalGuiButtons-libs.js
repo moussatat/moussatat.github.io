@@ -18,8 +18,11 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-// Insertion of the placeholders, around the search bar.
 
+
+
+/**Insertion of the placeholders, around the search bar.
+ * */
 subscribeWhenReady(
     "AroundSearch",
     function(){
@@ -34,9 +37,19 @@ subscribeWhenReady(
     function(){
         jsLogger('[AroundSearch]', 'right')
         const wrappingDivR = `<div id="${ CONFIG.element.searchBtnsRight.slice(1) }"></div>`
-        $(wrappingDivR).insertAfter(CONFIG.element.searchBlock)
+
+        /* Try various locations for insertion.
+            1. On the right of the search bar
+            2. On the right of the dayNight palette otherwise
+        */
+        if($(CONFIG.element.searchBlock)[0]){
+            $(wrappingDivR).insertAfter(CONFIG.element.searchBlock)
+        }else{
+            $(wrappingDivR).insertAfter(CONFIG.element.dayNight)
+        }
+
     },
-    {waitFor: CONFIG.element.searchBlock},
+    {waitFor: CONFIG.element.searchBtnsLeft},
 )
 
 
@@ -63,8 +76,9 @@ subscribeWhenReady(
             shift:90, tipText: CONFIG.lang.tipTrash.msg, tipWidth: CONFIG.lang.tipTrash.em
         }
 
-        const trashButtonCode = buttonWithTooltip(trashBtnOptions, TRASH_SVG)
-        $(trashButtonCode).insertAfter(CONFIG.element.searchBlock).on('click', function(){
+        const trashButton = $(
+            buttonWithTooltip(trashBtnOptions, TRASH_SVG)
+        ).on('click', function(){
 
             const data  = Object.keys(localStorage)
             const codes = data.filter( s => /^editor_[\da-f]{16,}$/.test(s) )
@@ -85,6 +99,7 @@ subscribeWhenReady(
                 localStorage.setItem(k, "[]")
             })
         })
+        $(CONFIG.element.searchBtnsRight).append(trashButton)
     },
     {waitFor: CONFIG.element.searchBtnsRight},
 )

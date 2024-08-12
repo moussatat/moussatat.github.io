@@ -19,13 +19,13 @@ If not, see <https://www.gnu.org/licenses/>.
 
 
 const STATE = {
-    checked: "checked",
+    checked:   "checked",
     unchecked: "unchecked",
-    ok: 'correct',
-    wrong: 'incorrect',
-    missed: 'missed',
-    multi: 'multi',
-    single: 'single',
+    ok:        'correct',
+    wrong:     'incorrect',
+    missed:    'missed',
+    multi:     'multi',
+    single:    'single',
 }
 
 

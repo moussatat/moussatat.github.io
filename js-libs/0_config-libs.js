@@ -44,6 +44,7 @@ const CONFIG = {
     baseUrl: null,
     buttonIconsDirectory: null,
     cutFeedback: null,
+    language: null,
     pmtUrl: null,
     pythonLibs: null,
     inServe: null,
@@ -84,8 +85,8 @@ const CONFIG = {
         qcmCheckTip: null,
         qcmRedoTip: null,
         tipTrash: null,
-        figureText: null,
         figureAdmoTitle: null,
+        figureText: null,
         pickerFailure: null
 },
    //JS_CONFIG_DUMP
@@ -123,13 +124,13 @@ const CONFIG = {
 
     loggerOptions: {},      // jsLogger debugging config/activations
 
-
+    ideMinLines: 3,
+    ideKeyStrokesSave: 30,
 
     // (defined in the securedPagesData-libs.js file)
     // JS <-> python property names tracker
     joinTerminalLines: false,
 
-    // HDR_TOKEN_PATTERN:   /#\s*-[\s-]*HDR\s*-[\s-]*#/i,           // not used anymore
     COMMENTED_PATTERN:      /(^\s*)(\S)(.?)/,
     MODULE_REG:             /File "<(env[^>]*|post[^>]*|exec|console)>", line (\d+)($|, in (?!await_fut))/,
     TRACE_REG:              /  File "<(env[^>]*|post[^>]*|exec|console)>"/,
