@@ -124,7 +124,6 @@ const CONFIG = {
 
     loggerOptions: {},      // jsLogger debugging config/activations
 
-    ideMinLines: 3,
     ideKeyStrokesSave: 30,
 
     // (defined in the securedPagesData-libs.js file)

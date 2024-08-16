@@ -51,6 +51,7 @@ class PyodideSectionsRunner {
   get isEncrypted()       { return this.no_undefined('isEncrypted')(this.data.is_encrypted) }
   get isVert()            { return this.no_undefined('isVert')(this.data.is_vert) }
   get maxIdeLines()       { return this.no_undefined('maxIdeLines')(this.data.max_ide_lines) }
+  get minIdeLines()       { return this.no_undefined('minIdeLines')(this.data.min_ide_lines) }
   get postContent()       { return this.no_undefined('postContent')(this.data.post_content) }
   get postTermContent()   { return this.no_undefined('postTermContent')(this.data.post_term_content) }
   get prefillTerm()       { return this.no_undefined('prefillTerm')(this.data.prefill_term) }

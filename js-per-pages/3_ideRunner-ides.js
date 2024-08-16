@@ -133,7 +133,7 @@ class _IdeEditorHandler extends TerminalRunner {
         navigateWithinSoftTabs:   false,              // this is _fucking_ actually "Atomic Soft Tabs"...
         printMargin:              false,              // hide ugly margins...
         maxLines:                 this.maxIdeLines,
-        minLines:                 CONFIG.ideMinLines,
+        minLines:                 this.minIdeLines,
         mode:                     "ace/mode/python",
         theme:                    getTheme(),
     }
@@ -239,7 +239,7 @@ class _IdeEditorHandler extends TerminalRunner {
    *      - save the code to the localStorage
    * */
   applyCodeToEditorAndSave(exerciseCode){
-    exerciseCode ||= "\n".repeat(CONFIG.ideMinLines)
+    exerciseCode ||= ""
     this.editor.getSession().setValue(exerciseCode);
     this.save(exerciseCode)
   }
