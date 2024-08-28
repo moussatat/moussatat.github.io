@@ -104,6 +104,8 @@ def _hack_input_prompt():
         response = await pyfetch(src)
         content  = await response.bytes()
         target   = Path(dest) / (name or Path(src).name)
+            # Note: Path(src).name works to extract the name file on urls, but the path
+            #       is actually invalid as an url: "http://xx" -> "http: / xx".
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(content)
 

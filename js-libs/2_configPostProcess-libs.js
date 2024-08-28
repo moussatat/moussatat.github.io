@@ -18,18 +18,21 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-class BtnRunner extends PyodideSectionsRunner {
+;`
+runScript
+installStart
+installDone
+validation
+editorCode
+publicTests
+secretTests
+`.trim().split(/\s+/).forEach( prop =>{
+        CONFIG.lang[prop].msg = info(CONFIG.lang[prop].msg)
+})
 
-  // @Override
-  build(){
-    $('#'+this.id).find("button").on(
-      'click',
-      this.lockedRunnerWithBigFailWarningFactory(
-        "PlayBtn",
-        this.setupRuntime,
-        ()=>null,                 // No "user" action!
-        this.teardownRuntime,
-      )
-    )
-  }
-}
+CONFIG.lang.successMsg.msg    = success(CONFIG.lang.successMsg.msg)
+CONFIG.lang.unforgettable.msg = warning(CONFIG.lang.unforgettable.msg)
+CONFIG.lang.failHead.msg      = warning(CONFIG.lang.failHead.msg)
+CONFIG.lang.tests.as_pattern  = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
+
+CONFIG.pythonLibs = new Set(CONFIG.pythonLibs)

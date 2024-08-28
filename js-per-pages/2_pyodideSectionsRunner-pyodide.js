@@ -86,11 +86,15 @@ class PyodideSectionsRunner {
     this.data.python_libs = new Set(this.data.python_libs)
     this.alreadyRanEnv = false    // Specific to terminals, but defined "for everyone"
     this.pythonCodeRunnerWithCtx = async (ctx)=>{ pyodide.runPython(ctx.code) }
+
+    this.running = undefined   // see CONFIG.running
   }
 
 
   build(){}   // For inheritance consistency
 
+  /** Nothing to do by default (specific to IDEs) */
+  testSectionEndFeedback(runtime, step){}
 
   /**Actions to perform when the current code in the editor has been extracted,
    * before anything is run.
@@ -204,6 +208,7 @@ class PyodideSectionsRunner {
       if(eventOrCmd && eventOrCmd.preventDefault) eventOrCmd.preventDefault()
       jsLogger(loggerName)
 
+      this.running = actionName
       let runtime
       try{
         runtime = await setup.call(this, eventOrCmd)
@@ -216,7 +221,7 @@ class PyodideSectionsRunner {
         const stdErr = youAreInTroubles(e)
         this.terminal.error(stdErr)
 
-        if(runtime){
+        if(runtime){                  // (`runtime` may be undefined if the error was in setup...)
           runtime.gotBigFail = true
           runtime.stdErr = stdErr
         }
@@ -226,6 +231,7 @@ class PyodideSectionsRunner {
         if(runtime){
           await finallyTeardown.call(this, runtime)
         }
+        this.running = "???"
       }
     })
   }
@@ -300,28 +306,33 @@ class PyodideSectionsRunner {
    * @throws: Any JS runtime Error if something went very wrong... (python errors are swallowed
    *          and just printed to the jQuery.terminal)
    * */
-  async runPythonCodeWithOptionsIfNoStdErr(code, runtime){
+  async runPythonCodeWithOptionsIfNoStdErr(code, runtime, testsStep=null){
       jsLogger('[checkPoint] - Enter generic running function')
 
       // Do nothing if nothing to do...!
-      if(runtime.stopped || !code.trim()) return;
-
-      const baseCtx = {
-        code, section: 'code', isEnvSection: false,
-        logConfig: {code, autoAssertExtraction: false, purgeTrace: runtime.purgeStackTrace},
-      }
-
-      // Do first the methods exclusions check, to gain some time (avoids loading modules if
-      // the error would show up anyway afterward...)
-      await runtime.runWithCtx({...baseCtx, method: this.throwIfExcludedMethodsFound})
-
-      // Detect possible user imports and install the packages to allow their imports:
-      await runtime.runWithCtx({...baseCtx, method: this.installAndImportMissingModules,
-                                            methodArgs: [code, runtime]})
       if(runtime.stopped) return;
 
-      baseCtx.logConfig.autoAssertExtraction = runtime.autoLogAssert
-      await runtime.runWithCtx({...baseCtx, applyExclusionsIfAny: true, method: this.pythonCodeRunnerWithCtx})
+      const someCodeToRun = code.trim()
+      if(someCodeToRun){
+
+        const baseCtx = {
+          code, section: 'code', isEnvSection: false,
+          logConfig: {code, autoAssertExtraction: false, purgeTrace: runtime.purgeStackTrace},
+        }
+
+        // Do first the methods exclusions check, to gain some time (avoids loading modules if
+        // the error would show up anyway afterward...)
+        await runtime.runWithCtx({...baseCtx, method: this.throwIfExcludedMethodsFound})
+
+        // Detect possible user imports and install the packages to allow their imports:
+        await runtime.runWithCtx({...baseCtx, method: this.installAndImportMissingModules,
+                                              methodArgs: [code, runtime]})
+        if(runtime.stopped) return;
+
+        baseCtx.logConfig.autoAssertExtraction = runtime.autoLogAssert
+        await runtime.runWithCtx({...baseCtx, applyExclusionsIfAny: true, method: this.pythonCodeRunnerWithCtx})
+      }
+      this.testSectionEndFeedback(runtime, testsStep)
     }
 
 

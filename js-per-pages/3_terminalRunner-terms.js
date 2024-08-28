@@ -198,7 +198,6 @@ class _TerminalHandler extends PyodideSectionsRunner {
 class TerminalRunner extends _TerminalHandler {
 
 
-
   /**Generate the async-locked callback used to run commands typed into the terminal.
    *
    * WARNING: USE OF `super.method` in setupRuntimeTerminalCmd and teardownRuntimeTerminalCmd
@@ -211,16 +210,12 @@ class TerminalRunner extends _TerminalHandler {
    * */
   getAsyncPythonExecutor(){
     return this.lockedRunnerWithBigFailWarningFactory(
-      "Command",
+      CONFIG.running.cmd,
       this.setupRuntimeTerminalCmd,
       this.runTermCommand,
       this.teardownRuntimeTerminalCmd,
     )
   }
-
-
-
-
 
 
   /**Definitions of `command`, `cmdOnThRun` and general context about `PyodideConsole`:
@@ -324,17 +319,16 @@ class TerminalRunner extends _TerminalHandler {
     // If env already run before, envTerm HAS to run independently, so remove the dependency.
     let runtime
     if(!this.alreadyRanEnv){
-
       runtime = await super.setupRuntime()
-      // Using super, because a command ran in the terminal of an IDE muse NOT runt the IDE
-      // setupRuntime logic. This works because there is an intermediate class between the
-      // TerminalRunner one and the PyodideSectionsRunner.
+      // Using super, because a command ran in the terminal of an IDE MUST NOT run the setupRuntime
+      // logic of the IDE but only the one related to the PyodideSectionsRunner logic.
+      // This works because there is an intermediate parent class between the TerminalRunner one
+      // and the PyodideSectionsRunner setupRuntime method.
 
     }else{
       runtime = this.buildRunConfig()
       runtime.changeDependency('envTerm', 'start')  // Make envTerm runnable on its own!
     }
-    runtime.finalMsg = ""     // No final message from terminals!
 
     await runtime.runWithCtx('envTerm')
     return runtime

@@ -71,6 +71,11 @@ class Ctx {
 
 
 
+
+
+
+
+
 /**Manage the environment when in need to execute some code in pyodide.
  *
  * Holds all the logic to manage all the possible outcomes:
@@ -93,10 +98,11 @@ class RuntimeManager {
     this.withStdOut      = true     // default for the PUBLIC tests...
 
     // --- Runtime logistic related (may be mutated on the way) ---
-    this.finalMsg     = CONFIG.lang.successMsg.msg
     this.stdErr       = ""          // First encountered error message
     this.isAssertErr  = false       // Is the error an assertion error
     this.gotBigFail   = false       // If true, new errors won't replace the current one
+    this.finalMsg     = ""          // Potential extra message to display at the very end, if truthy.
+                                    //  (will be printed even if this.stopped is true)
 
     this.ran = {start: true}        // Keep track of the successfully run env sections (or raising assertion errors)
     this.dependencies = {

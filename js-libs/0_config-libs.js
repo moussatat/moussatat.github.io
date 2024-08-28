@@ -57,7 +57,12 @@ const CONFIG = {
         runScript: null,
         installStart: null,
         installDone: null,
+        validation: null,
+        editorCode: null,
+        publicTests: null,
+        secretTests: null,
         successMsg: null,
+        unforgettable: null,
         successHead: null,
         successTail: null,
         failHead: null,
@@ -163,6 +168,18 @@ const CONFIG = {
         errTail: 5,
     },
 
+    running: {
+        cmd:      'Command',
+        btn:      'PlayBtn',
+        play:     'Play',
+        validate: 'Validate',
+    },
+
+    section: {
+        editor:  'editorCode',
+        public:  'publicTests',
+        secrets: 'secretTests',
+    },
 
     MSG: {
         successEmojis:   ['🔥','✨','🌠','✅','🥇','🎖'],

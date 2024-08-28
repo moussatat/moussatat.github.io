@@ -176,18 +176,12 @@ function richTextFormat(content, style, color="", background="") {
 }
 
 let error   = (content) => richTextFormat(content, "b", "red");
-let warning = (content) => richTextFormat(content, "", "orange");
-let stress  = (content) => richTextFormat(content, "b");
+let warning = (content) => richTextFormat(content, "ib", "orange");
 let info    = (content) => richTextFormat(content, "i", "grey");
 let italic  = (content) => richTextFormat(content, "i");
+let stress  = (content) => richTextFormat(content, "b");
 let success = (content) => richTextFormat(content, "ib", "green");
-let failure = (content) => richTextFormat(content, "ib", "orange");
 
-
-// Update CONFIG strings on the fly:
-'successMsg runScript installStart installDone'.split(' ').forEach(
-    prop=>CONFIG.lang[prop].msg = info(CONFIG.lang[prop].msg)
-)
 
 
 

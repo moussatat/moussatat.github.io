@@ -315,6 +315,12 @@ class _IdeEditorHandler extends TerminalRunner {
 
   play(){  throw new Error("Should be overridden in child class") }
   check(){ throw new Error("Should be overridden in child class") }
+
+
+
+
+  is_playing(){  return this.running == CONFIG.running.play }
+  is_checking(){ return this.running == CONFIG.running.validate }
 }
 
 
@@ -378,12 +384,34 @@ class IdeRunner extends _IdeEditorHandler {
   async teardownRuntime(runtime) {
     jsLogger("[checkPoint] - IdeRunner teardownRuntime")
 
-    runtime.setRuntimeWith()  // Restore default state in case a validation occurred.
+    // Restore default state first, in case a validation occurred (stdout!)
+    runtime.setRuntimeWith()
 
     if(runtime.finalMsg) this.giveFeedback(runtime.finalMsg)
+
     this.storeUserCodeInPython('__USER_CODE__', "")
     await super.teardownRuntime(runtime)
   }
+
+
+
+  /**If successful until now, Display the appropriate message in the terminal */
+  testSectionEndFeedback(runtime, step){
+    if(runtime.stopped || !step) return
+
+    const intro   = this.is_playing() ? "" : CONFIG.lang.validation.msg
+    const section = CONFIG.lang[step].msg
+    const ok      = CONFIG.lang.successMsg.msg
+
+    const msg = `${ intro }${ section }: ${ ok }`
+    this.terminal.echo(msg)
+
+    // If no error yet and secret tests exist, update the runtime.finalMsg accordingly:
+    if(this.is_playing() && this.hasCheckBtn){
+      runtime.finalMsg = CONFIG.lang.unforgettable.msg
+    }
+  }
+
 
 
 
@@ -396,7 +424,7 @@ class IdeRunner extends _IdeEditorHandler {
 
   playFactory(){
     return this.lockedRunnerWithBigFailWarningFactory(
-      "Play",
+      CONFIG.running.play,
       this.setupRuntime,
       this.playThroughRunner,
       this.teardownRuntime,
@@ -405,7 +433,7 @@ class IdeRunner extends _IdeEditorHandler {
 
   validateFactory(){
     return this.lockedRunnerWithBigFailWarningFactory(
-      "Validate",
+      CONFIG.running.validate,
       this.setupRuntime,
       this.validateThroughRunner,
       this.teardownRuntime,
@@ -447,7 +475,9 @@ class IdeRunner extends _IdeEditorHandler {
 
 
   async playThroughRunner(runtime){
-    await this.runPythonCodeWithOptionsIfNoStdErr(this.getCodeToTest(), runtime)
+    await this.runPythonCodeWithOptionsIfNoStdErr(
+      this.getCodeToTest(), runtime, CONFIG.section.editor
+    )
   }
 
 
@@ -466,7 +496,7 @@ class IdeRunner extends _IdeEditorHandler {
     }else{
 
       // Define the user's code in the environment and run the public tests (if any)
-      await this.runPythonCodeWithOptionsIfNoStdErr(this.getCodeToTest(), runtime)
+      await this.playThroughRunner(runtime)
       decrease_count &&= runtime.stopped
 
 
@@ -475,10 +505,9 @@ class IdeRunner extends _IdeEditorHandler {
         jsLogger("[checkPoint] - Run tests + secrets")
 
         // If still running, run the original public tests and the secret ones...
-        const fullTests = `${ this.publicTests }\n\n${ this.secretTests }`.trim()
-
         runtime.setRuntimeWith(this)
-        await this.runPythonCodeWithOptionsIfNoStdErr(fullTests, runtime)
+        await this.runPythonCodeWithOptionsIfNoStdErr(this.publicTests, runtime, CONFIG.section.public)
+        await this.runPythonCodeWithOptionsIfNoStdErr(this.secretTests, runtime, CONFIG.section.secrets)
         decrease_count = runtime.stopped
       }
 
@@ -600,9 +629,8 @@ class IdeRunner extends _IdeEditorHandler {
 
     const msg=[], sentence=[], mask = this.corrRemsMask
 
-    msg.push( isSuccess
-        ? "\n"+CONFIG.lang.successTail.msg
-        : failure(CONFIG.lang.failHead.msg)
+    msg.push( isSuccess ? "\n"+CONFIG.lang.successTail.msg
+                        : CONFIG.lang.failHead.msg
     )
 
     if(mask & 1) sentence.push(CONFIG.lang.revealCorr.msg)
