@@ -18,22 +18,302 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+class IdeStorageAndZipManager extends TerminalRunner {
 
-class _IdeEditorHandler extends TerminalRunner {
+
+  /**Process to "re-initiate" the internal state of the IDE (useful for testing) */
+  constructor(editorId){
+    super(editorId)
+    this.storage = null
+    this.getStorage()
+  }
+
+
+  _extractWhateverLocalStorageVersion(editorId){
+    const  extractForThis = editorId==this.id
+    return getIdeDataFromStorage(editorId, extractForThis ? this : null)
+  }
+
+
+  getStorage(){
+    let [storage, outdated] = this._extractWhateverLocalStorageVersion(this.id)
+    this.storage = storage
+
+    // Enforce update of internal values:
+    if( outdated || this.storage.name!=this.pyName || this.storage.zip!=this.export ){
+      this.setStorage({name: this.pyName, zip:  this.export})
+    }
+  }
+
+
+  setStorage(changes){
+    if(changes){
+      for(const k in changes) this.storage[k] = changes[k]
+    }
+    localStorage.setItem(this.id, JSON.stringify(this.storage))
+  }
+
+
+  checkSrcHash(){
+    if(this.storage.hash != this.srcHash){
+      this.terminalEcho(CONFIG.lang.refresh.msg)
+    }
+  }
+
+
+  /**Automatically gives the focus to the ACE editor with the given id.
+   * */
+  focusEditor(){
+    this.editor.focus()
+  }
+
+
+
+  buildZipExportsToolsAndCbk(jBtn){
+
+    // Add drag&Drop behavior for zip archives:
+    jBtn.on("dragenter dragstart dragend dragleave dragover drag", e=>e.preventDefault())
+
+    // Doesn't work using jQuery... (again... x/ ):
+    jBtn[0].addEventListener('drop', this.dropArchiveFactory(
+      this.lockedRunnerWithBigFailWarningFactory(
+        CONFIG.running.zipImport,
+        this.setupRuntimeZip,
+        this.dropArchive,
+        this.teardownRuntimeZip,
+        true,
+      )
+    ))
+
+    return this.lockedRunnerWithBigFailWarningFactory(
+      CONFIG.running.zipExport,
+      this.setupRuntimeZip,
+      this.zipExport,
+      this.teardownRuntimeZip,
+    )
+  }
+
+
+  async setupRuntimeZip(){
+    this.terminal.pause()           // Deactivate user actions in the terminal until resumed
+    this.terminal.clear()           // To do AFTER pausing...
+    const [runtime,] = await this._baseSetupRuntime()
+    return runtime
+  }
+
+  async teardownRuntimeZip(runtime){
+    this.terminal.resume()
+    await this._baseTeardownRuntime(runtime)
+  }
+
+
+
+
+  _getDataForExportableIdeInPage(){
+    const toArchive = []
+    const ideThis   = this
+
+    $(`[id^=editor_]`).each(function(){
+      if(localStorage.getItem(this.id)===null){
+        return    // should never happen... But just in case...
+      }
+      const [data,] = ideThis._extractWhateverLocalStorageVersion(this.id)
+      data.id = this.id
+      if(data.zip){             // Exportable
+        toArchive.push(data)
+      }
+    })
+    return toArchive
+  }
+
+
+  _buildZipNameFirstChunks(){
+    const zipChunks = []
+
+    if(CONFIG.exportZipPrefix){
+      zipChunks.push(CONFIG.exportZipPrefix)
+    }
+    if(CONFIG.exportZipWithNames){
+      let names = ""
+      while(!names){
+        names = window.prompt(CONFIG.lang.zipAskForNames.msg)
+      }
+      zipChunks.push(names)
+    }
+    return zipChunks
+  }
+
+
+  async zipExport(_runtime){
+    this.terminalEcho('Generate zip for '+location.href)
+
+    const toArchive = this._getDataForExportableIdeInPage()
+    const zipChunks = this._buildZipNameFirstChunks()
+    const code      = this._buildZipExportPythonCode(toArchive, zipChunks)
+    pyodide.runPython(code)
+    this.focusEditor()
+  }
+
+
+  _buildZipExportPythonCode(toArchive, zipChunks){
+    const pyJson = JSON.stringify(toArchive).replace(/\\/g, '\\\\')
+    return `
+@__builtins__.auto_run
+def _hack_build_zip():
+
+    import shutil, json
+    from pathlib import Path
+    from itertools import count
+
+    def unique_name(p:Path):
+        while p.exists():
+            p = p.with_name(f"{ p.stem }_{ p.suffix }")
+        return p
+
+    dirname = unique_name(Path('tmp_zip'))
+    dirname.mkdir()
+
+    url    = ${ JSON.stringify(location.href) }
+    origin = ${ JSON.stringify(location.origin) }
+    chunks = ${ JSON.stringify(zipChunks) }
+
+    # Always make sure the url part of the filename is not empty:
+    zip_url = url[len(origin):].strip('/').replace('/','_').replace('.','_') or 'home'
+    chunks.append(zip_url)
+
+    zip_name = unique_name( Path( '-'.join(chunks) + '.zip') )
+
+    data = json.loads("""${ pyJson }""")
+    for ide in data:
+        name = dirname / (ide['id'] + '${ CONFIG.ZIP.pySep }' + ide['name'])
+        name.write_text(ide['code'], encoding="utf-8")
+
+    shutil.make_archive(zip_name.with_suffix(''), 'zip', dirname)
+
+    pyodide_downloader(
+        zip_name.read_bytes(),
+        zip_name.name,
+        "application/zip"   # "application/x-zip-compressed" on Windaube...?
+                            # => no need (probably because in WASM)
+    )
+    shutil.rmtree(dirname)
+    zip_name.unlink()
+`
+  }
+
+
+
+  dropArchiveFactory(asyncRuntimeConsumer){
+    return async ev=>{
+      ev.preventDefault()
+      CONFIG.loadIdeContent = this.loadIdeContent.bind(this)
+      await asyncRuntimeConsumer(ev)
+    }
+  }
+
+
+  async dropArchive(ev){
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
+    // https://stackoverflow.com/questions/43180248/firefox-ondrop-event-datatransfer-is-null-after-update-to-version-52
+
+    const useItems = Boolean(ev.dataTransfer.items)
+    const files = [...ev.dataTransfer[ useItems?'items':'files' ]]
+
+    if(files.length!=1){
+      this.giveFeedback("Cannot Import multiple archives.")
+      return
+    }
+
+    files.forEach((itemOrFile) => {
+      if(useItems && itemOrFile.kind !== "file"){
+        // If dropped items aren't files, reject them
+        return
+      }
+      this.getZipContentAsBytes( useItems ? itemOrFile.getAsFile():itemOrFile)
+    })
+  }
+
+
+  getZipContentAsBytes(file){
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+      const bytesArr = event.target.result
+      pyodide.unpackArchive(bytesArr, "zip", {extractDir: CONFIG.ZIP.tmpZipDir})
+      pyodide.runPython(`
+@__builtins__.auto_run
+def _hack_zip_loading():
+    from pathlib import Path
+    import js
+    loadIdeContent = js.config().loadIdeContent
+
+    tmp_dir = Path('${ CONFIG.ZIP.tmpZipDir }')
+    for py in tmp_dir.iterdir():
+        content = py.read_text(encoding='utf-8')
+        loadIdeContent(py.name, content)
+        py.unlink()
+    tmp_dir.rmdir()
+`)
+    }
+    reader.readAsArrayBuffer(file)
+  }
+
+
+  loadIdeContent(pyName, code){
+    const i        = pyName.indexOf(CONFIG.ZIP.pySep)
+    const editorId = pyName.slice(0, i)
+    const name     = pyName.slice(i+1)
+    const jIde     = $('#'+editorId)
+
+    if(!jIde[0]){
+      this.giveFeedback(
+        `Couldn't find the IDE #${editorId} in the page (associated python name: ${ name })`
+      )
+    }else{
+      ace.edit(editorId).getSession().setValue(code);
+      // No save/localStorage handling at this point (I don't have the IdeRunner object in hand :p )
+      this.giveFeedback(`Loaded ${ editorId }${ CONFIG.ZIP.pySep }${ name }.`, "none")
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class _IdeEditorHandler extends IdeStorageAndZipManager {
 
   constructor(editorId){
     super(editorId)
-    this.termId     = "term_" + editorId
-    this.commentIdH = "#comment_" + editorId
-    this.globalIdH  = "#global_" + editorId
-    this.inputIdH   = "#input_" + editorId
-    this.counterH   = "#compteur_" + editorId
-    this.editor     = null
-    this.editorCode = ""
-    this.resizedTerm      = true
-    this.hiddenDivContent = true
 
-    this.getCodeToTest = ()=>this.editorCode
+    this.termId        = "term_" + editorId
+    this.commentIdH    = "#comment_" + editorId
+    this.globalIdH     = "#global_" + editorId
+    this.inputIdH      = "#input_" + editorId
+    this.counterH      = "#compteur_" + editorId
+    this.delay         = 200
+    this.editor        = null
+    this.resizedTerm   = !this.isVert
+    this.getCodeToTest = ()=>this.editor.getSession().getValue()
+    this._ide_init()
+  }
+
+
+  /**Process to "re-initiate" the internal state of the IDE (useful for testing) */
+  _ide_init(){
+    this.hiddenDivContent = true
   }
 
 
@@ -41,64 +321,70 @@ class _IdeEditorHandler extends TerminalRunner {
   // @Override
   build(){
     const ideThis = this
-    if(this.isVert) this.resizedTerm = false
 
     this.setupAceEditor()   // Create and define this.editor
 
     // Bind the ### "button":
     $(this.commentIdH).on("click", this.toggleComments.bind(this))
 
-    const ideLoader = txt => {
-      this.applyCodeToEditorAndSave(txt)
-      this.focusEditor()
-    }
 
     // Bind all buttons below the IDE
     $(this.globalIdH).find("button").each(function(){
       const btn  = $(this)
       const kind = btn.attr('btn_kind')
       let callback
+
       switch(kind){
         case 'play':      callback = ideThis.playFactory() ; break
-        case 'validate':  callback = ideThis.validateFactory() ; break
+        case 'check':     callback = ideThis.validateFactory()
+                          ideThis.updateValidationBtnColor()
+                          break
 
         case 'download':  callback = _=>ideThis.download() ; break
-        case 'upload':    callback = _=>uploader(ideLoader) ; break
+        case 'upload':    callback = _=>uploader( txt=>{
+                                        ideThis.applyCodeToEditorAndSave(txt)
+                                        ideThis.focusEditor()
+                                      }) ; break
 
         case 'restart':   callback = _=>ideThis.restart() ; break
         case 'save':      callback = _=>{ideThis.save(); ideThis.focusEditor()} ; break
+        case 'zip':       callback = ideThis.buildZipExportsToolsAndCbk(btn) ; break
 
         case 'corr_btn':  if(!CONFIG.inServe) return;
                           callback = ideThis.validateCorrFactory() ; break
         case 'show':      if(!CONFIG.inServe) return;
-                          callback = ideThis.revealSolutionAndRems.bind(ideThis) ; break
+                          callback = ()=>ideThis.revealSolutionAndRems() ; break
 
-        default: throw new Error(`Y'should never get there, mate... (${ kind })`)
+        default:          throw new Error(`Y'should never get there, mate... (${ kind })`)
       }
       btn.on('click', callback)
     })
 
 
-    // Build the related terminal and add the resize listener, because of the intermediate
-    // wrapper div, terminals would not resize automatically
+    // Build the related terminal and add the resize listener (because of the intermediate div
+    // wrappers, IDE's terminal will not resize automatically):
     super.build(this.termId)
+
     window.addEventListener(
       'resize',
-      _.throttle( this.handleTerminalWidthTroubles.bind(this), 50, {leading:false, trailing:true} )
+      _.throttle( this.terminalAutoWidthOnResize.bind(this), 50, {leading:false, trailing:true} )
     )
 
+    // Once the terminal is properly built, check for outdated IDE content:
+    this.checkSrcHash()
 
     // Then extract its current height and enforce the value on the terminal if isVert is true.
-    // This has to be done on "next tick" (not enough anymore => wait... a lot) and after creation
-    // of the terminal instance, so that the editor height has been actually applied.
+    // This has to be done on "next tick" and after creation of the terminal instance, so that
+    // the editor height has been actually applied.
     if(this.isVert){
-      // Resize on next tick, once the editor has been filled:
+
+      // Resize on next tick, once the editor has been filled with code (automatic height):
       setTimeout(_=>this.resizeVerticalTerm(false))
 
-      // in case an IDEv is tabbed, it won't scale properly because the editor is not handled
+      // In case an IDEv is "tabbed", it won't scale properly because the editor is not handled
       // the same way, so put in place a "run once" click event, to resize it when the user
       // clicks on the _parent_ div (because the terminal itself is 0px high! XD )
-      this.addEventToRunOnce(this.terminal.parent(), 'click', _=>this.resizeVerticalTerm())
+      this.addEventToRunOnce(this.terminal.parent(), _=>this.resizeVerticalTerm())
     }
   }
 
@@ -107,7 +393,7 @@ class _IdeEditorHandler extends TerminalRunner {
 
   resizeVerticalTerm(mark=true){
     if(!this.isVert || this.resizedTerm) return;
-    jsLogger("[checkPoint] - Handle terminal window size")
+    jsLogger("[CheckPoint] - Handle terminal window size")
 
     const divHeight = $('#'+this.id).css('height')
     const term_div = $(`${ this.globalIdH } .term_editor_v`)
@@ -129,7 +415,7 @@ class _IdeEditorHandler extends TerminalRunner {
         enableLiveAutocompletion: false,
         enableSnippets:           true,
         tabSize:                  4,
-        useSoftTabs:              true,               // 4 spaces instead of tabs
+        useSoftTabs:              true,               // Spaces instead of tabs
         navigateWithinSoftTabs:   false,              // this is _fucking_ actually "Atomic Soft Tabs"...
         printMargin:              false,              // hide ugly margins...
         maxLines:                 this.maxIdeLines,
@@ -162,7 +448,7 @@ class _IdeEditorHandler extends TerminalRunner {
       })
     }
 
-    // Editor content is saved every 30 keystrokes
+    // Content of the editor is saved every `CONFIG.ideKeyStrokesSave` keystrokes:
     let nChange = 0;
     this.editor.addEventListener("input", _=>{
         if(nChange++ >= CONFIG.ideKeyStrokesSave){
@@ -173,7 +459,7 @@ class _IdeEditorHandler extends TerminalRunner {
 
     // Try to restore a previous session, or extract default starting code:
     let exerciseCode = this.getStartCode(true)
-    this.applyCodeToEditorAndSave(exerciseCode)
+    this.applyCodeToEditorAndSave(exerciseCode, false)
     this.editor.resize();
   }
 
@@ -182,7 +468,7 @@ class _IdeEditorHandler extends TerminalRunner {
   // @Override
   getTerminalBindings(){
 
-    // Ensure the terminal is focused...!
+    // Ensure the focus is given back to the terminal after an action triggered from it!
     const asyncTermFocus=(cbk)=>async e=>{
       await cbk(e)
       this.editor.blur()
@@ -190,42 +476,41 @@ class _IdeEditorHandler extends TerminalRunner {
     }
     return ({
       ...super.getTerminalBindings(),
-      'CTRL+I': asyncTermFocus(this.toggleComments.bind(this)),    // false for event handling propagation
+      'CTRL+I': asyncTermFocus(this.toggleComments.bind(this)),
       'CTRL+S': asyncTermFocus(this.playFactory()),
-      ...(this.hasCheckBtn ? {'CTRL+ENTER': asyncTermFocus(this.validateFactory())}:{}),
+      ...(!this.hasCheckBtn ? {} : {'CTRL+ENTER': asyncTermFocus(this.validateFactory())} ),
     })
   }
 
 
-
-  /**Automatically gives the focus to the ACE editor with the given id
+  /**Add the `tests` section to the given code, joining them with the appropriated
+   * string/comment if needed.
    * */
-  focusEditor(){
-    this.editor.focus()
+  _joinCodeAndPublicSections(userCode){
+    const editorCode = [
+      userCode,
+      this.publicTests
+    ].filter(Boolean)
+     .join(CONFIG.lang.tests.msg)
+    return editorCode
   }
 
-
-  /* Override */
-  getCurrentEditorCode(){
-    // Extract the user's full code (possibly with public tests):
-    return this.editor.getSession().getValue();
-  }
 
 
   /**Build (or extract if allowed) the initial code to put in the editor.
    * */
-  getStartCode(extractFromLocaleStorage=false){
-    let exerciseCode=""
+  getStartCode(attemptLocalStorageExtraction=false){
+    let exerciseCode = ""
 
-    if(extractFromLocaleStorage){
-      exerciseCode = localStorage.getItem(this.id) || ""
+    if(attemptLocalStorageExtraction){
+      exerciseCode = this.storage.code
     }
     if(!exerciseCode){
-      const joiner = CONFIG.lang.tests.msg
-      exerciseCode = [this.userContent, this.publicTests].filter(Boolean).join(joiner)
+      exerciseCode = this._joinCodeAndPublicSections(this.userContent)
     }
 
-    // Enforce at least 2 lines, so that the prompt is always visible for IDEv
+    // Enforce at least one empty line of code in the editor, so that the terminal prompt
+    // is always visible for IDEv:
     exerciseCode = exerciseCode.replace(/\n+$/,'')
     if(!exerciseCode) exerciseCode = '\n'
 
@@ -238,10 +523,10 @@ class _IdeEditorHandler extends TerminalRunner {
    *      - set the editor content to that string
    *      - save the code to the localStorage
    * */
-  applyCodeToEditorAndSave(exerciseCode){
+  applyCodeToEditorAndSave(exerciseCode, doSave=true){
     exerciseCode ||= ""
     this.editor.getSession().setValue(exerciseCode);
-    this.save(exerciseCode)
+    if(doSave) this.save(exerciseCode)
   }
 
 
@@ -249,19 +534,27 @@ class _IdeEditorHandler extends TerminalRunner {
   //-------------------------------------------------------------------------
 
 
+  updateValidationBtnColor(done){
+    done ??= this.storage.done
+    const color = !done ? "unset" : done<0 ? 'red' : 'green'
+    $(`${this.globalIdH} button[btn_kind=check]`).css('--ide-btn-color',  color)
+  }
 
-  /**Extract the current content of the given editor, explore it, and toggle all the lines
-   * found after the `# Test` token.
+
+
+  /**Extract the current content of the given editor, explore it, and toggle all the LOCs
+   * found after the `TestToken` token.
+   *
    * Rules for toggling or not are:
-   *      - leading spaces are ignored.
-   *      - comment out if the first character is not "#".
-   *      - if the first char is "#" and there is no spaces behind, uncomment.
+   *      - leading spaces do not affect the logic.
+   *      - comment out if the first non space character is not "#".
+   *      - if the first non space char is "#" and there is no spaces after it, uncomment.
    * */
   toggleComments(e) {
     if(e && e.preventDefault) e.preventDefault()
 
-    const codeLines = this.getCurrentEditorCode().split('\n')
-    const pattern   = CONFIG.lang.tests.as_pattern
+    const codeLines   = this.getCodeToTest().split('\n')
+    const pattern     = CONFIG.lang.tests.as_pattern
     const iTestsToken = codeLines.findIndex(s=>pattern.test(s))
 
     /// No tests found:
@@ -284,9 +577,9 @@ class _IdeEditorHandler extends TerminalRunner {
 
   /**Download the current content of the editor to the download folder of the user.
    * */
-  download(){           jsLogger("[Download]")
+  download(){   jsLogger("[Download]")
 
-    let ideContent = this.getCurrentEditorCode() + "" // enforce stringification in any case
+    let ideContent = this.getCodeToTest() + "" // enforce stringification in any case
     downloader(ideContent, this.pyName)
     this.focusEditor()
   }
@@ -295,10 +588,11 @@ class _IdeEditorHandler extends TerminalRunner {
   /**Reset the content of the editor to its initial content, and reset the localStorage for
    * this editor on the way.
    * */
-  restart(){            jsLogger("[Restart]")
-
+  restart(){    jsLogger("[Restart]")
     const exerciseCode = this.getStartCode()
+    this.storage = freshStore(exerciseCode, this)
     this.applyCodeToEditorAndSave(exerciseCode)
+    this.updateValidationBtnColor()
     this.focusEditor()
   }
 
@@ -308,19 +602,45 @@ class _IdeEditorHandler extends TerminalRunner {
   * of the navigator.
   * */
   save(givenCode=""){   jsLogger("[Save]")
-
-    const currentCode = givenCode || this.getCurrentEditorCode()
-    localStorage.setItem(this.id, currentCode);
+    const currentCode = givenCode || this.getCodeToTest()
+    this.setStorage({code: currentCode, hash:this.srcHash})
   }
 
-  play(){  throw new Error("Should be overridden in child class") }
-  check(){ throw new Error("Should be overridden in child class") }
 
 
 
+  playFactory()    { throw new Error("Should be overridden in child class") }
+  validateFactory(){ throw new Error("Should be overridden in child class") }
 
-  is_playing(){  return this.running == CONFIG.running.play }
-  is_checking(){ return this.running == CONFIG.running.validate }
+
+
+  /**Is the current action "running the public tests"?
+   * */
+  isPlaying(){  return this.running.includes(CONFIG.running.play) }
+
+  /**Is the current action "running the validation tests"?
+   * */
+  isChecking(){ return this.running.includes(CONFIG.running.validate) }
+
+
+
+  /**Relay method, to transfer stdout content from pyodide to the jQuery.terminal.
+   * If @isPrint is true, the call has been done through the `bi_print` python function.
+   * If @isPrint is false, then the call has been done through the `terminal_message` function.
+   *
+   * When the stdout is deactivated and @isPrint is false, the @key argument is required to
+   * match the one given through the IDE macro `STD_KEY` argument.
+   * */
+  termFeedbackFromPyodide(key, msg, format, isPrint=false){
+    const hidden    =  isPrint && !this.allowPrint
+    const forbidden = !isPrint && !this.allowPrint && key != this.stdKey
+    if(forbidden){
+      throw new Error("Cannot print to the terminal: wrong key.")
+    }
+    if(!(isPrint && hidden)){
+      super.termFeedbackFromPyodide(null, msg, format, isPrint)
+    }
+  }
 }
 
 
@@ -344,6 +664,16 @@ class IdeRunner extends _IdeEditorHandler {
 
 
 
+  // @Override
+  build(){
+    super.build()
+    if(this.profile=='revealed'){
+      this.revealSolutionAndRems(true)
+    }
+  }
+
+
+
   /**Does nothing, but catch any call on the parent class, which would raise an error
    * because prefillTerm is undefined, for IDEs.
    * */
@@ -354,60 +684,78 @@ class IdeRunner extends _IdeEditorHandler {
   /**The terminal behaves differently when IDE content is run, so must be handled from here.
    * (mostly: through command lines, the terminal content is not cleared).
    *
-   *  - If not paused, the terminal automatically display a new line for a fresh command.
+   *  - If not paused, the terminal automatically displays a new line for a fresh command.
    *  - So clear content only after if got paused.
    *  - Then show to the user that executions started and enforce terminal GUI refresh,
    *    with a tiny pause so that the user has time to see the "cleared" terminal content.
-   *  - And relay to super setup methods.
+   *  - Then, relay to super setup methods.
    * */
-  async setupRuntime() {
-    jsLogger("[checkPoint] - setupRuntime IdeRunner")
+  async setupRuntimeIDE() {
+    jsLogger("[CheckPoint] - setupRuntimeIDE IdeRunner")
 
-    this.resizeVerticalTerm()   // needed in case the first click is on a button
-    this.handleTerminalWidthTroubles()
+    this.resizeVerticalTerm()           // needed in case the first click is on a button
+    this.terminalAutoWidthOnResize()
 
     // save before anything else, in case an error occur somewhere...
-    this.editorCode = this.getCurrentEditorCode()
-    this.save(this.editorCode)
-    this.storeUserCodeInPython('__USER_CODE__', this.editorCode)
+    const editorCode = this.getCodeToTest()
+    this.save(editorCode)
+    this.storeUserCodeInPython('__USER_CODE__', editorCode)
 
-    this.terminal.pause()
-    this.terminal.clear()
-    this.terminal.echo(CONFIG.lang.runScript.msg)
-    await sleep(200)  // "Blink" terminal, so that the user see a change
+    this.terminal.pause()           // Deactivate user actions in the terminal until resumed
+    this.terminal.clear()           // To do AFTER pausing...
+    this.terminalDisplayOnStart()   // Handle the terminal display for the current action
+    await sleep(this.delay)         // Terminal "blink", so that the user always sees a change
+    this.alreadyRanEnv = true
 
-    return super.setupRuntime()
+    return this.setupRuntime()
+  }
+
+
+  /**Things to display in the terminal at the very beginning of the executions.
+   * */
+  terminalDisplayOnStart(){
+    this.terminalEcho(CONFIG.lang.runScript.msg)
   }
 
 
 
-  async teardownRuntime(runtime) {
-    jsLogger("[checkPoint] - IdeRunner teardownRuntime")
+  async teardownRuntimeIDE(runtime) {
+    jsLogger("[CheckPoint] - IdeRunner teardownRuntime")
 
-    // Restore default state first, in case a validation occurred (stdout!)
-    runtime.setRuntimeWith()
+    // Restore default state first, in case a validation occurred (=> restore stdout behaviors!)
+    runtime.refreshStateWith()
 
-    if(runtime.finalMsg) this.giveFeedback(runtime.finalMsg)
+    // Handle any extra final message (related to revelation of solutions & REMs)
+    if(runtime.finalMsg) this.giveFeedback(runtime.finalMsg, null)
 
+    await this.teardownRuntime(runtime)
     this.storeUserCodeInPython('__USER_CODE__', "")
-    await super.teardownRuntime(runtime)
   }
 
 
 
-  /**If successful until now, Display the appropriate message in the terminal */
-  testSectionEndFeedback(runtime, step){
+  /**If the current action has been successful until now, display the appropriate
+   * message in the terminal.
+   * */
+  codeSnippetEndFeedback(runtime, step, code){
     if(runtime.stopped || !step) return
 
-    const intro   = this.is_playing() ? "" : CONFIG.lang.validation.msg
+    const playing = this.isPlaying()
+    const intro   = playing ? "" : CONFIG.lang.validation.msg
     const section = CONFIG.lang[step].msg
     const ok      = CONFIG.lang.successMsg.msg
 
-    const msg = `${ intro }${ section }: ${ ok }`
-    this.terminal.echo(msg)
+    let msg = `${ intro }${ section }: ${ ok }`   // Default section message
+    if(!code) msg = ""                            // No default message if no code in the section...
+    if(playing && !this.hasCheckBtn){             // ...but ensure the default ending message is shown,
+      msg = CONFIG.lang.successMsgNoTests.msg     //    if this is "playing" dans nothing else to do after.
+    }
 
-    // If no error yet and secret tests exist, update the runtime.finalMsg accordingly:
-    if(this.is_playing() && this.hasCheckBtn){
+    if(msg) this.terminalEcho(msg)
+
+    // If no error yet and secret tests exist while running the public tests right now,
+    // prepare a "very final" message reminding to try the validations:
+    if(playing && this.hasCheckBtn){
       runtime.finalMsg = CONFIG.lang.unforgettable.msg
     }
   }
@@ -421,41 +769,51 @@ class IdeRunner extends _IdeEditorHandler {
 
 
 
-
-  playFactory(){
+  /**Build the public tests runner routine.
+   * */
+  playFactory(runningMan=CONFIG.running.play){
     return this.lockedRunnerWithBigFailWarningFactory(
-      CONFIG.running.play,
-      this.setupRuntime,
+      runningMan,
+      this.setupRuntimeIDE,
       this.playThroughRunner,
-      this.teardownRuntime,
+      this.teardownRuntimeIDE,
     )
   }
 
-  validateFactory(){
+  /**Build the validation tests runner routine.
+   * */
+  validateFactory(runningMan=CONFIG.running.validate){
     return this.lockedRunnerWithBigFailWarningFactory(
-      CONFIG.running.validate,
-      this.setupRuntime,
+      runningMan,
+      this.setupRuntimeIDE,
       this.validateThroughRunner,
-      this.teardownRuntime,
+      this.teardownRuntimeIDE,
     )
   }
 
+  /**Build the correction validation runner routine.
+   * NOTE: the pyodideLock setup is not correct here (swaps done outside of it), but it shouldn't
+   *       ever cause troubles, as long as this method is not used in the IdeTester objects.
+   * */
   validateCorrFactory(){
     const cbk = this.validateFactory()
     const wrapper = async (e)=>{
-      jsLogger("[checkPoint] - corr_btn start")
+      jsLogger("[CheckPoint] - corr_btn start")
 
-      this.getCodeToTest = ()=>this.corrContent
+      const codeGetter   = this.getCodeToTest
+      const currentEditor= this.getCodeToTest()
       const profile      = this.profile
+      this.getCodeToTest = ()=>this.corrContent
       this.data.profile  = null    // REMINDER: getters without setters!
 
       let out
       try{
         out = await cbk(e)
       }finally{
-        jsLogger("[checkPoint] - corr_btn validation done")
-        this.getCodeToTest = ()=>this.editorCode
+        jsLogger("[CheckPoint] - corr_btn validation done")
         this.data.profile  = profile
+        this.getCodeToTest = codeGetter
+        this.save(currentEditor)    // Ensure the corr content doesn't stay stored in localStorage
       }
       return out
     }
@@ -465,29 +823,29 @@ class IdeRunner extends _IdeEditorHandler {
 
 
 
-
-
   //--------------------------------------------------------------------
 
 
 
 
-
-
+  /** `lockedRunnerWithBigFailWarningFactory(@action)` routine, to run public tests.
+   * */
   async playThroughRunner(runtime){
-    await this.runPythonCodeWithOptionsIfNoStdErr(
-      this.getCodeToTest(), runtime, CONFIG.section.editor
-    )
+    const code = this.getCodeToTest()
+    await this.runPythonCodeWithOptionsIfNoStdErr(code, runtime, CONFIG.section.editor)
   }
 
 
-
+  /** `lockedRunnerWithBigFailWarningFactory(@action)` routine, to run validation tests.
+   * */
   async validateThroughRunner(runtime){
 
-    let decrease_count = this.decreaseAttemptsOnCodeError
+    // env section is behaving like the editor one (should be changed...?)
+    let decrease_count = this.canDecreaseAttempts(CONFIG.section.editor)
 
-    // If an error, stop everything...
+    // If an error already occurred, stop everything...
     if(runtime.stopped){
+
       // ... but decrease the number attempts and run teardown if this was AssertionError.
       if(runtime.isAssertErr){
         this.handleRunOutcome(runtime, decrease_count)
@@ -495,32 +853,46 @@ class IdeRunner extends _IdeEditorHandler {
 
     }else{
 
-      // Define the user's code in the environment and run the public tests (if any)
-      await this.playThroughRunner(runtime)
-      decrease_count &&= runtime.stopped
+      const validation_state = {
+        autoLogAssert:    this.autoLogAssert,
+        purgeStackTrace:  this.showOnlyAssertionErrorsForSecrets,
+        withStdOut:      !this.deactivateStdoutForSecrets,
+      }
+      const toRun = [
+        [this.getCodeToTest(), CONFIG.section.editor,  {}],
+        [this.publicTests,     CONFIG.section.public,  validation_state],
+        [this.secretTests,     CONFIG.section.secrets, validation_state],
+      ]
 
+      for(const [code, testSection, state] of toRun){
+        jsLogger("[CheckPoint] - Run validation step:", testSection)
 
-      // Run the validation tests only if the user's code succeeded at the previous step
-      if(!runtime.stopped){
-        jsLogger("[checkPoint] - Run tests + secrets")
+        runtime.refreshStateWith(state)
+        await this.runPythonCodeWithOptionsIfNoStdErr(code, runtime, testSection)
 
-        // If still running, run the original public tests and the secret ones...
-        runtime.setRuntimeWith(this)
-        await this.runPythonCodeWithOptionsIfNoStdErr(this.publicTests, runtime, CONFIG.section.public)
-        await this.runPythonCodeWithOptionsIfNoStdErr(this.secretTests, runtime, CONFIG.section.secrets)
-        decrease_count = runtime.stopped
+        if(runtime.stopped){
+          decrease_count = this.canDecreaseAttempts(testSection)
+          break
+        }
       }
 
-      /* Reveal solution and REMs on success, or if the counter reached 0 and the sol&REMs
-        content is still encrypted.
-        Prepare an appropriate revelation message if needed (`finalMsg`).
-      */
+      // Reveal solution and REMs on success, or if the counter reached 0 and the sol&REMs content
+      // is still hidden, then prepare an appropriate revelation message if needed (`finalMsg`).
       this.handleRunOutcome(runtime, decrease_count)
     }
   }
 
 
-
+  /**Return true if the current section allow to decrease the number of attempts,
+   * during a validation
+   * */
+  canDecreaseAttempts(testSection){
+    const wanted      = CONFIG.section[ this.decreaseAttemptsOnUserCodeFailure ]
+    const allowedFrom = CONFIG.sectionOrder[ wanted ]
+    const currentAt   = CONFIG.sectionOrder[ testSection ]
+    const canDecrease = currentAt >= allowedFrom
+    return canDecrease
+  }
 
 
 
@@ -532,43 +904,48 @@ class IdeRunner extends _IdeEditorHandler {
 
 
 
-
-
-  /**Do not forget that all error feedback is already printed to the console. So when it comes to
-   * feedback, this method is only there to spot any final message needed.
+  /**Reveal solution and REMs on success, or if the counter reached 0 and the sol&REMs content
+   * is still hidden, then prepare an appropriate revelation message if needed (`finalMsg`).
+   *
+   * Do not forget that any error related feedback has already been printed to the console, so
+   * when it comes to feedback given in this method, it's only about a potential "final message".
    * */
   handleRunOutcome(runtime, allowCountDecrease){
     const success    = !runtime.stopped
     const revealable = this.corrRemsMask && this.hiddenDivContent && !this.profile
 
-    jsLogger("[checkPoint] - handleRunOutcome")
-    jsLogger("[OutCome]", JSON.stringify({ success, revealable, hidden:this.hiddenDivContent, allowCountDecrease: !!allowCountDecrease, mask:this.corrRemsMask, N:this.attemptsLeft}))
+    jsLogger("[CheckPoint] - handleRunOutcome")
+    // console.log("[OutCome]", JSON.stringify({ success, pof:this.profile, revealable, hidden:this.hiddenDivContent, allowCountDecrease: !!allowCountDecrease, mask:this.corrRemsMask, N:this.attemptsLeft}))
+
+    this.setStorage({done: success? 1:-1 })
+    this.updateValidationBtnColor()
 
     if(!success){
-      runtime.finalMsg = ""         // Reset default message "terminé sans erreurs"
+      runtime.finalMsg = ""         // Reset any default message "terminé sans erreurs" (TOTO: became useless?)
       if(allowCountDecrease){
         this.decreaseIdeCounter()
       }
     }
 
     if( revealable && (success || this.attemptsLeft==0) ){
-      jsLogger("[OutCome]", 'reveal!')
-      this.buildFinalMessage(runtime, success)
+      jsLogger("[OutCome]", 'reveal!', success)
+      runtime.finalMsg = success ? this._buildSuccessMessage(revealable)
+                                 : this._getSolRemTxt(false)
       this.revealSolutionAndRems()
 
     }else if(success && !revealable && this.corrRemsMask && this.hiddenDivContent){
-      runtime.finalMsg = this._buildSuccessMessage()
+      runtime.finalMsg = this._buildSuccessMessage(revealable)
     }
   }
 
 
-  /**Decrease the number of tries left, unless:
-   *    - The solution is already revealed
-   *    - The number of tries is infinite
-   *    - There no attempts left (redundant with revelation condition, but hey...)
+  /**Decrease the number of attempts left, EXCEPT when:
+   *    - the solution is already revealed,
+   *    - the number of attempts is infinite,
+   *    - there are no attempts left (redundant with revelation condition, but hey...).
    */
   decreaseIdeCounter(){
-    jsLogger("[checkPoint] - decreaseIdeCounter")
+    jsLogger("[CheckPoint] - decreaseIdeCounter")
     if(!this.hiddenDivContent) return    // already revealed => nothing to change.
 
     // Allow going below 0 so that triggers once only for failure.
@@ -578,72 +955,87 @@ class IdeRunner extends _IdeEditorHandler {
     // Update the GUI counter if needed (check for encryption in case
     // the user already solved the problem)
     if (Number.isFinite(nAttempts) && nAttempts >= 0){
-      $(this.counterH).text(nAttempts)
+      this.setAttemptsCounter(nAttempts)
     }
   }
 
 
-  /**Given the outcome of the current run, check if the sol&REMs must be revealed or not,
-   * and apply the needed DOM modifications if so.
-   *
-   * Revelation occurs if:
-   *    - Sol&REMs are still hidden,
-   *    - Some Sol&REMs actually exist,
-   *    - The run is successful or all attempts have been consumed.
-   *
-   * @returns: boolean, telling if the revelation occurred or not.
-   */
-  revealSolutionAndRems(){
-    jsLogger("[checkPoint] - Enter revealSolutionAndRems")
+  setAttemptsCounter(nAttempts){
+    $(this.counterH).text(nAttempts)
+  }
+
+
+  /**Reveal corr and/or REMs (visible or not) contents.
+   * When reaching this method, it is already sure by contract, that the revelation must occur.
+   * The only piece of contract this method is holding is that if flags the revelation as done,
+   * and it decides if the div content has to be decompressed or not on the way.
+   * */
+  revealSolutionAndRems(waitForMathJax=false){
+    jsLogger("[CheckPoint] - Enter revealSolutionAndRems")
     const sol_div = $("#solution_" + this.id)
 
+    // Need to check here one more time against hiddenDivContent because of the show button logic.
     if(this.hiddenDivContent && this.isEncrypted){
-      // Need to check here one more time against hidden_corr because of the show button logic.
-      jsLogger("[checkPoint] - revealed!")
-      const compressed = sol_div.text()
-      const content = decompressLZW(compressed, "ides.encrypt_corrections_and_rems")
+      jsLogger("[CheckPoint] - revealed!")
+
+      const compressed = sol_div.text().trim()
+      const content    = compressed && decompressLZW(compressed, "ides.encrypt_corrections_and_rems")
       sol_div.html(content)
-      this.hiddenDivContent = false // Forbid coming back here (last in case of errors...)
+      this.hiddenDivContent = false   // Forbid coming back here (last in case of errors...)
     }
-    sol_div.attr('class', '')       // unhide
-    mathJaxUpdate()                 // Enforce formatting, if ever...
+    sol_div.attr('class', '')         // Unhide
+
+    // Enforce formatting
+    if(waitForMathJax){
+      new Promise(subscribeWhenReady(
+        "revealOnLoad", mathJaxUpdate, { runOnly: true, waitFor: ()=>CONFIG.subscriptionReady.mathJax}
+      ))
+    }else{
+      mathJaxUpdate()
+    }
   }
 
 
 
-  buildFinalMessage(runtime, success){
-    jsLogger("[checkPoint] - buildFinalMessage. Success:", success)
-    runtime.finalMsg = success ? this._buildSuccessMessage()
-                               : this._getSolRemTxt(false)
-  }
-
-  _buildSuccessMessage(){
+  _buildSuccessMessage(revealable){
     const emo = choice(CONFIG.MSG.successEmojis)
-    let info = this._getSolRemTxt(true)
-    return `${ success(CONFIG.lang.successHead.msg) } ${ emo } ${ CONFIG.lang.successHeadExtra.msg }${ info }`
+    const moreInfo = !revealable ? '' : this._getSolRemTxt(true)
+    return `${ CONFIG.lang.successHead.msg } ${ emo } ${ CONFIG.lang.successHeadExtra.msg }${ moreInfo }`
   }
 
 
   _getSolRemTxt(isSuccess){
     if(!this.corrRemsMask) return ""
 
-    const msg=[], sentence=[], mask = this.corrRemsMask
+    const hasCorr  = this.corrRemsMask & 1
+    const hasRems  = this.corrRemsMask & 2
+    const hasBoth  = this.corrRemsMask == 3
+    const msg      = []
+    const sentence = []
 
-    msg.push( isSuccess ? "\n"+CONFIG.lang.successTail.msg
-                        : CONFIG.lang.failHead.msg
+    const pushSentence = (prop, kind='msg') => sentence.push(CONFIG.lang[prop][kind])
+
+    msg.push(
+      isSuccess ? "\n"+CONFIG.lang.successTail.msg
+                : CONFIG.lang.failHead.msg
     )
 
-    if(mask & 1) sentence.push(CONFIG.lang.revealCorr.msg)
-    if(mask===3) sentence.push(CONFIG.lang.revealJoin.msg)
-    if(mask & 2) sentence.push(CONFIG.lang.revealRem.msg)
+    if(hasCorr) pushSentence('revealCorr')
+    if(hasBoth) pushSentence('revealJoin')
+    if(hasRems) pushSentence('revealRem')
 
     if(!isSuccess){
         if(sentence.length) sentence[0] = _.capitalize(sentence[0])
-        if(mask&2)          sentence.push(CONFIG.lang.failTail.plural)
-        else if(mask)       sentence.push(CONFIG.lang.failTail.msg)
+
+        if(hasBoth) pushSentence('failTail', 'plural')
+        else        pushSentence('failTail')
     }
     msg.push(...sentence)
-    jsLogger("[OutComeSolRemTxt]", JSON.stringify({isSuccess, msg, mask, sentence}))
-    return msg.join(' ').trimEnd() + "."
+    const output = msg.join(' ').trimEnd() + "."
+
+    // console.log("[OutComeSolRemTxt]", JSON.stringify({isSuccess, msg, mask:this.corrRemsMask, sentence, output}))
+    return output
   }
 }
+
+CONFIG.CLASSES_POOL.Ide = IdeRunner

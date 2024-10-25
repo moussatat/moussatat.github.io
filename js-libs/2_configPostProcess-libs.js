@@ -18,21 +18,35 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-;`
-runScript
-installStart
-installDone
-validation
-editorCode
-publicTests
-secretTests
-`.trim().split(/\s+/).forEach( prop =>{
-        CONFIG.lang[prop].msg = info(CONFIG.lang[prop].msg)
-})
 
-CONFIG.lang.successMsg.msg    = success(CONFIG.lang.successMsg.msg)
-CONFIG.lang.unforgettable.msg = warning(CONFIG.lang.unforgettable.msg)
-CONFIG.lang.failHead.msg      = warning(CONFIG.lang.failHead.msg)
-CONFIG.lang.tests.as_pattern  = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
+;(function(){
 
-CONFIG.pythonLibs = new Set(CONFIG.pythonLibs)
+  // For backward compatibility ( < 2.2.0)
+  const DEFAULT_FORMATTING_BEFORE_220 = {
+    runScript:         'info',
+    installStart:      'info',
+    installDone:       'info',
+    validation:        'info',
+    editorCode:        'info',
+    publicTests:       'info',
+    secretTests:       'info',
+    successMsg:        'success',
+    successMsgNoTests: 'info',
+    unforgettable:     'warning',
+    successHead:       'success',
+    failHead:          'warning',
+  }
+
+  for(const prop in CONFIG.lang){
+    const obj = CONFIG.lang[prop]
+    const format = obj.format || DEFAULT_FORMATTING_BEFORE_220[prop]
+
+    if(format){
+      obj.msg = txtFormat[ format ]( obj.msg )
+    }
+  }
+
+  CONFIG.lang.tests.as_pattern  = new RegExp(CONFIG.lang.tests.as_pattern, 'i')
+
+  CONFIG.pythonLibs = new Set(CONFIG.pythonLibs)
+})()

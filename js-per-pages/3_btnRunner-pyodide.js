@@ -33,3 +33,5 @@ class BtnRunner extends PyodideSectionsRunner {
     )
   }
 }
+
+CONFIG.CLASSES_POOL.PyBtn = BtnRunner

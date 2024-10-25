@@ -45,7 +45,7 @@ If not, see <https://www.gnu.org/licenses/>.
   background-color: var(--main-theme);
   gap: 1px;
 }
-.py_mk_wrapper{
+.py_mk_wrapper {
   grid-template-rows: auto auto;
 }
 .py_mk_wrapper_v {

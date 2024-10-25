@@ -24,12 +24,14 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
   constructor(id){
     super(id)
-    this.terminal    = null
-    this.topDiv      = null
-    this.termEnabled = false
-    this.isIsolated  = id.startsWith("term_only")
-    this.cmdChunk        = ""
-    this.cmdOnTheRun     = ""
+    this.terminal      = null
+    this.termWrapper   = null
+    this.termEnabled   = false
+    this.isIsolated    = id.startsWith("term_only")
+    this.cmdChunk      = ""
+    this.cmdOnTheRun   = ""
+    this.alreadyRanEnv = false    // Specific to terminals, but defined "for everyone"
+    this.joinTerminalLines = false
   }
 
 
@@ -49,9 +51,9 @@ class _TerminalHandler extends PyodideSectionsRunner {
       greetings: "",                    // cancel terminal banner (welcome message),
       completionEscape: false,
       prompt: CONFIG.MSG.promptStart,
-      outputLimit: this.stdoutCutOff,
+      outputLimit: this.stdoutCutOff, // this.terminal.settings().outputLimit=value (to change dynamically)
       enabled: false,                   // GET RID OF THE DAMN AUTO-SCROLL!!!!!!
-      // wrap: getWrapTerms(),          // Also deactivate colors... FUCK THIS!
+      // wrap: getWrapTerms(),          // This also deactivate colors... FUCK THIS!
       keymap: this.getTerminalBindings(),
       completion: function (command, callback) {
         callback(pyFuncs.pyconsole.complete(command).toJs()[0]);    // autocompletion
@@ -60,53 +62,98 @@ class _TerminalHandler extends PyodideSectionsRunner {
                             // DO NOT PUT ANY CODE INSIDE THIS !!
     }
 
-    this.terminal = $(jqTermId).terminal(commandsCbk, termOptions)
-    this.topDiv   = this.terminal.closest(".py_mk_wrapper")
+    this.terminal    = $(jqTermId).terminal(commandsCbk, termOptions)
+    this.termWrapper = this.terminal.parent()
 
     if(CONFIG._devMode) CONFIG.terms[termId]=this.terminal
 
-    // Since terminal are created deactivated, add an EventListener for click to reactivate
-    // them (once only: unsubscribe the listener on click. Note: no original click event)
-    // Using the async lock so that the user cannot resume a terminal while it's running
-    // (could occur on first click/run).
-    this.addEventToRunOnce(this.terminal, 'click',  _=>{
-      if(this.termEnabled) return;
-      this.terminal.focus(true).enable()
-      this.termEnabled = true
-    }, true)
+    this.addEventToRunOnce(
+      this.terminal, this.ensureTerminalActivationOnClick.bind(this), true
+    )
+    this.termWrapper.on(
+      'click', this.attemptAtResolvingTerminalUiTroubles.bind(this)
+    )
+    this.termWrapper.find(".stdout-wraps-btn").on(
+      'click', this.swapTerminalLinesJoinerForCopies.bind(this)
+    )
+    this.termWrapper.find(".stdout-ctrl").on('click', _=>{
+      this.updateStdoutCutFeedback(!this.cutFeedback)
+    })
+    this.updateStdoutCutFeedback(this.cutFeedback)
+
     this.prefillTermIfAny()
 
-    /* Try to fix:
-        - The "terminal with 0px with in tabbed IDEs/terminals":
-        - The FILL content lost when the user changed of tab somewhere in the page...
-    */
-    const wrapper = this.terminal.parent()
-    wrapper.on('click', _=>{
-      const w = wrapper.css('width'), h = wrapper.css('height')
-      if(w != this.terminal.css('width') || h != this.terminal.css('height')){
-        this.terminal.css('width', w)
-        this.terminal.css('height', h)
-      }
-
-      if(this.isIsolated && !this.terminal.get_command()){
-        this.prefillTermIfAny()
-      }
-    })
-
-    super.build()   // nothing done so far, but for consistency...
+    super.build()   // Nothing done there so far, but for consistency...
   }
 
 
 
+  /**Update the UI button status and the inner state of cutFeedback to the given value.
+   * */
+  updateStdoutCutFeedback(to){
+    this.data.cut_feedback = CONFIG.cutFeedback = to
+    const method = to ? 'removeClass' : 'addClass'
+    $(this.termWrapper).find(".stdout-x-ray-svg")[method]('py_mk_hidden')
+  }
 
-  handleTerminalWidthTroubles(){
-    const wWrapper = this.topDiv.width()
-    if(wWrapper != this.terminal.width()){
-      this.terminal.width(wWrapper)
+
+
+  swapTerminalLinesJoinerForCopies(){
+    this.joinTerminalLines = !this.joinTerminalLines
+    const btnCssOpacity    = `${ this.joinTerminalLines ? 80 : 30 }%`
+    this.termWrapper.find(".stdout-wraps-btn").css('--wrap-opacity', btnCssOpacity)
+  }
+
+
+  /**Because terminals are created deactivated, add an EventListener for click to reactivate them.
+   * Using the async lock so that the user cannot resume a terminal while it's running (could
+   * occur on first click/run).
+   * Does nothing if the terminal already got activated by other means.
+   * */
+  ensureTerminalActivationOnClick(){
+    if(!this.termEnabled){
+      this.terminal.focus(true).enable()
+      this.termEnabled = true
     }
   }
 
-  addEventToRunOnce(target, event, cbk, withLock=false){
+
+  /**Transfer user's resize operations to the terminal wrapper, so that the content stays
+   * confined to the wrapping div.
+   * */
+  terminalAutoWidthOnResize(){
+    const wrapperWidth = this.termWrapper.width()
+    if(wrapperWidth != this.terminal.width()){
+      this.terminal.width(wrapperWidth)
+    }
+  }
+
+
+  /**This routine tries to fix the following bugs with terminals:
+   *    - The 0px width terminals on tab change (markdown: `=== "tabbed"`):
+   *    - The FILL content lost when the user changed of tab anywhere in the page...
+   * */
+  attemptAtResolvingTerminalUiTroubles(){
+    const w = this.termWrapper.css('width')
+    if(w != this.terminal.css('width')){
+      this.terminal.css('width', w)
+    }
+    const h = this.termWrapper.css('height')
+    if(h != this.terminal.css('height')){
+      this.terminal.css('height', h)
+    }
+    if(this.isIsolated && this.prefillTerm && !this.terminal.get_command()){
+      this.prefillTermIfAny()
+    }
+  }
+
+
+  /**Routine adding the given callback on a jQuery @target click event, with an automatic
+   * "unsubscription on first click" wrapping logic.
+   * If @withLock is true, the routine is using the Pyodide async lock, to avoid messing
+   * with the global state of the page.
+   * */
+  addEventToRunOnce(target, cbk, withLock=false, event='click'){
     let clickHandler = async _=>{
       target.off(event, clickHandler)
       cbk()
@@ -114,7 +161,7 @@ class _TerminalHandler extends PyodideSectionsRunner {
     if(withLock){
       clickHandler = withPyodideAsyncLock('term_'+event, clickHandler)
     }
-    target.on('click', clickHandler)
+    target.on(event, clickHandler)
   }
 
 
@@ -130,25 +177,26 @@ class _TerminalHandler extends PyodideSectionsRunner {
       "CTRL+C": async (e) => {
         let txt = getSelectionText()
 
-        // Skip if some text is selected (=copy!)
+        // Skip if some text is selected (=> copy!)
         if (!txt) {
           let currentCmd = this.terminal.get_command();
           pyFuncs.clear_console();    // Looks like it does nothing...? :/
           this.terminal.echo(CONFIG.MSG.promptStart + currentCmd);
-          this.terminal.echo(error("KeyboardInterrupt"));
+          this.terminal.echo(txtFormat.error("KeyboardInterrupt"));
           this.terminal.set_command("");
           this.terminal.set_prompt(CONFIG.MSG.promptStart);
           return
         }
         e.preventDefault()
         e.stopPropagation()
-        if(CONFIG.joinTerminalLines){
+        if(this.joinTerminalLines){
           txt = txt.replace(/\n/g, '')
         }
         await navigator.clipboard.writeText(txt)
       }
     })
   }
+
 
   getAsyncPythonExecutor(){
     throw new Error('Should be overridden in the child class.')
@@ -160,27 +208,53 @@ class _TerminalHandler extends PyodideSectionsRunner {
   }
 
 
-  /**When a terminal is available, display stdout and errors in it, if any.
-   * */
-  giveFeedback(stdout, stdErr="", _){
-    if(stdErr){
-      stdErr = error(stdErr)
-    }else if(stdout.endsWith('\n')){
-      stdout = stdout.slice(0,-1)       // useful when printing from terminal and no error
-    }
-    const msg = stdout + stdErr
-    if(msg) this.terminal.echo(msg)
+  setupGlobalConfig(){
+    super.setupGlobalConfig()
+    CONFIG.cutFeedback = this.cutFeedback
+    CONFIG.termMessage = this.termFeedbackFromPyodide.bind(this)
   }
 
 
-  /**Has to be on the TerminalHandler, because TerminalRunner will call this through super call,
-   * to avoid a command run in the terminal of an IDE calls the IdeRunner.teardownRuntime method.
+  /**When a terminal is available, display stdout and errors in it, if any.
+   *
+   *  @format: by default `"error"`. Formatting to use for the jQuery.terminal.
+   * If @format is `null`, the @content is already formatted for the terminal and no txtFormat
+   * option must be applied anymore.
    * */
-  async teardownRuntime(runtime) {
-    jsLogger("[checkPoint] - TerminalRunner teardownRuntime")
-    this.terminal.resume()
-    this.storeUserCodeInPython('__USER_CMD__', "")
-    await super.teardownRuntime(runtime)
+  giveFeedback(content, format='error'){
+    if(content){
+      if(format!==null) content = txtFormat[format](content)
+      this.terminalEcho(content)
+    }
+  }
+
+
+  /**Feedback coming from pyodide, one way or another...
+   * Any call reaching this method is about a content to unconditionally show in the terminal.
+   *
+   * If @isPrint is true, the call comes from a print statement and is a stdout redirection.
+   * the child method already decided if the message must be displayed or not.
+   * If @isPrint is false, the call is a direct one to terminal_message, from an author or a user,
+   * and the key argument has to match the STD_KEY argument
+   *
+   * @throws: Error if isPrint is false and the key isn't the expected one, of if the `format`
+   *          option is unknown.
+   */
+  termFeedbackFromPyodide(_key, msg, format, isPrint=false){
+    if(!txtFormat[format]){
+      throw new Error(`Unknown formatting option: ${format}`)
+    }
+    msg = textShortener(msg)
+    this.terminalEcho(txtFormat[format](msg), {newline:!isPrint})
+  }
+
+
+  /**Internal hook, allowing to capture all the content sent to the terminal from a parent class
+   * (aka, IdeTester...).
+   * WARNING: at this point, the content is already formatted with jQuery.terminal syntaxes.
+   * */
+  terminalEcho(content, options){
+    this.terminal.echo(content, options ?? {newline:true})
   }
 }
 
@@ -199,14 +273,6 @@ class TerminalRunner extends _TerminalHandler {
 
 
   /**Generate the async-locked callback used to run commands typed into the terminal.
-   *
-   * WARNING: USE OF `super.method` in setupRuntimeTerminalCmd and teardownRuntimeTerminalCmd
-   *
-   * Using super calls, because one only wants the setup specific to terminal here, while "this"
-   * could be an IdeRunner object. Ine that case, this.setupRuntime would run the setup for the
-   * code in the editor, and not the command typed in the terminal.
-   * This also way work with TerminalRunners, because the generic setupRuntime is _NOT_ on the
-   * TerminalRunner class, but actually on the PythonSectionRunner one.
    * */
   getAsyncPythonExecutor(){
     return this.lockedRunnerWithBigFailWarningFactory(
@@ -218,6 +284,7 @@ class TerminalRunner extends _TerminalHandler {
   }
 
 
+
   /**Definitions of `command`, `cmdOnThRun` and general context about `PyodideConsole`:
    * ----------------------------------------------------------------------------------
    *
@@ -226,21 +293,22 @@ class TerminalRunner extends _TerminalHandler {
    * This is essentially because the hidden/inner PyodideConsole is actually running totally
    * independently of the jQuery.terminal object itself.
    *
-   * 1. Concretely, the PyodideConsole is handling the code itself without troubles, but anything
+   * Concretely, the PyodideConsole is handling the code itself without troubles, but anything
    * other than "just run that code" (aka, installations/imports, exclusions, ...) still has to
    * be done around the console.
    *
-   * Problems arise when  you need to know on JS/Theme side if the cmdChunk is complete or not,
-   * and to do so, you need to send the current @cmdChunk to the PyodideConsole, and that little
-   * fucker wile automatically schedule the async execution of any complete cmdChunk as soon as
-   * you call `pyconsole.push(chunk)` before you can even know it is complete on JS/Theme side.
+   * Problems arise when you need to know on the JS/Theme side if the cmdChunk is complete or not.
+   * To do so, you need to send the current @cmdChunk to the PyodideConsole, and that _fucking
+   * little bastard_ will automatically schedule the async execution of any complete instruction
+   * as soon as you call `pyconsole.push(chunk)`, before you can even know it is complete or not
+   * on the JS/Theme side...
    *
    *
-   * On top of this, what is a cmdChunk, brain-wise, might sometimes be quite different of what
-   * a terminal might actually be sending here as argument:
+   * On top of this, what a @cmdChunk means (brain-wise), might sometimes be quite different of
+   * what a terminal might actually be sending here as argument:
    *
-   * @cmdChunk: This is the string content in the terminal that is passed through _WHEN THE USER
-   *           HITS `Enter` (without holding Shift key). This implies commands could concretely
+   * @cmdChunk: This is the string content that is passed through _WHEN THE USER HITS `Enter` in
+   *           the terminal without holding Shift key_. This implies @cmdChunk could concretely
    *           be a lot of different things:
    *                - A single line command, just like you'd expect:
    *                      `a = 45+6`
@@ -256,7 +324,8 @@ class TerminalRunner extends _TerminalHandler {
    *                      Now:          `... third line`
    *
    *                      After hitting `Enter`, @cmdChunk will be `"third line"` ONLY.
-   *                - Any mix of all these (that last 2, I mean).
+   *
+   *                - Any mix of all these two last...
    *
    *
    * Now, _IF_ the exclusions are already in place before the PyodideConsole execute the complete
@@ -275,14 +344,14 @@ class TerminalRunner extends _TerminalHandler {
    * 1. Exclusions (builtins & imports), if any, have to be put in place before the current
    *    `cmdChunk` is passed to the PyodideConsole, even if the current "command" is not complete.
    *
-   * 2. Methods exclusions and missing packages installation has to be done only when the "current
+   * 2. Methods exclusions and missing packages installation have to be done only when the "current
    *    command" is complete, so the TerminalRunner must keep track of previously entered cmdChunks
    *    and track properly when it is "fully complete", syntax error, ...
    *    This is where `cmdOnTheRun` enters the game.
    *
-   *        --------------------------------------------------------------------------------------
-   *        TODO: the implementation about imports actually do not match this description... => ??
-   *        --------------------------------------------------------------------------------------
+   *        ----------------------------------------------------------------------------------------
+   *        TODO: the implementation about imports actually does not match this description anymore
+   *        ----------------------------------------------------------------------------------------
    *
    * 3. When the `PyodideConsole` announce a complete command:
    *      - It's execution in pyodide is already scheduled, but the result stills need to be run
@@ -301,7 +370,9 @@ class TerminalRunner extends _TerminalHandler {
    *
    * */
   async setupRuntimeTerminalCmd(cmdChunk){
-    /* !!! WARNING !!!
+
+    /*
+    !!! WARNING !!!
 
         Any ASYNC potential calls to setupRuntime HAVE to be done before the pyconsole.push,
         otherwise, because of async loop scheduling, the environment is setup from JS AFTER
@@ -319,11 +390,8 @@ class TerminalRunner extends _TerminalHandler {
     // If env already run before, envTerm HAS to run independently, so remove the dependency.
     let runtime
     if(!this.alreadyRanEnv){
-      runtime = await super.setupRuntime()
-      // Using super, because a command ran in the terminal of an IDE MUST NOT run the setupRuntime
-      // logic of the IDE but only the one related to the PyodideSectionsRunner logic.
-      // This works because there is an intermediate parent class between the TerminalRunner one
-      // and the PyodideSectionsRunner setupRuntime method.
+      runtime = await this.setupRuntime()
+      this.alreadyRanEnv = !runtime.stopped
 
     }else{
       runtime = this.buildRunConfig()
@@ -336,22 +404,37 @@ class TerminalRunner extends _TerminalHandler {
 
 
 
+  /**Specific teardown steps when using a terminal command (isolated or IDE's terminal).
+   * */
   async teardownRuntimeTerminalCmd(runtime){
     try{
       await runtime.runWithCtx('postTerm')
     }finally{
       // If ever postTerm failed, post might still have to run:
-      super.teardownRuntime(runtime)
+      this.teardownRuntime(runtime)
     }
   }
 
 
 
+  /**Generic terminal teardown actions (common to isolated and IDEs' terminals)
+   * */
+  async teardownRuntime(runtime) {
+    jsLogger("[CheckPoint] - TerminalRunner teardownRuntime")
+    this.terminal.resume()
+    await super.teardownRuntime(runtime)
+    this.storeUserCodeInPython('__USER_CMD__', "")
+  }
+
+
+
+  /**Main command routine execution logic.
+   * */
   async runTermCommand(runtime){
-    jsLogger("[checkPoint] - Terminal - start running command")
+    jsLogger("[CheckPoint] - Terminal - start running command")
 
     if(runtime.stopped){
-      jsLogger("[checkPoint] - Terminal - Skipped!")
+      jsLogger("[CheckPoint] - Terminal - Skipped!")
       return
     }
 
@@ -365,13 +448,14 @@ class TerminalRunner extends _TerminalHandler {
       method:        this.installAndImportMissingModules,
       methodArgs:   [this.cmdOnTheRun, runtime],
     })
+
     if(runtime.stopped){
       this.cmdOnTheRun = ""
       return
     }
 
     const done = async (future)=>{
-      jsLogger("[checkPoint] - Terminal - done step. Awaited:", futureAwaited)
+      jsLogger("[CheckPoint] - Terminal - done step. Awaited:", futureAwaited)
       this.cmdOnTheRun = ""
       if(!futureAwaited){
         try{ await future }catch(e){
@@ -382,47 +466,48 @@ class TerminalRunner extends _TerminalHandler {
       await sleep()       // Enforce GUI update, going through the next tick
     }
 
-    let futureAwaited
+    let futureAwaited = false   // Flag to know if the future has been awaited or not, in the loop
+    const lines = this.cmdChunk.split("\n")   // Split multiline commands (useful when pasting)
 
-    // Multiline commands should be split (useful when pasting)
-    for (let line of this.cmdChunk.split("\n")) {
+    for (let line of lines) {
+      jsLogger("[CheckPoint] - Terminal - current cmd line:", line)
 
-      let [future] = [pyFuncs.pyconsole.push(line)]
-      /* NOTE: putting those inside the array slightly changes the behaviors about
-         "PyodideConsole future exception was never retrieved" stuff... => might be better.
-
+      /* NOTE: putting future inside an array slightly changes the behaviors about the
+         "PyodideConsole future exception was never retrieved" warnings... => might be better...
          BUT... this doesn't resolve the troubles about async scheduling in any way (I checked),
-         so the overall "mostly broken" setup must be kept...
-      */
-
+         so the overall "mostly broken" setup must be kept... */
+      let [future] = [pyFuncs.pyconsole.push(line)]
       futureAwaited = false
 
-      // set the beginning of the next line in the terminal:
+      // Set the next line prompt beginning in the terminal (command: ">>>" or continuation:"...")
       const isIncompleteExpr = future.syntax_check=="incomplete"
       const headLine = isIncompleteExpr ? CONFIG.MSG.promptWait : CONFIG.MSG.promptStart
       this.terminal.set_prompt(headLine)
 
-      jsLogger("[checkPoint] - Terminal - current cmd line:", line)
-
       switch (future.syntax_check) {
-        case "complete":
-          jsLogger("[checkPoint] - Terminal - future complete")
 
+        case "complete":
+          jsLogger("[CheckPoint] - Terminal - future complete")
+
+          // Prepare the needed runner, which will handle the `futureAwaited` flag:
           const oldRunner = this.pythonCodeRunnerWithCtx
+          this.pythonCodeRunnerWithCtx = async _=>{
+            jsLogger("[CheckPoint] - Terminal - awaiting future")
+            futureAwaited = true
+            await pyFuncs.await_fut(future)
+          }
+
           try{
-            /*NOTE: nothing can be awaited in between the future "creation" and the execution of
-              runtime.runCodeAsync, otherwise the event loop will actually compute the result of
-              the python command (which is now stored in the event loop) before the restrictions
-              are put in place in the environment (everything is synch up to this point!).
+            /*NOTE: nothing can be awaited in between the future "creation" and the execution
+              of this.pythonCodeRunnerWithCtx, otherwise the event loop will actually compute
+              the result of the python command (which is now stored in the event loop) before
+              the restrictions are put in place in the environment).
+              Everything is "synch" up to this point!
             */
-              this.pythonCodeRunnerWithCtx = async _=>{
-              jsLogger("[checkPoint] - Terminal - awaiting future")
-              futureAwaited = true
-              await pyFuncs.await_fut(future)
-            }
             await this.runPythonCodeWithOptionsIfNoStdErr(this.cmdOnTheRun, runtime)
-              // NOTE: the code argument has actually no other use than to check against exclusions
-              //      (imports are checked again, but with no result, since already done if needed)
+              // NOTE: this.cmdOnTheRun argument has actually no other use than to check against
+              //       methods exclusions (imports are checked again, but with no result, since
+              //       already done if needed).
 
           }finally{
             this.pythonCodeRunnerWithCtx = oldRunner
@@ -431,11 +516,11 @@ class TerminalRunner extends _TerminalHandler {
           continue
 
         case "incomplete":
-          jsLogger("[checkPoint] - Terminal - future incomplete")
+          jsLogger("[CheckPoint] - Terminal - future incomplete")
           continue
 
         case "syntax-error":
-          jsLogger("[checkPoint] - Terminal - future syntax error")
+          jsLogger("[CheckPoint] - Terminal - future syntax error")
           this.terminal.error(future.formatted_error.trimEnd());
           await done(future)
           return
@@ -448,21 +533,4 @@ class TerminalRunner extends _TerminalHandler {
   }
 }
 
-
-
-
-
-
-
-// SANITY CHECK:
-;(function(){
-  const somethingWrong = 'setupRuntime teardownRuntime'
-                              .split(' ').some(k=>TerminalRunner.prototype.hasOwnProperty(k))
-  if(somethingWrong){
-    throw new Error(
-      "The TerminalRunner class should define neither setupRuntime nor teardownRuntime methods: "
-     +"they should be on the parent class (TerminalHandler / see comments about the user of super "
-     +"in getAsyncPythonExecutor)"
-    )
-  }
-})()
+CONFIG.CLASSES_POOL.Terminal = TerminalRunner

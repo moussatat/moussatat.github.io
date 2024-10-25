@@ -42,6 +42,7 @@ CONFIG.loggerOptions={
     StdoutController:   false,
     Subscribing:        false,
     Terminal:           false,
+    Testing:            true,
     TrashCan:           false,
     Unsubscribing:      false,
     Validation:         false,

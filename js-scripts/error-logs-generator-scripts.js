@@ -27,6 +27,7 @@ If not, see <https://www.gnu.org/licenses/>.
  * @purgeTrace (boolean): if true, the complete stacktrace will be removed of error messages
  *
  * @returns: [errMessage, isAssertErr]
+ *           NOTE: errMessage is NOT formatted for jQuery terminal yet.
  * ---
  *
  * ## Rationals

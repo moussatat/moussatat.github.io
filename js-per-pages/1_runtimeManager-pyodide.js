@@ -19,49 +19,54 @@ If not, see <https://www.gnu.org/licenses/>.
 
 
 
+/**Build a "context" object, holding the various state information for the current
+ * "sub-action/step" in the current overall user action (RuntimeManager).
+ * (creates a bare object, without methods)
+ * */
 class Ctx {
 
-  static BASE_CTX = {
-    skipped: false,
-    success: true,                // false if error, not if skipped
+  static baseCtx(){
+    return {
+      success: true,                // false on errors only, not if just "skipped"
 
-    err: null,                    // Error instance
-    stdErr: "",                   // Error as string (msg to output, formatted)
-    isAssertErr:false,
-    stdout: "",
-    running: "<unknown>",         // Informational purpose
+      err: null,                    // Error instance
+      stdErr: "",                   // Error as string (msg to output, formatted)
+      isAssertErr:false,
+      stdout: "",
+      qualname: "<unknown>",        // "qualified name" of the section + method to run in the current action (debugging purpose)
 
-    useIO: true,                  // Apply setup/teardown? (without consideration of use)
-    keepRunningOnAssert: false,   // If true, consider the section ran successfully on AssertionError (this is env related)
-    isEnvSection: true,           // Any of env, env_term, ... => "not user code or cmd"
-    applyExclusionsIfAny: false,  // Apply exclusions specifically on this run (if any). Note: `!isEnvSection` is not specific enough!
-    section: "<unknown>",
-    archiveSuccess: false,        // If true, the section will be registered as ran successfully (if it is so). To use on the last action of the section.
-    method: ()=>null,             // Runner method to... run when everything is ready
-    code: ".",                    // If empty string, the Runner method won't ever be called. Default is not empty, because some Runner won't need to pass `code` to the ctx to know what to do (or the code needed is not known yet: Features)
-    methodArgs: [],
-    logConfig: {},
+      keepRunningOnAssert: false,   // If true, consider the section ran successfully on AssertionError (this is env related)
+      isEnvSection: true,           // Any of env, env_term, ... => "not user code or cmd"
+      applyExclusionsIfAny: false,  // Apply exclusions specifically on this run (if any). Note: `!isEnvSection` is not specific enough!
+      section: "<unknown>",         // as in "PYODIDE:{section}", or "unknown" instead. Visible in the stacktrace on errors.
+      archiveSuccess: false,        // If true, the section will be registered as ran successfully (if it is so). To use on the last action of the section.
+      method: ()=>null,             // Runner method to... run when everything is ready
+      code: ".",                    // If empty string, the Runner method won't ever be called. Default is not empty, because some Runner won't need to pass `code` to the ctx to know what to do (or the code needed is not known yet: Features)
+      methodArgs: [],               // Additional arguments to pass to the Runner method
+      logConfig: {},                // Config for generateErrorLog
+    }
   }
 
 
   static with(ctx, runtime){
-    let section = ctx && ctx.section || Ctx.BASE_CTX.section
+    const baseCtx = Ctx.baseCtx()
+    let section   = ctx && ctx.section || baseCtx.section
 
-    if(!ctx) ctx={}         // no argument
+    if(!ctx) ctx={}                     // no argument
 
-    else if(typeof(ctx)=='string'){   // environment name only
+    else if(typeof(ctx)=='string'){     // Environment section name only
       section = ctx
       ctx = {
+        archiveSuccess:      true,      // always, with environment codes
         code:                runtime.runner[`${ section }Content`].trim(),
-        archiveSuccess:      true,     // always on Environment codes
         keepRunningOnAssert: section.startsWith('env'),
         method:              runtime.runner.installImportsAndRunEnvCode,
       }
     }
 
     return {
-      ...Ctx.BASE_CTX,
-      running: `${ section || '?' }_${ ctx.method.name }`,
+      ...baseCtx,
+      qualname: `${ section || '?' }_${ ctx.method.name }`,
       ...ctx,
       section,
     }
@@ -79,8 +84,9 @@ class Ctx {
 /**Manage the environment when in need to execute some code in pyodide.
  *
  * Holds all the logic to manage all the possible outcomes:
- * Used as "throw away" data structure, once the full user action is done: this allows to mutate
- * all that one needs, being sure it wont affect the original data in the (PythonSectionsRunner).
+ * Used as "throw away" data structure, once the full user action is done: this allows
+ * to mutate "everything you need", being sure it wont affect the original data in the
+ * `PythonSectionsRunner` instance.
  * */
 class RuntimeManager {
 
@@ -93,9 +99,10 @@ class RuntimeManager {
     this.runner = runner
 
     // --- Python logistic related (may be mutated on the way) ---
-    this.autoLogAssert   = true     // default for the PUBLIC tests...
-    this.purgeStackTrace = false    // default for the PUBLIC tests...
-    this.withStdOut      = true     // default for the PUBLIC tests...
+    this.autoLogAssert   = null     // default for the PUBLIC tests...
+    this.purgeStackTrace = null     // default for the PUBLIC tests...
+    this.withStdOut      = null     // default for the PUBLIC tests...
+    this.refreshStateWith()         // Apply actual defaults (avoiding defaults duplication)
 
     // --- Runtime logistic related (may be mutated on the way) ---
     this.stdErr       = ""          // First encountered error message
@@ -118,14 +125,24 @@ class RuntimeManager {
   get stopped(){ return Boolean(this.stdErr) }
 
 
-  setRuntimeWith(runner={}){
-    // (not using this.runner to discriminate setup from teardown)
-    this.autoLogAssert   = runner.autoLogAssert ?? true
-    this.purgeStackTrace = runner.showOnlyAssertionErrorsForSecrets ?? false
-    this.withStdOut      = runner.deactivateStdoutForSecrets !== undefined ? !runner.deactivateStdoutForSecrets : true
+  /**Update the state of the current RuntimeManager with the given data, and use
+   * default values for missing fields.
+   * */
+  refreshStateWith(update={}){
+    update = {
+      autoLogAssert:   true,
+      purgeStackTrace: false,
+      withStdOut:      true,
+      ...update
+    }
+    for(const prop in update){
+      this[prop] = update[prop]
+    }
   }
 
 
+  /**Update the sections dependency graph, to modify the conditions to run or not a section.
+   * */
   changeDependency(source, target){
     if(this.dependencies[source]===undefined){
       throw new Error("Invalid source dependency: " + source)
@@ -133,7 +150,9 @@ class RuntimeManager {
     this.dependencies[source] = target
   }
 
-  cleanup(){ return this.runner = this.runCodeAsync = null }
+  cleanup(){
+    return this.runner = this.runCodeAsync = null   // Facilitate GC...
+  }
 
 
 
@@ -171,23 +190,27 @@ class RuntimeManager {
     ctx = Ctx.with(ctx, this)
 
     if(!this.stillRunnable(ctx)){
-      jsLogger('[Runtime] - SKIPPED', ctx.running)
-      ctx.skipped = true
+      jsLogger('[Runtime] - SKIPPED', ctx.qualname)
       return ctx
     }
 
-    jsLogger('[Runtime] - running ', ctx.running)
+    jsLogger('[Runtime] - running ', ctx.qualname)
     // No need for error extra handling: big fails handled in lockedRunnerWithBigFailWarningFactory
+
+    this.runner.allowPrint = this.withStdOut
 
     await this._runCaught( ctx, this.setupManager)
     await this._runCaught( ctx, this.applyRunnerMethod)
     await this._runCaught( ctx, this.removeExclusions, {always:true})
     await this._runCaught( ctx, this.teardownManager,  {always:true, critical:true})
 
-    this.runner.giveFeedback(ctx.stdout, ctx.stdErr)
+    this.runner.allowPrint = true
+    this.runner.giveFeedback(ctx.stdErr)
+
     if(ctx.archiveSuccess){
       this.ran[ctx.section] = ctx.success
     }
+    jsLogger('[Runtime] - done', ctx.qualname)
     return ctx
   }
 
@@ -202,22 +225,22 @@ class RuntimeManager {
 
 
 
-  /**1. Put the StringIO object in place if needed (stdout extraction).
-   * 2. IF the method to run is asking for excluions "environment-related", STOP HERE.
+  /**1. Put the StringIO object in place.
+   * 2. IF the method to run is "environment-related", STOP HERE.
    * 3. OTHERWISE, if the ctx is asking for exclusions applications:
    *     1. Put in place exclusions if any
    *     1. Cleanup pyodide environment (`auto_run.clean`)
    * */
   async setupManager(ctx){
-    if(ctx.useIO) setupStdIO()
 
+    setupStdIO()
     if(ctx.isEnvSection) return;
 
     if(this.needExclusions(ctx)){
-      jsLogger('[checkPoint] - running - setup exclusions')
+      jsLogger('[CheckPoint] - running - setup exclusions')
       setupExclusions(this.excluded, this.recLimit)
     }
-    pyodideCleaner()
+    pyodideFeatureRunCode('autoRunCleaner')
   }
 
 
@@ -233,7 +256,7 @@ class RuntimeManager {
    * it doesn't make use of them.
    * */
   async applyRunnerMethod(ctx){
-    jsLogger('[checkPoint] - running method runner -', ctx.running)
+    jsLogger('[CheckPoint] - running method runner -', ctx.qualname)
     await ctx.method.call(this.runner, ...ctx.methodArgs, ctx, this) // always send extras args (in case useful)
     ctx.success = true
   }
@@ -246,25 +269,27 @@ class RuntimeManager {
    * */
   async removeExclusions(ctx){
     if(this.needExclusions(ctx)){
-      jsLogger('[checkPoint] - running - removing exclusions')
+      jsLogger('[CheckPoint] - running - removing exclusions')
       restoreOriginalFunctions(this.excluded)
     }
   }
 
 
   async teardownManager(ctx){
-    let stdout = ctx.useIO ? getFullStdIO() : ""
-    if(!this.withStdOut) stdout = ''
-    else if(!ctx.isEnvSection) stdout = textShortener(stdout)
-    ctx.stdout = stdout
+    // let stdout = getFullStdIO()
+    // if(!this.withStdOut) stdout = ''
+    // else if(!ctx.isEnvSection) stdout = textShortener(stdout)
+    // ctx.stdout = stdout
 
+    getFullStdIO()
     this.handleError(ctx)
   }
 
 
 
 
-  /**In case an error has been registered in @param {, } ctx  */
+  /**In case an error has been registered in @ctx
+   * */
   handleError(ctx, replLogConf=null){
     if(!ctx.err) return;
 
@@ -282,12 +307,15 @@ class RuntimeManager {
   }
 
 
+
   async _runCaught(ctx, method, conf={}){
+    jsLogger('[Runtime] - _runCaught ', ctx.qualname, method.name)
     if(ctx.err && !conf.always) return
     try{
       await method.call(this, ctx)
     }catch(e){
-      jsLogger('[Runtime] - ERROR ', ctx.running)
+      jsLogger('[Runtime] - ERROR ', ctx.qualname)
+      if(CONFIG.loggerOptions.ACTIVATE) console.error(e)
       ctx.err = e
       if(conf.critical) throw e
     }

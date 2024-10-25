@@ -41,7 +41,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.42">
     
     
       
@@ -49,7 +49,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -74,9 +74,9 @@ If not, see <https://www.gnu.org/licenses/>.
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.min.js" charset="utf-8" type="text/javascript" integrity="sha512-GQpIYSKNIPIC763JKTNALj+t18/nfLdzw5gITgFGa31aK/4NmjyPKsfqrjh7CuzpJaG3nqEleeVcWUhHad9Axg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js" charset="utf-8" type="text/javascript" integrity="sha512-iK7yTkCkv7MbFwTqRgHTbmIqoiiLq6BsyNjymnFyB5a7pEQwYThj9QIgqBy9+XPPwj7+hAEHyR2npOHL1bz4Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/js/jquery.terminal.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/css/jquery.terminal.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- PYODIDE - insertion token -->
@@ -84,15 +84,17 @@ If not, see <https://www.gnu.org/licenses/>.
 
 <script type="application/javascript">
   CONFIG.argsFigureDivId = "figure1"
+  CONFIG.exportZipWithNames = false
+  CONFIG.exportZipPrefix = ""
   CONFIG.baseUrl = "../.."
+  CONFIG.siteUrl = "http://127.0.0.1:8000/"
   CONFIG.buttonIconsDirectory = "../../assets/images"
-  CONFIG.cutFeedback = true
   CONFIG.language = "fr"
   CONFIG.pmtUrl = "https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
   CONFIG.pythonLibs = ["turtle"]
   CONFIG.inServe = true
-  CONFIG.version = "2.2.0"
-  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9..."}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps..."}, "installDone": {"msg": "Installations termin\u00e9es !"}, "validation": {"msg": "Validation - "}, "editorCode": {"msg": "\u00c9diteur"}, "publicTests": {"msg": "Tests publics"}, "secretTests": {"msg": "Tests secrets"}, "successMsg": {"msg": "OK"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !"}, "successHead": {"msg": "Bravo !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "kbd": "Ctrl+Enter"}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}}</script>
+  CONFIG.version = "2.5.6"
+  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "kbd": "Ctrl+Enter"}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}</script>
 
 <script type="application/javascript" src="../../js-libs/1_functools-libs.js"></script>
 <script type="application/javascript" src="../../js-libs/2_configPostProcess-libs.js"></script>
@@ -105,6 +107,7 @@ If not, see <https://www.gnu.org/licenses/>.
 <link rel="stylesheet" href="../../pyodide-css/ide-libs.css">
 <link rel="stylesheet" href="../../pyodide-css/qcm-libs.css">
 <link rel="stylesheet" href="../../pyodide-css/terminal-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/testing-libs.css">
 <!-- PYODIDE - insertion token -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript" charset="utf-8"></script>
 
@@ -132,7 +135,6 @@ If not, see <https://www.gnu.org/licenses/>.
     
     
     
-
 
   <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle"
         data-ace-dark-mode="tomorrow_night_bright"
@@ -310,7 +312,7 @@ If not, see <https://www.gnu.org/licenses/>.
   
     
   
-  Accueil
+  🏡 Accueil
 
       </a>
     </li>
@@ -510,7 +512,7 @@ If not, see <https://www.gnu.org/licenses/>.
         
   
   <span class="md-ellipsis">
-    Accueil
+    🏡 Accueil
   </span>
   
 
@@ -1027,7 +1029,7 @@ If not, see <https://www.gnu.org/licenses/>.
         
   
   <span class="md-ellipsis">
-    Ressources pour la classe
+    🏡 Ressources pour la classe
   </span>
   
 
@@ -1063,7 +1065,7 @@ If not, see <https://www.gnu.org/licenses/>.
             
   
   <span class="md-ellipsis">
-    Parcours de découverte
+    👣 Parcours de découverte
   </span>
   
 
@@ -1073,7 +1075,7 @@ If not, see <https://www.gnu.org/licenses/>.
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5_2">
             <span class="md-nav__icon md-icon"></span>
-            Parcours de découverte
+            👣 Parcours de découverte
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1440,7 +1442,7 @@ If not, see <https://www.gnu.org/licenses/>.
             
   
   <span class="md-ellipsis">
-    TP (seconde)
+    ⚙️ TP (seconde)
   </span>
   
 
@@ -1450,7 +1452,7 @@ If not, see <https://www.gnu.org/licenses/>.
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_3">
             <span class="md-nav__icon md-icon"></span>
-            TP (seconde)
+            ⚙️ TP (seconde)
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1528,7 +1530,7 @@ If not, see <https://www.gnu.org/licenses/>.
         
   
   <span class="md-ellipsis">
-    TP test
+    🚧 Test
   </span>
   
 
@@ -1557,7 +1559,7 @@ If not, see <https://www.gnu.org/licenses/>.
         
   
   <span class="md-ellipsis">
-    Bac à Sable ⚙️
+    💻 Bac à Sable
   </span>
   
 
@@ -2715,6 +2717,8 @@ If not, see <https://www.gnu.org/licenses/>.
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
+
+
                   
   
   
@@ -2771,7 +2775,7 @@ If not, see <https://www.gnu.org/licenses/>.
 <li>L'instruction <code class="highlight"><span class="nb">type</span><span class="p">()</span></code> renvoie le type de l'objet.</li>
 <li>L'instruction <code class="highlight"><span class="nb">len</span><span class="p">()</span></code> renvoie la longueur de la liste.</li>
 </ul>
-<p><div id="global_editor_482ac3bee031936e9d4a3c14b777c595bffebf32" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_482ac3bee031936e9d4a3c14b777c595bffebf32"></div><span id="comment_editor_482ac3bee031936e9d4a3c14b777c595bffebf32" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:7;" id="term_editor_482ac3bee031936e9d4a3c14b777c595bffebf32" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_482ac3bee031936e9d4a3c14b777c595bffebf32">∞</span>/∞</div></div></div></div></p>
+<p><div id="global_editor_482ac3bee031936e9d4a3c14b777c595bffebf32" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_482ac3bee031936e9d4a3c14b777c595bffebf32"></div><span id="comment_editor_482ac3bee031936e9d4a3c14b777c595bffebf32" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:7;" id="term_editor_482ac3bee031936e9d4a3c14b777c595bffebf32" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"></div></div></div></div></p>
 <div markdown="1" id="solution_editor_482ac3bee031936e9d4a3c14b777c595bffebf32"      class="py_mk_hidden" data-search-exclude >
 </div>
 </div>
@@ -2787,7 +2791,7 @@ If not, see <https://www.gnu.org/licenses/>.
 <span class="n">indice</span> <span class="p">:</span>        <span class="mi">0</span>        <span class="mi">1</span>        <span class="mi">2</span>         <span class="mi">3</span>
 </code></pre></div>
 Il n'y a pas d'éléments d'indice 4 : <code>animaux[4]</code> renvoie une erreur.</p>
-<p><div id="global_editor_9330875cb5e4c8dac08a080d77fd2872f76c417f" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_9330875cb5e4c8dac08a080d77fd2872f76c417f"></div><span id="comment_editor_9330875cb5e4c8dac08a080d77fd2872f76c417f" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:10;" id="term_editor_9330875cb5e4c8dac08a080d77fd2872f76c417f" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_9330875cb5e4c8dac08a080d77fd2872f76c417f">∞</span>/∞</div></div></div></div></p>
+<p><div id="global_editor_9330875cb5e4c8dac08a080d77fd2872f76c417f" class="py_mk_ide"><div class="py_mk_wrapper"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_9330875cb5e4c8dac08a080d77fd2872f76c417f"></div><span id="comment_editor_9330875cb5e4c8dac08a080d77fd2872f76c417f" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:10;" id="term_editor_9330875cb5e4c8dac08a080d77fd2872f76c417f" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"> <svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg> <span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div style="--wrap-opacity: 30%" class="stdout-wraps-btn tooltip"> <span class="twemoji"> <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg></span><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext">Sauvegarder dans le navigateur</span></button></div><div class="compteur_wrapper"><div class="compteur"></div></div></div></div></p>
 <div markdown="1" id="solution_editor_9330875cb5e4c8dac08a080d77fd2872f76c417f"      class="py_mk_hidden" data-search-exclude >
 </div>
 </div>
@@ -2809,7 +2813,7 @@ Il n'y a pas d'éléments d'indice 4 : <code>animaux[4]</code> renvoie une erreu
 <p><em>durée envisagée : environ 1h</em></p>
 </div><script >
 CONFIG.needMermaid = false;
-let PAGE_IDES_CONFIG = '.\x1eb90{x4]5 8hvs3rfo1\'6}Ie(wlL7m`\\.pu=ktagdnc,_"2-iy[):\x1e070M0q0H0P0E0k0i0L090d0N0F0J0h040q0q060h0l050h0n0q050H090F0h0J0l09040v120J0b050b040j0j0q180h0N0M0T0c0U0A0Q0L0I0F0w0q1f0c0M1j0E0e0k0I0O0N0G0E0O060d0O0q081n0A0t0q0t0P0g0E0.0l0z1j0M0K1r0q0I0f0L0J1w1P0I0E1q0M1U1W1Y0L1P0i0w1!1$1X1(1g1*1V0M0B0g0q0#1#1\'1@1)0F0I0P0w0F0B080c0C0c0R0y0M0G0P0i0F1a2g1V2g0E0P0G0i0q2n0c2g0g0P0I0G2u1+2x0k0B0i1N2g0a0y1\'0F0P0t1K0g2c2e0b1V0N0z2U0c1R0v2Y060z0l0b2K0I0w0P081P2S2f2h2j2l2C1V2Y2E2G2I1+2%2(2*0A2H1\'0r252729080S0S2L322z0E0r0E0Q0A0q3g2N2P0q0g3a3c333f0j2g0t0F0c0t1w0G0B0q2G0c0H0q3y3x1M1O3H0x3N2,2.0q3N0x0c3o0E1h1K0I0r3P1P0S0o2g0S1+0M1#0i201?1\'1)3*0A0B041M0J1.3V0g3;1{1~0J2t0E3{1O3}1_3=0k1O3{1:1=223:471{0A4943211%1^1r3*1G0J0t0B3G0H1q0R0a1{4q4s4u0L1o1u0k0H462e4y1r2t3`1M2,4n0O0l1{0s0e0Y0q0L3K4n4x4h0i0k0j2O1p4g1r0F0E1P0w0A0E0g4Y0q0j4n0M0p0I4(263h3*290Z4Y0k0G0L0F0g1~0i4n0E0i3C1{3,0#2t0w4?280g0D1q061{0e581!0e0q0J0D0L040E0I1q0j0F0t1~1{1N0L1X413i1P4v1g5d5f1r5J0f1 4n5E5G0q1{28080L0P3G4Y2z3o1q0l5q1r2,0I5\'5)1M0I5,1g0h1{3G410q584X4-4/4;4?1w1=5)1 4%0i1q5R5!1r3G0)2q0f4-4X1O0H2F430j0!0L40424I6e3 1v0s0L1w0t1k585a2q676a0!4?6r0#6u0q4=5D5F5H1r1t1v5=1M044I0R0M0E2G0E1K0M4K0M6n6p1!0B434\'0j1q0N06060o4z0X0Z0#0=0h1D2#0J040b0q090J0d0H0)1D0F1D060H120j0H0N0d0v0N0j0v0n0J090l0v6?1g1i1k1m1o1)6V1w1y1A1C1E1G1I1K4Z0.2W1T4z1-4l234+0V1-1/1;7S4f4o1{1}1 4d4m2426282a2:2g2i2k2m2D6$2r2t2v2x2z2B7`6,2F2H0g2J3r3e0r2g0u0m0y0B6_0^0t8a8c051o1\'3F0m2z0X0J3H063U1O2w1U367,080R060a0S2w0I3d3487898b068d8f8J8h1@8k8m0P8o2Z8r3W2n8v380R0l8A848F0M888L8K8I0^8i3W0H8l0I8n3H0h8U8t0K8X2a0R0h8A3*5h7(7T7#6U3@3_446Q7U6O431P453~6U4j4b7Y3/4`484a7Z9l4z084r4t0W4w6+4A9t0H4D6P1v4H9v1{4M5*4P1q4R4T4V1P5*1O9E6U4%4(6)7U630q4:4=4@4_1)4|4~0Y0Q516:0k54566F5W6d5e6f3+0!5i9X5l585o1g5/0M5s4?0J5v5x5z5B6R5Z5I4?5L0i5N9u5Q9=aa0L5V5ba86T0M5$5?4X5^5`2Z9 5;aq5*5_4I5|6g5w2t61574.9X656B5=1#693-0!9;5S0M6h0J6j6l6t0E6o6:0L6M6taD6P6wah1r0g6zaK6D57595W0P6IaO0i6L6s9b4I5Yan7D6X0P6Z4w6$6\'6)6+6-a!0Ja!6=6@6_0o0o.'
+let PAGE_IDES_CONFIG = '.\x1ep5gd3cfybw8I`()2utm]9a17x{l:en,}vr4k[s-o_h.6 0iL=\x1e0z010C0d0U0r0N0H0O0I0k0p0v0f0e0i0C0C0T0e0w0u0e0R0C0u0d0I0v0e0f0w0I0i0x160f0b0u0b0i0g0g0C1c0e0p010B0S0X0a0h0O0D0v0s0C1j0S011n0r0P0N0D0M0p0c0r0M0T0k0M0C0y1r0a0A0C0A0U0L0r0=0w0Q1n010E1v0C0D0G0O0f1A1T0D0r1u011Y1!1$0O1T0H0s1(1*1#1-1k1/1Z010q0L0C0(1)1,1|1.0v0D0U0s0v0q0y0S0W0S0K09010c0U0H0v1e2l1Z2l0r0U0c0H0C2s0S2l0L0U0D0c2z1:2C0N0q0H1R2l0t091,0v0U0A1O0L2h2j0b1Z0p0Q2Z0S1V0x2%0T0Q0w0b2P0D0s0U0y1T2X2k2m2o2q2H1Z2%2J2L2N1:2,2.2:0a2M1,0n2a2c2e0y0o0o2Q382E0r0n0r0h0a0C3m2S2U0C0L3g3i393l0g2l0A0v0S0A1A0c0q0C2L0S0d0C3E3D1Q1S3N0m3T2=2@0C3T0m0S3u0r1l1O0D0n3V1T0o0F2l0o1:011)0H251{1,1.3;0a0q0i1Q0f1?3#0L3{20230f2y0r421S441~3|0N1S421^1`273`4e200a4g4a261+1}1v3;1K0f0A0q3M0d1u0K0t204x4z4B0O1s1y0N0d4d2j4F1v1x1z0D0O1Q0i4P0K010r2L0r1O014R012y411Q2=4u0M0w200j0P0#0C4W1R4u4E4o0H0N0g2T1t4n1v0v0r1T0s0a0r0L4W0C0g4u010l0D532b3n3;2e0$4W0N0c0O0v0L230H4u0r0H3I203?0(2y0s5e2d0L0J1u0T200P5w1(0P0C0f0J0O0i0r0D1u0g0v0A23201R0O1#483o1T4C1k5B5D1v5+0G244u5$5(0C202d0y0O0U3M4|0D3u1u0w5O1v2=4V644{1Q674P0e203M480C5w4{585a5c5e1A0O22241`655$2T2L551!0!0$0H3;3M0-2v0G584{1S0d2K4a0g0%0O47494P5?5 1v0L1z0j0O1A0A1o5w5y2v6v24510H5e6U0(6X0C5d5#5%5)6$0H415Q6%1.0p0g0i0d0f0R0k0R0w0R0g0w0p0e0I0u7m0I0g0x0R0u0k0d0d0R0b140I0;0.0e0b0k7o0C0p0i0f0T0T0p0p7g6a1H160C0b7u0f0f0I0w3;6Q0O0J0C0h451!0y4p5z6~5~460r6R0q4r7?6*1d1u0p7K5E7^1e0Z0i0-5M5=5C0C0F4G6G6V0_0e7Q0b0f0i0b0C0I0f7t0-1H0v1H0T0d160g0d0p0k0x777q7W0w0x0g1u1m1o1q1s1.4T1A1C1E1G1I1K1M1O3Q1T7L1W7(4G1=4s28560Y1=1@1_8#4m4v206x3^4l5i3c2d2f2_2l2n2p2r2I4#2w2y2A2C2E2G93010L2K2M0L2O3x3k0n2l0V00090q7K0|0A9k9m0u1s1,3L002E0!0f3N0T3!1S2B1Y8@3e0K0T0t0o2B0D3j3a9h9j9l0T9n9p9S9r1|9u9w0U9y2(9B3$2s9F2f0K0w9J9e9O019i9U9T9R0|9s3$0d9v0D9x3N0e9%9D0E9*0y0K0e9J3;5F4k4t7)1w3~404b6}8%6{4a1T4cae4p4h8*ac8$8.4S4qat8-1 7*4y4A0Z4D4+4HaD0d4K6|1z4OaF4o0h4M4V4X4Z4#4%4)4+4-4|4:1u4=4@4_1T4|1SaO4S51534)8%6r0C5b5d5f5h1.5k5m0#8Y577?0N5s5u6.5{1u6!5E0%5Ga@5J5w840S6b01745S5U5W5Y5!1k5}70015+5-0H5/aE855@bt5e5`7-bq6 6#016163656h681k6a602EbK6g2EbN0S6k1v6m2y6p5v59a@6t6*4V8:6z4{6B4z2y1.0Z0#0%6J6o0f6M6O6W7;6S0O6_6W5U6Yb886466(b*6,5v5x5{0U6;3@0%6^6Val4PbrbH0L720O740P1.7u0;8v0?7J7w0e0u0x3M8f0T0w7k7N0u0p0d0v2.7u0vcM0x0@cQ1h7B7f0b1h0T150T7g0v8fcD0e4C7:aJ7$7(8%1K7,5|bGc-c00f7^528E1k7|bic{6Tcw825Vc63I0F0F.'
 </script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_packagesInstaller-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_runtimeManager-pyodide.js"></script>
@@ -2838,6 +2842,11 @@ let PAGE_IDES_CONFIG = '.\x1eb90{x4]5 8hvs3rfo1\'6}Ie(wlL7m`\\.pu=ktagdnc,_"2-iy
 
 
                 
+<!-- PYODIDE - insertion token -->
+
+<!-- PYODIDE - insertion token -->
+
+
               </article>
             </div>
           
@@ -3044,12 +3053,12 @@ let PAGE_IDES_CONFIG = '.\x1eb90{x4]5 8hvs3rfo1\'6}Ie(wlL7m`\\.pu=ktagdnc,_"2-iy
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
 
 
-      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
       

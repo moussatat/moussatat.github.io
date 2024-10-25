@@ -161,7 +161,7 @@ mais sans lien dessus */
   border: 1px solid rgba(85, 119, 196);
   padding: 3px;
   border-radius: 9px;
-  background-image: linear-gradient(to bottom, rgb(191, 255, 255), 15%, rgba(var(--main-color), 0.8));
+  background-image: linear-gradient(to bottom, rgb(191, 255, 255), 15%, var(--ide-btn-color, rgba(var(--main-color), 0.8)));
 }
 
 .tooltip:hover>img {

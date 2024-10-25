@@ -44,6 +44,75 @@ const removeEmptyParagraphsFrom = rule => $(rule).filter(':empty').remove()
 
 
 class QCM {
+
+    static buildQcms(){
+
+        const questions     = ".py_mk_questions_list_qcm > li.py_mk_question_qcm "
+        const questionItems = " ul.py_mk_item_qcm > li.py_mk_item_qcm"
+
+        // Clean up empty <p>, that are messing the layout, BUT, beware that the md rendered
+        // qcm description, or the questions descriptions ALSO will contain some, and those
+        // shouldn't be removed, to not interact with the user's md rendering choices.
+        removeEmptyParagraphsFrom('.py_mk_questions_list_qcm > p')
+        removeEmptyParagraphsFrom('ul.py_mk_item_qcm p')
+
+        $('.py_mk_questions_list_qcm').prev('p:empty').remove()
+            // Get rid of the last empty <p> before questions, if any (left over of </p KEEP>)
+
+        $(CONFIG.element.qcm_admos).each(function(){
+
+            const qcmThis        = $(this)
+            const classes        =  qcmThis.attr('class').split(' ')
+            const shuffle        =  qcmThis.hasClass('qcm_shuffle')
+            const no_admo        =  qcmThis.hasClass('qcm_no_admo')
+            const reveal_results = !qcmThis.hasClass('qcm_hidden')
+            const multi_behavior =  qcmThis.hasClass('qcm_single') + 2 * qcmThis.hasClass('qcm_multi')
+            const qcmId          =  classes.find(kls=>kls.startsWith("py_mk_qcm_id"))
+
+            const qcmObj = new CONFIG.CLASSES_POOL.Qcm(qcmId, shuffle, reveal_results)
+            const owner  = qcmObj.createInnerLayoutButtonsAndCounter(no_admo)
+
+            let iQuest=-1
+            owner.find(questions)
+                .each(function(){
+                iQuest++; let iItem=0;
+
+                const jQuest           = $(this)
+                const q_multi_behavior = 2*jQuest.hasClass('qcm_multi') + jQuest.hasClass('qcm_single')
+                const q_shuffled       = jQuest.hasClass('qcm_shuffle')
+                const answers          = jQuest.attr('correct') || ""
+                jQuest.removeAttr('correct')
+
+                if(!answers){
+                    console.warn(
+                        "[Pyodide-Mkdocs - QCM]\nCorrect answer(s) unknown for this question:"
+                    + `\n\t"${ jQuest.text() }"`
+                    )
+                }
+                const ansArr = answers.split(",").map(Number)
+                const isMulti = ansArr.length>1 || (
+                    q_multi_behavior ? q_multi_behavior&2 : multi_behavior&2
+                )
+                if(ansArr.length==1 && !q_multi_behavior && !multi_behavior){
+                    console.warn(
+                        "[Pyodide-Mkdocs - QCM]\nA qcm question has only one correct answer, but the "
+                    + `multi/single choice aspect is unknown.\nQuestion: ${ jQuest.text() }`
+                    )
+                }
+
+                const question = new CONFIG.CLASSES_POOL.Question(jQuest, qcmId, iQuest, ansArr, isMulti, q_shuffled)
+                $(this).find(questionItems).each(function(){
+                    question.registerItem($(this), iItem++)
+                })
+                qcmObj.addQuestion(question)        // Done last, to be sure everything is up to date
+            })
+
+            qcmObj.randomize()
+        })
+    }
+
+    //------------------------------------------------------------------------
+
     constructor(id, shuffle, reveal){
         this.qcmClass     = id      // this class is actually used only once, so equivalent to an id
         this.shuffle      = shuffle
@@ -52,11 +121,11 @@ class QCM {
         this.locked       = false
 
         this.counterPath  = `.${ id } p${ CONFIG.element.qcmCounterCls }`
-        this.shuffleParentPath = `.${ id } ol.py_mk_question_qcm`
+        this.shuffleParentPath = `.${ id } .py_mk_questions_list_qcm`
         this.shuffleChildrenPath = "> li.py_mk_question_qcm"
-
-        this.createButtonsAndCounter()
     }
+
+    //------------------------------------------------------------------------
 
     addQuestion(question){
         this.questions.push(question)
@@ -101,7 +170,7 @@ class QCM {
     }
 
 
-    createButtonsAndCounter(){
+    createInnerLayoutButtonsAndCounter(no_admo){
 
         const makeButton = (kind, options) => {
             const button = `<img src="${ CONFIG.buttonIconsDirectory }/icons8-${ kind }-64.png" />`
@@ -110,22 +179,37 @@ class QCM {
 
         const divAdmo    = $('.'+this.qcmClass)
         const innerDiv   = $(`<div class="inner"></div>`)
+        const classes    = divAdmo.attr('class').replace('admonition ','').split()
+        innerDiv.addClass(classes)
+
         const wrapper    = $(`<div class="${ CONFIG.element.qcmWrapper.slice(1) } ${ this.reveal?'give-away':'hidden' }"></div>`)
         const counter    = $(`<p class="${ CONFIG.element.qcmCounterCls.slice(1) }"></p>`)
         const mask       = $(createSvgMask(95, 1.1, CONFIG.lang.qcmMaskTip.msg, CONFIG.lang.qcmMaskTip.em))
         const checkBtn   = $(makeButton('check', {tipWidth: CONFIG.lang.qcmCheckTip.em, tipText: CONFIG.lang.qcmCheckTip.msg}))
         const restartBtn = $(makeButton('restart', {tipWidth:CONFIG.lang.qcmRedoTip.em, tipText: CONFIG.lang.qcmRedoTip.msg}))
-        const children   = [...divAdmo.children()].slice(1)   // Exclude the title of the admonition
-        const detached   = children.map(child => $(child).detach() )
+
+        // Detach all "non admonition" elements:
+        const children   = [...divAdmo.children()]
+        const no_title   = children.slice(1)
+        const detached   = no_title.map(child => $(child).detach() )
 
         wrapper.append(counter, mask, checkBtn, restartBtn)
         innerDiv.append(...detached, wrapper)
-        divAdmo.append(innerDiv)
 
         checkBtn.on('click', this.check.bind(this))
         restartBtn.on('click', this.restart.bind(this))
+
+        if(no_admo){
+            divAdmo.replaceWith(innerDiv)
+            return innerDiv
+        }else{
+            divAdmo.append(innerDiv)
+            return divAdmo
+        }
     }
 }
+
+CONFIG.CLASSES_POOL.Qcm = QCM
 
 
 const createSvgMask=(shift,fontSize, tipText, tipWidth) => `
@@ -249,25 +333,7 @@ class Question {
 <li id="${ itemId }" class="py_mk_item_qcm">
 <input type="checkbox" id=${ inputId } ${ qcm_class } >
 <label for=${ inputId } class="${ label_classes }" >
-  <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-  <svg class="qcm" viewBox="0 0 12 12" role="img" version="1.1"
-    xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
-    style="stroke-width:1.25;stroke-linecap:round">
-    <path class="bgd-svg" style="fill:var(--qcm-fill);stroke:none;"
-      d="M 5.93,1.93 3.29,2.40 2.70,2.75 1.86,5.70 2.38,8.76 2.75,9.29 5.82,10.13 9.07,9.45 9.36,9.13 10.12,6.11 9.49,2.93 9.12,2.65 Z"></path>
-    <path class="tick"
-      style="display:var(--tick);fill:var(--qcm-light);stroke:var(--qcm-light);stroke-width:0;stroke-linecap:butt;stroke-linejoin:round"
-      d="M 6.34,8.49 C 6.49,7.32 7.07,5.36 9.05,4.06 L 8.93,3.91 C 7.13,4.50 6.38,5.52 5.63,7.03 5.36,6.61 3.91,5.92 3.47,5.86 L 3.32,6.00 C 4.41,6.54 5.06,7.30 5.63,8.77"></path>
-    <g style="display:var(--cross);fill:var(--qcm-light);stroke:var(--qcm-light)"
-      transform="matrix(0.91,0,0,0.91,0.52,0.52)">
-      <rect width="8.33" height="0.59" x="-5.86" y="8.02" transform="rotate(-56.54)"></rect>
-      <rect width="8.33" height="0.59" x="-12.47" y="-1.99" transform="matrix(-0.55,-0.83,-0.83,0.55,0,0)"></rect>
-    </g>
-    <g style="fill:none;stroke:var(--qcm-border)">
-    <circle style="display:var(--circle)" cy="6" cx="6" r="4.2"></circle>
-    <rect style="display:var(--square)" class="square" width="7.41" height="7.36" x="2.29" y="2.32"></rect>
-    </g>
-  </svg>
+  ${ CONFIG.QCM_SVG }
   <div class="content">${ jLiItem.html() }</div>
 </label>
 </li>`
@@ -277,78 +343,4 @@ class Question {
     }
 }
 
-
-
-
-
-
-
-
-
-subscribeWhenReady("QCM", function(){
-    jsLogger('[QCM]')
-
-    const questions = "ol.py_mk_question_qcm > li.py_mk_question_qcm "
-    const questionItems = " ul.py_mk_item_qcm > li.py_mk_item_qcm"
-
-
-    // Clean up empty <p>, that are messing the layout, BUT, beware that the md rendered
-    // qcm description, or the questions descriptions ALSO will contain some, and those
-    // shouldn't be removed, to not interact with the user's md rendering choices.
-    removeEmptyParagraphsFrom('ol.py_mk_question_qcm > p')
-    removeEmptyParagraphsFrom('ul.py_mk_item_qcm p')
-
-    $('ol.py_mk_question_qcm').prev('p:empty').remove()
-        // Get rid of the last empty <p> before questions, if any (left over of </p KEEP>)
-
-
-    $(CONFIG.element.qcm_admos).each(function(){
-
-        const qcmThis        = $(this)
-        const classes        =  qcmThis.attr('class').split(' ')
-        const qcmId          =  classes.find(kls=>kls.startsWith("py_mk_qcm_id"))
-        const shuffle        =  qcmThis.hasClass('qcm_shuffle')
-        const reveal_results = !qcmThis.hasClass('qcm_hidden')
-        const multi_behavior =  qcmThis.hasClass('qcm_single') + 2 * qcmThis.hasClass('qcm_multi')
-
-        const qcmObj = new QCM(qcmId, shuffle, reveal_results)
-
-        let iQuest=-1
-        qcmThis.find(questions)
-               .each(function(){
-            iQuest++; let iItem=0;
-
-            const jQuest           = $(this)
-            const q_multi_behavior = 2*jQuest.hasClass('qcm_multi') + jQuest.hasClass('qcm_single')
-            const q_shuffled       = jQuest.hasClass('qcm_shuffle')
-            const answers          = jQuest.attr('correct') || ""
-            jQuest.removeAttr('correct')
-
-            if(!answers){
-                console.warn(
-                    "[Pyodide-Mkdocs - QCM]\nCorrect answer(s) unknown for this question:"
-                  + `\n\t"${ jQuest.text() }"`
-                )
-            }
-            const ansArr = answers.split(",").map(Number)
-            const isMulti = ansArr.length>1 || (
-                q_multi_behavior ? q_multi_behavior&2 : multi_behavior&2
-            )
-            if(ansArr.length==1 && !q_multi_behavior && !multi_behavior){
-                console.warn(
-                    "[Pyodide-Mkdocs - QCM]\nA qcm question has only one correct answer, but the "
-                   + `multi/single choice aspect is unknown.\nQuestion: ${ jQuest.text() }`
-                )
-            }
-
-            const question = new Question(jQuest, qcmId, iQuest, ansArr, isMulti, q_shuffled)
-            $(this).find(questionItems).each(function(){
-                question.registerItem($(this), iItem++)
-            })
-            qcmObj.addQuestion(question)        // Done last, to be sure everything is up to date
-        })
-
-        qcmObj.randomize()
-    })
-
-}, {now:true})
+CONFIG.CLASSES_POOL.Question = Question

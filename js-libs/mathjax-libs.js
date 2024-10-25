@@ -21,6 +21,11 @@ If not, see <https://www.gnu.org/licenses/>.
 function mathJaxUpdate(){
   jsLogger('[MathJax] - Page formatting')
 
+  if(!window.MathJax.startup.output){
+    console.warn("Cannot update MathJax (CDN failed to load?)")
+    return
+  }
+
   window.MathJax.startup.output.clearCache()
   window.MathJax.typesetClear()
   window.MathJax.texReset()

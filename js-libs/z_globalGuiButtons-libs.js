@@ -30,7 +30,7 @@ subscribeWhenReady(
         const wrappingDivL = `<div id="${ CONFIG.element.searchBtnsLeft.slice(1)  }"></div>`
         $(wrappingDivL).insertBefore(CONFIG.element.dayNight)
     },
-    {waitFor: CONFIG.element.dayNight},
+    {waitFor: CONFIG.element.dayNight, runOnly:true},
 )
 subscribeWhenReady(
     "AroundSearch",
@@ -49,7 +49,7 @@ subscribeWhenReady(
         }
 
     },
-    {waitFor: CONFIG.element.searchBtnsLeft},
+    {waitFor: CONFIG.element.searchBtnsLeft, runOnly:true},
 )
 
 
@@ -61,8 +61,9 @@ subscribeWhenReady(
     function(){
         jsLogger('[TrashCan]')
 
+        const trashId = CONFIG.element.trashCan.slice(1)
         const TRASH_SVG =
-`<svg height="20px" version="1.1" id="trash-can-svg" xmlns="http://www.w3.org/2000/svg"
+`<svg height="20px" version="1.1" id="${ trashId }" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff">
     <g>
         <path d="M88.594,464.731C90.958,491.486,113.368,512,140.234,512h231.523c26.858,0,49.276-20.514,51.641-47.269 l25.642-335.928H62.952L88.594,464.731z M420.847,154.93l-23.474,307.496c-1.182,13.37-12.195,23.448-25.616,23.448H140.234 c-13.42,0-24.434-10.078-25.591-23.132L91.145,154.93H420.847z"></path>
@@ -73,6 +74,7 @@ subscribeWhenReady(
     </g>
 </svg>`
         const trashBtnOptions = {
+            buttonId: trashId+"Btn",
             shift:90, tipText: CONFIG.lang.tipTrash.msg, tipWidth: CONFIG.lang.tipTrash.em
         }
 
@@ -101,5 +103,5 @@ subscribeWhenReady(
         })
         $(CONFIG.element.searchBtnsRight).append(trashButton)
     },
-    {waitFor: CONFIG.element.searchBtnsRight},
+    {waitFor: CONFIG.element.searchBtnsRight, runOnly:true},
 )

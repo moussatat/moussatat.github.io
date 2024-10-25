@@ -41,7 +41,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.42">
     
     
       
@@ -49,7 +49,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -74,9 +74,9 @@ If not, see <https://www.gnu.org/licenses/>.
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.min.js" charset="utf-8" type="text/javascript" integrity="sha512-GQpIYSKNIPIC763JKTNALj+t18/nfLdzw5gITgFGa31aK/4NmjyPKsfqrjh7CuzpJaG3nqEleeVcWUhHad9Axg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js" charset="utf-8" type="text/javascript" integrity="sha512-iK7yTkCkv7MbFwTqRgHTbmIqoiiLq6BsyNjymnFyB5a7pEQwYThj9QIgqBy9+XPPwj7+hAEHyR2npOHL1bz4Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/js/jquery.terminal.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/css/jquery.terminal.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- PYODIDE - insertion token -->
@@ -84,15 +84,17 @@ If not, see <https://www.gnu.org/licenses/>.
 
 <script type="application/javascript">
   CONFIG.argsFigureDivId = "figure1"
+  CONFIG.exportZipWithNames = false
+  CONFIG.exportZipPrefix = ""
   CONFIG.baseUrl = "../.."
+  CONFIG.siteUrl = "http://127.0.0.1:8000/"
   CONFIG.buttonIconsDirectory = "../../assets/images"
-  CONFIG.cutFeedback = true
   CONFIG.language = "fr"
   CONFIG.pmtUrl = "https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
   CONFIG.pythonLibs = ["turtle"]
   CONFIG.inServe = true
-  CONFIG.version = "2.2.0"
-  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9..."}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps..."}, "installDone": {"msg": "Installations termin\u00e9es !"}, "validation": {"msg": "Validation - "}, "editorCode": {"msg": "\u00c9diteur"}, "publicTests": {"msg": "Tests publics"}, "secretTests": {"msg": "Tests secrets"}, "successMsg": {"msg": "OK"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !"}, "successHead": {"msg": "Bravo !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "kbd": "Ctrl+Enter"}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}}</script>
+  CONFIG.version = "2.5.6"
+  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "kbd": "Ctrl+Enter"}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}</script>
 
 <script type="application/javascript" src="../../js-libs/1_functools-libs.js"></script>
 <script type="application/javascript" src="../../js-libs/2_configPostProcess-libs.js"></script>
@@ -105,6 +107,7 @@ If not, see <https://www.gnu.org/licenses/>.
 <link rel="stylesheet" href="../../pyodide-css/ide-libs.css">
 <link rel="stylesheet" href="../../pyodide-css/qcm-libs.css">
 <link rel="stylesheet" href="../../pyodide-css/terminal-libs.css">
+<link rel="stylesheet" href="../../pyodide-css/testing-libs.css">
 <!-- PYODIDE - insertion token -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript" charset="utf-8"></script>
 
@@ -132,7 +135,6 @@ If not, see <https://www.gnu.org/licenses/>.
     
     
     
-
 
   <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle"
         data-ace-dark-mode="tomorrow_night_bright"
@@ -310,7 +312,7 @@ If not, see <https://www.gnu.org/licenses/>.
   
     
   
-  Accueil
+  🏡 Accueil
 
       </a>
     </li>
@@ -510,7 +512,7 @@ If not, see <https://www.gnu.org/licenses/>.
         
   
   <span class="md-ellipsis">
-    Accueil
+    🏡 Accueil
   </span>
   
 
@@ -1027,7 +1029,7 @@ If not, see <https://www.gnu.org/licenses/>.
         
   
   <span class="md-ellipsis">
-    Ressources pour la classe
+    🏡 Ressources pour la classe
   </span>
   
 
@@ -1063,7 +1065,7 @@ If not, see <https://www.gnu.org/licenses/>.
             
   
   <span class="md-ellipsis">
-    Parcours de découverte
+    👣 Parcours de découverte
   </span>
   
 
@@ -1073,7 +1075,7 @@ If not, see <https://www.gnu.org/licenses/>.
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5_2">
             <span class="md-nav__icon md-icon"></span>
-            Parcours de découverte
+            👣 Parcours de découverte
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1473,7 +1475,7 @@ If not, see <https://www.gnu.org/licenses/>.
             
   
   <span class="md-ellipsis">
-    TP (seconde)
+    ⚙️ TP (seconde)
   </span>
   
 
@@ -1483,7 +1485,7 @@ If not, see <https://www.gnu.org/licenses/>.
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_3">
             <span class="md-nav__icon md-icon"></span>
-            TP (seconde)
+            ⚙️ TP (seconde)
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1561,7 +1563,7 @@ If not, see <https://www.gnu.org/licenses/>.
         
   
   <span class="md-ellipsis">
-    TP test
+    🚧 Test
   </span>
   
 
@@ -1590,7 +1592,7 @@ If not, see <https://www.gnu.org/licenses/>.
         
   
   <span class="md-ellipsis">
-    Bac à Sable ⚙️
+    💻 Bac à Sable
   </span>
   
 
@@ -2781,6 +2783,8 @@ If not, see <https://www.gnu.org/licenses/>.
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
+
+
                   
   
   
@@ -2846,7 +2850,7 @@ If not, see <https://www.gnu.org/licenses/>.
 </div>
 <div class="admonition tip py_mk_admonition_qcm qcm_shuffle qcm_hidden qcm_single py_mk_qcm_id_00003">
 <p class="admonition-title">Je vérifie ma compréhension (bouton en bas pour recommencer)</p>
-<p></p KEEP><ol class="py_mk_question_qcm"></p>
+<p></p KEEP><ol class="py_mk_questions_list_qcm py_mk_question_qcm"></p>
 <p></p KEEP><li class="py_mk_question_qcm qcm_single qcm_shuffle" correct="2" markdown>
 La valeur <code class="highlight"><span class="mf">3.1</span></code> est de type :</p>
 <p></p KEEP><ul class="py_mk_item_qcm">
@@ -3020,7 +3024,7 @@ string</p>
 </table>
 <div class="admonition tip py_mk_admonition_qcm qcm_shuffle qcm_hidden qcm_single py_mk_qcm_id_00004">
 <p class="admonition-title">Je vérifie ma compréhension (bouton en bas pour recommencer)</p>
-<p></p KEEP><ol class="py_mk_question_qcm"></p>
+<p></p KEEP><ol class="py_mk_questions_list_qcm py_mk_question_qcm"></p>
 <p></p KEEP><li class="py_mk_question_qcm qcm_single qcm_shuffle" correct="1" markdown>
 L'expression <code class="highlight"><span class="mi">5</span><span class="o">**</span><span class="mi">2</span></code> s'évalue à :</p>
 <p></p KEEP><ul class="py_mk_item_qcm">
@@ -3152,7 +3156,7 @@ L'expression <code class="highlight"><span class="mi">10</span><span class="o">%
 </ol>
 </div><script >
 CONFIG.needMermaid = false;
-let PAGE_IDES_CONFIG = '.\x1eb90{x4]5 8hvs3rfo16}ewl7m.putagndc,_"2-iy[:\x1e070E0w0o0i0s0D0k0z0q0I0D0l040m090b0h0d050F090r0h0x090m0r0A060*0r0F0A0!0o04060b0x040B0F060h0l0Z0r0x0E0K0c0L0u0V0z0x0s0o180c0E1c0w0e0S0G0F0y0w0G060F0t1c0E0C1j0o0z0f0D0B0S0N0z0w1i0E1y1A1C0D0N0P1E1G1B1J191L1z0E0v0g0O1S1I1U1K1M0E1F0i0i1%1H1V1j1*0u0v040q0H0B1P0o0g0w0g1)1Y1#0B0i0o0w1}1 211W1?0k1 1}1R1F1\'1I221j0u2e282i1:2l0E0o080B0q0v0A0o0A1i0J0a1Y2u2w2y2A0D1g1m0k0A2b0c2D1Y261|1`0s0H1;0G0l1Y0p0e2X0o0D1`1 2C2E2m0I2M0z2)0H042P0J0M0v0i0w0q1h2-1k260j0H0q0q2g0s2s1 0A0k0v2p3d0R0j0j1i11060n1Y1Q0Q0S0U0D0x0B0h0)0d0A0m050x0h0B0d0l0j0x0m0F0o0m060j0b3u3z0m140}090o0b3K3t091i1b1d1f1h1W1l1n0z1p1r1t1v1x2F1O2q1(2c3;1D3o1/3@1=1Y1!1$3?2k3^1j1,1.421;1X2m1^1`1|0N2a390o252729202s2n2f3{484n2o3|433~1A2v2x2z2B192R4x2H4A2K271n2O2,2S4i2=2W2Y2!1j2$2\'2=2+4C303)0S2=2@2C2`2|2~0E4Y3234363o390w3b3f0B3f0k3h3j063l0n.'
+let PAGE_IDES_CONFIG = '.\x1ep5g3dcwybf82utm]9a17x{l:ne,kvr}4[s-_oh.6 0i\x1e0v010n0z0D0o0J0K0y0w0h0J0s0i0N0F0b0d0k0q0l0F0t0d0r0F0N0t0e0P0;0t0l0e0*0z0i0P0b0r0i0f0l0P0d0s0)0t0r010x0O0R0a0#0y0r0o0z1f0O011j0n0L0Y0I0l0c0n0I0P0l0M1j010A1q0z0y0C0J0f0Y0T0y0n1p011F1H1J0J0T0V1L1N1I1Q1g1S1G010m0H0U1Z1P1#1R1T011M0D0D1.1O1$1q1=0a0m0i0w0Q0f1W0z0H0n0H1;1)1,0f0D0z0n2527291%1~0K27251Y1M1/1P2a1q0a2m2g2q1{2t010z0u0f0w0m0e0z0e1p0G0p1)2C2E2G2I0J1n1t0K0e2j0O2L1)1s1u0y0J220i2X0G0S0m0D0n0w1o2M1q2e24220o0Q1|0I0s1)0g0L2|0z2(0Q272K2?1r2e0j0Q0w0w2o0o2A270e0K0m2x3m0X0j0j1p180P1)0f3o0j0z2I0i0r0f0B1p0n0D0m0z0E1)1X0W0Y0!0J3C0d0:0k0e0N0q0r0d0f0k0s0j0r0N0l0z0N0P0j0b0f0d3W0N1b140F0z0b3+3C0F1p1i1k1m1o1%2#1v1x1z1B1D0h1=1I1K2y1:2k2N1V3M1`4g1}1)1+1-4f2s4h1q1@1_4r1|1(2u2022240T2i3i0z2d2f2h282A2v2n4k4x4M2w4l4s4n1H2D2F2H2J1g2Z4W2P4Z2S2f1u2W382!0h2U2%2)2+2-2/2;01392^352{2}2 1q313335374#390a3b3d3f3M3i0n3k3o3w2g0K3q3s0P3u4u3x3z0e3B3D3F3H3J0E.'
 </script><script type="application/javascript" src="../../js-per-pages/0_genericPythonSnippets-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_packagesInstaller-pyodide.js"></script>
 <script type="application/javascript" src="../../js-per-pages/1_runtimeManager-pyodide.js"></script>
@@ -3181,6 +3185,11 @@ let PAGE_IDES_CONFIG = '.\x1eb90{x4]5 8hvs3rfo16}ewl7m.putagndc,_"2-iy[:\x1e070E
 
 
                 
+<!-- PYODIDE - insertion token -->
+
+<!-- PYODIDE - insertion token -->
+
+
               </article>
             </div>
           
@@ -3387,12 +3396,12 @@ let PAGE_IDES_CONFIG = '.\x1eb90{x4]5 8hvs3rfo16}ewl7m.putagndc,_"2-iy[:\x1e070E
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
 
 
-      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
       

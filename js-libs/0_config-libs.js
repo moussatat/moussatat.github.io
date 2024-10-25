@@ -41,9 +41,11 @@ const CONFIG = {
     once this script got loaded */
     //JS_CONFIG_DUMP
     argsFigureDivId: null,
+    exportZipWithNames: null,
+    exportZipPrefix: null,
     baseUrl: null,
+    siteUrl: null,
     buttonIconsDirectory: null,
-    cutFeedback: null,
     language: null,
     pmtUrl: null,
     pythonLibs: null,
@@ -57,11 +59,13 @@ const CONFIG = {
         runScript: null,
         installStart: null,
         installDone: null,
+        refresh: null,
         validation: null,
         editorCode: null,
         publicTests: null,
         secretTests: null,
         successMsg: null,
+        successMsgNoTests: null,
         unforgettable: null,
         successHead: null,
         successTail: null,
@@ -82,9 +86,14 @@ const CONFIG = {
         upload: null,
         restart: null,
         save: null,
+        zip: null,
         corrBtn: null,
         show: null,
         attemptsLeft: null,
+        testsDone: null,
+        testIdes: null,
+        test1Ide: null,
+        loadIde: null,
         qcmTitle: null,
         qcmMaskTip: null,
         qcmCheckTip: null,
@@ -92,35 +101,66 @@ const CONFIG = {
         tipTrash: null,
         figureAdmoTitle: null,
         figureText: null,
-        pickerFailure: null
+        pickerFailure: null,
+        zipAskForNames: null
 },
    //JS_CONFIG_DUMP
 
+    // Temporary value updated for each IDE tested in the testing.test_ides page, to allow
+    // automatic redirection for relative urls fetching:
+    cutFeedback: null,
+    relUrlRedirect : "",
+    runningId: null,                // html id of the current IDE, terminal or py_btn running
 
-    /**Constant, to archive the terminals at runtime.
+    termMessage: null,              // (key, msg, format=null) -> undefined
+    loadIdeContent: null,           // (editorId, name, code) -> undefined
+
+    /**Constant, to archive the  terminal, ace_editors, and all the PythonSectionRunner objects
+     * at runtime :
      *   - Will be garbage collected on page change or reload.
      *   - Warning if navigation.instant gets restored !!
      * */
-    terms: {},                      // debugging purpose
+    terms:   {},                    // debugging purpose
     editors: {},                    // debugging purpose
-    objs: {},                       // debugging purpose
+    objs:    {},                    // debugging purpose
 
-    onDoneEvent : 'unload',         // unused, so far...
-    pyodideDelay: 500,
     LZW: '\x1e',
+    onDoneEvent : 'unload',
+    pyodideDelay: 500,
+    ideKeyStrokesSave: 30,
 
     // Various UI elements identifiers
     element: {
-        searchBlock:     "div.md-search",
-        searchBtnsLeft:  "#search-btns-left",
-        searchBtnsRight: "#search-btns-right",
-        dayNight:        "form.md-header__option",
-        stdoutCtrlId:    "#stdout-controller-btn",
-        cutFeedbackSvg:  "#cut-feedback-svg",
-        hourGlass:       "#header-hourglass-svg",
-        qcm_admos:       ".py_mk_admonition_qcm",
-        qcmCounterCls:   ".qcm-counter",
-        qcmWrapper:      ".qcm_wrapper",
+      allEditors:      'editor_ tester_'.split(' '),
+      searchBlock:     "div.md-search",
+      searchBtnsLeft:  "#search-btns-left",
+      searchBtnsRight: "#search-btns-right",
+      dayNight:        "form.md-header__option",
+      stdoutCtrlId:    "#stdout-controller-btn",
+      cutFeedbackSvg:  "#cut-feedback-svg",
+      hourGlass:       "#header-hourglass-svg",
+      qcm_admos:       ".py_mk_admonition_qcm",
+      qcmCounterCls:   ".qcm-counter",
+      qcmWrapper:      ".qcm_wrapper",
+      testsResults:    "div.py_mk_tests_results",
+      testElement:     ".py_mk_test_element",
+      trashCan:        "#trash-can-svg",
+    },
+
+    // All classes to use to create the various objects (mutate on the fly when needed):
+    CLASSES_POOL: {
+      Ide: null,
+      IdeTester: null,
+      Terminal: null,
+      PyBtn: null,
+      Qcm: null,
+      Question: null
+    },
+
+
+    ZIP: {
+      pySep: '#',
+      tmpZipDir: 'tmp_zip_directory',
     },
 
     // Auto subscriber tracking:
@@ -128,12 +168,6 @@ const CONFIG = {
     subscriptionsTries: {},
 
     loggerOptions: {},      // jsLogger debugging config/activations
-
-    ideKeyStrokesSave: 30,
-
-    // (defined in the securedPagesData-libs.js file)
-    // JS <-> python property names tracker
-    joinTerminalLines: false,
 
     COMMENTED_PATTERN:      /(^\s*)(\S)(.?)/,
     MODULE_REG:             /File "<(env[^>]*|post[^>]*|exec|console)>", line (\d+)($|, in (?!await_fut))/,
@@ -159,8 +193,8 @@ const CONFIG = {
 
         // Terminal stacktrace:
         traceLimit: 20,
-        traceHead: 5,
-        traceTail: 5,
+        traceHead:  5,
+        traceTail:  5,
 
         // Error message:
         errLimit: 15,
@@ -168,17 +202,29 @@ const CONFIG = {
         errTail: 5,
     },
 
+    // Kind of running operation ("pyodide locked"):
     running: {
-        cmd:      'Command',
-        btn:      'PlayBtn',
-        play:     'Play',
-        validate: 'Validate',
+        cmd:          'Command',
+        btn:          'PlayBtn',
+        play:         'Play',
+        validate:     'Validate',
+        testing:      'Testing',
+        testingPlay:  'PlayTesting',
+        testingValid: 'TestingValidate',
+        zipExport:    'zipExport',
+        zipImport:    'zipImport',
     },
 
+    // Validation steps:
     section: {
         editor:  'editorCode',
         public:  'publicTests',
         secrets: 'secretTests',
+    },
+    sectionOrder: {
+        editorCode:  1,
+        publicTests: 2,
+        secretTests: 3,
     },
 
     MSG: {
@@ -195,4 +241,24 @@ const CONFIG = {
                        + "content of the console (F12) and possibly make a screenshot of any message "
                        + "there, to help debugging.",
     },
+
+    QCM_SVG: `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+  <svg class="qcm" viewBox="0 0 12 12" role="img" version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
+    style="stroke-width:1.25;stroke-linecap:round">
+    <path class="bgd-svg" style="fill:var(--qcm-fill);stroke:none;"
+      d="M 5.93,1.93 3.29,2.40 2.70,2.75 1.86,5.70 2.38,8.76 2.75,9.29 5.82,10.13 9.07,9.45 9.36,9.13 10.12,6.11 9.49,2.93 9.12,2.65 Z"></path>
+    <path class="tick"
+      style="display:var(--tick);fill:var(--qcm-light);stroke:var(--qcm-light);stroke-width:0;stroke-linecap:butt;stroke-linejoin:round"
+      d="M 6.34,8.49 C 6.49,7.32 7.07,5.36 9.05,4.06 L 8.93,3.91 C 7.13,4.50 6.38,5.52 5.63,7.03 5.36,6.61 3.91,5.92 3.47,5.86 L 3.32,6.00 C 4.41,6.54 5.06,7.30 5.63,8.77"></path>
+    <g style="display:var(--cross);fill:var(--qcm-light);stroke:var(--qcm-light)"
+      transform="matrix(0.91,0,0,0.91,0.52,0.52)">
+      <rect width="8.33" height="0.59" x="-5.86" y="8.02" transform="rotate(-56.54)"></rect>
+      <rect width="8.33" height="0.59" x="-12.47" y="-1.99" transform="matrix(-0.55,-0.83,-0.83,0.55,0,0)"></rect>
+    </g>
+    <g style="fill:none;stroke:var(--qcm-border)">
+    <circle style="display:var(--circle)" cy="6" cx="6" r="4.2"></circle>
+    <rect style="display:var(--square)" class="square" width="7.41" height="7.36" x="2.29" y="2.32"></rect>
+    </g>
+  </svg>`
 }

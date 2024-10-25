@@ -19,9 +19,23 @@ If not, see <https://www.gnu.org/licenses/>.
 
 
 
-/** Gather color theme data (once only). */
-;(function createAceThemes(){
+function getTheme() {
+  // automatically load current palette
+  const palette = __md_get("__palette")
+  let curPalette = palette===null ? CONFIG.ACE_COLOR_THEME.customThemeDefaultKey
+                                  : palette.color["scheme"]
 
+  const style = CONFIG.ACE_COLOR_THEME.customTheme[curPalette]
+  return "ace/theme/" + CONFIG.ACE_COLOR_THEME.aceStyle[style];
+}
+
+
+
+
+/** Gather color theme data (once only). */
+;(function initiatePage(){
+
+  // Create ACE theme:
   const getRGBChannels=colorString=>[
       colorString.slice(1, 3), colorString.slice(3, 5), colorString.slice(5, 7),
   ].map(s=>parseInt(s,16));
@@ -53,93 +67,62 @@ If not, see <https://www.gnu.org/licenses/>.
       default: default_ace_style,
       slate: slate_ace_style,
   };
-})()
 
 
 
-function getTheme() {
-  // automatically load current palette
-  const palette = __md_get("__palette")
-  let curPalette = palette===null ? CONFIG.ACE_COLOR_THEME.customThemeDefaultKey
-                                  : palette.color["scheme"]
-
-  const style = CONFIG.ACE_COLOR_THEME.customTheme[curPalette]
-  return "ace/theme/" + CONFIG.ACE_COLOR_THEME.aceStyle[style];
-}
+  //-----------------------------------------------------------------
 
 
-/** Following blocks paint the IDE according to the mkdocs light/dark mode changes
-* */
-function paintAllAces() {
-  jsLogger("[Paint_ACEs]")
+  // Setup actions to perform each time the document has changed (page load)
 
-  let theme = getTheme();
-  for (let theEditor of document.querySelectorAll('div[id^="editor_"]')) {
-      let editor = ace.edit(theEditor.id);
-      editor.setTheme(theme);
-      editor.getSession().setMode("ace/mode/python");
-  }
-}
-
-/**Setup reactivity for the day/night button.
- * NOTE: yet again, jQuery didn't work on a "change" event.
- * */
-document
-  .querySelector("[data-md-color-scheme]")
-  .addEventListener("change", _=>paintAllAces());
-
-
-//-----------------------------------------------------------------
-
-
-// Setup actions to perform each time the document has changed (page load)
-
-
-// Initialize the content of each IDE in the page
-$("[id^=global_editor_]").each(function(){
-  const editorId = this.id.slice('global_'.length)
-  const ide = new IdeRunner(editorId)
-  ide.build()
-})
-
-// Setup independent terminals, if any
-$("div[id^=term_only_]").each(function(){
-    const termHandler = new TerminalRunner(this.id)
-    termHandler.build()
-})
-
-// Setup independent terminals, if any
-$("[id^=btn_only_]").each(function(){
-    const btn = new BtnRunner(this.id)
-    btn.build()
-})
-
-
-;(function(){
-
-  const jQxRays = [...$(".stdout-x-ray-svg")].map(x=>$(x))
-  const updateStdoutButtons=()=>{
-    const method = CONFIG.cutFeedback ? 'removeClass': 'addClass'
-    jQxRays.forEach(x=>x[method]('py_mk_hidden'))
-  }
-
-  $(".stdout-ctrl").each(function(){
-      const jThis = $(this)
-      updateStdoutButtons()
-      jThis.on('click', function(){
-          CONFIG.cutFeedback = !CONFIG.cutFeedback
-          updateStdoutButtons()
-      })
+  // Initialize the content of each IDE in the page
+  CONFIG.element.allEditors.forEach(id=>{
+    $(`[id^=global_${ id }]`).each(function(){
+      const editorId = this.id.slice('global_'.length)
+      const ide = id=="editor_" ? new CONFIG.CLASSES_POOL.Ide(editorId)
+                                : new CONFIG.CLASSES_POOL.IdeTester(editorId)
+      ide.build()
+    })
   })
 
-  const jQwraps = [...$(".stdout-wraps-btn")].map(x=>$(x))
 
-  $(".stdout-wraps-btn").each(function(){
-      const jThis = $(this)
-      jThis.on('click', function(){
-        CONFIG.joinTerminalLines = !CONFIG.joinTerminalLines
-        const value = `${ CONFIG.joinTerminalLines ? 80 : 30 }%`
-        jQwraps.forEach(div=>div.css('--wrap-opacity', value))
-      })
+  // Setup independent terminals, if any
+  $("div[id^=term_only_]").each(function(){
+      const termHandler = new CONFIG.CLASSES_POOL.Terminal(this.id)
+      termHandler.build()
   })
+
+
+  // Setup independent terminals, if any
+  $("[id^=btn_only_]").each(function(){
+      const btn = new CONFIG.CLASSES_POOL.PyBtn(this.id)
+      btn.build()
+  })
+
+
+  /**Setup reactivity for the day/night button.
+   * NOTE: yet again, jQuery didn't work on a "change" event.
+   * */
+  document
+    .querySelector("[data-md-color-scheme]")
+    .addEventListener("change", _=>{
+      jsLogger("[Paint_ACEs]")
+
+      const theme = getTheme();
+      for(const id of CONFIG.element.allEditors){
+        for (let theEditor of document.querySelectorAll(`div[id^="${ id }"]`)) {
+          let editor = ace.edit(theEditor.id);
+          editor.setTheme(theme);
+          editor.getSession().setMode("ace/mode/python");
+        }
+      }
+    });
+
+  if(CONFIG.CLASSES_POOL.Qcm){
+    subscribeWhenReady("QCM", function(){
+      jsLogger('[QCM]')
+      CONFIG.CLASSES_POOL.Qcm.buildQcms()
+    }, {now:true, runOnly:true})
+  }
+
 })()

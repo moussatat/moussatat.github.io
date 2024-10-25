@@ -32,16 +32,6 @@ class PythonError extends Error {
 
 
 
-/**Function injected into the python environment (must be defined earlier than others
- * to be used in the tweaked import function)
- * */
-function inputWithPrompt(text) {
-    let result = prompt(text);
-    $.terminal.active().echo(result);
-    return result;
-}
-
-
 /**To access CONFIG data from pyodide (mermaid, cutFeedback, ...).
  * */
 function config(){ return CONFIG }
@@ -51,24 +41,90 @@ const pyodideFeatureCode=(()=>{
 
     const PYODIDE_SNIPPETS = {
 
+    autoRunCleaner: `__builtins__.auto_run.clean()`,
+
     autoRun: `
 def _hack_auto_run():
+
     G = globals()
+
     class AutoRunner:
         run = set()
-        def __init__(self):
-            self.strict = ${ CONFIG._devMode ? "True":"False" }
         def __call__(self, func):
             func()
-            self.run.add(func.__name__)     # Skip registration if failure in func
+            self.run.add(func.__name__)     # Skips registration if failure in func
         def clean(self):
             for k in self.run:
-                if self.strict or k in G: del G[k]
+                if k in G: del G[k]
             self.run.clear()
         def __repr__(self):
             return "AutoRunner()"
 
     __builtins__.auto_run = AutoRunner()
+
+
+    def as_builtin(name_or_func):
+
+        if not isinstance(name_or_func, str):
+            return as_builtin(name_or_func.__name__)(name_or_func)
+        return lambda func: setattr(__builtins__, name_or_func, func) or func
+
+    __builtins__.as_builtin = as_builtin
+
+
+    @as_builtin
+    def wraps_builtin(
+        *,
+        source=None,
+        store=True,
+        name="",
+    ):
+        """
+        Build a singleton object that mimics as much as possible an original builtin,
+        defining repr, str, dir, __name__ and __qualname__ behaviors of the builtin function.
+
+        type and help give slightly different behaviors:
+            * type(func) is showing the BuiltinWrapperXxx name
+            * help(func) is showing the original docstring of func if defined, or the builtin's
+               help message, wrapped inside the BuiltinWrapperXxx class layout
+
+        @source:        The function to "mimic". Generally a builtin, but might be any function
+                        that needs to have custom str and repr behaviors.
+        @store=True:    If True, added to __builtins__ with builtin.__name__ as property name.
+        """
+
+        def wrapper(func):
+
+            src = source or func
+            func_name = name or src.__name__
+
+            class BuiltinWrapper:
+
+                def __init__(self):
+                    self.func = func
+                    self.__name__ = self.__qualname__ = func_name
+
+                    # Keep any already defined docstring:
+                    self.__class__.__doc__ = func.__doc__ or source and source.__doc__
+
+                def __call__(self, *a,**kw):  return self.func(*a,**kw)
+                def __repr__(self):           return f"<function {name}>" if name else repr(src)
+                def __dir__(self):            return dir(src)
+
+            kls_name = "BuiltinWrapper" + func_name.capitalize()
+            BuiltinWrapper.__name__ = BuiltinWrapper.__qualname__ = kls_name
+
+            wrapped = BuiltinWrapper()
+            if store:
+                as_builtin(func_name)(wrapped)
+            return wrapped
+
+        return wrapper
+
+    # @wraps_builtin(__input_src__)
+    # def meh(msg):
+    #     __builtins__.print(msg)
+
 _hack_auto_run()
 del _hack_auto_run
 `,
@@ -76,27 +132,62 @@ del _hack_auto_run
 
     version: `
 def version():
+    """ Print to the console the current version number of pyodide-mkdocs-theme. """
     print("pyodide-mkdocs-theme v${ CONFIG.version }")
 `,
 
 
-    inputPrompt: `
-@__builtins__.auto_run
-def _hack_input_prompt():
-    if not getattr(__builtins__, '__js_input__',None):
-        import js
-        __builtins__.__js_input__ = js.inputWithPrompt
-    __builtins__.input = __js_input__
+    ioStuff: `
+@auto_run
+def _hack_io_stuff():
+
+    import js
+
+    @wraps_builtin(source=__input_src__)
+    def input(question:str="", beginning:str=""):
+        question = question or ""           # Original is using None so, just in case...
+        result = js.prompt(f"{ beginning }{ question }")
+        print(f"{ question }{ result }")    # Must ensure string conversion of result
+        return result
+
+
+    @wraps_builtin(source=__help_src__, name='help')
+    def help(stuff):
+        """
+        Replace the original help function, which doesn't work as expected in pyodide.
+        Signature:  help(object_or_function)
+        """
+        print(getattr(stuff, '__doc__', None))
+
+
+    @wraps_builtin(name="terminal_message")
+    def terminal_message(key, msg:str, format:str="none"):
+        """
+        Display the given message directly into the terminal, without using the python stdout.
+        This allows to give informations to the user even if the stdout is deactivated during
+        a validation.
+
+        @key:    Value to pass to allow the use of the function when the stdout is deactivated.
+        @msg:    The message to display. Can be a multiline string.
+        @format: The name of one of the predefined formatting for the terminal:
+                 "error", "warning", "info", "italic", "stress", "success", "none" (default)
+        """
+        try:
+            js.config().termMessage(key, msg, format)
+        except Exception as e:
+            raise ValueError(str(e)) from None
 `,
 
 
     copyFromServer: `
-@__builtins__.auto_run
-def _hack_input_prompt():
+@auto_run
+def _hack_copy_from_server():
+
+    @as_builtin
     async def copy_from_server(
         src: str,
-        dest: str=".",
-        name: str="",
+        dest: str = ".",
+        name: str = "",
     ):
         from pyodide.http import pyfetch
         from pathlib import Path
@@ -105,43 +196,41 @@ def _hack_input_prompt():
         content  = await response.bytes()
         target   = Path(dest) / (name or Path(src).name)
             # Note: Path(src).name works to extract the name file on urls, but the path
-            #       is actually invalid as an url: "http://xx" -> "http: / xx".
+            #       is actually invalid as an url: "http://xx" givers "http:/xx".
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(content)
-
-    __builtins__.copy_from_server = copy_from_server
 `,
 
 
     exclusionsTools: `
-@__builtins__.auto_run
+@auto_run
 def _hack_exclusions_tools():
 
     type = __builtins__.type      # avoid restrictions troubles
 
+    @as_builtin
     def __move_forward__(stuff):
         treasure = __builtins__.__builtins___
         if type(stuff) is str and stuff in treasure:
             return treasure[stuff][0]
 
+    @as_builtin
     class ExclusionError(Exception):
         @staticmethod
         def throw(that:str):
             raise ExclusionError(f"${ CONFIG.MSG.exclusionMarker }: don't use {that}")
-
-    __builtins__.__move_forward__ = __move_forward__
-    __builtins__.ExclusionError = ExclusionError
 `,
 
 
     refresher: `
-@__builtins__.auto_run
+@auto_run
 def _hack_scope_cleaner():
 
     # Avoid restrictions troubles:
     set = __builtins__.set
     globals = __builtins__.globals
 
+    @as_builtin
     def clear_scope(skip=()):
         keeper = set(skip) | {
             '__name__', '__doc__', '__package__', '__loader__', '__spec__',
@@ -150,12 +239,13 @@ def _hack_scope_cleaner():
         g_dct = globals()
         for k in set(g_dct) - keeper:
             del g_dct[k]
-
-    __builtins__.clear_scope = clear_scope
 `,
 
+    clearScope: `clear_scope()`,
+
+
     wantedImports: `
-@__builtins__.auto_run
+@auto_run
 def _hack_find_imports():
     from pyodide.code import find_imports
     __builtins__.imported_modules = find_imports({FORMAT_TOKEN})
@@ -165,7 +255,7 @@ __builtins__.imported_modules
 
 
     alreadyImported: `
-@__builtins__.auto_run
+@auto_run
 def _hack_imported():
     import sys
     __builtins__.loaded_modules = " ".join(sys.modules.keys())
@@ -175,13 +265,14 @@ __builtins__.loaded_modules
 
 
     upDownLoader: `
-@__builtins__.auto_run
+@auto_run
 def _hack_uploader_downloader():
 
     import js
     from pyodide.ffi import create_proxy
     from typing import Callable, Any, Literal
     from argparse import Namespace
+
 
     class ReadAs(Namespace):
         txt = 'readAsText'
@@ -225,6 +316,7 @@ def _hack_uploader_downloader():
         return (proxy_cbk, read_method, multi), lambda: out
 
 
+    @as_builtin
     async def pyodide_uploader_async(*args, **kw) -> Any :
         js_args, out_getter = wrapping(*args, **kw)
         await js.uploaderAsync(*js_args)
@@ -233,25 +325,23 @@ def _hack_uploader_downloader():
             return tuple(out)
         return out.pop() if out else None
 
+    @as_builtin
     def pyodide_uploader(*args, **kw) -> None :
         js_args, _ = wrapping(*args, **kw)
         js.uploader(*js_args)
 
 
+    @as_builtin
     def pyodide_downloader(content:str|bytes|list[int], filename:str, type="text/plain"):
         if not isinstance(content, str):
             content = js.Uint8Array.new(content)
         js.downloader(content, filename, type)
-
-
-    __builtins__.pyodide_uploader_async = pyodide_uploader_async
-    __builtins__.pyodide_uploader       = pyodide_uploader
-    __builtins__.pyodide_downloader     = pyodide_downloader
 `,
 
 
+    // GENERATED (modify the root project file instead)
     pyodidePlot: `
-@__builtins__.auto_run
+@auto_run
 def _hack_plot():
     # THIS IS A PLOT TOKEN
 
@@ -270,26 +360,32 @@ def _hack_plot():
         If no argument is provided, the default \`div_id\` is used (arguments configuration of
         the plugin).
 
-        Use as a remplacement for \`matplotlib.pyplot\`:
-
         \`\`\`python
-        pyo_plt = PyodidePlot()
-        pyo_plt.plot(xs, ys, ...)           # Same as pyplot.plot, but draw where appropriate
-        pyo_plt.title("...")
-        pyo_plt.show()
+        import matplotlib.pyplot as plt
+        PyodidePlot().target()
+
+        plt.plot(xs, ys, ...)
+        plt.title("...")
+        plt.show()
         \`\`\`
 
-        Or draw quickly single curves:
+        ---
+
+        In case you want to target more than one figure in the same page, pass the html id of the
+        div tag to target to the \`PyodidePlot\` constructor:
 
         \`\`\`python
-        pyo_plt = PyodidePlot("figure_id")
-        pyo_plt.plot_func(                  # draw where appropriate + automatic plt.show()
-            lambda x: x**3,
-            range(-15, 16),
-            'r-",
-            "cube...",
-        )
+        fig1 = PyodidePlot("figure_id1")
+        fig2 = PyodidePlot("figure_id2")
+
+        fig1.target()       # Draw in "figure_id1"
+        plt.plot(...)
+
+        fig2.target()       # Draw in "figure_id2"
+        plt.plot(...)
         \`\`\`
+
+        ---
         """
 
         def __init__(self, div_id:str=''):
@@ -298,11 +394,25 @@ def _hack_plot():
         def __getattr__(self, prop:str):
             return getattr(plt, prop)
 
-        def _refresh(self):
-            js.document.pyodideMplTarget = js.document.getElementById(self.div_id)
-            js.document.getElementById(self.div_id).textContent = ""
-            _,ax = plt.subplots()
-            return ax
+
+        def target(self, keep_fig=False):
+            """
+            Close any previously created figure, then setup the current run to draw in
+            the div tag targeted by the current instance.
+            If keep_fig is set to True, the automatic \`Figure N\` will be kept, above the
+            drawn figure.
+            """
+            for _ in plt.get_fignums():
+                plt.close()
+            div = js.document.getElementById(self.div_id)
+            js.document.pyodideMplTarget = div
+            div.textContent = ""
+            if not keep_fig:
+                plt.gcf().canvas.manager.set_window_title('')
+            return plt
+
+        refresh = target        # backward compatibility
+
 
 
         def plot_func(
@@ -312,7 +422,9 @@ def _hack_plot():
             fmt:str=None,
             title:str=None,
             *,
-            show:bool=True
+            show:bool=True,
+            keep_figure_num: bool = False,
+            **kw
         ):
             """
             Draw an automatic graph for the given function on the given range, then "show"
@@ -325,19 +437,26 @@ def _hack_plot():
                 title: If given, will be added as title of the graph.
                 show:  Call \`pyplot.show()\` only if \`True\`. This allows to customize the graph
                        before applying show manually.
+                keep_figure_num: if False (by default), the \`Figure N\` above the drawing is
+                       automatically removed.
+
             """
+            self.target(keep_figure_num)
 
             xs = list(rng)
             ys = [*map(func, rng)]
             args = (xs,ys) if fmt is None else (xs,ys,fmt)
-            ax = self._refresh()
-            ax.plot(*args)
-            if title: plt.title(title)
+            out = plt.plot(*args, **kw)
+
+            if title:
+                plt.title(title)
             if show:
                 plt.show()
+            return out
 
 
-        def plot(self, *args, **kw):
+
+        def plot(self, *args, keep_figure_num:bool=False, **kw):
             """
             Generic interface, strictly equivalent to \`pyplot.plot\`, except the \`PyodidePlot\`
             instance will automatically apply the drawing to the desired html element it is
@@ -346,19 +465,23 @@ def _hack_plot():
             _Use specifically this method to "plot"_ ! You then can rely on \`pyplot\` to finalize
             the figure as you prefer.
             """
-            ax = self._refresh()
-            return ax.plot(*args, **kw)
+            self.target(keep_figure_num)
+            out = plt.plot(*args, **kw)
+            return out
+
+
 
 # THIS IS A PLOT TOKEN
-    __builtins__.PyodidePlot = PyodidePlot
+    __builtins__.PyodidePlot = PyodidePlot      # don't use the decorator because auto-updated code
 `,
 
 
     mermaidDrawer: `
-@__builtins__.auto_run
+@auto_run
 def _hack_mermaid():
     import js
 
+    @as_builtin
     def mermaid_figure(div_id:str=None):
         """
         Create a Callable[[str],None] that will draw the given mermaid code into the wanted figure div.
@@ -388,18 +511,41 @@ def _hack_mermaid():
             +"\\n\\nDon't forget to mark the markdown page by using the argument "
             +"'MERMAID=True' in one of the macros (IDE, IDEv, terminal or py_btn)"
         )
-
-    __builtins__.mermaid_figure = mermaid_figure
 `,
 
-    // Cannot be done using the decorator, because called _before_ pyodide features refresh.
+
+
     setupStdIO: `
+@auto_run
 def _hack_stdout_up():
-    import sys, io
+    import sys, io, js
+
+    @wraps_builtin(source=__print_src__)
+    def print(*a,**kw):     # Note: wraps doesn't seem to work... Dunno why...)
+
+        # First, blindly print to the actual stdout (in case the author is using it)
+        __print_src__(*a,**kw)
+
+        # Then print to the one used to get proper formatting, but with a "per call" logic:
+        kw['file'] = per_call_stdout
+        __print_src__(*a,**kw)
+
+        # Extract the stuff to transfer to the terminal, then empty per_call_stdout:
+        txt_to_term = per_call_stdout.getvalue()
+        per_call_stdout.truncate(0)
+        per_call_stdout.seek(0)
+
+        js.config().termMessage(None, txt_to_term, 'none', True)
+
+
+    # Different object allowing to spot what to print exactly, for one single call to print:
+    __builtins__.per_call_std_out = per_call_stdout = io.StringIO()
+
+    # For backward compatibility, keep a StringIO object there (this also allow to enforce a flush
+    # of the stdout content in between runs/sections, on user's side!)
+    # NOTE: users wanting to test against the user stdout WILL USE THIS!
     __builtins__.src_stdout = sys.stdout
     sys.stdout = io.StringIO()
-_hack_stdout_up()
-del _hack_stdout_up
 `,
 
 
@@ -407,17 +553,21 @@ del _hack_stdout_up
 @__builtins__.auto_run
 def _hack_stdout_down():
     import sys
-    __builtins__._stdout = sys.stdout.getvalue()
+    __builtins__._stdout_value = sys.stdout.getvalue()
+
     sys.stdout.close()
     sys.stdout = __builtins__.src_stdout
     del __builtins__.src_stdout
 
-__builtins__._stdout
+    __builtins__.per_call_std_out.close()
+    __builtins__.print = __builtins__.__print_src__
+
+__builtins__._stdout_value
 `,
     }
 
     return (option, repl=null)=>{
-        jsLogger('[checkPoint] - Pyodide feature:', option)
+        jsLogger('[CheckPoint] - Pyodide feature:', option)
         let code = PYODIDE_SNIPPETS[option]
         if(code===undefined) throw new Error(`Unknown snippet: ${option}`)
         if(repl!==null){
@@ -428,9 +578,8 @@ __builtins__._stdout
 })()
 
 
-/**Delete all the variables in the global scope that left hanging by the AutoRunner instance.
- * */
-const pyodideCleaner=()=>pyodide.runPython('__builtins__.auto_run.clean()')
+
+
 
 
 
@@ -442,18 +591,29 @@ const pyodideCleaner=()=>pyodide.runPython('__builtins__.auto_run.clean()')
 */
 
 
-/**Use a StringIO stdout, so that the full content can be extracted later
- * */
-const setupStdIO =_=>{
-    const code = pyodideFeatureCode('setupStdIO')
+const pyodideFeatureRunCode=(name, repl=null)=>{
+    const code = pyodideFeatureCode(name, repl)
     return pyodide.runPython(code)
 }
 
-const getFullStdIO =_=>{
-    const code = pyodideFeatureCode('getFullStdIO')
-    return escapeSquareBrackets( pyodide.runPython(code) || '' )
+
+/**Use a StringIO stdout, so that the full content can be extracted later.
+ * */
+const setupStdIO =_=>{
+    pyodideFeatureRunCode('autoRun')
+    pyodideFeatureRunCode('setupStdIO')
 }
 
+const getFullStdIO =_=>{
+    const stdout = pyodideFeatureRunCode('getFullStdIO') || ''
+    return escapeSquareBrackets(stdout)
+}
+
+const clearPyodideScope=()=>{
+    pyodideFeatureRunCode('autoRun')
+    pyodideFeatureRunCode('refresher')
+    pyodideFeatureRunCode('clearScope')
+}
 
 
 
@@ -492,28 +652,29 @@ const getFullStdIO =_=>{
  *
  * ## SOLUTION FOR BUILTINS FUNCTIONS:
  *
- * - Redeclare forbidden things in the global scope, through `globals()`, using an object that will
- *   systematically throw an ExclusionError when it's called.
- * - Since those are in the global scope, they are visible through `dir()`, so add some make up to
- *   them, using a class that redefines its __qualname__ and __repr__, so that they are less obvious
- *   as "anti-cheats" (it will still remain obvious for those who know enough. But if they can find
- *   about that, they probably could solve the problem the right way anyway...).
- * - Pyodide runtime won't see those globals, so it is not affected in any way, only the user's and
- *   tester's codes are.
- * - The (hidden) function `__move_forward__('builtin_name')` (see documentation) can be used in the
- *   tests to get back the original builtin. If used, it must be done inside a closure, so that the
- *   original builtin doesn't override the "Raiser" in the global scope (see below).
- * - Since the hacked version are available to the user in the global runtime, they could just
- *   delete them to get back the access to the original  __builtins__ version. To limit this risk,
- *   an extra check is done after the user's code has been run, verifying that the hacked functions
- *   are still defined in the global scope, and that they still are the original Raiser objects.
+ * - Redeclare forbidden things in the global scope, through `globals()`, using an object that
+ *   will systematically throw an ExclusionError when it's called.
+ * - Since those are in the global scope, they are visible through `dir()`, so add some make up
+ *   to them, using a class that redefines its __qualname__ and __repr__, so that they are less
+ *   obvious as "anti-cheats" (it will still remain obvious for those who know enough. But if they
+ *   can find about that, they probably could solve the problem the right way anyway...).
+ * - Pyodide runtime won't see those globals, so it is not affected in any way, only the user's
+ *   and tester's codes are.
+ * - The (hidden) function `__move_forward__('builtin_name')` (see documentation) can be used in
+ *   the tests to get back the original builtin. If used, it must be done inside a closure, so
+ *   that the original builtin doesn't override the "Raiser" in the global scope (see below).
+ * - Since the hacked versions are available to the user in the global runtime, they could just
+ *   delete them to get back the access to the original builtins. To limit this risk, an extra
+ *   check is done after the user's code and tests has been run, verifying that the hacked
+ *   functions are still defined in the global scope, and that they still are the original
+ *   Raiser objects.
  *
  *
  * ## SOLUTION FOR IMPORTS
  *
- * The main problem about `import` is that it actually goes directly through `__builtins__`, using
- * `__import__`. So in that case, there is no other choice than hacking directly the __builtins__,
- * and then put it back in place when not useful anymore.
+ * The problem with `import` is that they actually go directly through `__builtins__.__import__`.
+ * So in that case, there is no other choice than hacking directly the builtin, and then put it
+ * back in place when not useful anymore.
  *
  *
  * ## RECURSION LIMIT
@@ -567,7 +728,7 @@ const setupExclusions =(excluded, recLimit)=>{
         base_isinstance = isinstance
 
 
-        __builtins__.__builtins___ = dct = {}
+        dct = __builtins__.__builtins___ = {}
         raiser_import = Raiser('__import__')
         dct['__import__'] = [base_import, raiser_import]
         __builtins__.__import__ = raiser_import
@@ -587,11 +748,11 @@ const setupExclusions =(excluded, recLimit)=>{
 
         for key,lst in dct.items():
             stuff = lst[0]
-            if callable(stuff) and key!='__import__':       # import already handled
+            if callable(stuff) and key!='__import__':       # import has already been handled
+                # Store the reference of the raiser in lst, to check against it later:
                 glob_dct[key] = lst[1] = Raiser(key)
-                # store the reference to the raiser, to check against it later
 
-        # \`auto_run\` added for vérification purpose only, but it must stay usable:
+        # auto_run added for verification purpose only, but it must stay usable:
         dct['auto_run'] = auto_run
 `
     pyodide.runPython(code)
@@ -602,6 +763,7 @@ const setupExclusions =(excluded, recLimit)=>{
 /**Cancel the code exclusions (done as soon as possible, to restore pyodide's normal behaviors).
  * */
 const restoreOriginalFunctions = exclusions =>{
+
     // Don't use auto_run, in case someone messes with it...
     const code = `
 def _hack_unexclude():
@@ -624,7 +786,7 @@ def _hack_unexclude():
             if raiser is not None and raiser is not G.get(key):
                 not_ok.append(key)
             if func is not None:
-                del G[key]  # unshadow the builtin
+                del G[key]  # "Unshadow" the builtin
                 if key == 'setrecursionlimit':
                     func(1000)
 

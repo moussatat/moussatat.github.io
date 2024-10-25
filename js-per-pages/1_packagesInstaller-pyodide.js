@@ -25,7 +25,7 @@ If not, see <https://www.gnu.org/licenses/>.
  * micropip (if not done yet), then install all the missing modules.
  * Also import all the packages present in runner.whiteList.
  *
- * NOTE: python libs are identified peeking into the global config, but are actually
+ * NOTE: python libs are identified by picking into the global config, but are actually
  * loaded only if they are available in the instance property (this is to limit the
  * _SAVAGE_ unexpected installations of random packages from PyPI).
  * */
@@ -39,9 +39,9 @@ const installPythonPackages=(function(){
    *      display installation messages or not.
    *    * _Installed_ packages can be found through micropip, but not _loaded_ pythonLibs.
    *
-   *    So, spotting missing packages relies on picking in sys.modules, BUT they actually end
-   *    up there _ONLY_ if a python code actually imported them, going through `import xxx`.
-   *
+   *    So, spotting missing packages relies on picking in sys.modules.
+   *    BUT, modules actually end up there _ONLY_ if a python code actually imported them, going
+   *    through `import xxx`.
    *    So far, so good. Problems arise with additional features:
    *
    *    * White lists:
@@ -73,14 +73,13 @@ const installPythonPackages=(function(){
    *    Since the "triggering code" (env code, user code, cmd, ...) still has to be executed, the
    *    actual visibility of the imported module is left to the redactor/user, and:
    *        - All automatic installs/imports are done in a hidden scope.
-   *        - Packages of the whiteList are all imported in the global scope, whatever happens/the
-   *          configuration of exclusions/sections, ...
+   *        - Packages of the whiteList are all imported in the global scope, whatever happens or
+   *          the configuration of exclusions/sections, ...
    **/
 
 
-  const featureRunner=(feature, convertOutput)=>(...args)=>{
-    let code = pyodideFeatureCode(feature, ...args)
-    let out  = pyodide.runPython(code)
+  const featureRunner=(feature, convertOutput)=>(repl=null)=>{
+    let out = pyodideFeatureRunCode(feature, repl)
     if(convertOutput) out = convertOutput(out)
     return out
   }
@@ -98,7 +97,7 @@ const installPythonPackages=(function(){
     matplotlib: {post: featureRunner('pyodidePlot')}
   }
 
-  const installConfigFor=(libName)=>({
+  const getInstallConfigFor=(libName)=>({
     toImport:  libName,
     toInstall: libName,
     post:      ()=>undefined,
@@ -131,7 +130,7 @@ const installPythonPackages=(function(){
    * @returns: the actual config object.
    * */
   const importFinalizer = (name) =>{
-    const conf = installConfigFor(name)
+    const conf = getInstallConfigFor(name)
     const importCode = `import ${ conf.toImport }`
     enforceImports.push( importCode )
     return conf
@@ -143,7 +142,8 @@ const installPythonPackages=(function(){
   const installCustomPythonLib = async (libName) => {
     jsLogger("[PythonLibs] - Install", libName)
 
-    const archive     = `${ CONFIG.baseUrl }/${ libName }.zip`
+    const rootNoSlash = CONFIG.siteUrl.replace(/\/$/, '')
+    const archive     = `${ rootNoSlash }/${ libName }.zip`
     const zipResponse = await fetch(archive)
     const zipBinary   = await zipResponse.arrayBuffer()
     pyodide.unpackArchive(zipBinary, "zip", {extractDir: libName})
@@ -167,11 +167,37 @@ const installPythonPackages=(function(){
   }
 
 
+  /**Some standard libs are available, but not already imported (like statistics, for example).
+   * So a basic import is tried first.
+   * Note: to NOT apply on forbidden packages!
+   */
+  attemptStandardLibImports=(importableLibs)=>{
+    const installNeeded = []
+
+    for(const lib of importableLibs){
+      try{
+        pyodide.runPython(`
+def __hack_std_import_attempt():
+    import ${ lib }
+__hack_std_import_attempt()
+`)
+      }catch(e){
+        installNeeded.push(lib)
+      }
+    }
+
+    if(installNeeded.length != importableLibs.length){
+      pyodide.runPython(`del __hack_std_import_attempt`)
+    }
+    return installNeeded
+  }
+
+
   // ------------------------------------------------------------------------------
 
 
   return async (runner, code, _runtime, _isFromEnv)=>{
-    jsLogger('[checkPoint] - installPythonPackages', _isFromEnv?'isFromEnv':'')
+    jsLogger('[CheckPoint] - installPythonPackages', _isFromEnv?'isFromEnv':'')
 
     // Refresh globals:
     runtime   = _runtime
@@ -182,8 +208,11 @@ const installPythonPackages=(function(){
     // various config flags:
     const importedModules  = getAlreadyImportedPackages()
     const installPredicate = isNeededAndAllowedInstall(importedModules, runtime, isFromEnv)
+
     const missingWhiteList = runner.whiteList.filter(name=>!importedModules.has(name))
-    const installNeeded    = getWantedImports(code).filter(installPredicate).concat(missingWhiteList)
+    const importableLibs   = getWantedImports(code).filter(installPredicate).concat(missingWhiteList)
+    const installNeeded    = attemptStandardLibImports(importableLibs)
+
     const externalsMissing = installNeeded.filter(isNotKnownPythonLib)
     const pyLibsMissing    = installNeeded.filter(isAvailablePythonLib(runner))
 
@@ -198,14 +227,15 @@ const installPythonPackages=(function(){
           Using this.pythonLibs because only the available ones can be downloaded.
     */
 
+
     // Actual installations:
     if(pyLibsMissing.length || externalsMissing.length){
-      runner.giveFeedback(CONFIG.lang.installStart.msg)
+      runner.giveFeedback(CONFIG.lang.installStart.msg, null)
 
       for(const lib of pyLibsMissing)    await installCustomPythonLib(lib)
       for(const lib of externalsMissing) await installExternalPackage(lib)
 
-      runner.giveFeedback(CONFIG.lang.installDone.msg)
+      runner.giveFeedback(CONFIG.lang.installDone.msg, null)
     }
 
     // Enforce imports of all installed modules in hidden scope

@@ -72,6 +72,7 @@ Unknown = ${ JSON.stringify(unknown) }
 
 
 
+
 /**Creates the console: the variable pyconsole, which is the runtime tool behind the  "terminal
  * process" is created here.
  * Returns the PyodideConsoleManager which handles the python functions needed to control the
@@ -85,14 +86,17 @@ function setupPyodideEnvironmentTools(){
 
     // Indentation does matter a bit: 1 extra indent is ok, but 2 fails (whatever... :rolleyes: )
     const pythonRoutinesExtractionCode = `
-    def _hack_2():
+    def _hack_start_pyodide():
         import js
         import __main__
         from pyodide.console import PyodideConsole, repr_shorten
 
         # Globals initializations:
-        __builtins__['__USER_CMD__'] = __builtins__['__USER_CODE__'] = ""
         __builtins__['_'] = None
+        __builtins__['__USER_CMD__'] = __builtins__['__USER_CODE__'] = ""
+
+        for name in 'input print help'.split():
+            __builtins__[ f"__{ name }_src__" ] = __builtins__[name]
 
         pyconsole = PyodideConsole(__main__.__dict__)
 
@@ -105,15 +109,15 @@ function setupPyodideEnvironmentTools(){
 
             if js.config().cutFeedback:
                 res = repr_shorten(res)
-            print(res, end='')
+            print(res)
 
         def clear_console():            # Useless...?
             pyconsole.buffer = []
 
         return ${ routines }
 
-    ${ routines } = _hack_2()
-    del _hack_2`
+    ${ routines } = _hack_start_pyodide()
+    del _hack_start_pyodide`
 
     const namespace = pyodide.globals.get("dict")();
     pyodide.runPython(pythonRoutinesExtractionCode, {globals: namespace});
@@ -150,5 +154,5 @@ subscribeWhenReady(
 </g></svg>`
         $(CONFIG.element.searchBtnsLeft).prepend($(hourGlassSvg))
     },
-    {waitFor: CONFIG.element.searchBtnsLeft},
+    {waitFor: CONFIG.element.searchBtnsLeft, runOnly:true},
 )

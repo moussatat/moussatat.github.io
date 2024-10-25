@@ -19,7 +19,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
 
 
-/**Decorator like factory function, managing the global pyodide lock.
+/**Decorator like function factory, managing the global pyodide lock.
  * If a call is done while pyodide is locked, it is delayed until the lock is available.
  * */
 var withPyodideAsyncLock = (_=>{
@@ -37,7 +37,7 @@ var withPyodideAsyncLock = (_=>{
 
             jsLogger("[LOCK?] -", logName, pyodideLocked)
             while(pyodideLocked){
-                await sleep(100)
+                await sleep(60)
             }
             jsLogger("[LOCK ACQUIRE] -", logName)
             pyodideLocked = true
@@ -48,8 +48,8 @@ var withPyodideAsyncLock = (_=>{
                 console.error(e)    // Always keep that, otherwise errors in JS are just swallowed
                                     // (impossible to rethrow them, not sure why... async probably)
             }finally{
-                pyodideLocked = false
                 jsLogger("[LOCK RELEASE] -", logName)
+                pyodideLocked = false
             }
             return ret
         }
@@ -97,15 +97,17 @@ async function waitForPyodideReady(){
  *              which will result in a function checking for the existence of that element in
  *              the DOM. This function will be called every .delay ms and the subscription will
  *              be delayed until it returns true. This has precedence over the .now option.
+ *      .runOnly: if truthy, run the callback when ready, but do not subscribe to document changes.
  *
  * @throws: Error if more than 20 subscriptions attempts are done without success.
  * */
 function subscribeWhenReady(waitId, callback, options={}){
 
-    let {now, delay, waitFor} = {
+    let {now, delay, waitFor, runOnly} = {
         delay: 50,
         now: false,
         waitFor: null,
+        runOnly: false,
         ...options
     }
     now = now && !waitFor                       // has to wait if waitFor is used
@@ -135,14 +137,18 @@ function subscribeWhenReady(waitId, callback, options={}){
                 try{
                     callback()
                 }catch(e){
-                    console.log(e)
+                    console.error(e)
                 }
             }
-            const subscript = document$.subscribe(wrapper)
-            document.addEventListener(CONFIG.onDoneEvent, function(){
-                jsLogger("[Unsubscribing] -", waitId)
-                subscript.unsubscribe()
-            })
+            if(runOnly){
+                wrapper()
+            }else{
+                const subscript = document$.subscribe(wrapper)
+                document.addEventListener(CONFIG.onDoneEvent, function(){
+                    jsLogger("[Unsubscribing] -", waitId)
+                    subscript.unsubscribe()
+                })
+            }
         }
     }
 
@@ -150,6 +156,7 @@ function subscribeWhenReady(waitId, callback, options={}){
 
     if(!now) return ()=>{ CONFIG.subscriptionReady[waitId]=true }
 }
+
 
 
 
@@ -166,7 +173,7 @@ function escapeSquareBrackets(msg){
 }
 
 
-/**Formatting factory function, for messages used in the jquery terminal.
+/**Formatting function factory, for messages used in the jquery terminal.
  *
  * WARNING: the input message will be "escapeSquareBrackets"-ed.
  * */
@@ -175,13 +182,15 @@ function richTextFormat(content, style, color="", background="") {
     return `[[${ style };${ color };${ background }]${ content }]`;
 }
 
-let error   = (content) => richTextFormat(content, "b", "red");
-let warning = (content) => richTextFormat(content, "ib", "orange");
-let info    = (content) => richTextFormat(content, "i", "grey");
-let italic  = (content) => richTextFormat(content, "i");
-let stress  = (content) => richTextFormat(content, "b");
-let success = (content) => richTextFormat(content, "ib", "green");
-
+const txtFormat = {
+    error:   (content) => richTextFormat(content, "b", "red"),
+    warning: (content) => richTextFormat(content, "ib", "orange"),
+    info:    (content) => richTextFormat(content, "i", "grey"),
+    italic:  (content) => richTextFormat(content, "i"),
+    stress:  (content) => richTextFormat(content, "b"),
+    success: (content) => richTextFormat(content, "ib", "green"),
+    none:    escapeSquareBrackets,  // To override the defaults, if needed (see post processing)
+}
 
 
 
@@ -244,8 +253,8 @@ function choice(arr){
 
 
 
-const NO_HTML = '&#><'
-const ALPHA = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%'()*+,-./:;=?@^_`{|}~ "
+const NO_HTML = '\'"&#><\n\t\r\\'
+const ALPHA = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%()*+,-./:;=?@^_`{|}~ "
 const TOME_B = [...ALPHA].reduce((o,c,i)=>(o[c]=i,o), {})
 
 const unBase =s=> [...s].reduce((v,c)=>v*ALPHA.length + TOME_B[c], 0)
@@ -265,6 +274,8 @@ const unBase =s=> [...s].reduce((v,c)=>v*ALPHA.length + TOME_B[c], 0)
  *         when no emojis are used in the original content.
  * */
 const decompressLZW=(compressed, compressOptionSrc)=>{
+
+    // console.log(JSON.stringify(compressed))
 
     const [bigs, smalls, ...chunks] = compressed.trim().slice(0,-1).split(CONFIG.LZW)
     const tome = [
@@ -299,14 +310,24 @@ const decompressLZW=(compressed, compressOptionSrc)=>{
 }
 
 
+/**Decompress PAGE_IDES_CONFIG content if not already done.
+ * */
 function decompressPagesIfNeeded(){
-    jsLogger('[checkPoint] - decompress page LZW')
     if(typeof(PAGE_IDES_CONFIG)!='string') return;
 
-    const decompressed = decompressLZW(PAGE_IDES_CONFIG, "build.encrypted_js_data")
-    PAGE_IDES_CONFIG = JSON.parse(
+    jsLogger('[CheckPoint] - decompress page LZW')
+    PAGE_IDES_CONFIG = decompressAndConvert(PAGE_IDES_CONFIG)
+}
+
+
+/**Decompress LZW encoded string to a JSON object.
+ * */
+function decompressAndConvert(compressed){
+    const decompressed = decompressLZW(compressed, "build.encrypted_js_data")
+    const outcome      = JSON.parse(
         decompressed, (key,val)=>key=='attempts_left' && val=="Infinity" ? Infinity : val
     )
+    return outcome
 }
 
 
@@ -487,7 +508,6 @@ var [uploader, uploaderAsync] = (function(){
     const uploaderAsync = async (...args)=>{
         errorHandler = null
         uploader(...args)
-
         // Wait until the upload is done, so that the uploaded content is usable during current run
         while(contentHandler){
             await sleep(200)
@@ -499,3 +519,42 @@ var [uploader, uploaderAsync] = (function(){
 
     return [uploader, uploaderAsync]
 })()
+
+
+
+
+
+
+
+/**Extract the given ID data from the localStorage, checking if it's not an outdated
+ * or invalid structure.
+ * @returns: [storage_data, outdated]
+ * */
+function getIdeDataFromStorage(editorId, forThis=null){
+
+    let storage = localStorage.getItem(editorId) || ""
+    let outdated = true
+    try{
+      const obj = JSON.parse(storage || '{}')
+      outdated = "hash code done name zip".split(' ').some( k => !(k in obj) )
+      if(!outdated) storage=obj
+    }catch(_){}
+
+    if(outdated){
+        storage = freshStore(storage, forThis)
+      }
+    return [storage, outdated]
+}
+
+
+function freshStore(code, forThis=null){
+    return {
+      code: code || "",
+      done: 0,            // -1: fail, 0: unknown, 1:success
+      ...( !forThis ? {}:{
+          hash: forThis.srcHash,
+          name: forThis.pyName,
+          zip:  forThis.export,
+        })
+    }
+}
