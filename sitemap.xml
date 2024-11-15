@@ -21,11 +21,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://127.0.0.1:8000/1eds/cours/</loc>
-         <lastmod>2024-11-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>http://127.0.0.1:8000/1eds/evaluations/</loc>
          <lastmod>2024-11-15</lastmod>
          <changefreq>daily</changefreq>
@@ -37,16 +32,6 @@
     </url>
     <url>
          <loc>http://127.0.0.1:8000/2gt/</loc>
-         <lastmod>2024-11-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>http://127.0.0.1:8000/2gt/archive2024/</loc>
-         <lastmod>2024-11-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>http://127.0.0.1:8000/2gt/cours/</loc>
          <lastmod>2024-11-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
