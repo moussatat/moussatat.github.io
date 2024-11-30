@@ -78,32 +78,96 @@ const installPythonPackages=(function(){
    **/
 
 
-  const featureRunner=(feature, convertOutput)=>(repl=null)=>{
+
+  const featureRunner= (feature, convertOutput)=>(repl=null)=>{
     let out = pyodideFeatureRunCode(feature, repl)
     if(convertOutput) out = convertOutput(out)
     return out
   }
 
+
+  /**In most cases, installations will be done once only, but just in case (to avoid troubles
+   * with later changes... / Without that, a script tag/load could end up loaded at each call)
+   * */
+  const CACHE_INSTALL = new Set()
+
+
+  const asyncJsScriptCdnLoader = (name, scriptOptions)=> async ()=>{
+    if(CACHE_INSTALL.has(name)) return;
+
+    let loaded = false
+
+    const script = document.createElement('script')
+    script.addEventListener("load", function(){ loaded=true })
+    for(k in scriptOptions){
+      if(k=='src') continue             // Always add last...
+      script[k] = scriptOptions[k]
+    }
+    script.src = scriptOptions.src      // Always add last...
+
+    document.body.appendChild(script)
+
+    while(!loaded) await sleep(50)
+    CACHE_INSTALL.add(name)
+    console.log(name, 'ready')
+  }
+
+
+
+
+
+
   /**IMPORTS_CONFIG type:
    *
    *      Record<string, {
-   *          toImport: string,       // Automatic import name (in hidden scope)
+   *          codeCheck: Cbk
+   *          toImport:  string,      // Automatic import name (in hidden scope)
    *          toInstall: string,      // Micropip installation name
-   *          post: Cbk,              // Callback to run to apply any kind of extra logic
+   *          post:      async Cbk,   // Callback to run to apply any kind of extra logic
    *      }>
    * */
   const IMPORTS_CONFIG = {
-    PIL:        {toInstall: "Pillow"},
-    matplotlib: {post: featureRunner('pyodidePlot')}
+
+    PIL: {
+      toInstall: "Pillow"
+    },
+
+    p5: {
+      codeCheck: ()=>{
+        if(/from p5\S* import/.test(currentCode)){
+          throw new PythonError(
+            "ImportError: Invalid p5 import.\nThe p5 module must be used as a namespace:"
+            +"\n    import p5\n    p5.createCanvas(...)"
+          )
+        }
+      },
+      post: asyncJsScriptCdnLoader('p5', {
+        crossorigin:    "anonymous",
+        referrerpolicy: "no-referrer",
+        src:            "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.min.js" ,
+      })
+
+    },
+
+    matplotlib: {
+      post: async ()=>featureRunner('pyodidePlot')()
+    },
+
   }
 
   const getInstallConfigFor=(libName)=>({
     toImport:  libName,
     toInstall: libName,
-    post:      ()=>undefined,
+    post:      async ()=>undefined,
     ...IMPORTS_CONFIG[libName] || {}
   })
 
+
+
+
+
+  const FORBID_EXTERNALS = ['py_lib', 'pylib', 'pylibs', 'py-lib', 'py-libs']
+  const PMT_TOOLS = ['p5']
 
   /**Extract all the packages names currently available in pyodide. */
   const getAlreadyImportedPackages = featureRunner("alreadyImported", out=>new Set(out.split(' ')) )
@@ -112,8 +176,8 @@ const installPythonPackages=(function(){
   const getWantedImports = featureRunner("wantedImports")
 
   // Predicate factories...:
-  const isAvailablePythonLib = (runner) => (name) => runner.pythonLibs.has(name)
-  const isNotKnownPythonLib  = (name) => !CONFIG.pythonLibs.has(name)
+  const isAvailablePythonLib = (runner) => (name) =>  runner.pythonLibs.has(name) ||  PMT_TOOLS.includes(name)
+  const isNotKnownPythonLib       =        (name) => !CONFIG.pythonLibs.has(name) && !PMT_TOOLS.includes(name)
   const isNeededAndAllowedInstall = (installedModules, runtime, isFromEnv) => (
     isFromEnv ? name => !installedModules.has(name)
               : name => !installedModules.has(name) && !runtime.excluded.includes(name)
@@ -121,7 +185,7 @@ const installPythonPackages=(function(){
 
 
 
-  let micropip, runtime;
+  let micropip, runtime, currentCode;
   const enforceImports = []   // python imports to make sure python_libs are showing up in sys.modules
 
   /**Routine managing the actual import logic, storing the name of the module/package
@@ -131,6 +195,9 @@ const installPythonPackages=(function(){
    * */
   const importFinalizer = (name) =>{
     const conf = getInstallConfigFor(name)
+
+    if(conf.codeCheck) conf.codeCheck(currentCode)
+
     const importCode = `import ${ conf.toImport }`
     enforceImports.push( importCode )
     return conf
@@ -140,22 +207,29 @@ const installPythonPackages=(function(){
   /**Install an available custom python lib.
    * */
   const installCustomPythonLib = async (libName) => {
-    jsLogger("[PythonLibs] - Install", libName)
+    jsLogger("[Installer] - Install", libName)
 
+    const conf        = importFinalizer(libName)
+    const isPmtTool   = PMT_TOOLS.includes(libName)
     const rootNoSlash = CONFIG.siteUrl.replace(/\/$/, '')
-    const archive     = `${ rootNoSlash }/${ libName }.zip`
+    const archive     = `${ rootNoSlash }${ isPmtTool?"/assets/javascript":"" }/${ libName }.zip`
     const zipResponse = await fetch(archive)
     const zipBinary   = await zipResponse.arrayBuffer()
     pyodide.unpackArchive(zipBinary, "zip", {extractDir: libName})
-    const conf = importFinalizer(libName)
-    conf.post()
+    await conf.post()
   }
 
 
   /**Install an external python package (through pyodide's default behaviors: micropip+PyPI).
    * */
   const installExternalPackage = async (libName) => {
-    jsLogger("[Micropip] - Install", libName)
+    jsLogger("[Installer] - Install", libName)
+
+    if(FORBID_EXTERNALS.includes(libName)){
+      throw new PythonError(
+        `Import of ${libName} is forbidden for security reasons.\n\nDid you mean \`import py_libs\`?`
+      )
+    }
 
     if(!micropip){
       await pyodide.loadPackage("micropip");
@@ -163,7 +237,7 @@ const installPythonPackages=(function(){
     }
     const conf = importFinalizer(libName)
     await micropip.install(conf.toInstall)
-    conf.post()
+    await conf.post()
   }
 
 
@@ -197,11 +271,12 @@ __hack_std_import_attempt()
 
 
   return async (runner, code, _runtime, _isFromEnv)=>{
-    jsLogger('[CheckPoint] - installPythonPackages', _isFromEnv?'isFromEnv':'')
+    jsLogger('[Installer] - installPythonPackages', _isFromEnv?'isFromEnv':'')
 
     // Refresh globals:
-    runtime   = _runtime
-    isFromEnv = _isFromEnv
+    runtime     = _runtime
+    isFromEnv   = _isFromEnv
+    currentCode = code
     enforceImports.length = 0
 
     // Analyze what's supposed to be done, depending on the code du execute later and
@@ -226,6 +301,9 @@ __hack_std_import_attempt()
           Import names matching an available python_lib.
           Using this.pythonLibs because only the available ones can be downloaded.
     */
+
+    jsLogger('[Installer] - pyLibsMissing', pyLibsMissing)
+    jsLogger('[Installer] - externalsMissing', externalsMissing)
 
 
     // Actual installations:

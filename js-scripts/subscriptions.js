@@ -73,56 +73,72 @@ function getTheme() {
   //-----------------------------------------------------------------
 
 
-  // Setup actions to perform each time the document has changed (page load)
+  /**Elements in tabbed divs, that may need GUI makeup actions when the tab gets clicked on.
+   * */
+  const TABBED_TO_MAKE_UP_GUI = new Set()
 
-  // Initialize the content of each IDE in the page
+
+  // Setup actions to perform each time the document has changed (page load)
+  const builder =(className, transformId)=> function(){
+    const id  = transformId ? transformId(this.id) : this.id
+    const elt = new CONFIG.CLASSES_POOL[className](id)
+    elt.build()
+    if(!elt.isGuiCompliant) TABBED_TO_MAKE_UP_GUI.add(elt)
+  }
+
+
+  $("span[id^=auto_run_]").each( builder("PyBtn") )     // Setup auto running elements, if any
+  $("[id^=btn_only_]").each( builder("PyBtn") )         // Setup py_btns, if any
+  $("div[id^=term_only_]").each( builder("Terminal") )  // Setup independent terminals, if any
+
   CONFIG.element.allEditors.forEach(id=>{
-    $(`[id^=global_${ id }]`).each(function(){
-      const editorId = this.id.slice('global_'.length)
-      const ide = id=="editor_" ? new CONFIG.CLASSES_POOL.Ide(editorId)
-                                : new CONFIG.CLASSES_POOL.IdeTester(editorId)
-      ide.build()
+    $(`div[id^=global_${ id }]`).each(                  // Initialize the content of each IDE in the page
+      builder(
+        id=="editor_" ? "Ide" : "IdeTester",
+        id=>id.slice('global_'.length)
+      )
+    )
+  })
+
+
+  // Add tabbed content manager (transformations to apply when tabs become visible)
+  $("div.tabbed-labels label").on('click', function(){
+    // Next tick so that the UI is up to date (mainly : the IDE isn't hidden anymore...)
+    setTimeout(_=>{
+      ;[...TABBED_TO_MAKE_UP_GUI].forEach(obj=>{
+        if(obj.isGuiCompliant || obj.makeUpYourGui()) TABBED_TO_MAKE_UP_GUI.delete(obj)
+      })
     })
   })
 
 
-  // Setup independent terminals, if any
-  $("div[id^=term_only_]").each(function(){
-      const termHandler = new CONFIG.CLASSES_POOL.Terminal(this.id)
-      termHandler.build()
-  })
-
-
-  // Setup independent terminals, if any
-  $("[id^=btn_only_]").each(function(){
-      const btn = new CONFIG.CLASSES_POOL.PyBtn(this.id)
-      btn.build()
-  })
-
-
-  /**Setup reactivity for the day/night button.
-   * NOTE: yet again, jQuery didn't work on a "change" event.
-   * */
-  document
-    .querySelector("[data-md-color-scheme]")
-    .addEventListener("change", _=>{
-      jsLogger("[Paint_ACEs]")
-
-      const theme = getTheme();
-      for(const id of CONFIG.element.allEditors){
-        for (let theEditor of document.querySelectorAll(`div[id^="${ id }"]`)) {
-          let editor = ace.edit(theEditor.id);
-          editor.setTheme(theme);
-          editor.getSession().setMode("ace/mode/python");
-        }
-      }
-    });
-
-  if(CONFIG.CLASSES_POOL.Qcm){
+  if(CONFIG.CLASSES_POOL.Qcm){                          // Building qcms only if the class is defined in the page
     subscribeWhenReady("QCM", function(){
       jsLogger('[QCM]')
       CONFIG.CLASSES_POOL.Qcm.buildQcms()
     }, {now:true, runOnly:true})
   }
 
+
+
+  //-----------------------------------------------------------------
+
+
+
+  /**Setup reactivity for the day/night button, repainting ACE editors.
+   * NOTE: yet again, jQuery didn't work on a "change" event.
+   * */
+  document.querySelector("[data-md-color-scheme]")
+          .addEventListener("change", _=>{
+            jsLogger("[Paint_ACEs]")
+
+            const theme = getTheme();
+            for(const id of CONFIG.element.allEditors){
+              for (let theEditor of document.querySelectorAll(`div[id^="${ id }"]`)) {
+                let editor = ace.edit(theEditor.id);
+                editor.setTheme(theme);
+                editor.getSession().setMode("ace/mode/python");
+              }
+            }
+          });
 })()

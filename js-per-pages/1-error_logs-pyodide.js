@@ -319,11 +319,3 @@ _`
   errLines[ errLines.length-1 ] += ':\n' + assertArr.splice(0,1)[0]
   errLines.push(...assertArr)
 }
-
-
-
-
-/**Extract full information when something gets VERY wrong... */
-function youAreInTroubles(err){
-  return `${ err }\n\n${ err.stack || '[no stack]' }\n${ CONFIG.MSG.bigFail }`
-}

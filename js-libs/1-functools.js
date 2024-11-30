@@ -194,6 +194,15 @@ const txtFormat = {
 
 
 
+
+/**Extract full information when something gets VERY wrong... */
+function youAreInTroubles(err){
+  return `${ err }\n\n${ err.stack || '[no stack]' }\n${ CONFIG.MSG.bigFail }`
+}
+
+
+
+
 function toSnake(msg){
     return msg.replace(/[A-Z]/g, m=>'_'+m.toLowerCase())
 }
@@ -253,9 +262,17 @@ function choice(arr){
 
 
 
+/**NO_HTML and ALPHA (TOME_BASE in the python source) constants automatically transferred
+ * from python during dev_ops/mkdocs_hooks operations.
+ *
+ * ****************************
+ * * !!! DO NOT EDIT HERE !!! *
+ * ****************************
+ * */
 const NO_HTML = '\'"&#><\n\t\r\\'
 const ALPHA = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%()*+,-./:;=?@^_`{|}~ "
 const TOME_B = [...ALPHA].reduce((o,c,i)=>(o[c]=i,o), {})
+
 
 const unBase =s=> [...s].reduce((v,c)=>v*ALPHA.length + TOME_B[c], 0)
 
@@ -532,20 +549,30 @@ var [uploader, uploaderAsync] = (function(){
  * */
 function getIdeDataFromStorage(editorId, forThis=null){
 
-    let storage = localStorage.getItem(editorId) || ""
-    let outdated = true
+    let storage  = localStorage.getItem(editorId) || ""
+    let upToDate = false
     try{
       const obj = JSON.parse(storage || '{}')
-      outdated = "hash code done name zip".split(' ').some( k => !(k in obj) )
-      if(!outdated) storage=obj
+      upToDate  = "hash code done name zip".split(' ').every(k=> k in obj)
+      if(upToDate) storage=obj
     }catch(_){}
 
-    if(outdated){
+    if(!upToDate){
+        // Here, `storage` is the user code itself (initial implementation of the localStorage)
         storage = freshStore(storage, forThis)
       }
-    return [storage, outdated]
+    return [storage, !upToDate]
 }
 
+
+/**Forbid writing these properties from pyodide. */
+const FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
+    code
+    done
+    hash
+    name
+    zip
+`.trim().split(/\s+/))
 
 function freshStore(code, forThis=null){
     return {
@@ -557,4 +584,15 @@ function freshStore(code, forThis=null){
           zip:  forThis.export,
         })
     }
+}
+
+
+
+
+/**Special JS Error: methods calls exclusions are tested from the JS runtime, instead of pyodide.
+ * So, JS has to throw a special error that will mimic ("enough"...) the pattern of pyodide errors
+ * and hance, will be considered legit errors.
+ */
+class PythonError extends Error {
+    toString(){ return "Python" + super.toString() }
 }

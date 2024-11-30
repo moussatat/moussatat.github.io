@@ -39,6 +39,7 @@ class PyodideSectionsRunner {
   //JS_CONFIG_DUMP
   get attemptsLeft()      { return this.data.attempts_left }
   get autoLogAssert()     { return this.data.auto_log_assert }
+  get autoRun()           { return this.data.auto_run }
   get corrContent()       { return this.data.corr_content }
   get corrRemsMask()      { return this.data.corr_rems_mask }
   get cutFeedback()       { return this.data.cut_feedback }
@@ -50,6 +51,9 @@ class PyodideSectionsRunner {
   get excludedMethods()   { return this.data.excluded_methods }
   get export()            { return this.data.export }
   get hasCheckBtn()       { return this.data.has_check_btn }
+  get hasCorrBtn()        { return this.data.has_corr_btn }
+  get hasCounter()        { return this.data.has_counter }
+  get hasRevealBtn()      { return this.data.has_reveal_btn }
   get isEncrypted()       { return this.data.is_encrypted }
   get isVert()            { return this.data.is_vert }
   get maxIdeLines()       { return this.data.max_ide_lines }
@@ -88,11 +92,14 @@ class PyodideSectionsRunner {
       delete PAGE_IDES_CONFIG[id]
     }
     this.pythonCodeRunnerWithCtx = async (ctx)=>{ pyodide.runPython(ctx.code) }
-    this.getCodeToTest = ()=>""   // if no editor, nothing to test...
-    this.running = undefined      // see CONFIG.running
+    this.getCodeToTest = ()=>""   // If no editor, nothing to test...
+    this.running = undefined      // See CONFIG.runningMode
     this.allowPrint = true
+    this.isGuiCompliant = false   // All the GUI makeup has been applied (may not be, right at the beginning, for tabbed contents, typically)
   }
 
+
+  _init(){}   // Sink for super calls...
 
   _prepareData(data){
     data.python_libs = new Set(data.python_libs)
@@ -100,8 +107,34 @@ class PyodideSectionsRunner {
   }
 
 
+  build(){
+    // Using setTimeout to be sure the `build` step will be complete (some children classes
+    // may have subsequent operations after the super method, aka here, has been called).
+    if(this.autoRun) setTimeout(async ()=>{
+      await waitForPyodideReady()           // Make absolutely sure this happens...
+      await this.applyAutoRun()
+    })
 
-  build(){}   // For inheritance consistency
+    this.makeUpYourGui()
+  }
+
+
+
+  /**Actions to perform when the element becomes "visible" in the page.
+   * Here "visible" is "not hidden", CSS-wise (see `=== "tabbed"`, typically).
+   * */
+  makeUpYourGui(){
+    return this.isGuiCompliant = true
+  }
+
+
+
+  /** Generic call for macros with AUTO_RUN=True (if the runner callback is defined...).
+   * */
+  async applyAutoRun(){
+    if(this.runner) await this.runner()
+  }
+
 
   /** Nothing to do by default (specific to IDEs) */
   codeSnippetEndFeedback(runtime, step, code){}
@@ -178,7 +211,7 @@ class PyodideSectionsRunner {
    *    - @finallyTeardown takes the runtime argument and returns nothing.
    *
    * About executions:
-   *    - @actionName : CONFIG.running property  to be able to identify what's currently running.
+   *    - @actionName : CONFIG.runningMode property  to be able to identify what's currently running.
    *    - @setup is always run
    *    - @action is always called, and it is its job to decide if it has to actually run its
    *       logic or not, depending on the `runtime` state.
@@ -247,8 +280,11 @@ class PyodideSectionsRunner {
   /**Build the default configuration runtime to use to run the user's code.
    * */
   setupGlobalConfig(){
-    CONFIG.runningId = this.id
-    CONFIG.termMessage = ()=>undefined    // sink
+    CONFIG.runningId      = this.id
+    CONFIG.running        = this.running
+    CONFIG.termMessage    = ()=>undefined    // sink
+    globalThis.getStorage = noStorage
+    globalThis.setStorage = noStorage
   }
 
 

@@ -24,7 +24,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
 /* Common to all terminals.
    --n-lines is defined on the parent, through the terminal macro */
-.py_mk_terminal {
+.py_mk_terminal.terminal {
   --color: var(--main-theme);
   --base-color: var(--main-theme);
   --background: var(--gutter-theme);
@@ -55,15 +55,6 @@ If not, see <https://www.gnu.org/licenses/>.
 }
 
 
-.md-typeset .stdout-ctrl svg {
-  fill: none !important;
-}
+.md-typeset .stdout-ctrl > svg { fill: none !important; }
 
-.stdout-wraps-btn span.twemoji:hover {
-  --wrap-opacity: 55% !important;
-}
-
-.md-typeset .stdout-wraps-btn span.twemoji {
-  opacity:var(--wrap-opacity);
-  margin-left: 2px;
-}
+.stdout-wraps-btn > svg { margin-left: 1px; }

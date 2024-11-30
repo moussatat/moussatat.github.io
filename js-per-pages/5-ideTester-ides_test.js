@@ -25,38 +25,70 @@ class IdeTesterGuiManager extends IdeRunner {
 
   constructor(editorId){
     super(editorId)
+    this.globalTestsJq = $("#py_mk_test_global_wrapper")
     this.delay       = 0     // Override: no pause when starting the executions
     this.conf        = null
     this.testing     = false
-    this.toSwap      = [this.data, this.getCodeToTest] // nothing to swap...
+    this.toSwap      = [this.data, ()=>""] // nothing to swap...
     this.ides_cache  = {}
-    this.test_cases  = []   // Linearized version of CASES_DATA
-    this.std_capture = []   // Full stdout+stdErr capture, BEFORE any jQuery.terminal formatting
+    this.test_cases  = []   // List[conf]: Linearized version of CASES_DATA
+    this.std_capture = []   // Full stdout+stdErr capture, AFTER any jQuery.terminal formatting
     this.counters    = {skip:0, remaining:0, failed:0, success:0}
+    this.stopTests   = false
+    this.fullCode    = ""   // Initial loaded code (associated to one conf/test)
   }
 
 
   // @Override
-  checkSrcHash(){}
+  announceCodeChangeBasedOnSrcHash(){}
 
 
   // @Override
   build(){
     super.build()
 
+    this.finalizeFilters()
+    this.finalizeControllers()
+
+    // Configure all the tests before the counters, so that counts are up to date
     const confsArr = Object.values(CASES_DATA)
-    confsArr.forEach( this.setupOneConfCaseAndAllSubcases.bind(this) )
-    this.finalizeGlobalUiAndCounters(confsArr.length, this.test_cases.length)
+    confsArr.forEach( conf=>this.setupOneConfCaseAndAllSubcases(conf) )
+
+    this.finalizeCounters(confsArr.length, this.test_cases.length)
   }
 
 
 
-  finalizeGlobalUiAndCounters(nIdes, nTests){
+  finalizeFilters(){
+    const ideThis = this
+    $(".filter-btn").each(function(){
+
+      const jBtn = $(this)
+      const kind = this.id.split('-')[1]
+      ideThis.globalTestsJq.css(`--display-${ kind }`, 'unset')
+
+      jBtn.find(".status_filter").html(CONFIG.QCM_SVG).addClass([CONFIG.qcm.multi, kind])
+
+      jBtn.on('click', function(){
+        const state = 1 ^ +jBtn.attr('state')
+        jBtn.attr('state', state)
+        ideThis.globalTestsJq.css(`--display-${ kind }`, state?'unset':'none')
+      })
+    })
+  }
+
+
+
+  finalizeControllers(){
 
     // configure "run all" button:
-    $(this.globalIdH).parent()
+    this.global.parent()
                      .find('button[btn_kind=test_ides]')
                      .on('click', ()=>this.runAllTests())
+                     .parent()
+                     .find('button[btn_kind=test_stop]')
+                     .on('click', ()=>this.stopTests=true)
+
 
     // Configure global buttons (select-all, unselect-all):
     ;[ [false, ''], [true, 'un'] ].forEach(([state,prefix])=>{
@@ -74,15 +106,10 @@ class IdeTesterGuiManager extends IdeRunner {
       this.test_cases.forEach(o=>{
         if(!o.human) return;
         o.skip = !o.skip
-        this.setSvgAndCounters(o, `${ o.skip?'un':'' }checked`)
+        this.setSvgAndCounters(o, o.skip?CONFIG.qcm.unchecked:CONFIG.qcm.checked)
       })
       this.displayCounters()
     })
-
-    // Finalize and display initial counters state, once all the tests have been registered:
-    const allHtml = nTests==nIdes ? nIdes : `${ nIdes }<br>(${ nTests } cases)`
-    $('#cnt-all').html(allHtml)
-    this.displayCounters()
   }
 
 
@@ -98,15 +125,18 @@ class IdeTesterGuiManager extends IdeRunner {
       // If subcases are defined:
       const propsToReport = 'editor_id ide_link ide_name page_url rel_dir_url'.split(' ')
       conf.subcases.forEach( (subConf, i)=>{
-        if(i) subConf.no_clear = true            // Keep original choice for first only
+        if(i) subConf.no_clear ??= true            // Keep original choice
         for(const prop of propsToReport){
           subConf[prop] = conf[prop]
         }
         this.registerOneTestAndSetupUI(subConf, batchOfTests, i+1)
 
         // Bind subcases "play" buttons: "run all subcases until this one"
-        $(`#play${i+1}-${ conf.editor_id } > button`).on(
+        $(`#play${i+1}-${ conf.editor_id } > button[btn_kind=test_1_ide]`).on(
           'click', ((testsUpTo)=> ()=>this.runAllTests(testsUpTo) )(batchOfTests.slice())
+        )
+        $(`#play${i+1}-${ conf.editor_id } > button[btn_kind=load_ide]`).on(
+          'click', this.loadFactory(conf)
         )
       })
     }
@@ -121,7 +151,6 @@ class IdeTesterGuiManager extends IdeRunner {
   }
 
 
-
   registerOneTestAndSetupUI(conf, batchOfTests, tailId=""){
 
     this.test_cases.push(conf)
@@ -129,17 +158,19 @@ class IdeTesterGuiManager extends IdeRunner {
 
     this.testConfStandardization(conf, tailId)
 
-    const [countProp, setupClass] = conf.skip ? ['skip','unchecked'] : ['remaining','checked']
+    const [countProp, setupClass] = conf.skip ? ['skip',      CONFIG.qcm.unchecked]
+                                              : ['remaining', CONFIG.qcm.checked]
     this.counters[countProp]++
 
-    $(conf.divSvgBtnsId)
+    const jDiv = $(conf.divSvgBtnsId)
       .html(CONFIG.QCM_SVG)
       .addClass([ 'multi', setupClass])
       .on( 'click', _=>{
-          if(this.testing) return;
-          this.setSvgAndCounters(conf, conf.skip ? 'checked':'unchecked')
-          this.displayCounters()
+        if(this.testing) return;
+        this.setSvgAndCounters(conf, conf.skip ? CONFIG.qcm.checked : CONFIG.qcm.unchecked)
+        this.displayCounters()
       })
+    this.updateItemVar(jDiv, setupClass)
   }
 
 
@@ -161,14 +192,37 @@ class IdeTesterGuiManager extends IdeRunner {
     conf.revealedCorrRems = false
 
     ;'std_capture_regex not_std_capture_regex'.split(' ').forEach( prop=>{
-      if(conf[prop]) conf[prop] = new RegExp(conf[prop], 's')
+      try{
+        if(conf[prop]) conf[prop] = new RegExp(conf[prop], 'si')
+      }catch(e){
+        throw new PythonError(`Invalid Regex generation for ${ prop }, using ${ conf[prop] }`)
+      }
     })
 
     conf.assertions = !conf.assertions ? [] : conf.assertions.split(' ').map(rule=>{
-      const prop=rule.replace(/^!/, '')
+      const prop = _.camelCase( rule.replace(/^!/, '') )
       const revExpected = rule.startsWith('!')  // Reversing to enforce booleans everywhere
-      return (obj) => !obj[prop]==revExpected ? "" : `${ prop }: should be ${ !revExpected }`
+      return (obj) =>{
+        if( obj[prop]===undefined ) return prop+' is undefined...'
+        return!obj[prop] == revExpected ? "" : `${ prop }: should be ${ !revExpected }\n`
+      }
     })
+  }
+
+
+
+
+  finalizeCounters(nIdes, nTests){
+    // Finalize and display initial counters state, once all the tests have been registered:
+    const allHtml = nTests==nIdes ? nIdes : `${ nIdes }<br>(${ nTests } cases)`
+    $('#cnt-all').html(allHtml)
+    this.displayCounters()
+  }
+
+
+  updateItemVar(jDivSvg, kind){
+    const itemVar = jDivSvg.attr('itemVar')
+    this.globalTestsJq.css(itemVar, `var(--display-${ kind })`)
   }
 
 
@@ -176,20 +230,21 @@ class IdeTesterGuiManager extends IdeRunner {
   /**Update the html class of the svg container with the given id.
    * */
   setSvgAndCounters(conf, kls){
-    const div = $(conf.divSvgBtnsId)
-    this.updateCountersFor(div, -1)
-    div.removeClass(['checked', 'unchecked', 'correct', 'incorrect', 'must-fail'])
-    div.addClass(kls)
-    this.updateCountersFor(div, +1)
-    conf.skip = div.hasClass('unchecked')
+    const jDiv = $(conf.divSvgBtnsId)
+    this.updateItemVar(jDiv, kls)
+    this.updateCountersFor(jDiv, -1)
+    jDiv.removeClass(CONFIG.qcm_clean_up)
+    jDiv.addClass(kls)
+    this.updateCountersFor(jDiv, +1)
+    conf.skip = jDiv.hasClass(CONFIG.qcm.unchecked)
   }
 
 
-  updateCountersFor(div, delta){
-    if(div.hasClass('correct'))   this.counters.success   += delta
-    if(div.hasClass('incorrect')) this.counters.failed    += delta
-    if(div.hasClass('checked'))   this.counters.remaining += delta
-    if(div.hasClass('unchecked')) this.counters.skip      += delta
+  updateCountersFor(jDiv, delta){
+    if(jDiv.hasClass(CONFIG.qcm.ok))        this.counters.success   += delta
+    if(jDiv.hasClass(CONFIG.qcm.wrong))     this.counters.failed    += delta
+    if(jDiv.hasClass(CONFIG.qcm.checked))   this.counters.remaining += delta
+    if(jDiv.hasClass(CONFIG.qcm.unchecked)) this.counters.skip      += delta
   }
 
 
@@ -207,21 +262,27 @@ class IdeTesterGuiManager extends IdeRunner {
   }
 
 
-  swapConfAndData(){
+  swapConfAndData(data=undefined, codeGetter=undefined){
+    if(data!==undefined){
+      this.toSwap = [ data, codeGetter ]
+    }
     ;[this.data, this.toSwap[0]]          = [this.toSwap[0], this.data]
     ;[this.getCodeToTest, this.toSwap[1]] = [this.toSwap[1], this.getCodeToTest]
   }
 
 
   // Override
-  terminalDisplayOnStart(){
-    if(this.isTesting()){
-      this.terminal.echo(`Testing: ${ this.conf.ide_name }`)
-    }
-    super.terminalDisplayOnStart()
+  terminalDisplayOnIdeStart(){
+    this.announceTest(false)
+    super.terminalDisplayOnIdeStart()
   }
 
-
+  announceTest(clearFromTerm){
+    if(this.testing){
+      if(clearFromTerm) this.terminal.clear()
+      this.terminal.echo(`Testing: ${ this.conf.ide_name }`)
+    }
+  }
 
 
 
@@ -231,51 +292,69 @@ class IdeTesterGuiManager extends IdeRunner {
   loadFactory(conf){
     return async ()=>{
       await waitForPyodideReady()
-
       if(this.testing) return;    // Deactivated during tests (otherwise, big troubles...)
 
+      this.conf = conf
       this.data = await this.getIdeData(conf)   // Update first (see getters)
 
-      const sections = [
-        this._toSection('env',       this.envContent),
-        this._toSection('env_term',  this.envTermContent),
-        this._toSection('corr',      this.corrContent),
-        this._toSection('code',      this.userContent),
-        this._toSection('post_term', this.postTermContent),
-        this._toSection('post',      this.postContent),
-      ]
-      const codeToTest = sections.splice( 2+Boolean(conf.code), 1)[0]
-
-      const fullCode = [
-        codeToTest,
-        CONFIG.lang.tests.msg.trimEnd(),
-        this._toSection('tests', this.publicTests),
-        this._toSection('secrets', this.secretTests),
-        `\n\n"""\n${ sections.join('').replace(/"""/g, '\\"\\"\\"').trimStart() }\n"""`
-      ].join('')
-
-      this.applyCodeToEditorAndSave(fullCode)
+      this.getCodeToTest =()=> this.editor.getSession().getValue()
+      this.applyCodeToEditorAndSave(conf.loadedCode)
+      this._applyConfAndData(true)
     }
   }
 
-
-
-  /**Build a sub section of the original python file.
+  // @Override
+  /**Reset the content of the editor to its initial content, and reset the localStorage for
+   * the editor on the way.
    * */
-  _toSection(py_section, content){
-    return content && `\n\n# --- PYODIDE:${ py_section } --- #\n${ content }`
+  restart(){    jsLogger("[RestartTester]")
+    let startCode = ""
+    if(this.conf){
+      startCode = this.conf.loadedCode
+      this._applyConfAndData(true)
+    }
+    this.applyCodeToEditorAndSave(startCode)
+    this.updateValidationBtnColor(0)
+    this.terminal.clear()
+    this.focusEditor()
   }
 
 
+  _applyConfAndData(onLoad=false){
+
+    const hasSetMaxHide = 'set_max_and_hide' in this.conf
+    if(onLoad || hasSetMaxHide){
+      this.conf.revealedCorrRems = false
+      this.hiddenDivContent      = true
+      this.srcAttemptsLeft       = hasSetMaxHide ? this.conf.set_max_and_hide
+                                                 : this.conf.srcAttemptsLeft
+      this.data.attempts_left    = this.srcAttemptsLeft
+    }
+
+    this.terminal.settings().outputLimit = this.stdoutCutOff
+    this.updateStdoutCutFeedback(this.cutFeedback)
+
+    this.setAttemptsCounter(this.attemptsLeft, true)
+    this._clearStateIfNeededAndReinit(onLoad)
+    this.setupFetchers()
+    this.clearLibs()
+  }
+
+
+  // @Override
+  setAttemptsCounter(n, low=false){
+    n = Number.isFinite(n) ? n : "∞"
+    if(low){
+      $(this.counterH+'-low').text(n)
+    }
+    super.setAttemptsCounter(n)
+  }
 
 
   save(_){}
 
-  runAllTests(){ throw new Error('Not implemented') }
 
-  /**Is the current action "running all IDEs tests"? (or even, only some of them...)
-   * */
-  isTesting(){ return this.running.includes(CONFIG.running.testing) }
+  runAllTests(){ throw new Error('Not implemented') }
 
 
 
@@ -297,8 +376,12 @@ class IdeTesterGuiManager extends IdeRunner {
       const configs  = decompressAndConvert(fix_comp)
 
       Object.entries(configs).forEach( ([editor,data])=>{
+        // WARNING, the conf object matches only ONE of the data extracted from one page, so the
+        // data object cannot be updated right away with decrease_attempts_on_user_code_failure
+        // and so on...
         conf._profile = data.profile
         if(!conf.keep_profile) data.profile = null   // Remove profile info for tests (by default).
+
         this.ides_cache[editor] = this._prepareData(data)
       })
     }
@@ -312,9 +395,57 @@ class IdeTesterGuiManager extends IdeRunner {
       +"rendered data). Otherwise, please raise an issue on the project's repository."
     )
 
+    // Update the global values, once only:
+    if(!conf.__conf_updated){
+      conf.__conf_updated = 1
+
+      ;`decrease_attempts_on_user_code_failure
+        deactivate_stdout_for_secrets
+        show_only_assertion_errors_for_secrets
+      `.trim()
+        .split(/\s+/).forEach(prop=>{
+        if(prop in conf) data[prop] = conf[prop]
+      })
+
+      if('set_max_and_hide' in conf){
+        conf.set_max_and_hide = conf.set_max_and_hide==1000 ? Infinity : conf.set_max_and_hide
+      }
+      conf.srcAttemptsLeft = data.attempts_left
+
+      const sections = [
+        this._toSection('env',       data.env_content),
+        this._toSection('env_term',  data.env_term_content),
+        this._toSection('code',      data.user_content),
+        this._toSection('corr',      data.corr_content),
+        this._toSection('tests',     data.public_tests),
+        this._toSection('secrets',   data.secret_tests),
+        this._toSection('post_term', data.post_term_content),
+        this._toSection('post',      data.post_content),
+      ]
+      // Extract the section used during the tests (based on the main conf object...):
+      const [codeToTest] = sections.splice(2 + !conf.code, 1)
+      const others       = sections.join('').replace(/'''/g, "\\'\\'\\'").trim()
+      const commented    = others && `\n\n\n'''\n${ others }\n\n'''\n`
+      conf.loadedCode    = codeToTest.trim() + commented
+    }
+
+
     // Send back a copy, to allow runtime mutation while keeping a clean initial state
-    return {...data}
+    // (no need for a deep copy, so far...)
+    const freshData = {...data}
+    if('set_max_and_hide' in conf){
+      freshData.attemptsLeft = conf.set_max_and_hide
+    }
+    return freshData
   }
+
+
+  /**Build a sub section of the original python file.
+   * */
+  _toSection(py_section, content){
+    return content && `\n\n# --- PYODIDE:${ py_section } --- #\n${ content }`
+  }
+
 }
 
 
@@ -333,51 +464,64 @@ class IdeTesterGuiManager extends IdeRunner {
 class IdeTester extends IdeTesterGuiManager {
 
 
+  constructor(editorId){
+    super(editorId)
+
+    this.runners = {
+      play:     this.playFactory(CONFIG.runningMode.testingPlay),
+      validate: this.validateFactory(CONFIG.runningMode.testingValid),
+      terminal: async ()=>{ await this.runnerTerm(this.conf.term_cmd) },
+    }
+  }
+
 
   async runAllTests(targets){
     if(this.testing) return;
     await waitForPyodideReady()
 
     this.terminal.clear()
-    const start = Date.now()
-    this.testing = true
+    const start    = Date.now()
+    this.testing   = true
+    this.stopTests = false
 
     const confsToRun = (targets ?? this.test_cases).filter( conf =>{
       const skip = (!targets || targets.length!=1) && conf.skip
       if(!skip){
-        this.setSvgAndCounters(conf, 'checked')
+        this.setSvgAndCounters(conf, CONFIG.qcm.checked)
       }
       return !skip
     })
 
     this.displayCounters()
 
-    const final = (isOk)=>(arg)=>{
-      this.testing  = false
-      const txt     = isOk ? CONFIG.lang.testsDone.msg : txtFormat.error(String(arg))
-      const elapsed = ((Date.now() - start) / 1000).toFixed(1)
-
-      this.terminal.echo(txt)
-      this.terminal.echo(txtFormat.info(`(Elapsed time: ${ elapsed }s)`))
-    }
-
     /* Running everything in order: it's actually a bit faster (probably because not queueing again
        and again while waiting in getIdeData...?). So don't bother with Promise.all anymore...  */
+    let errOrNull=null
     try{
       for(const conf of confsToRun){
+        if(this.stopTests) break
         this.conf = conf
         jsLogger('[Testing] - start', conf.ide_name)
-        if(conf.run_play){
-          await this.playFactory(CONFIG.running.testingPlay)()
-        }else{
-          await this.validateFactory(CONFIG.running.testingValid)()
-        }
-        jsLogger('[Testing] - done', conf.ide_name)
+        const runningKind = conf.term_cmd!==undefined ? 'terminal'
+                          : conf.run_play ? 'play' : 'validate'
+        await this.runners[ runningKind ]()
+        jsLogger('[Testing] - done', conf.ide_name, '\n')
       }
-      final(true)()
-    }catch{
-      final(false)()
+    }catch(e){ errOrNull=e
+    }finally{
+      this._endTests(start, errOrNull)
     }
+  }
+
+
+  _endTests(start, error=null){
+    this.testing   = false
+    this.stopTests = false
+    this.conf      = null
+    const txt      = !error ? CONFIG.lang.testsDone.msg : txtFormat.error(String(error))
+    const elapsed  = ((Date.now() - start) / 1000).toFixed(1)
+    this.terminal.echo(txt)
+    this.terminal.echo(txtFormat.info(`(Elapsed time: ${ elapsed }s)`))
   }
 
 
@@ -391,95 +535,105 @@ class IdeTester extends IdeTesterGuiManager {
   }
 
 
-  // @Override
-  setAttemptsCounter(n, low=false){
-    n = Number.isFinite(n) ? n : "∞"
-    if(low){
-      $(this.counterH+'-low').text(n)
-    }
-    super.setAttemptsCounter(n)
+  async setupRuntimeTests(){
+    if(!this.testing) return;
+    const data = await this.getIdeData(this.conf)
+    this.swapConfAndData(data, this.buildCodeGetter())
+    this._applyConfAndData()
   }
 
+
+  /**Note: Do NOT clear the scope in teardownRuntime: this would forbid
+   * playing with the terminal afterward.
+   * */
+  _clearStateIfNeededAndReinit(force=false){
+    if(force || !this.conf.no_clear){
+      clearPyodideScope()
+      this._init()
+    }
+  }
+
+
+
+  async teardownRuntimeTests(runtime){
+    if(!this.testing) return;
+
+    this.conf.attempts_end = this.attemptsLeft  // Store before swap
+    const testOutcome = this._analyzeTestOutcome(runtime)
+
+    const success     = !testOutcome
+    const classToBe   = !success        ? CONFIG.qcm.wrong
+                      : !this.conf.fail ? CONFIG.qcm.ok
+                                        : [CONFIG.qcm.ok,CONFIG.qcm.failOk]
+                                                      // warning: failOk always last!
+
+    this.swapConfAndData()    // Has to always occur
+    this.teardownFetchers()   // Has to always occur
+
+    this.setSvgAndCounters(this.conf, classToBe)
+    this.displayCounters()
+    this.std_capture.length = 0   // Always...
+
+    if(testOutcome){
+      if(!runtime) throw new Error(testOutcome)
+      else         console.error(testOutcome)
+    }
+  }
 
 
 
   // @Override
   async setupRuntimeIDE(){
-
-    if(this.isTesting()){
-      const data = await this.getIdeData(this.conf)
-
-      ;`decrease_attempts_on_user_code_failure
-        deactivate_stdout_for_secrets
-        show_only_assertion_errors_for_secrets
-      `.trim()
-        .split(/\s+/).forEach(prop=>{
-        if(prop in this.conf) data[prop] = this.conf[prop]
-      })
-
-      this.toSwap = [ data, this.buildCodeGetter() ]
-      this.swapConfAndData()
-
-      if('set_max_and_hide' in this.conf){
-        const max = this.conf.set_max_and_hide==1000 ? Infinity : this.conf.set_max_and_hide
-        this.data.attempts_left = max
-        this.hiddenDivContent   = true
-        this.conf.revealedCorrRems = false
-      }
-      this.setAttemptsCounter(this.attemptsLeft, true)
-      this.conf.attempts_start = this.attemptsLeft
-
-      this.terminal.settings().outputLimit = this.stdoutCutOff
-      this.updateStdoutCutFeedback(this.cutFeedback)
-
-
-      // Do NOT clear the scope in teardownRuntime: would forbid playing with the terminal afterward.
-      if(!this.conf.no_clear){
-        clearPyodideScope()
-        this._ide_init()
-      }
-      this.setupFetchers(this.conf)
-    }
-
+    await this.setupRuntimeTests()
     return await super.setupRuntimeIDE()
   }
-
-
-
   // @Override
   async teardownRuntimeIDE(runtime){
     try{
       await super.teardownRuntimeIDE(runtime)
-
     }finally{
-      if(!this.isTesting()) return;
-
-      this.conf.attempts_end = this.attemptsLeft  // Store before swap
-      const testOutcome = this._analyzeTestOutcome(runtime)
-
-      const success     = !testOutcome
-      const classToBe   = !success        ? 'incorrect'
-                        : !this.conf.fail ? 'correct'
-                                          : ['correct','must-fail']
-                                                        // warning: .must-fail always last!
-
-      this.swapConfAndData()    // Has to always occur
-      this.teardownFetchers()   // Has to always occur
-
-      this.setSvgAndCounters(this.conf, classToBe)
-      this.displayCounters()
-      this.std_capture.length = 0   // Always...
-
-      if(testOutcome){
-        if(!runtime) throw new Error(testOutcome)
-        else         console.error(testOutcome)
-      }
+      await this.teardownRuntimeTests(runtime)
     }
   }
+
+  // @Override
+  async setupRuntimeTerminalCmd(cmdChunk){
+    if(this.testing){
+      this.announceTest(true)
+      await this.setupRuntimeTests()
+    }
+    const runtime = await super.setupRuntimeTerminalCmd(cmdChunk)
+    if(this.testing){
+      const cmd = this.conf.term_cmd.split('\n').join('\n'+CONFIG.MSG.promptWait)
+      this.terminalEcho(CONFIG.MSG.promptStart + cmd)
+    }
+    return runtime
+  }
+  // @Override
+  async teardownRuntimeTerminalCmd(runtime){
+    try{
+      await super.teardownRuntimeTerminalCmd(runtime)
+    }finally{
+      await this.teardownRuntimeTests(runtime)
+    }
+  }
+
+  // @Override
+  getAsyncPythonExecutor(){
+    return super.getAsyncPythonExecutor(CONFIG.runningMode.testingCmd)
+  }
+
+
+
+
+  // ------------------------------------------------------------
+
+
 
 
   // Override
   revealSolutionAndRems(){
+    if(!this.conf) return;
     this.conf.revealedCorrRems = true
     this.hiddenDivContent = false      // Mimic actual behavior
   }
@@ -492,32 +646,38 @@ class IdeTester extends IdeTesterGuiManager {
     const fullOut = this.std_capture.join('')
     let msg = []
 
-    if(!Number.isFinite(this.conf.attempts_start)){
+    if(!Number.isFinite(this.srcAttemptsLeft)){
       if(Number.isFinite(this.conf.attempts_end)) msg.push(
         "The number of attempts left should still be infinite, but was: " + this.conf.attempts_end
       )
+      if(this.conf.delta_attempts) msg.push(
+        `Expected delta_attempts=${ this.conf.delta_attempts } the final number of attempts is: ${ this.conf.attempts_end }`
+      )
+
     }else if(this.conf.delta_attempts!==undefined){
-      const actual = this.conf.attempts_end - this.conf.attempts_start
+      const actual = this.conf.attempts_end - this.srcAttemptsLeft
       const exp    = this.conf.delta_attempts
       if(exp != actual) msg.push(
         `Delta attempts: ${ actual } should be ${ exp }`
       )
     }
 
-    if( ('reveal_corr_rems' in this.conf)){
+
+    if(('reveal_corr_rems' in this.conf)){
       if(this.conf.reveal_corr_rems !== this.conf.revealedCorrRems) msg.push(
         this.conf.reveal_corr_rems ? "Corr/REMs should have been revealed."
                                    : "Corr/REMs should NOT have been revealed."
       )
     }
 
-    const assertions=this.conf.assertions.map(check=>check(this)).join('')
-    if(assertions) msg.push(assertions)
+
+    const failedAssertions = this.conf.assertions.map(check=>check(this)).join('')
+    if(failedAssertions) msg.push(failedAssertions)
+
 
     if(this.conf.in_error_msg && !runtime.stdErr.includes(this.conf.in_error_msg)){
       msg.push(`The error message should contain; "${this.conf.in_error_msg}"`)
     }
-
     if(this.conf.not_in_error_msg && runtime.stdErr.includes(this.conf.not_in_error_msg)){
       msg.push(`The error message should NOT contain; "${this.conf.not_in_error_msg}"`)
     }
@@ -527,17 +687,16 @@ class IdeTester extends IdeTesterGuiManager {
         `The std output/error should match ${ this.conf.std_capture_regex }, but found:\n\n${ fullOut }`
       )
     }
-
     if(this.conf.not_std_capture_regex && this.conf.not_std_capture_regex.test(fullOut) ){
       msg.push(
-        `The std output/error should NOT match ${ this.conf.std_capture_regex }, but found:\n\n${ fullOut }`
+        `The std output/error should NOT match ${ this.conf.not_std_capture_regex }, but found:\n\n${ fullOut }`
       )
     }
+
 
     if(!msg.length && runtime.stopped === this.conf.fail){
       return ""
     }
-
     msg = [
       `Test failed for ${this.conf.ide_link} :`,
       runtime.stdErr || "No error raised, but...",
@@ -552,9 +711,9 @@ class IdeTester extends IdeTesterGuiManager {
    * to the correct (original) locations, and setup various sinks to avoids DOM interactions to
    * fail, typically when trying to update img tags through `PyodidePlot` or `mermaid_figure`.
    * */
-  setupFetchers(conf){
+  setupFetchers(){
 
-    CONFIG.relUrlRedirect = `${ CONFIG.baseUrl }/${ conf.rel_dir_url }/`.replace(/[/]{2}/g, '/')
+    CONFIG.relUrlRedirect = `${ CONFIG.baseUrl }/${ this.conf.rel_dir_url }/`.replace(/[/]{2}/g, '/')
 
     pyodide.runPython(`
 
@@ -630,6 +789,25 @@ del __hack_pyfetch`)
   teardownFetchers(){
     CONFIG.relUrlRedirect = ''
     pyodide.runPython("teardown_tests()")
+  }
+
+
+  clearLibs(){
+    if(!this.conf.clear_libs) return
+    pyodide.runPython(`
+def _hack_remove_libs():
+    import sys, shutil
+    from pathlib import Path
+
+    to_clear = ${ JSON.stringify(this.conf.clear_libs) }
+    for name in to_clear:
+        sys.modules.pop(name, None)
+        p = Path(name)
+        if p.exists():
+            shutil.rmtree(p)
+_hack_remove_libs()
+del _hack_remove_libs
+`)
   }
 }
 

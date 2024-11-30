@@ -22,16 +22,15 @@ class BtnRunner extends PyodideSectionsRunner {
 
   // @Override
   build(){
-    $('#'+this.id).find("button").on(
-      'click',
-      this.lockedRunnerWithBigFailWarningFactory(
-        CONFIG.running.btn,
-        this.setupRuntime,
-        ()=>null,                 // No "user" action!
-        this.teardownRuntime,
-      )
+    this.runner = this.lockedRunnerWithBigFailWarningFactory(
+      CONFIG.runningMode.btn,
+      this.setupRuntime,
+      ()=>null,                 // No "user" action!
+      this.teardownRuntime,
     )
+    $('#'+this.id).find("button").on(
+      'click', this.runner)
+    super.build()
   }
 }
-
 CONFIG.CLASSES_POOL.PyBtn = BtnRunner

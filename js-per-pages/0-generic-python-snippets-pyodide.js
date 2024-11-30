@@ -19,16 +19,6 @@ If not, see <https://www.gnu.org/licenses/>.
 
 
 
-/**Special JS Error: methods calls exclusions are tested from the JS runtime, instead of pyodide.
- * So, JS has to throw a special error that will mimic ("enough"...) the pattern of pyodide errors
- * and hance, will be considered legit errors.
- */
-class PythonError extends Error {
-    toString(){ return "Python" + super.toString() }
-}
-
-
-
 
 
 
@@ -60,21 +50,37 @@ def _hack_auto_run():
         def __repr__(self):
             return "AutoRunner()"
 
-    __builtins__.auto_run = AutoRunner()
+    # Keep uncleaned elements:
+    runner = AutoRunner()
+    if hasattr(__builtins__, 'auto_run'):
+        runner.run |= __builtins__.auto_run.run
+    __builtins__.auto_run = runner
 
 
     def as_builtin(name_or_func):
+        """
+        Automatically add the decorated function in the builtins module. Usage:
+
+        \`\`\`python
+        @as_builtin
+        def func(...): pass     # declare __builtins__.func
+
+        @as_builtin("actual_name")
+        def func(...): pass     # declare __builtins__.actual_name = func
+        \`\`\`
+        """
 
         if not isinstance(name_or_func, str):
             return as_builtin(name_or_func.__name__)(name_or_func)
         return lambda func: setattr(__builtins__, name_or_func, func) or func
+
 
     __builtins__.as_builtin = as_builtin
 
 
     @as_builtin
     def wraps_builtin(
-        *,
+        *args,
         source=None,
         store=True,
         name="",
@@ -82,10 +88,13 @@ def _hack_auto_run():
         """
         Build a singleton object that mimics as much as possible an original builtin,
         defining repr, str, dir, __name__ and __qualname__ behaviors of the builtin function.
+        Can also be used with user defined functions, to get a custom \`repr\` value which
+        doesn't show some horrible \`<function _hack_xxx.<locals>.some_func>\` to the user
+        when printed in the terminal.
 
-        type and help give slightly different behaviors:
-            * type(func) is showing the BuiltinWrapperXxx name
-            * help(func) is showing the original docstring of func if defined, or the builtin's
+        \`type\` and \`help\` give slightly different behaviors:
+            * \`type(func)\` is showing the BuiltinWrapperXxx name
+            * \`help(func)\` is showing the original docstring of func if defined, or the builtin's
                help message, wrapped inside the BuiltinWrapperXxx class layout
 
         @source:        The function to "mimic". Generally a builtin, but might be any function
@@ -95,8 +104,16 @@ def _hack_auto_run():
 
         def wrapper(func):
 
-            src = source or func
-            func_name = name or src.__name__
+            builtin_src = f"__{ func.__name__ }_src__"
+            is_builtin  = hasattr(__builtins__, builtin_src)
+
+            if is_builtin:
+                src       = source or getattr(__builtins__, f"__{ func.__name__ }_src__")
+                func_name = name or getattr(src, '__name__', func.__name__)
+            else:
+                src       = source or func
+                func_name = name or getattr(src, '__name__', func.__name__)
+
 
             class BuiltinWrapper:
 
@@ -108,8 +125,11 @@ def _hack_auto_run():
                     self.__class__.__doc__ = func.__doc__ or source and source.__doc__
 
                 def __call__(self, *a,**kw):  return self.func(*a,**kw)
-                def __repr__(self):           return f"<function {name}>" if name else repr(src)
                 def __dir__(self):            return dir(src)
+                def __repr__(self):
+                    if is_builtin and func_name!='help':
+                        return repr(src)
+                    return f"<function {func_name}>"
 
             kls_name = "BuiltinWrapper" + func_name.capitalize()
             BuiltinWrapper.__name__ = BuiltinWrapper.__qualname__ = kls_name
@@ -119,11 +139,13 @@ def _hack_auto_run():
                 as_builtin(func_name)(wrapped)
             return wrapped
 
-        return wrapper
 
-    # @wraps_builtin(__input_src__)
-    # def meh(msg):
-    #     __builtins__.print(msg)
+        if len(args)>1 or args and (not callable(args[0]) or source or name):
+            raise ValueError(
+                "Invalid call for @wraps_builtin: shouldn't be used with positional arguments,"
+                " unless it's the function to wrap."
+            )
+        return wrapper(args[0]) if args else wrapper
 
 _hack_auto_run()
 del _hack_auto_run
@@ -141,9 +163,11 @@ def version():
 @auto_run
 def _hack_io_stuff():
 
-    import js
+    import js, re
+    from pydoc import render_doc
+    from typing import Any
 
-    @wraps_builtin(source=__input_src__)
+    @wraps_builtin
     def input(question:str="", beginning:str=""):
         question = question or ""           # Original is using None so, just in case...
         result = js.prompt(f"{ beginning }{ question }")
@@ -151,17 +175,29 @@ def _hack_io_stuff():
         return result
 
 
-    @wraps_builtin(source=__help_src__, name='help')
-    def help(stuff):
+    @wraps_builtin
+    def help(object_or_function):
         """
-        Replace the original help function, which doesn't work as expected in pyodide.
-        Signature:  help(object_or_function)
+        Replace the original help function, which doesn't work as expected within pyodide.
         """
-        print(getattr(stuff, '__doc__', None))
+
+        class_name = getattr(type(object_or_function), '__name__', '')
+        prefix     = 'BuiltinWrapper'
+        if class_name.startswith(prefix):
+            func_name = class_name[len(prefix):].lower()
+            if func_name == 'help':
+                object_or_function = object_or_function.func
+            else:
+                src_name = f"__{ func_name }_src__"
+                object_or_function    = getattr(__builtins__, src_name, None) or object_or_function.func
+
+        doc = render_doc(object_or_function)
+        print(re.sub(r"\x08.", "", doc))
 
 
-    @wraps_builtin(name="terminal_message")
-    def terminal_message(key, msg:str, format:str="none"):
+
+    @wraps_builtin
+    def terminal_message(key, msg:Any, *_:Any, format:str="none", new_line=True, **__):
         """
         Display the given message directly into the terminal, without using the python stdout.
         This allows to give informations to the user even if the stdout is deactivated during
@@ -171,9 +207,17 @@ def _hack_io_stuff():
         @msg:    The message to display. Can be a multiline string.
         @format: The name of one of the predefined formatting for the terminal:
                  "error", "warning", "info", "italic", "stress", "success", "none" (default)
+        @new_line: if False, no new line character is added after the @msg content.
         """
+        # _ and __ are used as sinks for use of terminal_message as a replacement for print in
+        # p5 codes converted from Basthon.
+        # This is also the reason why the automatic conversion to string + join has been added.
+        # Use of end=... is just ignored.
+        # NOTE: keep these info outside of PMT public documentation...
+
+        msg = __.get('sep',' ').join(map(str, (msg, *_)))
         try:
-            js.config().termMessage(key, msg, format)
+            js.config().termMessage(key, msg, format, False, new_line)
         except Exception as e:
             raise ValueError(str(e)) from None
 `,
@@ -191,8 +235,14 @@ def _hack_copy_from_server():
     ):
         from pyodide.http import pyfetch
         from pathlib import Path
+        from urllib.error import URLError
+
+
 
         response = await pyfetch(src)
+        if not response.ok:
+            raise URLError(f"Failed request for { src }.")
+
         content  = await response.bytes()
         target   = Path(dest) / (name or Path(src).name)
             # Note: Path(src).name works to extract the name file on urls, but the path
@@ -208,11 +258,11 @@ def _hack_exclusions_tools():
 
     type = __builtins__.type      # avoid restrictions troubles
 
-    @as_builtin
-    def __move_forward__(stuff):
+    @wraps_builtin
+    def __move_forward__(x):
         treasure = __builtins__.__builtins___
-        if type(stuff) is str and stuff in treasure:
-            return treasure[stuff][0]
+        if type(x) is str and x in treasure:
+            return treasure[x][0]
 
     @as_builtin
     class ExclusionError(Exception):
@@ -230,9 +280,15 @@ def _hack_scope_cleaner():
     set = __builtins__.set
     globals = __builtins__.globals
 
-    @as_builtin
-    def clear_scope(skip=()):
-        keeper = set(skip) | {
+    @wraps_builtin
+    def clear_scope(keep=()):
+        """
+        Remove any new function or variable from the global scope, keeping only:
+
+        - Variables and functions that were defined after the start of the environment.
+        - Elements present in the @keep argument (Iterable).
+        """
+        keeper = set(keep) | {
             '__name__', '__doc__', '__package__', '__loader__', '__spec__',
             '__annotations__', '__builtins__', '_pyodide_core', 'version'
         }
@@ -498,21 +554,23 @@ def _hack_mermaid():
     try:
         if js.config().needMermaid:
             js.mermaid
+
         else:
+            @as_builtin
             def mermaid_figure(*_,**__):
                 raise ValueError(
-                     "The function mermaid_figure cannot be used because there is no registration"
-                    +" in the page.\\n\\nDon't forget to mark the markdown page by using the "
-                    +"argument 'MERMAID=True' in one of the macros (IDE, IDEv, terminal or py_btn)"
+                     "The function mermaid_figure cannot be used because there is no mermaid "
+                    +"registration in the page.\\nDon't forget to mark the markdown page "
+                    +"by using the argument 'MERMAID=True' in one of the macros (IDE, IDEv, "
+                    +"terminal or py_btn)"
                 )
     except:
         raise ValueError(
             "Cannot create mermaid logistic: the js mermaid object doesn't exist."
-            +"\\n\\nDon't forget to mark the markdown page by using the argument "
+            +"\\nDon't forget to mark the markdown page by using the argument "
             +"'MERMAID=True' in one of the macros (IDE, IDEv, terminal or py_btn)"
         )
 `,
-
 
 
     setupStdIO: `
@@ -520,7 +578,7 @@ def _hack_mermaid():
 def _hack_stdout_up():
     import sys, io, js
 
-    @wraps_builtin(source=__print_src__)
+    @wraps_builtin
     def print(*a,**kw):     # Note: wraps doesn't seem to work... Dunno why...)
 
         # First, blindly print to the actual stdout (in case the author is using it)
@@ -553,6 +611,8 @@ def _hack_stdout_up():
 @__builtins__.auto_run
 def _hack_stdout_down():
     import sys
+
+    # Store to send the result to JS layer at the end:
     __builtins__._stdout_value = sys.stdout.getvalue()
 
     sys.stdout.close()
@@ -779,6 +839,7 @@ def _hack_unexclude():
     # Restore everything before raising anything:
     not_ok = []
     for key,(func,raiser) in dct.items():
+
         if key == '__import__':
             __builtins__.__import__ = func
 
@@ -786,7 +847,8 @@ def _hack_unexclude():
             if raiser is not None and raiser is not G.get(key):
                 not_ok.append(key)
             if func is not None:
-                del G[key]  # "Unshadow" the builtin
+                if key in G:
+                    del G[key]  # "Unshadow" the builtin
                 if key == 'setrecursionlimit':
                     func(1000)
 

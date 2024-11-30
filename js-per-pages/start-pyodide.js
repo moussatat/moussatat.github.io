@@ -24,8 +24,6 @@ If not, see <https://www.gnu.org/licenses/>.
  * */
 setTimeout(async ()=>{
 
-    ace.require("ace/ext/language_tools");
-
     // Delay to let the elements in the page to load before the page starts to freeze...
     await sleep(CONFIG.pyodideDelay)
 

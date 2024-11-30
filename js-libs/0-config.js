@@ -34,26 +34,47 @@ const SqBs = {
     R: '&rsqb;',
 }
 
+
+
+/**Note: the behavior of this in pyodide is a bit weird: because defined as a const, it is not
+ * visible in pyodide from a terminal because it stays "hidden" even after assigning it to
+ * getStorage/setStorage...
+ * */
+const noStorage = function(){
+  throw new PythonError(
+    `Cannot read localStorage: no data available (looks like executions are stopped already).`
+  )
+}
+
+getStorage = noStorage     // Access from pyodide, setup from IdeStorageAndZipManager
+setStorage = noStorage     // Access from pyodide, setup from IdeStorageAndZipManager
+
+
 const CONFIG = {
 
     /*
     The following values are passed from python to JS through the main.html,
-    once this script got loaded */
+    once this script got loaded
+    */
     //JS_CONFIG_DUMP
     argsFigureDivId: null,
     exportZipWithNames: null,
     exportZipPrefix: null,
     baseUrl: null,
-    siteUrl: null,
     buttonIconsDirectory: null,
+    editorFontFamily: null,
+    editorFontSize: null,
+    inServe: null,
     language: null,
     pmtUrl: null,
     pythonLibs: null,
-    inServe: null,
+    siteUrl: null,
     version: null,
     lang: {
         tests: null,
         comments: null,
+        splitScreen: null,
+        fullScreen: null,
         feedback: null,
         wrapTerm: null,
         runScript: null,
@@ -68,12 +89,12 @@ const CONFIG = {
         successMsgNoTests: null,
         unforgettable: null,
         successHead: null,
+        successHeadExtra: null,
         successTail: null,
         failHead: null,
         revealCorr: null,
         revealJoin: null,
         revealRem: null,
-        successHeadExtra: null,
         failTail: null,
         titleCorr: null,
         titleRem: null,
@@ -92,6 +113,7 @@ const CONFIG = {
         attemptsLeft: null,
         testsDone: null,
         testIdes: null,
+        testStop: null,
         test1Ide: null,
         loadIde: null,
         qcmTitle: null,
@@ -101,6 +123,9 @@ const CONFIG = {
         tipTrash: null,
         figureAdmoTitle: null,
         figureText: null,
+        p5Start: null,
+        p5Stop: null,
+        p5Step: null,
         pickerFailure: null,
         zipAskForNames: null
 },
@@ -110,10 +135,12 @@ const CONFIG = {
     // automatic redirection for relative urls fetching:
     cutFeedback: null,
     relUrlRedirect : "",
+    running: null,                  // Current running profile. Set through lockedRunnerWithBigFailWarningFactory.
     runningId: null,                // html id of the current IDE, terminal or py_btn running
 
     termMessage: null,              // (key, msg, format=null) -> undefined
-    loadIdeContent: null,           // (editorId, name, code) -> undefined
+    loadIdeContent: null,           // (editorId, name, code) -> undefined (used for ZIP imports)
+
 
     /**Constant, to archive the  terminal, ace_editors, and all the PythonSectionRunner objects
      * at runtime :
@@ -145,6 +172,9 @@ const CONFIG = {
       testsResults:    "div.py_mk_tests_results",
       testElement:     ".py_mk_test_element",
       trashCan:        "#trash-can-svg",
+      aceSettings:     'div#ace_settingsmenu',
+      aceF1Cmds:       'div.ace_prompt_container',
+      aceAutoComplete: 'ace_autocomplete',
     },
 
     // All classes to use to create the various objects (mutate on the fly when needed):
@@ -203,14 +233,15 @@ const CONFIG = {
     },
 
     // Kind of running operation ("pyodide locked"):
-    running: {
+    runningMode: {
         cmd:          'Command',
         btn:          'PlayBtn',
         play:         'Play',
         validate:     'Validate',
         testing:      'Testing',
-        testingPlay:  'PlayTesting',
+        testingPlay:  'TestingPlay',
         testingValid: 'TestingValidate',
+        testingCmd:   'TestingCommand',
         zipExport:    'zipExport',
         zipImport:    'zipImport',
     },
@@ -225,6 +256,14 @@ const CONFIG = {
         editorCode:  1,
         publicTests: 2,
         secretTests: 3,
+    },
+
+    // GENERATED:
+    PROFILES:{
+      delayedReveal: "delayed_reveal",
+      noReveal: "no_reveal",
+      noValid: "no_valid",
+      revealed: "revealed"
     },
 
     MSG: {
@@ -260,5 +299,17 @@ const CONFIG = {
     <circle style="display:var(--circle)" cy="6" cx="6" r="4.2"></circle>
     <rect style="display:var(--square)" class="square" width="7.41" height="7.36" x="2.29" y="2.32"></rect>
     </g>
-  </svg>`
+  </svg>`,
+
+  qcm: {
+    checked:   "checked",
+    unchecked: "unchecked",
+    ok:        'correct',
+    wrong:     'incorrect',
+    missed:    'missed',
+    multi:     'multi',
+    single:    'single',
+    failOk:    'must-fail',
+  },
+  qcm_clean_up: ['checked', 'unchecked', 'correct', 'incorrect', 'must-fail']
 }

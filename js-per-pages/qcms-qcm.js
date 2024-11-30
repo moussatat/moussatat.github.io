@@ -18,15 +18,6 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-const STATE = {
-    checked:   "checked",
-    unchecked: "unchecked",
-    ok:        'correct',
-    wrong:     'incorrect',
-    missed:    'missed',
-    multi:     'multi',
-    single:    'single',
-}
 
 
 const shuffleDomInPlace=(shufflable)=>{
@@ -274,8 +265,8 @@ class Question {
     _reveal(){
         Object.entries(this.byId).forEach(([itemId,it])=>{
             const classes = []
-            if(it.checked) classes.push(it.correct ? STATE.ok : STATE.wrong)
-            else if(it.correct) classes.push(STATE.missed)
+            if(it.checked) classes.push(it.correct ? CONFIG.qcm.ok : CONFIG.qcm.wrong)
+            else if(it.correct) classes.push(CONFIG.qcm.missed)
 
             if(classes.length){
                 this._setLabelClasses(itemId, ...classes)
@@ -286,7 +277,7 @@ class Question {
     _inject(qcm){ this.qcm = qcm }
 
     _getLabelClasses(itemId, ...classes){
-        classes.push(this.isMulti ? STATE.multi : STATE.single)
+        classes.push(this.isMulti ? CONFIG.qcm.multi : CONFIG.qcm.single)
         return `${ itemId } ${ classes.join(' ') }`
     }
 
@@ -304,7 +295,7 @@ class Question {
 
     updateItem(itemId, checked){
         this.byId[itemId].checked = checked
-        this._setLabelClasses(itemId, checked ? STATE.checked : STATE.unchecked)
+        this._setLabelClasses(itemId, checked ? CONFIG.qcm.checked : CONFIG.qcm.unchecked)
         $(`input.${ itemId }`).attr('checked', checked)      // for page semantic only...
     }
 

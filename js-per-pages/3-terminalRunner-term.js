@@ -24,14 +24,19 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
   constructor(id){
     super(id)
-    this.terminal      = null
-    this.termWrapper   = null
-    this.termEnabled   = false
+    this.terminal      = null     // jQuery.terminal object
+    this.termWrapper   = null     // Html element
+    this.termEnabled   = false    // Flag to enforce activation of the terminal (admonitions+tabbed troubles)
     this.isIsolated    = id.startsWith("term_only")
     this.cmdChunk      = ""
     this.cmdOnTheRun   = ""
-    this.alreadyRanEnv = false    // Specific to terminals, but defined "for everyone"
     this.joinTerminalLines = false
+    this._init()                  // Will cause a second call if coming from an iDE, but "whatever"...
+  }
+
+  _init(){
+    super._init()
+    this.alreadyRanEnv = false    // Specific to terminals, but defined "for everyone"
   }
 
 
@@ -46,24 +51,26 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
     jsLogger("[Terminal] - build " + jqTermId)
 
-    const commandsCbk = this.getAsyncPythonExecutor()
+    this.runnerTerm = this.getAsyncPythonExecutor()
     const termOptions = {
-      greetings: "",                    // cancel terminal banner (welcome message),
+      greetings: "",                            // Cancel terminal banner (welcome message),
       completionEscape: false,
       prompt: CONFIG.MSG.promptStart,
-      outputLimit: this.stdoutCutOff, // this.terminal.settings().outputLimit=value (to change dynamically)
-      enabled: false,                   // GET RID OF THE DAMN AUTO-SCROLL!!!!!!
-      // wrap: getWrapTerms(),          // This also deactivate colors... FUCK THIS!
+      outputLimit: this.stdoutCutOff,           // this.terminal.settings().outputLimit=value (to change dynamically)
+      enabled: false,                           // GET RID OF THE DAMN AUTO-SCROLL!!!!!!
+      // wrap: getWrapTerms(),                  // This also deactivate colors... FUCK THIS!
       keymap: this.getTerminalBindings(),
-      completion: function (command, callback) {
-        callback(pyFuncs.pyconsole.complete(command).toJs()[0]);    // autocompletion
+      completion: function (command, callback) {  // AUTO-completion
+        callback(pyFuncs.pyconsole.complete(command).toJs()[0]);
       },
-      onBlur: function(){}, // Allow to leave the textarea, focus-wise.
-                            // DO NOT PUT ANY CODE INSIDE THIS !!
-    }
+      mousewheel: function(){ return true },    // Seems enough to fix the "no mouse wheel" troubles on terminals
+      onBlur: function(){},                     // Allow to leave the textarea, focus-wise.
+    }                                           // DO NOT PUT ANY CODE INSIDE THIS !! (I don't understand what's going
+                                                // on here, but  this is the only way I found to make all this work...)
 
-    this.terminal    = $(jqTermId).terminal(commandsCbk, termOptions)
+    this.terminal    = $(jqTermId).terminal(this.runnerTerm, termOptions)
     this.termWrapper = this.terminal.parent()
+    this.terminal.history().clear()     // Clear the history from localeStorage.
 
     if(CONFIG._devMode) CONFIG.terms[termId]=this.terminal
 
@@ -76,9 +83,9 @@ class _TerminalHandler extends PyodideSectionsRunner {
     this.termWrapper.find(".stdout-wraps-btn").on(
       'click', this.swapTerminalLinesJoinerForCopies.bind(this)
     )
-    this.termWrapper.find(".stdout-ctrl").on('click', _=>{
-      this.updateStdoutCutFeedback(!this.cutFeedback)
-    })
+    this.termWrapper.find(".stdout-ctrl").on(
+      'click', _=>{ this.updateStdoutCutFeedback(!this.cutFeedback) }
+    )
     this.updateStdoutCutFeedback(this.cutFeedback)
 
     this.prefillTermIfAny()
@@ -100,19 +107,24 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
   swapTerminalLinesJoinerForCopies(){
     this.joinTerminalLines = !this.joinTerminalLines
-    const btnCssOpacity    = `${ this.joinTerminalLines ? 80 : 30 }%`
-    this.termWrapper.find(".stdout-wraps-btn").css('--wrap-opacity', btnCssOpacity)
+    const classMethod = this.joinTerminalLines ? 'removeClass' : 'addClass'
+    this.termWrapper.find(".stdout-wraps-btn")[classMethod]('deactivated')
   }
 
 
   /**Because terminals are created deactivated, add an EventListener for click to reactivate them.
    * Using the async lock so that the user cannot resume a terminal while it's running (could
    * occur on first click/run).
-   * Does nothing if the terminal already got activated by other means.
+   *
+   * - Does nothing if the terminal already got activated by other means.
+   * - If a selection exists, do not enable the terminal or the selection gets lost.
    * */
   ensureTerminalActivationOnClick(){
     if(!this.termEnabled){
-      this.terminal.focus(true).enable()
+      if(!getSelectionText()){
+        this.terminal.focus(true)
+        this.terminal.enable()
+      }
       this.termEnabled = true
     }
   }
@@ -240,12 +252,12 @@ class _TerminalHandler extends PyodideSectionsRunner {
    * @throws: Error if isPrint is false and the key isn't the expected one, of if the `format`
    *          option is unknown.
    */
-  termFeedbackFromPyodide(_key, msg, format, isPrint=false){
+  termFeedbackFromPyodide(_key, msg, format, isPrint=false, newline=false){
     if(!txtFormat[format]){
       throw new Error(`Unknown formatting option: ${format}`)
     }
     msg = textShortener(msg)
-    this.terminalEcho(txtFormat[format](msg), {newline:!isPrint})
+    this.terminalEcho(txtFormat[format](msg), {newline})
   }
 
 
@@ -274,13 +286,17 @@ class TerminalRunner extends _TerminalHandler {
 
   /**Generate the async-locked callback used to run commands typed into the terminal.
    * */
-  getAsyncPythonExecutor(){
+  getAsyncPythonExecutor(running=CONFIG.runningMode.cmd){
     return this.lockedRunnerWithBigFailWarningFactory(
-      CONFIG.running.cmd,
+      running,
       this.setupRuntimeTerminalCmd,
       this.runTermCommand,
       this.teardownRuntimeTerminalCmd,
     )
+  }
+
+  async applyAutoRun(){
+    await this.runnerTerm(this.prefillTerm)
   }
 
 
@@ -396,6 +412,7 @@ class TerminalRunner extends _TerminalHandler {
     }else{
       runtime = this.buildRunConfig()
       runtime.changeDependency('envTerm', 'start')  // Make envTerm runnable on its own!
+      this.setupGlobalConfig()                      // Make sure CONFIG.termMessage is properly bound
     }
 
     await runtime.runWithCtx('envTerm')
@@ -411,7 +428,7 @@ class TerminalRunner extends _TerminalHandler {
       await runtime.runWithCtx('postTerm')
     }finally{
       // If ever postTerm failed, post might still have to run:
-      this.teardownRuntime(runtime)
+      await this.teardownRuntime(runtime)
     }
   }
 
