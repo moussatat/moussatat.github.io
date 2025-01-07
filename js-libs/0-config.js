@@ -35,27 +35,10 @@ const SqBs = {
 }
 
 
-
-/**Note: the behavior of this in pyodide is a bit weird: because defined as a const, it is not
- * visible in pyodide from a terminal because it stays "hidden" even after assigning it to
- * getStorage/setStorage...
- * */
-const noStorage = function(){
-  throw new PythonError(
-    `Cannot read localStorage: no data available (looks like executions are stopped already).`
-  )
-}
-
-getStorage = noStorage     // Access from pyodide, setup from IdeStorageAndZipManager
-setStorage = noStorage     // Access from pyodide, setup from IdeStorageAndZipManager
-
-
 const CONFIG = {
 
-    /*
-    The following values are passed from python to JS through the main.html,
-    once this script got loaded
-    */
+    /* The following values are passed from python to JS through the main.html,
+       once this script got loaded */
     //JS_CONFIG_DUMP
     argsFigureDivId: null,
     exportZipWithNames: null,
@@ -74,6 +57,7 @@ const CONFIG = {
         tests: null,
         comments: null,
         splitScreen: null,
+        splitModePlaceholder: null,
         fullScreen: null,
         feedback: null,
         wrapTerm: null,
@@ -135,26 +119,27 @@ const CONFIG = {
     // automatic redirection for relative urls fetching:
     cutFeedback: null,
     relUrlRedirect : "",
-    running: null,                  // Current running profile. Set through lockedRunnerWithBigFailWarningFactory.
-    runningId: null,                // html id of the current IDE, terminal or py_btn running
+    running: null,          // Current running profile. Set through lockedRunnerWithBigFailWarningFactory.
+    runningId: null,        // html id of the current IDE, terminal or py_btn running
 
-    termMessage: null,              // (key, msg, format=null) -> undefined
-    loadIdeContent: null,           // (editorId, name, code) -> undefined (used for ZIP imports)
+    termMessage: null,      // (key, msg, format=null) -> undefined
+    loadIdeContent: null,   // (editorId, name, code) -> undefined (used for ZIP imports)
 
 
-    /**Constant, to archive the  terminal, ace_editors, and all the PythonSectionRunner objects
-     * at runtime :
+    /* Constants, to archive the  terminal, ace_editors, and all the PythonSectionRunner
+     * objects at runtime :
      *   - Will be garbage collected on page change or reload.
      *   - Warning if navigation.instant gets restored !!
      * */
-    terms:   {},                    // debugging purpose
-    editors: {},                    // debugging purpose
-    objs:    {},                    // debugging purpose
+    terms:   {},            // debugging purpose
+    editors: {},            // debugging purpose
+    objs:    {},            // debugging purpose
 
+    INFINITY: "∞",
     LZW: '\x1e',
-    onDoneEvent : 'unload',
     pyodideDelay: 500,
     ideKeyStrokesSave: 30,
+    onDoneEvent: 'unload',
 
     // Various UI elements identifiers
     element: {
@@ -175,17 +160,25 @@ const CONFIG = {
       aceSettings:     'div#ace_settingsmenu',
       aceF1Cmds:       'div.ace_prompt_container',
       aceAutoComplete: 'ace_autocomplete',
+      pmtTopDiv:       'pmt-top-div',
     },
 
-    // All classes to use to create the various objects (mutate on the fly when needed):
+
+    pyodideIsReady: false,
+    classesPoolIsReady: false,
+    overlordIsReady: false,
+    overlordClasses: [],
+
+
+    // All classes to use to create the various objects (mutated on the fly when needed):
     CLASSES_POOL: {
-      Ide: null,
-      IdeTester: null,
-      Terminal: null,
-      PyBtn: null,
-      Qcm: null,
-      Question: null
-    },
+      "Ide": null,
+      "IdeTester": null,
+      "Terminal": null,
+      "PyBtn": null,
+      "Qcm": null,
+      "Question": null
+    },                  // Declared in a json.loads compatible fashion, see mkdocs_hooks.py
 
 
     ZIP: {
@@ -199,13 +192,13 @@ const CONFIG = {
 
     loggerOptions: {},      // jsLogger debugging config/activations
 
-    COMMENTED_PATTERN:      /(^\s*)(\S)(.?)/,
-    MODULE_REG:             /File "<(env[^>]*|post[^>]*|exec|console)>", line (\d+)($|, in (?!await_fut))/,
-    TRACE_REG:              /  File "<(env[^>]*|post[^>]*|exec|console)>"/,
-    TRACE_NUM_LINE:         /File "<(?:env[^>]*|post[^>]*|exec|console)>", line (\d+)/,
+    COMMENTED_PATTERN:  /(^\s*)(\S)(.?)/,
+    MODULE_REG:         /File "<(env[^>]*|post[^>]*|exec|console)>", line (\d+)($|, in (?!await_fut))/,
+    TRACE_REG:          /  File "<(env[^>]*|post[^>]*|exec|console)>"/,
+    TRACE_NUM_LINE:     /File "<(?:env[^>]*|post[^>]*|exec|console)>", line (\d+)/,
 
-    ESCAPE_SQ_B:            /\[|\]/g,
-    UNESCAPE_SQ_B:          new RegExp(`${ SqBs.L }|${ SqBs.R }`, 'g'),
+    ESCAPE_SQ_B:        /\[|\]/g,
+    UNESCAPE_SQ_B:      new RegExp(`${ SqBs.L }|${ SqBs.R }`, 'g'),
 
     ACE_COLOR_THEME: {
         customTheme: undefined,
@@ -274,11 +267,12 @@ const CONFIG = {
         leftSafeSqbr:    SqBs.L,
         rightSafeSqbr:   SqBs.R,
         exclusionMarker: "FORBIDDEN",
-        bigFail:         "\nIf You see this, there is a bug either in the website code, or in the way "
-                       + "this exercice is configured.\nPlease contact the webmaster with information "
-                       + "about what You were doing when this happened!\n\nDon't forget to check the "
-                       + "content of the console (F12) and possibly make a screenshot of any message "
-                       + "there, to help debugging.",
+        bigFail:
+            "\nIf You see this, there is a bug either in the website code, or in the way "
+          + "this exercice is configured.\nPlease contact the webmaster with information "
+          + "about what You were doing when this happened!\n\nDon't forget to check the "
+          + "content of the console (F12) and possibly do a screenshot of any error message "
+          + "there, to help debugging.",
     },
 
     QCM_SVG: `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -311,5 +305,7 @@ const CONFIG = {
     single:    'single',
     failOk:    'must-fail',
   },
-  qcm_clean_up: ['checked', 'unchecked', 'correct', 'incorrect', 'must-fail']
+  qcm_clean_up: [
+    'checked', 'unchecked', 'correct', 'incorrect', 'must-fail'
+  ],
 }

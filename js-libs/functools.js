@@ -18,11 +18,30 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+import { jsLogger } from 'jsLogger'
+
+
+
+
+
+export function getTheme(){
+    // automatically load current palette
+    const palette = __md_get("__palette")
+    let curPalette = palette === null ? CONFIG.ACE_COLOR_THEME.customThemeDefaultKey
+        : palette.color["scheme"]
+
+    const style = CONFIG.ACE_COLOR_THEME.customTheme[curPalette]
+    return "ace/theme/" + CONFIG.ACE_COLOR_THEME.aceStyle[style];
+}
+
+
+
+
 
 /**Decorator like function factory, managing the global pyodide lock.
  * If a call is done while pyodide is locked, it is delayed until the lock is available.
  * */
-var withPyodideAsyncLock = (_=>{
+export var withPyodideAsyncLock = (_=>{
 
     /* Everything is run async but single threaded, so a global lock can be added, using
      * a simple simple boolean flag, declared inside a closure to avoid a user messing
@@ -30,7 +49,7 @@ var withPyodideAsyncLock = (_=>{
     let pyodideLocked = false
 
     return function(name, asyncCallback){
-        const logName = asyncCallback.name||name
+        const logName = asyncCallback.name || name
 
         const wrapper = async function(...args){
             await waitForPyodideReady()
@@ -46,7 +65,7 @@ var withPyodideAsyncLock = (_=>{
                 ret = await asyncCallback.apply(this, args)
             }catch(e){
                 console.error(e)    // Always keep that, otherwise errors in JS are just swallowed
-                                    // (impossible to rethrow them, not sure why... async probably)
+                // (impossible to rethrow them, not sure why... async probably)
             }finally{
                 jsLogger("[LOCK RELEASE] -", logName)
                 pyodideLocked = false
@@ -63,14 +82,14 @@ var withPyodideAsyncLock = (_=>{
 /**Allow to delay the executions of various functions, until the pyodide environment
  * is done loading.
  * */
-async function waitForPyodideReady(){
+export async function waitForPyodideReady(){
 
     const maxWaitingTime = 20  // in seconds
     const attempts = 80
     const step_ms = Math.round(1000 * maxWaitingTime / attempts)
 
     let counter = 0
-    while(!globalThis.pyodideIsReady){
+    while(!CONFIG.pyodideIsReady){
         await sleep(step_ms);
         if(++counter == attempts){
             throw new Error(`Couldn't access to pyodide environment in time (${maxWaitingTime}s)`)
@@ -98,24 +117,33 @@ async function waitForPyodideReady(){
  *              the DOM. This function will be called every .delay ms and the subscription will
  *              be delayed until it returns true. This has precedence over the .now option.
  *      .runOnly: if truthy, run the callback when ready, but do not subscribe to document changes.
+ *      .maxTries: if not given 20 tries allowed.
  *
- * @throws: Error if more than 20 subscriptions attempts are done without success.
+ * @throws: Error if maxTries subscriptions attempts are done without success.
  * */
-function subscribeWhenReady(waitId, callback, options={}){
+export function subscribeWhenReady(waitId, callback, options={}){
 
-    let {now, delay, waitFor, runOnly} = {
+    let {now, delay, waitFor, runOnly, maxTries} = {
         delay: 50,
         now: false,
         waitFor: null,
         runOnly: false,
+        maxTries: 20,
         ...options
     }
     now = now && !waitFor                       // has to wait if waitFor is used
     CONFIG.subscriptionReady[waitId] = now
 
-    const checkReady = !waitFor                  ? ()=>null
-                     : typeof(waitFor)=='string' ? ()=>{ CONFIG.subscriptionReady[waitId] = $(waitFor).length>0 }
-                                                 : ()=>{ CONFIG.subscriptionReady[waitId] = waitFor() }
+    const buildCheckReady=()=>{
+        if(!waitFor){
+            return ()=>null
+        }
+        if(typeof (waitFor)=='string'){
+            return ()=>{ CONFIG.subscriptionReady[waitId] = $(waitFor).length > 0 }
+        }
+        return ()=>{ CONFIG.subscriptionReady[waitId] = waitFor() }
+    }
+    const checkReady = buildCheckReady()
     const isNotReady =()=>{
         checkReady()
         return !CONFIG.subscriptionReady[waitId] || !globalThis.document$
@@ -125,7 +153,7 @@ function subscribeWhenReady(waitId, callback, options={}){
 
         if(isNotReady()){
             const nTries = CONFIG.subscriptionsTries[waitId]+1 || 1
-            if(nTries==20){
+            if(nTries==maxTries){
                 throw new Error(`Impossible to subscribe to ${ waitId } in time: too many tries.`)
             }
             CONFIG.subscriptionsTries[waitId] = nTries
@@ -151,26 +179,80 @@ function subscribeWhenReady(waitId, callback, options={}){
             }
         }
     }
-
     autoSubscribe()
 
-    if(!now) return ()=>{ CONFIG.subscriptionReady[waitId]=true }
+    if(!now){
+        return ()=>{ CONFIG.subscriptionReady[waitId]=true }
+    }
+}
+// TOKEN: end subscribeWhenReady
+
+
+
+
+/**Routine to call unconditionally from overlord.js. It is used to make sure all the classes
+ * required in the page are actually defined before trying to define the related instances
+ * from the DOM content (this has become useful once the JS layer has been moved to JS
+ * modules, which are async loaded).
+ *
+ * Passing in a callback also provides a way to a user customizing the theme to inject their
+ * own logic/custom classes in CONFIG.CLASSES_POOL by overriding the call in overlord.js.
+ * This way:
+ *   - Their callback is called only once all the original classes have been defined.
+ *   - The subscriptions are delayed until their callback returns a truthy value.
+ *
+ * @throws: Error if `applyWhenPoolReady` is given and it returns `undefined`
+ *          (to prevent infinite loop).
+ * */
+export function waitForClassesPoolReady(applyWhenPoolReady){
+
+    if(CONFIG.overlordClasses.length){
+        const notDefinedYet    = className => !CONFIG.CLASSES_POOL[className]
+        CONFIG.overlordClasses = CONFIG.overlordClasses.filter(notDefinedYet)
+    }else{
+        CONFIG.overlordIsReady = !applyWhenPoolReady || applyWhenPoolReady()
+        if(CONFIG.overlordIsReady === undefined){
+            throw new Error(
+                "applyWhenPoolReady() returned undefined. It has to return something."
+            )
+        }
+    }
+
+    if(!CONFIG.overlordIsReady){
+        jsLogger('[Overlord] - waiting...')
+        setTimeout(()=>waitForClassesPoolReady(applyWhenPoolReady), 50)
+    }else{
+        jsLogger('[Overlord] - READY')
+    }
 }
 
 
 
 
+/**To access CONFIG data from pyodide (mermaid, cutFeedback, ...).
+ * */
+export function config(){ return CONFIG }
 
+
+
+
+
+/**Ensure the given python code can safely be inserted into a JS template.
+ * */
+export function escapePyodideCodeForJsTemplates(code){
+    return code.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+}
 
 
 
 /**Square brackets in "rich text format" must be escaped, otherwise they are messing up the
  * terminal formatting informations.
  * */
-function escapeSquareBrackets(msg){
+export function escapeSquareBrackets(msg){
     return msg.replace(/\[/g, CONFIG.MSG.leftSafeSqbr)
               .replace(/\]/g, CONFIG.MSG.rightSafeSqbr)
 }
+
 
 
 /**Formatting function factory, for messages used in the jquery terminal.
@@ -182,7 +264,7 @@ function richTextFormat(content, style, color="", background="") {
     return `[[${ style };${ color };${ background }]${ content }]`;
 }
 
-const txtFormat = {
+export const txtFormat = {
     error:   (content) => richTextFormat(content, "b", "red"),
     warning: (content) => richTextFormat(content, "ib", "orange"),
     info:    (content) => richTextFormat(content, "i", "grey"),
@@ -195,15 +277,15 @@ const txtFormat = {
 
 
 
-/**Extract full information when something gets VERY wrong... */
-function youAreInTroubles(err){
-  return `${ err }\n\n${ err.stack || '[no stack]' }\n${ CONFIG.MSG.bigFail }`
+export const escapeSqBrackets=msg=>{
+    return msg.replace(CONFIG.ESCAPE_SQ_B, c=>SqBs[c])
 }
 
+export const unEscapeSqBrackets=msg=>{
+    return msg.replace(CONFIG.UNESCAPE_SQ_B, c=>SqBs[c]||c)
+}
 
-
-
-function toSnake(msg){
+export function toSnake(msg){
     return msg.replace(/[A-Z]/g, m=>'_'+m.toLowerCase())
 }
 
@@ -214,7 +296,7 @@ function toSnake(msg){
  *   - keep the 500 first and 300 last chars
  *   - replace the middle with a message
  * */
-function textShortener(text){
+export function textShortener(text){
     if(CONFIG.cutFeedback && text.length > CONFIG.feedbackShortener.limit){
         const head = text.slice(0,CONFIG.feedbackShortener.head)
         const tail = text.slice(-CONFIG.feedbackShortener.tail)
@@ -224,10 +306,25 @@ function textShortener(text){
 }
 
 
+/**Async sleep (time given in milliseconds / must be awaited by the caller)
+ * */
+export function sleep(ms=0){
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+
+/**Extract full information when something gets VERY wrong... */
+export function youAreInTroubles(err){
+    return `${ err }\n\n${ err.stack || '[no stack]' }\n${ CONFIG.MSG.bigFail }`
+}
+
+
+
+
 
 /**Create a button with tooltip, just like the python _html_builder one.
  * */
-function buttonWithTooltip(options, content){
+export function buttonWithTooltip(options, content){
     options = {
         buttonId: "",
         shift: 50,          // %
@@ -241,7 +338,7 @@ function buttonWithTooltip(options, content){
     return `
 <button ${ buttonId }class="tooltip header-btn" type="button"
  style="--tool_shift:${ options.shift }%; font-size:${ options.fontSize }em;">
-    <span class="tooltiptext" ${options.tipWidth}>${ options.tipText }</span>
+    <span class="tooltiptext" ${ options.tipWidth }>${ options.tipText }</span>
     ${ content }
 </button>
 `
@@ -252,7 +349,7 @@ function buttonWithTooltip(options, content){
 /**Randomly pick a value from an array.
  * @throws Error if the array is empty.
  * */
-function choice(arr){
+export function choice(arr){
     if(!arr.length){
         throw new Error("Cannot pick from an empty array")
     }
@@ -290,7 +387,7 @@ const unBase =s=> [...s].reduce((v,c)=>v*ALPHA.length + TOME_B[c], 0)
  *      2. The leading dot allows to disambiguate the "big" section content of the alphabet,
  *         when no emojis are used in the original content.
  * */
-const decompressLZW=(compressed, compressOptionSrc)=>{
+export const decompressLZW=(compressed, compressOptionSrc)=>{
 
     // console.log(JSON.stringify(compressed))
 
@@ -329,17 +426,17 @@ const decompressLZW=(compressed, compressOptionSrc)=>{
 
 /**Decompress PAGE_IDES_CONFIG content if not already done.
  * */
-function decompressPagesIfNeeded(){
+export function decompressPagesIfNeeded(){
     if(typeof(PAGE_IDES_CONFIG)!='string') return;
 
     jsLogger('[CheckPoint] - decompress page LZW')
-    PAGE_IDES_CONFIG = decompressAndConvert(PAGE_IDES_CONFIG)
+    globalThis.PAGE_IDES_CONFIG = decompressAndConvert(PAGE_IDES_CONFIG)
 }
 
 
 /**Decompress LZW encoded string to a JSON object.
  * */
-function decompressAndConvert(compressed){
+export function decompressAndConvert(compressed){
     const decompressed = decompressLZW(compressed, "build.encrypted_js_data")
     const outcome      = JSON.parse(
         decompressed, (key,val)=>key=='attempts_left' && val=="Infinity" ? Infinity : val
@@ -349,24 +446,13 @@ function decompressAndConvert(compressed){
 
 
 
-const escapeSqBrackets=msg=>{
-    return msg.replace(CONFIG.ESCAPE_SQ_B, c=>SqBs[c])
-}
 
-const unEscapeSqBrackets=msg=>{
-    return msg.replace(CONFIG.UNESCAPE_SQ_B, c=>SqBs[c]||c)
-}
 
-/**Async sleep (time given in milliseconds / must be awaited by the caller)
- * */
-function sleep(ms=0) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 
 
 // Code inspired by https://stackoverflow.com/questions/5379120/get-the-highlighted-selected-text
-function getSelectionText() {
+export function getSelectionText(){
     let text = "";
     if(window.getSelection) {
 
@@ -414,10 +500,16 @@ function getSelectionText() {
         text = document.selection.createRange().text;
     }
 
-    // Just like usual, jQuery terminals are messing with the content, replacing spaces with \u00a0...:
+    // Just like usual, jQuery terminals are messing with the content, replacing spaces
+    // with "\u00a0"... x/
     text = text.replace(/\u00a0/ug, " ")
 
-    return text;
+    // Strip ONE trailing new line if exist, because it belongs to the end of the current
+    // line (hence, messing what the user actually wants... generally)
+    if(text.endsWith('\n')){
+        text = text.slice(0,-1)
+    }
+    return text.endsWith('\n') ? text.slice(0,-1) : text;
 }
 
 
@@ -429,9 +521,9 @@ function getSelectionText() {
  * See https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
  * about MIME types.
  * */
-function downloader(content, filename, mimeType="text/plain"){
-    let blob = new Blob([content], {type: mimeType})
-    let link = document.createElement("a")
+export function downloader(content, filename, mimeType="text/plain") {
+    const blob = new Blob([content], {type: mimeType})
+    const link = document.createElement("a")
     link.href = URL.createObjectURL(blob)
     link.download = filename
     link.click()
@@ -441,20 +533,19 @@ function downloader(content, filename, mimeType="text/plain"){
 
 
 
-
 /**Routine reusing the very same input[type=file] element (hidden in <head>) to upload content.
  * It must receive a callback that will handle the action to do with the content of the uploaded
  * file.
- * Returns a curried event executor: (cbk)=>[event executor function}
+ * Returns a curried event executor: (cbk)=>(event executor function)
  * */
-var [uploader, uploaderAsync] = (function(){
+export var [uploader, uploaderAsync] = (function(){
 
     // https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#example_showing_thumbnails_of_user-selected_images
 
     let jInput         = null
-    let readMethod     = null       // readAsText / readAsDataURL / readAsArrayBuffer / readAsBinaryString
-    let contentHandler = null       // Replaced on the fly at runtime
-    let errorHandler   = null       // first error thrown during the reading process
+    let readMethod     = null   // readAsText / readAsDataURL / readAsArrayBuffer / readAsBinaryString
+    let contentHandler = null   // Replaced on the fly at runtime
+    let errorHandler   = null   // first error thrown during the reading process
 
     const inputId      = 'pyodide-file-uploader'
     const resumeHandler=_=>{ contentHandler = null }
@@ -543,11 +634,32 @@ var [uploader, uploaderAsync] = (function(){
 
 
 
+
+/**Special JS Error: methods calls exclusions are tested from the JS runtime, instead of pyodide.
+ * So, JS has to throw a special error that will mimic ("enough"...) the pattern of pyodide errors
+ * and hance, will be considered legit errors.
+ */
+export class PythonError extends Error {
+    toString() { return "Python" + super.toString() }
+}
+
+
+/**Note: the behavior of this in pyodide is a bit weird: because defined as a const, it is not
+ * visible in pyodide from a terminal because it stays "hidden" even after assigning it to
+ * getStorage/setStorage...
+ * */
+export const noStorage = function () {
+    throw new PythonError(
+        `Cannot read localStorage: no data available (looks like executions are stopped already).`
+    )
+}
+
+
 /**Extract the given ID data from the localStorage, checking if it's not an outdated
  * or invalid structure.
  * @returns: [storage_data, outdated]
  * */
-function getIdeDataFromStorage(editorId, forThis=null){
+export function getIdeDataFromStorage(editorId, forThis=null){
 
     let storage  = localStorage.getItem(editorId) || ""
     let upToDate = false
@@ -560,13 +672,13 @@ function getIdeDataFromStorage(editorId, forThis=null){
     if(!upToDate){
         // Here, `storage` is the user code itself (initial implementation of the localStorage)
         storage = freshStore(storage, forThis)
-      }
+    }
     return [storage, !upToDate]
 }
 
 
 /**Forbid writing these properties from pyodide. */
-const FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
+export const FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
     code
     done
     hash
@@ -574,7 +686,7 @@ const FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
     zip
 `.trim().split(/\s+/))
 
-function freshStore(code, forThis=null){
+export function freshStore(code, forThis=null){
     return {
       code: code || "",
       done: 0,            // -1: fail, 0: unknown, 1:success
@@ -588,11 +700,19 @@ function freshStore(code, forThis=null){
 
 
 
+// Access from pyodide, setup from IdeZipManager
+globalThis.getStorage  = noStorage
+globalThis.setStorage  = noStorage
+globalThis.delStorage  = noStorage
+globalThis.keysStorage = noStorage
 
-/**Special JS Error: methods calls exclusions are tested from the JS runtime, instead of pyodide.
- * So, JS has to throw a special error that will mimic ("enough"...) the pattern of pyodide errors
- * and hance, will be considered legit errors.
- */
-class PythonError extends Error {
-    toString(){ return "Python" + super.toString() }
-}
+// For backward compatibility (hooks and co'):
+globalThis.PythonError        = PythonError
+globalThis.CONFIG             = CONFIG
+globalThis.subscribeWhenReady = subscribeWhenReady
+
+// For usage from pyodide + backward compatibility:
+globalThis.config        = config
+globalThis.downloader    = downloader
+globalThis.uploader      = uploader
+globalThis.uploaderAsync = uploaderAsync

@@ -18,20 +18,29 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+import { jsLogger } from 'jsLogger'
+import {
+  decompressPagesIfNeeded,
+  noStorage,
+  sleep,
+  unEscapeSqBrackets,
+  withPyodideAsyncLock,
+  youAreInTroubles,
+} from 'functools'
+import { _DUMMY } from 'process_and_gui'   // Enforce dependencies order (if ever a runner is needed)
 
-const isExclusionOrAssertionError=(runtime)=>{
-  return runtime.stdErr.startsWith(CONFIG.MSG.exclusionMarker) || runtime.isAssertErr
-}
+import { pyodideFeatureRunCode } from '0-generic-python-snippets-pyodide'
+import { RuntimeManager } from '1-runtimeManager-runtime-pyodide'
 
 
 
 
-class PyodideSectionsRunner {
+export class PyodideSectionsRunner {
 
   no_undefined = prop =>{
       const getter = v => {
         if(v!==undefined) return v
-        throw new Error(`Undefined is not allow: ${this.constructor.name}.${prop}.`)
+        throw new Error(`Undefined is not allowed: ${this.constructor.name}.${prop}.`)
       }
       return getter
   }
@@ -48,6 +57,7 @@ class PyodideSectionsRunner {
   get envContent()        { return this.data.env_content }
   get envTermContent()    { return this.data.env_term_content }
   get excluded()          { return this.data.excluded }
+  get excludedKws()       { return this.data.excluded_kws }
   get excludedMethods()   { return this.data.excluded_methods }
   get export()            { return this.data.export }
   get hasCheckBtn()       { return this.data.has_check_btn }
@@ -64,6 +74,7 @@ class PyodideSectionsRunner {
   get profile()           { return this.data.profile }
   get publicTests()       { return this.data.public_tests }
   get pyName()            { return this.data.py_name }
+  get pypiWhite()         { return this.data.pypi_white }
   get pythonLibs()        { return this.data.python_libs }
   get recLimit()          { return this.data.rec_limit }
   get secretTests()       { return this.data.secret_tests }
@@ -71,6 +82,7 @@ class PyodideSectionsRunner {
   get srcHash()           { return this.data.src_hash }
   get stdKey()            { return this.data.std_key }
   get stdoutCutOff()      { return this.data.stdout_cut_off }
+  get twoCols()           { return this.data.two_cols }
   get userContent()       { return this.data.user_content }
   get whiteList()         { return this.data.white_list }
   //JS_CONFIG_DUMP
@@ -79,7 +91,7 @@ class PyodideSectionsRunner {
 
 
 
-  constructor(id){
+  constructor(id, callInit=true){
     jsLogger('[CheckPoint] - Constructor for', this.constructor.name, id)
 
     decompressPagesIfNeeded()
@@ -96,10 +108,10 @@ class PyodideSectionsRunner {
     this.running = undefined      // See CONFIG.runningMode
     this.allowPrint = true
     this.isGuiCompliant = false   // All the GUI makeup has been applied (may not be, right at the beginning, for tabbed contents, typically)
+
+    if(callInit) this._init()
   }
 
-
-  _init(){}   // Sink for super calls...
 
   _prepareData(data){
     data.python_libs = new Set(data.python_libs)
@@ -107,14 +119,15 @@ class PyodideSectionsRunner {
   }
 
 
+  _init(){}     // Super calls sink...
+
+
   build(){
     // Using setTimeout to be sure the `build` step will be complete (some children classes
     // may have subsequent operations after the super method, aka here, has been called).
-    if(this.autoRun) setTimeout(async ()=>{
-      await waitForPyodideReady()           // Make absolutely sure this happens...
-      await this.applyAutoRun()
-    })
-
+    if(this.autoRun){
+      setTimeout(async ()=>await this.applyAutoRun())
+    }
     this.makeUpYourGui()
   }
 
@@ -129,10 +142,18 @@ class PyodideSectionsRunner {
 
 
 
-  /** Generic call for macros with AUTO_RUN=True (if the runner callback is defined...).
+  /** Generic call for macros with AUTO_RUN=True (once the runner callback is defined...).
    * */
   async applyAutoRun(){
-    if(this.runner) await this.runner()
+    await this._defaultAutoRun()
+  }
+
+  /**Allow to keep the same implementation for the IDE class, while the intermediate Terminal
+   * class has its own logic for autoRun.
+   * */
+  async _defaultAutoRun(){
+    while(!this.runner) await sleep(40)
+    await this.runner()
   }
 
 
@@ -179,26 +200,6 @@ class PyodideSectionsRunner {
 
 
 
-
-
-  /**Explore the user's code to find missing modules to install. If some are found, load micropip
-   * (if not done yet), then install all the missing modules.
-   * Also import all the packages present in runtime.whiteList.
-   *
-   * NOTE: python libs are identified by picking into the global config, but are actually loaded
-   *       only if they are available in the instance property (this is to limit the _SAVAGE_
-   *       unexpected installations of random packages from PyPI).
-   *
-   * @code : the python code to run.
-   * @runtime : `RuntimeManager` object.
-   * @isFromEnv : specify if the current run is for an environment section or not.
-   * */
-  async installAndImportMissingModules(code, runtime, isFromEnv=false){
-    await installPythonPackages(this, code, runtime, isFromEnv)
-  }
-
-
-
   /**Creates a generic "action runner", handling the overall security logic, catching exceptions
    * that are thrown up to this point and displaying them in a BigFail-fashion-way in the terminal.
    *
@@ -223,7 +224,7 @@ class PyodideSectionsRunner {
    * */
   lockedRunnerWithBigFailWarningFactory(
     actionName,       // string, logging purpose + used to identify what's currently running.
-    setup,            // async, no args
+    setup,            // async, args: eventOrTermCmdString
     action,           // async, args: runtime
     finallyTeardown,  // async, args: runtime (guaranteed to run)
     sendSrcOrEvent=false,
@@ -267,27 +268,23 @@ class PyodideSectionsRunner {
 
 
 
-  /**Generic main "action" runner for environment code.
-   * */
-  async installImportsAndRunEnvCode(ctx, runtime){
-    if(!ctx.code) return;
-    await installPythonPackages(this, ctx.code, runtime, ctx.isEnvSection)
-    await pyodide.runPythonAsync(ctx.code, {filename: `<${ toSnake(ctx.section) }>`})
-  }
-
-
-
   /**Build the default configuration runtime to use to run the user's code.
    * */
   setupGlobalConfig(){
     CONFIG.runningId      = this.id
     CONFIG.running        = this.running
     CONFIG.termMessage    = ()=>undefined    // sink
-    globalThis.getStorage = noStorage
-    globalThis.setStorage = noStorage
+    for(const prop of 'get del set keys'.split(' ')){
+      const globName = prop+'Storage'
+      const method   = `pyodide${ _.capitalize(prop) }Storage`
+      globalThis[globName] = this[method].bind(this)
+    }
   }
 
-
+  pyodideGetStorage(key)  { noStorage() }   // sink
+  pyodideKeysStorage()    { noStorage() }   // sink
+  pyodideSetStorage(k, v) { noStorage() }   // sink
+  pyodideDelStorage(key)  { noStorage() }   // sink
 
 
 
@@ -300,21 +297,25 @@ class PyodideSectionsRunner {
    *     If isOk is false, an error has been raised: this is a CRITICAL ERROR and executions at
    *     upper level must be stopped.
    * */
-  async setupRuntime(){
+  async setupRuntime(srcRuntime=null, section='env'){
     jsLogger('[CheckPoint] - setupRuntime PyodideSectionsRunner')
 
-    const [runtime,ctx] = await this._baseSetupRuntime()
+    const [runtime,ctx] = await this._baseSetupRuntime(srcRuntime, section)
     if(ctx.success){
-      await runtime.runWithCtx('env')
+      await runtime.runWithCtx(section)
     }
     return runtime
   }
 
 
-  async _baseSetupRuntime(){
+  async _baseSetupRuntime(srcRuntime, section){
     this.setupGlobalConfig()
-    const runtime = this.buildRunConfig()
-    let ctx       = await runtime.runWithCtx({section:'env', method: this.refreshPyodideFeatures})
+    const runtime = srcRuntime || this.buildRunConfig()
+    const ctx = await runtime.runWithCtx({
+      section:    section ?? 'env',
+      method:     this.refreshPyodideFeatures,
+      autoImport: false,    // Nothing to install, with the Pyodide Features!
+    })
     return [runtime, ctx]
   }
 
@@ -323,6 +324,7 @@ class PyodideSectionsRunner {
     ;`
       ioStuff
       version
+      localStorageRelays
       copyFromServer
       exclusionsTools
       mermaidDrawer
@@ -332,8 +334,6 @@ class PyodideSectionsRunner {
      .split(/\s+/)
      .forEach(pyodideFeatureRunCode)
   }
-
-
 
 
 
@@ -353,7 +353,7 @@ class PyodideSectionsRunner {
    * @throws: Any JS runtime Error if something went very wrong... (python errors are swallowed
    *          and just printed to the jQuery.terminal)
    * */
-  async runPythonCodeWithOptionsIfNoStdErr(code, runtime, testsStep=null){
+  async runPythonCodeWithOptionsIfNoStdErr(code, runtime, testsStep){
     jsLogger('[CheckPoint] - Enter generic running function')
 
     // Do nothing if nothing to do...!
@@ -362,51 +362,28 @@ class PyodideSectionsRunner {
     const someCodeToRun = code.trim()
     if(someCodeToRun){
 
-      const baseCtx =(autoAssertExtraction=false)=>({
-        code, section: 'code', isEnvSection: false,
-        logConfig: {code, autoAssertExtraction, purgeTrace: runtime.purgeStackTrace},
-      })
-
-      // Do first the methods exclusions check, to gain some time (avoids loading modules if
-      // the error would show up anyway afterward...)
-      await runtime.runWithCtx({
-        ...baseCtx(),
-        method: this.throwIfExcludedMethodsFound,
-      })
-      if(runtime.stopped) return;
-
-      // Detect possible user imports and install the packages to allow their imports:
-      await runtime.runWithCtx({
-        ...baseCtx(),
-        method: this.installAndImportMissingModules,
-        methodArgs: [code, runtime],
-      })
-      if(runtime.stopped) return;
-
-      await runtime.runWithCtx({
-        ...baseCtx(runtime.autoLogAssert),
+      const ctx = {
+        code,
+        section: 'code',
+        logConfig: {
+          code,
+          purgeTrace: runtime.purgeStackTrace,
+          autoAssertExtraction: runtime.autoLogAssert,
+        },
         method: this.pythonCodeRunnerWithCtx,
+        isEnvSection: false,
         applyExclusionsIfAny: true,
-      })
+      }
+      // No ast exclusions for validations' code:
+      if(testsStep!==CONFIG.section.editor){
+        ctx.kwsExclusions = ctx.methodsExclusions = false
+      }
+      await runtime.runWithCtx(ctx)
     }
 
     // Potentially give some feedback in the terminal to the user, about what happened:
     this.codeSnippetEndFeedback(runtime, testsStep, code)
   }
-
-
-
-  throwIfExcludedMethodsFound(ctx, runtime){
-    const nope = runtime.excludedMethods.filter(methodCall=>ctx.code.includes(methodCall))
-    if(nope.length){
-      const plural = nope.length>1 ? "s":""
-      const nopes = nope.map( s=>s.slice(1) ).join(', ')
-      const msg = `${ CONFIG.MSG.exclusionMarker } method${plural}: ${ nopes }`
-      throw new PythonError(msg)
-    }
-  }
-
-
 
 
 
@@ -443,7 +420,7 @@ class PyodideSectionsRunner {
       await mermaid.run()
       // mermaid.run systematically throws an error, even on valid graphs...
       // Worse: If mermaid.run({suppressErrors:true}) is used, nothing is rendered at all...
-      //        I love JS...
+      //        (I love JS...)
     }catch(e){}
   }
 }

@@ -60,7 +60,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.46">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.49">
     
     
       
@@ -87,63 +87,66 @@ If not, see <https://www.gnu.org/licenses/>.
     
     
 
+<script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
+
+
 
       
     
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/js/jquery.terminal.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/css/jquery.terminal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<script src="../../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/js/jquery.terminal.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script src="../../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script type="text/javascript">
-  CONFIG.argsFigureDivId = "figure1"
-  CONFIG.exportZipWithNames = false
-  CONFIG.exportZipPrefix = ""
-  CONFIG.baseUrl = "../.."
-  CONFIG.buttonIconsDirectory = "../../assets/images"
-  CONFIG.editorFontFamily = "monospace"
-  CONFIG.editorFontSize = 15
-  CONFIG.inServe = true
-  CONFIG.language = "fr"
-  CONFIG.pmtUrl = "https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
-  CONFIG.pythonLibs = ['turtle']
-  CONFIG.siteUrl = "http://127.0.0.1:8000/"
-  CONFIG.version = "3.2.13"
-  CONFIG.lang = {"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 12, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Ctrl+Clic</kbd> pour inverser les colonnes)", "kbd": ""}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"", "kbd": ""}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "kbd": "Ctrl+Enter"}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}</script>
-<script src="../../js-libs/1-functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+CONFIG.argsFigureDivId="figure1"
+CONFIG.exportZipWithNames=false
+CONFIG.exportZipPrefix=""
+CONFIG.baseUrl="../.."
+CONFIG.buttonIconsDirectory="../../assets/images"
+CONFIG.editorFontFamily="monospace"
+CONFIG.editorFontSize=15
+CONFIG.inServe=true
+CONFIG.language="fr"
+CONFIG.pmtUrl="https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
+CONFIG.pythonLibs=['alien_python', 'turtle']
+CONFIG.siteUrl="http://127.0.0.1:8000/"
+CONFIG.version="4.1.7"
+CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)", "kbd": "Ctrl+Enter"}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Journal de bord de math\u00e9matiques au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}</script>
+<script src="../../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
-<script src="../../js-libs/2-configPostProcess-cfg_process.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../../js-libs/jsLogger.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-libs/jsLogger.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../../js-libs/mathjax-libs.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-libs/mathjax-libs.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
-<script src="../../js-libs/z_globalGuiButtons-global_gui.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-libs/process_and_gui.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<link href="../../pyodide-css/0-generic.css" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="../../pyodide-css/0-generic.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../../pyodide-css/btns-header.css" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="../../pyodide-css/btns-header.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../../pyodide-css/hourglass.css" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="../../pyodide-css/hourglass.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../../pyodide-css/ide.css" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="../../pyodide-css/ide.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../../pyodide-css/qcm.css" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="../../pyodide-css/qcm.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../../pyodide-css/terminal.css" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="../../pyodide-css/terminal.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../../pyodide-css/testing.css" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="../../pyodide-css/testing.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/css/jquery.terminal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet"/>
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle" data-ace-dark-mode="tomorrow_night_bright" data-ace-light-mode="crimson_editor">
 
@@ -3147,11 +3150,11 @@ If not, see <https://www.gnu.org/licenses/>.
 <ol>
 <li>
 <p>Taper dans la console de votre pythonette  <code>0b10</code> et <code>0b1011</code> et retrouver les écritures décimales correspondantes.</p>
-<p><div style="--n-buttons:2" class="term_wrapper"><div style="line-height:24px;--n-lines:5;" id="term_only_12c6fc06c99a462375eeb3f43dfd832b08ca9e17" class="py_mk_wrapper term_solo py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div> </p>
+<p><div style="--n-buttons:2" class="term_wrapper"><div style="line-height:24px;--n-lines:5;" id="term_only_d435a6cdd786300dff204ee7c2ef942d3e9034e2" class="py_mk_wrapper term_solo py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div> </p>
 </li>
 <li>
 <p>Utiliser l'instruction <code>bin(37)</code> et <code>bin(139)</code> pour retrouver l'écriture binaire des nombres entiers <span class="arithmatex">\(37\)</span> et <span class="arithmatex">\(139\)</span>.</p>
-<p><div style="--n-buttons:2" class="term_wrapper"><div style="line-height:24px;--n-lines:5;" id="term_only_d435a6cdd786300dff204ee7c2ef942d3e9034e2" class="py_mk_wrapper term_solo py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div> </p>
+<p><div style="--n-buttons:2" class="term_wrapper"><div style="line-height:24px;--n-lines:5;" id="term_only_4d134bc072212ace2df385dae143139da74ec0ef" class="py_mk_wrapper term_solo py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div> </p>
 </li>
 </ol>
 </details>
@@ -3266,22 +3269,23 @@ C'est à l'informaticien de décider du sens accordé aux bits. Dans les deux ca
 <li>le plus grand <strong>entier signé</strong> que l'on peut enregistrer sur 8 bits est <span class="arithmatex">\(2^7-1=127\)</span></li>
 <li>le plus grand <strong>entier signé</strong> que l'on peut enregistrer sur <span class="arithmatex">\(n\)</span> bit est <span class="arithmatex">\(2^{n-1}-1\)</span></li>
 </ul>
-</div><script >
+</div><script type="text/javascript">
 CONFIG.needMermaid = false;
-let PAGE_IDES_CONFIG = '.\x1ew.it)bm}eA[lx(rp29h8f-_]y 4uo51d67vnc3k:s{C0a,g\x1e0P010d0i0o0g0w0C0J0l0y0w0E0q0K0G0u0K0R0G0K0r0r0S0A0G0q0L0H0D0i0i0f0L0u0A0L0F0u0F0t0L0q0f0R0t0K0S0r0i0E0H010N0z0V0p0)0J0S0g0i1m0z010Q0C0F0S0U0i0O0j0b1q010T1x0i0J0I0w0K0$0X0J0d1w011J1L1N0w0X0Z1P1R1M1U1n1W1K010B0O0Y1%1T1)1V1X011Q0o0o1=1S1*1x1_0p0B0f0l0c0K1!1E0d0O1^1-1:0K0o0i0d290O2b2d1x0p0C2l291$1Q1?1T2n012p2r2u1 2x0i0m0K0l0B0F0i0F1w0k0x1-2E2G2I2K0w1u0d0s1A2c1n2N1-1q2W0$0w260f2Z0z0k0W0B0o0d0l1v2O1x2h28260g0c200v0E1-0a0s2 0i2*0c2l2M2_010S0B0d0C0w0o0B0J1w0u0S0l1:2$2h0u0c0l0l2s0g1V0R0f0E0R1_2l0F0C3f1P3I0C0u0u1w0q0R0R1-0K3I0u100F0f0S0K0M1w0d3j0i0h1-1#0!0$0(0w0F150D0S0=0F0F0H0t0G0L3Q170u3P0A100H0K0q0i0u0r0A0q0F0L0i0r0R0L430q1w1p1r1t1v1+1z1B1D1F1H0y1_1M1O2B1@1+4x1Z3,1~4B211-1/1;4A2w4C3S0C1|4G4N4I2o2426280X2l2-1,1x2f2h2j4Z2m4O2o2q4*0Y0!4M204$2y4/4S4@4x2F2H2J2L2!3c2Q4 2T2V2X0F2-2#2o0y2(0J382,2M2:2=2@013c2{382~30321x3436383a521-3e3g3i3k3m3o3q2o3s3u3w3,1V0f0c0J0n0}0e3E0d3G3I3T2j3L3N1n3P3R1x5X0w3V2K3Y3!3$3(0h0h.'
-</script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+CONFIG.overlordClasses = ["Terminal"];
+globalThis.PAGE_IDES_CONFIG = '.\x1eh3lg0 k6.7xmvus-2(:1ey4bi5{Cp_A[9w)adncrt,o}f8]\x1e0A010O0u0N0l0D0Q0L0c0v0D0K0w0b0z0J0h0M0K0K0j0T0h0b0e0e0K0S0S0q0e0w0u0u0j0M0q0u0S0G0w0q0K0b0u0G0e0b120q010s0f0V0C0)0L0J0l0u1l0f010B0Q0K0J0d0u0o0E0i1p010P1w0u0L0m0D0M0$0X0L0O1v011I1K1M0D0X0Z1O1Q1L1T1m1V1J010n0o0Y1$1S1(1U1W011P0N0N1;1R1)1w1^0C0n0x0c0y0M1Z1D0O0o1@1,1/0M0N0u0O280o2a2c1w0C0Q2k281#1P1=1S2m012o2q2t1~2w0u0k0M0c0n0K0u0K1v0F0U1,2D2F2H2J0D1t0O0a1z2b1m2M2O2E2G2I0K0D0g0H2Y0f2!2n0v2V0$0D250x2-0F0W0n0N0O0c1u1,0J251L0D1p2=0L012N2:0C0y0D0H0a0y0X1v0L0n0c0c1,2g27250l3i1v0p0t1,3g3i0u2@0y2k2L3b010J0n0O0Q0D0N0n391m0S331/1,0C2g0S0y3n2r0l1U0e0x0t0e1^2k0K0Q3J1O3/0Q0~1v100e1,0M3/0S130K0x0J0M0g1v0O3N0u0R1,1!0!0$0(0D0w0K0t1i0x0M0e0j0q0q0t0q410u1c0S0b0T0z1A0u0t0,4h0G1A0j124k181v1o1q1s1u1*1y1A1C1E1G0v1^1L1N2A1?1*4V1Y4a1}4Z201,1.1:4Y2v4!3`0Q1{4(4/4*2n2325270X2k2-1+1w2e2g2i4~2l4:2n2p550Y0!4.1 512x5a4@5f4V2$2R2K2Z3G2P2%2S2U2W0K2`5q5m2(2*2,3F3U2;2W0L3C2_2L2|2~301^330y35375G3a5E3d3f3h3j1m3l3n3p0u3r0y3t1 3w3y5Y3B253E5p323J3L3N3P0f3R0c3T2n3W3Y0c3!1U0x0y0L0r0b0j0I3+0O3-3/3{2i3=0S3@0{3`3|3~404244460R0R.'
+</script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../../js-per-pages/1-packagesInstaller-install-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-per-pages/1-packagesInstaller-install-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../../js-per-pages/1-runtimeManager-runtime-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-per-pages/1-runtimeManager-runtime-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../../js-per-pages/3-terminalRunner-term.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-per-pages/3-terminalRunner-term.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../../js-per-pages/start-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-per-pages/start-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 
 
@@ -3518,14 +3522,16 @@ let PAGE_IDES_CONFIG = '.\x1ew.it)bm}eA[lx(rp29h8f-_]y 4uo51d67vnc3k:s{C0a,g\x1e
     
 
 
-      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       
     
-<script src="../../js-scripts/subscriptions.js" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript" charset="utf-8"></script>
+<script src="../../js-scripts/overlord.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../js-scripts/subscriptions.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 
 

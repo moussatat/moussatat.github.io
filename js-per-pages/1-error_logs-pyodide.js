@@ -18,6 +18,13 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+import { escapePyodideCodeForJsTemplates, youAreInTroubles } from 'functools'
+
+
+
+
+
+
 /**Return the plain error message, unless it's an assertion error, where the message is formatted.
  *
  * @err (Error):   The Error object caught in JS context.
@@ -26,8 +33,8 @@ If not, see <https://www.gnu.org/licenses/>.
  *                 the assertion instruction if autoMsg is true.
  * @purgeTrace (boolean): if true, the complete stacktrace will be removed of error messages
  *
- * @returns: [errMessage, isAssertErr]
- *           NOTE: errMessage is NOT formatted for jQuery terminal yet.
+ * @returns ([errMessage, isAssertErr]): NOTE: errMessage is NOT formatted for jQuery terminal yet.
+ *
  * ---
  *
  * ## Rationals
@@ -57,7 +64,7 @@ If not, see <https://www.gnu.org/licenses/>.
  *
  *      ```python
  *      raise ValueError("""
- *      Hey, the could should have raised:
+ *      Hey, the code should have raised:
  *      AssertionError!
  *      """)
  *      ```
@@ -114,7 +121,7 @@ If not, see <https://www.gnu.org/licenses/>.
   *       [Previous line repeated 44 more times]
   *     RecursionError: maximum recursion depth exceeded
  * */
-function generateErrorLog(err, config={}) {
+export function generateErrorLog(err, config={}) {
 
   const {code, autoAssertExtraction, purgeTrace, forceBigFail} = {
     code:"", autoAssertExtraction:false, purgeTrace:false, forceBigFail:false,
@@ -280,7 +287,7 @@ Couldn't determine the line number of the assertion in:
 
   // The double quotes are all escaped to make sure no multiline string in the code
   // can cause troubles.
-  const escapedCode = code.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+  const escapedCode = escapePyodideCodeForJsTemplates(code)
   const lineNo = +numMatch[1]
 
   const astExplorer = `

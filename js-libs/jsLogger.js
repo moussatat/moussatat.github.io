@@ -17,9 +17,10 @@ along with this program.
 If not, see <https://www.gnu.org/licenses/>.
 */
 
+
 /** The options can be modified at runtime on user's side, to ease debugging.
  * */
-CONFIG.loggerOptions={
+globalThis.LOGGER_CONFIG = CONFIG.loggerOptions = {
     ACTIVATE:           false,
     all:                false,
 
@@ -32,11 +33,12 @@ CONFIG.loggerOptions={
     MathJax:            false,
     OutCome:            false,
     OutComeSolRemTxt:   false,
+    Overlord:           false,
     Paint_ACEs:         false,
     PythonLibs:         false,
     QCM:                false,
     Runtime:            false,
-    ScreenMode:         true,
+    ScreenMode:         false,
     Scroll:             false,
     SetupIDEs:          false,
     SetupLoneTerms:     false,
@@ -50,7 +52,7 @@ CONFIG.loggerOptions={
 }
 
 
-const jsLogger=(...msgs)=>{
+export const jsLogger=(...msgs)=>{
     if(!CONFIG.loggerOptions.ACTIVATE) return
 
     if(CONFIG.loggerOptions.all || msgs[0] && isLoggedOption(msgs[0])){
@@ -65,3 +67,6 @@ const isLoggedOption=(msg)=>{
     const head = msg.match(/^\[(\w+)/)
     return head && CONFIG.loggerOptions[head[1]]
 }
+
+
+globalThis.jsLogger = jsLogger

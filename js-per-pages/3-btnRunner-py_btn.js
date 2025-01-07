@@ -18,19 +18,29 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-class BtnRunner extends PyodideSectionsRunner {
+import { PyodideSectionsRunner } from "2-pyodideSectionsRunner-runner-pyodide"
+
+
+export class BtnRunner extends PyodideSectionsRunner {
 
   // @Override
   build(){
+
     this.runner = this.lockedRunnerWithBigFailWarningFactory(
       CONFIG.runningMode.btn,
-      this.setupRuntime,
+      this.setupRuntimeBtn,
       ()=>null,                 // No "user" action!
       this.teardownRuntime,
     )
-    $('#'+this.id).find("button").on(
-      'click', this.runner)
+
+    $('#'+this.id).find("button").on('click', this.runner)
+
     super.build()
   }
+
+  async setupRuntimeBtn(){              // Can get an argument, depending on how it's run/called
+    return await this.setupRuntime()    // => do not transmit any actual argument (eventOrCmd)
+  }
 }
+
 CONFIG.CLASSES_POOL.PyBtn = BtnRunner

@@ -22,7 +22,7 @@ function mathJaxUpdate(){
   jsLogger('[MathJax] - Page formatting')
 
   if(!window.MathJax.startup.output){
-    console.warn("Cannot update MathJax (CDN failed to load?)")
+    console.error("Cannot update MathJax (CDN failed to load?)")
     return
   }
 
@@ -31,7 +31,7 @@ function mathJaxUpdate(){
   window.MathJax.texReset()
   window.MathJax.typesetPromise()
 }
-const mathJaxIsReady = subscribeWhenReady('mathJax', mathJaxUpdate)
+const mathJaxIsReady = subscribeWhenReady('mathJax', mathJaxUpdate, {maxTries:100})
 
 
 window.MathJax = {
@@ -44,9 +44,11 @@ window.MathJax = {
       mathJaxUpdate()
     },
   },
-  loader: {load: ['[tex]/cancel', 'output/svg']},
+  loader: {
+    load: ['[tex]/cancel', 'output/svg', '[tex]/color']
+  },
   tex: {
-    packages: {'[+]': ['cancel']},
+    packages: {'[+]': ['cancel', 'color']},
     inlineMath: [["\\(", "\\)"]],
     displayMath: [["\\[", "\\]"]],
     processEscapes: true,

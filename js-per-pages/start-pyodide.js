@@ -18,9 +18,19 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+import { jsLogger } from 'jsLogger'
+import {
+  sleep,
+  subscribeWhenReady,
+  withPyodideAsyncLock,
+} from 'functools'
 
-/**This is what's triggering the huge lag, when loading the page, so do it only when an ide or
- * or terminal is needed, and do it on next tick, so that all the scripts are actually loaded first
+
+
+
+
+/**This is what's triggering the huge lag, when loading the page, so do it only when pyodide
+ * is needed, and do it on next tick, so that all the scripts are actually loaded first.
  * */
 setTimeout(async ()=>{
 
@@ -64,7 +74,7 @@ Unknown = ${ JSON.stringify(unknown) }
     })
 
     // All done!
-    globalThis.pyodideIsReady = true
+    CONFIG.pyodideIsReady = true
     $("#header-hourglass-svg").attr("class", "py_mk_vanish")
 })
 

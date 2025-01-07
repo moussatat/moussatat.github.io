@@ -18,6 +18,18 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+import { jsLogger } from 'jsLogger'
+import {
+  decompressAndConvert,
+  PythonError,
+  txtFormat,
+  waitForPyodideReady,
+} from 'functools'
+import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
+import { IdeRunner } from '4-ideRunner-ide'
+
+
+
 
 
 
@@ -81,13 +93,13 @@ class IdeTesterGuiManager extends IdeRunner {
 
   finalizeControllers(){
 
-    // configure "run all" button:
+    // configure "run all" and "stop" buttons:
     this.global.parent()
-                     .find('button[btn_kind=test_ides]')
-                     .on('click', ()=>this.runAllTests())
-                     .parent()
-                     .find('button[btn_kind=test_stop]')
-                     .on('click', ()=>this.stopTests=true)
+               .find('button[btn_kind=test_ides]')
+               .on('click', ()=>this.runAllTests())
+               .parent()
+               .find('button[btn_kind=test_stop]')
+               .on('click', ()=>this.stopTests=true)
 
 
     // Configure global buttons (select-all, unselect-all):
@@ -133,7 +145,7 @@ class IdeTesterGuiManager extends IdeRunner {
 
         // Bind subcases "play" buttons: "run all subcases until this one"
         $(`#play${i+1}-${ conf.editor_id } > button[btn_kind=test_1_ide]`).on(
-          'click', ((testsUpTo)=> ()=>this.runAllTests(testsUpTo) )(batchOfTests.slice())
+          'click', ((targets)=>()=>this.runAllTests(targets, true))(batchOfTests.slice())
         )
         $(`#play${i+1}-${ conf.editor_id } > button[btn_kind=load_ide]`).on(
           'click', this.loadFactory(conf)
@@ -143,7 +155,7 @@ class IdeTesterGuiManager extends IdeRunner {
 
     // Bind the top level case buttons:
     $(`#test-btns-${ conf.editor_id } > button[btn_kind=test_1_ide]`).on(
-      'click', ()=>this.runAllTests(batchOfTests)
+      'click', ()=>this.runAllTests(batchOfTests, true)
     )
     $(`#test-btns-${ conf.editor_id } > button[btn_kind=load_ide]`).on(
       'click', this.loadFactory(conf)
@@ -337,7 +349,7 @@ class IdeTesterGuiManager extends IdeRunner {
     this.setAttemptsCounter(this.attemptsLeft, true)
     this._clearStateIfNeededAndReinit(onLoad)
     this.setupFetchers()
-    this.clearLibs()
+    this.clearLibsIfNeeded()
   }
 
 
@@ -354,7 +366,9 @@ class IdeTesterGuiManager extends IdeRunner {
   save(_){}
 
 
-  runAllTests(){ throw new Error('Not implemented') }
+  runAllTests(targets, forceRun=false){ throw new Error('Not implemented') }
+  setupFetchers(){ throw new Error('Not implemented') }
+  clearLibsIfNeeded(){ throw new Error('Not implemented') }
 
 
 
@@ -461,7 +475,7 @@ class IdeTesterGuiManager extends IdeRunner {
 
 
 
-class IdeTester extends IdeTesterGuiManager {
+export class IdeTester extends IdeTesterGuiManager {
 
 
   constructor(editorId){
@@ -475,7 +489,8 @@ class IdeTester extends IdeTesterGuiManager {
   }
 
 
-  async runAllTests(targets){
+
+  async runAllTests(targets, forceRun=false){
     if(this.testing) return;
     await waitForPyodideReady()
 
@@ -485,11 +500,11 @@ class IdeTester extends IdeTesterGuiManager {
     this.stopTests = false
 
     const confsToRun = (targets ?? this.test_cases).filter( conf =>{
-      const skip = (!targets || targets.length!=1) && conf.skip
-      if(!skip){
+      const skipped = (!targets || !forceRun) && conf.skip
+      if(!skipped){
         this.setSvgAndCounters(conf, CONFIG.qcm.checked)
       }
-      return !skip
+      return !skipped
     })
 
     this.displayCounters()
@@ -730,6 +745,7 @@ def __hack_pyfetch():
     async def pyfetch(url, *a, **kw):
         if isinstance(url,str) and not re.match(r'(https?|ftps?|file)://|www[.]', url):
             url = js.config().relUrlRedirect + url
+        #print(url)
         return await pure_pyfetch(url, *a, **kw)
     http.pyfetch = pyfetch
 
@@ -737,6 +753,7 @@ def __hack_pyfetch():
     async def fake_fetch(url, *a):
         if isinstance(url,str) and not re.match(r'(https?|ftps?|file)://|www[.]', url):
             url = js.config().relUrlRedirect + url
+        #print(url)
         return await js.fetch(url, *a)
 
 
@@ -792,7 +809,7 @@ del __hack_pyfetch`)
   }
 
 
-  clearLibs(){
+  clearLibsIfNeeded(){
     if(!this.conf.clear_libs) return
     pyodide.runPython(`
 def _hack_remove_libs():

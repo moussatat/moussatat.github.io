@@ -18,6 +18,11 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+import { buttonWithTooltip } from 'functools'
+
+
+
+
 
 
 const shuffleDomInPlace=(shufflable)=>{
@@ -173,34 +178,35 @@ class QCM {
         const classes    = divAdmo.attr('class').replace('admonition ','').split()
         innerDiv.addClass(classes)
 
-        const wrapper    = $(`<div class="${ CONFIG.element.qcmWrapper.slice(1) } ${ this.reveal?'give-away':'hidden' }"></div>`)
+        const btnWrapper = $(`<div class="${ CONFIG.element.qcmWrapper.slice(1) } ${ this.reveal?'give-away':'hidden' }"></div>`)
         const counter    = $(`<p class="${ CONFIG.element.qcmCounterCls.slice(1) }"></p>`)
         const mask       = $(createSvgMask(95, 1.1, CONFIG.lang.qcmMaskTip.msg, CONFIG.lang.qcmMaskTip.em))
         const checkBtn   = $(makeButton('check', {tipWidth: CONFIG.lang.qcmCheckTip.em, tipText: CONFIG.lang.qcmCheckTip.msg}))
         const restartBtn = $(makeButton('restart', {tipWidth:CONFIG.lang.qcmRedoTip.em, tipText: CONFIG.lang.qcmRedoTip.msg}))
-
-        // Detach all "non admonition" elements:
-        const children   = [...divAdmo.children()]
-        const no_title   = children.slice(1)
-        const detached   = no_title.map(child => $(child).detach() )
-
-        wrapper.append(counter, mask, checkBtn, restartBtn)
-        innerDiv.append(...detached, wrapper)
+        btnWrapper.append(counter, mask, checkBtn, restartBtn)
 
         checkBtn.on('click', this.check.bind(this))
         restartBtn.on('click', this.restart.bind(this))
 
+        // Detach all "non admonition" elements (aka, skip the summary/title element):
+        const children   = [...divAdmo.children()]
+        const no_title   = children.slice(1)
+        const detached   = no_title.map(child => $(child).detach() )
+        innerDiv.append(...detached)
+
+        const layoutWrapper = $(`<div class="layout-qcm-wrapper"></div>`)
+        layoutWrapper.append(innerDiv, btnWrapper)
+
         if(no_admo){
-            divAdmo.replaceWith(innerDiv)
-            return innerDiv
+            divAdmo.replaceWith(layoutWrapper)
+            return layoutWrapper
         }else{
-            divAdmo.append(innerDiv)
+            divAdmo.append(layoutWrapper)
             return divAdmo
         }
     }
 }
 
-CONFIG.CLASSES_POOL.Qcm = QCM
 
 
 const createSvgMask=(shift,fontSize, tipText, tipWidth) => `
@@ -334,4 +340,6 @@ class Question {
     }
 }
 
+
 CONFIG.CLASSES_POOL.Question = Question
+CONFIG.CLASSES_POOL.Qcm      = QCM

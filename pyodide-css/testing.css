@@ -28,7 +28,7 @@ If not, see <https://www.gnu.org/licenses/>.
   margin: 1em;
 }
 
-#py_mk_tests_controllers{
+#py_mk_tests_controllers {
     display: block;
     width: fit-content;
     margin-top: 4em;
@@ -106,8 +106,11 @@ If not, see <https://www.gnu.org/licenses/>.
   margin-left: 1em;
 }
 .md-typeset .pmt_note_tests.top_test {
-  margin-top: -.7em;
+  margin-top: -.4em;
   font-weight: bold;
+}
+.md-typeset .pmt_note_tests.last {
+  margin-bottom: 1.8em;
 }
 
 .py_mk_test_element {

@@ -19,19 +19,34 @@ If not, see <https://www.gnu.org/licenses/>.
 
 
 
+import { jsLogger } from 'jsLogger'
+import {
+  getSelectionText,
+  sleep,
+  textShortener,
+  txtFormat,
+  withPyodideAsyncLock,
+ } from 'functools'
+import { PyodideSectionsRunner } from "2-pyodideSectionsRunner-runner-pyodide"
+
+
+
+
+
 
 class _TerminalHandler extends PyodideSectionsRunner {
 
-  constructor(id){
-    super(id)
+  constructor(id, callInit=true){
+    super(id, false)
     this.terminal      = null     // jQuery.terminal object
-    this.termWrapper   = null     // Html element
+    this.termWrapper   = null     // jQuery Html element
     this.termEnabled   = false    // Flag to enforce activation of the terminal (admonitions+tabbed troubles)
     this.isIsolated    = id.startsWith("term_only")
     this.cmdChunk      = ""
     this.cmdOnTheRun   = ""
     this.joinTerminalLines = false
-    this._init()                  // Will cause a second call if coming from an iDE, but "whatever"...
+    this.eraseCmdOnTheRunInPost = false
+    if(callInit) this._init()
   }
 
   _init(){
@@ -52,6 +67,7 @@ class _TerminalHandler extends PyodideSectionsRunner {
     jsLogger("[Terminal] - build " + jqTermId)
 
     this.runnerTerm = this.getAsyncPythonExecutor()
+
     const termOptions = {
       greetings: "",                            // Cancel terminal banner (welcome message),
       completionEscape: false,
@@ -70,7 +86,8 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
     this.terminal    = $(jqTermId).terminal(this.runnerTerm, termOptions)
     this.termWrapper = this.terminal.parent()
-    this.terminal.history().clear()     // Clear the history from localeStorage.
+
+    this.terminal.history().clear()             // Clear the history from localeStorage.
 
     if(CONFIG._devMode) CONFIG.terms[termId]=this.terminal
 
@@ -107,8 +124,8 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
   swapTerminalLinesJoinerForCopies(){
     this.joinTerminalLines = !this.joinTerminalLines
-    const classMethod = this.joinTerminalLines ? 'removeClass' : 'addClass'
-    this.termWrapper.find(".stdout-wraps-btn")[classMethod]('deactivated')
+    const method = this.joinTerminalLines ? 'removeClass' : 'addClass'
+    this.termWrapper.find(".stdout-wraps-btn")[method]('deactivated')
   }
 
 
@@ -154,9 +171,11 @@ class _TerminalHandler extends PyodideSectionsRunner {
     if(h != this.terminal.css('height')){
       this.terminal.css('height', h)
     }
-    if(this.isIsolated && this.prefillTerm && !this.terminal.get_command()){
-      this.prefillTermIfAny()
-    }
+
+    // NOT NEEDED ANYMORE (...?)
+    // if(this.isIsolated && this.prefillTerm && !this.terminal.get_command()){
+    //   this.prefillTermIfAny()
+    // }
   }
 
 
@@ -187,24 +206,46 @@ class _TerminalHandler extends PyodideSectionsRunner {
   getTerminalBindings(){
     return ({
       "CTRL+C": async (e) => {
-        let txt = getSelectionText()
 
         // Skip if some text is selected (=> copy!)
-        if (!txt) {
-          let currentCmd = this.terminal.get_command();
-          pyFuncs.clear_console();    // Looks like it does nothing...? :/
-          this.terminal.echo(CONFIG.MSG.promptStart + currentCmd);
-          this.terminal.echo(txtFormat.error("KeyboardInterrupt"));
-          this.terminal.set_command("");
-          this.terminal.set_prompt(CONFIG.MSG.promptStart);
+        let txt = getSelectionText()
+        if (txt) {
+          e.preventDefault()
+          e.stopPropagation()
+          if(this.joinTerminalLines){
+            txt = txt.replace(/\n/g, '')
+          }
+          await navigator.clipboard.writeText(txt)
           return
         }
+
+        let currentCmd = this.terminal.get_command();
+        pyFuncs.clear_console();    // Looks like it does nothing...? :/
+        this.terminal.echo(CONFIG.MSG.promptStart + currentCmd);
+        this.terminal.echo(txtFormat.error("KeyboardInterrupt"));
+        this.terminal.set_command("");
+        this.terminal.set_prompt(CONFIG.MSG.promptStart);
+      },
+
+      "CTRL+V": async(e)=>{
         e.preventDefault()
         e.stopPropagation()
-        if(this.joinTerminalLines){
-          txt = txt.replace(/\n/g, '')
+
+        const history = this.terminal.history()
+        const cmd = await navigator.clipboard.readText()||""
+        const txtLines = cmd.split('\n')
+        const last = txtLines.pop() ?? ''
+
+        for(const line of txtLines){
+          history.append(line)
+          await this.terminal.exec(line)
         }
-        await navigator.clipboard.writeText(txt)
+        const headLine = txtLines.length ? CONFIG.MSG.promptWait : CONFIG.MSG.promptStart
+        this.terminal.set_prompt(headLine)
+        this.terminal.set_command(last)
+
+        // Make sure the cursor is blinking in the terminal, at the end of the last copied line:
+        this.termWrapper.find('span.cmd-cursor').css('display', 'unset')
       }
     })
   }
@@ -216,7 +257,11 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
 
   prefillTermIfAny(){
-    if(this.prefillTerm) this.terminal.set_command(this.prefillTerm)
+    if(this.prefillTerm){
+      const history = this.terminal.history()
+      history.append(this.prefillTerm)
+      this.terminal.set_command(this.prefillTerm)
+    }
   }
 
 
@@ -281,7 +326,7 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
 
 
-class TerminalRunner extends _TerminalHandler {
+export class TerminalRunner extends _TerminalHandler {
 
 
   /**Generate the async-locked callback used to run commands typed into the terminal.
@@ -301,11 +346,11 @@ class TerminalRunner extends _TerminalHandler {
 
 
 
-  /**Definitions of `command`, `cmdOnThRun` and general context about `PyodideConsole`:
-   * ----------------------------------------------------------------------------------
+  /**Definitions of @cmdChunk and @cmdOnThRun and general context about `PyodideConsole`:
+   * ------------------------------------------------------------------------------------
    *
    *
-   * All those properties, but especially `cmdChunk`, are trickier than they seem.
+   * All those properties, but especially @cmdChunk are trickier than they seem.
    * This is essentially because the hidden/inner PyodideConsole is actually running totally
    * independently of the jQuery.terminal object itself.
    *
@@ -313,9 +358,10 @@ class TerminalRunner extends _TerminalHandler {
    * other than "just run that code" (aka, installations/imports, exclusions, ...) still has to
    * be done around the console.
    *
-   * Problems arise when you need to know on the JS/Theme side if the cmdChunk is complete or not.
-   * To do so, you need to send the current @cmdChunk to the PyodideConsole, and that _fucking
-   * little bastard_ will automatically schedule the async execution of any complete instruction
+   * Problems arise when you need to know on the JS/Theme side if the @cmdChunk is complete or not.
+   *
+   * To do so, you need to send the current @cmdChunk to the PyodideConsole, and that _fucking-
+   * little-bastard_ will automatically schedule the async execution of any complete instruction
    * as soon as you call `pyconsole.push(chunk)`, before you can even know it is complete or not
    * on the JS/Theme side...
    *
@@ -342,80 +388,36 @@ class TerminalRunner extends _TerminalHandler {
    *                      After hitting `Enter`, @cmdChunk will be `"third line"` ONLY.
    *
    *                - Any mix of all these two last...
-   *
-   *
-   * Now, _IF_ the exclusions are already in place before the PyodideConsole execute the complete
-   * command, builtins or imports exclusions are already handled because the console uses the
-   * global scope.
-   *
-   * BUT, methods exclusions have to be checked, and missing packages might need to be installed.
-   *
-   * Considering the UX, it seems highly questionnable to drop exclusions related errors right in
-   * the middle of an incomplete command. Even worse: to start installing a package right in the
-   * middle of a multiline command... :roll-eyes:
-   *
-   *
-   * Summarizing:
-   *
-   * 1. Exclusions (builtins & imports), if any, have to be put in place before the current
-   *    `cmdChunk` is passed to the PyodideConsole, even if the current "command" is not complete.
-   *
-   * 2. Methods exclusions and missing packages installation have to be done only when the "current
-   *    command" is complete, so the TerminalRunner must keep track of previously entered cmdChunks
-   *    and track properly when it is "fully complete", syntax error, ...
-   *    This is where `cmdOnTheRun` enters the game.
-   *
-   *        ----------------------------------------------------------------------------------------
-   *        TODO: the implementation about imports actually does not match this description anymore
-   *        ----------------------------------------------------------------------------------------
-   *
-   * 3. When the `PyodideConsole` announce a complete command:
-   *      - It's execution in pyodide is already scheduled, but the result stills need to be run
-   *        with an async call.
-   *      - Before that, excluded methods and missing packages have to be handled, so pass the
-   *        `cmdOnTheRun` content to `runPythonCodeWithOptionsIfNoStdErr`, replacing the code
-   *        executor method with an async callback that will actually just  await the result
-   *        from the internal `PyodideConsole`.
-   *
-   *
-   * IMPLICATIONS:
-   *
-   * Because of all this, a lot of operations have to be applied each time the user strikes `Enter`
-   * in the terminal, even if the command is not complete yet (since, you cannot know upfront...).
-   * This is the reason for env_term and post_term executions, for example.
-   *
    * */
   async setupRuntimeTerminalCmd(cmdChunk){
 
-    /*
-    !!! WARNING !!!
+    /*  !!! WARNING !!!
 
         Any ASYNC potential calls to setupRuntime HAVE to be done before the pyconsole.push,
-        otherwise, because of async loop scheduling, the environment is setup from JS AFTER
-        the user command has been run indie pyodide...
-        Because of this, need the commandBuffer to update the __USER_CMD__ variable, and
-        _also_ because of this, the env section will also run on incomplete commands, and
-        _also_ because of this, any import done through the console must be checked now...
+        otherwise, the environment is setup from JS AFTER the user command has been run inside
+        pyodide because of the async loop scheduling...
+        Because of this, need the commandBuffer to update the __USER_CMD__ variable, and _also_
+        because of this, the env/_term section will also run on incomplete commands, and _also_
+        because of this, any import done through the console must be checked now...
     */
-    this.cmdChunk     = cmdChunk
-    this.cmdOnTheRun += this.cmdOnTheRun ? '\n'+cmdChunk : cmdChunk
+    this.cmdChunk    = cmdChunk
+    this.cmdOnTheRun = !this.cmdOnTheRun ? cmdChunk : this.cmdOnTheRun + '\n' + cmdChunk
     this.storeUserCodeInPython('__USER_CMD__', this.cmdOnTheRun)
     this.terminal.pause()
 
-    // If an IDE-terminal is run before the IDE itself, it must run the env/post sections.
-    // If env already run before, envTerm HAS to run independently, so remove the dependency.
     let runtime
     if(!this.alreadyRanEnv){
+      // If an IDE-terminal is run before the IDE itself, it must run the env/post sections.
       runtime = await this.setupRuntime()
       this.alreadyRanEnv = !runtime.stopped
 
     }else{
+      // If env already ran before, envTerm HAS to run independently, so remove the dependency.
       runtime = this.buildRunConfig()
       runtime.changeDependency('envTerm', 'start')  // Make envTerm runnable on its own!
-      this.setupGlobalConfig()                      // Make sure CONFIG.termMessage is properly bound
     }
 
-    await runtime.runWithCtx('envTerm')
+    await this.setupRuntime(runtime, 'envTerm')
     return runtime
   }
 
@@ -429,6 +431,7 @@ class TerminalRunner extends _TerminalHandler {
     }finally{
       // If ever postTerm failed, post might still have to run:
       await this.teardownRuntime(runtime)
+      if(this.eraseCmdOnTheRunInPost) this.cmdOnTheRun = ""
     }
   }
 
@@ -445,46 +448,82 @@ class TerminalRunner extends _TerminalHandler {
 
 
 
+
+
   /**Main command routine execution logic.
    * */
   async runTermCommand(runtime){
     jsLogger("[CheckPoint] - Terminal - start running command")
 
+    let futureAwaited = false              // Flag to know if the future has been awaited or not, in the loop
+    this.eraseCmdOnTheRunInPost = false
+
     if(runtime.stopped){
       jsLogger("[CheckPoint] - Terminal - Skipped!")
+      this.eraseCmdOnTheRunInPost = true
       return
     }
 
-    // Must be done BEFORE creating the future, otherwise, async scheduling troubles, and the
-    // exclusions end up being applied AFTER the user's command has been run...
+
+
+    /**Actions to perform when a command is complete or failed.
+     * */
+    const done = async (future)=>{
+      jsLogger("[CheckPoint] - Terminal - done step. Awaited:", futureAwaited)
+      this.eraseCmdOnTheRunInPost = true
+
+      // Future destruction cannot occur if the future didn't get awaited, so make sure it has been:
+      if(!futureAwaited){
+        try{ await future }
+        catch(e){ // console.warn(e)    // Might fail but result is useless => sink.
+        }
+      }
+      future.destroy()
+      await sleep()                     // Enforce GUI update, going through the next tick
+    }
+
+
+
+    // DO NOT use this.cmdChunk, otherwise, `import ...` in a multiline string WILL do the import... XD
+    const baseCtx = {
+      code: this.cmdOnTheRun,
+      section: CONFIG.runningMode.cmd,
+      isEnvSection: false,
+      applyExclusionsIfAny: true,
+      logConfig: {
+        code: this.cmdOnTheRun,
+        autoAssertExtraction: false,
+        purgeTrace: runtime.purgeStackTrace
+      },
+    }
+
+    /**Seek for excluded imports & installations, but NOT running the actual code.
+     * This has to be done before any future is fed to the PyodideConsole, otherwise it WILL
+     * run that code anyway...
+     * */
     await runtime.runWithCtx({
-      code:          this.cmdChunk,
-      section:      'cmd',
-      isEnvSection:  false,
-      logConfig:    {code:this.cmdChunk, autoAssertExtraction: false, purgeTrace: runtime.purgeStackTrace},
-      method:        this.installAndImportMissingModules,
-      methodArgs:   [this.cmdOnTheRun, runtime],
+      ...baseCtx,
+      kwsExclusions: false,         // Skip all usual exclusions
+      methodsExclusions: false,     // Skip all usual exclusions
+      runtimeExclusions: false,     // Skip all usual exclusions
+      method: async _=>{},          // Nothing to do: only check.apply imports!
     })
 
     if(runtime.stopped){
-      this.cmdOnTheRun = ""
+      // Need to "consume" any currently incomplete command here, because the user wrote
+      // an invalid import:
+      futureAwaited  = true
+      const [future] = [pyFuncs.pyconsole.push(":+42")]
+      try{
+        await pyFuncs.await_fut(future)
+      } catch(e){}
+      await done(future)
+      this.terminal.set_prompt(CONFIG.MSG.promptStart)
       return
     }
 
-    const done = async (future)=>{
-      jsLogger("[CheckPoint] - Terminal - done step. Awaited:", futureAwaited)
-      this.cmdOnTheRun = ""
-      if(!futureAwaited){
-        try{ await future }catch(e){
-          // console.warn(e)    // Might fail but result is useless => sink.
-        }
-      }
-      future.destroy()    // to destroy only if it got awaited first
-      await sleep()       // Enforce GUI update, going through the next tick
-    }
 
-    let futureAwaited = false   // Flag to know if the future has been awaited or not, in the loop
-    const lines = this.cmdChunk.split("\n")   // Split multiline commands (useful when pasting)
+    const lines = this.cmdChunk.split("\n")   // Split multiline commands (for multiline FILL)
 
     for (let line of lines) {
       jsLogger("[CheckPoint] - Terminal - current cmd line:", line)
@@ -505,29 +544,31 @@ class TerminalRunner extends _TerminalHandler {
 
         case "complete":
           jsLogger("[CheckPoint] - Terminal - future complete")
-
-          // Prepare the needed runner, which will handle the `futureAwaited` flag:
-          const oldRunner = this.pythonCodeRunnerWithCtx
-          this.pythonCodeRunnerWithCtx = async _=>{
-            jsLogger("[CheckPoint] - Terminal - awaiting future")
-            futureAwaited = true
-            await pyFuncs.await_fut(future)
-          }
-
           try{
-            /*NOTE: nothing can be awaited in between the future "creation" and the execution
-              of this.pythonCodeRunnerWithCtx, otherwise the event loop will actually compute
-              the result of the python command (which is now stored in the event loop) before
-              the restrictions are put in place in the environment).
-              Everything is "synch" up to this point!
+            /*NOTE: Imports exclusions are extra wonky, here...
+
+              Since the future has been "setup", the underlying PyConsole WILL execute the related
+              code anyway. Awaiting it or not doesn't change the fact that the JS layer of pyodide
+              will see the import and install the module (see `done`: I tried without enforcing
+              awaiting the future).
+              BUT: with the exclusions in place, the module won't be available to the user. Not even
+              through sys.modules! (I think it is installed, but never actually imported).
+
+              So all in all: let the installation itself occur anyway, because this avoids to have
+              to run something else from outside the routine like it was the case before, which was
+              also causing some kinds of problems...
             */
-            await this.runPythonCodeWithOptionsIfNoStdErr(this.cmdOnTheRun, runtime)
-              // NOTE: this.cmdOnTheRun argument has actually no other use than to check against
-              //       methods exclusions (imports are checked again, but with no result, since
-              //       already done if needed).
+            await runtime.runWithCtx({
+              ...baseCtx,
+              code:   line,
+              method: async _=>{
+                jsLogger("[CheckPoint] - Terminal - awaiting future")
+                futureAwaited = true
+                await pyFuncs.await_fut(future)
+              },
+            })
 
           }finally{
-            this.pythonCodeRunnerWithCtx = oldRunner
             await done(future)
           }
           continue
@@ -549,5 +590,6 @@ class TerminalRunner extends _TerminalHandler {
     }
   }
 }
+
 
 CONFIG.CLASSES_POOL.Terminal = TerminalRunner

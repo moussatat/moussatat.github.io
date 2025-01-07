@@ -18,897 +18,27 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-ace.require("ace/ext/language_tools");
 
-const isWin   = navigator.userAgent.includes('Windows')
-const isMacOs = navigator.userAgent.includes('Macintosh')
-
-const somethingFullScreen =()=> Boolean(document.fullscreenElement)
-
-/**Extract the height, as a number, from the css property (by default)
- * */
-const cssPx =(jObj,prop='height')=> +jObj.css(prop).slice(0,-2)
-
-
-
-
-
-
-
-
-
-
-
-
-class IdeStorageManager extends TerminalRunner {
-
-  /**Process to "re-initiate" the internal state of the IDE (useful for testing) */
-  constructor(editorId){
-    super(editorId)
-    this.storage = null   // updated with the following call...
-    this.getStorage()
-  }
-
-  // First class, making sure the change of argument if handled
-  build(){  super.build(this.termId) }
-
-
-  _extractWhateverLocalStorageVersion(editorId){
-    const  extractForThis = editorId==this.id
-    return getIdeDataFromStorage(editorId, extractForThis ? this : null)
-  }
-
-  getStorage(){
-    let [storage, outdated] = this._extractWhateverLocalStorageVersion(this.id)
-    this.storage = storage
-
-    // Enforce update of internal values:
-    if( outdated || this.storage.name!=this.pyName || this.storage.zip!=this.export ){
-      this.setStorage({name: this.pyName, zip:  this.export})
-    }
-  }
-
-  setStorage(changes){
-    if(changes){
-      for(const k in changes) this.storage[k] = changes[k]
-    }
-    localStorage.setItem(this.id, JSON.stringify(this.storage))
-  }
-
-  //-------------------------------------------------------------------------
-
-
-  announceCodeChangeBasedOnSrcHash(){
-    if(this.storage.hash != this.srcHash){
-      this.terminalEcho(CONFIG.lang.refresh.msg)
-    }
-  }
-
-
-  /**Automatically gives the focus to the ACE editor with the given id.
-   * */
-  focusEditor(){
-    this.editor.focus()
-  }
-
-
-  //-------------------------------------------------------------------------
-
-
-  setupGlobalConfig(){
-    super.setupGlobalConfig()
-    globalThis.getStorage = this.pyodideGetStorage.bind(this)
-    globalThis.setStorage = this.pyodideSetStorage.bind(this)
-  }
-
-
-  /**LocalStorage accessor from pyodide.
-   *
-   * @throws: PythonError if no storage data can be found for the current IDE.
-   * */
-  pyodideGetStorage(key){
-    return this.storage[key]
-  }
-
-
-  /**LocalStorage mutator from pyodide. Writing the properties used by PMT is forbidden.
-   * Accept only strings or numbers.
-   * */
-  pyodideSetStorage(key, value){
-    if(FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE.some(k=>k==key)){
-        throw new PythonError(
-            `Writing the "${ key }" property of the localStorage is forbidden (already used by PMT).`
-        )
-    }
-    if(typeof(value)!='string' && typeof(value)!='number'){
-      throw new PythonError(
-        `Cannot update "${ key }" localStorage property: only numbers and strings are allowed as values.`
-      )
-    }
-    this.setStorage({[key]: value})
-
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class IdeZipManager extends IdeStorageManager {
-
-  buildZipExportsToolsAndCbk(jBtn){
-
-    // Add drag&Drop behavior for zip archives:
-    jBtn.on("dragenter dragstart dragend dragleave dragover drag", e=>e.preventDefault())
-
-    // Doesn't work using jQuery... (again... x/ ):
-    jBtn[0].addEventListener('drop', this.dropArchiveFactory(
-      this.lockedRunnerWithBigFailWarningFactory(
-        CONFIG.runningMode.zipImport,
-        this.setupRuntimeZip,
-        this.dropArchive,
-        this.teardownRuntimeZip,
-        true,
-      )
-    ))
-
-    return this.lockedRunnerWithBigFailWarningFactory(
-      CONFIG.runningMode.zipExport,
-      this.setupRuntimeZip,
-      this.zipExport,
-      this.teardownRuntimeZip,
-    )
-  }
-
-
-  async setupRuntimeZip(){
-    this.terminal.pause()           // Deactivate user actions in the terminal until resumed
-    this.terminal.clear()           // To do AFTER pausing...
-    const [runtime,] = await this._baseSetupRuntime()
-    return runtime
-  }
-
-  async teardownRuntimeZip(runtime){
-    this.terminal.resume()
-    await this._baseTeardownRuntime(runtime)
-  }
-
-
-  _getDataForExportableIdeInPage(){
-    const toArchive = []
-    const ideThis   = this
-
-    $(`[id^=editor_]`).each(function(){
-      if(localStorage.getItem(this.id)===null){
-        return    // should never happen... But just in case...
-      }
-      const [data,] = ideThis._extractWhateverLocalStorageVersion(this.id)
-      data.id = this.id
-      if(data.zip){             // Exportable
-        toArchive.push(data)
-      }
-    })
-    return toArchive
-  }
-
-
-  _buildZipNameFirstChunks(){
-    const zipChunks = []
-
-    if(CONFIG.exportZipPrefix){
-      zipChunks.push(CONFIG.exportZipPrefix)
-    }
-    if(CONFIG.exportZipWithNames){
-      let names = ""
-      while(!names){
-        names = window.prompt(CONFIG.lang.zipAskForNames.msg)
-      }
-      zipChunks.push(names)
-    }
-    return zipChunks
-  }
-
-
-  async zipExport(_runtime){
-    this.terminalEcho('Generate zip for '+location.href)
-
-    const toArchive = this._getDataForExportableIdeInPage()
-    const zipChunks = this._buildZipNameFirstChunks()
-    const code      = this._buildZipExportPythonCode(toArchive, zipChunks)
-    pyodide.runPython(code)
-    this.focusEditor()
-  }
-
-
-  _buildZipExportPythonCode(toArchive, zipChunks){
-    const pyJson = JSON.stringify(toArchive).replace(/\\/g, '\\\\')
-    return `
-@__builtins__.auto_run
-def _hack_build_zip():
-
-    import shutil, json
-    from pathlib import Path
-    from itertools import count
-
-    def unique_name(p:Path):
-        while p.exists():
-            p = p.with_name(f"{ p.stem }_{ p.suffix }")
-        return p
-
-    dirname = unique_name(Path('tmp_zip'))
-    dirname.mkdir()
-
-    url    = ${ JSON.stringify(location.href) }
-    origin = ${ JSON.stringify(location.origin) }
-    chunks = ${ JSON.stringify(zipChunks) }
-
-    # Always make sure the url part of the filename is not empty:
-    zip_url = url[len(origin):].strip('/').replace('/','_').replace('.','_') or 'home'
-    chunks.append(zip_url)
-
-    zip_name = unique_name( Path( '-'.join(chunks) + '.zip') )
-
-    data = json.loads("""${ pyJson }""")
-    for ide in data:
-        name = dirname / (ide['id'] + '${ CONFIG.ZIP.pySep }' + ide['name'])
-        name.write_text(ide['code'], encoding="utf-8")
-
-    shutil.make_archive(zip_name.with_suffix(''), 'zip', dirname)
-
-    pyodide_downloader(
-        zip_name.read_bytes(),
-        zip_name.name,
-        "application/zip"   # "application/x-zip-compressed" on Windaube...?
-                            # => no need (probably because in WASM)
-    )
-    shutil.rmtree(dirname)
-    zip_name.unlink()
-`
-  }
-
-  dropArchiveFactory(asyncRuntimeConsumer){
-    return async ev=>{
-      ev.preventDefault()
-      CONFIG.loadIdeContent = this.loadIdeContent.bind(this)
-      await asyncRuntimeConsumer(ev)
-    }
-  }
-
-
-  async dropArchive(ev){
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
-    // https://stackoverflow.com/questions/43180248/firefox-ondrop-event-datatransfer-is-null-after-update-to-version-52
-
-    const useItems = Boolean(ev.dataTransfer.items)
-    const files = [...ev.dataTransfer[ useItems?'items':'files' ]]
-
-    if(files.length!=1){
-      this.giveFeedback("Cannot Import multiple archives.")
-      return
-    }
-
-    files.forEach((itemOrFile) => {
-      if(useItems && itemOrFile.kind !== "file"){
-        // If dropped items aren't files, reject them
-        return
-      }
-      this.getZipContentAsBytes( useItems ? itemOrFile.getAsFile():itemOrFile)
-    })
-  }
-
-
-  getZipContentAsBytes(file){
-    const reader = new FileReader();
-
-    reader.onload = function(event){
-      const bytesArr = event.target.result
-      pyodide.unpackArchive(bytesArr, "zip", {extractDir: CONFIG.ZIP.tmpZipDir})
-      pyodide.runPython(`
-@__builtins__.auto_run
-def _hack_zip_loading():
-    from pathlib import Path
-    import js
-    loadIdeContent = js.config().loadIdeContent
-
-    tmp_dir = Path('${ CONFIG.ZIP.tmpZipDir }')
-    for py in tmp_dir.iterdir():
-        content = py.read_text(encoding='utf-8')
-        loadIdeContent(py.name, content)
-        py.unlink()
-    tmp_dir.rmdir()
-`)
-    }
-    reader.readAsArrayBuffer(file)
-  }
-
-
-  loadIdeContent(pyName, code){
-    const i        = pyName.indexOf(CONFIG.ZIP.pySep)
-    const editorId = pyName.slice(0, i)
-    const name     = pyName.slice(i+1)
-    const jIde     = $('#'+editorId)
-
-    if(!jIde[0]){
-      this.giveFeedback(
-        `Couldn't find the IDE #${editorId} in the page (associated python name: ${ name })`
-      )
-    }else{
-      ace.edit(editorId).getSession().setValue(code);
-      // No save/localStorage handling at this point (I don't have the IdeRunner object in hand :p )
-      this.giveFeedback(`Loaded ${ editorId }${ CONFIG.ZIP.pySep }${ name }.`, "none")
-    }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**Mostly handle various GUI troubles, like:
- *    - Incomplete initialization of IDEs that are in hidden `==== "tabs"`
- *    - Wrong terminal dimensions for this or that reason (generally, also tabs...)
- *
- * Also holds the generic routines that will be used for IDE split screen and full screen modes.
- *
- * NOTE: the constructor also takes in charge some definitions needed only for child classes,
- *       to get a better/easier way to see what values are available.
- * */
-class IdeGuiManager extends IdeZipManager {
-
-  /**IDE instance currently in "split screen" mode.
-   * */
-  static SPLITTED = null
-
-  /**Model to clone, to get the extraline numbers in the gutter perfectly overlapped with the
-   * ones added by ACE editors.
-   * */
-  static INNER_LINE_NUMS = $(
-    '<span style="display: none;" tabindex="0"></span><span style="display: none;" tabindex="0"><span></span></span>'
-  )
-
-
-  constructor(editorId){
-    super(editorId)
-
-    this.global    = $("#global_"+editorId)
-    this.termId    = "term_" + editorId
-    this.inputIdH  = "#input_" + editorId
-    this.counterH  = "#compteur_" + editorId
-    this.solutionH = "#solution_" + editorId
-
-    this.guiIdeFlags = {
-      gutter: false,                  // Ensured the minIdeLines are written in IDE the gutter
-      resizedVertTerm: !this.isVert,  // Flag to know if the terminal size dimensions have already been enforced or not.
-      splittedLines: 0,               // nLines (gutter) of the IDE in split mode (0 if not splitted)
-      initTermH: 0,
-      initGlobH: 0,
-      hasObserver: false,             // Has already built auto-completion MutationObserver or not
-      internalIsFullScreen: false,    // Inner flag to handle mixed requests between full and split screen.
-                                      // DO NOT use as flag to handle fullscreen behaviors themselves...
-    }
-
-    this.editor = null  // ACE object
-    this.gutter = null  // ACE object child
-    this.delay  = 200   // Delay to wait after clearing the terminal content, (user actions)
-    this.getCodeToTest = ()=>this.editor.getSession().getValue()
-    this._init()
-  }
-
-
-  /**Process to "re-initiate" the internal state of the IDE (useful for testing) */
-  _init(){
-    super._init()
-    this.hiddenDivContent = true
-  }
-
-
-  get isSplitScreen()     { return this === IdeGuiManager.SPLITTED }
-  get activeSplitScreen() { return IdeGuiManager.SPLITTED }
-
-  setAsSplitted(that)     { IdeGuiManager.SPLITTED = that }
-
-
-  /**Routines to handle partial UI initializations, mostly for IDEs hidden in `=== "tabs"`
-   * whe the page is loaded: applies visual updates conditionally, only if they haven't
-   * been applied before.
-   * Note that the logic is rather intricate with super calls...
-   * */
-  makeUpYourGui(){
-    if(this.global.is(':hidden')) return false    // Nothing to do yet (tabbed content).
-
-    const todo = [
-      this.guiUpdateFillAceGutter(),
-      this.resizeVertTerm(),
-    ]
-    return todo.every(Boolean) && super.makeUpYourGui()
-  }
-
-
-  resizeVertTerm(){
-    if(this.guiIdeFlags.resizedVertTerm) return true
-    jsLogger("[CheckPoint] - Handle terminal window size")
-
-    const divHeight = $('#'+this.id).css('height')
-    this.global.find(".term_editor_v").css("height", divHeight)
-    return this.guiIdeFlags.resizedVertTerm=true
-  }
-
-
-  /**Fill the entire gutter with minIdeLines line numbers: those won't disappear when the
-   * user is deleting lines (probably because they use "remove first match" kind of logic).
-   * */
-  guiUpdateFillAceGutter(){
-    if(!this.guiIdeFlags.gutter){
-      this.fillAceGutter(this.minIdeLines)
-    }
-    return this.guiIdeFlags.gutter = true
-  }
-
-
-  //-----------------------------------------------------------------------------------
-
-
-  /**When then current IDE is in neither split nor full screen mode, store the current height of
-   * the terminal so that it can be restored when exiting from both modes.
-   * This is needed because the terminal's height is tweaked on the fly to make the display nicer,
-   * while the term height is also part of determining how many lines the ace gutter needs. Add
-   * the css margins dynamically changing at times _OTHER_ than when I compute the lines... and
-   * without tracking the initial height, you get terminals that get larger and larger when the
-   * user is switching from split to cull scree, modes repeatedly...
-   * */
-  storeInitHeightsIfNeeded(){
-    if(!somethingFullScreen() && !this.isSplitScreen){
-      this.guiIdeFlags.initTermH = cssPx( this.global.find('.term_wrapper') )
-      this.guiIdeFlags.initGlobH = cssPx( this.global )
-    }
-  }
-
-
-  /**Fill the entire gutter with minIdeLines line numbers: those won't disappear when the
-   * user is deleting lines (probably because they use "remove first match" kind of logic).
-   * */
-  fillAceGutter(nLines){
-    const model   = this.gutter.children().first().clone().removeClass('ace_gutter-active-line').addClass('pmt-gutter')
-    const numbers = this.gutter.find('.pmt-gutter')
-    const height  = cssPx(model)
-
-    const first_missing = numbers.length
-
-    // Remove extra line numbers:
-    for(let i=nLines ; i<first_missing ; i++){
-      numbers[i] && numbers[i].remove()
-    }
-
-    // Add needed line numbers:
-    for(let i=first_missing ; i<=nLines ; i++){
-      const elt = model.clone().css('top', (i-1)*height+'px').text(i)
-      elt.append(IdeGuiManager.INNER_LINE_NUMS.clone())
-      this.gutter.append(elt)
-    }
-  }
-
-
-  /**Handle the ACE editor gutter display, enforcing options.minLines line umbers so that
-   * the editor fills the desired height in `div.global_editor_xxx`.
-   * May adapt the terminal height on the fly, if "required".
-   *
-   * @param options: object with optional properties:
-   *    - setup:    default=true (is setting up the mode or not)
-   *    - minLines,maxLines: Resulting values to set on the ACE editor. If not given,
-   *                computed automatically on the fly.
-   *    - topDivH:  The max height space currently available for the #pmt-top-div element.
-   * */
-  ideScreenModeResize(options={}){
-
-    let {setup, minLines, maxLines, topDivH} = {setup:true, topDivH:Infinity, ...options}
-
-    const term  = this.global.find('.term_editor')
-    let   termH = this.guiIdeFlags.initTermH
-
-    // If not given compute minLines automatically (means: "entering a screen mode"):
-    if(minLines===undefined){
-
-      const btns  = this.global.find('.ide_buttons_div_wrapper')
-      const globH = Math.min(cssPx(this.global), topDivH)
-      const btnsH = cssPx(btns) + cssPx(btns, 'margin-top') + cssPx(btns, 'margin-bottom')
-      const lineH = cssPx(this.global.find('div.ace_gutter-layer').children().first())
-
-      // Do not allow terminal + buttons to fill more than half the height:
-      if( !this.isVert && termH+btnsH > globH/2 ){
-        termH = globH/2 - btnsH
-      }
-
-      // Fix the exact terminal height so that the bottom space is always consistent:
-      // Sliders on windaube are HUGE, so reduce by one, whatever the case.
-      const availableH = globH - btnsH - termH * !this.isVert
-      const nLines     = Math.max(1, Math.floor( availableH/lineH )) - isWin
-
-
-      // Set the actual number of lines to "lock" for the ACE editor:
-      minLines = maxLines = nLines
-
-      jsLogger('[ScreenMode]', "Computed minLines =", minLines)
-      // jsLogger('[ScreenMode]', {globH, termH, btnsH, availableH, lineH, topDiv:cssPx($("#pmt-top-div"))})
-    }
-
-    this.editor.setOptions({minLines, maxLines})
-    this.fillAceGutter(minLines)
-    this.editor.resize()
-
-    term.css('resize', setup||this.isVert ? 'unset' : 'vertical')
-    term.css("height", (setup ? termH : this.guiIdeFlags.initTermH)+'px')
-
-    jsLogger('[ScreenMode]', "IDE resizing done -", this.editor.getOption('minLines'), this.editor.getOption('maxLines'))
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class IdeFullScreenGlobalManager {
-
-  static currentIde = null
-  static someMenuOpened = false
-
-
-  /**Identify if the given jQuery node is one related to a context menu (ACE auto-completion,
-   * ACE menu, or commands).
-   * */
-  static isSomeAceMenu(jNode){
-    return (
-           jNode.children(CONFIG.element.aceSettings).length && "menu"
-        || jNode.children(CONFIG.element.aceF1Cmds).length && "F1"
-        || jNode.hasClass(CONFIG.element.aceAutoComplete) && "auto-complete"
-    )
-  }
-
-
-  static setMenusFlag(isVisibleAndNow) {
-    if(isVisibleAndNow){
-      IdeFullScreenGlobalManager.someMenuOpened=true
-    }else{
-      // The menu flag has to be unset with a significant delay, otherwise the keydown event sees
-      // the updated status. Note that the delay only applies to an internal state, so it doesn't
-      // have any visible effect on the user's side.
-      setTimeout(()=>{IdeFullScreenGlobalManager.someMenuOpened=false}, 150)
-    }
-  }
-
-
-  /**Handling the various context menus, to try to forbid going full screen when the auto-completion
-   * tool, ace settings or ace command window are opened requires to keep track of what is currently
-   * or has been added to the body tag.
-   *
-   * Notes:
-   *  - Same logic _while_ in full screen cannot be applied because there is no control over the
-   *    escape button keypress event, there.
-   *  - The global state must be tracked, because the resolution order of the Escape keypress
-   *    closes the menu before the fullscreen related key event is triggered...
-   *  - Added once only per page...
-   * */
-  static buildBodyObserver(){
-    new MutationObserver((records)=>{
-
-      for(const record of records) {
-
-        for (const node of record.removedNodes) {
-          const kind = this.isSomeAceMenu($(node))
-          if(kind && kind!='auto-complete') this.setMenusFlag(false)
-          // The auto-complete window will be extracted as soon as it's added, so ignore it.
-        }
-
-        for(let node of record.addedNodes) {
-          node = $(node)
-          const kind = this.isSomeAceMenu(node)
-          if(!kind) continue
-
-          this.setMenusFlag(true)
-          switch(kind){
-
-            case 'menu':
-              node.find('table')
-                  .addClass('dummyclass')     // To deactivate css background rule for pmt
-                  .css('font-size','10px')
-              break
-
-            case 'auto-complete':
-              if(!this.currentIde.guiIdeFlags.hasObserver){
-                this.currentIde.guiIdeFlags.hasObserver=true
-                new MutationObserver(records=>{
-                  for(const record of records){
-                    const isVisible = $(record.target).css('display')!='none'
-                    this.setMenusFlag(isVisible)
-                  }
-                }).observe(node[0], {attributeFilter:['style']})
-              }
-              break
-          }
-
-          if(somethingFullScreen() || kind=='auto-complete'){
-            node.detach().appendTo(this.currentIde.global)
-            /* Always move the auto-complete window because:
-                  - each IDE has its own window
-                  - this allows to add one single style observer the first time the
-                    auto-completion tool is used for that IDE */
-          }
-        }
-      }
-    }).observe(document.body, {childList: true})
-  }
-}
-
-IdeFullScreenGlobalManager.buildBodyObserver()
-
-
-
-
-
-
-
-
-
-
-
-
-class IdeFullScreenManager extends IdeGuiManager {
-
-  switchFullScreenFromEscape(event){
-    if(event.key=='Escape' && !somethingFullScreen() && !IdeFullScreenGlobalManager.someMenuOpened){
-      this.requestFullScreen()
-    }
-    // The browser already handles on its own going out of fullscreen with escape.
-  }
-
-  switchFullScreenFromButton(){
-    if(!somethingFullScreen()){
-      this.storeInitHeightsIfNeeded()
-      this.requestFullScreen()
-    }else{
-      document.exitFullscreen()
-    }
-  }
-
-
-  /**Finalize the IDE layout once full screen mode has been setup by the browser, then
-   * wait for the exit. This is not done through an event, because it might happen in
-   * different ways (Esc, click "full screen" or "split screen" buttons), requiring
-   * different results/behaviors.
-   * */
-  requestFullScreen(){
-    this.global[0].requestFullscreen().then(async _=>{
-      jsLogger('[ScreenMode]', "Full screen ready")
-
-      // Just in case the user used a button without typing anything in the editor yet.:
-      IdeFullScreenGlobalManager.currentIde = this
-
-      const splitScreenBtn = this.global.find(".ide-split-screen")
-      splitScreenBtn.addClass('deactivated')
-
-      this.guiIdeFlags.internalIsFullScreen = true
-      this.ideScreenModeResize()
-      jsLogger('[ScreenMode]', "Full screen setup - DONE")
-
-      // Wait forever if needed...
-      while(somethingFullScreen()) await sleep(50)
-
-      const minLines = this.guiIdeFlags.splittedLines || this.minIdeLines
-      const maxLines = this.guiIdeFlags.splittedLines || this.maxIdeLines
-
-      jsLogger('[ScreenMode]', "Full screen reversion", minLines, maxLines)
-
-      this.ideScreenModeResize({setup:false, minLines, maxLines})
-      this.guiIdeFlags.internalIsFullScreen = false
-      if(this.guiIdeFlags.splittedLines){
-        splitScreenBtn.removeClass('deactivated')
-      }
-      IdeFullScreenGlobalManager.currentIde = null
-
-      jsLogger('[ScreenMode]', "Full screen reversion - DONE")
-    })
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-class IdeSplitScreenManager extends IdeFullScreenManager {
-
-
-  /**Set the pmt-top-div height so that it occupies the whole viewport.
-   * */
-  setupTopDivHeight(topDiv, header){
-    topDiv ??= $("#pmt-top-div")
-    if(!topDiv[0]) return;
-    const headerHpx = ( header ?? $('body > header') ).css('height')
-    topDiv.css('height', `calc( 100vh - ${ headerHpx })`)
-    return cssPx(topDiv)
-  }
-
-
-  async switchSplitScreenFromButton(e){
-
-    const wasFullScreen = somethingFullScreen()
-    this.storeInitHeightsIfNeeded()
-
-    if(wasFullScreen){
-      jsLogger('[ScreenMode]', "Exit full screen mode")
-      document.exitFullscreen()
-
-      // Everything is async with various delays/things waiting on ea ch others, so wait
-      // for the internal flag instead of document.fullscreenElement, so that the IDE can
-      // apply its logic when exiting it.
-      // NOTE: Add an extra delay otherwise glob's height might be wrong when computing
-      // minLines.
-      while(this.guiIdeFlags.internalIsFullScreen) await sleep(50)
-      await sleep(50)
-      jsLogger('[ScreenMode]', "Full screen mode exited")
-    }
-
-    const swapColumns = e.originalEvent.ctrlKey || isMacOs && e.originalEvent.metaKey
-    this.switchSplitScreen(swapColumns, wasFullScreen)
-  }
-
-
-
-  /**Go "in" or "out" of "split screen" mode for the current IDE instance, handling
-   * the possible initial states, like:
-   *
-   *    - If currently in full screen:
-   *          1. exit full screen
-   *          2. set current IDE in split mode
-   *    - If another IDE is currently in split screen mode:
-   *          1. make it exit split screen
-   *          2. set current IDE in split mode
-   *    - If the current IDE is in split screen mode:
-   *          1. make it exit split screen
-   *
-   * This involves DOM reorganizations, moving entire parts of it here or there...
-   * */
-  switchSplitScreen(swapColumns, fromFullScreen){
-
-    // Allow to switch from one IDE to another, staying in "split" mode:
-    if(this.activeSplitScreen && !this.isSplitScreen){
-      jsLogger('[ScreenMode]', "Exit previous splitted")
-      this.activeSplitScreen.switchSplitScreen(swapColumns, false)
-    }
-
-    const topDiv = $(document.getElementById(`pmt-top-div`) ?? `<div id="pmt-top-div"></div>`)
-
-    // Check for columns reversion request only:
-    if(this.isSplitScreen && swapColumns){
-      topDiv.append(
-        topDiv.children().get().map(elt=>$(elt).detach()).reverse()
-      )
-      return;
-    }
-
-    const setup    = !this.isSplitScreen || fromFullScreen
-    const header   = $('body > header')
-    const page     = $("div.md-container")
-    const repl     = $(document.getElementById("pmt-ide-placeholder") ?? '<div id="pmt-ide-placeholder"></div>')
-    const splitBtn = this.global.find(".ide-split-screen")
-    const headerH  = cssPx(header)
-
-    const changes  = setup ? {
-      log: 'Setup',
-      rearrangeDom: ()=>{ topDiv.insertAfter(header)
-                          const order = swapColumns ? [this.global, page] : [page, this.global]
-                          topDiv.append(order)
-                          const topDivH = this.setupTopDivHeight(topDiv, header)
-                          repl.insertBefore($(this.solutionH))
-                          return {topDivH}
-                        },
-      ideResizeArgs:      {setup},
-      splitBtnClass:     'remove',
-      splitIdeClass:     'add',
-      SPLITTED_becomes:   this,
-      splittedLinesFlag:  this.editor.getOption('minLines'),
-      topSrcBefore:       this.global,
-      scrollRefAfter:     repl,
-      toScroll:           page[0],
-    }:{
-      log: 'Teardown',
-      rearrangeDom: ()=>{ page.insertAfter(header)
-                          repl.replaceWith(this.global)
-                          topDiv.remove()
-                          return {}
-                        },
-      ideResizeArgs:      {setup, minLines:this.minIdeLines, maxLines:this.maxIdeLines},
-      splitBtnClass:     'add',
-      splitIdeClass:     'remove',
-      SPLITTED_becomes:   null,
-      splittedLinesFlag:  0,
-      topSrcBefore:       repl,
-      scrollRefAfter:     this.global,
-      toScroll:           window,
-      initHeight:         this.guiIdeFlags.initGlobH,
-    }
-
-    //------------------------------------------------------------
-
-    jsLogger('[ScreenMode]', changes.log, "split screen mode")
-
-    // BEFORE detaching anything:
-    let topSrc = changes.topSrcBefore[0].getBoundingClientRect().top
-
-
-    // Reorganize the DOM:
-    page.detach()
-    this.global.detach()
-    const data = changes.rearrangeDom()
-
-
-    // Resize the IDE once moved, adding or removing line numbers to fill appropriately
-    // the space when needed:
-    if('topDivH' in data) changes.ideResizeArgs.topDivH = data.topDivH
-    this.ideScreenModeResize(changes.ideResizeArgs)
-
-
-    // Update various tracked values or UI element classes:
-    splitBtn[    changes.splitBtnClass+'Class' ]('deactivated')
-    this.global[ changes.splitIdeClass+'Class' ]('split')
-    this.guiIdeFlags.splittedLines = changes.splittedLinesFlag
-    this.setAsSplitted(changes.SPLITTED_becomes)
-
-
-    // Handle the final scroll position once everything is in place, keeping the original placement
-    // as much as possible, unless the moved element would end up outside of the viewport.
-    const viewH = window.innerHeight || document.documentElement.clientHeight
-    const box   = changes.scrollRefAfter[0].getBoundingClientRect()
-
-    if(topSrc < headerH || topSrc > viewH-50){
-      const eltH = changes.initHeight ?? box.height
-      topSrc = headerH + Math.max(50, (viewH - eltH) / 2)
-    }
-    changes.toScroll.scrollBy(0, box.top - topSrc)
-
-
-    jsLogger('[ScreenMode]', "split handling - DONE")
-  }
-}
-
+import { jsLogger } from 'jsLogger'
+import {
+  choice,
+  decompressLZW,
+  downloader,
+  freshStore,
+  getTheme,
+  PythonError,
+  sleep,
+  subscribeWhenReady,
+  txtFormat,
+  uploader,
+} from 'functools'
+import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
+import {
+  IdeSplitScreenManager,
+  IdeFullScreenGlobalManager,
+  somethingFullScreen,
+  useCtrl,
+} from '4-ideLogistic-ide'
 
 
 
@@ -948,10 +78,12 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
 
 
   /**Unconditionally update the counter of attempts with the given value.
+   *
+   * Handles Infinity as a security, in case the method is called with it anyway.
    * */
   setAttemptsCounter(nAttempts){
     this.data.attempts_left = nAttempts
-    $(this.counterH).text(nAttempts)
+    $(this.counterH).text(nAttempts===Infinity ? CONFIG.INFINITY : nAttempts)
   }
 
 
@@ -993,7 +125,7 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
 
 
 
-  /**Reveal solution and REMs on success, or if the counter reached 0 and the sol&REMs content
+  /**Reveal solution and REMs on success, or if the counter reached 0 and the corr&REMs content
    * is still hidden, then prepare an appropriate revelation message if needed (`finalMsg`).
    *
    * Do not forget that any error related feedback has already been printed to the console, so
@@ -1005,7 +137,10 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
     const someToReveal = this.corrRemsMask && this.hiddenDivContent && (!this.profile || isDelayed)
 
     jsLogger("[CheckPoint] - handleRunOutcome")
-    // console.log("[OutCome]", JSON.stringify({ success, pof:this.profile, revealable, hidden:this.hiddenDivContent, allowCountDecrease: !!allowCountDecrease, mask:this.corrRemsMask, N:this.attemptsLeft}))
+    // console.log("[OutCome]", JSON.stringify({
+    //   success, pof:this.profile, revealable, hidden:this.hiddenDivContent,
+    //   allowCountDecrease: !!allowCountDecrease, mask:this.corrRemsMask, N:this.attemptsLeft
+    // }))
 
     this.setStorage({done: success ? 1:-1 })
     this.updateValidationBtnColor()
@@ -1058,14 +193,19 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
   }
 
 
-  /**Reveal corr and/or REMs (visible or not) contents.
-   * When reaching this method, it is already sure by contract, that the revelation must occur.
-   * The only piece of contract this method is holding is that if flags the revelation as done,
-   * and it decides if the div content has to be decompressed or not on the way.
+  /**Reveal corr and/or REMs (VIS or not) contents.
+   * When reaching this method, it is already sure by contract that the revelation must occur.
+   * The only piece of contract this method is holding is that it flags the revelation as done,
+   * and decides if the div content has to be decompressed or not on the way.
+   *
+   * @waitForMathJax: if true, the call is done with profile=="revealed", so mathjax might not be
+   * ready yet, and the update must be delayed.
    * */
   revealSolutionAndRems(waitForMathJax=false){
     jsLogger("[CheckPoint] - Enter revealSolutionAndRems")
-    // Need to check here one more time against hiddenDivContent because of the "show" button logic.
+
+    // Need to check here _one more_ time against hiddenDivContent because of the "show"
+    // button logic...
     if(this.hiddenDivContent){
       jsLogger("[CheckPoint] - revealed!")
 
@@ -1191,6 +331,11 @@ class IdeRunnerLogic extends IdeFeedbackManager {
   prefillTermIfAny(){}
 
 
+  // @OVERRIDE
+  async applyAutoRun(){
+    await this._defaultAutoRun()
+  }
+
 
   /**Add the `tests` section to the given code, joining them with the appropriated
    * string/comment if needed.
@@ -1251,29 +396,20 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
 
 
-  /**The terminal behaves differently when IDE content is run, so must be handled from here.
-   * (mostly: through command lines, the terminal content is not cleared).
-   *
-   *  - If not paused, the terminal automatically displays a new line for a fresh command.
-   *  - So clear content only after if got paused.
-   *  - Then show to the user that executions started and enforce terminal GUI refresh,
-   *    with a tiny pause so that the user has time to see the "cleared" terminal content.
-   *  - Then, relay to super setup methods.
-   * */
   async setupRuntimeIDE() {
     jsLogger("[CheckPoint] - setupRuntimeIDE IdeRunner")
 
     this.terminalAutoWidthOnResize()
 
-    // save before anything else, in case an error occur somewhere...
+    // Save before anything else, in case an error occurs somewhere...
     const editorCode = this.getCodeToTest()
     this.save(editorCode)
     this.storeUserCodeInPython('__USER_CODE__', editorCode)
 
-    this.terminal.pause()           // Deactivate user actions in the terminal until resumed
-    this.terminal.clear()           // To do AFTER pausing...
-    this.terminalDisplayOnIdeStart()   // Handle the terminal display for the current action
-    await sleep(this.delay)         // Terminal "blink", so that the user always sees a change
+    this.terminal.pause()             // Deactivate user actions in the terminal until resumed
+    this.terminal.clear()             // To do AFTER pausing...
+    this.terminalDisplayOnIdeStart()  // Handle the terminal display for the current action
+    await sleep(this.delay)           // Terminal "blink", so that the user always sees a change
     this.alreadyRanEnv = true
 
     return this.setupRuntime()
@@ -1293,10 +429,6 @@ class IdeRunnerLogic extends IdeFeedbackManager {
     await this.teardownRuntime(runtime)
 
     this.storeUserCodeInPython('__USER_CODE__', "")
-
-    // Remove localStorage accessors
-    globalThis.getStorage = noStorage
-    globalThis.setStorage = noStorage
   }
 
 
@@ -1378,7 +510,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
         }
       }
 
-      // Reveal solution and REMs on success, or if the counter reached 0 and the sol&REMs content
+      // Reveal solution and REMs on success, or if the counter reached 0 and the corr&REMs content
       // is still hidden, then prepare an appropriate revelation message if needed (`finalMsg`).
       this.handleRunOutcome(runtime, decrease_count)
     }
@@ -1446,7 +578,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
 
 
-class IdeRunner extends IdeRunnerLogic {
+export class IdeRunner extends IdeRunnerLogic {
 
 
   /**Process to "re-initiate" the internal state of the IDE (useful for testing) */
@@ -1459,11 +591,11 @@ class IdeRunner extends IdeRunnerLogic {
   // @Override
   build(){
 
-    // Create and define this.editor + fill code content + define all needed listeners:
+    // Create and define this.editor + define all needed listeners:
     this.setupAceEditor()
     this.bindIdeButtons()
 
-    // Try to restore a previous session, or extract default starting code, but skip  localStorage
+    // Try to restore a previous session, or extract default starting code, but skip localStorage
     // update (this way, the user is not bothered with updates of the starting content of an IDE
     // they didn't even tried yet, when the author is making updates):
     this.setStartingCode({extractFromLocalStorage: true, saveOnceApplied: false})
@@ -1473,14 +605,18 @@ class IdeRunner extends IdeRunnerLogic {
 
     this.announceCodeChangeBasedOnSrcHash()
 
-    // Add the resize listener (because of the intermediate div wrappers, IDE's terminal
+    // Add the terminal resize listener (because of the intermediate div wrappers, IDE's terminal
     // will not resize automatically):
     window.addEventListener( 'resize', _.throttle(
       this.windowResizeHandler.bind(this), 50, {leading:false, trailing:true}
     ))
 
+    // Check for initial actions on page load:
     if(this.profile===CONFIG.PROFILES.revealed){
       this.revealSolutionAndRems(true)
+    }
+    if(this.twoCols){
+      this.switchSplitScreenFromButton(null, false)
     }
   }
 
@@ -1511,6 +647,7 @@ class IdeRunner extends IdeRunnerLogic {
     }
 
     this.editor = ace.edit(this.id, options);
+    this.runner = this.playFactory()
     this.gutter = this.global.find('div.ace_gutter-layer')
 
     if(CONFIG._devMode) CONFIG.editors[this.id] = this.editor
@@ -1527,7 +664,7 @@ class IdeRunner extends IdeRunnerLogic {
     this.editor.commands.addCommand({
         name: "runPublicTests",
         bindKey: { win: "Ctrl-S", mac: "Cmd-S" },
-        exec: this.playFactory(),
+        exec: this.runner,
     })
     if(this.hasCheckBtn){
       this.editor.commands.addCommand({
@@ -1551,11 +688,13 @@ class IdeRunner extends IdeRunnerLogic {
 
   bindIdeButtons(){
 
-    // Add fullscreen activation binding, but NOT through the ACE editor (cannot control the exit)
-    this.global.on('keyup', this.switchFullScreenFromEscape.bind(this))
+    // Doesn't work to catch the Esc applying "exit full screen"... :/
+    this.global.on('keydown', ()=>{
+      IdeFullScreenGlobalManager.currentIde = this  // Register the IDE currently in use
+    })
 
-    // Register the IDe currently in use
-    this.global.on('keydown', ()=>IdeFullScreenGlobalManager.currentIde=this)
+    // Add fullscreen activation binding, but NOT through the ACE editor (cannot control the exit)
+    this.global.on('keyup', this.respondToEscapeKeyUp.bind(this))
 
     // Bind editor extra buttons:
     this.global.find(".comment.tooltip" ).on("click", this.toggleComments.bind(this))
@@ -1603,28 +742,43 @@ class IdeRunner extends IdeRunnerLogic {
   getTerminalBindings(){
 
     // Ensure the focus is given back to the terminal after an action triggered from it!
-    const asyncTermFocus=(cbk)=>async e=>{
+    const asyncTerminalFocus=(cbk)=>async e=>{
       await cbk(e)
       this.editor.blur()
       this.terminal.focus()
     }
     return ({
       ...super.getTerminalBindings(),
-      'CTRL+I': asyncTermFocus(this.toggleComments.bind(this)),
-      'CTRL+S': asyncTermFocus(this.playFactory()),
-      ...(!this.hasCheckBtn ? {} : {'CTRL+ENTER': asyncTermFocus(this.validateFactory())} ),
+      'CTRL+I': asyncTerminalFocus(this.toggleComments.bind(this)),
+      'CTRL+S': asyncTerminalFocus(this.playFactory()),
+      ...(!this.hasCheckBtn ? {}:{
+        'CTRL+ENTER': asyncTerminalFocus(this.validateFactory())
+      } ),
     })
   }
 
 
   windowResizeHandler(){
-    if(this.isSplitScreen){
+    // When going full screen the resize would trigger this logic, while the computations have
+    // already been done correctly (with goingFullScreen argument), so skip:
+    if(this.isInSplit && !somethingFullScreen()){
       const topDivH = this.setupTopDivHeight()
-      this.ideScreenModeResize({topDivH})
+      this.ideScreenModeVerticalResize({topDivH})
     }
     this.terminalAutoWidthOnResize()
   }
 
+
+  async respondToEscapeKeyUp(event){
+
+    if(event.key=='Escape' && !IdeFullScreenGlobalManager.someMenuOpened && !somethingFullScreen()){
+      this.requestFullScreen()
+      // The browser already handles on its own going out of fullscreen with escape => no else needed
+
+    }else if(event.key==':' && event.altKey){
+      this.switchSplitScreenFromButton(event)
+    }
+  }
 
 
   //--------------------------------------------------------------
@@ -1681,7 +835,9 @@ class IdeRunner extends IdeRunnerLogic {
     const code = this.setStartingCode({extractFromLocalStorage: false, saveOnceApplied: true})
     this.storage = freshStore(code, this)
     this.updateValidationBtnColor()
-    this.setAttemptsCounter(this.srcAttemptsLeft)
+    if(Number.isFinite(this.srcAttemptsLeft)){
+      this.setAttemptsCounter(this.srcAttemptsLeft)
+    }
     $("#solution_" + this.id).addClass('py_mk_hidden')
     this.hiddenDivContent = true
     this.terminal.clear()

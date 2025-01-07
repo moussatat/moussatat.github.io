@@ -198,7 +198,7 @@ div[class*='ace-'] .ace_gutter {
 #pmt-top-div {
   width:100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% min-content auto;
 }
 
 /*Page content has to stay scrollable*/
@@ -208,7 +208,6 @@ div[class*='ace-'] .ace_gutter {
 #pmt-top-div > div.md-container div.md-sidebar { display: none; }
 
 #pmt-top-div > div.py_mk_ide.split {
-  margin: 10px 10px 0px 0px;  /* Nicer... */
   overflow: hidden; /*FIX: avoid scrollbar when height computations gets slightly wrong*/
 }
 
@@ -219,12 +218,44 @@ div[class*='ace-'] .ace_gutter {
 #pmt-top-div div.py_mk_ide.split .ide_buttons_div_wrapper { font-size: 160%; }
 
 #pmt-ide-placeholder {
-  width: 80%;
-  height: 4em;
-  border: solid 2px gray;
-  background-image: repeating-linear-gradient( -45deg, gray 0px 5px, black 0px 20px );
+  height: 120px;
+  border: solid 2px var(--main-theme);
   border-radius: 10px;
-  margin: auto;
   margin-top: 1em;
   margin-bottom: 1em;
+  opacity: 0.35;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7em;
+  color: var(--main-theme);
+  box-shadow: 0 0 10px var(--main-theme);
+}
+
+#pmt-slider-div-div {
+  justify-self: center;
+  align-self: center;
+  width: 1px;
+  height: 100%;
+  background-color: var(--main-theme);
+  display: grid;
+  align-content: center;
+}
+#pmt-slider-div {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+#pmt-split-slider:hover {
+  cursor: grab;
+}
+#pmt-split-slider {
+  position: absolute;
+  background-color: darkgray;
+  border-radius: 4px;
+  height: 3.5em;
+  width: 1em;
+  border: 2px solid gray;
+  top: -1.75em;
+  left: -0.5em;
 }

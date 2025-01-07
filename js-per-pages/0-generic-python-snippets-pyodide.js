@@ -18,16 +18,14 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+import { jsLogger } from 'jsLogger'
+import { escapeSquareBrackets } from 'functools'
 
 
 
 
-/**To access CONFIG data from pyodide (mermaid, cutFeedback, ...).
- * */
-function config(){ return CONFIG }
 
-
-const pyodideFeatureCode=(()=>{
+export const pyodideFeatureCode=(()=>{
 
     const PYODIDE_SNIPPETS = {
 
@@ -153,9 +151,27 @@ del _hack_auto_run
 
 
     version: `
-def version():
-    """ Print to the console the current version number of pyodide-mkdocs-theme. """
-    print("pyodide-mkdocs-theme v${ CONFIG.version }")
+def version(get_version=False):
+    """ Print (also returns) the current version number of pyodide-mkdocs-theme. """
+    out = "pyodide-mkdocs-theme v${ CONFIG.version }"
+    print(out)
+    if get_version:
+        return out
+`,
+
+
+    localStorageRelays: `
+@auto_run
+def _hack_local_storage_routines():
+    import js
+
+    for prop in 'get set del'.split():
+        routine = getattr(js, prop+'Storage')
+        as_builtin(prop+'_storage')(routine)
+
+    @as_builtin
+    def keys_storage():
+        return js.keysStorage().to_py()
 `,
 
 
@@ -267,8 +283,10 @@ def _hack_exclusions_tools():
     @as_builtin
     class ExclusionError(Exception):
         @staticmethod
-        def throw(that:str):
-            raise ExclusionError(f"${ CONFIG.MSG.exclusionMarker }: don't use {that}")
+        def throw(that:str, head=None):
+            if head is None:
+                head = "don't use "
+            raise ExclusionError(f"${ CONFIG.MSG.exclusionMarker }: { head }{ that }")
 `,
 
 
@@ -651,7 +669,7 @@ __builtins__._stdout_value
 */
 
 
-const pyodideFeatureRunCode=(name, repl=null)=>{
+export const pyodideFeatureRunCode=(name, repl=null)=>{
     const code = pyodideFeatureCode(name, repl)
     return pyodide.runPython(code)
 }
@@ -659,206 +677,18 @@ const pyodideFeatureRunCode=(name, repl=null)=>{
 
 /**Use a StringIO stdout, so that the full content can be extracted later.
  * */
-const setupStdIO =_=>{
+export const setupStdIO =_=>{       // WARNING: some arguments may be passed in silently here or there
     pyodideFeatureRunCode('autoRun')
     pyodideFeatureRunCode('setupStdIO')
 }
 
-const getFullStdIO =_=>{
+export const getFullStdIO =_=>{
     const stdout = pyodideFeatureRunCode('getFullStdIO') || ''
     return escapeSquareBrackets(stdout)
 }
 
-const clearPyodideScope=()=>{
+export const clearPyodideScope=()=>{
     pyodideFeatureRunCode('autoRun')
     pyodideFeatureRunCode('refresher')
     pyodideFeatureRunCode('clearScope')
-}
-
-
-
-
-
-
-/*
-------------------------------------------------------------------
-                      Manage code exclusions
-------------------------------------------------------------------
-*/
-
-
-/**Put in place code exclusions. Are handled:
- *   - builtin function calls
- *   - imports
- *   - method calls (done through a simple string check in the code, in runPythonCodeWithOptionsIfNoStdErr)
- *
- *
- * ## RATIONALS:
- *
- * To forbid the use of some functions or packages, replace them in the global scope by "functions"
- * that look "more or less the same", but will raise an error when called, or when used in the
- * wrong way (imports).
- *
- *
- * ## PROBLEMS & CONTEXT:
- *
- * 1. Pyodide itself uses various functions to run python code:
- *      - eval is used in pyodide.runPython
- *      - reversed and/or min and/or max may be used when building a stacktrace when an error is
- *        thrown in python
- * 2. This forbids to replace the __builtins__ versions of those functions (see about imports)...
- * 3. ...but the __main__ script is run separately of pyodide actual "python runtime".
- *
- *
- * ## SOLUTION FOR BUILTINS FUNCTIONS:
- *
- * - Redeclare forbidden things in the global scope, through `globals()`, using an object that
- *   will systematically throw an ExclusionError when it's called.
- * - Since those are in the global scope, they are visible through `dir()`, so add some make up
- *   to them, using a class that redefines its __qualname__ and __repr__, so that they are less
- *   obvious as "anti-cheats" (it will still remain obvious for those who know enough. But if they
- *   can find about that, they probably could solve the problem the right way anyway...).
- * - Pyodide runtime won't see those globals, so it is not affected in any way, only the user's
- *   and tester's codes are.
- * - The (hidden) function `__move_forward__('builtin_name')` (see documentation) can be used in
- *   the tests to get back the original builtin. If used, it must be done inside a closure, so
- *   that the original builtin doesn't override the "Raiser" in the global scope (see below).
- * - Since the hacked versions are available to the user in the global runtime, they could just
- *   delete them to get back the access to the original builtins. To limit this risk, an extra
- *   check is done after the user's code and tests has been run, verifying that the hacked
- *   functions are still defined in the global scope, and that they still are the original
- *   Raiser objects.
- *
- *
- * ## SOLUTION FOR IMPORTS
- *
- * The problem with `import` is that they actually go directly through `__builtins__.__import__`.
- * So in that case, there is no other choice than hacking directly the builtin, and then put it
- * back in place when not useful anymore.
- *
- *
- * ## RECURSION LIMIT
- *
- * The sys module function is directly hacked, then put back in place: meaning, the function
- * setrecursionlimit is also replaced at user's runtime with a Raiser object.
- *
- * */
-const setupExclusions =(excluded, recLimit)=>{
-    // Store None in the __builtins___ dict for things that aren't builtin functions, aka, names
-    // of forbidden module.
-
-    /** WARNING!
-     *  Keep in mind that the code of the Raiser instances will run "in context".
-     *  This means it will be subject to existing exclusions, so it must never use a function that
-     *  could be forbidden. Possibly...
-     *  For this reason, copies of all the builtins used in the Raiser code are stored locally, to
-     *  be sure the Raiser won't use Raiser instances... XD
-     * */
-    const code = `
-    @__builtins__.auto_run
-    def _hack_exclusions_setup():
-
-        class Raiser:
-            __name__ = __qualname__ = 'function'
-
-            def __init__(self, key):  self.key = key
-
-            def __repr__(self): return f"<built-in function {self.key}>"
-
-            def __call__(self, *a, **kw):
-                key = self.key
-
-                head = a and base_isinstance(a[0],base_str) and a[0].split(".")[0]
-
-                is_forbidden = (
-                    key != '__import__' or
-                    key == '__import__' and head in dct
-                )
-                if is_forbidden:
-                    that = key if key!='__import__' else head
-                    ExclusionError.throw(that)
-
-                # if reaching this point, the call is a valid import, so apply it:
-                return base_import(*a,**kw)
-
-
-        # Store the originals used here to avoid troubles with exclusions at runtime:
-        base_import = __import__
-        base_str = str
-        base_isinstance = isinstance
-
-
-        dct = __builtins__.__builtins___ = {}
-        raiser_import = Raiser('__import__')
-        dct['__import__'] = [base_import, raiser_import]
-        __builtins__.__import__ = raiser_import
-
-
-        glob_dct = globals()
-        exclusions = ${ JSON.stringify(excluded) }
-        for key in exclusions:
-            stuff = getattr(__builtins__, key, None)
-            dct[key] = [stuff, None]
-            # => the dict will store [None,None] for module names
-
-        if ${ recLimit } != -1:
-            import sys
-            sys.setrecursionlimit(${ recLimit })
-            dct['setrecursionlimit'] = [sys.setrecursionlimit, None]
-
-        for key,lst in dct.items():
-            stuff = lst[0]
-            if callable(stuff) and key!='__import__':       # import has already been handled
-                # Store the reference of the raiser in lst, to check against it later:
-                glob_dct[key] = lst[1] = Raiser(key)
-
-        # auto_run added for verification purpose only, but it must stay usable:
-        dct['auto_run'] = auto_run
-`
-    pyodide.runPython(code)
-}
-
-
-
-/**Cancel the code exclusions (done as soon as possible, to restore pyodide's normal behaviors).
- * */
-const restoreOriginalFunctions = exclusions =>{
-
-    // Don't use auto_run, in case someone messes with it...
-    const code = `
-def _hack_unexclude():
-    dct = __builtins__.__builtins___
-    G = globals() if "globals" not in dct else dct['globals']()
-
-    # Handle special behavior of auto_run:
-    key = "auto_run"
-    auto_run = dct.pop(key)
-    bad_auto_run = G.get(key, __builtins__.auto_run) is not auto_run
-    __builtins__.auto_run = auto_run
-
-    # Restore everything before raising anything:
-    not_ok = []
-    for key,(func,raiser) in dct.items():
-
-        if key == '__import__':
-            __builtins__.__import__ = func
-
-        else:
-            if raiser is not None and raiser is not G.get(key):
-                not_ok.append(key)
-            if func is not None:
-                if key in G:
-                    del G[key]  # "Unshadow" the builtin
-                if key == 'setrecursionlimit':
-                    func(1000)
-
-    if bad_auto_run:
-        ExclusionError.throw("the auto_run tool...")
-    if not_ok:
-        ExclusionError.throw("${ exclusions }")
-
-_hack_unexclude()
-del _hack_unexclude
-`
-    pyodide.runPython(code)
 }

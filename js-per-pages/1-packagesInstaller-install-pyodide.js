@@ -18,6 +18,12 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+import { jsLogger } from 'jsLogger'
+import { PythonError, sleep } from 'functools'
+import { pyodideFeatureRunCode } from '0-generic-python-snippets-pyodide'
+
+
+
 
 
 
@@ -29,7 +35,7 @@ If not, see <https://www.gnu.org/licenses/>.
  * loaded only if they are available in the instance property (this is to limit the
  * _SAVAGE_ unexpected installations of random packages from PyPI).
  * */
-const installPythonPackages=(function(){
+export const installPythonPackages=(function(){
 
   /*Things are complicated, here...:
    *
@@ -79,7 +85,7 @@ const installPythonPackages=(function(){
 
 
 
-  const featureRunner= (feature, convertOutput)=>(repl=null)=>{
+  const featureRunner = (feature, convertOutput) => (repl=null) =>{
     let out = pyodideFeatureRunCode(feature, repl)
     if(convertOutput) out = convertOutput(out)
     return out
@@ -99,7 +105,7 @@ const installPythonPackages=(function(){
 
     const script = document.createElement('script')
     script.addEventListener("load", function(){ loaded=true })
-    for(k in scriptOptions){
+    for(const k in scriptOptions){
       if(k=='src') continue             // Always add last...
       script[k] = scriptOptions[k]
     }
@@ -155,6 +161,7 @@ const installPythonPackages=(function(){
 
   }
 
+
   const getInstallConfigFor=(libName)=>({
     toImport:  libName,
     toInstall: libName,
@@ -170,23 +177,24 @@ const installPythonPackages=(function(){
   const PMT_TOOLS = ['p5']
 
   /**Extract all the packages names currently available in pyodide. */
-  const getAlreadyImportedPackages = featureRunner("alreadyImported", out=>new Set(out.split(' ')) )
+  const getAlreadyImportedPackagesAsSet = featureRunner("alreadyImported", out=>new Set(out.split(' ')) )
 
   /**Rely on pyodide to analyze the code content and find the imports the user is trying to use. */
   const getWantedImports = featureRunner("wantedImports")
 
   // Predicate factories...:
+  const isInWhiteList  = (isIn, runner) => (name) => isIn == runner.whiteList.includes(name)
+  const isExcluded     = (isIn, runner) => (name) => isIn == runner.excluded.includes(name)
+  const isPyPiAllowed  = (isIn, runner) => (name) => isIn == ( !runner.pypiWhite || runner.pypiWhite.includes(name) )
   const isAvailablePythonLib = (runner) => (name) =>  runner.pythonLibs.has(name) ||  PMT_TOOLS.includes(name)
-  const isNotKnownPythonLib       =        (name) => !CONFIG.pythonLibs.has(name) && !PMT_TOOLS.includes(name)
-  const isNeededAndAllowedInstall = (installedModules, runtime, isFromEnv) => (
-    isFromEnv ? name => !installedModules.has(name)
-              : name => !installedModules.has(name) && !runtime.excluded.includes(name)
-  )
+  const isNotKnownPythonLib              = (name) => !CONFIG.pythonLibs.has(name) && !PMT_TOOLS.includes(name)
 
 
 
-  let micropip, runtime, currentCode;
+  let micropip, currentCode;
   const enforceImports = []   // python imports to make sure python_libs are showing up in sys.modules
+
+
 
   /**Routine managing the actual import logic, storing the name of the module/package
    * to import later (hidden scope).
@@ -245,7 +253,7 @@ const installPythonPackages=(function(){
    * So a basic import is tried first.
    * Note: to NOT apply on forbidden packages!
    */
-  attemptStandardLibImports=(importableLibs)=>{
+  const attemptStandardLibImports=(importableLibs)=>{
     const installNeeded = []
 
     for(const lib of importableLibs){
@@ -267,57 +275,76 @@ __hack_std_import_attempt()
   }
 
 
+  const forbidIfAny = (ctx, arr, head="")=>{
+    if(ctx.applyExclusionsIfAny && arr.length){
+      pyodide.runPython(`ExclusionError.throw("${ arr.join(', ') }", ${ head })`)
+    }
+  }
+
+
+
   // ------------------------------------------------------------------------------
 
 
-  return async (runner, code, _runtime, _isFromEnv)=>{
-    jsLogger('[Installer] - installPythonPackages', _isFromEnv?'isFromEnv':'')
+
+  return async (runtime, ctx)=>{
+    jsLogger('[Installer] - installPythonPackages')
+
+    const runner = runtime.runner
+    const code   = ctx.code
 
     // Refresh globals:
-    runtime     = _runtime
-    isFromEnv   = _isFromEnv
     currentCode = code
     enforceImports.length = 0
 
-    // Analyze what's supposed to be done, depending on the code du execute later and
-    // various config flags:
-    const importedModules  = getAlreadyImportedPackages()
-    const installPredicate = isNeededAndAllowedInstall(importedModules, runtime, isFromEnv)
 
-    const missingWhiteList = runner.whiteList.filter(name=>!importedModules.has(name))
-    const importableLibs   = getWantedImports(code).filter(installPredicate).concat(missingWhiteList)
-    const installNeeded    = attemptStandardLibImports(importableLibs)
+    const importedModules  = getAlreadyImportedPackagesAsSet()
+    const isNotImportedYet = name => !importedModules.has(name)
 
-    const externalsMissing = installNeeded.filter(isNotKnownPythonLib)
-    const pyLibsMissing    = installNeeded.filter(isAvailablePythonLib(runner))
+    const wantedLibs       = getWantedImports(code)
+    const maybeUndesired   = wantedLibs.filter(isInWhiteList(false, runner))
 
+    // Spot exclusions FIRST (otherwise attemptStandardLibImports could actually import
+    // some standard libs...):
+    const excluded = maybeUndesired.filter(isExcluded(true, runner))
+    forbidIfAny(ctx, excluded)
+
+    const neededLibs      = wantedLibs.concat(runner.whiteList).filter(isNotImportedYet)
+    const installNeeded   = attemptStandardLibImports(neededLibs)
+    const pyLibsNeeded    = installNeeded.filter(isAvailablePythonLib(runner))
+    const externalsNeeded = installNeeded.filter(isNotKnownPythonLib)
+
+    jsLogger('[Installer] - pyLibsNeeded',    pyLibsNeeded)
+    jsLogger('[Installer] - externalsNeeded', externalsNeeded)
     /*
-    externalsMissing:
+    pyLibsNeeded:
+          Import names matching an available python_lib.
+          Using this.pythonLibs because only the available ones can be downloaded.
+
+    externalsNeeded:
           Imports names that will attempt installation from PyPI.
           Using CONFIG.pythonLibs so that an unavailable custom lib doesn't trigger a "savage
           install" from PyPI.
-
-    pyLibsMissing:
-          Import names matching an available python_lib.
-          Using this.pythonLibs because only the available ones can be downloaded.
     */
 
-    jsLogger('[Installer] - pyLibsMissing', pyLibsMissing)
-    jsLogger('[Installer] - externalsMissing', externalsMissing)
+
+    // pypiWhite restrictions only apply to external requests:
+    const invalid = externalsNeeded.filter(isPyPiAllowed(false, runner))
+    forbidIfAny(ctx, invalid, "'cannot install '" )
 
 
     // Actual installations:
-    if(pyLibsMissing.length || externalsMissing.length){
+    if(pyLibsNeeded.length || externalsNeeded.length){
+
       runner.giveFeedback(CONFIG.lang.installStart.msg, null)
-
-      for(const lib of pyLibsMissing)    await installCustomPythonLib(lib)
-      for(const lib of externalsMissing) await installExternalPackage(lib)
-
+      for(const lib of pyLibsNeeded)    await installCustomPythonLib(lib)
+      for(const lib of externalsNeeded) await installExternalPackage(lib)
       runner.giveFeedback(CONFIG.lang.installDone.msg, null)
     }
 
-    // Enforce imports of all installed modules in hidden scope
-    // (not using the auto_run decorator because it might not be already in place):
+
+    // Enforce imports of all installed modules in hidden scope to be sure they end up in
+    // sys.modules (not using the auto_run decorator because it might not be already in place).
     if(enforceImports.length){
       pyodide.runPython(`
 def _hack_imports():
@@ -326,7 +353,10 @@ _hack_imports()
 del _hack_imports`)
     }
 
+
     // Make sure white listed packages are always visible in the user's scope:
+    // (DON'T filter already imported modules from the white list because they could have been
+    // imported in a different scope!)
     if(runner.whiteList.length){
       pyodide.runPython( runner.whiteList.map(lib=>'import '+lib).join('\n') )
     }
