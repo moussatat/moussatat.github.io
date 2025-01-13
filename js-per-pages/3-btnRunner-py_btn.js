@@ -25,6 +25,7 @@ export class BtnRunner extends PyodideSectionsRunner {
 
   // @Override
   build(){
+    super.build()
 
     this.runner = this.lockedRunnerWithBigFailWarningFactory(
       CONFIG.runningMode.btn,
@@ -34,8 +35,6 @@ export class BtnRunner extends PyodideSectionsRunner {
     )
 
     $('#'+this.id).find("button").on('click', this.runner)
-
-    super.build()
   }
 
   async setupRuntimeBtn(){              // Can get an argument, depending on how it's run/called

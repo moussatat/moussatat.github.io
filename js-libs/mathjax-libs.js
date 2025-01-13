@@ -19,7 +19,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
 
 function mathJaxUpdate(){
-  jsLogger('[MathJax] - Page formatting')
+  LOGGER_CONFIG.ACTIVATE && console.log('[MathJax] - Page formatting')
 
   if(!window.MathJax.startup.output){
     console.error("Cannot update MathJax (CDN failed to load?)")
@@ -31,17 +31,16 @@ function mathJaxUpdate(){
   window.MathJax.texReset()
   window.MathJax.typesetPromise()
 }
-const mathJaxIsReady = subscribeWhenReady('mathJax', mathJaxUpdate, {maxTries:100})
+const mathJaxIsReady = subscribeWhenReady('MathJax', mathJaxUpdate, {maxTries:100})
 
 
 window.MathJax = {
   startup: {
     ready: () => {
-      jsLogger("[MathJax] - Setting up");
+      LOGGER_CONFIG.ACTIVATE && console.log("[MathJax] - Setting up");
       MathJax.startup.defaultReady();
-      jsLogger("[MathJax] - Ready");
+      LOGGER_CONFIG.ACTIVATE && console.log("[MathJax] - Ready");
       mathJaxIsReady()
-      mathJaxUpdate()
     },
   },
   loader: {

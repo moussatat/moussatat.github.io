@@ -31,9 +31,10 @@ import { pyodideFeatureRunCode } from '0-generic-python-snippets-pyodide'
  * micropip (if not done yet), then install all the missing modules.
  * Also import all the packages present in runner.whiteList.
  *
- * NOTE: python libs are identified by picking into the global config, but are actually
- * loaded only if they are available in the instance property (this is to limit the
- * _SAVAGE_ unexpected installations of random packages from PyPI).
+ * NOTE:
+ *    python_libs are identified by picking into the global config, but are actually loaded
+ *    only if they are available in the instance property (this is to limit the _SAVAGE_,
+ *    unexpected installations of random packages from PyPI).
  * */
 export const installPythonPackages=(function(){
 
@@ -73,6 +74,9 @@ export const installPythonPackages=(function(){
    *        - Then the redactor's import (from the `env` or `env_term` code itself) will determine
    *          if the module ends up in the global scope or not.
    *
+   *
+   * CONCLUSIONS:
+   *
    *    For those reasons, all packages that are "installed" will always be imported in a hidden
    *    scope, so that they get registered in sys.modules.
    *
@@ -85,114 +89,87 @@ export const installPythonPackages=(function(){
 
 
 
-  const featureRunner = (feature, convertOutput) => (repl=null) =>{
-    let out = pyodideFeatureRunCode(feature, repl)
-    if(convertOutput) out = convertOutput(out)
-    return out
-  }
 
-
-  /**In most cases, installations will be done once only, but just in case (to avoid troubles
-   * with later changes... / Without that, a script tag/load could end up loaded at each call)
+  /**In most cases, installations will be done once only (since no module will be installed
+   * several times!), but just in case (to avoid troubles with later changes... Without that,
+   * a script tag/load could end up loaded at each call of `asyncJsScriptCdnLoader`).
    * */
-  const CACHE_INSTALL = new Set()
+  const CACHE_JS_INSTALLED = new Set()
 
 
-  const asyncJsScriptCdnLoader = (name, scriptOptions)=> async ()=>{
-    if(CACHE_INSTALL.has(name)) return;
+  /**Dynamically load a JS script tag (sync) at runtime.
+   * (Loaded scripts names are cached, to avoid multiple imports)
+   * */
+  const asyncJsScriptCdnLoader = (name, scriptOptions={})=> async ()=>{
+    if(CACHE_JS_INSTALLED.has(name)) return;
 
+    scriptOptions = {
+      crossorigin:    "anonymous",
+      referrerpolicy: "no-referrer",
+      ...scriptOptions
+    }
     let loaded = false
 
     const script = document.createElement('script')
     script.addEventListener("load", function(){ loaded=true })
     for(const k in scriptOptions){
-      if(k=='src') continue             // Always add last...
+      if(k=='src') continue             // Always set last...
       script[k] = scriptOptions[k]
     }
-    script.src = scriptOptions.src      // Always add last...
+    script.src = scriptOptions.src      // Always set LAST (I don't remember why...)
 
     document.body.appendChild(script)
 
     while(!loaded) await sleep(50)
-    CACHE_INSTALL.add(name)
+    CACHE_JS_INSTALLED.add(name)
     console.log(name, 'ready')
   }
 
 
 
 
+  const featureRunner = (feature, outputConverter=null) => (repl=null) =>{
+    let out = pyodideFeatureRunCode(feature, repl)
+    if(outputConverter) out = outputConverter(out)
+    return out
+  }
 
 
   /**IMPORTS_CONFIG type:
    *
-   *      Record<string, {
-   *          codeCheck: Cbk
+   *      Record<
+   *        PackageName,              // (string) Name used in the import statement (user's code)
+   *        {
+   *          codeCheck: Cbk          // Verifications to apply to the code content first
    *          toImport:  string,      // Automatic import name (in hidden scope)
    *          toInstall: string,      // Micropip installation name
    *          post:      async Cbk,   // Callback to run to apply any kind of extra logic
-   *      }>
+   *        }
+   *      >
    * */
   const IMPORTS_CONFIG = {
+
+    matplotlib: {
+      post: async ()=>featureRunner('pyodidePlot')()
+    },
 
     PIL: {
       toInstall: "Pillow"
     },
 
     p5: {
-      codeCheck: ()=>{
-        if(/from p5\S* import/.test(currentCode)){
-          throw new PythonError(
-            "ImportError: Invalid p5 import.\nThe p5 module must be used as a namespace:"
-            +"\n    import p5\n    p5.createCanvas(...)"
-          )
-        }
+      codeCheck: (code)=>{
+        const badP5Import = /from p5\S* import/.test(code)
+        if(badP5Import){ throw new PythonError(
+          "ImportError: Invalid p5 import.\nThe p5 module must be used as a namespace. Example:"
+          +"\n    import p5\n    p5.createCanvas(...)"
+        )}
       },
-      post: asyncJsScriptCdnLoader('p5', {
-        crossorigin:    "anonymous",
-        referrerpolicy: "no-referrer",
-        src:            "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.min.js" ,
-      })
-
+      post: asyncJsScriptCdnLoader(
+        'p5', {src: "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.min.js"}
+      )
     },
-
-    matplotlib: {
-      post: async ()=>featureRunner('pyodidePlot')()
-    },
-
   }
-
-
-  const getInstallConfigFor=(libName)=>({
-    toImport:  libName,
-    toInstall: libName,
-    post:      async ()=>undefined,
-    ...IMPORTS_CONFIG[libName] || {}
-  })
-
-
-
-
-
-  const FORBID_EXTERNALS = ['py_lib', 'pylib', 'pylibs', 'py-lib', 'py-libs']
-  const PMT_TOOLS = ['p5']
-
-  /**Extract all the packages names currently available in pyodide. */
-  const getAlreadyImportedPackagesAsSet = featureRunner("alreadyImported", out=>new Set(out.split(' ')) )
-
-  /**Rely on pyodide to analyze the code content and find the imports the user is trying to use. */
-  const getWantedImports = featureRunner("wantedImports")
-
-  // Predicate factories...:
-  const isInWhiteList  = (isIn, runner) => (name) => isIn == runner.whiteList.includes(name)
-  const isExcluded     = (isIn, runner) => (name) => isIn == runner.excluded.includes(name)
-  const isPyPiAllowed  = (isIn, runner) => (name) => isIn == ( !runner.pypiWhite || runner.pypiWhite.includes(name) )
-  const isAvailablePythonLib = (runner) => (name) =>  runner.pythonLibs.has(name) ||  PMT_TOOLS.includes(name)
-  const isNotKnownPythonLib              = (name) => !CONFIG.pythonLibs.has(name) && !PMT_TOOLS.includes(name)
-
-
-
-  let micropip, currentCode;
-  const enforceImports = []   // python imports to make sure python_libs are showing up in sys.modules
 
 
 
@@ -201,23 +178,28 @@ export const installPythonPackages=(function(){
    *
    * @returns: the actual config object.
    * */
-  const importFinalizer = (name) =>{
-    const conf = getInstallConfigFor(name)
+  const getConfAndSetupImport = (name, code) =>{
 
-    if(conf.codeCheck) conf.codeCheck(currentCode)
+    const conf = {
+      codeCheck: (_)=>undefined,
+      toImport:  name,
+      toInstall: name,
+      post:      async ()=>undefined,
+      ...IMPORTS_CONFIG[name] || {}
+    }
 
-    const importCode = `import ${ conf.toImport }`
-    enforceImports.push( importCode )
+    conf.codeCheck(code)
+    enforceImports.push( conf.toImport )
     return conf
   }
 
 
-  /**Install an available custom python lib.
+  /**Install an available custom python_lib.
    * */
-  const installCustomPythonLib = async (libName) => {
-    jsLogger("[Installer] - Install", libName)
+  const installCustomPythonLib = async (libName, code) => {
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[Installer] - Install", libName)
 
-    const conf        = importFinalizer(libName)
+    const conf        = getConfAndSetupImport(libName, code)
     const isPmtTool   = PMT_TOOLS.includes(libName)
     const rootNoSlash = CONFIG.siteUrl.replace(/\/$/, '')
     const archive     = `${ rootNoSlash }${ isPmtTool?"/assets/javascript":"" }/${ libName }.zip`
@@ -230,23 +212,18 @@ export const installPythonPackages=(function(){
 
   /**Install an external python package (through pyodide's default behaviors: micropip+PyPI).
    * */
-  const installExternalPackage = async (libName) => {
-    jsLogger("[Installer] - Install", libName)
-
-    if(FORBID_EXTERNALS.includes(libName)){
-      throw new PythonError(
-        `Import of ${libName} is forbidden for security reasons.\n\nDid you mean \`import py_libs\`?`
-      )
-    }
+  const installExternalPackage = async (libName, code) => {
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[Installer] - Install", libName)
 
     if(!micropip){
       await pyodide.loadPackage("micropip");
       micropip = pyodide.pyimport("micropip");
     }
-    const conf = importFinalizer(libName)
+    const conf = getConfAndSetupImport(libName, code)
     await micropip.install(conf.toInstall)
     await conf.post()
   }
+
 
 
   /**Some standard libs are available, but not already imported (like statistics, for example).
@@ -275,10 +252,53 @@ __hack_std_import_attempt()
   }
 
 
-  const forbidIfAny = (ctx, arr, head="")=>{
-    if(ctx.applyExclusionsIfAny && arr.length){
-      pyodide.runPython(`ExclusionError.throw("${ arr.join(', ') }", ${ head })`)
+
+
+  const FORBID_EXTERNALS = new Set(['py_lib', 'pylib', 'pylibs', 'py-lib', 'py-libs'])
+  const PMT_TOOLS = ['p5']
+
+
+  /**Extract all the packages names currently available in pyodide. */
+  const getAlreadyImportedPackagesAsSet = featureRunner("alreadyImported", out=>new Set(out.split(' ')) )
+
+  /**Rely on pyodide to analyze the code content and find the imports the user is trying to use. */
+  const getWantedImports = featureRunner("wantedImports")
+
+
+  const predicatesFactory=(runner)=>{
+
+    const importedModules  = getAlreadyImportedPackagesAsSet()
+    return {
+      isNotImportedYet:     (name) => !importedModules.has(name),
+      isNotWhiteList:       (name) => !runner.whiteList.includes(name),
+      isExcluded:           (name) =>  runner.excluded.includes(name),
+      isNotPyPiAllowed:     (name) =>  runner.pypiWhite  && !runner.pypiWhite.includes(name),
+      isAvailablePythonLib: (name) =>  runner.pythonLibs.has(name) ||  PMT_TOOLS.includes(name),
+      isNotKnownPythonLib:  (name) => !CONFIG.pythonLibs.has(name) && !PMT_TOOLS.includes(name),
+      isWrongPyLib:         (name) =>  FORBID_EXTERNALS.has(name),
     }
+  }
+
+
+  const forbidIfAny = (ctx, arr, head="", extraMsg="")=>{
+    if(ctx.applyExclusionsIfAny && arr.length){
+      pyodide.runPython(`ExclusionError.throw("${ arr.join(', ') + extraMsg }", ${ head })`)
+    }
+  }
+
+
+  const runPythonImportsIfAny = (arrCmds, scoped) =>{
+    if(!arrCmds.length) return;
+
+    arrCmds = arrCmds.map(lib=>'import '+lib)
+
+    const code = !scoped ? arrCmds.join('\n') : `
+def _hack_imports():
+    ${ arrCmds.join('\n    ') }
+_hack_imports()
+del _hack_imports`
+
+    pyodide.runPython(code)
   }
 
 
@@ -287,49 +307,57 @@ __hack_std_import_attempt()
 
 
 
+  let   micropip
+  const enforceImports = []   // python lib names to import at the end (in hidden scope)
+
+
+
   return async (runtime, ctx)=>{
-    jsLogger('[Installer] - installPythonPackages')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Installer] - installPythonPackages')
+
+    enforceImports.length = 0       // Reset global
 
     const runner = runtime.runner
     const code   = ctx.code
 
-    // Refresh globals:
-    currentCode = code
-    enforceImports.length = 0
+    const wantedLibs = getWantedImports(code)
+    const pred       = predicatesFactory(runner)
 
-
-    const importedModules  = getAlreadyImportedPackagesAsSet()
-    const isNotImportedYet = name => !importedModules.has(name)
-
-    const wantedLibs       = getWantedImports(code)
-    const maybeUndesired   = wantedLibs.filter(isInWhiteList(false, runner))
 
     // Spot exclusions FIRST (otherwise attemptStandardLibImports could actually import
     // some standard libs...):
-    const excluded = maybeUndesired.filter(isExcluded(true, runner))
+    const maybeUndesired = wantedLibs.filter(pred.isNotWhiteList)
+    const excluded       = maybeUndesired.filter(pred.isExcluded)
     forbidIfAny(ctx, excluded)
 
-    const neededLibs      = wantedLibs.concat(runner.whiteList).filter(isNotImportedYet)
-    const installNeeded   = attemptStandardLibImports(neededLibs)
-    const pyLibsNeeded    = installNeeded.filter(isAvailablePythonLib(runner))
-    const externalsNeeded = installNeeded.filter(isNotKnownPythonLib)
 
-    jsLogger('[Installer] - pyLibsNeeded',    pyLibsNeeded)
-    jsLogger('[Installer] - externalsNeeded', externalsNeeded)
+    const neededLibs      = wantedLibs.concat(runner.whiteList).filter(pred.isNotImportedYet)
+    const installNeeded   = attemptStandardLibImports(neededLibs)
+    const pyLibsNeeded    = installNeeded.filter(pred.isAvailablePythonLib)
+    const externalsNeeded = installNeeded.filter(pred.isNotKnownPythonLib)
+
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Installer] - pyLibsNeeded',    pyLibsNeeded)
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Installer] - externalsNeeded', externalsNeeded)
     /*
     pyLibsNeeded:
-          Import names matching an available python_lib.
-          Using this.pythonLibs because only the available ones can be downloaded.
+          Import names matching an available python_lib, compared against runner.pythonLibs,
+          because only the available ones in the current IDE can be downloaded.
 
     externalsNeeded:
           Imports names that will attempt installation from PyPI.
-          Using CONFIG.pythonLibs so that an unavailable custom lib doesn't trigger a "savage
-          install" from PyPI.
+          Names checked against CONFIG.pythonLibs so that an unavailable custom lib doesn't
+          trigger a "savage install" from PyPI.
     */
 
 
+    // Check misspelled py_libs imports first (at this point, they are seen as external requests)
+    const wrongs  = externalsNeeded.filter(pred.isWrongPyLib)
+    const verb    = wrongs.length-1 ? "are":"is"
+    const msgTail =` ${ verb } forbidden for security reasons.\\n\\nDid you mean?   import py_libs`
+    forbidIfAny( ctx, wrongs, "'Import of '", msgTail)
+
     // pypiWhite restrictions only apply to external requests:
-    const invalid = externalsNeeded.filter(isPyPiAllowed(false, runner))
+    const invalid = externalsNeeded.filter(pred.isNotPyPiAllowed)
     forbidIfAny(ctx, invalid, "'cannot install '" )
 
 
@@ -337,28 +365,19 @@ __hack_std_import_attempt()
     if(pyLibsNeeded.length || externalsNeeded.length){
 
       runner.giveFeedback(CONFIG.lang.installStart.msg, null)
-      for(const lib of pyLibsNeeded)    await installCustomPythonLib(lib)
-      for(const lib of externalsNeeded) await installExternalPackage(lib)
+      for(const lib of pyLibsNeeded)    await installCustomPythonLib(lib, code)
+      for(const lib of externalsNeeded) await installExternalPackage(lib, code)
       runner.giveFeedback(CONFIG.lang.installDone.msg, null)
     }
 
 
-    // Enforce imports of all installed modules in hidden scope to be sure they end up in
+    // Enforce imports of all installed modules in hidden scope, to be sure they end up in
     // sys.modules (not using the auto_run decorator because it might not be already in place).
-    if(enforceImports.length){
-      pyodide.runPython(`
-def _hack_imports():
-    ${ enforceImports.join('\n    ') }
-_hack_imports()
-del _hack_imports`)
-    }
-
+    runPythonImportsIfAny(enforceImports, true)
 
     // Make sure white listed packages are always visible in the user's scope:
     // (DON'T filter already imported modules from the white list because they could have been
     // imported in a different scope!)
-    if(runner.whiteList.length){
-      pyodide.runPython( runner.whiteList.map(lib=>'import '+lib).join('\n') )
-    }
+    runPythonImportsIfAny(runner.whiteList, false)
   }
 })()

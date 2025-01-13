@@ -23,7 +23,7 @@ import {
   decompressPagesIfNeeded,
   noStorage,
   sleep,
-  unEscapeSqBrackets,
+  unEscapeSquaredBrackets,
   withPyodideAsyncLock,
   youAreInTroubles,
 } from 'functools'
@@ -36,6 +36,8 @@ import { RuntimeManager } from '1-runtimeManager-runtime-pyodide'
 
 
 export class PyodideSectionsRunner {
+
+  static pyFuncs = {}
 
   no_undefined = prop =>{
       const getter = v => {
@@ -92,7 +94,7 @@ export class PyodideSectionsRunner {
 
 
   constructor(id, callInit=true){
-    jsLogger('[CheckPoint] - Constructor for', this.constructor.name, id)
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - Constructor for', this.constructor.name, id)
 
     decompressPagesIfNeeded()
 
@@ -157,16 +159,11 @@ export class PyodideSectionsRunner {
   }
 
 
-  /** Nothing to do by default (specific to IDEs) */
-  codeSnippetEndFeedback(runtime, step, code){}
-
-
-
   /**Store code or command in the python runtime.
    * */
   storeUserCodeInPython(varName, code){
     const showOff = JSON.stringify(code.length>50 ? code.slice(0,50)+' ...' : code)
-    jsLogger('[CheckPoint] - Store ', varName, showOff)
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - Store ', varName, showOff)
 
     // The double quotes are all escaped to make sure no multiline string will cause troubles
     const escapedCode = code.replace(/"/g, '\\"')
@@ -181,21 +178,8 @@ export class PyodideSectionsRunner {
   giveFeedback(content, format='error'){
     if(content && format=='error'){
       // Format back any escaped square brackets, because window.alert is not the terminal...
-      window.alert( unEscapeSqBrackets(content) )
+      window.alert( unEscapeSquaredBrackets(content) )
     }
-  }
-
-
-
-
-  /**Build the default runtime to pass as argument to the `runPythonCodeWithOptionsIfNoStdErr`
-   * function. This object is the "per run" state tracker for the executions.
-   *
-   * @returns: a RuntimeManager object
-   * */
-  buildRunConfig(){
-    jsLogger('[CheckPoint] - buildConfig (runtime)')
-    return new RuntimeManager(this)
   }
 
 
@@ -227,35 +211,36 @@ export class PyodideSectionsRunner {
     setup,            // async, args: eventOrTermCmdString
     action,           // async, args: runtime
     finallyTeardown,  // async, args: runtime (guaranteed to run)
-    sendSrcOrEvent=false,
+    sendEventOrCmdToAction = false,   // Useful for drag & drop (IDE zip imports)
   ){
     const loggerName=`[${actionName}]`
 
     return withPyodideAsyncLock(actionName, async(eventOrCmd)=>{
       if(eventOrCmd && eventOrCmd.preventDefault) eventOrCmd.preventDefault()
-      jsLogger(loggerName)
+      LOGGER_CONFIG.ACTIVATE && jsLogger(loggerName)
 
       this.running = actionName
       let runtime
       try{
         runtime = await setup.call(this, eventOrCmd)
-        await action.call(this, sendSrcOrEvent ? eventOrCmd : runtime)
+        await action.call(this, sendEventOrCmdToAction ? eventOrCmd : runtime)
 
       }catch(e){
-        jsLogger("[CheckPoint] - BIG FAIL", actionName)
+        LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - BIG FAIL", actionName)
 
-        // If something didn't get caught, it's very wrong... so dump everything to the console
+        // If something didn't get caught, it's very wrong... so give feedback to the user
+        // in BIG and RED:
         const stdErr = youAreInTroubles(e)
         this.giveFeedback(stdErr)
 
         if(runtime){                  // (`runtime` may be undefined if the error was in setup...)
           runtime.gotBigFail = true
-          runtime.stdErr = stdErr
+          runtime.stdErr     = stdErr
         }
         throw e
 
       }finally{
-        jsLogger("[CheckPoint] - finally", actionName)
+        LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - finally", actionName)
         if(runtime){
           await finallyTeardown.call(this, runtime)
         }
@@ -277,7 +262,7 @@ export class PyodideSectionsRunner {
     for(const prop of 'get del set keys'.split(' ')){
       const globName = prop+'Storage'
       const method   = `pyodide${ _.capitalize(prop) }Storage`
-      globalThis[globName] = this[method].bind(this)
+      globalThis[globName] = this[method].bind(this)    // Legacy behavior
     }
   }
 
@@ -293,30 +278,26 @@ export class PyodideSectionsRunner {
    *     (accidentally or not).
    *  2. Then run the content of the `env` section.
    *
-   * @returns: [runtime, isOk].
-   *     If isOk is false, an error has been raised: this is a CRITICAL ERROR and executions at
-   *     upper level must be stopped.
+   * @returns: RuntimeManager object.
    * */
   async setupRuntime(srcRuntime=null, section='env'){
-    jsLogger('[CheckPoint] - setupRuntime PyodideSectionsRunner')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - setupRuntime PyodideSectionsRunner')
 
-    const [runtime,ctx] = await this._baseSetupRuntime(srcRuntime, section)
-    if(ctx.success){
-      await runtime.runWithCtx(section)
-    }
+    const runtime = await this._baseSetupRuntime(srcRuntime, section)
+    await runtime.runWithCtx(section)
     return runtime
   }
 
 
   async _baseSetupRuntime(srcRuntime, section){
     this.setupGlobalConfig()
-    const runtime = srcRuntime || this.buildRunConfig()
-    const ctx = await runtime.runWithCtx({
+    const runtime = srcRuntime || new RuntimeManager(this)
+    await runtime.runWithCtx({
       section:    section ?? 'env',
       method:     this.refreshPyodideFeatures,
       autoImport: false,    // Nothing to install, with the Pyodide Features!
     })
-    return [runtime, ctx]
+    return runtime
   }
 
 
@@ -354,7 +335,7 @@ export class PyodideSectionsRunner {
    *          and just printed to the jQuery.terminal)
    * */
   async runPythonCodeWithOptionsIfNoStdErr(code, runtime, testsStep){
-    jsLogger('[CheckPoint] - Enter generic running function')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - Enter generic running function')
 
     // Do nothing if nothing to do...!
     if(runtime.stopped) return;
@@ -386,9 +367,14 @@ export class PyodideSectionsRunner {
   }
 
 
+  /** Nothing to do by default (specific to IDEs) */
+  codeSnippetEndFeedback(runtime, step, code){}
+
+
+
 
   async teardownRuntime(runtime){
-    jsLogger("[CheckPoint] - PyodideSectionsRunner teardownRuntime")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - PyodideSectionsRunner teardownRuntime")
 
     await runtime.runWithCtx('post')
     await this.handleMermaids(runtime)
@@ -396,7 +382,7 @@ export class PyodideSectionsRunner {
   }
 
   async _baseTeardownRuntime(runtime){
-    jsLogger("[CheckPoint] - teardown pyodide cleaner")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - teardown pyodide cleaner")
     pyodideFeatureRunCode('autoRunCleaner')
     runtime.cleanup()
   }
@@ -404,7 +390,7 @@ export class PyodideSectionsRunner {
 
 
   async handleMermaids(runtime){
-    jsLogger("[CheckPoint] - teardown mermaid")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - teardown mermaid")
 
     if(!CONFIG.needMermaid || runtime.stopped){
       return

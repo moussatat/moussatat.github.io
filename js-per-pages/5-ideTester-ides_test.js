@@ -99,7 +99,7 @@ class IdeTesterGuiManager extends IdeRunner {
                .on('click', ()=>this.runAllTests())
                .parent()
                .find('button[btn_kind=test_stop]')
-               .on('click', ()=>this.stopTests=true)
+               .on('click', ()=>{ this.stopTests=true })
 
 
     // Configure global buttons (select-all, unselect-all):
@@ -303,8 +303,12 @@ class IdeTesterGuiManager extends IdeRunner {
    * */
   loadFactory(conf){
     return async ()=>{
-      await waitForPyodideReady()
       if(this.testing) return;    // Deactivated during tests (otherwise, big troubles...)
+
+      // Do NOT use the pyodideAsyncLock utility here, so that the call is just cancelled
+      // if occurring during a test session (see above), instead of being delayed until
+      // the tests are done.
+      await waitForPyodideReady()
 
       this.conf = conf
       this.data = await this.getIdeData(conf)   // Update first (see getters)
@@ -319,7 +323,7 @@ class IdeTesterGuiManager extends IdeRunner {
   /**Reset the content of the editor to its initial content, and reset the localStorage for
    * the editor on the way.
    * */
-  restart(){    jsLogger("[RestartTester]")
+  restart(){    LOGGER_CONFIG.ACTIVATE && jsLogger("[RestartTester]")
     let startCode = ""
     if(this.conf){
       startCode = this.conf.loadedCode
@@ -366,7 +370,7 @@ class IdeTesterGuiManager extends IdeRunner {
   save(_){}
 
 
-  runAllTests(targets, forceRun=false){ throw new Error('Not implemented') }
+  async runAllTests(targets, forceRun=false){ throw new Error('Not implemented') }
   setupFetchers(){ throw new Error('Not implemented') }
   clearLibsIfNeeded(){ throw new Error('Not implemented') }
 
@@ -492,6 +496,13 @@ export class IdeTester extends IdeTesterGuiManager {
 
   async runAllTests(targets, forceRun=false){
     if(this.testing) return;
+
+    // Do NOT use the pyodideAsyncLock utility here, so that the call is just cancelled if
+    // occurring during a test session (see above), instead of being delayed until the tests
+    // are done. Note that an unlucky click on the IDE buttons _just in between_ two tests
+    // might cause a mess in the tests results (of just cause weird display in the terminal:
+    // the IDE could be run, then the test, and unless it doesn't clear the scope or the IDE
+    // did install something, the test should run fine...), because the Lock is then available.
     await waitForPyodideReady()
 
     this.terminal.clear()
@@ -516,13 +527,14 @@ export class IdeTester extends IdeTesterGuiManager {
       for(const conf of confsToRun){
         if(this.stopTests) break
         this.conf = conf
-        jsLogger('[Testing] - start', conf.ide_name)
+        LOGGER_CONFIG.ACTIVATE && jsLogger('[Testing] - start', conf.ide_name)
         const runningKind = conf.term_cmd!==undefined ? 'terminal'
                           : conf.run_play ? 'play' : 'validate'
         await this.runners[ runningKind ]()
-        jsLogger('[Testing] - done', conf.ide_name, '\n')
+        LOGGER_CONFIG.ACTIVATE && jsLogger('[Testing] - done', conf.ide_name, '\n')
       }
-    }catch(e){ errOrNull=e
+    }catch(e){
+      errOrNull=e
     }finally{
       this._endTests(start, errOrNull)
     }
@@ -634,8 +646,8 @@ export class IdeTester extends IdeTesterGuiManager {
   }
 
   // @Override
-  getAsyncPythonExecutor(){
-    return super.getAsyncPythonExecutor(CONFIG.runningMode.testingCmd)
+  buildAsyncPythonExecutors(){
+    super.buildAsyncPythonExecutors(CONFIG.runningMode.testingCmd)
   }
 
 
@@ -660,6 +672,10 @@ export class IdeTester extends IdeTesterGuiManager {
 
     const fullOut = this.std_capture.join('')
     let msg = []
+
+    if(runtime.gotBigFail){
+      return this._formatErrMsgArray(runtime, ['Got BigFail!!'])
+    }
 
     if(!Number.isFinite(this.srcAttemptsLeft)){
       if(Number.isFinite(this.conf.attempts_end)) msg.push(
@@ -712,12 +728,17 @@ export class IdeTester extends IdeTesterGuiManager {
     if(!msg.length && runtime.stopped === this.conf.fail){
       return ""
     }
-    msg = [
-      `Test failed for ${this.conf.ide_link} :`,
-      runtime.stdErr || "No error raised, but...",
-      ...msg
-    ]
-    return msg.join('\n\n')
+    return this._formatErrMsgArray(runtime, msg)
+  }
+
+
+  _formatErrMsgArray(runtime, msg){
+    msg = `Test failed for ${this.conf.ide_link} :
+
+${ runtime.stdErr || "No error raised, but..." }
+
+${ msg.join('\n') }`
+    return msg
   }
 
 

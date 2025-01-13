@@ -27,12 +27,6 @@ import { escapePyodideCodeForJsTemplates, youAreInTroubles } from 'functools'
 
 /**Return the plain error message, unless it's an assertion error, where the message is formatted.
  *
- * @err (Error):   The Error object caught in JS context.
- * @code (string): The python code that (possibly) generated the error.
- * @autoAssertExtraction (boolean=true): If the error is an AssertionError without message, automatically add
- *                 the assertion instruction if autoMsg is true.
- * @purgeTrace (boolean): if true, the complete stacktrace will be removed of error messages
- *
  * @returns ([errMessage, isAssertErr]): NOTE: errMessage is NOT formatted for jQuery terminal yet.
  *
  * ---
@@ -107,62 +101,86 @@ import { escapePyodideCodeForJsTemplates, youAreInTroubles } from 'functools'
  *
  * Example of error involving RecursionError with repeated lines:
  *
-  *     PythonError: Traceback (most recent call last):
-  *       File "/lib/python311.zip/_pyodide/_base.py", line 501, in eval_code
-  *         .run(globals, locals)
-  *          ^^^^^^^^^^^^^^^^^^^^
-  *       File "/lib/python311.zip/_pyodide/_base.py", line 339, in run
-  *         coroutine = eval(self.code, globals, locals)
-  *                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  *       File "<exec>", line 2, in <module>
-  *       File "<env>", line 10, in essai
-  *       File "<env>", line 10, in essai
-  *       File "<env>", line 10, in essai
-  *       [Previous line repeated 44 more times]
-  *     RecursionError: maximum recursion depth exceeded
+ *      PythonError: Traceback (most recent call last):
+ *        File "/lib/python311.zip/_pyodide/_base.py", line 501, in eval_code
+ *          .run(globals, locals)
+ *           ^^^^^^^^^^^^^^^^^^^^
+ *        File "/lib/python311.zip/_pyodide/_base.py", line 339, in run
+ *          coroutine = eval(self.code, globals, locals)
+ *                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *        File "<exec>", line 2, in <module>
+ *        File "<env>", line 10, in essai
+ *        File "<env>", line 10, in essai
+ *        File "<env>", line 10, in essai
+ *        [Previous line repeated 44 more times]
+ *      RecursionError: maximum recursion depth exceeded
+ *
+ *
+ *
+ * And it sometimes gets even worse:
+ *
+ *      PythonError: Traceback (most recent call last):
+ *        File "/lib/python311.zip/_pyodide/_base.py", line 501, in eval_code
+ *          .run(globals, locals)
+ *           ^^^^^^^^^^^^^^^^^^^^
+ *        File "/lib/python311.zip/_pyodide/_base.py", line 339, in run
+ *          coroutine = eval(self.code, globals, locals)
+ *                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *        File "<exec>", line 6, in <module>
+ *        File "<exec>", line 5, in meh
+ *        File "<exec>", line 5, in meh
+ *        File "<exec>", line 5, in meh
+ *        [Previous line repeated 992 more times]
+ *        File "/lib/python311.zip/random.py", line 312, in randrange
+ *          return self._randbelow(istart)
+ *                 ^^^^^^^^^^^^^^^^^^^^^^^
+ *        File "/lib/python311.zip/random.py", line 239, in _randbelow_with_getrandbits
+ *          k = n.bit_length()  # don't use (n-1) here because n can be 1
+ *              ^^^^^^^^^^^^^^
+ *      RecursionError: maximum recursion depth exceeded while calling a Python object
+ *
  * */
-export function generateErrorLog(err, config={}) {
+export function generateErrorLog(ctx) {
 
-  const {code, autoAssertExtraction, purgeTrace, forceBigFail} = {
-    code:"", autoAssertExtraction:false, purgeTrace:false, forceBigFail:false,
-    ...config
+  const { code, autoAssertExtraction, purgeTrace } = {
+    code: "",
+    autoAssertExtraction: false,
+    purgeTrace: false,
+    ...ctx.logConfig
   }
 
-  const msg = String(err).trimEnd() // Note: err has a trailing linefeed, so, trim it...
+  const err = ctx.err
+  const msg = String(err).trimEnd()     // Note: err might have a trailing linefeed x/ => trim it...
 
 
-  // Return directly non python errors. => allows to also see JS errors.
-  if(!msg.startsWith('PythonError' || forceBigFail)){
-    return [youAreInTroubles(err), false]
+  // Return directly non python errors => this allows to also see JS errors.
+  if(!msg.startsWith('PythonError')){
+    ctx.stdErr = formatBigFail(msg, ctx)
+    return
   }
 
   const errLines = msg.split("\n")
 
   /*
   Search for the first line after the pyodide-specific infos, avoiding false positives for
-  terminals, where the second line is: ""  File "<exec>", line dd, in await_fut".
+  terminals, where the second line is: `  File "<exec>", line \d+, in redirect_cmd`.
   Also, in case of SyntaxError, there is no indication after the line number (REMINDER: the
-  negative lookahead CANNOT start just after the number or the await_fut thing is matched
+  negative lookahead CANNOT start just after the number or the redirect_cmd thing is matched
   when the line number has more than 1 digit..., so must use another strategy).
   */
-  const iModule = errLines.findIndex(s=>CONFIG.MODULE_REG.test(s))
+  const iModule     = errLines.findIndex(s=>CONFIG.MODULE_REG.test(s))
+  const iError      = err.type ? guessErrorMsgLine(errLines, err.type) : errLines.length-1
+  const isAssertErr = ctx.isAssertErr = err.type == 'AssertionError'
 
-  /*
-  Python errors may sometimes be coming from side effects of restrictions: those may not come
-  from the execution of the user's code and then, the stacktrace may not contain the desired
-  pattern, aka, the "file" may be neither exec nor console. (this happens for example with a
-  recursion limit set too low: the error is raised when extracting stdout only).
-  */
-  // const isFromUserCode = iModule > 0
-
-  const [iError,isAssertErr] = getErrorKindInfos(errLines)
 
   // If ExclusionError, just throw the last line without anything else:
   if(errLines[iError].includes(CONFIG.MSG.exclusionMarker)){
-    const msg = errLines.slice(iError).join('\n')
-    const i   = msg.indexOf(CONFIG.MSG.exclusionMarker)
-    return [msg.slice(i), false]
+    const msg  = errLines.slice(iError).join('\n')
+    const i    = msg.indexOf(CONFIG.MSG.exclusionMarker)
+    ctx.stdErr = msg.slice(i)
+    return
   }
+
 
   const isMultiLineError = iError+1 < errLines.length
   const cleaned = (errLines[iError] || "").replace("AssertionError","").trim()
@@ -172,8 +190,11 @@ export function generateErrorLog(err, config={}) {
 
   // Rebuild the assertion message first, if needed:
   if( code && isAssertErr && hasNoMsg && autoAssertExtraction ){
-    const bigFail = buildAssertionMsg(code, errLines, iError)
-    if(bigFail) return [bigFail, false]
+    const bigFail = buildAssertionMsg(code, errLines, iError, ctx)
+    if(bigFail){
+      ctx.stdErr =  bigFail
+      return
+    }
 
   }else if(!isAssertErr && purgeTrace){
     // Reformat error message if needed
@@ -195,7 +216,7 @@ export function generateErrorLog(err, config={}) {
   // }else{
   //   errLines.push(CONFIG.MSG.bigFail)
   // }
-  return [errLines.join('\n'), isAssertErr]
+  ctx.stdErr =  errLines.join('\n')
 }
 
 
@@ -238,32 +259,45 @@ const shortenArrSection=(kind, errLines, from, to, iModule, purgeTrace)=>{
 
 
 
-/**Travel through the lines of an error message from the end, and spot the line index of the
- * raised Error, assuming it will be preceded by a line starting with `  File "<(exec|console)>"`
- * and return the index of the error line, and a boolean saying if the error was or not an
- * AssertionError.
+/**Since nothing can be sure about how the message is formatted, and some users could add
+ * messages containing the error name itself (worse case: at the beginning of a new line...),
+ * the following logic is used:
+ *    - Start exploring lines from the end.
+ *    - Store the index of any line starting with the desired errKind.
+ *    - Return the last index stored whe, reaching a line matching CONFIG.TRACE_REG, which
+ *      means we've entered the traceback section for sure.
+ *
+ * Tricks & quirks:
+ *    - `errKind` must be regexp searched, because the JS error.type might miss some "upper
+ *      level packages names", like errKind is `JsException` while the stacktrace actually
+ *      holds `pyodide.ffi.JsException`.
+ *    - `errKind` can also contain weird chars, like "<>" in `_hack_exclusions_tools.<locals>.ExclusionError`
+ *
+ * @throws: Error if @errKind cannot be found.
  * */
-const getErrorKindInfos=(arr)=>{
-  for(let i=arr.length-1 ; i>0 ; i--){
-    const previousLine = arr[i-1]   // Always defined, see loop stop
+const guessErrorMsgLine=(arr, errKind)=>{
+  const specials = errKind.replace(/[\w.]+/g, '')
+  const matcher  = new RegExp(`^[\\w.${ specials }]+(?=$|:)`)
+
+  let iErr = -1
+  for(let i=arr.length-1 ; i>=0 ; i--){
     const line = arr[i]
-
-    const isLastTrace = CONFIG.TRACE_REG.test(previousLine)
+    const isLastTrace = CONFIG.TRACE_REG.test(line)
     if(isLastTrace){
-      // RecursionError may return a message with an extra line
-      if(line.startsWith("  [Previous line repeated")){
-        if(!arr[++i] || !arr[i].startsWith('RecursionError')){
-          throw new Error(
-            `Expected RecursionError, but found something else:\n\n${ arr.join('\n') }`
-          )
-        }
-        return [i,false]
-      }
-
-      return [i, line.startsWith('AssertionError')]
+      if(iErr<0) break
+      return iErr
     }
+    const start = matcher.exec(line)
+    if(start && start[0].endsWith(errKind)) iErr=i
   }
-  return [arr.length-1, false]
+  throw new Error(
+    `Couldn't find the "${ errKind }" error line in the error message.
+
+Matcher: ${matcher}
+Message:
+
+${ arr.join('\n') }`
+  )
 }
 
 
@@ -273,7 +307,7 @@ const getErrorKindInfos=(arr)=>{
  * through the use of the ast module in pyodide, then mutate the array representing
  * the error message accordingly.
  * */
-function buildAssertionMsg(code, errLines, iAssertionError){
+function buildAssertionMsg(code, errLines, iAssertionError, ctx){
 
   const callLine = errLines[iAssertionError-1] || ""
 
@@ -320,9 +354,16 @@ _`
     // Any error here must be caught and returned, otherwise it will just
     // be swallowed (somehow...)
     console.log(astExplorer)
-    return youAreInTroubles(e)
+    return formatBigFail(e, ctx)
   }
   const assertArr = assertion.split('\n')
   errLines[ errLines.length-1 ] += ':\n' + assertArr.splice(0,1)[0]
   errLines.push(...assertArr)
+}
+
+
+
+const formatBigFail=(err, ctx)=>{
+  ctx.gotBigFail = true
+  return youAreInTroubles(err)
 }

@@ -24,43 +24,128 @@ import {
   subscribeWhenReady,
   withPyodideAsyncLock,
 } from 'functools'
+import { PyodideSectionsRunner } from '2-pyodideSectionsRunner-runner-pyodide'
+
+
+import _anything from 'overlord'
+    // Enforce dependencies/import order and make sure pyodide isn't started before other
+    // elements are loaded and initialized: this avoids some troubles with Chrome|Chromium.
+    // (note: this alone is not enough: need to also avoid big async delays, otherwise these
+    // browsers just cancel the executions, at some point... :rolleyes: )
 
 
 
 
 
-/**This is what's triggering the huge lag, when loading the page, so do it only when pyodide
- * is needed, and do it on next tick, so that all the scripts are actually loaded first.
+
+
+
+
+/**Creates the PyodideConsole, which is the runtime tool behind the "terminal", and setup
+ * the JS routines so that Runners can interact with it.
+ *
+ * https://pyodide.org/en/stable/usage/api/python-api/console.html#pyodide.console.PyodideConsole
+ *
+ *
+ * Routines are stored in `globalThis.pyFuncs`, which is also `PyodideSectionsRunner.pyFuncs`.
+ * The global version will be deleted after use unless `CONFIG._devMode` is true.
+ * The available routines are:
+ *
+ *      - `redirect_cmd(cmd:string)` to run commands written by a user in the terminal.
+ *
+ *      - `complete(cmd:string)` to ask for an array of all the possible auto-completion
+ *         suggestions for the command currently typed in the terminal by a user.
+ *
+ *      - `clear_console()` to cancel the PyodideConsole current buffer, if ever needed
+ *        (an incomplete command triggers an error about imports => the previous parts
+ *         of the command need to be cancelled, for example).
  * */
-setTimeout(async ()=>{
+const setupPyodideConsoleAndPyFuncs=()=>{
+    /*  Archive note: in earlier implementations, `__builtins__` was here behaving like a dict instead
+        of an object because pyodide.runPython(...) was run using a dedicated namespace object.
+    */
 
-    // Delay to let the elements in the page to load before the page starts to freeze...
-    await sleep(CONFIG.pyodideDelay)
+    pyodide.runPython(`
+def _hack_start_pyodide():
+    import js
+    import __main__
+    from pyodide.console import PyodideConsole, repr_shorten
+    from pyodide.ffi import to_js
 
-    // slow step...
-    globalThis.pyodide = await loadPyodide()
+    # Globals initializations:
+    __builtins__._ = None
+    __builtins__.__USER_CMD__ = __builtins__.__USER_CODE__ = ""
 
-    // Extract basic utilities for JS <-> python communication:
-    globalThis.pyFuncs = setupPyodideEnvironmentTools()
+    # Store some original python functions
+    for name in 'input print help'.split():
+        src_func = getattr(__builtins__, name)
+        setattr(__builtins__, f"__{ name }_src__", src_func)
 
 
-    // Check everything is as expected on pyodide side:
+    pyconsole = PyodideConsole(__main__.__dict__)
+
+
+    async def redirect_cmd(cmd):
+
+        fut = pyconsole.push(cmd)
+        state = fut.syntax_check
+
+        if state != 'incomplete':
+            res = await fut             # Still raises if error (desired)
+            if res is not None:
+                __builtins__._ = res
+                if js.config().cutFeedback:
+                    res = repr_shorten(res)
+                print(res)
+
+        return state
+
+
+    def complete(cmd:str):
+        return to_js(pyconsole.complete(cmd)[0])
+
+
+    def clear_console():
+        pyconsole.buffer = []
+
+
+    # PyProxies (on JS side) created once only per page => don't care about destroying them:
+    js.pyFuncs.redirect_cmd = to_js(redirect_cmd)
+    js.pyFuncs.clear_console = to_js(clear_console)
+    js.pyFuncs.complete = to_js(complete)
+
+
+_hack_start_pyodide()
+del _hack_start_pyodide
+`)
+}
+
+
+
+/**Make sure everything is as expected on Pyodide side (enforce clean_scope contract).
+ * */
+const checkPyodideInitialState=()=>{
     const keeper = ['__name__', '__doc__', '__package__', '__loader__', '__spec__', '__annotations__', '__builtins__', '_pyodide_core', 'version']
     const unknown = pyodide.runPython('",".join(globals())').split(',').filter(k=>!keeper.includes(k))
-
     if(unknown.length){
         window.alert(`
-Something unexpected was found in pyodide environnement startup.
+Something unexpected was found after Pyodide's environnement startup.
 
 The python environment might behave strangely because of this, or even raise unexpected errors.
-Please contact the author of the theme by opening a ticket with this complete message on:
+Please contact the author of Pyodide-MkDocs-Theme by opening an issue with this complete error message on:
 
   ${ CONFIG.pmtUrl }/-/issues
 
-Unknown = ${ JSON.stringify(unknown) }
+  Unknown = ${ JSON.stringify(unknown) }
 `)
     }
+}
 
+
+
+/**Setup Pyodide fatal error callback (note: never seen it, so far...).
+ * */
+const setupPyodideFatalCbk =()=> {
 
     // Put in place a "critical error" message (never saw it, so far...)
     pyodide._module.on_fatal = withPyodideAsyncLock('fatal', async(e)=>{
@@ -76,67 +161,53 @@ Unknown = ${ JSON.stringify(unknown) }
     // All done!
     CONFIG.pyodideIsReady = true
     $("#header-hourglass-svg").attr("class", "py_mk_vanish")
-})
-
-
-
-
-/**Creates the console: the variable pyconsole, which is the runtime tool behind the  "terminal
- * process" is created here.
- * Returns the PyodideConsoleManager which handles the python functions needed to control the
- * python console from the JS layer
- *
- * https://pyodide.org/en/stable/usage/api/python-api/console.html#pyodide.console.PyodideConsole
- * */
-function setupPyodideEnvironmentTools(){
-
-    const routines = "pyconsole, await_fut, clear_console"
-
-    // Indentation does matter a bit: 1 extra indent is ok, but 2 fails (whatever... :rolleyes: )
-    const pythonRoutinesExtractionCode = `
-    def _hack_start_pyodide():
-        import js
-        import __main__
-        from pyodide.console import PyodideConsole, repr_shorten
-
-        # Globals initializations:
-        __builtins__['_'] = None
-        __builtins__['__USER_CMD__'] = __builtins__['__USER_CODE__'] = ""
-
-        for name in 'input print help'.split():
-            __builtins__[ f"__{ name }_src__" ] = __builtins__[name]
-
-        pyconsole = PyodideConsole(__main__.__dict__)
-
-        async def await_fut(fut):
-            res = await fut
-
-            if res is None:
-                return
-            __builtins__['_'] = res
-
-            if js.config().cutFeedback:
-                res = repr_shorten(res)
-            print(res)
-
-        def clear_console():            # Useless...?
-            pyconsole.buffer = []
-
-        return ${ routines }
-
-    ${ routines } = _hack_start_pyodide()
-    del _hack_start_pyodide`
-
-    const namespace = pyodide.globals.get("dict")();
-    pyodide.runPython(pythonRoutinesExtractionCode, {globals: namespace});
-
-    const outRoutines = {}
-    for(let key of routines.split(/, */)){
-        outRoutines[key] = namespace.get(key)
-    }
-    namespace.destroy();      // avoid (some) memory leaks
-    return outRoutines
 }
+
+
+
+
+
+
+/**Wait for some time before starting then initializing Pyodide environment.
+ * */
+const startPyodideSync =()=> {
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - WASM: starting')
+    loadPyodide().then(
+        setupPyodideEnvironmentTools, console.error
+    )
+}
+
+
+/**Once the POyodide environment has been started, put in place the generic logic/setup
+ * for it (these are only "do once" operations).
+ * */
+const setupPyodideEnvironmentTools =(pyodide)=> {
+
+    globalThis.pyodide = pyodide
+
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - WASM: ok')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - Environment setup start')
+
+    PyodideSectionsRunner.pyFuncs = globalThis.pyFuncs = {}
+
+    setupPyodideConsoleAndPyFuncs()
+    checkPyodideInitialState()
+    setupPyodideFatalCbk()
+
+    if(!CONFIG._devMode) delete globalThis.pyFuncs
+
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - Environment setup ok')
+}
+
+
+const start = new Date()
+const waitForStart =()=> new Date()-start >= CONFIG.pyodideDelay
+
+// Using this because Chrome-like browser may sometime just cancel a delayed execution if
+// there is too much time in between two synch steps... (FML...):
+subscribeWhenReady('Wait4StartPyodide', startPyodideSync, {waitFor:waitForStart, runOnly:true})
+
+
 
 
 
@@ -148,7 +219,7 @@ function setupPyodideEnvironmentTools(){
 subscribeWhenReady(
     "HourGlass",
     function(){
-        jsLogger('[HourGlass]')
+        LOGGER_CONFIG.ACTIVATE && jsLogger('[HourGlass]')
 
         const hourGlassSvg = `
 <svg viewBox="0 0 512 512" id="${ CONFIG.element.hourGlass.slice(1) }"

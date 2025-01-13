@@ -37,52 +37,94 @@ export function getTheme(){
 
 
 
-
-/**Decorator like function factory, managing the global pyodide lock.
- * If a call is done while pyodide is locked, it is delayed until the lock is available.
+/**Randomly pick a value from an array.
+ * @throws Error if the array is empty.
  * */
-export var withPyodideAsyncLock = (_=>{
+export function choice(arr){
+    if(!arr.length){
+        throw new Error("Cannot pick from an empty array")
+    }
+    const i = Math.random() * arr.length | 0
+    return arr[i]
+}
 
-    /* Everything is run async but single threaded, so a global lock can be added, using
-     * a simple simple boolean flag, declared inside a closure to avoid a user messing
-     * with the variable... */
+
+
+
+/**Async sleep (time given in milliseconds / must be awaited by the caller)
+ * */
+export function sleep(ms=0){
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+
+
+
+/**Create a global async Lock logistic, so that functions/methods involving pyodide will
+ * not be able to run concurrently. The Lock value is a simple boolean flag, since the app
+ * is single threaded, and its value is protected be defining it within a scope where the
+ * "locking" function is also defined (behaves like a python/TS decorator. Kinda... :p ).
+ * */
+export const withPyodideAsyncLock = (_=>{
+
+    /**Everything is run async but single threaded, so a global lock can be added, using a simple
+     * boolean flag, declared inside a closure to avoid a user messing with the variable...
+     * */
     let pyodideLocked = false
 
-    return function(name, asyncCallback){
+
+    /**Function factory ("decorator like"), managing the global pyodide lock.
+     * If a call is done while pyodide is locked, it is delayed until the lock is available.
+     *
+     * @name: Logging purpose only
+     *
+     * @asyncCallback: async function or method to wrap with the Lock. The calls are:
+     *      - Passing in the current `@this` context.
+     *      - And ofc the arguments (any number)
+     * */
+    return function withPyodideAsyncLock(name, asyncCallback){
         const logName = asyncCallback.name || name
 
         const wrapper = async function(...args){
             await waitForPyodideReady()
 
-            jsLogger("[LOCK?] -", logName, pyodideLocked)
+            LOGGER_CONFIG.ACTIVATE && jsLogger("[LOCK?] -", logName, pyodideLocked)
             while(pyodideLocked){
                 await sleep(60)
             }
-            jsLogger("[LOCK ACQUIRE] -", logName)
             pyodideLocked = true
+            LOGGER_CONFIG.ACTIVATE && jsLogger("[LOCK ACQUIRE] -", logName)
             let ret;
             try{
                 ret = await asyncCallback.apply(this, args)
             }catch(e){
-                console.error(e)    // Always keep that, otherwise errors in JS are just swallowed
-                // (impossible to rethrow them, not sure why... async probably)
+                console.error(e)
+                    // Always keep that to be warned when something goes wrong, otherwise
+                    // errors in JS are just swallowed (impossible to rethrow them, because
+                    // of the async context).
             }finally{
-                jsLogger("[LOCK RELEASE] -", logName)
+                LOGGER_CONFIG.ACTIVATE && jsLogger("[LOCK RELEASE] -", logName)
                 pyodideLocked = false
             }
             return ret
         }
         return wrapper
     }
-
 })()
 
 
 
 /**Allow to delay the executions of various functions, until the pyodide environment
- * is done loading.
+ * is ready.
+ *
+ * NOTES:
+ *    1. DO NOT use this with subscribeWhenReady, which is expecting a sync callback.
+ *    2. WARNING: this tool does NOT hold the async Lock logistic, so use it only in
+ *       methods or functions that will themselves call other functions or methods
+ *       that are actually locked (otherwise, deadlock!).
  * */
-export async function waitForPyodideReady(){
+export const waitForPyodideReady = async()=>{
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[Wait4Pyodide] - ...")
 
     const maxWaitingTime = 20  // in seconds
     const attempts = 80
@@ -94,6 +136,7 @@ export async function waitForPyodideReady(){
         if(++counter == attempts){
             throw new Error(`Couldn't access to pyodide environment in time (${maxWaitingTime}s)`)
         }
+        LOGGER_CONFIG.ACTIVATE && jsLogger("[Wait4Pyodide] -", counter,'/',attempts, "attempts")
     }
 }
 
@@ -122,31 +165,27 @@ export async function waitForPyodideReady(){
  * @throws: Error if maxTries subscriptions attempts are done without success.
  * */
 export function subscribeWhenReady(waitId, callback, options={}){
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscribing] - Enter', waitId)
 
     let {now, delay, waitFor, runOnly, maxTries} = {
         delay: 50,
         now: false,
-        waitFor: null,
+        waitFor: null,  // or string or boolean provider
         runOnly: false,
         maxTries: 20,
         ...options
     }
-    now = now && !waitFor                       // has to wait if waitFor is used
+    now = now && !waitFor                   // Has to wait if waitFor is used (... XD )
     CONFIG.subscriptionReady[waitId] = now
 
-    const buildCheckReady=()=>{
-        if(!waitFor){
-            return ()=>null
-        }
-        if(typeof (waitFor)=='string'){
-            return ()=>{ CONFIG.subscriptionReady[waitId] = $(waitFor).length > 0 }
-        }
-        return ()=>{ CONFIG.subscriptionReady[waitId] = waitFor() }
-    }
-    const checkReady = buildCheckReady()
+    const waitForProp = typeof (waitFor)=='string'
+    const checkReady  = !waitFor    ? ()=>null
+                      : waitForProp ? ()=>{ CONFIG.subscriptionReady[waitId] = $(waitFor).length > 0 }
+                                    : ()=>{ CONFIG.subscriptionReady[waitId] = waitFor() }
+
     const isNotReady =()=>{
         checkReady()
-        return !CONFIG.subscriptionReady[waitId] || !globalThis.document$
+        return !( CONFIG.subscriptionReady[waitId] && globalThis.document$ )
     }
 
     function autoSubscribe(){
@@ -160,7 +199,7 @@ export function subscribeWhenReady(waitId, callback, options={}){
             setTimeout(autoSubscribe, delay)
 
         }else{
-            jsLogger('[Subscribing] -', waitId)
+            LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscribing] -', waitId)
             const wrapper=function(){
                 try{
                     callback()
@@ -173,7 +212,7 @@ export function subscribeWhenReady(waitId, callback, options={}){
             }else{
                 const subscript = document$.subscribe(wrapper)
                 document.addEventListener(CONFIG.onDoneEvent, function(){
-                    jsLogger("[Unsubscribing] -", waitId)
+                    LOGGER_CONFIG.ACTIVATE && jsLogger('[Unsubscribing] -', waitId)
                     subscript.unsubscribe()
                 })
             }
@@ -190,40 +229,57 @@ export function subscribeWhenReady(waitId, callback, options={}){
 
 
 
+
+
+
+
+/**Flag to allow only one call to waitForClassesPoolReady.
+ * */
+let classesPoolSubscriptionDone = false
+
+
 /**Routine to call unconditionally from overlord.js. It is used to make sure all the classes
  * required in the page are actually defined before trying to define the related instances
  * from the DOM content (this has become useful once the JS layer has been moved to JS
  * modules, which are async loaded).
  *
- * Passing in a callback also provides a way to a user customizing the theme to inject their
+ * Passing in a callback also provides a way for a user customizing the theme to inject their
  * own logic/custom classes in CONFIG.CLASSES_POOL by overriding the call in overlord.js.
  * This way:
- *   - Their callback is called only once all the original classes have been defined.
+ *   - Their callback is called only after all the original classes have been defined.
  *   - The subscriptions are delayed until their callback returns a truthy value.
  *
  * @throws: Error if `applyWhenPoolReady` is given and it returns `undefined`
  *          (to prevent infinite loop).
  * */
-export function waitForClassesPoolReady(applyWhenPoolReady){
+export function waitForClassesPoolReady(applyWhenPoolReady=null){
 
+  if(classesPoolSubscriptionDone){
+    throw new Error("Cannot call several times waitForClassesPoolReady")
+  }
+  classesPoolSubscriptionDone = true
+
+  const waitFor=()=>{
+    // As long as class names remain in CONFIG.overlordClasses, those are not yet registered:
     if(CONFIG.overlordClasses.length){
-        const notDefinedYet    = className => !CONFIG.CLASSES_POOL[className]
-        CONFIG.overlordClasses = CONFIG.overlordClasses.filter(notDefinedYet)
-    }else{
-        CONFIG.overlordIsReady = !applyWhenPoolReady || applyWhenPoolReady()
-        if(CONFIG.overlordIsReady === undefined){
-            throw new Error(
-                "applyWhenPoolReady() returned undefined. It has to return something."
-            )
-        }
+      CONFIG.overlordClasses = CONFIG.overlordClasses.filter(
+        className => !CONFIG.CLASSES_POOL[className]
+      )
     }
+    // Separated `if`, to gain 1 async cycle:
+    if(!CONFIG.overlordClasses.length){
+      CONFIG.overlordIsReady = !applyWhenPoolReady || applyWhenPoolReady()
+      if(CONFIG.overlordIsReady === undefined){
+        throw new Error(
+          "`applyWhenPoolReady()` returned undefined: it has to return something."
+        )
+      }
+    }
+    return Boolean(CONFIG.overlordIsReady)
+  }
 
-    if(!CONFIG.overlordIsReady){
-        jsLogger('[Overlord] - waiting...')
-        setTimeout(()=>waitForClassesPoolReady(applyWhenPoolReady), 50)
-    }else{
-        jsLogger('[Overlord] - READY')
-    }
+  const maxTries = 600    // 600 * 50 ms = 30s
+  subscribeWhenReady('Overlord', ()=>null, {waitFor, maxTries, runOnly: true})
 }
 
 
@@ -237,6 +293,23 @@ export function config(){ return CONFIG }
 
 
 
+
+
+/**Square brackets in "rich text format" must be escaped, otherwise they are messing up the
+ * terminal formatting informations.
+ * */
+export const escapeSquareBrackets=msg=>{
+    return msg.replace(CONFIG.ESCAPE_SQ_B, m=>SqBs[m])
+}
+
+export const unEscapeSquaredBrackets=msg=>{
+    return msg.replace(CONFIG.UNESCAPE_SQ_B, m=>SqBs[m]||m)     // Why ||m ??
+}
+
+export function toSnake(msg){
+    return msg.replace(/[A-Z]/g, m=>'_'+m.toLowerCase())
+}
+
 /**Ensure the given python code can safely be inserted into a JS template.
  * */
 export function escapePyodideCodeForJsTemplates(code){
@@ -244,51 +317,11 @@ export function escapePyodideCodeForJsTemplates(code){
 }
 
 
-
-/**Square brackets in "rich text format" must be escaped, otherwise they are messing up the
- * terminal formatting informations.
- * */
-export function escapeSquareBrackets(msg){
-    return msg.replace(/\[/g, CONFIG.MSG.leftSafeSqbr)
-              .replace(/\]/g, CONFIG.MSG.rightSafeSqbr)
+/**Extract full information when something gets VERY wrong... */
+export function youAreInTroubles(err, isError=false){
+    if(isError) err = String(err).trimEnd()
+    return `${ err }\n\n${ err.stack || '[no stack]' }\n${ CONFIG.MSG.bigFail }`
 }
-
-
-
-/**Formatting function factory, for messages used in the jquery terminal.
- *
- * WARNING: the input message will be "escapeSquareBrackets"-ed.
- * */
-function richTextFormat(content, style, color="", background="") {
-    content = escapeSquareBrackets(content)
-    return `[[${ style };${ color };${ background }]${ content }]`;
-}
-
-export const txtFormat = {
-    error:   (content) => richTextFormat(content, "b", "red"),
-    warning: (content) => richTextFormat(content, "ib", "orange"),
-    info:    (content) => richTextFormat(content, "i", "grey"),
-    italic:  (content) => richTextFormat(content, "i"),
-    stress:  (content) => richTextFormat(content, "b"),
-    success: (content) => richTextFormat(content, "ib", "green"),
-    none:    escapeSquareBrackets,  // To override the defaults, if needed (see post processing)
-}
-
-
-
-
-export const escapeSqBrackets=msg=>{
-    return msg.replace(CONFIG.ESCAPE_SQ_B, c=>SqBs[c])
-}
-
-export const unEscapeSqBrackets=msg=>{
-    return msg.replace(CONFIG.UNESCAPE_SQ_B, c=>SqBs[c]||c)
-}
-
-export function toSnake(msg){
-    return msg.replace(/[A-Z]/g, m=>'_'+m.toLowerCase())
-}
-
 
 
 /**Takes a string and cut the "middle chunk" of them if it is considered too long (length > 1750),
@@ -306,56 +339,33 @@ export function textShortener(text){
 }
 
 
-/**Async sleep (time given in milliseconds / must be awaited by the caller)
+
+/**Formatting function factory, for messages used in the jquery terminal.
+ *
+ * WARNING: the input message will be "escapeSquareBrackets"-ed.
  * */
-export function sleep(ms=0){
-    return new Promise((resolve) => setTimeout(resolve, ms));
+const _richTextFormat = (content, style, color="", background="")=>{
+    content = escapeSquareBrackets(content)
+    return `[[${ style };${ color };${ background }]${ content }]`;
 }
 
-
-/**Extract full information when something gets VERY wrong... */
-export function youAreInTroubles(err){
-    return `${ err }\n\n${ err.stack || '[no stack]' }\n${ CONFIG.MSG.bigFail }`
-}
-
-
-
-
-
-/**Create a button with tooltip, just like the python _html_builder one.
- * */
-export function buttonWithTooltip(options, content){
-    options = {
-        buttonId: "",
-        shift: 50,          // %
-        fontSize: 1.5,      // em
-        tipWidth: 15,       // em
-        tipText: "",
-        ...options
-    }
-    options.tipWidth = options.tipWidth>0 ? `style="width:${ options.tipWidth }em;"` : ""
-    const buttonId = !options.buttonId ? "" : `id="${ options.buttonId }" `
-    return `
-<button ${ buttonId }class="tooltip header-btn" type="button"
- style="--tool_shift:${ options.shift }%; font-size:${ options.fontSize }em;">
-    <span class="tooltiptext" ${ options.tipWidth }>${ options.tipText }</span>
-    ${ content }
-</button>
-`
+export const txtFormat = {
+    error:   (content) => _richTextFormat(content, "b", "red"),
+    warning: (content) => _richTextFormat(content, "ib", "orange"),
+    info:    (content) => _richTextFormat(content, "i", "grey"),
+    italic:  (content) => _richTextFormat(content, "i"),
+    stress:  (content) => _richTextFormat(content, "b"),
+    success: (content) => _richTextFormat(content, "ib", "green"),
+    none:    escapeSquareBrackets,  // To override the defaults, if needed (see post processing)
 }
 
 
 
-/**Randomly pick a value from an array.
- * @throws Error if the array is empty.
- * */
-export function choice(arr){
-    if(!arr.length){
-        throw new Error("Cannot pick from an empty array")
-    }
-    const i = Math.random() * arr.length | 0
-    return arr[i]
-}
+
+
+
+
+
 
 
 
@@ -429,7 +439,7 @@ export const decompressLZW=(compressed, compressOptionSrc)=>{
 export function decompressPagesIfNeeded(){
     if(typeof(PAGE_IDES_CONFIG)!='string') return;
 
-    jsLogger('[CheckPoint] - decompress page LZW')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - decompress page LZW')
     globalThis.PAGE_IDES_CONFIG = decompressAndConvert(PAGE_IDES_CONFIG)
 }
 
@@ -442,6 +452,34 @@ export function decompressAndConvert(compressed){
         decompressed, (key,val)=>key=='attempts_left' && val=="Infinity" ? Infinity : val
     )
     return outcome
+}
+
+
+
+
+
+
+
+/**Create a button with tooltip, just like the python _html_builder one.
+ * */
+export function buttonWithTooltip(options, content){
+    options = {
+        buttonId: "",
+        shift: 50,          // %
+        fontSize: 1.5,      // em
+        tipWidth: 15,       // em
+        tipText: "",
+        ...options
+    }
+    options.tipWidth = options.tipWidth>0 ? `style="width:${ options.tipWidth }em;"` : ""
+    const buttonId = !options.buttonId ? "" : `id="${ options.buttonId }" `
+    return `
+<button ${ buttonId }class="tooltip header-btn" type="button"
+ style="--tool_shift:${ options.shift }%; font-size:${ options.fontSize }em;">
+    <span class="tooltiptext" ${ options.tipWidth }>${ options.tipText }</span>
+    ${ content }
+</button>
+`
 }
 
 
@@ -700,18 +738,18 @@ export function freshStore(code, forThis=null){
 
 
 
-// Access from pyodide, setup from IdeZipManager
-globalThis.getStorage  = noStorage
-globalThis.setStorage  = noStorage
-globalThis.delStorage  = noStorage
-globalThis.keysStorage = noStorage
 
 // For backward compatibility (hooks and co'):
 globalThis.PythonError        = PythonError
 globalThis.CONFIG             = CONFIG
 globalThis.subscribeWhenReady = subscribeWhenReady
+LOGGER_CONFIG.ACTIVATE && console.log("async subscriber updated")
 
-// For usage from pyodide + backward compatibility:
+// Access from pyodide + IdeZipManager logistic + backward compatibility:
+globalThis.getStorage    = noStorage
+globalThis.setStorage    = noStorage
+globalThis.delStorage    = noStorage
+globalThis.keysStorage   = noStorage
 globalThis.config        = config
 globalThis.downloader    = downloader
 globalThis.uploader      = uploader

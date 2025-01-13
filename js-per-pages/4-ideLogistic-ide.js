@@ -217,7 +217,7 @@ class IdeZipManager extends IdeStorageManager {
   async setupRuntimeZip(){
     this.terminal.pause()           // Deactivate user actions in the terminal until resumed
     this.terminal.clear()           // To do AFTER pausing...
-    const [runtime,] = await this._baseSetupRuntime()
+    const runtime = await this._baseSetupRuntime()
     return runtime
   }
 
@@ -459,6 +459,7 @@ export class IdeGuiManager extends IdeZipManager {
       initTermH: 0,                   // Initial height of the terminal, before entering any screen mode
       initGlobH: 0,                   // Initial height of this.global, before entering any screen mode
       hasObserver: false,             // (should be actually useless, now) Has already built auto-completion MutationObserver or not
+      escapeIdeSearch: false,              // Stroke Esc while the search/replace IDE tool was on focus
       viewport: window.screen.height,
       ideMinWidth: cssPx(this.global,'min-width'),
       fullScreenPadPx: 15,            // Padding added in full screen mode
@@ -504,7 +505,7 @@ export class IdeGuiManager extends IdeZipManager {
 
   resizeVertTerm(){
     if(this.guiIdeFlags.resizedVertTerm) return true
-    jsLogger("[CheckPoint] - Handle terminal window size")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - Handle terminal window size")
 
     const divHeight = $('#'+this.id).css('height')
     this.global.find(".term_editor_v").css("height", divHeight)
@@ -542,9 +543,11 @@ export class IdeGuiManager extends IdeZipManager {
   }
 
   static enforceAceGutterFillAfterHeightsTroubles(){
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[GutterLogistics]')
     for(const obj of IdeGuiManager.IDE_WITH_HEIGHT_TROUBLES){
       obj.fillAceGutter()
     }
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[GutterLogistics] - Done')
   }
 
 
@@ -641,8 +644,8 @@ export class IdeGuiManager extends IdeZipManager {
       // Set the actual number of lines to "lock" for the ACE editor:
       minLines = maxLines = nLines
 
-      jsLogger('[ScreenMode]', "Computed minLines =", minLines)
-      jsLogger('[ScreenMode]', {globH, termH, btnsH, availableH, lineH})
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Computed minLines =", minLines)
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', {globH, termH, btnsH, availableH, lineH})
     }
 
     this.editor.setOptions({minLines, maxLines})
@@ -652,7 +655,11 @@ export class IdeGuiManager extends IdeZipManager {
     term.css('resize', setup||this.isVert ? 'unset' : 'vertical')
     term.css("height", (setup ? termH : this.guiIdeFlags.initTermH)+'px')
 
-    jsLogger('[ScreenMode]', "IDE resizing done -", this.editor.getOption('minLines'), this.editor.getOption('maxLines'))
+    LOGGER_CONFIG.ACTIVATE && jsLogger(
+      '[ScreenMode]', "IDE resizing done -",
+      this.editor.getOption('minLines'),
+      this.editor.getOption('maxLines')
+    )
   }
 }
 
@@ -670,7 +677,7 @@ export class IdeGuiManager extends IdeZipManager {
 
 
 
-export class IdeFullScreenGlobalManager {
+export class IdeFullScreenGlobalManager extends IdeGuiManager {
 
   static currentIde = null
   static someMenuOpened = false
@@ -765,7 +772,42 @@ export class IdeFullScreenGlobalManager {
       }
     }).observe(document.body, {childList: true})
   }
+
+
+  build(){
+    super.build()
+
+    /* Add the logistic to track the use of ESC while the IDE search/replace tool is used
+      ...
+      Except the div is not present until first use, so needs first an observer on the
+      parent div.ace_scroller. XD
+
+      WARNING: Shenanigans around here because:
+        - The keyup event on this.global is always applied AFTER the search/replace tool has
+          already been closed. So it cannot be used to track the state of the search tool.
+        - A MutationObserver on the search tool also resolves it's records before the keydown
+          event is triggered on this.global
+        - A MutationObserver would see the closing action whatever triggered it... Not only
+          through the use of ESC...
+     */
+    const scroller    = this.global.find('div.ace_scroller')
+    const scrollerObs = new MutationObserver(()=> {
+
+      const search = scroller.children('.ace_search')
+      if(search.length){
+        scrollerObs.disconnect()    // no need anymore
+
+        search.on('keydown', (e)=>{
+          if(e.key!='Escape') return;
+          this.guiIdeFlags.escapeIdeSearch = true
+        })
+
+      }
+    })
+    scrollerObs.observe(scroller[0], {childList:true})
+  }
 }
+
 
 IdeFullScreenGlobalManager.buildBodyObserver()
 
@@ -780,7 +822,7 @@ IdeFullScreenGlobalManager.buildBodyObserver()
 
 
 
-class IdeFullScreenManager extends IdeGuiManager {
+class IdeFullScreenManager extends IdeFullScreenGlobalManager {
 
 
   switchFullScreenFromButton(){
@@ -802,7 +844,7 @@ class IdeFullScreenManager extends IdeGuiManager {
     const focused = document.activeElement
 
     this.global[0].requestFullscreen().then(async _=>{
-      jsLogger('[ScreenMode]', "Full screen ready")
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Full screen ready")
 
       const splitScreenBtn = this.global.find(".ide-split-screen")
 
@@ -813,20 +855,22 @@ class IdeFullScreenManager extends IdeGuiManager {
       this.ideScreenModeVerticalResize({goingFullScreen: true})
       focused.focus()   // Always give back the focus to the element which had it before.
 
-      jsLogger('[ScreenMode]', "Full screen setup - DONE")
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Full screen setup - DONE")
 
       // Wait forever if needed...
       while(somethingFullScreen()) await sleep(50)
 
       const minLines = this.guiIdeFlags.splittedLines || this.minIdeLines
       const maxLines = this.guiIdeFlags.splittedLines || this.maxIdeLines
-      jsLogger('[ScreenMode]', "Full screen reversion with", minLines, maxLines)
+      LOGGER_CONFIG.ACTIVATE && jsLogger(
+        '[ScreenMode]', "Full screen reversion with", minLines, maxLines
+      )
 
       this.ideScreenModeVerticalResize({setup:false, minLines, maxLines})
       if(this.splitScreenActivated) splitScreenBtn.removeClass('deactivated')
       this.guiIdeFlags.internalIsFullScreen = false
 
-      jsLogger('[ScreenMode]', "Full screen reversion - DONE")
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Full screen reversion - DONE")
     })
   }
 }
@@ -866,7 +910,7 @@ export class IdeSplitScreenManager extends IdeFullScreenManager {
     const swapColumns  = e && useCtrl(e.originalEvent ?? e)    // Adapt for non jQuery events
 
     if(isFullScreen){
-      jsLogger('[ScreenMode]', "Exit full screen mode")
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Exit full screen mode")
       document.exitFullscreen()
 
       // Everything is async with various delays/things waiting on each others, so wait
@@ -875,7 +919,7 @@ export class IdeSplitScreenManager extends IdeFullScreenManager {
       while(this.guiIdeFlags.internalIsFullScreen) await sleep(50)
       await sleep(50)  // Extra delay so that the logic in `requestFullScreen.then` finishes
 
-      jsLogger('[ScreenMode]', "Full screen mode exited")
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Full screen mode exited")
     }
 
     this.switchSplitScreen(swapColumns, isFullScreen, autoScroll)
@@ -904,7 +948,7 @@ export class IdeSplitScreenManager extends IdeFullScreenManager {
 
     // Allow to switch from one IDE to another, staying in "split" mode:
     if(this.splitScreenActivated && !this.isInSplit){
-      jsLogger('[ScreenMode]', "Exit previous splitted")
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Exit previous splitted")
       this.splitScreenActivated.switchSplitScreen(swapColumns, false)
     }
     const topDivId = CONFIG.element.pmtTopDiv
@@ -968,7 +1012,7 @@ export class IdeSplitScreenManager extends IdeFullScreenManager {
 
     //------------------------------------------------------------
 
-    jsLogger('[ScreenMode]', changes.log, "split screen mode")
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', changes.log, "split screen mode")
 
     // BEFORE detaching anything:
     let topSrc = changes.scrollRefBefore[0].getBoundingClientRect().top
@@ -1006,7 +1050,7 @@ export class IdeSplitScreenManager extends IdeFullScreenManager {
       changes.eltToScroll.scrollBy(0, box.top - topSrc)
     }
 
-    jsLogger('[ScreenMode]', "split handling - DONE")
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "split handling - DONE")
   }
 
 

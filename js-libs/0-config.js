@@ -193,7 +193,7 @@ const CONFIG = {
     loggerOptions: {},      // jsLogger debugging config/activations
 
     COMMENTED_PATTERN:  /(^\s*)(\S)(.?)/,
-    MODULE_REG:         /File "<(env[^>]*|post[^>]*|exec|console)>", line (\d+)($|, in (?!await_fut))/,
+    MODULE_REG:         /File "<(env[^>]*|post[^>]*|exec|console)>", line (\d+)($|, in (?!redirect_cmd))/,
     TRACE_REG:          /  File "<(env[^>]*|post[^>]*|exec|console)>"/,
     TRACE_NUM_LINE:     /File "<(?:env[^>]*|post[^>]*|exec|console)>", line (\d+)/,
 
@@ -209,10 +209,10 @@ const CONFIG = {
 
     feedbackShortener: {
         // StdOut:
-        limit: 1000,
-        head: 400,
-        tail: 200,
         msg: "&lsqb;Message truncated&rsqb;",
+        limit: 1000,    // Cut if more than this
+        head: 400,      // How many chars kept at the beginning
+        tail: 200,      // How many chars kept at the end
 
         // Terminal stacktrace:
         traceLimit: 20,

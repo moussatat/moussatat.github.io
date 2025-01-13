@@ -645,7 +645,7 @@ __builtins__._stdout_value
     }
 
     return (option, repl=null)=>{
-        jsLogger('[CheckPoint] - Pyodide feature:', option)
+        LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - Pyodide feature:', option)
         let code = PYODIDE_SNIPPETS[option]
         if(code===undefined) throw new Error(`Unknown snippet: ${option}`)
         if(repl!==null){

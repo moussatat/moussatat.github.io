@@ -72,7 +72,7 @@ CONFIG.ACE_COLOR_THEME.aceStyle = {
  * */
 document.querySelector("[data-md-color-scheme]")
         .addEventListener("change", _=>{
-          jsLogger("[Paint_ACEs]")
+          LOGGER_CONFIG.ACTIVATE && jsLogger("[Paint_ACEs]")
 
           const theme = getTheme();
           for(const id of CONFIG.element.allEditors){
@@ -135,11 +135,11 @@ document.querySelector("[data-md-color-scheme]")
   const waitForOverlord=()=>{
 
     if(!CONFIG.overlordIsReady){
-      jsLogger('[Overlord] (waiting from subscription)')
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[Overlord] (...waiting from subscription)')
       setTimeout(waitForOverlord, 50)
       return
     }
-    jsLogger('[Overlord] - Starting subscriptions')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Overlord] - Done waiting: starting subscriptions')
 
 
     const to_build = TO_BUILD_CONFIG.map(
@@ -163,11 +163,17 @@ document.querySelector("[data-md-color-scheme]")
         })
       })
     }
-    if(gotSomeIdes) setTimeout(CONFIG.CLASSES_POOL.Ide.enforceAceGutterFillAfterHeightsTroubles)
+
+    if(gotSomeIdes){
+      // On next tick because the DOM isn't up to date yet:
+      const runner = CONFIG.CLASSES_POOL.Ide
+      setTimeout(runner.enforceAceGutterFillAfterHeightsTroubles.bind(runner))
+    }
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Overlord] - Subscriptions done')
 
     if(CONFIG.CLASSES_POOL.Qcm){                          // Building qcms only if the class is defined in the page
       subscribeWhenReady("QCM", function(){
-        jsLogger('[QCM]')
+        LOGGER_CONFIG.ACTIVATE && jsLogger('[QCM]')
         CONFIG.CLASSES_POOL.Qcm.buildQcms()
       }, {now:true, runOnly:true})
     }

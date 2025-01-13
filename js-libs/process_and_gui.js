@@ -72,7 +72,7 @@ CONFIG.pythonLibs            = new Set(CONFIG.pythonLibs)
 subscribeWhenReady(
     "AroundSearch",
     function(){
-        jsLogger('[AroundSearch]', 'left')
+        LOGGER_CONFIG.ACTIVATE && jsLogger('[AroundSearch]', 'left')
         const wrappingDivL = `<div id="${ CONFIG.element.searchBtnsLeft.slice(1)  }"></div>`
         $(wrappingDivL).insertBefore(CONFIG.element.dayNight)
     },
@@ -82,12 +82,12 @@ subscribeWhenReady(
 subscribeWhenReady(
     "AroundSearch",
     function(){
-        jsLogger('[AroundSearch]', 'right')
+        LOGGER_CONFIG.ACTIVATE && jsLogger('[AroundSearch]', 'right')
         const wrappingDivR = `<div id="${ CONFIG.element.searchBtnsRight.slice(1) }"></div>`
 
         /* Try various locations for insertion.
             1. On the right of the search bar
-            2. On the right of the dayNight palette otherwise
+            2. On the right of the dayNight palette otherwise (in case no search tool/plugin)
         */
         if($(CONFIG.element.searchBlock)[0]){
             $(wrappingDivR).insertAfter(CONFIG.element.searchBlock)
@@ -105,7 +105,7 @@ subscribeWhenReady(
 subscribeWhenReady(
     "TrashCan",
     function(){
-        jsLogger('[TrashCan]')
+        LOGGER_CONFIG.ACTIVATE && jsLogger('[TrashCan]')
 
         const trashId = CONFIG.element.trashCan.slice(1)
         const TRASH_SVG =

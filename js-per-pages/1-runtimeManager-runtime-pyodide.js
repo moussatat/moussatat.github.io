@@ -21,8 +21,8 @@ If not, see <https://www.gnu.org/licenses/>.
 import { jsLogger } from 'jsLogger'
 import {
   escapePyodideCodeForJsTemplates,
-  PythonError,
   toSnake,
+  youAreInTroubles,
 } from 'functools'
 import {
   getFullStdIO,
@@ -34,72 +34,87 @@ import { installPythonPackages } from '1-packagesInstaller-install-pyodide'
 
 
 
+const UNKNOWN = "<unknown>"
+
+
+
 
 /**Build a "context" object, holding the various state information for the current
  * "sub-action/step" in the current overall user action (RuntimeManager).
  * (creates a bare object, without methods)
  * */
-export class Ctx {
+class Ctx {
 
-  static baseCtx(){
-    return {
+  /**Build a "context" object, holding the various state information for the current
+   * "sub-action/step" in the current overall user action (RuntimeManager).
+   * (creates a bare object, without methods).
+   *
+   * @ctx:  May be an object or a simple string (for environment sections).
+   *        In this case, the default values are rebuilt accordingly.
+   */
+  static build(ctx, runtime){
+
+    let section = ctx && ctx.section || UNKNOWN
+
+    if(!ctx){
+      ctx = {}                          // No argument
+
+    }else if(typeof(ctx)=='string'){    // Environment section name only
+      section = ctx                     // Override the default value ('<unknown>')
+      ctx = {
+        archiveSuccess:       true,     // always, with environment codes
+        code:                 runtime.runner[`${ section }Content`].trim(),
+        keepRunningOnAssert:  section.startsWith('env'),
+        method:               this.genericEnvSectionRunnerAsync,
+      }
+    }
+
+    // Merge all the data in appropriate order...:
+    ctx = {
       success: true,                // false on errors only, not if just "skipped"
+      archiveSuccess: false,        // If true, the section will be registered as ran successfully (if it is so). To use on the last action of the section.
 
       err: null,                    // Error instance
-      stdErr: "",                   // Error as string (msg to output, formatted)
+      stdErr: "",                   // Error as string (msg to output, already formatted for terminal)
       isAssertErr:false,
-      stdout: "",
-      qualname: "<unknown>",        // "qualified name" of the section + method to run in the current action (debugging purpose)
-
       keepRunningOnAssert: false,   // If true, consider the section ran successfully on AssertionError (this is env related)
+      gotBigFail: false,            // YOU ARE IN TROUBLES
+
       isEnvSection: true,           // Any of env, env_term, ... => "not user code or cmd"
+      autoImport: true,             // If true, apply automatically install/imports logistic
+      code: ".",                    // If empty string, the Runner method won't ever be called (non empty default is ok, because some Runner won't need to pass `code` to the ctx to know what to do (or the code needed is not known yet: Features)
+      method: ()=>null,             // Runner method to... run when everything is ready
+      logConfig: {},                // Config for generateErrorLog
+
       applyExclusionsIfAny: false,  // Apply exclusions specifically on this run (if any). Note: `!isEnvSection` is not specific enough!
       kwsExclusions: undefined,     // Define if some exclusions logic has to be applied or not on the way
       methodsExclusions: undefined, // Define if some exclusions logic has to be applied or not on the way
       runtimeExclusions: undefined, // Define if some exclusions logic has to be applied or not on the way
-      runtimeExclusionSetupSuccessful: false,  // flag
-      autoImport: true,             // If true, apply automatically install/imports logistic
-      section: "<unknown>",         // as in "PYODIDE:{section}", or "unknown" instead. Visible in the stacktrace on errors.
-      archiveSuccess: false,        // If true, the section will be registered as ran successfully (if it is so). To use on the last action of the section.
-      method: ()=>null,             // Runner method to... run when everything is ready
-      code: ".",                    // If empty string, the Runner method won't ever be called. Default is not empty, because some Runner won't need to pass `code` to the ctx to know what to do (or the code needed is not known yet: Features)
-      methodArgs: [],               // Additional arguments to pass to the Runner method
-      logConfig: {},                // Config for generateErrorLog
-    }
-  }
+      runtimeExclusionSetupSuccessful: false,  // Flag to decide to apply or not exclusions logistic teardown
 
-
-  static with(ctx, runtime){
-    const baseCtx = Ctx.baseCtx()
-    let section   = ctx && ctx.section || baseCtx.section
-
-    if(!ctx) ctx={}                     // no argument
-
-    else if(typeof(ctx)=='string'){     // Environment section name only
-      section = ctx
-      ctx = {
-        archiveSuccess:      true,      // always, with environment codes
-        code:                runtime.runner[`${ section }Content`].trim(),
-        keepRunningOnAssert: section.startsWith('env'),
-        method:              (ctx)=>runtime.installImportsAndRunEnvCode(ctx),
-                             // Avoids the wrong binding to runtime.runner
-      }
-    }
-
-    ctx={
-      ...baseCtx,
-      qualname: `${ section || '?' }_${ ctx.method.name }`,
+      qualname: `${ section || '?' }_${ ctx.method.name }`, // "qualified name" = section + method to run in the current action (debugging purpose)
       ...ctx,
-      section,
+      section,                      // As in "PYODIDE:{section}", or "unknown" instead. Visible in the stacktrace on errors.
+                                    // Always AFTER unpacking @ctx, because section either is consistent, or has been correctly updated.
     }
+
+    // Manage exclusions flags, once all sources have been merged:
     const needExclusions  = !ctx.isEnvSection && ctx.applyExclusionsIfAny
     ctx.kwsExclusions     ??= needExclusions && runtime.excludedKws.length>0
     ctx.methodsExclusions ??= needExclusions && runtime.excludedMethods.length>0
     ctx.runtimeExclusions ??= needExclusions && (
-      runtime.excluded.length>0 || runtime.pypiWhite && runtime.pypiWhite.length>0 || runtime.recLimit > 0
+      runtime.pypiWhite && runtime.pypiWhite.length>0
+      || runtime.excluded.length>0
+      || runtime.recLimit > 0
     )
 
     return ctx
+  }
+
+
+  static genericEnvSectionRunnerAsync = async (ctx)=>{
+    if(!ctx.code) return;
+    await pyodide.runPythonAsync( ctx.code, {filename:`<${ toSnake(ctx.section) }>`} )
   }
 }
 
@@ -186,7 +201,7 @@ export class RuntimeManager {
   }
 
   cleanup(){
-    return this.runner = this.runCodeAsync = null   // Facilitate GC...
+    return this.runner = this.runCodeAsync = null   // Facilitate GC...(?)
   }
 
 
@@ -200,13 +215,6 @@ export class RuntimeManager {
   }
 
 
-
-  /**Generic, main "action" runner for environment code.
-   * */
-  async installImportsAndRunEnvCode(ctx){
-    if(!ctx.code) return;
-    await pyodide.runPythonAsync(ctx.code, {filename: `<${ toSnake(ctx.section) }>`})
-  }
 
 
   /**Run one Runner method (async), surrounding it with all necessary logics, like:
@@ -228,28 +236,29 @@ export class RuntimeManager {
    * Inside this "runWithCtx" call, subsequent methods calls are skipped if an error has been
    * registered in the @ctx object, unless the method is specified as "should `always` happen"
    * */
-  async runWithCtx(ctx){
-    ctx = Ctx.with(ctx, this)
+  async runWithCtx(srcCtx){
+    const ctx    = Ctx.build(srcCtx, this)
+    const toSkip = !this.stillRunnable(ctx)
 
-    if(!this.stillRunnable(ctx)){
-      jsLogger('[Runtime] - SKIPPED', ctx.qualname)
+    if(toSkip){
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[Runtime] - SKIPPED', ctx.qualname)
       return ctx
     }
 
-    jsLogger('[Runtime] - running ', ctx.qualname)
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Runtime] - running ', ctx.qualname)
     // No need for error extra handling: big fails handled in lockedRunnerWithBigFailWarningFactory
 
     this.runner.allowPrint = this.withStdOut
     const astExclusions    = ctx.kwsExclusions || ctx.methodsExclusions
 
-                              await this._runCaught(ctx, setupStdIO)
+                              await this._runCaught(ctx, setupStdIO, {shouldNeverFail:true})
     if(astExclusions)         await this._runCaught(ctx, this.setupAstExclusions)
-    if(ctx.autoImport)        await this._runCaught(ctx, this.installOrImportModules) // BEFORE runtime exclusions!
-    if(ctx.runtimeExclusions) await this._runCaught(ctx, this.setupRuntimeExclusions)
-    if(!ctx.isEnvSection)     await this._runCaught(ctx, this.clearAutoRun)
+    if(ctx.autoImport)        await this._runCaught(ctx, this.installOrImportModules) // BEFORE runtime exclusions! ('cause using `import`)
+    if(ctx.runtimeExclusions) await this._runCaught(ctx, this.setupRuntimeExclusions, {shouldNeverFail:true})
+    if(!ctx.isEnvSection)     await this._runCaught(ctx, this.clearAutoRun, {shouldNeverFail:true})
                               await this._runCaught(ctx, this.applyRunnerMethod)
     if(ctx.runtimeExclusions) await this._runCaught(ctx, this.removeExclusions, {always:true})
-                              await this._runCaught(ctx, this.teardownManager, {always:true, reThrow:true})
+                              await this._runCaught(ctx, this.teardownManager,  {always:true, shouldNeverFail:true})
 
     this.runner.allowPrint = true
     this.runner.giveFeedback(ctx.stdErr)
@@ -257,32 +266,38 @@ export class RuntimeManager {
     if(ctx.archiveSuccess){
       this.ran[ctx.section] = ctx.success
     }
-    jsLogger('[Runtime] - done', ctx.qualname)
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Runtime] - done', ctx.qualname)
     return ctx
   }
 
 
 
-
+  /**Generic "task" runner, handling the overall logic to run or not routines, update the global
+   * states, log errors if desired, depending on the runtime and ctx configurations.
+   * */
   async _runCaught(ctx, method, conf={}){
-    jsLogger('[Runtime] - _runCaught ', ctx.qualname, method.name)
-    if(ctx.err && !conf.always) return
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Runtime] - Enter _runCaught ', ctx.qualname, method.name)
+
+    if(ctx.err && !conf.always) return;
+
     try{
-      await method.call(this, ctx, conf)
+      await method.call(this, ctx)
+
     }catch(e){
-      jsLogger('[Runtime] - ERROR ', ctx.qualname)
-      if(CONFIG.loggerOptions.ACTIVATE){
-        console.log('[jsLogger activated, causing the following log:')
-        console.error(e)
-      }
       ctx.err = e
-      if(conf.rethrow) throw e
+      if(conf.shouldNeverFail){
+        // Here, teardownManager could have fail, so handle the error manually:
+        ctx.success     = false
+        ctx.isAssertErr = this.isAssertErr = false
+        ctx.stdErr      = this.stdErr      = youAreInTroubles(e)
+        ctx.gotBigFail  = this.gotBigFail  = true
+      }
     }
   }
 
 
   async setupAstExclusions(ctx){
-    jsLogger('[CheckPoint] - running - setup keywords exclusions')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - running - setup keywords exclusions')
     if(ctx.code){
       astExclusions(ctx.code, this.excludedKws, this.excludedMethods)
     }
@@ -290,7 +305,7 @@ export class RuntimeManager {
 
 
   async setupRuntimeExclusions(ctx){
-    jsLogger('[CheckPoint] - running - setup runtime exclusions')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - running - setup runtime exclusions')
     setupExclusions(this.excluded, this.recLimit)
     ctx.runtimeExclusionSetupSuccessful = true
   }
@@ -305,8 +320,26 @@ export class RuntimeManager {
     await installPythonPackages(this, ctx)
   }
 
+
+  /**Run the desired Runner method, once all the setup has been managed.
+   * If it succeeds (aka, the method doesn't throw any error), the ctx is marked as successful.
+   *
+   * The Runner method is supposed to take this kind of signature:
+   *
+   *      method.call(runner, ctx, runtime)
+   *
+   * The two last arguments are always passed but may be ignored on the actual method signature,
+   * if they do not make use of them.
+   * */
+  async applyRunnerMethod(ctx){
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - running method runner -', ctx.qualname)
+    await ctx.method.call(this.runner, ctx, this) // always send extras args (in case useful)
+    ctx.success = true
+  }
+
+
   async removeExclusions(ctx){
-    jsLogger('[CheckPoint] - running - removing exclusions')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - running - removing exclusions')
     if(ctx.runtimeExclusionSetupSuccessful){
       restoreOriginalFunctions(this.excluded)
     }
@@ -315,44 +348,19 @@ export class RuntimeManager {
 
   async teardownManager(ctx){
     getFullStdIO()
-    this.handleError(ctx)
-  }
 
+    if(!ctx.err) return;    // nothing to do if no error during the current run.
 
+    this.finalMsg = ""      // Never show a default finalMsg if an error occurred.
 
-
-  /**Run the desired Runner method, once all the setup has been managed.
-   * If it succeeds (aka, the method doesn't throw any error), the ctx is marked as successful.
-   *
-   * The Runner method is supposed to take this kind of signature:
-   *
-   *      method(...ctx.methodArgs, ctx, runtime)
-   *
-   * Where `ctx.methodArgs` are arguments the RuntimeManager cannot know about in the first place.
-   * The two last arguments are always passed but may be ignored on the actual method signature, if
-   * it doesn't make use of them.
-   * */
-  async applyRunnerMethod(ctx){
-    jsLogger('[CheckPoint] - running method runner -', ctx.qualname)
-    await ctx.method.call(this.runner, ...ctx.methodArgs, ctx, this) // always send extras args (in case useful)
-    ctx.success = true
-  }
-
-
-  /**In case an error has been registered in @ctx
-   * */
-  handleError(ctx, replLogConf=null){
-    if(!ctx.err) return;
-
-    this.finalMsg = ""
-
-    ;[ctx.stdErr, ctx.isAssertErr] = generateErrorLog(ctx.err, replLogConf || ctx.logConfig)
+    generateErrorLog(ctx)
 
     // If ever multiple errors happen, an assertion error will always be the very
     // first one, so always keep if any (avoid the need to condition the update)
     if(!this.gotBigFail){
       this.isAssertErr ||= ctx.isAssertErr
       this.stdErr        = ctx.stdErr
+      this.gotBigFail    = ctx.gotBigFail
     }
     ctx.success = ctx.keepRunningOnAssert && ctx.isAssertErr
   }

@@ -27,6 +27,7 @@ globalThis.LOGGER_CONFIG = CONFIG.loggerOptions = {
     AroundSearch:       false,
     CheckPoint:         false,
     Command:            false,
+    GutterLogistics:    false,
     HourGlass:          false,
     Installer:          false,
     LOCK:               false,
@@ -36,6 +37,7 @@ globalThis.LOGGER_CONFIG = CONFIG.loggerOptions = {
     Overlord:           false,
     Paint_ACEs:         false,
     PythonLibs:         false,
+    Pyodide:            false,
     QCM:                false,
     Runtime:            false,
     ScreenMode:         false,
@@ -49,6 +51,7 @@ globalThis.LOGGER_CONFIG = CONFIG.loggerOptions = {
     TrashCan:           false,
     Unsubscribing:      false,
     Validation:         false,
+    Wait4Pyodide:       false,
 }
 
 

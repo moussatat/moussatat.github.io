@@ -37,7 +37,6 @@ import {
   IdeSplitScreenManager,
   IdeFullScreenGlobalManager,
   somethingFullScreen,
-  useCtrl,
 } from '4-ideLogistic-ide'
 
 
@@ -136,7 +135,7 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
     const isDelayed    = this.profile === CONFIG.PROFILES.delayedReveal
     const someToReveal = this.corrRemsMask && this.hiddenDivContent && (!this.profile || isDelayed)
 
-    jsLogger("[CheckPoint] - handleRunOutcome")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - handleRunOutcome")
     // console.log("[OutCome]", JSON.stringify({
     //   success, pof:this.profile, revealable, hidden:this.hiddenDivContent,
     //   allowCountDecrease: !!allowCountDecrease, mask:this.corrRemsMask, N:this.attemptsLeft
@@ -162,7 +161,7 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
     const isSuccessNoReveal = success && this.hiddenDivContent && !isDelayed
 
     if(isRevelation){
-      jsLogger("[OutCome]", 'reveal!', success)
+      LOGGER_CONFIG.ACTIVATE && jsLogger("[OutCome]", 'reveal!', success)
       runtime.finalMsg = success ? this._buildSuccessMessage(someToReveal, isDelayed)
                                  : this._getSolRemTxt(false)
       this.revealSolutionAndRems()
@@ -180,7 +179,7 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
    *    - there are no attempts left (redundant with revelation condition, but hey...).
    */
   decreaseIdeCounter(){
-    jsLogger("[CheckPoint] - decreaseIdeCounter")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - decreaseIdeCounter")
     if(!this.hiddenDivContent) return    // already revealed => nothing to change.
 
     // Allow going below 0 so that triggers once only for failure.
@@ -202,12 +201,12 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
    * ready yet, and the update must be delayed.
    * */
   revealSolutionAndRems(waitForMathJax=false){
-    jsLogger("[CheckPoint] - Enter revealSolutionAndRems")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - Enter revealSolutionAndRems")
 
     // Need to check here _one more_ time against hiddenDivContent because of the "show"
     // button logic...
     if(this.hiddenDivContent){
-      jsLogger("[CheckPoint] - revealed!")
+      LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - revealed!")
 
       const sol_div = $(this.solutionH)
 
@@ -397,7 +396,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
 
   async setupRuntimeIDE() {
-    jsLogger("[CheckPoint] - setupRuntimeIDE IdeRunner")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - setupRuntimeIDE IdeRunner")
 
     this.terminalAutoWidthOnResize()
 
@@ -407,18 +406,17 @@ class IdeRunnerLogic extends IdeFeedbackManager {
     this.storeUserCodeInPython('__USER_CODE__', editorCode)
 
     this.terminal.pause()             // Deactivate user actions in the terminal until resumed
-    this.terminal.clear()             // To do AFTER pausing...
+    this.terminal.clear()             // To do AFTER pausing... (otherwise, prompt is showing up)
     this.terminalDisplayOnIdeStart()  // Handle the terminal display for the current action
     await sleep(this.delay)           // Terminal "blink", so that the user always sees a change
-    this.alreadyRanEnv = true
 
-    return this.setupRuntime()
+    return await this.setupRuntimeTrackingEnvRun()
   }
 
 
 
   async teardownRuntimeIDE(runtime) {
-    jsLogger("[CheckPoint] - IdeRunner teardownRuntime")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - IdeRunner teardownRuntime")
 
     // Restore default state first, in case a validation occurred (=> restore stdout behaviors!)
     runtime.refreshStateWith()
@@ -499,7 +497,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
       ]
 
       for(const [code, testSection, state] of toRun){
-        jsLogger("[CheckPoint] - Run validation step:", testSection)
+        LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - Run validation step:", testSection)
 
         runtime.refreshStateWith(state)
         await this.runPythonCodeWithOptionsIfNoStdErr(code, runtime, testSection)
@@ -541,7 +539,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
   validateCorrFactory(){
     const cbk = this.validateFactory()
     const wrapper = async (e)=>{
-      jsLogger("[CheckPoint] - corr_btn start")
+      LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - corr_btn start")
 
       const codeGetter   = this.getCodeToTest
       const currentCode  = this.getCodeToTest()
@@ -553,7 +551,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
       try{
         out = await cbk(e)
       }finally{
-        jsLogger("[CheckPoint] - corr_btn validation done")
+        LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - corr_btn validation done")
         this.data.profile  = profile
         this.getCodeToTest = codeGetter
         this.save(currentCode)     // Ensure the corr content doesn't stay stored in localStorage
@@ -689,11 +687,10 @@ export class IdeRunner extends IdeRunnerLogic {
   bindIdeButtons(){
 
     // Doesn't work to catch the Esc applying "exit full screen"... :/
-    this.global.on('keydown', ()=>{
-      IdeFullScreenGlobalManager.currentIde = this  // Register the IDE currently in use
-    })
+    this.global.on('keydown', this.respondToEscapeKeyDown.bind(this))
 
-    // Add fullscreen activation binding, but NOT through the ACE editor (cannot control the exit)
+    // Add fullscreen activation binding, but NOT through the ACE editor commands
+    // cannot control the exit :/ )
     this.global.on('keyup', this.respondToEscapeKeyUp.bind(this))
 
     // Bind editor extra buttons:
@@ -769,15 +766,27 @@ export class IdeRunner extends IdeRunnerLogic {
   }
 
 
-  async respondToEscapeKeyUp(event){
 
-    if(event.key=='Escape' && !IdeFullScreenGlobalManager.someMenuOpened && !somethingFullScreen()){
+  // Doesn't work to catch the Esc applying "exit full screen"... :/
+  respondToEscapeKeyDown(event){
+    IdeFullScreenGlobalManager.currentIde = this  // Register the IDE currently in use
+  }
+
+
+  async respondToEscapeKeyUp(event){
+    if(
+      event.key == 'Escape'
+      && !IdeFullScreenGlobalManager.someMenuOpened
+      && !this.guiIdeFlags.escapeIdeSearch
+      && !somethingFullScreen()
+    ){
       this.requestFullScreen()
       // The browser already handles on its own going out of fullscreen with escape => no else needed
 
-    }else if(event.key==':' && event.altKey){
+    }else if(event.altKey && event.key==':'){
       this.switchSplitScreenFromButton(event)
     }
+    this.guiIdeFlags.escapeIdeSearch = false
   }
 
 
@@ -820,7 +829,7 @@ export class IdeRunner extends IdeRunnerLogic {
 
   /**Download the current content of the editor to the download folder of the user.
    * */
-  download(){   jsLogger("[Download]")
+  download(){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Download]")
 
     let ideContent = this.getCodeToTest() + "" // enforce stringification in any case
     downloader(ideContent, this.pyName)
@@ -831,7 +840,7 @@ export class IdeRunner extends IdeRunnerLogic {
   /**Reset the content of the editor to its initial content, and reset the localStorage for
    * this editor on the way.
    * */
-  restart(){    jsLogger("[Restart]")
+  restart(){    LOGGER_CONFIG.ACTIVATE && jsLogger("[Restart]")
     const code = this.setStartingCode({extractFromLocalStorage: false, saveOnceApplied: true})
     this.storage = freshStore(code, this)
     this.updateValidationBtnColor()
@@ -850,7 +859,7 @@ export class IdeRunner extends IdeRunnerLogic {
   /**Save the current IDE content of the user, or the given code, into the localStorage
   * of the navigator.
   * */
-  save(givenCode=""){   jsLogger("[Save]")
+  save(givenCode=""){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Save]")
     const currentCode = givenCode || this.getCodeToTest()
     this.setStorage({code: currentCode, hash:this.srcHash})
   }
