@@ -57,6 +57,10 @@ globalThis.LOGGER_CONFIG = {ACTIVATE:true, all:1}
 function subscribeWhenReady(waitId, callback, options={}){
     LOGGER_CONFIG.ACTIVATE && console.log('[Subscribing] (legacy) - Enter', waitId)
 
+    if(waitId in CONFIG.subscriptionReady){
+        throw new Error(`Cannot subscribe several times to "${ waitId }".`)
+    }
+
     let {now, delay, waitFor, runOnly, maxTries} = {
         delay: 50,
         now: false,
@@ -82,7 +86,7 @@ function subscribeWhenReady(waitId, callback, options={}){
 
         if(isNotReady()){
             const nTries = CONFIG.subscriptionsTries[waitId]+1 || 1
-            if(nTries==maxTries){
+            if(nTries > maxTries){
                 throw new Error(`Impossible to subscribe to ${ waitId } in time: too many tries.`)
             }
             CONFIG.subscriptionsTries[waitId] = nTries

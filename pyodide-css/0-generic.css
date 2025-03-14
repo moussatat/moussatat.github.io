@@ -104,6 +104,14 @@ mais sans lien dessus */
 }
 
 
+.vertical{
+  display:grid;
+  grid-template-columns: 1fr;
+}
+.horizontal{
+  display:grid;
+  grid-template-rows: 1fr;
+}
 
 
 /*
@@ -115,62 +123,108 @@ mais sans lien dessus */
 
 .tooltip {
   position: relative;
-  display: inline-block;
+  display: grid;
   cursor: pointer;
 }
 
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  background-color: var(--main-theme);
-  color: #fff;
-  text-align: center;
-  padding: 5px 10px;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 10;
-  top: 110%;
-  font-size: 0.8rem;
-  left: 50%;
-  transform: translate(calc(-1 * var(--tool_shift)), 0);    /* root placement. The translation is done from the Html.tooltip function */
-}
 .tooltip .tooltiptext code {
   color: white;
 }
 
+/*The tooltip itself (bottom position by default)*/
+.tooltip .tooltiptext {
+  --tip-gap: 5px;
+  --rev-tip-gap: calc(-1 * var(--tip-gap));
+  --rev-tool_shift: calc(-1 * var(--tool_shift));
+  visibility: hidden;
+  background-color: var(--main-theme);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 10;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+.tooltiptext.bottom {
+  top: 100%;
+  left: 50%;
+  transform: translate(var(--rev-tool_shift), var(--tip-gap));
+}
+.tooltiptext.right {
+  left: 100%;
+  top: 50%;
+  transform: translate(var(--tip-gap), var(--rev-tool_shift));
+}
+.tooltiptext.left {
+  right: 100%;
+  top: 50%;
+  transform: translate( calc(2 * var(--rev-tip-gap)), var(--rev-tool_shift));
+}
+.tooltiptext.top {
+  bottom: 100%;
+  left: 50%;
+  transform: translate(var(--rev-tool_shift), 0);
+}
+
+
+/*tiny tooltip arrow pointing toward the source*/
 .tooltip .tooltiptext::after {
   content: " ";
   position: absolute;
-  bottom: 100%;
-  /* At the top of the tooltip */
-  left: var(--tool_shift);  /* --tool_shift defined on a parent */
-  margin-left: -5px;
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent var(--main-theme) transparent;
 }
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  cursor: pointer;
-  box-shadow: 0 0 4px var(--hover-fg-color);
+.tooltiptext.bottom::after {
+  margin-left: -5px;
+  bottom: 100%;
+  left: var(--tool_shift);
+}
+.tooltiptext.top::after {
+  margin-left: -5px;
+  top: 100%;
+  left: var(--tool_shift);
+  transform: rotate(180deg) translate(0, -2px);
+}
+.tooltiptext.left::after {
+  margin-top: -4px;
+  left: 100%;
+  top: var(--tool_shift);
+  transform: rotate(90deg) translate(0, -2px);
+}
+.tooltiptext.right::after {
+  margin-top: -4px;
+  right: 100%;
+  top: var(--tool_shift);
+  transform: rotate(-90deg);
 }
 
-.tooltip > img {
+
+
+.tooltip:hover .tooltiptext, .history-box, .history-btn:hover {
+  visibility: visible;
+  cursor: pointer;
+  box-shadow: 2px 3px 5px var(--hover-fg-color,#555);
+}
+
+
+/* Buttons or images holding tooltips messages. */
+.tooltip > img, .history-btn, .qcm-builder-btn, .add-qcm-item {
   width: 32px;
   border: 1px solid rgba(85, 119, 196);
   padding: 3px;
   border-radius: 9px;
   background-image: linear-gradient(to bottom, rgb(191, 255, 255), 15%, var(--ide-btn-color, rgba(var(--main-color), 0.8)));
 }
-
-.tooltip:hover:not(.p5-btn) > img {
+.tooltip:hover:not(.p5-btn) > img,
+.history-btn:hover,
+.qcm-builder-btn:hover {
   text-shadow: 0px 0px rgba(87, 147, 240, 0);
   position: relative;
   left: 1px;
   top: 1px;
-  font-size: 2em;
-  box-shadow: 0 0 5px var(--hover-fg-color, #333);
+  box-shadow: 2px 3px 5px var(--hover-fg-color,#555);
 }
 
 

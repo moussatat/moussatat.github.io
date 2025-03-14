@@ -35,6 +35,51 @@ import { RuntimeManager } from '1-runtimeManager-runtime-pyodide'
 
 
 
+
+export class RunningProfile {
+
+  static PROFILE = Object.freeze({
+    cmd:          'Command',
+    btn:          'PyBtn',
+    play:         'Play',
+    validate:     'Validate',
+    validateCorr: 'ValidateCorr',
+    testing:      'Testing',
+    testingPlay:  'TestingPlay',
+    testingValid: 'TestingValidate',
+    testingCorr:  'TestingValidateCorr',
+    testingCmd:   'TestingCommand',
+    zipExport:    'zipExport',
+    zipImport:    'zipImport',
+  })
+
+  static build(profile){
+    return Object.freeze({
+      name: profile,
+      isTermCmd:  profile.includes(RunningProfile.PROFILE.cmd),
+      isPlaying:  profile.includes(RunningProfile.PROFILE.play),
+      isChecking: profile.includes(RunningProfile.PROFILE.validate),
+      isTesting:  profile.includes(RunningProfile.PROFILE.testing),
+    })
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export class PyodideSectionsRunner {
 
   static pyFuncs = {}
@@ -105,9 +150,8 @@ export class PyodideSectionsRunner {
     else{
       delete PAGE_IDES_CONFIG[id]
     }
-    this.pythonCodeRunnerWithCtx = async (ctx)=>{ pyodide.runPython(ctx.code) }
     this.getCodeToTest = ()=>""   // If no editor, nothing to test...
-    this.running = undefined      // See CONFIG.runningMode
+    this.running = undefined      // RunningProfile
     this.allowPrint = true
     this.isGuiCompliant = false   // All the GUI makeup has been applied (may not be, right at the beginning, for tabbed contents, typically)
 
@@ -196,7 +240,7 @@ export class PyodideSectionsRunner {
    *    - @finallyTeardown takes the runtime argument and returns nothing.
    *
    * About executions:
-   *    - @actionName : CONFIG.runningMode property  to be able to identify what's currently running.
+   *    - @actionName : RunningProfile.PROFILES value to be able to identify what's currently running.
    *    - @setup is always run
    *    - @action is always called, and it is its job to decide if it has to actually run its
    *       logic or not, depending on the `runtime` state.
@@ -213,13 +257,14 @@ export class PyodideSectionsRunner {
     finallyTeardown,  // async, args: runtime (guaranteed to run)
     sendEventOrCmdToAction = false,   // Useful for drag & drop (IDE zip imports)
   ){
-    const loggerName=`[${actionName}]`
+    const loggerName = `[${actionName}]`
+    const runningMan = RunningProfile.build(actionName)
 
     return withPyodideAsyncLock(actionName, async(eventOrCmd)=>{
       if(eventOrCmd && eventOrCmd.preventDefault) eventOrCmd.preventDefault()
       LOGGER_CONFIG.ACTIVATE && jsLogger(loggerName)
 
-      this.running = actionName
+      this.running = runningMan
       let runtime
       try{
         runtime = await setup.call(this, eventOrCmd)
@@ -257,7 +302,7 @@ export class PyodideSectionsRunner {
    * */
   setupGlobalConfig(){
     CONFIG.runningId      = this.id
-    CONFIG.running        = this.running
+    CONFIG.running        = this.running.name
     CONFIG.termMessage    = ()=>undefined    // sink
     for(const prop of 'get del set keys'.split(' ')){
       const globName = prop+'Storage'
@@ -270,6 +315,16 @@ export class PyodideSectionsRunner {
   pyodideKeysStorage()    { noStorage() }   // sink
   pyodideSetStorage(k, v) { noStorage() }   // sink
   pyodideDelStorage(key)  { noStorage() }   // sink
+
+
+
+
+  // Sink: Just in case the implementation goes wrong somewhere...
+  //       CONFIG.termMessage normally has no effect: see this.setupGlobalConfig.
+  termFeedbackFromPyodide(){
+    throw new Error("Y'shall never get there, mate...")
+  }
+
 
 
 
@@ -351,7 +406,14 @@ export class PyodideSectionsRunner {
           purgeTrace: runtime.purgeStackTrace,
           autoAssertExtraction: runtime.autoLogAssert,
         },
-        method: this.pythonCodeRunnerWithCtx,
+        asyncSecrets: testsStep === CONFIG.section.secrets,
+        method: async (ctx)=>{
+          if(ctx.asyncSecrets){
+            await pyodide.runPythonAsync(ctx.code)
+          }else{
+            pyodide.runPython(ctx.code)
+          }
+        },
         isEnvSection: false,
         applyExclusionsIfAny: true,
       }

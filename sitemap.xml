@@ -16,6 +16,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>http://127.0.0.1:8000/tags/</loc>
+         <lastmod>2025-03-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>http://127.0.0.1:8000/1eds/</loc>
          <lastmod>2025-03-14</lastmod>
          <changefreq>daily</changefreq>
@@ -317,11 +322,6 @@
     </url>
     <url>
          <loc>http://127.0.0.1:8000/teds/progression2024/</loc>
-         <lastmod>2025-03-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>http://127.0.0.1:8000/tags/</loc>
          <lastmod>2025-03-14</lastmod>
          <changefreq>daily</changefreq>
     </url>

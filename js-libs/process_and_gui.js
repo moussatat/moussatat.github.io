@@ -62,6 +62,28 @@ CONFIG.pythonLibs            = new Set(CONFIG.pythonLibs)
 
 
 
+
+/**Define a MutationObserver to modify on the fly all the figures, when content is added to them:
+ *
+ * Whatever the figure, at some point, the content is removed, then replaced.
+ * When the figure is low enough in the page, when it disappears, the page might scroll down
+ * because it's not high enough anymore to fill the viewport.
+ * This observer automatically set a min-height on the figure div so that it doesn't shrink
+ * anymore when its content is removed. This avoids the damn "flickering page scroll".
+ * */
+CONFIG.figureObserver = new MutationObserver((entries)=>{
+    for(const entry of entries){
+        if(entry.addedNodes.length){
+            // (Note: Should never insert more than one element:)
+            const currentHeight = $(entry.addedNodes[0]).height() + 'px'
+            $(entry.target).css('min-height', currentHeight)
+        }
+    }
+})
+
+
+
+
 //----------------------------------------------------------
 // Manage global GUI modifications for the Theme's elements
 //----------------------------------------------------------
@@ -70,7 +92,7 @@ CONFIG.pythonLibs            = new Set(CONFIG.pythonLibs)
 /**Insertion of the placeholders, around the search bar.
  * */
 subscribeWhenReady(
-    "AroundSearch",
+    "AroundSearchLeft",
     function(){
         LOGGER_CONFIG.ACTIVATE && jsLogger('[AroundSearch]', 'left')
         const wrappingDivL = `<div id="${ CONFIG.element.searchBtnsLeft.slice(1)  }"></div>`
@@ -80,7 +102,7 @@ subscribeWhenReady(
 )
 
 subscribeWhenReady(
-    "AroundSearch",
+    "AroundSearchRight",
     function(){
         LOGGER_CONFIG.ACTIVATE && jsLogger('[AroundSearch]', 'right')
         const wrappingDivR = `<div id="${ CONFIG.element.searchBtnsRight.slice(1) }"></div>`
@@ -120,8 +142,11 @@ subscribeWhenReady(
     </g>
 </svg>`
         const trashBtnOptions = {
-            buttonId: trashId+"Btn",
-            shift:90, tipText: CONFIG.lang.tipTrash.msg, tipWidth: CONFIG.lang.tipTrash.em
+            tagId: trashId+"Btn",
+            shift: 90,
+            fontSize: 1.5,
+            tipWidth: CONFIG.lang.tipTrash.em,
+            tipText: CONFIG.lang.tipTrash.msg,
         }
 
         const trashButton = $(

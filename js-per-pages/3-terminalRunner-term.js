@@ -21,14 +21,456 @@ If not, see <https://www.gnu.org/licenses/>.
 
 import { jsLogger } from 'jsLogger'
 import {
-  getSelectionText,
-  sleep,
   textShortener,
   txtFormat,
   withPyodideAsyncLock,
  } from 'functools'
-import { PyodideSectionsRunner } from "2-pyodideSectionsRunner-runner-pyodide"
+import { PyodideSectionsRunner, RunningProfile } from "2-pyodideSectionsRunner-runner-pyodide"
 import { RuntimeManager } from '1-runtimeManager-runtime-pyodide'
+
+
+
+
+
+
+
+
+export const observeResizeOf=(function(){
+
+  /**Global ResizeObserver:
+   *
+   * Terminals (isolated or with IDEs) are subscribing to the observer through the `observeResizeOf`
+   * function, then the observer transfers the call to the desired JS object, calling its `handleResize`
+   * method with the ResizeObserverEntry as argument.
+   *
+   * WARNING:
+   *    1) Make sure no element subscribes several times to the observer (typically: IDE+its terminal!)
+   *    2) Inheritance will handle the fact that the needed behaviors are different.
+   *    3) Defined here _if ever_ it becomes useful with isolated terminals but, until now, those are
+   *       handling their size gracefully, without any extra logistic...
+   */
+  const RESIZE_OBS = new ResizeObserver(
+    _.throttle( (entries)=>{
+      for(const entry of entries){
+        const runnerThis = SIZE_OBS_MAP.get(entry.target)
+        runnerThis.handleResize(entry)
+      }
+    }), 50, {leading:false, trailing:true}
+  )
+
+  const SIZE_OBS_MAP = new Map()
+
+  return (jTarget, runnerThis)=>{
+    jTarget.each(function(){
+      SIZE_OBS_MAP.set(this, runnerThis)
+      RESIZE_OBS.observe(this)
+    })
+  }
+})()
+
+
+
+
+
+
+const TERMINAL_CRAZY_SPACE = "\\u00a0"
+const TERMINAL_SPACES_REGEXP = new RegExp(TERMINAL_CRAZY_SPACE, "ug")
+const TERMINAL_RSTRIP_SPACE_REGEXP = new RegExp(`${ TERMINAL_CRAZY_SPACE }$`, "u")
+const TERMINAL_PROMPT_REGEX = /^(?:[.]{0,3}>{0,3})$/
+
+
+function getSelectionText(){
+  // Code inspired by https://stackoverflow.com/questions/5379120/get-the-highlighted-selected-text
+
+  let text = "";
+  if(window.getSelection){
+    if(!window.getSelection().toString()){
+      return ""     // Avoid some mess when no selection!
+    }
+    text = new TermSelectionExtractor().extract()
+
+  }else if(document.selection && document.selection.type != "Control") {
+      console.warn("Unsupported copy from PMT terminal (fallback to default/simplified behavior).")
+      text = document.selection.createRange().text;
+  }
+
+  // Just like usual, jQuery terminals are messing with the content, replacing spaces
+  // with "\u00a0" characters... x/
+  text = text.replace(TERMINAL_SPACES_REGEXP, " ")
+  // console.log(text)
+  return text;
+}
+
+
+
+
+
+
+
+/**Extraction of text selection using the window.getSelection is not enough to extract properly
+ * empty lines...
+ * That's... UNFORTUNATE!!!!!  DX
+ *
+ * Terminal output/contents are organized in the following way (ignoring top levels elements):
+ *
+ *        div.terminal-wrapper
+ *            ├── div.terminal-output                 // All older commands or feedback blocks
+ *            │     ├── div[data-index]               // One block (aka, one older command, or one feedback block)
+ *            │     ├── ...
+ *            │     └── div[data-index]
+ *            │           ├── div                     // That represents one single line in the block
+ *            │           ├── ...
+ *            │           └── div.cmd-end-line        // Always present. The class is a flag for jQ.terminals.
+ *            │                 └── (various spans)
+ *            │
+ *            └── div.cmd                             // Current command element, where the user is typing
+ *                └── div.cmd-wrapper                 // Current command element, where the user is typing
+ *                      ├── span.cmd-prompt           // Always first. Either ">>> " or "... "
+ *                      │     └── span
+ *                      │           └── ">>> " or "... "
+ *                      ├── div.cmd-end-line          // One div per command line.
+ *                      │     ├── span                // One span PER CHAR
+ *                      │     ├── ...
+ *                      │     └── span                // Always ending with an extra space! (allows to show the blinking cursor at the end of the line...)
+ *                      ├── ...
+ *                      ├── div.cmd-cursor-line       // Cmd line  holding the cursor (might be first or last)
+ *                      │     ├── span                // before cursor, MAY BE EMPTY
+ *                      │     │     ├── span          // One span PER CHAR
+ *                      │     │     ├── ...
+ *                      │     │     └── span
+ *                      │     ├── span.cmd-cursor.cmd-end-line
+ *                      │     │     └── span
+ *                      │     │         └── span
+ *                      │     │             └── span  // One char, or a space if at the end of the line (then the next bunch of spans IS EMPTY)
+ *                      │     └── span                // after cursor, MAY BE EMPTY
+ *                      │           ├── span          // One span PER CHAR
+ *                      │           ├── ...
+ *                      │           └── span          // Always ending with an extra space, IF not empty (cursor already at the end of the line)
+ *                      ├── ...
+ *                      └── div.cmd-end-line
+ *                            └── (various spans)
+ *
+ * WARNING:
+ *    - The DocumentFragment objects may at most overlap on both `div.terminal-output` AND
+ *      the `div.cmd-wrapper`.
+ *    - The number of Range objects IS NOT guaranteed. Might 1 to... more (there are more than
+ *      one when the current command line is multiline, independently of the cursors position).
+ *
+ *
+ * GENERIC STRATEGY:
+ *    1. If there are multiple ranges, merge them all together in a unique Range.
+ *    2. Depending on the common ancestor, decide what to extract, and how.
+ *          - If the common ancestor is "too wide", just return "" (this will trigger the
+ *            default copy behavior)
+ *          - Otherwise, extract the terminal-output on one side (if any), then the terminal
+ *            command on the other side.
+ *
+ *    DO NOT rely on the ranges themselves, but only on the actual DOM structure.
+ * */
+class TermSelectionExtractor {
+  /*
+  Code usable in the sandbox to test the behaviors :
+
+N = 1
+import js
+getattr(js.window,"$").terminal.active().set_command(("print(43)\n"*N).strip())
+assert False, 'slgjkhjkgfhd\n\nlkhsgkjhsdg'
+  */
+
+  constructor(){
+    this.rng   = null
+    this.conf  = this._analyze()    // Set this.rng on the fly
+    this.lines = []
+  }
+
+
+  /**Debugging purpose only.
+   * */
+  show(title, elts={}, rngs={}){
+    console.log("*******************\n"+title)
+    for(const name in elts){
+      const elt = elts[name]
+      console.log(name+':', elt)
+    }
+    console.log("----")
+    for(const name in rngs){
+      const rng = rngs[name]
+      console.log(name+':', rng.toString())
+      console.log(rng)
+    }
+  }
+
+
+  _analyze(){
+
+    const findDivOfInterest = (elt)=> elt.closest([
+      'cmd-wrapper',         // command only
+      'cmd',                 // command only
+      'terminal-output',     // output only
+      'terminal-wrapper',    // Cmd for sure, but output??? -> need to rebuild a Range
+      'terminal-scroller',   // Cmd for sure, but output??? -> need to rebuild a Range
+    ].map(rule=>'div.'+rule).join(', '))
+
+
+    const selection = window.getSelection()
+    this.rng = selection.getRangeAt(0).cloneRange()
+
+    // Merge all ranges into one, BUT... the selection could contain an extra empty Range
+    // that will make a total mess of the extraction.
+    // This range MUST be ignored and can be identified as following:
+    //    - Having a startContainer node being `div.cmd`
+    //    - Its offset is greater than 0
+    //    - It's always the last range, even if the user started by clicking to much on
+    //      the left of the line.
+    let closingIdx = selection.rangeCount-1
+    let closingRng = selection.getRangeAt(closingIdx)
+    const isOutRng = $(closingIdx.startContainer).is('div.cmd') && closingRng.startOffset > 0
+    if(isOutRng) closingIdx--
+
+    if(closingIdx > 0){
+      const endRng = selection.getRangeAt(selection.rangeCount-1)
+      this.rng.setEnd(endRng.endContainer, endRng.endOffset)
+    }
+
+    // Fix the endContainer and rebuild a new Range if needed:
+    //    - iF the cursor is on the very end of the current command line...
+    //    - and depending on the initial the user's mouse click in the terminal (as in,
+    //      enough on the right or the left of the text)...
+    let elder = $(this.rng.commonAncestorContainer)
+    let jEnd  = $(this.rng.endContainer)
+    let end   = findDivOfInterest(jEnd)
+
+    const isWrongEnd = end.is('.terminal-scroller, .terminal-wrapper, .cmd') || jEnd.is('.cmd-wrapper')
+      // Do NOT test .cmd-wrapper on end: it would systematically extend selections to the end
+      // of the current command, il any.
+
+    if(isWrongEnd){
+      if(end.is('.cmd-wrapper')) end = end.parent()
+      const tail = end.find('div.cmd-wrapper > :last-child')[0]
+      this.rng.setEndAfter(tail)
+      elder = $(this.rng.commonAncestorContainer)
+      if(!tail){
+        throw new Error("Couldn't find div.cmd-wrapper from "+elder.toString())
+      }
+    }
+
+    // Too wide => selection going out of the terminal:
+    if(elder.is("body, main, article")){
+      return {invalid:true}
+    }
+
+    // Get lowest possible meaningful div to identify what kind of content(s) is to be copied:
+    const div = findDivOfInterest(elder)
+    if(div.is('.cmd, .cmd-wrapper')) return {hasCmd: true}
+    if(div.is('.terminal-output'))   return {hasOutput: true}
+    if(div.is('.terminal-wrapper'))  return {hasOutput: true, hasCmd: true}
+    return {invalid:true}
+  }
+
+
+
+  extract(){
+    // console.log('conf', this.conf)
+    // Selection out of bounds of the div.terminal-wrapper
+    if(this.conf.invalid) return ""
+
+    if(this.conf.hasOutput) this._extractOutput()
+    if(this.conf.hasCmd)    this._extractCmd()
+    const out = this.lines.join('\n')
+    return out
+  }
+
+
+
+  _getParentTag(side, stopUpOn){
+    const node   = $(this.rng[side+'Container'])
+    const offset = Math.max(0, this.rng[side+'Offset'] - (side=='end'))
+    let   elt    = node[0].nodeName=='#text' ? node : node.children().eq(offset)
+    if(!elt.length) elt = node   // (resulted in negative index...)
+
+    while(!stopUpOn(elt)){
+      elt = elt.parent()
+    }
+    return elt
+  }
+
+  pushLine(line, stripOneSpace=false){
+    const txt =  stripOneSpace ? line.replace(TERMINAL_RSTRIP_SPACE_REGEXP,'') : line
+    this.lines.push(txt)
+  }
+
+
+
+  /**Extract the string content of the given Range, if it's not collapsed.
+   *
+   * @on:       If given, must be a jQuery identifier string: the content Range is then cloned and
+   *            copy the innerText data of all the elements matching the @on rule.
+   * @stripOne: When extracting the terminal current command lines, those hold a trailing space,
+   *            that has to be removed.
+   */
+  _getRangeTxt(rng, stripOneSpace, options=null){
+    if(rng.collapsed) return;
+
+    if(!options || options.centerAsOneLine){
+      // `head` and `tail` ranges are _supposed_ to be single line contents, so extract directly:
+      this.pushLine(rng.toString(), stripOneSpace)
+
+    }else{
+      // The `center` Range may be multiline, so extract the whole content, then pick complete
+      // lines inside the fragment, when found:
+      const extractor = this
+      $(rng.cloneContents()).find(options.centerJRule).each(function(){
+        const txt = this.innerText
+        extractor.pushLine(txt, stripOneSpace)
+      })
+    }
+  }
+
+
+  _extractRanges(head, center, tail, options={}){
+    options = {
+      centerJRule:null, centerAsOneLine:false, stripOneSpace:false, ...options
+    }
+    this._getRangeTxt(head,   options.stripOneSpace)
+    this._getRangeTxt(center, options.stripOneSpace, options)
+    this._getRangeTxt(tail,   options.stripOneSpace)
+  }
+
+
+  _workoutBaseRange(IsLine, spotLine){
+    const top          = $(this.rng.commonAncestorContainer)
+    const topTag       = top[0].nodeName    // Don't use jQuery for this....
+
+    const isTxtOnly    = topTag == '#text'
+    const isSpan       = topTag == 'SPAN'
+    const isMultiSpan  = topTag == 'DIV' && IsLine(top)
+    const isSingleLine = isTxtOnly || isSpan || isMultiSpan
+
+    let headLine, tailLine
+    let [head, center, tail] = [0,0,0].map(_=>this.rng.cloneRange())
+
+    if(!isSingleLine){
+      // At this point:
+      //    - The given Range IS (supposed to be) multiline, but "dunno where"
+      //    - It could be in the terminal-output div only,
+      //    - ...or in the current command line(s) only,
+      //    - ...or covering both.
+      //
+      // So, the idea is to create 3 new Ranges:
+      //      - The head Range covers only the first line (potentially incomplete)
+      //      - All the lines in the middle (potentially collapsed Range, that
+      //        may cover both output and cmd-wrapper)
+      //      - The tail Range covers the last line (potentially incomplete)
+      //
+      // These will then be cut further if need by caller (to extract the output or cmd
+      // parts solely.)
+
+      headLine = this._getParentTag('start', spotLine)
+      tailLine = this._getParentTag('end', spotLine)
+      head.setEndAfter(headLine[0])
+      center.setStartAfter(headLine[0])
+      center.setEndBefore(tailLine[0])
+      tail.setStartBefore(tailLine[0])
+    }
+    // this.show('BASE', {top, headLine, tailLine, isSingleLine}, {rng:this.rng, head, center, tail})
+
+    return {top, head, center, tail, headLine, tailLine, isSingleLine}
+  }
+
+
+
+
+
+  _extractOutput(){
+    let {
+      top, head, center, tail, headLine, tailLine, isSingleLine
+    }=this._workoutBaseRange(
+      (elt) => elt.parent().attr('data-index'),
+      (elt) => elt.is('div.terminal-wrapper') || elt.parent().is('div[data-index]')
+    )
+
+    if(isSingleLine){
+      this.pushLine(this.rng.toString())
+      return
+    }
+
+    // Adapt center and collapse tail if there is a Cmd part:
+    if(this.conf.hasCmd || tailLine.is('div.terminal-wrapper')){
+      tail.collapse()   // Remove any Cmd part
+      const out = top.find('div.terminal-output')
+      center.setEndAfter(out[0])
+      center.setStart(head.endContainer, head.endOffset)
+    }
+
+    let centerAsOneLine = false
+    let centerJRule = "div[data-index] > div"
+    const topCenter   = $(center.commonAncestorContainer)
+    if(!topCenter.is('div[class]')){
+      centerAsOneLine = true
+      centerJRule = null
+    }
+    // this.show('OUT', {head, center, tail})
+
+    this._extractRanges(head, center, tail, {centerAsOneLine, centerJRule})
+  }
+
+
+  _extractCmd(){
+    let {
+      top, head, center, tail, headLine, tailLine, isSingleLine
+    }=this._workoutBaseRange(
+      (elt) => elt.is('div[role=presentation], span.cmd-prompt'),
+      (elt) => elt.is('div[role=presentation], span.cmd-prompt, div.terminal-wrapper'),
+      true
+    )
+
+    // Shortcuts to avoid a fucking mess when possible...
+    const cmdWrapper = $(this.rng.startContainer).closest('div.terminal-scroller').find('div.cmd-wrapper')
+    const children   = cmdWrapper.children()
+    isSingleLine   ||= !this.conf.hasOutput && children.length == 2
+
+    if(isSingleLine){
+      this.pushLine(this.rng.toString(), true)
+      return
+    }
+
+    const headIsTail = headLine.is('div[role=presentation') && headLine[0]===tailLine[0]
+    if(headIsTail){
+      head.collapse(true)
+      // DO NOT merge this part of the logic within the next `if` condition (they aren't
+      // equivalent/common...).
+    }
+
+    // Adapt center and collapse head if there is an output part:
+    if(this.conf.hasOutput || headLine.is('div.terminal-wrapper')){
+      head.collapse(true)     // Collapse on start, to keep the info to handle the prompt later
+      const cmd = top.is('div.cmd-wrapper') ? top : top.find('div.cmd-wrapper')
+      center.setStartBefore(cmd[0])
+      center.setEnd(tail.startContainer, tail.startOffset)
+    }
+    // this.show('CMD', {head, center, tail})
+
+    const iPromptMaybe = this.lines.length
+    this._extractRanges(head, center, tail, {
+      centerJRule: "div[role=presentation], span.cmd-prompt",
+      stripOneSpace: true,
+    })
+
+    // Merge the prompt (if any) in the next string:
+    const prompt = this.lines[iPromptMaybe]
+    const promptWithNext = iPromptMaybe+1 < this.lines.length && TERMINAL_PROMPT_REGEX.test(prompt)
+    if(promptWithNext){
+      this.lines.splice(iPromptMaybe, 1)
+      this.lines[iPromptMaybe] = prompt + ' ' + this.lines[iPromptMaybe]
+    }
+  }
+}
+
+
+
+
+
+
 
 
 
@@ -111,8 +553,11 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
     this.prefillTermIfAny()
 
-    super.build()   // Nothing done there so far, but for consistency...
+    super.build()
   }
+
+
+
 
 
 
@@ -156,7 +601,8 @@ class _TerminalHandler extends PyodideSectionsRunner {
    * */
   terminalAutoWidthOnResize(){
     const wrapperWidth = this.termWrapper.width()
-    if(wrapperWidth != this.terminal.width()){
+    const termWidth    = this.terminal.width()
+    if(wrapperWidth!=termWidth){
       this.terminal.width(wrapperWidth)
     }
   }
@@ -175,11 +621,6 @@ class _TerminalHandler extends PyodideSectionsRunner {
     if(h != this.terminal.css('height')){
       this.terminal.css('height', h)
     }
-
-    // NOT NEEDED ANYMORE (...?)
-    // if(this.isIsolated && this.prefillTerm && !this.terminal.get_command()){
-    //   this.prefillTermIfAny()
-    // }
   }
 
 
@@ -271,30 +712,34 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
   /**Feedback coming from pyodide, one way or another...
    * Any call reaching this method is about a content to unconditionally show in the terminal.
-   *
-   * If @isPrint is true, the call comes from a print statement and is a stdout redirection.
-   * the child method already decided if the message must be displayed or not.
-   * If @isPrint is false, the call is a direct one to terminal_message, from an author or a user,
-   * and the key argument has to match the STD_KEY argument
+   *(Note: @isPrint is only used in children classes)
    *
    * @throws: Error if isPrint is false and the key isn't the expected one, of if the `format`
    *          option is unknown.
    */
   termFeedbackFromPyodide(_key, msg, format, isPrint=false, newline=false){
-    if(!txtFormat[format]){
-      throw new Error(`Unknown formatting option: ${format}`)
-    }
     msg = textShortener(msg)
-    this.terminalEcho(txtFormat[format](msg), {newline})
+    this.terminalEcho(msg, {newline, format})
   }
 
 
   /**Internal hook, allowing to capture all the content sent to the terminal from a parent class
    * (aka, IdeTester...).
-   * WARNING: at this point, the content is already formatted with jQuery.terminal syntaxes.
+   * @options argument is never used, UNLESS the call comes from `termFeedbackFromPyodide`.
+   *
+   * WARNING: at this point, the content is already formatted with jQuery.terminal syntaxes,
+   *          __UNLESS__ @options is used (hence, the content comes from a pyodide call).
    * */
-  terminalEcho(content, options){
-    this.terminal.echo(content, options ?? {newline:true})
+  terminalEcho(content, options=null){
+    const termOptions = {newline: true}   // jQuery terminal default behavior
+    if(options){
+      if(!txtFormat[options.format]){
+        throw new Error(`format='${options.format}' is not a valid value for terminal_message(...)`)
+      }
+      content = txtFormat[options.format](content)
+      termOptions.newline = options.newline
+    }
+    this.terminal.echo(content, termOptions)
   }
 }
 
@@ -314,7 +759,7 @@ export class TerminalRunner extends _TerminalHandler {
 
   /**Generate the async-locked callback used to run commands typed into the terminal.
    * */
-  buildAsyncPythonExecutors(running=CONFIG.runningMode.cmd){
+  buildAsyncPythonExecutors(running=RunningProfile.PROFILE.cmd){
 
     this.runnerTerm = this.lockedRunnerWithBigFailWarningFactory(
       running,
@@ -470,7 +915,7 @@ export class TerminalRunner extends _TerminalHandler {
     }
 
     await runtime.runWithCtx({
-      section: CONFIG.runningMode.cmd,
+      section: RunningProfile.PROFILE.cmd,
       code: this.cmdOnTheRun,
       isEnvSection: false,
       applyExclusionsIfAny: true,

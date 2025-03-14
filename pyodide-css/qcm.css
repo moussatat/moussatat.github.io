@@ -160,7 +160,7 @@ svg.qcm {
   height: var(--svg-size);
   min-height: var(--svg-size);
   min-width: var(--svg-size);
-  margin: var(--svg_margin, -2px 0.6em 0 0);
+  margin: var(--svg_margin, 1px 0.6em 0 0);
   opacity: var(--opacity, 1);
 }
 

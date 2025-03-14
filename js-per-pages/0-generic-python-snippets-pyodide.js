@@ -33,20 +33,34 @@ export const pyodideFeatureCode=(()=>{
 
     autoRun: `
 def _hack_auto_run():
+    import inspect
 
     G = globals()
 
     class AutoRunner:
         run = set()
+        coros = []
+
         def __call__(self, func):
-            func()
-            self.run.add(func.__name__)     # Skips registration if failure in func
+            self.run.add(func.__name__)
+            if inspect.iscoroutinefunction(func):
+                self.coros.append(func)
+            else:
+                func()
+
         def clean(self):
             for k in self.run:
                 if k in G: del G[k]
             self.run.clear()
+
         def __repr__(self):
             return "AutoRunner()"
+
+        async def loop_async(self):
+            coros = self.coros[:]
+            self.coros.clear()
+            for func in coros: await func()
+
 
     # Keep uncleaned elements:
     runner = AutoRunner()
@@ -213,29 +227,36 @@ def _hack_io_stuff():
 
 
     @wraps_builtin
-    def terminal_message(key, msg:Any, *_:Any, format:str="none", new_line=True, **__):
+    def terminal_message(key, *msg:Any, format:str=None, sep:str=' ', end:str=None, new_line:bool=True, **__):
         """
         Display the given message directly into the terminal, without using the python stdout.
         This allows to give informations to the user even if the stdout is deactivated during
         a validation.
 
-        @key:    Value to pass to allow the use of the function when the stdout is deactivated.
-        @msg:    The message to display. Can be a multiline string.
-        @format: The name of one of the predefined formatting for the terminal:
-                 "error", "warning", "info", "italic", "stress", "success", "none" (default)
-        @new_line: if False, no new line character is added after the @msg content.
+        @key:      Value to pass to allow the use of the function when the stdout is deactivated.
+        @*msg:     Any number of elements to display in the terminal.
+        @format:   One of the predefined formatting options for the terminal:
+                   "error", "warning", "info", "italic", "stress", "success", "none" (default)
+        @sep=' ':  Equivalent to \`print(..., sep=...)\`
+        @end=None: Close to \`print(..., end=...)\`. If not used, the @new_line argument will apply.
+                   Otherwise, @new_line will be False, and @end will control the end of the
+                   displayed message.
+        @new_line: _Legacy behavior_: this argument is now useless and can be replaced with the
+                   use of \`end\`. If False, no new line character is added after the @msg content.
+        @returns:  None
         """
-        # _ and __ are used as sinks for use of terminal_message as a replacement for print in
-        # p5 codes converted from Basthon.
-        # This is also the reason why the automatic conversion to string + join has been added.
-        # Use of end=... is just ignored.
-        # NOTE: keep these info outside of PMT public documentation...
 
-        msg = __.get('sep',' ').join(map(str, (msg, *_)))
+        # NOTE: **__ arguments are used as sinks when using terminal_message as a replacement.
+
+        msg = sep.join(map(str, msg))
+        if end is not None:
+            new_line = False
+            msg += end
         try:
-            js.config().termMessage(key, msg, format, False, new_line)
+            js.config().termMessage(key, msg, format or 'none', False, new_line)
         except Exception as e:
-            raise ValueError(str(e)) from None
+            stripped_js_err = str(e)[ len('Error: '): ]
+            raise ValueError(stripped_js_err) from None
 `,
 
 
@@ -479,6 +500,8 @@ def _hack_plot():
             for _ in plt.get_fignums():
                 plt.close()
             div = js.document.getElementById(self.div_id)
+            if not div:
+                raise ValueError("Couldn't find the target object: #"+self.div_id)
             js.document.pyodideMplTarget = div
             div.textContent = ""
             if not keep_fig:
@@ -602,24 +625,25 @@ def _hack_stdout_up():
         # First, blindly print to the actual stdout (in case the author is using it)
         __print_src__(*a,**kw)
 
-        # Then print to the one used to get proper formatting, but with a "per call" logic:
+        # Then print to the one used to get proper formatting (according to the generic
+        # behavior of python print function), then extract the formatted content to
+        # transfer to the terminal and empty per_call_stdout:
+
         kw['file'] = per_call_stdout
         __print_src__(*a,**kw)
-
-        # Extract the stuff to transfer to the terminal, then empty per_call_stdout:
-        txt_to_term = per_call_stdout.getvalue()
+        properly_formatted = per_call_stdout.getvalue()
         per_call_stdout.truncate(0)
         per_call_stdout.seek(0)
 
-        js.config().termMessage(None, txt_to_term, 'none', True)
+        js.config().termMessage(None, properly_formatted, 'none', True)
 
 
     # Different object allowing to spot what to print exactly, for one single call to print:
     __builtins__.per_call_std_out = per_call_stdout = io.StringIO()
 
-    # For backward compatibility, keep a StringIO object there (this also allow to enforce a flush
-    # of the stdout content in between runs/sections, on user's side!)
-    # NOTE: users wanting to test against the user stdout WILL USE THIS!
+    # Keep a StringIO object there (this also allows to enforce a flush of the stdout content
+    # in between runs/sections, on user's side, and redactors wanting to test against the user
+    # stdout will also use this:
     __builtins__.src_stdout = sys.stdout
     sys.stdout = io.StringIO()
 `,
@@ -649,7 +673,10 @@ __builtins__._stdout_value
         let code = PYODIDE_SNIPPETS[option]
         if(code===undefined) throw new Error(`Unknown snippet: ${option}`)
         if(repl!==null){
-            code = code.replace(/\{FORMAT_TOKEN\}/g, JSON.stringify(repl))
+            code = code.split("{FORMAT_TOKEN}").join(JSON.stringify(repl))
+            /* WARNING!! DO NOT use string.replace here, because if ever the repl contains some
+               specific RegExp characters (like... `$`), those will cause a mess in the replacement
+               (even if they are escaped first). */
         }
         return code+"\n"
     }

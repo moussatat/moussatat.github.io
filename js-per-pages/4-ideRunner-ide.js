@@ -32,7 +32,9 @@ import {
   txtFormat,
   uploader,
 } from 'functools'
-import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
+// import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
+import { RunningProfile } from '2-pyodideSectionsRunner-runner-pyodide'
+import { observeResizeOf } from '3-terminalRunner-term'
 import {
   IdeSplitScreenManager,
   IdeFullScreenGlobalManager,
@@ -51,10 +53,188 @@ import {
 
 
 
+
+
+/**Hold logistic related to managing the Ace editor data (no behaviors implemented here:
+ * see IdeRunner about that).
+ * */
+class IdeAceManager extends IdeSplitScreenManager {
+
+
+  /**Add the `tests` section to the given code, joining them with the appropriated
+   * string/comment if needed.
+   * */
+  _joinCodeAndPublicSections(userCode){
+    const editorCode = [ userCode, this.publicTests ].filter(Boolean).join(CONFIG.lang.tests.msg)
+    return editorCode
+  }
+
+
+  /**Save the current IDE content of the user, or the given code, into the localStorage
+  * of the navigator.
+  * */
+  save(givenCode=""){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Save]")
+    const currentCode = givenCode || this.getCodeToTest()
+    this.setStorage({code: currentCode, hash:this.srcHash})
+  }
+
+
+  applyCodeToEditorAndSave(exerciseCode, doSave=true){
+    exerciseCode ||= ""
+    this.editor.getSession().setValue(exerciseCode)
+    if(doSave) this.save(exerciseCode)
+  }
+
+
+  /**Build (or extract if allowed) the initial code to put in the editor.
+   * */
+  getStartCode(attemptLocalStorageExtraction=false){
+    let exerciseCode = ""
+
+    if(attemptLocalStorageExtraction){
+      exerciseCode = this.storage.code
+    }
+    if(!exerciseCode){
+      exerciseCode = this._joinCodeAndPublicSections(this.userContent)
+    }
+
+    // Enforce at least one empty line of code in the editor, so that the terminal prompt
+    // is always visible for IDEv:
+    exerciseCode = exerciseCode.replace(/\n+$/,'')
+    if(!exerciseCode) exerciseCode = '\n'
+
+    return exerciseCode+"\n"
+  }
+
+
+  setStartingCode(options={}){
+
+    const {extractFromLocalStorage, saveOnceApplied} = {
+      extractFromLocalStorage:false,
+      saveOnceApplied:true,
+      ...options
+    }
+    const code = this.getStartCode(extractFromLocalStorage)
+    this.applyCodeToEditorAndSave(code, saveOnceApplied)
+    return code
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**Handle `validations`: an array of arrays, holding info about N last validations.
+ * As of now, the structure of the inner arrays is:
+ *
+ *      [done, formattedTimestamp, code]
+ *
+ * Validations have a "session" lifetime and are not stored in the localStorage.
+ * */
+class IdeHistoryManager extends IdeAceManager {
+
+  constructor(editorId){
+    super(editorId)
+    this.validations = []
+  }
+
+  pushValidation(code, done){
+    const time = (Date()+'').split(' GMT')[0].slice(-8)
+    this.validations.push([done, time, code])
+    if(this.validations.length > CONFIG.N_IDE_VALIDATIONS){
+      this.validations.splice(0, this.validations.length-CONFIG.N_IDE_VALIDATIONS)
+    }
+  }
+
+
+  /**Update the color of an element to show a validation state (green/ref/normal).
+   * By default, color the "check" button of the current IDE instance. To color another
+   * element, pass in a second argument (jQuery collection).
+   * @returns: the jQuery updated element/collection.
+   * */
+  updateValidationBtnColor(done=undefined, jElt=undefined){
+    done ??= this.storage.done
+    jElt ??= this.global.find("button[btn_kind=check]")
+    const color = !done ? "unset" : done<0 ? 'red' : 'green'
+    jElt.css('--ide-btn-color',  color)
+    return jElt
+  }
+
+
+  clearValidations(){ this.validations.length = 0 }
+
+
+  openHistoryModal(){
+
+    // Exit if nothing to show or already displayed:
+    const histId = `history_${ this.id }`
+    if(!this.validations.length || $('#'+histId)[0]) return;
+
+    const jHist = $(`<button id="${ histId }" class="history-box"></button>`)
+    // Use button instead of div, so that focusout and co are actually working...
+
+    const buttons = this.validations.map(data=>this._buildHistoryBtn(data,this))
+    jHist.append(buttons)
+
+    // Remove the window if left or clicking somewhere else:
+    jHist.on('focusout mouseleave', function(e){ jHist.off().remove() })
+
+    // Once entered, clicking on a button would close the window if the focusout event is still defined.
+    jHist.on('mouseenter', function(e){ jHist.off('focusout') })
+
+    // Make sure events are not transferred to upper level, (whatever they are)
+    jHist.on('keyup click', function(e){ e.stopPropagation() ; e.preventDefault() })
+
+    // Forbid going full screen and close if not needed anymore.
+    jHist.on('keydown', function(e){
+      e.stopPropagation() ; e.preventDefault()
+      if(e.key=='Escape') jHist.off().remove()
+    })
+
+    // Force focus once mounter: activates focusout, in case the user never enters the panel.
+    jHist.appendTo(this.global.find('button[btn_kind=check]')).focus()
+  }
+
+
+  _buildHistoryBtn([done, time, code], ideThis){
+
+    const btn = $(`<button class="history-btn">${ time }</button>`)
+    this.updateValidationBtnColor(done, btn)
+
+    return btn.on('click', function(e){
+      e.stopPropagation() ; e.preventDefault()
+      ideThis.applyCodeToEditorAndSave(code)
+      ideThis.updateValidationBtnColor(done)
+    })
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**Handle all elements of logics related to giving some kind of feedback to the user
  * (through terminal, UI colors, ...),
  */
-class IdeFeedbackManager extends IdeSplitScreenManager {
+class IdeFeedbackManager extends IdeHistoryManager {
 
 
   /**Relay method, to transfer stdout content from pyodide to the jQuery.terminal.
@@ -86,13 +266,6 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
   }
 
 
-  updateValidationBtnColor(done=undefined){
-    done ??= this.storage.done
-    const color = !done ? "unset" : done<0 ? 'red' : 'green'
-    this.global.find("button[btn_kind=check]").css('--ide-btn-color',  color)
-  }
-
-
   //----------------------------------------------------------------------------------
 
 
@@ -102,7 +275,7 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
   codeSnippetEndFeedback(runtime, step, code){
     if(runtime.stopped || !step) return
 
-    const playing = this.isPlaying()
+    const playing = this.running.isPlaying
     const intro   = playing ? "" : CONFIG.lang.validation.msg
     const section = CONFIG.lang[step].msg
     const ok      = CONFIG.lang.successMsg.msg
@@ -130,8 +303,9 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
    * Do not forget that any error related feedback has already been printed to the console, so
    * when it comes to feedback given in this method, it's only about a potential "final message".
    * */
-  handleRunOutcome(runtime, allowCountDecrease){
+  handleRunOutcome(runtime, allowCountDecrease, code){
     const success      = !runtime.stopped
+    const done         = success ? 1:-1
     const isDelayed    = this.profile === CONFIG.PROFILES.delayedReveal
     const someToReveal = this.corrRemsMask && this.hiddenDivContent && (!this.profile || isDelayed)
 
@@ -141,8 +315,9 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
     //   allowCountDecrease: !!allowCountDecrease, mask:this.corrRemsMask, N:this.attemptsLeft
     // }))
 
-    this.setStorage({done: success ? 1:-1 })
-    this.updateValidationBtnColor()
+    this.pushValidation(code, done)
+    this.setStorage({done})
+    this.updateValidationBtnColor(done)
 
     if(allowCountDecrease && (!success || isDelayed)){
       this.decreaseIdeCounter()
@@ -315,20 +490,16 @@ class IdeFeedbackManager extends IdeSplitScreenManager {
 class IdeRunnerLogic extends IdeFeedbackManager {
 
 
-  /**Is the current action "running the public tests"?
-   * */
-  isPlaying(){  return this.running.includes(CONFIG.runningMode.play) }
+  /**Is the current action "running the public tests"? (legacy) */
+  isPlaying(){  return this.running.isPlaying }
 
-  /**Is the current action "running the validation tests"?
-   * */
-  isChecking(){ return this.running.includes(CONFIG.runningMode.validate) }
-
+  /**Is the current action "running the validation tests"? (legacy) */
+  isChecking(){ return this.running.isChecking }
 
   /**Does nothing, but catch any call on the parent class, which would raise an error
    * because prefillTerm is undefined, for IDEs.
    * */
   prefillTermIfAny(){}
-
 
   // @OVERRIDE
   async applyAutoRun(){
@@ -336,55 +507,6 @@ class IdeRunnerLogic extends IdeFeedbackManager {
   }
 
 
-  /**Add the `tests` section to the given code, joining them with the appropriated
-   * string/comment if needed.
-   * */
-  _joinCodeAndPublicSections(userCode){
-    const editorCode = [ userCode, this.publicTests ].filter(Boolean).join(CONFIG.lang.tests.msg)
-    return editorCode
-  }
-
-
-
-  applyCodeToEditorAndSave(exerciseCode, doSave=true){
-    exerciseCode ||= ""
-    this.editor.getSession().setValue(exerciseCode);
-    if(doSave) this.save(exerciseCode)
-  }
-
-
-  /**Build (or extract if allowed) the initial code to put in the editor.
-   * */
-  getStartCode(attemptLocalStorageExtraction=false){
-    let exerciseCode = ""
-
-    if(attemptLocalStorageExtraction){
-      exerciseCode = this.storage.code
-    }
-    if(!exerciseCode){
-      exerciseCode = this._joinCodeAndPublicSections(this.userContent)
-    }
-
-    // Enforce at least one empty line of code in the editor, so that the terminal prompt
-    // is always visible for IDEv:
-    exerciseCode = exerciseCode.replace(/\n+$/,'')
-    if(!exerciseCode) exerciseCode = '\n'
-
-    return exerciseCode+"\n"
-  }
-
-
-  setStartingCode(options={}){
-
-    const {extractFromLocalStorage, saveOnceApplied} = {
-      extractFromLocalStorage:false,
-      saveOnceApplied:true,
-      ...options
-    }
-    const code = this.getStartCode(extractFromLocalStorage)
-    this.applyCodeToEditorAndSave(code, saveOnceApplied)
-    return code
-  }
 
 
   /**Things to display in the terminal at the very beginning of the executions.
@@ -398,6 +520,8 @@ class IdeRunnerLogic extends IdeFeedbackManager {
   async setupRuntimeIDE() {
     LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - setupRuntimeIDE IdeRunner")
 
+    // Fix Chrome bug with terminal width sometimes set to 0px: make sure the terminal width
+    // becomes correct whatever the way the user triggered the computations:
     this.terminalAutoWidthOnResize()
 
     // Save before anything else, in case an error occurs somewhere...
@@ -431,13 +555,9 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
 
 
-  //--------------------------------------------------------------------
-
-
-
   /**Build the public tests runner routine.
    * */
-  playFactory(runningMan=CONFIG.runningMode.play){
+  playFactory(runningMan=RunningProfile.PROFILE.play){
     return this.lockedRunnerWithBigFailWarningFactory(
       runningMan,
       this.setupRuntimeIDE,
@@ -447,6 +567,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
   }
 
 
+
   async playThroughRunner(runtime){
     const code = this.getCodeToTest()
     await this.runPythonCodeWithOptionsIfNoStdErr(code, runtime, CONFIG.section.editor)
@@ -454,13 +575,9 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
 
 
-  //--------------------------------------------------------------------
-
-
-
   /**Build the validation tests runner routine.
    * */
-  validateFactory(runningMan=CONFIG.runningMode.validate){
+  validateFactory(runningMan=RunningProfile.PROFILE.validate){
     return this.lockedRunnerWithBigFailWarningFactory(
       runningMan,
       this.setupRuntimeIDE,
@@ -470,17 +587,19 @@ class IdeRunnerLogic extends IdeFeedbackManager {
   }
 
 
+
   async validateThroughRunner(runtime){
 
     // env section is behaving like the editor one (should be changed...?)
     let decrease_count = this.canDecreaseAttempts(CONFIG.section.editor)
+    const code = this.getCodeToTest()
 
     // If an error already occurred, stop everything...
     if(runtime.stopped){
 
       // ... but decrease the number attempts and run teardown if this was AssertionError.
       if(runtime.isAssertErr){
-        this.handleRunOutcome(runtime, decrease_count)
+        this.handleRunOutcome(runtime, decrease_count, code)
       }
 
     }else{
@@ -491,9 +610,9 @@ class IdeRunnerLogic extends IdeFeedbackManager {
         withStdOut:      !this.deactivateStdoutForSecrets,
       }
       const toRun = [
-        [this.getCodeToTest(), CONFIG.section.editor,  {}],
-        [this.publicTests,     CONFIG.section.public,  validation_state],
-        [this.secretTests,     CONFIG.section.secrets, validation_state],
+        [code,             CONFIG.section.editor,  {}],
+        [this.publicTests, CONFIG.section.public,  validation_state],
+        [this.secretTests, CONFIG.section.secrets, validation_state],
       ]
 
       for(const [code, testSection, state] of toRun){
@@ -510,7 +629,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
       // Reveal solution and REMs on success, or if the counter reached 0 and the corr&REMs content
       // is still hidden, then prepare an appropriate revelation message if needed (`finalMsg`).
-      this.handleRunOutcome(runtime, decrease_count)
+      this.handleRunOutcome(runtime, decrease_count, code)
     }
   }
 
@@ -531,34 +650,45 @@ class IdeRunnerLogic extends IdeFeedbackManager {
   //--------------------------------------------------------------------
 
 
-
-  /**Build the correction validation runner routine.
-   * NOTE: the pyodideLock setup is not correct here (swaps done outside of it), but it shouldn't
-   *       ever cause troubles, as long as this method is not used in the IdeTester objects.
+  /**Build the validation tests runner routine.
    * */
-  validateCorrFactory(){
-    const cbk = this.validateFactory()
-    const wrapper = async (e)=>{
-      LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - corr_btn start")
+  validateCorrFactory(runningMan=RunningProfile.PROFILE.validateCorr){
+    return this.lockedRunnerWithBigFailWarningFactory(
+      runningMan,
+      this.setupRuntimeIDECorr,
+      this.validateThroughRunner,
+      this.teardownRuntimeIDECorr,
+    )
+  }
 
-      const codeGetter   = this.getCodeToTest
-      const currentCode  = this.getCodeToTest()
-      const profile      = this.profile
-      this.getCodeToTest = ()=>this.corrContent
-      this.data.profile  = null    // REMINDER: getters without setters, so need inner update!
 
-      let out
-      try{
-        out = await cbk(e)
-      }finally{
-        LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - corr_btn validation done")
-        this.data.profile  = profile
-        this.getCodeToTest = codeGetter
-        this.save(currentCode)     // Ensure the corr content doesn't stay stored in localStorage
-      }
-      return out
+  async setupRuntimeIDECorr() {
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - corr_btn start")
+
+    this._corrConfigSwap = {            // (not defined in the constructor. MEH!  xp )
+      codeGetter:   this.getCodeToTest,
+      profile:      this.profile,
+      currentCode:  this.getCodeToTest(),
     }
-    return wrapper
+
+    this.getCodeToTest = ()=>this.corrContent
+    this.data.profile  = null           // REMINDER: no setter on this.profile!
+    return await this.setupRuntimeIDE()
+  }
+
+
+  async teardownRuntimeIDECorr(runtime) {
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - corr_btn validation done")
+    let out
+    try{
+      out = await this.teardownRuntimeIDE(runtime)
+    }finally{
+      const {codeGetter, profile, currentCode} = this._corrConfigSwap
+      this.getCodeToTest = codeGetter
+      this.data.profile  = profile
+      this.save(currentCode)     // Ensure the corr content doesn't stay stored in localStorage
+    }
+    return out
   }
 }
 
@@ -575,7 +705,8 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
 
 
-
+/**Controller. Linking behaviors and UI.
+ * */
 export class IdeRunner extends IdeRunnerLogic {
 
 
@@ -597,17 +728,12 @@ export class IdeRunner extends IdeRunnerLogic {
     // update (this way, the user is not bothered with updates of the starting content of an IDE
     // they didn't even tried yet, when the author is making updates):
     this.setStartingCode({extractFromLocalStorage: true, saveOnceApplied: false})
-    this.editor.resize();
 
     super.build()
 
     this.announceCodeChangeBasedOnSrcHash()
 
-    // Add the terminal resize listener (because of the intermediate div wrappers, IDE's terminal
-    // will not resize automatically):
-    window.addEventListener( 'resize', _.throttle(
-      this.windowResizeHandler.bind(this), 50, {leading:false, trailing:true}
-    ))
+    observeResizeOf(this.global, this)
 
     // Check for initial actions on page load:
     if(this.profile===CONFIG.PROFILES.revealed){
@@ -616,7 +742,23 @@ export class IdeRunner extends IdeRunnerLogic {
     if(this.twoCols){
       this.switchSplitScreenFromButton(null, false)
     }
+
+    this.editor.resize()
   }
+
+
+
+  handleResize(obsEntry){
+    const width = this.isVert ? (obsEntry.contentRect.width - 3) / 2  // -3px because borders
+                              : obsEntry.contentRect.width - 2        // -2px because borders
+
+    const innerTermWidth = this.termWrapper.width()
+    if(width != innerTermWidth){
+      this.termWrapper.width(width)
+    }
+  }
+
+
 
 
 
@@ -686,8 +828,8 @@ export class IdeRunner extends IdeRunnerLogic {
 
   bindIdeButtons(){
 
-    // Doesn't work to catch the Esc applying "exit full screen"... :/
-    this.global.on('keydown', this.respondToEscapeKeyDown.bind(this))
+    // (Doesn't work to catch the Esc applying "exit full screen"... :/ )
+    this.global.on('keydown', this.respondToKeyDown.bind(this))
 
     // Add fullscreen activation binding, but NOT through the ACE editor commands
     // cannot control the exit :/ )
@@ -709,7 +851,7 @@ export class IdeRunner extends IdeRunnerLogic {
 
       switch(kind){
         case 'play':      callback = ideThis.playFactory() ; break
-        case 'check':     callback = ideThis.runner = ideThis.validateFactory()
+        case 'check':     callback = ideThis.validateFactory()
                           ideThis.updateValidationBtnColor()
                           break
 
@@ -731,6 +873,12 @@ export class IdeRunner extends IdeRunnerLogic {
         default:          throw new Error(`Y'should never get there, mate... (${ kind })`)
       }
       btn.on('click', callback)
+
+      if(kind=='check') btn.on('contextmenu', function(e){
+        e.stopPropagation()
+        e.preventDefault()
+        ideThis.openHistoryModal()
+      })
     })
   }
 
@@ -744,31 +892,22 @@ export class IdeRunner extends IdeRunnerLogic {
       this.editor.blur()
       this.terminal.focus()
     }
-    return ({
+    const bindings = {
       ...super.getTerminalBindings(),
       'CTRL+I': asyncTerminalFocus(this.toggleComments.bind(this)),
       'CTRL+S': asyncTerminalFocus(this.playFactory()),
-      ...(!this.hasCheckBtn ? {}:{
-        'CTRL+ENTER': asyncTerminalFocus(this.validateFactory())
-      } ),
-    })
-  }
-
-
-  windowResizeHandler(){
-    // When going full screen the resize would trigger this logic, while the computations have
-    // already been done correctly (with goingFullScreen argument), so skip:
-    if(this.isInSplit && !somethingFullScreen()){
-      const topDivH = this.setupTopDivHeight()
-      this.ideScreenModeVerticalResize({topDivH})
+      ...(
+        this.hasCheckBtn ? {'CTRL+ENTER': asyncTerminalFocus(this.validateFactory())} : {}
+      ),
     }
-    this.terminalAutoWidthOnResize()
+    return bindings
   }
 
 
 
-  // Doesn't work to catch the Esc applying "exit full screen"... :/
-  respondToEscapeKeyDown(event){
+
+  respondToKeyDown(event){
+    // Doesn't work to catch the Esc applying "exit full screen"... :/
     IdeFullScreenGlobalManager.currentIde = this  // Register the IDE currently in use
   }
 
@@ -841,27 +980,19 @@ export class IdeRunner extends IdeRunnerLogic {
    * this editor on the way.
    * */
   restart(){    LOGGER_CONFIG.ACTIVATE && jsLogger("[Restart]")
-    const code = this.setStartingCode({extractFromLocalStorage: false, saveOnceApplied: true})
-    this.storage = freshStore(code, this)
+
+    const code   = this.setStartingCode({extractFromLocalStorage: false, saveOnceApplied: true})
+    this.storage = freshStore(code, {}, this)
     this.updateValidationBtnColor()
+    this.clearValidations()
     if(Number.isFinite(this.srcAttemptsLeft)){
       this.setAttemptsCounter(this.srcAttemptsLeft)
     }
     $("#solution_" + this.id).addClass('py_mk_hidden')
     this.hiddenDivContent = true
     this.terminal.clear()
-    clearPyodideScope()
+    // clearPyodideScope()    // v4.2.0: no scope cleaning anymore.
     this.focusEditor()
-  }
-
-
-
-  /**Save the current IDE content of the user, or the given code, into the localStorage
-  * of the navigator.
-  * */
-  save(givenCode=""){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Save]")
-    const currentCode = givenCode || this.getCodeToTest()
-    this.setStorage({code: currentCode, hash:this.srcHash})
   }
 }
 

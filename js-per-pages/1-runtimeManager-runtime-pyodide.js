@@ -85,6 +85,7 @@ class Ctx {
       code: ".",                    // If empty string, the Runner method won't ever be called (non empty default is ok, because some Runner won't need to pass `code` to the ctx to know what to do (or the code needed is not known yet: Features)
       method: ()=>null,             // Runner method to... run when everything is ready
       logConfig: {},                // Config for generateErrorLog
+      asyncSecrets: false,
 
       applyExclusionsIfAny: false,  // Apply exclusions specifically on this run (if any). Note: `!isEnvSection` is not specific enough!
       kwsExclusions: undefined,     // Define if some exclusions logic has to be applied or not on the way
@@ -250,6 +251,7 @@ export class RuntimeManager {
 
     this.runner.allowPrint = this.withStdOut
     const astExclusions    = ctx.kwsExclusions || ctx.methodsExclusions
+    const handleAsyncRuns  = ctx.isEnvSection  || ctx.asyncSecrets
 
                               await this._runCaught(ctx, setupStdIO, {shouldNeverFail:true})
     if(astExclusions)         await this._runCaught(ctx, this.setupAstExclusions)
@@ -257,6 +259,7 @@ export class RuntimeManager {
     if(ctx.runtimeExclusions) await this._runCaught(ctx, this.setupRuntimeExclusions, {shouldNeverFail:true})
     if(!ctx.isEnvSection)     await this._runCaught(ctx, this.clearAutoRun, {shouldNeverFail:true})
                               await this._runCaught(ctx, this.applyRunnerMethod)
+    if(handleAsyncRuns)       await this._runCaught(ctx, this.manageDecoratedAsyncRuns, {always:true})
     if(ctx.runtimeExclusions) await this._runCaught(ctx, this.removeExclusions, {always:true})
                               await this._runCaught(ctx, this.teardownManager,  {always:true, shouldNeverFail:true})
 
@@ -335,6 +338,15 @@ export class RuntimeManager {
     LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - running method runner -', ctx.qualname)
     await ctx.method.call(this.runner, ctx, this) // always send extras args (in case useful)
     ctx.success = true
+  }
+
+
+  async manageDecoratedAsyncRuns(ctx){
+    if(this.stopped || ctx.err){
+      await pyodide.runPythonAsync("__builtins__.auto_run.coros.clear()")
+    }else{
+      await pyodide.runPythonAsync("await __builtins__.auto_run.loop_async()")
+    }
   }
 
 

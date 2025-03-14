@@ -18,7 +18,7 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-import { buttonWithTooltip } from 'functools'
+import { makeIdeJqButton } from 'functools'
 
 
 
@@ -168,11 +168,6 @@ class QCM {
 
     createInnerLayoutButtonsAndCounter(no_admo){
 
-        const makeButton = (kind, options) => {
-            const button = `<img src="${ CONFIG.buttonIconsDirectory }/icons8-${ kind }-64.png" />`
-            return buttonWithTooltip({shift:95, fontSize:1.1, ...options}, button)
-        }
-
         const divAdmo    = $('.'+this.qcmClass)
         const innerDiv   = $(`<div class="inner"></div>`)
         const classes    = divAdmo.attr('class').replace('admonition ','').split()
@@ -181,8 +176,8 @@ class QCM {
         const btnWrapper = $(`<div class="${ CONFIG.element.qcmWrapper.slice(1) } ${ this.reveal?'give-away':'hidden' }"></div>`)
         const counter    = $(`<p class="${ CONFIG.element.qcmCounterCls.slice(1) }"></p>`)
         const mask       = $(createSvgMask(95, 1.1, CONFIG.lang.qcmMaskTip.msg, CONFIG.lang.qcmMaskTip.em))
-        const checkBtn   = $(makeButton('check', {tipWidth: CONFIG.lang.qcmCheckTip.em, tipText: CONFIG.lang.qcmCheckTip.msg}))
-        const restartBtn = $(makeButton('restart', {tipWidth:CONFIG.lang.qcmRedoTip.em, tipText: CONFIG.lang.qcmRedoTip.msg}))
+        const checkBtn   = makeIdeJqButton('check',   {shift:95, tipWidth: CONFIG.lang.qcmCheckTip.em, tipText: CONFIG.lang.qcmCheckTip.msg})
+        const restartBtn = makeIdeJqButton('restart', {shift:95, tipWidth: CONFIG.lang.qcmRedoTip.em,  tipText: CONFIG.lang.qcmRedoTip.msg })
         btnWrapper.append(counter, mask, checkBtn, restartBtn)
 
         checkBtn.on('click', this.check.bind(this))
@@ -211,7 +206,7 @@ class QCM {
 
 const createSvgMask=(shift,fontSize, tipText, tipWidth) => `
 <div class="tooltip mask-svg" style="--tool_shift:${ shift }%; font-size:${ fontSize }em;">
-<span class="tooltiptext" style="width:${ tipWidth }em;">${ tipText }</span>
+<span class="tooltiptext bottom" style="width:${ tipWidth }em;">${ tipText }</span>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 viewBox="0 130 512 250" xml:space="preserve">
 <path style="fill:var(--md-primary-fg-color)" d="M508.692,167.211c-14.625,0.984-64.391,5.859-128.781,5.859c-90.734,0-96.594,32.188-123.922,32.188 c-31.203,0-29.25-32.188-123.906-32.188c-64.391,0-114.156-4.875-128.781-5.859c-10.531-0.703,3.906,103.406,46.828,142.438 c32.5,29.547,111.234,54.656,172.703,13.656c23.422-18.516,33.156-18.516,33.156-18.516s9.781,0,33.188,18.516 c61.453,41,140.203,15.891,172.688-13.656C504.786,270.617,519.239,166.508,508.692,167.211z M202.442,255.305 c-45.656,50.922-120.297,15.797-121.172-35.141C165.552,207.008,205.755,251.602,202.442,255.305z M309.552,255.305 c-3.313-3.703,36.875-48.297,121.172-35.141C429.849,271.102,355.224,306.227,309.552,255.305z"></path>

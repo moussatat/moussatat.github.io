@@ -48,7 +48,7 @@ import _anything from 'overlord'
  *
  *
  * Routines are stored in `globalThis.pyFuncs`, which is also `PyodideSectionsRunner.pyFuncs`.
- * The global version will be deleted after use unless `CONFIG._devMode` is true.
+ * The global version will be deleted after use, unless `CONFIG._devMode` is true.
  * The available routines are:
  *
  *      - `redirect_cmd(cmd:string)` to run commands written by a user in the terminal.
@@ -57,12 +57,14 @@ import _anything from 'overlord'
  *         suggestions for the command currently typed in the terminal by a user.
  *
  *      - `clear_console()` to cancel the PyodideConsole current buffer, if ever needed
- *        (an incomplete command triggers an error about imports => the previous parts
- *         of the command need to be cancelled, for example).
+ *        (for example: an incomplete command triggering an error about imports => the previous
+ *         parts of the command need to be cancelled).
  * */
 const setupPyodideConsoleAndPyFuncs=()=>{
-    /*  Archive note: in earlier implementations, `__builtins__` was here behaving like a dict instead
-        of an object because pyodide.runPython(...) was run using a dedicated namespace object.
+    /*
+    Archive note: in earlier implementations, `__builtins__` was behaving here like a dict
+    instead of an object because pyodide.runPython(...) was run using a dedicated namespace
+    object (second argument).
     */
 
     pyodide.runPython(`
@@ -72,26 +74,27 @@ def _hack_start_pyodide():
     from pyodide.console import PyodideConsole, repr_shorten
     from pyodide.ffi import to_js
 
+
     # Globals initializations:
     __builtins__._ = None
     __builtins__.__USER_CMD__ = __builtins__.__USER_CODE__ = ""
 
-    # Store some original python functions
+    # Store some original python functions:
     for name in 'input print help'.split():
         src_func = getattr(__builtins__, name)
         setattr(__builtins__, f"__{ name }_src__", src_func)
 
 
-    pyconsole = PyodideConsole(__main__.__dict__)
+    py_console = PyodideConsole(__main__.__dict__)
 
 
     async def redirect_cmd(cmd):
 
-        fut = pyconsole.push(cmd)
+        fut = py_console.push(cmd)
         state = fut.syntax_check
 
         if state != 'incomplete':
-            res = await fut             # Still raises if error (desired)
+            res = await fut             # Raising is desired if error
             if res is not None:
                 __builtins__._ = res
                 if js.config().cutFeedback:
@@ -100,16 +103,14 @@ def _hack_start_pyodide():
 
         return state
 
-
     def complete(cmd:str):
-        return to_js(pyconsole.complete(cmd)[0])
-
+        return to_js(py_console.complete(cmd)[0])
 
     def clear_console():
-        pyconsole.buffer = []
+        py_console.buffer = []
 
 
-    # PyProxies (on JS side) created once only per page => don't care about destroying them:
+    # Proxies created once only per page, so don't care about destroying them:
     js.pyFuncs.redirect_cmd = to_js(redirect_cmd)
     js.pyFuncs.clear_console = to_js(clear_console)
     js.pyFuncs.complete = to_js(complete)
@@ -122,7 +123,7 @@ del _hack_start_pyodide
 
 
 
-/**Make sure everything is as expected on Pyodide side (enforce clean_scope contract).
+/**Make sure everything is as expected on Pyodide side (enforce clear_scope contracts).
  * */
 const checkPyodideInitialState=()=>{
     const keeper = ['__name__', '__doc__', '__package__', '__loader__', '__spec__', '__annotations__', '__builtins__', '_pyodide_core', 'version']
@@ -157,10 +158,6 @@ const setupPyodideFatalCbk =()=> {
         term.error(e)
         await sleep();  // Enforce UI refresh
     })
-
-    // All done!
-    CONFIG.pyodideIsReady = true
-    $("#header-hourglass-svg").attr("class", "py_mk_vanish")
 }
 
 
@@ -172,13 +169,11 @@ const setupPyodideFatalCbk =()=> {
  * */
 const startPyodideSync =()=> {
     LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - WASM: starting')
-    loadPyodide().then(
-        setupPyodideEnvironmentTools, console.error
-    )
+    loadPyodide().then(setupPyodideEnvironmentTools, console.error)
 }
 
 
-/**Once the POyodide environment has been started, put in place the generic logic/setup
+/**Once the Pyodide environment has been started, put in place the generic logic/setup
  * for it (these are only "do once" operations).
  * */
 const setupPyodideEnvironmentTools =(pyodide)=> {
@@ -195,6 +190,10 @@ const setupPyodideEnvironmentTools =(pyodide)=> {
     setupPyodideFatalCbk()
 
     if(!CONFIG._devMode) delete globalThis.pyFuncs
+
+    // All done!
+    CONFIG.pyodideIsReady = true
+    $("#header-hourglass-svg").attr("class", "py_mk_vanish")
 
     LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - Environment setup ok')
 }

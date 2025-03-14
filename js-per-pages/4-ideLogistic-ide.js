@@ -25,8 +25,9 @@ import {
   getIdeDataFromStorage,
   PythonError,
   sleep,
-  FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE,
+  PMT_LOCAL_STORAGE_KEYS_WRITE,
 } from 'functools'
+import { RunningProfile } from '2-pyodideSectionsRunner-runner-pyodide'
 import { TerminalRunner } from '3-terminalRunner-term'
 
 
@@ -57,14 +58,26 @@ export const cssPx =(jObj,prop='height')=> +jObj.css(prop).slice(0,-2)
 
 
 
-
+/**LocaleStorage data manager.
+ *
+ * Each IDE stores various data about it's current or past state(s):
+ *    - `code`: current version of the content of the editor. Might be updated frequently.
+ *    - `done`: -1|0|1 = state of the last validation: -1=failure, 0=unknown, 1=success.
+ *    - `hash`: `ide.scrHash` value associated with the `code` property. Allow to track updates
+ *              of the exercice, so that the user can be warned that the initial content of the
+ *              exercice is not anymore the same than the last time they trained on it.
+ *    - `name`: `ide.pyName` value (used to build zip archives or to load them).
+ *    - `zip`:  To know if the given IDE content must be exported in the zip archive or not.
+ *
+ * WARNING: Redactors are allowed to store their own values in the local storage, so foreign
+ *          items may occur and _HAVE TO BE KEPT_.
+ */
 class IdeStorageManager extends TerminalRunner {
 
   /**Process to "re-initiate" the internal state of the IDE (useful for testing) */
   constructor(editorId, callInit=false){
     super(editorId, callInit)
-    this.storage = null   // updated with the following call...
-    this.getStorage()
+    this.storage = this.getStorage()
   }
 
   // First class, making sure the change of argument if handled
@@ -73,20 +86,23 @@ class IdeStorageManager extends TerminalRunner {
   }
 
 
-  _extractWhateverLocalStorageVersion(editorId){
-    const  extractForThis = editorId==this.id
-    return getIdeDataFromStorage(editorId, extractForThis ? this : null)
+
+  getStorage(editorId=null){
+    editorId ??= this.id
+    const extractForThis = editorId==this.id
+    const [storage,upToDate]  = getIdeDataFromStorage(editorId, extractForThis?this:null)
+    if(!upToDate) this.forceUpdateStorage(storage)
+    return storage
   }
 
-  getStorage(){
-    let [storage, outdated] = this._extractWhateverLocalStorageVersion(this.id)
-    this.storage = storage
 
-    // Enforce update of internal values:
-    if( outdated || this.storage.name!=this.pyName || this.storage.zip!=this.export ){
-      this.setStorage({name: this.pyName, zip:  this.export})
-    }
+  forceUpdateStorage(storage){
+    storage.name   = this.pyName
+    storage.zip    = this.export
+    storage.hash ??= this.srcHash    // Only if undefined, so that no alert shown for ALL updated IDEs by default
   }
+
+
 
   setStorage(changes){
     if(changes){
@@ -96,11 +112,12 @@ class IdeStorageManager extends TerminalRunner {
   }
 
 
+
   //-------------------------------------------------------------------------
 
 
   announceCodeChangeBasedOnSrcHash(){
-    if(this.storage.hash != this.srcHash){
+    if(this.storage.hash !== this.srcHash){
       this.terminalEcho(CONFIG.lang.refresh.msg)
     }
   }
@@ -117,7 +134,7 @@ class IdeStorageManager extends TerminalRunner {
 
 
   _validateKeyStorageAccess(key){
-    if(FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE.some(k=>k==key)){
+    if(PMT_LOCAL_STORAGE_KEYS_WRITE.some(k=>k==key)){
       throw new PythonError(
           `Writing the "${ key }" property of the localStorage is forbidden (already used by PMT).`
       )
@@ -125,9 +142,9 @@ class IdeStorageManager extends TerminalRunner {
   }
 
   _validateNotFromTerminal(){
-    if(this.running === CONFIG.runningMode.cmd) throw new PythonError(
-      'Cannot access localStorage data from the terminal'
-    )
+    if(this.running.isTermCmd){
+      throw new PythonError('Cannot access localStorage data from the terminal')
+    }
   }
 
 
@@ -187,6 +204,7 @@ class IdeStorageManager extends TerminalRunner {
 
 
 
+
 class IdeZipManager extends IdeStorageManager {
 
   buildZipExportsToolsAndCbk(jBtn){
@@ -197,7 +215,7 @@ class IdeZipManager extends IdeStorageManager {
     // Doesn't work using jQuery... (again... x/ ):
     jBtn[0].addEventListener('drop', this.dropArchiveFactory(
       this.lockedRunnerWithBigFailWarningFactory(
-        CONFIG.runningMode.zipImport,
+        RunningProfile.PROFILE.zipImport,
         this.setupRuntimeZip,
         this.dropArchive,
         this.teardownRuntimeZip,
@@ -206,7 +224,7 @@ class IdeZipManager extends IdeStorageManager {
     ))
 
     return this.lockedRunnerWithBigFailWarningFactory(
-      CONFIG.runningMode.zipExport,
+      RunningProfile.PROFILE.zipExport,
       this.setupRuntimeZip,
       this.zipExport,
       this.teardownRuntimeZip,
@@ -233,12 +251,12 @@ class IdeZipManager extends IdeStorageManager {
 
     $(`[id^=editor_]`).each(function(){
       if(localStorage.getItem(this.id)===null){
-        return    // should never happen... But just in case...
+        return                                      // Should never happen... But just in case...
       }
-      const [data,] = ideThis._extractWhateverLocalStorageVersion(this.id)
-      data.id = this.id
-      if(data.zip){             // "is exportable"...
-        toArchive.push(data)
+      const storage = ideThis.getStorage(this.id)   // WARNING: this is ANY IDE in the page, here.
+      storage.id = this.id                          // (Wut? why? Should already be up to date...)
+      if(storage.zip){                              // "Is exportable"...
+        toArchive.push(storage)
       }
     })
     return toArchive
@@ -458,8 +476,9 @@ export class IdeGuiManager extends IdeZipManager {
       splitSlider: null,              // jQuery object
       initTermH: 0,                   // Initial height of the terminal, before entering any screen mode
       initGlobH: 0,                   // Initial height of this.global, before entering any screen mode
+      // initGlobHY: 0,                  // Initial Y position of this.global or its replacement, before entering full screen mode
       hasObserver: false,             // (should be actually useless, now) Has already built auto-completion MutationObserver or not
-      escapeIdeSearch: false,              // Stroke Esc while the search/replace IDE tool was on focus
+      escapeIdeSearch: false,         // Stroke Esc while the search/replace IDE tool was on focus
       viewport: window.screen.height,
       ideMinWidth: cssPx(this.global,'min-width'),
       fullScreenPadPx: 15,            // Padding added in full screen mode
@@ -527,20 +546,21 @@ export class IdeGuiManager extends IdeZipManager {
   //-----------------------------------------------------------------------------------
 
 
-  /**When then current IDE is neither in split nor in full screen mode, store the current height
-   * of its terminal so that it can be restored exactly when exiting from both modes.
+  /**When the current IDE is neither in split nor full screen mode, store the current height of
+   * its terminal so that it can be restored exactly when exiting from both modes.
    * This is needed because the terminal's height is tweaked on the fly to make the display nicer,
    * while the term height is also part of determining how many lines the ace gutter needs.
    * And the css margins dynamically changing at times _OTHER_ than when I compute the lines...
-   * and without tracking the initial height, you get terminals that get larger and larger when
-   * the user is switching from split to full screen, modes repeatedly...
+   * (and without tracking the initial height, you get terminals that get larger and larger when
+   * the user is switching from split to full screen, modes repeatedly...)
    * */
-  storeInitHeightsIfNeeded(){
+  storeInitPositionsDataIfNeeded(){
     if(!somethingFullScreen() && !this.isInSplit){
       this.guiIdeFlags.initTermH = cssPx( this.global.find('.term_wrapper') )
       this.guiIdeFlags.initGlobH = cssPx( this.global )
     }
   }
+
 
   static enforceAceGutterFillAfterHeightsTroubles(){
     LOGGER_CONFIG.ACTIVATE && jsLogger('[GutterLogistics]')
@@ -629,16 +649,18 @@ export class IdeGuiManager extends IdeZipManager {
         termH = halfMinusBtns
       }
 
-      // Sliders on windaube are HUGE, so reduce by one, whatever the case.
+      // Sliders on windaube are HUGE, and will generally be applied only once the 2 cols mode
+      // has been entered (the width becoming insufficient to avoid the need for a horizontal
+      // slider). So, reduce the number of lines by 1 for the editor _and_ the terminal.
       const availableH = globH - btnsH - termH * !this.isVert
       const nLines     = Math.max(
-        3,  // Keep as min, so that the buttons on the editor stay on different lines
-        Math.max(1, Math.floor( availableH/lineH )) - isWin
+        3,  // So that screen modes & "commenting tests" buttons stay on different lines
+        Math.floor( availableH/lineH ) - isWin
       )
 
       // Fix the exact terminal height so that the bottom space is always consistent:
       if(!this.isVert){
-        termH = Math.max(termH, globH - btnsH - lineH*nLines)
+        termH = Math.max(termH, globH - btnsH - lineH * (nLines-isWin) )
       }
 
       // Set the actual number of lines to "lock" for the ACE editor:
@@ -721,7 +743,7 @@ export class IdeFullScreenGlobalManager extends IdeGuiManager {
    *    over the escape button keypress event, there.
    *  - The global state must be tracked, because the resolution order of the Escape keypress
    *    closes the menu before the fullscreen related key event is triggered...
-   *  - The MutationObserver is added _once only_ per page ("static").
+   *  - The MutationObserver is added _once only_ per page (hence, "static").
    * */
   static buildBodyObserver(){
     new MutationObserver((records)=>{
@@ -750,7 +772,10 @@ export class IdeFullScreenGlobalManager extends IdeGuiManager {
 
             case 'auto-complete':
               if(!this.currentIde.guiIdeFlags.hasObserver){
-                this.currentIde.guiIdeFlags.hasObserver=true
+                this.currentIde.guiIdeFlags.hasObserver = true
+                // Creating one observer per instance is suboptimal, but there aren't many IDEs
+                // per page, and ofr the sake of simplicity... (tracking the ide instance against
+                // the html target) => "whatever"...)
                 new MutationObserver(records=>{
                   for(const record of records){
                     const isVisible = $(record.target).css('display')!='none'
@@ -764,9 +789,10 @@ export class IdeFullScreenGlobalManager extends IdeGuiManager {
           if(somethingFullScreen() || kind=='auto-complete'){
             node.detach().appendTo(this.currentIde.global)
             /* Always move the auto-complete window because:
-                - each IDE has its own auto-completion div element
-                - this allows to add one single style observer the first time the
-                  auto-completion tool is used for that IDE */
+                  - each IDE has its own auto-completion div element
+                  - this allows to add one single style observer the first time the auto-completion
+                    tool is used for that IDE
+             */
           }
         }
       }
@@ -790,11 +816,12 @@ export class IdeFullScreenGlobalManager extends IdeGuiManager {
         - A MutationObserver would see the closing action whatever triggered it... Not only
           through the use of ESC...
      */
-    const scroller    = this.global.find('div.ace_scroller')
-    const scrollerObs = new MutationObserver(()=> {
+    const scroller = this.global.find('div.ace_scroller')
+    new MutationObserver( (_, scrollerObs) => {
 
       const search = scroller.children('.ace_search')
       if(search.length){
+        // Apply once only (the search tool elements stay in the DOM once created)
         scrollerObs.disconnect()    // no need anymore
 
         search.on('keydown', (e)=>{
@@ -803,8 +830,7 @@ export class IdeFullScreenGlobalManager extends IdeGuiManager {
         })
 
       }
-    })
-    scrollerObs.observe(scroller[0], {childList:true})
+    }).observe(scroller[0], {childList:true})
   }
 }
 
@@ -840,7 +866,7 @@ class IdeFullScreenManager extends IdeFullScreenGlobalManager {
    * */
   requestFullScreen(){
 
-    this.storeInitHeightsIfNeeded()
+    this.storeInitPositionsDataIfNeeded()
     const focused = document.activeElement
 
     this.global[0].requestFullscreen().then(async _=>{
@@ -857,8 +883,10 @@ class IdeFullScreenManager extends IdeFullScreenGlobalManager {
 
       LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Full screen setup - DONE")
 
+
       // Wait forever if needed...
       while(somethingFullScreen()) await sleep(50)
+
 
       const minLines = this.guiIdeFlags.splittedLines || this.minIdeLines
       const maxLines = this.guiIdeFlags.splittedLines || this.maxIdeLines
@@ -866,9 +894,11 @@ class IdeFullScreenManager extends IdeFullScreenGlobalManager {
         '[ScreenMode]', "Full screen reversion with", minLines, maxLines
       )
 
-      this.ideScreenModeVerticalResize({setup:false, minLines, maxLines})
       if(this.splitScreenActivated) splitScreenBtn.removeClass('deactivated')
       this.guiIdeFlags.internalIsFullScreen = false
+      const resizeOption = this.isInSplit ? {topDivH:this.setupTopDivHeight()}
+                                          : {setup:false, minLines, maxLines}
+      this.ideScreenModeVerticalResize(resizeOption)
 
       LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Full screen reversion - DONE")
     })
@@ -903,7 +933,7 @@ export class IdeSplitScreenManager extends IdeFullScreenManager {
 
   async switchSplitScreenFromButton(e, autoScroll=true){
 
-    this.storeInitHeightsIfNeeded()
+    this.storeInitPositionsDataIfNeeded()
 
     const focused      = document.activeElement
     const isFullScreen = somethingFullScreen()

@@ -18,7 +18,7 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-import { PyodideSectionsRunner } from "2-pyodideSectionsRunner-runner-pyodide"
+import { PyodideSectionsRunner, RunningProfile } from "2-pyodideSectionsRunner-runner-pyodide"
 
 
 export class BtnRunner extends PyodideSectionsRunner {
@@ -28,7 +28,7 @@ export class BtnRunner extends PyodideSectionsRunner {
     super.build()
 
     this.runner = this.lockedRunnerWithBigFailWarningFactory(
-      CONFIG.runningMode.btn,
+      RunningProfile.PROFILE.btn,
       this.setupRuntimeBtn,
       ()=>null,                 // No "user" action!
       this.teardownRuntime,
@@ -37,8 +37,10 @@ export class BtnRunner extends PyodideSectionsRunner {
     $('#'+this.id).find("button").on('click', this.runner)
   }
 
-  async setupRuntimeBtn(){              // Can get an argument, depending on how it's run/called
-    return await this.setupRuntime()    // => do not transmit any actual argument (eventOrCmd)
+  async setupRuntimeBtn(){
+    // Can get an argument (eventOrCmd), depending on how it's run/called.
+    //    => Override to not transmit it
+    return await this.setupRuntime()
   }
 }
 

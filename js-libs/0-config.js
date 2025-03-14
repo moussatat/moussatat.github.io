@@ -37,6 +37,8 @@ const SqBs = {
 
 const CONFIG = {
 
+    N_IDE_VALIDATIONS: 10,
+
     /* The following values are passed from python to JS through the main.html,
        once this script got loaded */
     //JS_CONFIG_DUMP
@@ -169,6 +171,9 @@ const CONFIG = {
     overlordIsReady: false,
     overlordClasses: [],
 
+    needMermaid: false,
+    figureObserver: null,
+
 
     // All classes to use to create the various objects (mutated on the fly when needed):
     CLASSES_POOL: {
@@ -194,7 +199,7 @@ const CONFIG = {
 
     COMMENTED_PATTERN:  /(^\s*)(\S)(.?)/,
     MODULE_REG:         /File "<(env[^>]*|post[^>]*|exec|console)>", line (\d+)($|, in (?!redirect_cmd))/,
-    TRACE_REG:          /  File "<(env[^>]*|post[^>]*|exec|console)>"/,
+    TRACE_REG:          /  File "(?:<env[^>]*>|<post[^>]*>|<exec>|<console>|\/lib\/python[^"]+)"/,
     TRACE_NUM_LINE:     /File "<(?:env[^>]*|post[^>]*|exec|console)>", line (\d+)/,
 
     ESCAPE_SQ_B:        /\[|\]/g,
@@ -225,19 +230,6 @@ const CONFIG = {
         errTail: 5,
     },
 
-    // Kind of running operation ("pyodide locked"):
-    runningMode: {
-        cmd:          'Command',
-        btn:          'PlayBtn',
-        play:         'Play',
-        validate:     'Validate',
-        testing:      'Testing',
-        testingPlay:  'TestingPlay',
-        testingValid: 'TestingValidate',
-        testingCmd:   'TestingCommand',
-        zipExport:    'zipExport',
-        zipImport:    'zipImport',
-    },
 
     // Validation steps:
     section: {

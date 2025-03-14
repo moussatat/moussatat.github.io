@@ -150,10 +150,11 @@ export function generateErrorLog(ctx) {
   }
 
   const err = ctx.err
-  const msg = String(err).trimEnd()     // Note: err might have a trailing linefeed x/ => trim it...
+  const msg = String(err).trimEnd()     // Note: err might have a trailing new line x/ => trim it...
 
 
-  // Return directly non python errors => this allows to also see JS errors.
+  // Return directly non python errors => this allows to also see JS errors as "big fail"(because
+  // they should never occur, here!).
   if(!msg.startsWith('PythonError')){
     ctx.stdErr = formatBigFail(msg, ctx)
     return
@@ -163,10 +164,11 @@ export function generateErrorLog(ctx) {
 
   /*
   Search for the first line after the pyodide-specific infos, avoiding false positives for
-  terminals, where the second line is: `  File "<exec>", line \d+, in redirect_cmd`.
+  terminals, where the second line is:
+      `  File "<exec>", line \d+, in redirect_cmd`
   Also, in case of SyntaxError, there is no indication after the line number (REMINDER: the
   negative lookahead CANNOT start just after the number or the redirect_cmd thing is matched
-  when the line number has more than 1 digit..., so must use another strategy).
+  when the line number has more than 1 digit... So, 'must use another strategy).
   */
   const iModule     = errLines.findIndex(s=>CONFIG.MODULE_REG.test(s))
   const iError      = err.type ? guessErrorMsgLine(errLines, err.type) : errLines.length-1
@@ -186,38 +188,34 @@ export function generateErrorLog(ctx) {
   const cleaned = (errLines[iError] || "").replace("AssertionError","").trim()
   const hasNoMsg = !isMultiLineError && !cleaned
 
-  // WARNING: working by mutation, so successive splices are done 'from the end".
+  // WARNING:
+  //   The following lines are working by mutation, so the successive splices are done "backward"
+  //   (aka, from end to beginning, so that the line numbers stay consistent).
 
-  // Rebuild the assertion message first, if needed:
+  // Rebuild the automatic assertion message first, if needed, or reformat the error message:
   if( code && isAssertErr && hasNoMsg && autoAssertExtraction ){
     const bigFail = buildAssertionMsg(code, errLines, iError, ctx)
     if(bigFail){
       ctx.stdErr =  bigFail
       return
     }
-
-  }else if(!isAssertErr && purgeTrace){
-    // Reformat error message if needed
+  } else if(!isAssertErr && purgeTrace){
     const errKind = errLines[iError].split(':')[0]
     errLines.splice(iError, errLines.length)
     errLines.push(`${errKind} has been raised.`)
   }
 
-  // Shorten the error code section (if multiline assertion message), and then the stacktrace.
+  // Then shorten the error code section (if multiline assertion message), and then the stacktrace.
   shortenArrSection('err',   errLines, iError, errLines.length-1, iModule, purgeTrace)
 
-  // Remove pyodide related information from the stacktrace (the user doesn't need to know)
+  // Then remove pyodide related information from the stacktrace (the user doesn't need to know)
   shortenArrSection('trace', errLines, iModule, iError-1, iModule, purgeTrace)
 
-  // Remove pyodide related information from the stacktrace (the user doesn't need to know) if
-  // it's the user's code that is run, otherwise, keep the full stack trace to ease debugging:
-  // if(isFromUserCode){
-  //   shortenArrSection('trace', errLines, iModule, iError-1, iModule, purgeTrace)
-  // }else{
-  //   errLines.push(CONFIG.MSG.bigFail)
-  // }
   ctx.stdErr =  errLines.join('\n')
 }
+
+
+
 
 
 
@@ -249,29 +247,30 @@ const shortenArrSection=(kind, errLines, from, to, iModule, purgeTrace)=>{
     }
   }
 
-  if(kind!='trace') return
-
-  // Then remove or reformat pyodide specific lines (nly if this is the last operation, aka "trace")
-  errLines.splice(1, iModule-1)
-  errLines[0] = errLines[0].slice( 'PythonError: '.length )
+  if(kind=='trace'){
+    // Then remove or reformat pyodide specific lines (nly if this is the last operation, aka "trace")
+    errLines.splice(1, iModule-1)
+    errLines[0] = errLines[0].slice( 'PythonError: '.length )
+  }
 }
 
 
 
 
 /**Since nothing can be sure about how the message is formatted, and some users could add
- * messages containing the error name itself (worse case: at the beginning of a new line...),
+ * messages containing the error name itself (worst case: at the beginning of a new line...),
  * the following logic is used:
  *    - Start exploring lines from the end.
  *    - Store the index of any line starting with the desired errKind.
- *    - Return the last index stored whe, reaching a line matching CONFIG.TRACE_REG, which
- *      means we've entered the traceback section for sure.
+ *    - Return the last index found, either when reaching a line matching CONFIG.TRACE_REG (meaning
+ *      we've entered the traceback section), or once all the lines have been checked.
  *
  * Tricks & quirks:
- *    - `errKind` must be regexp searched, because the JS error.type might miss some "upper
- *      level packages names", like errKind is `JsException` while the stacktrace actually
- *      holds `pyodide.ffi.JsException`.
- *    - `errKind` can also contain weird chars, like "<>" in `_hack_exclusions_tools.<locals>.ExclusionError`
+ *    - `errKind` can also contain "<>." chars:  `_hack_exclusions_tools.<locals>.ExclusionError`
+ *    - `errKind` analysis requires regexp, because the JS error.type might miss "some upper level
+ *      packages names". For example:
+ *            When `errKind` is `JsException`, the stacktrace actually holds:
+ *                  `pyodide.ffi.JsException`
  *
  * @throws: Error if @errKind cannot be found.
  * */
@@ -282,13 +281,16 @@ const guessErrorMsgLine=(arr, errKind)=>{
   let iErr = -1
   for(let i=arr.length-1 ; i>=0 ; i--){
     const line = arr[i]
+
+    // Attempt at early exit when entering the stacktrace, but might not always be found...
     const isLastTrace = CONFIG.TRACE_REG.test(line)
-    if(isLastTrace){
-      if(iErr<0) break
-      return iErr
-    }
+    if(isLastTrace) break
+
     const start = matcher.exec(line)
     if(start && start[0].endsWith(errKind)) iErr=i
+  }
+  if(iErr >= 0){
+    return iErr
   }
   throw new Error(
     `Couldn't find the "${ errKind }" error line in the error message.

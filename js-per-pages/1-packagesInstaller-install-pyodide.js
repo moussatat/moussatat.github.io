@@ -202,7 +202,7 @@ export const installPythonPackages=(function(){
     const conf        = getConfAndSetupImport(libName, code)
     const isPmtTool   = PMT_TOOLS.includes(libName)
     const rootNoSlash = CONFIG.siteUrl.replace(/\/$/, '')
-    const archive     = `${ rootNoSlash }${ isPmtTool?"/assets/javascript":"" }/${ libName }.zip`
+    const archive     = `${ rootNoSlash }${ isPmtTool?"/assets/javascripts":"" }/${ libName }.zip`
     const zipResponse = await fetch(archive)
     const zipBinary   = await zipResponse.arrayBuffer()
     pyodide.unpackArchive(zipBinary, "zip", {extractDir: libName})
@@ -280,7 +280,7 @@ __hack_std_import_attempt()
   }
 
 
-  const forbidIfAny = (ctx, arr, head="", extraMsg="")=>{
+  const throwExclusionErrorIfNeeded = (ctx, arr, head="", extraMsg="")=>{
     if(ctx.applyExclusionsIfAny && arr.length){
       pyodide.runPython(`ExclusionError.throw("${ arr.join(', ') + extraMsg }", ${ head })`)
     }
@@ -296,7 +296,7 @@ __hack_std_import_attempt()
 def _hack_imports():
     ${ arrCmds.join('\n    ') }
 _hack_imports()
-del _hack_imports`
+del _hack_imports`  // (not using the auto_run decorator because it might not be already in place)
 
     pyodide.runPython(code)
   }
@@ -328,7 +328,7 @@ del _hack_imports`
     // some standard libs...):
     const maybeUndesired = wantedLibs.filter(pred.isNotWhiteList)
     const excluded       = maybeUndesired.filter(pred.isExcluded)
-    forbidIfAny(ctx, excluded)
+    throwExclusionErrorIfNeeded(ctx, excluded)
 
 
     const neededLibs      = wantedLibs.concat(runner.whiteList).filter(pred.isNotImportedYet)
@@ -354,11 +354,11 @@ del _hack_imports`
     const wrongs  = externalsNeeded.filter(pred.isWrongPyLib)
     const verb    = wrongs.length-1 ? "are":"is"
     const msgTail =` ${ verb } forbidden for security reasons.\\n\\nDid you mean?   import py_libs`
-    forbidIfAny( ctx, wrongs, "'Import of '", msgTail)
+    throwExclusionErrorIfNeeded(ctx, wrongs, "'Import of '", msgTail)
 
     // pypiWhite restrictions only apply to external requests:
     const invalid = externalsNeeded.filter(pred.isNotPyPiAllowed)
-    forbidIfAny(ctx, invalid, "'cannot install '" )
+    throwExclusionErrorIfNeeded(ctx, invalid, "'cannot install '" )
 
 
     // Actual installations:
@@ -376,8 +376,8 @@ del _hack_imports`
     runPythonImportsIfAny(enforceImports, true)
 
     // Make sure white listed packages are always visible in the user's scope:
-    // (DON'T filter already imported modules from the white list because they could have been
-    // imported in a different scope!)
+    // (DON'T filter out already imported modules from the white list because they could have
+    // been imported in a different scope!)
     runPythonImportsIfAny(runner.whiteList, false)
   }
 })()

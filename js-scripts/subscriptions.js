@@ -64,6 +64,12 @@ CONFIG.ACE_COLOR_THEME.aceStyle = {
 
 
 
+$("div.py_mk_figure").each(function(){
+  CONFIG.figureObserver.observe(this, {childList:true})
+})
+
+
+
 //-----------------------------------------------------------------
 
 
@@ -97,6 +103,19 @@ document.querySelector("[data-md-color-scheme]")
   const ALL_TERMINALS = []
 
 
+  const TO_BUILD_CONFIG = [
+    ["span[id^=auto_run_]", "PyBtn"],
+    ["[id^=btn_only_]",     "PyBtn"],
+    ["div[id^=term_only_]", "Terminal"],
+    ...CONFIG.element.allEditors.map(id=>
+      [`div[id^=global_${ id }]`, id=="editor_"?"Ide":"IdeTester", id=>id.slice('global_'.length)]
+    )
+  ]
+
+
+  //------------------------------------------------------------------------
+
+
   // Add tabbed content manager/fixxxer (transformations to apply when tabs become visible
   // or are clicked on).
   $("div.tabbed-labels label").on('click', function(){
@@ -123,14 +142,36 @@ document.querySelector("[data-md-color-scheme]")
 
 
 
-  const TO_BUILD_CONFIG = [
-    ["span[id^=auto_run_]", "PyBtn"],
-    ["[id^=btn_only_]",     "PyBtn"],
-    ["div[id^=term_only_]", "Terminal"],
-    ...CONFIG.element.allEditors.map(id=>
-      [`div[id^=global_${ id }]`, id=="editor_"?"Ide":"IdeTester", id=>id.slice('global_'.length)]
-    )
-  ]
+
+
+  /**Add a dirty patch to fix troubles with IDE layout in details on CHROME (only):
+   * The code area might slightly overlap the gutter, in some cases (happens if the gutter has
+   * more than 9 lines, because the "more than one digit" line number creates a width increase,
+   * that is not always properly reported on the code area with Chrome...).
+   * */
+  if(navigator.userAgent.includes('Chrome')){
+
+    $('details').each(function(){
+
+      const details = $(this)
+      const ides = details.find("div[id^=global_editor]")
+      if(!ides.length) return;
+
+      details.on('click', _=>setTimeout(_=>{ ides.each(function(){
+        const ide      = $(this)
+        const codeArea = ide.find('div.ace_scroller')
+        const gutter   = codeArea.prev()
+        codeArea.css('left', gutter.css('width'))
+      })}))
+
+    })
+  }
+
+
+
+  //------------------------------------------------------------------------
+
+
 
   const waitForOverlord=()=>{
 
@@ -178,6 +219,7 @@ document.querySelector("[data-md-color-scheme]")
       }, {now:true, runOnly:true})
     }
   }
-  waitForOverlord()
+
+  waitForOverlord()   // Start waiting...
 
 })()

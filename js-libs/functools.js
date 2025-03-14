@@ -143,6 +143,10 @@ export const waitForPyodideReady = async()=>{
 
 
 
+
+// NOTE: Don't convert the `setTimeout+recursive` logic inside subscribeWhenReady to a setInterval
+//       thing: it causes troubles when reloading pages (I'm not sure why...)
+
 /**Auto-subscription routine to document changes.
  * If the subscription is not possible yet (readyForSubscription[waitOn] is falsy), try again
  * @delay later until it works.
@@ -166,6 +170,10 @@ export const waitForPyodideReady = async()=>{
  * */
 export function subscribeWhenReady(waitId, callback, options={}){
     LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscribing] - Enter', waitId)
+
+    if(waitId in CONFIG.subscriptionReady){
+        throw new Error(`Cannot subscribe several times to "${ waitId }".`)
+    }
 
     let {now, delay, waitFor, runOnly, maxTries} = {
         delay: 50,
@@ -192,7 +200,7 @@ export function subscribeWhenReady(waitId, callback, options={}){
 
         if(isNotReady()){
             const nTries = CONFIG.subscriptionsTries[waitId]+1 || 1
-            if(nTries==maxTries){
+            if(nTries > maxTries){
                 throw new Error(`Impossible to subscribe to ${ waitId } in time: too many tries.`)
             }
             CONFIG.subscriptionsTries[waitId] = nTries
@@ -285,10 +293,19 @@ export function waitForClassesPoolReady(applyWhenPoolReady=null){
 
 
 
+
+
 /**To access CONFIG data from pyodide (mermaid, cutFeedback, ...).
  * */
 export function config(){ return CONFIG }
 
+
+/**Function telling if the user is currently in light or dark mode. (Assumes the palette
+ * buttons is still in the UI).
+ * */
+export function isDark(){
+    return !$('label[for=__palette_0]').attr('hidden')
+}
 
 
 
@@ -356,7 +373,7 @@ export const txtFormat = {
     italic:  (content) => _richTextFormat(content, "i"),
     stress:  (content) => _richTextFormat(content, "b"),
     success: (content) => _richTextFormat(content, "ib", "green"),
-    none:    escapeSquareBrackets,  // To override the defaults, if needed (see post processing)
+    none:    escapeSquareBrackets,  // To override the defaults, if needed (see process_and_gui.js)
 }
 
 
@@ -460,26 +477,97 @@ export function decompressAndConvert(compressed){
 
 
 
-/**Create a button with tooltip, just like the python _html_builder one.
+
+
+
+
+
+
+const defaultOptions=(options, prop)=>({
+    tagClass: "vertical",
+    tagId: prop,
+    extraStyles: "",    // For the outer element/tag, as "width:min-content;..."
+
+    label: prop,
+    labelFirst: true,
+    noLabel: false,
+
+    inputId: prop+'-input',     // to link the label to the input/element
+    inputClass: "",
+
+    tipText: "",
+    shift: 50,          // %
+    tipWidth: 0,        // em ; 0 => auto
+    tipClass: '',
+
+    ...options
+})
+
+
+
+
+const _buildTipSpan=(options)=>{
+    if(!options.tipText) return ""
+
+    const tipClass = ['tooltiptext', options.tipClass || 'bottom'].join(' ')
+    const tipWidth = (options.tipWidth??0) > 0 ? options.tipWidth+'em' : 'max-content'
+    const tipSpan  = `<span class="${ tipClass }" style="width:${ tipWidth }">${ options.tipText }</span>`
+    return tipSpan
+}
+const _getTagStyle=(options)=>{
+    const styles = []
+    if(options.tipText)       styles.push(`--tool_shift:${ options.shift }%"`)
+    if(options.fontSize)      styles.push(`font-size:${ options.fontSize }em`)
+    if(options.extraStyleTag) styles.push(options.extraStyleTag)
+    return ` style="${ styles.join(';') }"`
+}
+
+
+/**Generic jQuery object generator. No event attached.
+ * */
+const stuffWithTooltip = (tag, options, content) =>{
+
+    const classes = []
+    if(tag=='button')    classes.push("header-btn")
+    if(options.tagClass) classes.push(options.tagClass)
+    if(options.tipText)  classes.push("tooltip")
+
+    const tagClass = !classes.length  ? '':`class="${ classes.join(' ') }"`
+    const tagId    = !options.tagId   ? '':`id="${ options.tagId }"`
+    const tagStyle = _getTagStyle(options)
+    const tipSpan  = _buildTipSpan(options)
+    const label    = `<label for="${ options.inputId }" style="align-self:center">${ options.label }</label>`
+
+    const buttonType = ' type="button"'.repeat(tag=='button')
+    return $([
+        `<${tag} ${ tagId }${ tagClass }${ tagStyle }${ buttonType }>`,
+            tipSpan,
+            options.noLabel || !options.labelFirst ? '':label,
+            content,
+            options.noLabel || options.labelFirst  ? '':label,
+        `</${tag}>`
+    ].join(''))
+}
+
+
+
+
+/**Create a button with tooltip, just like the python _html_builder one (no event attached).
  * */
 export function buttonWithTooltip(options, content){
-    options = {
-        buttonId: "",
-        shift: 50,          // %
-        fontSize: 1.5,      // em
-        tipWidth: 15,       // em
-        tipText: "",
-        ...options
-    }
-    options.tipWidth = options.tipWidth>0 ? `style="width:${ options.tipWidth }em;"` : ""
-    const buttonId = !options.buttonId ? "" : `id="${ options.buttonId }" `
-    return `
-<button ${ buttonId }class="tooltip header-btn" type="button"
- style="--tool_shift:${ options.shift }%; font-size:${ options.fontSize }em;">
-    <span class="tooltiptext" ${ options.tipWidth }>${ options.tipText }</span>
-    ${ content }
-</button>
-`
+    options = defaultOptions(options)
+    options.noLabel = true
+    return stuffWithTooltip('button', options, content)
+}
+
+
+
+/**Create a jQuery button WITHOUT bound event, holding the svg of one of the IDE's buttons.
+ * No event attached.
+ * */
+export const makeIdeJqButton = (kind, options) => {
+    const img = `<img src="${ CONFIG.buttonIconsDirectory }/icons8-${ kind }-64.png" />`
+    return buttonWithTooltip(options, img)
 }
 
 
@@ -487,68 +575,96 @@ export function buttonWithTooltip(options, content){
 
 
 
-
-
-// Code inspired by https://stackoverflow.com/questions/5379120/get-the-highlighted-selected-text
-export function getSelectionText(){
-    let text = "";
-    if(window.getSelection) {
-
-        const extractTxtIfExists=(section, jRule, inline="")=>{
-            const i = copied.length
-            section.find(jRule).each(function(){ copied.push(this.innerText) })
-            if(inline){
-                section.find(inline).each(function(){ copied[i] = this.innerText + copied[i] })
-            }
-        }
-
-        /**Return the first matching extraction logic, (broadest to smallest) */
-        const getTxtFromSection=(section)=>{
-
-            /* Search top level selection: several groups and/or the prompt thing.
-               Notes:
-                * For multiline commands, only the last one is in the "cmd/prompt" part. Previous/
-                  incomplete lines are already in the structure with [data-index] attributes.
-                * The prompt (beginning of the currently written command) must be extracted on its
-                  own then added at the beginning of the actual command content.
-            */
-            extractTxtIfExists(section, 'div[data-index]>div')
-            extractTxtIfExists(section, 'div.cmd-cursor-line', 'span.cmd-prompt')
-            if(copied.length) return;
-
-
-            // Search different lines inside one div[data-index].
-            extractTxtIfExists(section, 'div')
-            if(copied.length) return;
-
-            // At this point, only bare text in a single element has been selected
-            copied.push(section.text())
-        }
-
-        const selection = window.getSelection()
-        const copied = []
-        for(let iR=0;iR<selection.rangeCount;iR++){
-            const section = $( selection.getRangeAt(iR).cloneContents() )
-            copied.push( getTxtFromSection(section) )
-        }
-        text = copied.join('\n')
-
-    }else if(document.selection && document.selection.type != "Control") {
-        console.warn("Unsupported copy from PMT terminal.")
-        text = document.selection.createRange().text;
-    }
-
-    // Just like usual, jQuery terminals are messing with the content, replacing spaces
-    // with "\u00a0"... x/
-    text = text.replace(/\u00a0/ug, " ")
-
-    // Strip ONE trailing new line if exist, because it belongs to the end of the current
-    // line (hence, messing what the user actually wants... generally)
-    if(text.endsWith('\n')){
-        text = text.slice(0,-1)
-    }
-    return text.endsWith('\n') ? text.slice(0,-1) : text;
+/**Generic "change" event factory.
+ *
+ * @obj: object to mutate
+ * @prop: property of the object to update
+ * @inputProp; property name of the context object from which to extract the _already updated_ value.
+ * */
+const valueAssigner=(obj, prop, inputProp='value')=>function(){
+    obj[prop] = this[inputProp]
+    // console.log(JSON.stringify(obj[prop]))
 }
+
+
+
+/**Create a textarea object automatically updating the @obj[@prop] value.
+ * */
+export function buildJqTextArea(obj, prop, options={}){
+    options = defaultOptions(options, prop)
+    const kls     = `class="full-width ${ options.inputClass||"" }"`
+    const content = obj[prop]??""
+    const nLines  = content.split('\n').length
+    const html    = stuffWithTooltip(
+        options.tag ?? 'div', options,
+       `<textarea id="${ options.inputId }"  ${kls} placeholder="${ options.placeholder??"" }">${ content }</textarea>`,
+    )
+
+    const txtArea = html.find('textarea')
+    txtArea.css('overflow-y','auto')
+    txtArea.attr('rows', nLines)
+    if(options.resize) txtArea.css('resize', options.resize)
+    txtArea.on('change', valueAssigner(obj, prop))
+
+    return html
+}
+
+
+
+/**Create a checkbox object automatically updating the @obj[@prop] value.
+ * */
+export function buildJqCheckBox(obj, prop, options={}){
+    options.tagClass    = ("horizontal "+(options.tagClass??"")).trim()
+    options.extraStyles = "grid-template-columns: max-content max-content;grid-gap:5px;"
+    options.labelFirst ??= false
+    options = defaultOptions(options, prop)
+    const kls = options.inputClass ? `class="${ options.inputClass }"`:""
+    const html = stuffWithTooltip(
+        'div', options,
+        `<input type="checkbox" id="${ options.inputId }" ${kls} ${ obj[prop]?'checked':'' }>`,
+    )
+    return $(html).on('click', 'input', valueAssigner(obj, prop, 'checked'))
+}
+
+
+
+/**Create an input text object automatically updating the @obj[@prop] value.
+ * */
+export function buildJqText(obj, prop, options={}){
+    options = defaultOptions(options, prop)
+    const kls  = options.inputClass ? `class="${ options.inputClass }"`:""
+    const html = stuffWithTooltip(
+        'div', options,
+        `<input type="text" id="${ options.inputId }" ${kls} value="${ obj[prop]??"" }" placeholder="${ options.placeholder??"" }">`
+    )
+    return $(html).on('change', 'input', valueAssigner(obj, prop))
+}
+
+
+
+/**Create a select object automatically updating the @obj[@prop] value.
+ * At creation time, the current value of @obj[@prop] is automatically selected.
+ *
+ * @valuesArr: array of strings, for all the possible choices (in desired order).
+ *             Keep in mind if there are other types ni there, they will be converted
+ *             automatically to strings at DOM level...
+ * */
+export function buildJqSelect(obj, prop, valuesArr, options={}){
+    options = defaultOptions(options, prop)
+
+    const kls    = options.inputClass ? `class="${ options.inputClass }"`:""
+    const select = `<select id="${ options.inputId }" ${kls}>`+valuesArr.map( v=>
+        `<option value="${ v }"${ v!==obj[prop]?'' : ' selected="selected"' }>${ v }</option>`
+    ).join('')+"</select>"
+
+    const html = stuffWithTooltip('div', options, select)
+    return html.on('change', 'select', valueAssigner(obj, prop))
+}
+
+
+
+
+
 
 
 
@@ -693,30 +809,12 @@ export const noStorage = function () {
 }
 
 
-/**Extract the given ID data from the localStorage, checking if it's not an outdated
- * or invalid structure.
- * @returns: [storage_data, outdated]
+
+
+
+/**Forbid writing these properties from pyodide.
  * */
-export function getIdeDataFromStorage(editorId, forThis=null){
-
-    let storage  = localStorage.getItem(editorId) || ""
-    let upToDate = false
-    try{
-      const obj = JSON.parse(storage || '{}')
-      upToDate  = "hash code done name zip".split(' ').every(k=> k in obj)
-      if(upToDate) storage=obj
-    }catch(_){}
-
-    if(!upToDate){
-        // Here, `storage` is the user code itself (initial implementation of the localStorage)
-        storage = freshStore(storage, forThis)
-    }
-    return [storage, !upToDate]
-}
-
-
-/**Forbid writing these properties from pyodide. */
-export const FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
+export const PMT_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
     code
     done
     hash
@@ -724,17 +822,52 @@ export const FORBIDDEN_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
     zip
 `.trim().split(/\s+/))
 
-export function freshStore(code, forThis=null){
-    return {
-      code: code || "",
-      done: 0,            // -1: fail, 0: unknown, 1:success
-      ...( !forThis ? {}:{
-          hash: forThis.srcHash,
-          name: forThis.pyName,
-          zip:  forThis.export,
-        })
-    }
+
+
+/**Extract the given ID data from the localStorage, checking if it's not an outdated
+ * or invalid structure.
+ * @returns: [storage_data, upToDate]
+ *
+ * WARNING:
+ *  1) Redactors might store extra fields in the LocalStorage, so DO NOT cleanup the thing...
+ *  2) used in CodEx...
+ * */
+export function getIdeDataFromStorage(editorId, ide=null){
+
+    // Originally, the storage value was just the user's code, so keep extracting as this:
+    let codeOrStorageAsStr = localStorage.getItem(editorId) || ""
+
+    let obj  = {}
+    let code = codeOrStorageAsStr
+    try{
+      obj = JSON.parse(codeOrStorageAsStr || "{}")
+      code = obj.code ?? ""
+    }catch(_){}
+
+    const upToDate = PMT_LOCAL_STORAGE_KEYS_WRITE.every(k=> k in obj)
+    const storage  = upToDate ? obj : freshStore(code, obj, ide)
+
+    return [storage, upToDate]
 }
+
+
+
+/**Build a default IDE storage object, taking care of the logic involved in various PMT versions.
+ *
+ * WARNING: Redactors might store extra fields in the LocalStorage, so DO NOT cleanup the thing...
+ * */
+export function freshStore(code, storage={}, ide=null){
+
+    storage.code = code || ""
+    storage.done ??= 0              // -1: fail, 0: unknown, 1:success
+    if(ide) ide.forceUpdateStorage(storage)
+    return storage
+}
+
+
+
+
+
 
 
 
@@ -742,6 +875,7 @@ export function freshStore(code, forThis=null){
 // For backward compatibility (hooks and co'):
 globalThis.PythonError        = PythonError
 globalThis.CONFIG             = CONFIG
+globalThis.sleep              = sleep
 globalThis.subscribeWhenReady = subscribeWhenReady
 LOGGER_CONFIG.ACTIVATE && console.log("async subscriber updated")
 
@@ -751,6 +885,7 @@ globalThis.setStorage    = noStorage
 globalThis.delStorage    = noStorage
 globalThis.keysStorage   = noStorage
 globalThis.config        = config
+globalThis.isDark        = isDark
 globalThis.downloader    = downloader
 globalThis.uploader      = uploader
 globalThis.uploaderAsync = uploaderAsync

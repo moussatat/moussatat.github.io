@@ -26,6 +26,7 @@ import {
   waitForPyodideReady,
 } from 'functools'
 import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
+import { RunningProfile } from '2-pyodideSectionsRunner-runner-pyodide'
 import { IdeRunner } from '4-ideRunner-ide'
 
 
@@ -44,7 +45,9 @@ class IdeTesterGuiManager extends IdeRunner {
     this.toSwap      = [this.data, ()=>""] // nothing to swap...
     this.ides_cache  = {}
     this.test_cases  = []   // List[conf]: Linearized version of CASES_DATA
-    this.std_capture = []   // Full stdout+stdErr capture, AFTER any jQuery.terminal formatting
+    this.std_capture = []   // Full stdout+stdErr capture,. Considering jQTerm formatting:
+                            //  * any content coming from pyodide stdout is NOT FORMATTED YET
+                            //  * any content coming from JS logistic IS ALREADY FORMATTED.
     this.counters    = {skip:0, remaining:0, failed:0, success:0}
     this.stopTests   = false
     this.fullCode    = ""   // Initial loaded code (associated to one conf/test)
@@ -269,7 +272,8 @@ class IdeTesterGuiManager extends IdeRunner {
 
   // Override
   terminalEcho(content, options){
-    this.std_capture.push(content)
+    const withTail = !options || (options.newline??true) ? content+'\n' : content
+    this.std_capture.push(withTail)
     super.terminalEcho(content, options)
   }
 
@@ -482,16 +486,18 @@ class IdeTesterGuiManager extends IdeRunner {
 export class IdeTester extends IdeTesterGuiManager {
 
 
-  constructor(editorId){
-    super(editorId)
+  // @Override
+  build(){
+    super.build()
 
     this.runners = {
-      play:     this.playFactory(CONFIG.runningMode.testingPlay),
-      validate: this.validateFactory(CONFIG.runningMode.testingValid),
+      play: this.playFactory(RunningProfile.PROFILE.testingPlay),
+      validate: this.validateFactory(RunningProfile.PROFILE.testingValid),
+      validateCorr: this.validateCorrFactory(RunningProfile.PROFILE.testingCorr),
       terminal: async ()=>{ await this.runnerTerm(this.conf.term_cmd) },
+      auto_run: this.runner,
     }
   }
-
 
 
   async runAllTests(targets, forceRun=false){
@@ -522,14 +528,21 @@ export class IdeTester extends IdeTesterGuiManager {
 
     /* Running everything in order: it's actually a bit faster (probably because not queueing again
        and again while waiting in getIdeData...?). So don't bother with Promise.all anymore...  */
-    let errOrNull=null
+    let errOrNull = null
     try{
       for(const conf of confsToRun){
         if(this.stopTests) break
+
         this.conf = conf
         LOGGER_CONFIG.ACTIVATE && jsLogger('[Testing] - start', conf.ide_name)
-        const runningKind = conf.term_cmd!==undefined ? 'terminal'
-                          : conf.run_play ? 'play' : 'validate'
+
+        const hasCmd      = conf.term_cmd !== undefined
+        const runningKind = conf.auto_run ? (hasCmd ? 'terminal' : 'auto_run')
+                          : hasCmd        ? 'terminal'
+                          : conf.run_play ? 'play'
+                          : conf.run_corr ? 'validateCorr'
+                                          : 'validate'
+
         await this.runners[ runningKind ]()
         LOGGER_CONFIG.ACTIVATE && jsLogger('[Testing] - done', conf.ide_name, '\n')
       }
@@ -647,7 +660,7 @@ export class IdeTester extends IdeTesterGuiManager {
 
   // @Override
   buildAsyncPythonExecutors(){
-    super.buildAsyncPythonExecutors(CONFIG.runningMode.testingCmd)
+    super.buildAsyncPythonExecutors(RunningProfile.PROFILE.testingCmd)
   }
 
 
@@ -706,23 +719,28 @@ export class IdeTester extends IdeTesterGuiManager {
     if(failedAssertions) msg.push(failedAssertions)
 
 
-    if(this.conf.in_error_msg && !runtime.stdErr.includes(this.conf.in_error_msg)){
-      msg.push(`The error message should contain; "${this.conf.in_error_msg}"`)
-    }
-    if(this.conf.not_in_error_msg && runtime.stdErr.includes(this.conf.not_in_error_msg)){
-      msg.push(`The error message should NOT contain; "${this.conf.not_in_error_msg}"`)
+    const checkMessageInclusionOrMatch=(prop)=>{
+      const data = this.conf[prop]
+      if(!data) return;
+
+      const checkInclude = typeof(data) == 'string'
+
+      const present  = !prop.includes('not')
+      const announce =  prop.includes('error') ? "error message" : "stdout/stderr"
+      const verb     =  checkInclude ? "include" : "match"
+      const negation =  present ? '' : 'NOT '
+      const outcome  = checkInclude ? runtime.stdErr.includes(data) : data.test(fullOut)
+
+      if(outcome!==present){
+        msg.push(`The ${ announce } should ${ negation }${ verb }: ${ prop }="${ data }"`)
+      }
     }
 
-    if(this.conf.std_capture_regex && !this.conf.std_capture_regex.test(fullOut) ){
-      msg.push(
-        `The std output/error should match ${ this.conf.std_capture_regex }, but found:\n\n${ fullOut }`
-      )
-    }
-    if(this.conf.not_std_capture_regex && this.conf.not_std_capture_regex.test(fullOut) ){
-      msg.push(
-        `The std output/error should NOT match ${ this.conf.not_std_capture_regex }, but found:\n\n${ fullOut }`
-      )
-    }
+    checkMessageInclusionOrMatch('in_error_msg')
+    checkMessageInclusionOrMatch('not_in_error_msg')
+
+    checkMessageInclusionOrMatch('std_capture_regex')
+    checkMessageInclusionOrMatch('not_std_capture_regex')
 
 
     if(!msg.length && runtime.stopped === this.conf.fail){
