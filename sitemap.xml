@@ -61,11 +61,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://127.0.0.1:8000/2gt/AP01/</loc>
-         <lastmod>2025-05-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>http://127.0.0.1:8000/dnl/</loc>
          <lastmod>2025-05-07</lastmod>
          <changefreq>daily</changefreq>
