@@ -41,7 +41,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.6.8">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.6.14">
     
     
       
@@ -49,7 +49,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -61,14 +61,14 @@ If not, see <https://www.gnu.org/licenses/>.
     
   
   
-  <style>:root{--md-admonition-icon--coeur:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z"/></svg>');}</style>
+  <style>:root{--md-admonition-icon--coeur:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m12%2021.35-1.45-1.32C5.4%2015.36%202%2012.27%202%208.5%202%205.41%204.42%203%207.5%203c1.74%200%203.41.81%204.5%202.08C13.09%203.81%2014.76%203%2016.5%203%2019.58%203%2022%205.41%2022%208.5c0%203.77-3.4%206.86-8.55%2011.53z%22/%3E%3C/svg%3E');}</style>
 
 
 
     
     
 
-<script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
+<script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
 
 
 
@@ -93,6 +93,7 @@ If not, see <https://www.gnu.org/licenses/>.
 <script src="../../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script type="text/javascript">
+if(!window.CONFIG) window.CONFIG={}
 CONFIG.argsFigureDivId="figure1"
 CONFIG.exportZipWithNames=false
 CONFIG.exportZipPrefix=""
@@ -105,8 +106,9 @@ CONFIG.language="fr"
 CONFIG.pmtUrl="https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
 CONFIG.pythonLibs=['alien_python', 'turtle']
 CONFIG.siteUrl="http://127.0.0.1:8000/"
-CONFIG.version="4.2.5"
-CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "kbd": ""}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}</script>
+CONFIG.version="4.4.5"
+CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "kbd": ""}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "restartConfirm": {"em": 0, "msg": "ATTENTION: r\u00e9initialiser l'\u00e9diteur fera perdre les anciens codes, status de validation et historiques.", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}
+</script>
 <script src="../../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script src="../../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -251,11 +253,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -294,6 +298,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
@@ -326,9 +331,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../.." class="md-tabs__link">
         
+  
   
     
   
@@ -343,9 +350,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       
+  
   
   
   
@@ -354,6 +363,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <li class="md-tabs__item">
         <a href="../../teds/" class="md-tabs__link">
           
+  
   
   Terminale
 
@@ -370,11 +380,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../1eds/" class="md-tabs__link">
           
+  
   
   Première
 
@@ -388,11 +400,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../2gt/" class="md-tabs__link">
           
+  
   
   Seconde
 
@@ -405,6 +419,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
         
   
   
+  
     
   
   
@@ -413,6 +428,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../" class="md-tabs__link">
           
+  
   
   🐍 Python
 
@@ -426,11 +442,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../snt/" class="md-tabs__link">
           
+  
   
   🤖 SNT
 
@@ -444,11 +462,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../dnl/" class="md-tabs__link">
           
+  
   
   DNL
 
@@ -462,9 +482,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../../tags/" class="md-tabs__link">
         
+  
   
     
   
@@ -531,6 +553,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🏡 Accueil
     
@@ -551,6 +574,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -564,6 +588,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Terminale
@@ -590,6 +615,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -603,6 +629,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Ens. de spécialité
@@ -630,6 +657,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../teds/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -652,6 +680,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../teds/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -673,6 +702,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../teds/progression2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -710,6 +740,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -723,6 +754,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Première
@@ -750,6 +782,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../1eds/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -771,6 +804,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../1eds/cours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🎯 Cours et exercices
@@ -794,6 +828,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../1eds/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -815,6 +850,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../1eds/progression2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -844,6 +880,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -857,6 +894,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Seconde
@@ -884,6 +922,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../2gt/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -905,6 +944,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../2gt/cours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🎯 Cours et exercices
@@ -928,6 +968,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../2gt/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -949,6 +990,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../2gt/progression/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -980,6 +1022,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
         
         
@@ -996,6 +1039,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
+  
   
   <span class="md-ellipsis">
     🐍 Python
@@ -1023,6 +1067,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🏡 Ressources pour la classe
     
@@ -1046,6 +1091,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1059,6 +1105,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     👣 Parcours de découverte
@@ -1086,6 +1133,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-00/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) Découvrir Python en 1h
     
@@ -1107,6 +1155,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-01/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     IDE et consoles
@@ -1130,6 +1179,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-02/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Types de valeurs et opérations
     
@@ -1151,6 +1201,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-03/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Variables et affectations
@@ -1174,6 +1225,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-04/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Librairies et compléments
     
@@ -1195,6 +1247,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-05/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les fonctions
@@ -1227,6 +1280,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
     Les instructions conditionnelles
     
@@ -1238,6 +1292,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
+  
   
   <span class="md-ellipsis">
     Les instructions conditionnelles
@@ -1326,6 +1381,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-07/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) Fonctions et tests
     
@@ -1347,6 +1403,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-08/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     (TD) Silent Teacher
@@ -1370,6 +1427,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-09/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Les boucles finies
     
@@ -1391,6 +1449,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-10/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les boucles conditionnées
@@ -1414,6 +1473,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-11/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) PY-rates
     
@@ -1435,6 +1495,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-1eds-00/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les listes
@@ -1465,6 +1526,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1478,6 +1540,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     ⚙️ TP (seconde)
@@ -1505,6 +1568,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../TP_alien/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🚧 Alien (débranché)
     
@@ -1526,6 +1590,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../TP_turtle/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🚧 Le module turtle
@@ -1549,6 +1614,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../TP_kandinsky/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🚧 Le module kandinsky
     
@@ -1570,6 +1636,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../TP_test/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🚧 Test
@@ -1601,6 +1668,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../bac_a_sable/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     💻 Bac à Sable
     
@@ -1629,6 +1697,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1642,6 +1711,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     🤖 SNT
@@ -1669,6 +1739,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Introduction
     
@@ -1690,6 +1761,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1703,6 +1775,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Codage de l'information
@@ -1730,6 +1803,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/CodagesA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Le binaire
     
@@ -1751,6 +1825,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/CodagesB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Le hexadécimal
@@ -1774,6 +1849,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/CodagesC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Les caractères
     
@@ -1795,6 +1871,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/CodagesD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - Les images
@@ -1825,6 +1902,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1838,6 +1916,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Données structurées
@@ -1865,6 +1944,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/DonneesA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -1886,6 +1966,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/DonneesB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Structurer
@@ -1909,6 +1990,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/DonneesC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Traiter
     
@@ -1930,6 +2012,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/DonneesD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - Projet
@@ -1960,6 +2043,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1973,6 +2057,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Internet
@@ -2000,6 +2085,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2021,6 +2107,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/InternetB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Les protocoles
@@ -2044,6 +2131,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Simuler un réseau
     
@@ -2066,6 +2154,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetD/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     4 - Impact écologique
     
@@ -2087,6 +2176,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/InternetE/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     5 - 🚧 P2P
@@ -2117,6 +2207,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2130,6 +2221,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Le Web
@@ -2157,6 +2249,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2178,6 +2271,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/WebB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Les langages
@@ -2201,6 +2295,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Les protocoles
     
@@ -2223,6 +2318,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebD/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     4 - 🚧 PageRank
     
@@ -2244,6 +2340,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/WebE/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     5 - 🚧 Les cookies
@@ -2274,6 +2371,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2287,6 +2385,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Les réseaux sociaux
@@ -2314,6 +2413,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2335,6 +2435,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Modélisation
@@ -2358,6 +2459,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - 🚧 Les infox
     
@@ -2379,6 +2481,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - 🚧 Données personnelles
@@ -2402,6 +2505,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxE/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     5 - 🚧 Harcèlement et cyberviolences
     
@@ -2423,6 +2527,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxCours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     6 - Le bilan
@@ -2453,6 +2558,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2466,6 +2572,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Objets connectés
@@ -2492,6 +2599,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ObjetsConnectesA/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     1 - Découverte
@@ -2522,6 +2630,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2535,6 +2644,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Le Numérique
@@ -2562,6 +2672,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/NumeriqueA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - 🚧 Découverte
     
@@ -2584,6 +2695,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/NumeriqueB/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     2 - 🚧 Numérique et logistique
     
@@ -2605,6 +2717,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/NumeriqueC/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     3 - 🚧 Parcours PIX
@@ -2642,6 +2755,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2655,6 +2769,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     DNL
@@ -2682,6 +2797,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../dnl/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -2703,6 +2819,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../dnl/archive2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🗂️ Archives 2023-2024
@@ -2732,6 +2849,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../tags/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     ️🏷️ tags
@@ -3088,7 +3206,7 @@ Soit le code suivant :
 </ol>
 <p><div id="global_editor_0a67633582ca86bc5ea7a2d700325e355f85256a" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_0a67633582ca86bc5ea7a2d700325e355f85256a"></div><span id="comment_editor_0a67633582ca86bc5ea7a2d700325e355f85256a" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_0a67633582ca86bc5ea7a2d700325e355f85256a" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_0a67633582ca86bc5ea7a2d700325e355f85256a">5</span>/<span id="compteur_editor_0a67633582ca86bc5ea7a2d700325e355f85256a-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_0a67633582ca86bc5ea7a2d700325e355f85256a"      class="py_mk_hidden" data-search-exclude >
-.128013éne8ca u2m1o3Vlb/0ditpr)hyvg(=;qkS:Pz4sf050t0d0v0g0u0p0N0h0f0p0g0N0N0E010v0u0w010406050N0i0k0k0g0x0A040I0m0p0i0)0m0c050r0:0=0@0_0.0w040519121c0r190.0t0u0B0X0Z0#0%0z0u0C0z0p1q0z0v0,050S0q0p0d1l0!0$011p1r1t1r0v1z1B1x0v0x1a0v0z0X0|0N0w0g0c0%0j011D1n010O0U0d0c0g0k0d1x1W1Y1%1F1*1B1-1/0,0a0h0K0x0m0w0m0N0u0 0c0h0Q1U0x0x0d0f27121=0c1a0r1S2k1P1R1Q1y0t1@0%1t0c1,241x1i1k0Y1E2u0u2w0c0m2A1x0w2d1a2i2k2O0/1X282C1(2H0x0?0p0,0l2h2S0-2R1?2U1F2W2Y0,0j2$1Y2(2i2t012-0g2Z040n2;2j0.2@2+0%2`2|0M2 2k2L0d2k2A2n0t1R2s33010f2I1:1a3d1b2M2)2j38053k0Q2N2S2^0c0,0g0C0d380h3r2^0m0,0E3F3H3i0k0u2/0s38313y3i0H0,0u0O3M321m2,3B3D3#3V3%0%3J04020C0v0F3L132%3G3$2D013P2!0e3+2*3-010+040J3F0h4a064a4a3N440c0q0,2L2F0v3t3|1(460D4n3,3}0N1#3:0G0i0m3?0o0m0i0W230i0B0d0L0h0B4A0d0x024y4A0F4s433}460y3F3U4V2V4i044k0c4m3_2=4f4W0,4r4,3s4o1F4v0,4Q4z4B4D0W0m0q0N4O4I2d4K1B0h0x0b0:0p0S0v4{4S4U2T444X3T123v3b1d3q0r3o2l3f122o5v0g1A5o5r1j2(5r0R0T0V04.
+.1280138osqe =iryéntVS2(p4dPgczl1)avhu;3/m:k0fb050u0f0n0C0i0z0d0g0x0z0C0d0d0h010n0i0s010406050d0F0J0J0C0j0k040p0c0z0F0)0c0m050I0:0=0@0_0.0s040519121c0I190.0u0i0D0X0Z0#0%0E0i0w0E0z1q0E0n0,050S0O0z0f1l0!0$011p1r1t1r0n1z1B1x0n0j1a0n0E0X0|0d0s0C0m0%0q011D1n010N0U0f0m0C0J0f1x1W1Y1%1F1*1B1-1/0,0a0g0v0j0c0s0c0d0i0 0m0g0Q1U0j0j0f0x27121=0m1a0I1S2k1P1R1Q1y0u1@0%1t0m1,241x1i1k0Y1E2u0i2w0m0c2A1x0s2d1a2i2k2O0/1X282C1(2H0j0?0z0,0A2h2S0-2R1?2U1F2W2Y0,0q2$1Y2(2i2t012-0C2Z040H2;2j0.2@2+0%2`2|0t2 2k2L0f2k2A2n0u1R2s33010x2I1:1a3d1b2M2)2j38053k0Q2N2S2^0m0,0C0w0f380g3r2^0c0,0h3F3H3i0J0i2/0M38313y3i0L0,0i0N3M321m2,3B3D3#3V3%0%3J04020w0n0G3L132%3G3$2D013P2!0b3+2*3-010+040K3F0g4a064a4a3N440m0O0,2L2F0n3t3|1(460r4n3,3}0d1#3:0e0F0c3?0o0c0F0W230F0D0f0y0g0D4A0f0j024y4A0G4s433}460B3F3U4V2V4i044k0m4m3_2=4f4W0,4r4,3s4o1F4v0,4Q4z4B4D0W0c0O0d4O4I2d4K1B0g0j0l0:0z0S0n4{4S4U2T444X3T123v3b1d3q0I3o2l3f122o5v0C1A5o5r1j2(5r0R0T0V04.
 </div>
 </div>
 <div class="admonition example">
@@ -3415,7 +3533,7 @@ Soit le script suivant :
 </ol>
 <p><div id="global_editor_aa234e88c83d9103e53efa163529e1e2a4259bd2" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_aa234e88c83d9103e53efa163529e1e2a4259bd2"></div><span id="comment_editor_aa234e88c83d9103e53efa163529e1e2a4259bd2" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_aa234e88c83d9103e53efa163529e1e2a4259bd2" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_aa234e88c83d9103e53efa163529e1e2a4259bd2">5</span>/<span id="compteur_editor_aa234e88c83d9103e53efa163529e1e2a4259bd2-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_aa234e88c83d9103e53efa163529e1e2a4259bd2"      class="py_mk_hidden" data-search-exclude >
-.128013éne8ca u2m1o3Vlb/dit5pr)hyvg(=;qk6S:Pz4sf050s0d0u0g0t0p0O0h0f0p0g0O0O0E010u0t0w010406050O0i0k0k0g0x0A040J0m0p0i0*0m0c050r0;0?0^0`0/0w04051a131d0r1a0/0s0t0B0Y0!0$0(0z0t0C0z0p1r0z0u0-050T0q0p0d1m0#0%011q1s1u1s0u1A1C1y0u0x1b0u0z0Y0}0O0w0g0c0(0j011E1o010P0V0d0c0g0k0d1y1X1Z1(1G1+1C1.1:0-0a0h0L0x0m0w0m0O0t100c0h0R1V0x0x0d0f28131?0c1b0r1T2l1Q1S1R1z0s1^0(1u0c1-251y1j1l0Z1F2v0t2x0c0m2B1y0w2e1b2j2l2P0:1Y292D1)2I0x0@0p0-0l2i2T0.2S1@2V1G2X2Z0-0j2%1Z2)2j2u012.0g2!040n2=2k0/2^2,0(2{2}0N302@2T2_360-0v39323b342`0m2Y2|0-0I391e2N132B2o0s1S2t3j0f2J1;1b3u1c3s2R142(053A0R2O3i1n2-0-0g0C0d390h2*2U3P0(0m0-0E3V3X2_0k0t2#3f3I2?3h2+3Z010H0-0t0P3(333?0c3R3T3|3O2E013#04020C0u0F3%3/2k3W3}443+2#0e423=440,040K3V0h4s064s4s3)3j0c0q0-2M2G0u3q4g1)4o0D4F431)0O1$470G0i0m4a0o0m0i0X240i0B0d0M0h0B4S0d0x024Q4S0F4K4m4H0-0y3V3;3Y443^040d0W3U4d044f4L1G4o4q514v0h4u4v4x3~4A044C0c4E515d4n0-4J5k4G1G4N0-4,4R4T4V0X2x0h4Y4!4$1Y0X4(0u4*5u4.4:4`4=044@584_3c5f5h5j2R5q0(4I5L2_5s4P5v0F4U4W0h0m0q0O4*4!2e4$1C0h0x0b0;0p0T0u5J4a5!3j4o5P2P0/0r3L0d2l2M693t1k3v2o2r2m0g1B6c0r3u660R0T0V0O04.
+.1280138osqe =5iryéntVS2(p4dPgczl1)avhu;3/6m:kfb050v0f0o0D0j0A0d0g0y0A0D0d0d0h010o0j0t010406050d0G0L0L0D0k0l040q0c0A0G0*0c0n050J0;0?0^0`0/0t04051a131d0J1a0/0v0j0E0Y0!0$0(0F0j0x0F0A1r0F0o0-050T0P0A0f1m0#0%011q1s1u1s0o1A1C1y0o0k1b0o0F0Y0}0d0t0D0n0(0r011E1o010O0V0f0n0D0L0f1y1X1Z1(1G1+1C1.1:0-0a0g0w0k0c0t0c0d0j100n0g0R1V0k0k0f0y28131?0n1b0J1T2l1Q1S1R1z0v1^0(1u0n1-251y1j1l0Z1F2v0j2x0n0c2B1y0t2e1b2j2l2P0:1Y292D1)2I0k0@0A0-0B2i2T0.2S1@2V1G2X2Z0-0r2%1Z2)2j2u012.0D2!040I2=2k0/2^2,0(2{2}0u302@2T2_360-0i39323b342`0c2Y2|0-0K391e2N132B2o0v1S2t3j0y2J1;1b3u1c3s2R142(053A0R2O3i1n2-0-0D0x0f390g2*2U3P0(0c0-0h3V3X2_0L0j2#3f3I2?3h2+3Z010N0-0j0O3(333?0n3R3T3|3O2E013#04020x0o0H3%3/2k3W3}443+2#0b423=440,040M3V0g4s064s4s3)3j0n0P0-2M2G0o3q4g1)4o0s4F431)0d1$470e0G0c4a0p0c0G0X240G0E0f0z0g0E4S0f0k024Q4S0H4K4m4H0-0C3V3;3Y443^040f0W3U4d044f4L1G4o4q514v0g4u4v4x3~4A044C0n4E515d4n0-4J5k4G1G4N0-4,4R4T4V0X2x0g4Y4!4$1Y0X4(0o4*5u4.4:4`4=044@584_3c5f5h5j2R5q0(4I5L2_5s4P5v0H4U4W0g0c0P0d4*4!2e4$1C0g0k0m0;0A0T0o5J4a5!3j4o5P2P0/0J3L0f2l2M693t1k3v2o2r2m0D1B6c0J3u660R0T0V0d04.
 </div>
 </div>
 <div class="admonition tip py_mk_admonition_qcm qcm_single py_mk_qcm_id_00009">
@@ -3770,7 +3888,7 @@ On rappelle que <code>x%n</code> (lire <span class="arithmatex">\(x\)</span> mod
 </ol>
 <p><div id="global_editor_183bc2b8f71ae4fc085c55f0f511a0a463f2413b" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_183bc2b8f71ae4fc085c55f0f511a0a463f2413b"></div><span id="comment_editor_183bc2b8f71ae4fc085c55f0f511a0a463f2413b" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_183bc2b8f71ae4fc085c55f0f511a0a463f2413b" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_183bc2b8f71ae4fc085c55f0f511a0a463f2413b">5</span>/<span id="compteur_editor_183bc2b8f71ae4fc085c55f0f511a0a463f2413b-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_183bc2b8f71ae4fc085c55f0f511a0a463f2413b"      class="py_mk_hidden" data-search-exclude >
-.128013ne8ca u27m1o3,lb/0dBit5*prAh)yvg(=;+qCk69S:P4sf050t0c0w0f0v0p0U0g0e0p0f0U0U0I010w0v0z010406050U0h0k0k0f0A0E040Q0m0p0h0:0m0b050r0`0|0~100^0z04051g191j0r1g0^0t0v0F0(0*0,0.0C0v0G0C0p1x0C0w0?050Z0q0p0c1s0+0-011w1y1A1y0w1G1I1E0w0A1h0w0C0(130U0z0f0b0.0i011K1u010V0#0c0b0f0k0c1E1%1)1.1M1;1I1@1_0?0a0g0S0A0m0z0m0U0v160b0g0X1#0A0A0c0e2e191|0b1h0r1Z2r1W1Y1X1F0t1~0.1A0b1?2b1E1p1r0)1L2B0v2D0b0m2H1E0z2k1h2p2r2V0_1(2f2J1/2O0A0}0p0?0g0l2o2Z0@2Y1}2#1M2%2)2+0i2.1)2:2p2A012^0f2*040g0n2|2q0^2 2?0.32340g0T382~2Z303e2+0x3i3a3k3c310m2(332+0O3p2;2!1t2@3u2_350j3z3b3C3d3E3w350d3I3r3K3t3v3f0P3Q2=3S3m040l0s3X3B2K3T3F0l2-1a2/3q3Y3*3!0l2{3/2}1k2T192H2u0t1Y2z3s0e2P1`1h3 1i3}2X3`2q05450X2U3R3?0?0B0M3i0g3A300m0?0I4o4q3s0k0v0?0l374d3j3=2$4l0u4v3J3*4s044u4D4p4K1/4y0?3o4D3;3)4G040u4n4P4w3S4M4O2V4Q4j4S4z3#3_2V4X3l0q0?2S2M0w3i4(3*0=040H4~4R1M0U1,04020L0h0m0w0J0B0u0g0I0g5a5c5e544.1M510o4J5p3d4l4$2X550.5r5t4F56585l5d5f0M5i5k5b5H5o5D5A0?5s4%5z315w5O4Y5q5R5C5Y0.570?5G5e4#5K5*0J5X305B5T5u5V4!5x2/4 1/510D3(300N0?0v0V5#3l4H5:3s4M0y0y693S4T044=2/4-5P014*4+6j5|2@5W4D6q0.6b6d6t5U6g6i2}6k5$6m0?0K663s0b0?4#6e4L0?6c6N4/0?6B2q0g6D5;0?0R3p6W6W6u314_044{0b4}6y5@51536/6l5(595M5e5g5J0c0U0w0g0h2f1W0v1)0G1I0g2k2m76781?0g0M5.6R5Z045 4W6(62040c1A655?6l6K044m7i6v6P6x5y5@6A6I4)4t6o6C6(7v5g7y6F046Q6?6E7E7t6E4M6H7U675_7N6w7N7T4,6(516!4W6$6X6J6*6,6.7C6l6;7N6^5.6|0g6~70720g747c1J7a0Z0b771J7e0u7h7R6Y7k603s7o7q647F4k7!8e6a7A7%4:6U356(6n8m4Z7M8p7G7P7B5{6z8t8y1M7W8I5v7w5`3{5U7$8B3*7(6p5U7+6#6$7K7;0A4|7N7_8S1/7{6`5f5,7 71738$84792l87897~2f0B8d7@6E5~8h3S8j0$0c8L018X7-8Z5U0b8#8%8*7j6=90308,5m0J788388780b02030n0P0J8:1(0%86848 8F6:0?7l4?194g0c2r2S9M3~1q402u2x2s0f1H9P0r3 0^9Z0Y0!0$04.
+.1280138osqe =C5,iryntAS2(p4dP*gc+l1)Bavhu;37/6m:k90fb050w0f0p0G0l0C0d0g0A0C0G0d0d0h010p0l0u010406050d0J0P0P0G0m0n040r0c0C0J0:0c0o050N0`0|0~100^0u04051g191j0N1g0^0w0l0H0(0*0,0.0I0l0z0I0C1x0I0p0?050Z0V0C0f1s0+0-011w1y1A1y0p1G1I1E0p0m1h0p0I0(130d0u0G0o0.0s011K1u010U0#0f0o0G0P0f1E1%1)1.1M1;1I1@1_0?0a0g0x0m0c0u0c0d0l160o0g0X1#0m0m0f0A2e191|0o1h0N1Z2r1W1Y1X1F0w1~0.1A0o1?2b1E1p1r0)1L2B0l2D0o0c2H1E0u2k1h2p2r2V0_1(2f2J1/2O0m0}0C0?0g0D2o2Z0@2Y1}2#1M2%2)2+0s2.1)2:2p2A012^0G2*040g0L2|2q0^2 2?0.32340g0v382~2Z303e2+0j3i3a3k3c310c2(332+0O3p2;2!1t2@3u2_350M3z3b3C3d3E3w350b3I3r3K3t3v3f0S3Q2=3S3m040D0T3X3B2K3T3F0D2-1a2/3q3Y3*3!0D2{3/2}1k2T192H2u0w1Y2z3s0A2P1`1h3 1i3}2X3`2q05450X2U3R3?0?0q0i3i0g3A300c0?0h4o4q3s0P0l0?0D374d3j3=2$4l0F4v3J3*4s044u4D4p4K1/4y0?3o4D3;3)4G040F4n4P4w3S4M4O2V4Q4j4S4z3#3_2V4X3l0V0?2S2M0p3i4(3*0=040t4~4R1M0d1,04020e0J0c0p0K0q0F0g0h0g5a5c5e544.1M510k4J5p3d4l4$2X550.5r5t4F56585l5d5f0i5i5k5b5H5o5D5A0?5s4%5z315w5O4Y5q5R5C5Y0.570?5G5e4#5K5*0K5X305B5T5u5V4!5x2/4 1/510E3(300R0?0l0U5#3l4H5:3s4M0y0y693S4T044=2/4-5P014*4+6j5|2@5W4D6q0.6b6d6t5U6g6i2}6k5$6m0?0B663s0o0?4#6e4L0?6c6N4/0?6B2q0g6D5;0?0Q3p6W6W6u314_044{0o4}6y5@51536/6l5(595M5e5g5J0f0d0p0g0J2f1W0l1)0z1I0g2k2m76781?0g0i5.6R5Z045 4W6(62040f1A655?6l6K044m7i6v6P6x5y5@6A6I4)4t6o6C6(7v5g7y6F046Q6?6E7E7t6E4M6H7U675_7N6w7N7T4,6(516!4W6$6X6J6*6,6.7C6l6;7N6^5.6|0g6~70720g747c1J7a0Z0o771J7e0F7h7R6Y7k603s7o7q647F4k7!8e6a7A7%4:6U356(6n8m4Z7M8p7G7P7B5{6z8t8y1M7W8I5v7w5`3{5U7$8B3*7(6p5U7+6#6$7K7;0m4|7N7_8S1/7{6`5f5,7 71738$84792l87897~2f0q8d7@6E5~8h3S8j0$0f8L018X7-8Z5U0o8#8%8*7j6=90308,5m0K788388780o02030L0S0K8:1(0%86848 8F6:0?7l4?194g0f2r2S9M3~1q402u2x2s0G1H9P0N3 0^9Z0Y0!0$04.
 </div>
 </div>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> Si <code>&lt;test1&gt;==True</code> et <code>&lt;test3&gt;==True</code>, l'instruction exécute <code>action_1()</code> et ignore le reste des tests pour exécuter <code>action_6()</code>     </p>
@@ -3887,8 +4005,8 @@ Soit le script suivant :
 </ol>
 </div><script type="text/javascript">
 CONFIG.needMermaid = false;
-CONFIG.overlordClasses = ["Terminal", "Qcm", "Ide"];
-globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/B}5{!prh]y[gFqkSx4s:fNa2 ,oV0ditE*-)AUI_v(=+C69zw\x1e0r010T0c0u0h0#0O0b0l0x0#0j0q0g0F0m0R0R0m0g0q0e0g0d0K0+0I0R0L0L0q0j0R0+0j0c0L0,0,0k0m1h0F0+0L0Q0j0k0j0,010H0M0/0t0|0b0K0h0c1B0M011F0T0v0_0W0L0z0T0W0Q0+0a1F010N1M0c0b0$0#0e0_0;0b0T1L011#1%1)0#0;0?1+1-1(1:1C1=1$010f0G0=1|1/1~1;1?011,0u0u271.1 1M2b0t0f0m0l0S0e1_0c0G0T0G2a22250e0u0c0T2r2t2v202k0O2t2r1{1,281/2w1M0t2I2C2M2h2P010c0E0e0l0f0R0c0R1L0y0w222Y2!2$2(0#1J1P0O0R2F0M2+2-2Z2#2%0R0#0C0.2`2|2Q0x2@0b0#2o0m350:0f0u0T0l1K220K2o1(0#1O1Q0b012,370t0S0#0.0v0S0;1L0b0f0l0l222A2q2o0h3B1L0W0j223z3B0c3b0S2t2*3u010K0f0T0O0#0u0f3s1C0I3m25220t2A0I0S3G2K0h2W2t0R0O3$1+400O0I0I1L1v0Q220e400I0c2(0m0K0e0C1L0T3*0c0p221`0@0_0{0#0Q0g0j0+0R0,0g0Q0d0R0k0L0j440m0+0K0Q4B0j0d1k0F0g0g0,0c4R1o1g0k0+171L1E1G1I1K203q1R1T1V1X1Z0x2b1(1*2U292G2-1^4p2g4_2j2224264^2O4`1M2d2f542i212Q2m2o2q0;2E3|0c2z2B2D2u2W2R2J4}5a5p2S4~55501%2~2:2)1C362X5A302=2B1Q2_3Y2}2/5H33353Z4+3a3c3e0T3g3i3k1M3m0S3o5T3t3;0x3w3y3A3C1C3E3G3I5k3V3M2i3P3R5/3U2o3X5D3Z3#3%3)3+1L3.0l3:2Q3?3^0l3`1;0j0n0j0Q0M0(0(0M0Q0a0j2b3}3 2T4244464L494b4d144g4i1C4k0f4m4o0=4q0`0|4T4J0q0q4I0m0F0q0+0k0c4Z0L0K0L1q0c0,1j6(0e0K0q0Q6S0e0k6X0,0F0Q4#1N4%1J1;5T1S1U1W1Y1!4{4@1}5x5c2X4|6M5w5b2b5259797g490O2e7f5p5e2p5n2`7b2y2A2C5h5o561N5v5s7k5u2J5t7B2.2 2(5M5z5O2;2?5K5R5N7L315Q7N6}393V3d2*3f3h3j2b5$5(383r5*3v3x3S5:0M5=3H1M3J5_3N1C5|1M7?5 3W2i5E643(3*3,0M696b1N6d3_4p1;0%6q0j0)6q0L0X6m6o6q0k6t0T3~404a2C43451C476B2C4c4e6F4j4l4n1M4}4r0|0m0k0I0Q180I0+0m156Y0K0I0j0m6*1i4T100c0K0m4c0m1z6+0e4G4G6|1F0#1H6 4*7.4,734/761@782N7l943`7p7B7i9a5y2c7n7j967q2n7s7z7u6t5k7x7t7G7y7e7I9e5q2T7F7J5G7M627U5B5I2@5L9D7O7V32347Y5T7#5W5Y7*3l3n3a5)5S5,7=5~3D3F7`017|3L7~0M8001823V612{633$88673-3/0c3;8f6f8h208b000r8s0H0a0k0Q0I0p001M2x8v6v418z6y8C6A576C8H4h8J6J8L0:7e8O0#0,6k4E0K0R0g8X0e4I0e0I0g0L0d160c0daN1v0g0RaH4f0d1w0g8R0g0e8_6~4)3739724.754;779d7b4?999v7b9ca?2b58a/2k7r5g2s7A9e7w5m9m9sa=9z9w5va_9E307Y7K9F7R2^7T9K9F7X9J7Z3r9Q7%5X7)5!3!9V3p8 3s9Y5-829$5?7{5^9+5{3Q815~9;859@6589689|9~0c3@8g6M1;a3a56r8m0a0La7a9abad8u8w6waj8B0M8Dan8F6D4faq6H8K6L1{aw4Q0L0m4u0m0,0IaH0L0e0L6W1laL0d1l6_110I0qaIaZ0R0d6WaZ0da#8{4(70bya*744:4=1^bb987E9i9b259h2V7Ba{cC1Na~9r7Bb39t5i7B9xb7cFb97Hb8a:9B5C9?bc7Q5Jbibec$9Mbjbo0_bq5D7(5Z7+bw9X5+bB9#5;9%5@3K0S5`3ObJ9/bL60bN3l9^668a8c9}6cbU6e6g200=2A3g6m6p0a4L4L0j0M030M0K0t3=0O0Ed40K0T0S0b0M3%0l090f4L6*0udMdO4T091)0K0udq0kds9-b=0a0gdU8sd#dn0cdp050M0$dW0Md/d*0)0Md,dpb-ah8y0^akb=am2cao6Eb{dJb}8Mav6O0}c91c0e1X0e1o0K1t6(aM0c8Q0I0F0k0R1d0d4Ec30d6.4T0j0gcs8|a%c;0bcx92a-98cMa;cEcJ9ea^c!a`9ga|3;cOb5cQ9pb4b09n3;7D9ueSe(cZcXc#7Pc%5Ebf5Hbh9Ic(bk5P9Nbn9P5Vbr9Sbu7,9Wby7:6}c~3TbD9(9*d49,9.9:da7Y87debR6adh8edjbW0?1;d{dX8rdsdtdvdxdzdBdD0hdFdHdJ0OdLdN0QdPdRfLdTdVfv0MdZ6l0Wd$d(1H3d0%d;dXfV8s8pd/fud}8x6xb;b?e4b^ap6Ge8as2-0R3B7n4t1b0g6Y6@0dc90K4O0m0e0q8,0g6%aC4L4Eg96@ck0d0q1g4JeDcu8~a)4-740W2Y1I0t3j1wcza.a?2!0K0G0G0M0D0T6F0HdU0MgM0M0901gPgP0M0%0!280u3.0e0cgOfK0c6l0RfN6*2z0S2A0M0R0K0bgF0l00g*0,0b0_0eg_8pgRgQgQdIgN2%0I0M0#0#dH3Bh80%250l0I0X1Che0I0ah82t0C0(2+gLh4bU0M2l0G0vhd0chf1$0$hh0Mhjhl0#hn0afB1(0Rf!0XhrgMh5hu0O0thyhfhD7x3gdIhFhm0T0C1ZhT0%hOh3hQht3W0#0c0h0t0T0xhVhg1ChY0udIg{0ThEhzhkh$4ia.eO4 a@cHa/0K0zg!6o0~dU0Sh6idg!04ig0d0M1CgNhPhu0udH0T0%gP0P3 gF2R0f0$0c0-d:0O1`gPg 0b3=iwiy01iA240M0O3d0=iF2AiH3j0MdQg$0,0G3FgI0TiLeT7oa?ildq1viiikie0Min0M4NiqgNgOh-iuiPiziBhSiEiGiIiK01iMiO1/iQiSgFiVcHiYj9i#i%dSi*0li,i.eW9ka cTb2e!cSb101hR9mh+iritd;0ldqilit2Y0ti?0Qit0h0G0zdq0IgP0l0Kd:3md-dX2%dyi`2%0$0u0K3Bg#dOdFg.0rjN0pd`i1g{dI0rjI0pgSdx0ijZ3%gI3jdUitgDcHi1jI8qd`0E0t1$jS0zk8282Eh+j0kpdx0Jg!0tgDiU7r0=g/00hK3jdXjY8bg|dG0_g/g!9m0akM0M0s0M0Eh,2%jJ9mkpgMdx0D0SiIiT0bg!0$3 3jiHkug?j.gEkyj(4k4g2skM0a2H5re*e.k{9ye.k2jZ2ykHdI9x0M2U5%1/g/0fl82^g!j(gPk%0T3%0xjL1?g*6lfB2o0B6JdX0G0x2tg_fEdGlth=1~dUfA3=g*0dgFlC0Mi#1,j(2BlM2sdJe$dylai1g_i-i(lMg;g}i(0G0alF0M0*g!54ldb0kfg_8yg_0M0hg*4(hEk!3+g!fudyj:fOlZdSlR0$g_ktjofOl%dS2%0h1J1/1$0D0Y0Z0Al}l+gZlkm02ej$iu0O0$lWkJl#i20el50M0U0J0Pk`c)e;3Ze?c*9Hc:mM7We}e`eGc?2{c^9T5#c{f6bA9!fad0bE9)bGfebI5}3TbMfjddbQ9{fn9~433^eF7+mrh?2u3bbU2i0qdc650l0O0z0#ka0=2i6Ifoa{2AjS2=gDf@d70vgD1+0v5k0C0#0m0T8anf22no0G1|7onvnx4lnznp2AiF3mnunwarfonA1|3+1`nO22h:1(2z5,0;c%ny1Mh:iY2idg22fE0Eh92%3Vk%2`6kn,dHn/83n=1L0k222%5lgD3UdF0;n0nBc=eRn:3.3^3geF2(f|0u2b2%4gdGd;0;hHag4bf}cR2`n$01hw0O0.0^ecnc3h0Sc=dn7nnB0Iorjz2`n+1M0G0u2qnA0vftc26.0eg31X0R4ucbbU6:0e4D0,6$4NaS4T0Q0FaK4Jo:0k6`cjca0q0k0kaL4A0Kek4wg7aXaD2b0T0.3(1,6afm8d3}320c4;9A2R3hpcfo6uf-b:6z48b@0#8Ge6f@nfatof3%2fp06(0FaNeyev4yaz0co{bU0K4w6@1n0c1l6$o:0q0,120Lgn8}a(3reI0+gt0Egvgx0LgzeLc!gCgEgGgI4hgKj2h0gSgUgWgYg!lpg/l?ivg.g:g=lMg^i(j|mdfOg h1gRj2hRh8ha2C0#h`hDh#oohohqqhhthvhxhjhBqoi3hGhIhK0bhMhCithR2RhUhjhX2BhZi2hfqBh%h)hUh,j0hRnWn0h_qLh|qNh~7^iJqPi4qqcA1*i87a7hibi;i`6oi@0bijj)imioi isj2jeixj5iTiDiFiHk)jbiMhz25r0gMitr3jgj6k%j7r8hukvra0=iLj1rir5jiiW0ujli!g!mb6*jqjsjci/cIi9i=ig0qi^q}i{q irrgr2ivjfrvrmj9rqdQjcj1rdg!rRj1j0ruiRrkkt3 rnk-jarrr#dUr,jhiUrxrzlRi$g_rEdFjt5djvcPjy5ljA7ujDe$jFrSj0kd6ojLj2jNdqihj2kjjVjXjZjImuj(i=j+j-j/l{4kg!j@kgj_lQj|1Dj k10Mk3fHk60cklj0oBkc3mkejNkijTkljE8pkWkX0Mksrojikxj%kAdAhzkykEoI0bmCoDdIk=e$k_kOkQkShzlT2Es$kYk!k)k$k(k*j9r=jY3WcHmzk?gZl)kMk cWeP7bcVa?l2mBmDl7l91~lclej(lh01ljllln1$q1lr0SlClvlxm5fOlAtI6Jmhi-0blGrClJ0MlLlNlfj`lRgFkVj.twlYl^jYs@s1l*tTl,l.79l:2tl=i(l@l!l`g$l|0Gl~rlm1jZt+l!3jm8i(mal?g_mftRmjmlmnu1mp2B0;d`mtdpdBmxtwj(kEl4s_mEmGmIe{9CmTmQ9G7Sc-e:c/9ObymV0ymXf3m!39f71Ff97@7_d27}m.bKm:fibnfkm@8bbS6cm{7*7Bo4h=h@nB3j0In4n63(n8nasSnU57eUninBfE0GnmnHnB0enr4hnMnF6Jv6nC2fnEu~01nQnJ8,6fvhb|vd1MnQ1,nS0=vinWs@0unZuBoun(ndpln,0Kn.0Sn:2on|1Cn@1M3M3avJn{2sn}n e!o2nbm u;oz0#o93Uob2#2Aftf{pAoi8,s^om3Upn8FoJs9otnGoN1QoyawsSs_h;2eoGptv`7xoLu*ovoP0#oR1;4uaI4c4v128$6X4Q6S0RpEc24g0e0F6W140e0+6+0F0j111k6/wBet6V1mcfaX1h8Rcng01A4op81|pbm^pd8vpfph9ejN7nn*wbv^aie0f/e3d pub`pwe92Xv.f}4N1qca0m0daI0j0K0c0Fc74B176S8Scj0jw 0Qek6Y0Icb1x0mpZeF71gr1Xp)p+g%dZ937c95tnp;gFgHgJitp{01gTgV1`p m3g%q2t{q4lgg;g?q9dSqbg~gOqfh2qWhtqjq{qlqnhiqAi5hp0wqHqu24qwi3qyx#qQi5hJs/qEhNx*h6qJx!i$q%h!x$qqqTh+x`0MqYh@q!i3qMbsh q*qphnq.tmi9q=53c!0Y0*dYdU0Y0odqrM0b0oyo6o0Fr_rUr401yrdqgP1$yntFyDyxxSyH0*yJywyF1?ywh,q|yr0V0V0LkeynyXyZd_ywy$gMp_r+yBiQyryol;3+e80Sg;0zjn5kgI0by`m0dI0*iLdUhzyV0*y*6n0MyWyY0My(z7zcy,gNr,y:d`t_y?4ky^y~y{mCy_i#1(0M0oz3k%2oh6y)zcz9zby%zazfyZzhgMzjyQy=dIzoztrBy|zRd`dI0Yzyr%iqrhy.jXkKivzU0b00l;r=3Jy}y s49fi:ymyL1xyqys6oyuyQig0LyAj4yDz|yMzHyJynyRyNyPyLyGzw0*yUh6zFy!zIzdAfy*z!rTA3zkzOy@zUz/zUzvz2jcz4zAzHz86oAjzey*zKj3rVA4y;zmzPz)zqzSzsARzVzwzYACzCyZzE0oy*d_y#zgz#ArzNAOAuAUAwAUzvzXAAzzreAJr,i#zQAUz+z-kvA;z;rGju5fs77vjzB8scknhDr*gNjI0#A9AFz2j2BhyEAFzxBmnLz AfjMkgBiz_0kBv0tBiA5yuj0jN0#Bt0jyZjRjTBxsq01kEn8y~6Jdpj(A9sxj.lXt sB1DBGynsFj{kIj~nLB(sKsMk5j#BLnaBo8bsrlM0_0zBTj%g!BW0cj,BYxGj=sCB%0oB)q)j}BnC9B/k4iJB=soBMBtjWBPjZBRB}suC0yoBXszB!j?BGywCasHB,6fCzCfsNCik9k:3hj!jJz9sWl_sY0bdUs!s$s%s)r=3 9kk;s.0ts:kDjZs?s^kIs{2Es}kPkRdUkTt22ut4gGt6r.k#k+s*l#tek;z(k@tjuz7Ck|2Le+2Qbac!truvkItu1-my0RldlOlgq0tBul0OlmieAetGdAlsluhEtLlzfFlCtRl+dztVlK6Jr Dmt#3jt%lUt)lbu6m6t-qcrDt:dxl-le2Nt^i12Yl?3$l^t~j;1Jl}0Ml undodXu5i(tM6*m7m9iuuci(ue1~ugmmmot;mqumm1uqDjg!uuy|uwmFmH4=c$uG9Le^mPc.bmmTe 0S7$c@bsc_9UlabxuQm$5.m(7^d1bFd3d57 d7fh84m=bP9`u)m_u+bVm}3lv!n1u?u^5#ddu{nbCJnev}z?2fv1nkv41Lnnnpv8nsvbvivseUvof^nPnIC2vmE^vpE~v73 gWvwnBnXvzh@vBE*vDpkwVfon-n`n;vUvN0Ln^vRvKdHFmfSvWo125vZo5v#o8q?lfptj.v+oew@ohvWok0Sv?oob.w72fosvioww0oAE(w3oF0uoHw82BwaERwcoQgDoS200Q0k0gxeaR1mpR8S130Iev6@8!aKc28,8$100LaR0F4Dwyc78Q4Zaa0L0+eoaR1z8W1e0I1o2)wRp9fIF(wW7Wpg2Ww#FgEQGrd~f.pq8Eptb_8IF30p0p.'
+CONFIG.overlordClasses = ["Ide", "Terminal", "GlobalRunnersManager", "Qcm"];
+globalThis.PAGE_IDES_CONFIG = '.\x1esqeNC]E5_rin-[VS4c!xBahvu6m0).b8owk =,yUtA(2pd*gzl1}{37/L:I9+fF\x1e0!010O0c0j0A0i0G0l0X0M0i0Y0h0$0q0E0T0T0E0$0h0r0$0F0v0z0-0T0R0R0h0Y0T0z0Y0c0R0+0+0#0E1h0q0z0R0B0Y0#0Y0+010)0J0/0S0|0l0v0A0c1B0J011F0O0w0_0m0R0V0O0m0B0z0D1F010L1M0c0l0x0i0r0_0;0l0O1L011#1%1)0i0;0?1+1-1(1:1C1=1$010y0a0=1|1/1~1;1?011,0j0j271.1 1M2b0S0y0E0X0k0r1_0c0a0O0a2a22250r0j0c0O2r2t2v202k0G2t2r1{1,281/2w1M0S2I2C2M2h2P010c0t0r0X0y0T0c0T1L0n0f222Y2!2$2(0i1J1P0G0T2F0J2+2-2Z2#2%0T0i0I0H2`2|2Q0M2@0l0i2o0E350:0y0j0O0X1K220v2o1(0i1O1Q0l012,370S0k0i0H0w0k0;1L0l0y0X0X222A2q2o0A3B1L0m0Y223z3B0c3b0k2t2*3u010v0y0O0G0i0j0y3s1C0-3m253I3+0i0V0j0G0y0S1L0B220G0j2%2f0k3a3@3_3{1C3Q1M250b3)3+2W0S2A0-0k3G2K0A2W2t0T3_2T3$0^0-0-1L1v3}1M0r4s0-0c2(0E0v0r0I1L0O3*0c0Z221`0@0_0{0i0B0$0Y0z0T0+0$0B0F0T0#0R0Y4u0E0z0v0B4#0Y0F1k0q0$0$0+0c4^1o1g0#0z171L1E1G1I1K203q1R1T1V1X1Z0M2b1(1*2U292G2-1^4P2g5j2j2224265i2O5k4z3 2f5u2i212Q2m2o2q0;2E4n0c2z2B2D2u4f2S4l5o5v5q2Q5Q5A2W2.2 2(3Y2}2/302=2B1Q2_5$1%2~2:3133353Z583a3c3e0O3g3i3k1M3m0k3o5_3t221F3w3y3A3C1C3E3G3I5K3V3M2i3P3R6b3U2o3X1C363!3$3(3*3,0J3.0X3:1M6w3?3^3`1L49013 410i436E466H2x0c4c6w4f4h4j0X4l1;0Y0%0Y0B0J0K0K0J0B0D0Y2b4o4q1+4s0G4u4w4/224A2C4C4E4G4I1C4K0y4M4O0=4Q0`0|4`4-0h0h4,0E0q0h0z0#0c500R0v0R1q0c0+1j7q0r0v0h0B7e0r0#7j0+0q0B521N541J1;5_1S1U1W1Y1!5l5h1}5T5C2X5m785S5B2b5s5z7U7#6|5y7!4f5E2p5N2`7W2y2A2C5H5O5w1N5Q5n5X7|2R2J805U2X5:305.865(2;2?5,5@5%5!5=34895_3V3d2*3f3h3j2b6264383r663v3x3S6c0J6e3H6C6h3L3N1C6l1M8A6o3W2i6s3#3%4d6x6z6B016D456G1C0R3~40266N8Z470J6I4b8T6V0c4i4k4P1;0Q6-0Y0,6-0R0C6)6+6-0#6:0O4p4s6}4t4v8#6{4z4B4D14714J4L4N1M5n4R0|0E0#0-0B180-0z0E157k0v0-0Y0E7s1i4`100c0v0E4C0E1z7t0r4*4*7H1F0i1H7K578v597O5c7R1@7T2N7*9%5R847W7%7-7|2d7(9)7.2n7:7`7=6:5K7^7;5P2J7 7)a12Ta47|5Z5;89a95)8d2^8f5/8b8iag7I398m5|5~8r3l3n3a655^0M698M3D3F8E8X8G0k6j3O6I8M3V6q2{3Z8R6v4e3-3/0c3;446F8,0#8%6L8*aV6Q4a6S8:816W8@781;6y000!930)0D0#0B0-0Z001M2x966=996^9b0J4x6|9f704H9j759l0:7Z9o0i0+6%4(0v0T0$9x0r4,0r0-0$0R0F160c0Fbw1v0$0Tbq4F0F1w0$9r0$0r9S7J5637397N5b7Q5e7S9:855g9,a7859/9-2b9=bU7W2l9_5G2s7{857@5M9{a5bX9@815WbY7Wac5#6r3Zb}31ae5-b 8g5;328jc5bN3ran8o5}8q603!as3p9Y3savax6naz6f8F3KaE8I0J8K01aI6p8PaM6ua)6yaRaT6O8!0J0qaY8)aU6P486R6TaP854g8=6X6Z20a/a;6.8}0D0Ra?a^a`a|95974r2Cb26`4y2cb79hb9739k771{bf4@0R0E4U0E0+0-bq0R0r0R7i1lbu0F1l7E110-0hbrbI0T0F7ibI0FbK9U557LclbP7P5d5f1^b#bTa3b^bZ259?2V9;7,dC5Db+a07|b:7_b-9|677~7ZdM7}83b{5f87b~aLc6ad5+afabd%aj8kclcd6r8p5 8scjau67aw8zcp6daA6gctaF8JaH6naJcB3lcD6UaQ6AaS6C3=8+1L0hcM42cOcJ8.a(edcUa+6Y8^200=2A3g6)6,0D4/4/0Y0J030J0v0S4g0G0taE0v0O430J3%0X090y4/7s0jeWeY4`091)0v0jeB0#eDcwb40D0$e(93e/ey0ceA050J0xe*0Je|e@0,0Je_eAc.b06@6_9cc@996 c`72eTc}9mbe7a0}d91c0r1X0r1o0v1t7qbv0c9q0-0q0#0T1d0F4(d30F7w4`0Y0$ds9VbMal3rdx9#bS9+dYbWdEdJdG5td#7+2eb(2k7/b,5IdQ9~b;dTb?fX5pb)b`dFb|d/d.ai5*2@c4d)ah8hc8ak8l5{ceapch8tatcl8x7Ico3TcqaB3J6icvcxcz8O89aNcE8Veg8Xeia#1C0zem6Meo8,eqcS6xb)eucY1%2ee`e+92eDeEeGeIeKeMeO0AeQeSeUe#0BeZg!7s0ce(e~gN0Je-6(0me:e=1H3d0Qg+e/9390e|f50jf798f9b3b59e6~9g4Fc{fhbb2-0T3B3 4T1b0$7k7C0Fd90v4=0E0r0h9I0$7pbl4/4(hr7Cdk0F0h1g4-fMdu9XbO5a7P0m2Y1I0S3j1wdzbT9-2!0v0a0a0J0p0O710)e(0Jh(0J0901h+h+0J0Q0*280j3.0r0ch*eXg#6(0Tg%0+2z0k2A0J0T0v0lhX0X00h 0l0_0rh 90h-h,h,0lh)i48=0J0igB3Bip0Q250X0-0C1Ciu0-0Dip2t0I0K2+h%h)2%0-0J2l0a0wit0civ1$0xix0JiziB0iiD0DgT1(0Tg^0CiHh(iJiL0G0SiPiviU7^3gikiWiC0O0I1Zi.0Qi)ikiIin3W0i0c0A0S0O0Mi:iw1Ci?0jikic0OiViQiAi`4IdDdXf#1Mb!b{0v0Vh_6+0~e(0kiKjuh_04jx0F0J1Ch)i*iL0j430O0Qh+0o3_hX2R0y0x0c0We}0G1`h+ig0l4gjNjP01jR240J0G3d0=jW2AjY3j0Je!h{7s0a3Fh!0Oj$b$dLjtjveB1vjzjBk6jE8-jGjIh(jKj)1/j+j-jT3_jWjY0xj!0=j$h*j(jMkjjQjSj/j;0jj?jX0Jj_j{e$j~0Xk0k267f*dPb/f.dSf,1Mi,9{i jIjKe~0XeBjCjK2Y0Sk70BjK0A0a0VeB0-h+0X0ve}3mgMimeJk62%0x0j0v3Bh`eYeQi30!k)0Zf4jiicik0!k!0Zh.eI0(k^3%h!3je(jKhVdHjik!91f40t0S1$k.0Vlp282Ei illGeI0dh_0ShVj/7/0=i400i#3je+k@6yideR0_k|9{0Dl$0J0s0J0tj02%k#9{lGh(eI0p0kjZj.0lh_kq3FkElLi8l2hWlP2%fh4G2sl$0D2Ha2jpf_maa6f_ljk^2ylYik82ji2U631/i40y0J1,m4m4h+l`0O3%0Mk%1?g%6(gT2o0b75e+0a0M2th gWeRmIj61~e(gS4gg%0FhXmRkFh_muh_2Bm#hXl/l21~l4g#0+k1j|0+kFi6iem?0a0DmU0J0em$7Umsb-lwh 6}h 0J0Ag%55iVl@3+m(gLeAk^h m=e$m#0xh lKkHm:m`e$2%0A1J1/1$0p0P0N0.ndm~h^mzngeze+eM0xmpjim4lVmj0klZ0g0d0om9d*d(6sc1f~8ef|g35?d;amg7d@cfd_armpck39ge68d ghe1craCe4gme73Te9gqeccTgtcHej1C0$gAa!cP8-cRcEgH6^4jfO8snHj72u3b8=2iel61cD0X0G0V0ilr0=2i74gub%2Ak.2=hVfg6I0whV1+0w5K0I0i0E0O6xoD22oM0a1|f%oToV4LoXoN2AjW3moSoUbaguoY1|3+1`o:22j41(2zaw0;2)c|75o`oZj?2io71MgW0t6M2%3Vl`2`6%223M3a0kpc2ope1LaXkUf.hV3UeQ0;oooZ0_0ijspc3.4j3gfO2(heg 222%4GeRe~0;iYa 4BhfdR2`oW4a1Q0H0^floA3hnS3aey3 oZ0-pSkR2`p7010a0j2qoY0w1;1mhp4Ghl1X0T4Udb8=7y0r4%0+7o4;bB4`0B0qbt4-qd0#7Fdjda0h0#0#bu4!0vft4WhpbGbmc.320c5e7|0O0H3(1,6A1Lp:k)3 p6cG4apQc:9ac?b6h6b8fgoDbcpG3%2fqq7q0qbwfHfE4Ybi0cql8=0v4W7C1n0c1l7oqd0h0+120RhF9Wcb9ZbQhL0thNhP0RhRfUb{hUhWhYh!4Hh$j1kgiih.h:h=h@h_mEi4n6jMi3i5i7kFiam?ldntm:igrjijili,ip43ir0ijbiUi_pPiEiGrhimiKiMiOiziSrMjkiXiZi#0li%iTjKi,2Ri/izi=2Bi@jjivr!i{i}i/j0rFj3oZj6j8jar.jdr:jf8Cj!r=jlrOdA1*f=7V7$dHb(jCk+k9k}jDjFjHilkhkwjOkyj.jUkojZj#01j%iQ25sojJrRkissj,kzl`i-jVl~lMkqsyj%sGkkkzj:dHkDj^h_nrj}j eQkM5xf%9-sijx0hsksikc4;sDkgsFsrsTsuknkEsPksszkusBh_kfkuilsSsthXsKsvsNhXs~e!t0e(t7sIj.sVj=0=kEkGh kJkLszf)dOb=f-5LkSb.01kVdTkXs@illu6+k%rRk)eBjyrRlAk;k?k^k!k{m4sik l1l3nb4Kh_l8lxlam)ld1Dlgli0JlkeTj!k`lCilp#lt3mlvk)lzk/lCkW90l:l;0JlJiLlM3_9_m3lReLiQlPlVp,0l0rmkl!dTm8l(l*l,iQeTdTu3l=l@l|t9l{3_3jjYl m^3WdHl!l1h^m|l$meb@fYf@d!mgt/mi5Kukmmmt1-nNmruXmvro01mymAmC1$rpmG0kmRmKmMnlm:mPu/75nxk10lmVs!mY0Jm!j_m%lbm*us2EeJuZnkn8k@uitqm}u}m n12Nn32tn5m?n7m?n9nb1Jnd0Jnff4nhe+njm?u?7snnnpjLn6h nvu{nznBnD0a0knF2B0;vxnJjL0GnMm.nPuTujp%0JnUnWd$ain(c7c3akn#n*cafPpyn-2{d^aq61d{gdcnn`8B8De3gl6ko1pOcAo48Sesp:8Ygx0J0FocgCa$p;ercToi8?ol3lonj8oZ3j0-oseb8Sowoyt_o_s)2foGoZgW0aoKo)oZ0roP4Ho.o%p21Mo=b%o$wC01o=o+9I6YwVp1o;oN1,o@0=wWo{ui0jo~d(pV01j4p5qGqL01p9pb8Npn48c@piw~pd2spopJpr25ozwroppypA3UpC2#2Ap`hdqY2bpKv#pN3U6;pR2fpTwWiN0GpYbft_p%j52ep*0ip,xup.w`ef2xp?0ip^1;4Ubr4C4V129C7j4@7e0Tq$d24G0r0q7i140r0z7t0q0Y111k7xx/fC7h1mdfbG1h9rdnhi1Aa~5=qy2WqBqD0GqFee8WqI3hxK8WxsqOc=fbqRxGh79iw%qWxlhf4;1qda0E0Fbr0Y0v0c0qd74#177e9sdj0Yyy0Bft7k0-db1x0Eq~fO7MhJ1Xr3r50c0Be-9$7X9(uOrbhXhZh#jKihrkh;1`rnm/yYrqvorsh_rui8rxe$rzifh*rDr*inrH0lrJrLiyrZjmiF0fz4rT24rVjkrXzar?jmi!udr%i(zfi-r-jkr/cfi^zbrOr_i zso{oos1zvs3zxs6jirNiDsbuNf?sff!f_0P0ee,e(0P0ueBs.0l0uzV6+0qths_h+zYeBh+1$zUu,01zUz/1?z=z2z%z_1$z%j0jA0JzY0U0U0RlvzUA5A7f3z%Aah(rgt6z,z@z}n43+fh0ki60VkGuUApj_1(m j$e(iQA2A9A6A80uAeAc0eAeAgh)tizYzVAlik4KAo0lAqsZAsASAuik0uAxl`2oiKAdAC6*A3AEACf3ABA7AJh(ALAkvmAmAQAtAUujA{f4ik0PA!t2jHsqj*k?h_A`AWh_0l00n4uD3Jh!Bas(2ck4zTz(8-0#zXzZ6+z#z}jx0Rz+B6Ajz~A30ez?z^6+z:BBz?Buz2z 0eA1iKA4A)6+A/0JAGAeB4s^ByAMf4A^APjMA~BgA~Av0eB2A$BBAeA*BPAb0JA(A:B5kxAjANB#AnB(AVATA B@B-A2B^ADAFB/ACA;jLBYA@jiA_B%Baj`C1AXA3B-sCCctij_B9C2BcBelMB)BittkNtvf:tx9 twpqiKu1kYrRk!0iBEBBkZo-z.BRAZCLo-BJz%k(lxCNBn1xCZ0SCNBr0Jz#ilk)0iBJ0YA7k-k/C#tQ01lVowAS75eAm4z^tXl2jit!l7C/zUt)lclZlfCR0elh01eHuSt;lng)tOC^CS6ytRkF0_0VC e+D1zVD3tZj|l6t$D80uDas6leCMzYDgDit:lmt?DnoyBJk=C{k^C}DutUh_D20cl0D4y?DC1DC/z%DGt+Dd6YD,t.DNt=lo0llqm23hk_k#A*t}n9t D_lD2ulFu3Diu6uDu93nDwuc0SuelUk^uhv#lZm4l#l%l)l+e(l-v72uuuhYuwsJuzl}uClMk@uFm3B8uIm7uLdVmb2LjqdZmfuOmhjjEkml2SuX1/uZ0Tmsv4mwu(vR0GmBjvBGu-eLmHmJiVu=mOgXmRu{m~eKu mZ75m#u#m(ji3jm+utm-mqvbvqvdrAj}vgeIn0EW1.vlji2Yn63$n8naDBvtvOvvsKg~eJy?m;vcD#vFmWvovIj6vKhYvMnEvhnGvSFunLEYh_nQuUv$v(nXg2aav=n#v.v,5)v;g1v?5`0k8nn.g9d`n=d|8y6an{8Ce2csw4aG6mo2w8v=grwbw{wdoe0+whcIgDogeswnok2Wpur opwuwwouwyoxozD{oCo(wD3)j6wGoJwjwTwNoRw$haw(wL7,Gzw?wYD#w!wPwWwT3_h=w-r~w/w;p0GAp30iw_yaguw}pkw x6488$p86NG!x52`pptBx9ptxcpx3axfxGl2xipFyqpIpqpL0kxqpPc/xGp-typUGpp;pXpZ4SxBpyp)0jp+H67^p/w{p=p@hVp_20yZ0$yNbA1mq?9s130-fE7C9Abtd29I9C100RbA0q4%x,d79q50a_0R0zfxbA1z9w1e0-1o2)y2qxqz85y61|y9cFxL5/2RydGXy2f8c;fab49dc^qSffo:0Z0Z.'
 </script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -3897,9 +4015,13 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/B}5{!prh]y[gFqkSx4s:fNa2 ,oV0d
 
 <script src="../../js-per-pages/1-runtimeManager-runtime-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
+<script src="../../js-per-pages/2-0-runnersManager-runners.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
 <script src="../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/3-terminalRunner-term.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../js-per-pages/4-0-idesManager-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/4-ideLogistic-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
@@ -4067,16 +4189,6 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/B}5{!prh]y[gFqkSx4s:fNa2 ,oV0d
           <form class="md-consent__form md-grid md-typeset" name="consent">
             
 
-  
-    
-  
-
-
-  
-    
-  
-
-
 
 
 <h4>Consentement aux cookies</h4>
@@ -4085,31 +4197,42 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/B}5{!prh]y[gFqkSx4s:fNa2 ,oV0d
 <div class="md-consent__settings">
   <ul class="task-list">
     
-      
-      
-        
-        
-      
-      <li class="task-list-item">
-        <label class="task-list-control">
-          <input type="checkbox" name="analytics" checked>
-          <span class="task-list-indicator"></span>
-          Google Analytics
-        </label>
-      </li>
     
       
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
       
         
-        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
       
-      <li class="task-list-item">
-        <label class="task-list-control">
-          <input type="checkbox" name="github" checked>
-          <span class="task-list-indicator"></span>
-          GitHub
-        </label>
-      </li>
+    
     
   </ul>
 </div>
@@ -4139,12 +4262,14 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/B}5{!prh]y[gFqkSx4s:fNa2 ,oV0d
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
     
     
 
 
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
       

@@ -37,7 +37,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
       
       <link rel="icon" href="../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.6.8">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.6.14">
     
     
       
@@ -45,7 +45,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -57,14 +57,14 @@ If not, see <https://www.gnu.org/licenses/>.
     
   
   
-  <style>:root{--md-admonition-icon--coeur:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z"/></svg>');}</style>
+  <style>:root{--md-admonition-icon--coeur:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m12%2021.35-1.45-1.32C5.4%2015.36%202%2012.27%202%208.5%202%205.41%204.42%203%207.5%203c1.74%200%203.41.81%204.5%202.08C13.09%203.81%2014.76%203%2016.5%203%2019.58%203%2022%205.41%2022%208.5c0%203.77-3.4%206.86-8.55%2011.53z%22/%3E%3C/svg%3E');}</style>
 
 
 
     
     
 
-<script type="importmap">{"imports": {"functools": "../js-libs/functools.js", "jsLogger": "../js-libs/jsLogger.js", "process_and_gui": "../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-pyodideSectionsRunner-runner-pyodide": "../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../js-per-pages/3-terminalRunner-term.js", "4-ideLogistic-ide": "../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../js-per-pages/qcms-qcm.js", "start-pyodide": "../js-per-pages/start-pyodide.js", "overlord": "../js-scripts/overlord.js", "subscriptions": "../js-scripts/subscriptions.js"}}</script>
+<script type="importmap">{"imports": {"functools": "../js-libs/functools.js", "jsLogger": "../js-libs/jsLogger.js", "process_and_gui": "../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../js-per-pages/qcms-qcm.js", "start-pyodide": "../js-per-pages/start-pyodide.js", "overlord": "../js-scripts/overlord.js", "subscriptions": "../js-scripts/subscriptions.js"}}</script>
 
 
 
@@ -81,6 +81,7 @@ If not, see <https://www.gnu.org/licenses/>.
 <script src="../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script type="text/javascript">
+if(!window.CONFIG) window.CONFIG={}
 CONFIG.argsFigureDivId="figure1"
 CONFIG.exportZipWithNames=false
 CONFIG.exportZipPrefix=""
@@ -93,8 +94,9 @@ CONFIG.language="fr"
 CONFIG.pmtUrl="https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
 CONFIG.pythonLibs=['alien_python', 'turtle']
 CONFIG.siteUrl="http://127.0.0.1:8000/"
-CONFIG.version="4.2.5"
-CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "kbd": ""}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}</script>
+CONFIG.version="4.4.5"
+CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "kbd": ""}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "restartConfirm": {"em": 0, "msg": "ATTENTION: r\u00e9initialiser l'\u00e9diteur fera perdre les anciens codes, status de validation et historiques.", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}
+</script>
 <script src="../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script src="../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -239,11 +241,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -282,6 +286,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
@@ -314,9 +319,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     <li class="md-tabs__item">
       <a href=".." class="md-tabs__link">
         
+  
   
     
   
@@ -331,9 +338,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       
+  
   
   
   
@@ -342,6 +351,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <li class="md-tabs__item">
         <a href="../teds/" class="md-tabs__link">
           
+  
   
   Terminale
 
@@ -358,11 +368,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../1eds/" class="md-tabs__link">
           
+  
   
   Première
 
@@ -376,11 +388,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../2gt/" class="md-tabs__link">
           
+  
   
   Seconde
 
@@ -394,11 +408,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../python/" class="md-tabs__link">
           
+  
   
   🐍 Python
 
@@ -412,11 +428,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../snt/" class="md-tabs__link">
           
+  
   
   🤖 SNT
 
@@ -430,11 +448,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../dnl/" class="md-tabs__link">
           
+  
   
   DNL
 
@@ -448,9 +468,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../tags/" class="md-tabs__link">
         
+  
   
     
   
@@ -517,6 +539,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href=".." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🏡 Accueil
     
@@ -537,6 +560,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -550,6 +574,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Terminale
@@ -576,6 +601,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -589,6 +615,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Ens. de spécialité
@@ -616,6 +643,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../teds/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -638,6 +666,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../teds/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -659,6 +688,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../teds/progression2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -696,6 +726,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -709,6 +740,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Première
@@ -736,6 +768,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../1eds/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -757,6 +790,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../1eds/cours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🎯 Cours et exercices
@@ -780,6 +814,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../1eds/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -801,6 +836,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../1eds/progression2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -830,6 +866,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -843,6 +880,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Seconde
@@ -870,6 +908,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../2gt/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -891,6 +930,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../2gt/cours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🎯 Cours et exercices
@@ -914,6 +954,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../2gt/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -935,6 +976,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../2gt/progression/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -964,6 +1006,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -977,6 +1020,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     🐍 Python
@@ -1004,6 +1048,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🏡 Ressources pour la classe
     
@@ -1025,6 +1070,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1038,6 +1084,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     👣 Parcours de découverte
@@ -1065,6 +1112,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/python-2gt-00/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) Découvrir Python en 1h
     
@@ -1086,6 +1134,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python/python-2gt-01/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     IDE et consoles
@@ -1109,6 +1158,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/python-2gt-02/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Types de valeurs et opérations
     
@@ -1130,6 +1180,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python/python-2gt-03/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Variables et affectations
@@ -1153,6 +1204,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/python-2gt-04/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Librairies et compléments
     
@@ -1174,6 +1226,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python/python-2gt-05/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les fonctions
@@ -1197,6 +1250,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/python-2gt-06/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Les instructions conditionnelles
     
@@ -1218,6 +1272,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python/python-2gt-07/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     (TD) Fonctions et tests
@@ -1241,6 +1296,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/python-2gt-08/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) Silent Teacher
     
@@ -1262,6 +1318,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python/python-2gt-09/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les boucles finies
@@ -1285,6 +1342,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/python-2gt-10/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Les boucles conditionnées
     
@@ -1307,6 +1365,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/python-2gt-11/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) PY-rates
     
@@ -1328,6 +1387,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python/python-1eds-00/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les listes
@@ -1358,6 +1418,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1371,6 +1432,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     ⚙️ TP (seconde)
@@ -1398,6 +1460,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/TP_alien/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🚧 Alien (débranché)
     
@@ -1419,6 +1482,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python/TP_turtle/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🚧 Le module turtle
@@ -1442,6 +1506,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/TP_kandinsky/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🚧 Le module kandinsky
     
@@ -1463,6 +1528,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python/TP_test/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🚧 Test
@@ -1494,6 +1560,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python/bac_a_sable/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     💻 Bac à Sable
     
@@ -1522,6 +1589,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1535,6 +1603,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     🤖 SNT
@@ -1562,6 +1631,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Introduction
     
@@ -1583,6 +1653,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1596,6 +1667,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Codage de l'information
@@ -1623,6 +1695,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/CodagesA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Le binaire
     
@@ -1644,6 +1717,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/CodagesB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Le hexadécimal
@@ -1667,6 +1741,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/CodagesC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Les caractères
     
@@ -1688,6 +1763,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/CodagesD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - Les images
@@ -1718,6 +1794,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1731,6 +1808,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Données structurées
@@ -1758,6 +1836,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/DonneesA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -1779,6 +1858,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/DonneesB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Structurer
@@ -1802,6 +1882,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/DonneesC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Traiter
     
@@ -1823,6 +1904,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/DonneesD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - Projet
@@ -1853,6 +1935,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1866,6 +1949,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Internet
@@ -1893,6 +1977,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/InternetA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -1914,6 +1999,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/InternetB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Les protocoles
@@ -1937,6 +2023,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/InternetC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Simuler un réseau
     
@@ -1959,6 +2046,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/InternetD/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     4 - Impact écologique
     
@@ -1980,6 +2068,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/InternetE/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     5 - 🚧 P2P
@@ -2010,6 +2099,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2023,6 +2113,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Le Web
@@ -2050,6 +2141,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/WebA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2071,6 +2163,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/WebB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Les langages
@@ -2094,6 +2187,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/WebC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Les protocoles
     
@@ -2116,6 +2210,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/WebD/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     4 - 🚧 PageRank
     
@@ -2137,6 +2232,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/WebE/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     5 - 🚧 Les cookies
@@ -2167,6 +2263,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2180,6 +2277,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Les réseaux sociaux
@@ -2207,6 +2305,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/ReseauxSociauxA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2228,6 +2327,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/ReseauxSociauxB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Modélisation
@@ -2251,6 +2351,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/ReseauxSociauxC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - 🚧 Les infox
     
@@ -2272,6 +2373,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/ReseauxSociauxD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - 🚧 Données personnelles
@@ -2295,6 +2397,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/ReseauxSociauxE/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     5 - 🚧 Harcèlement et cyberviolences
     
@@ -2316,6 +2419,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/ReseauxSociauxCours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     6 - Le bilan
@@ -2346,6 +2450,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2359,6 +2464,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Objets connectés
@@ -2385,6 +2491,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/ObjetsConnectesA/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     1 - Découverte
@@ -2415,6 +2522,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2428,6 +2536,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Le Numérique
@@ -2455,6 +2564,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/NumeriqueA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - 🚧 Découverte
     
@@ -2477,6 +2587,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../snt/NumeriqueB/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     2 - 🚧 Numérique et logistique
     
@@ -2498,6 +2609,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../snt/NumeriqueC/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     3 - 🚧 Parcours PIX
@@ -2535,6 +2647,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2548,6 +2661,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     DNL
@@ -2575,6 +2689,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../dnl/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -2596,6 +2711,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../dnl/archive2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🗂️ Archives 2023-2024
@@ -2625,6 +2741,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../tags/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     ️🏷️ tags
@@ -2781,12 +2898,22 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e{}\x1e0a0b.'
               
                 
               
+              
+              
+                
+                
+              
               Merci pour votre avis !
             </div>
           
             <div data-md-value="0" hidden>
               
               
+                
+              
+              
+              
+                
                 
               
               Merci pour votre avis !
@@ -2895,16 +3022,6 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e{}\x1e0a0b.'
           <form class="md-consent__form md-grid md-typeset" name="consent">
             
 
-  
-    
-  
-
-
-  
-    
-  
-
-
 
 
 <h4>Consentement aux cookies</h4>
@@ -2913,31 +3030,42 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e{}\x1e0a0b.'
 <div class="md-consent__settings">
   <ul class="task-list">
     
-      
-      
-        
-        
-      
-      <li class="task-list-item">
-        <label class="task-list-control">
-          <input type="checkbox" name="analytics" checked>
-          <span class="task-list-indicator"></span>
-          Google Analytics
-        </label>
-      </li>
     
       
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
       
         
-        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
       
-      <li class="task-list-item">
-        <label class="task-list-control">
-          <input type="checkbox" name="github" checked>
-          <span class="task-list-indicator"></span>
-          GitHub
-        </label>
-      </li>
+    
     
   </ul>
 </div>
@@ -2967,12 +3095,14 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e{}\x1e0a0b.'
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
     
     
 
 
-      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../xtra/javascripts/extra.js"></script>
       

@@ -37,6 +37,7 @@ const SqBs = {
 
 const CONFIG = {
 
+    /**Number of entries kept in validations history. */
     N_IDE_VALIDATIONS: 10,
 
     /* The following values are passed from python to JS through the main.html,
@@ -92,6 +93,7 @@ const CONFIG = {
         download: null,
         upload: null,
         restart: null,
+        restartConfirm: null,
         save: null,
         zip: null,
         corrBtn: null,
@@ -139,7 +141,7 @@ const CONFIG = {
 
     INFINITY: "∞",
     LZW: '\x1e',
-    pyodideDelay: 500,
+    pyodideDelay: 100,
     ideKeyStrokesSave: 30,
     onDoneEvent: 'unload',
 
@@ -172,18 +174,20 @@ const CONFIG = {
     overlordClasses: [],
 
     needMermaid: false,
-    figureObserver: null,
+    calledMermaid: false,
 
 
+    // GENERATED:
     // All classes to use to create the various objects (mutated on the fly when needed):
     CLASSES_POOL: {
-      "Ide": null,
-      "IdeTester": null,
-      "Terminal": null,
-      "PyBtn": null,
-      "Qcm": null,
-      "Question": null
-    },                  // Declared in a json.loads compatible fashion, see mkdocs_hooks.py
+      GlobalRunnersManager: null,
+      PyBtn: null,
+      Terminal: null,
+      Ide: null,
+      IdeTester: null,
+      Question: null,
+      Qcm: null
+    },
 
 
     ZIP: {
@@ -244,7 +248,7 @@ const CONFIG = {
     },
 
     // GENERATED:
-    PROFILES:{
+    PROFILES: {
       delayedReveal: "delayed_reveal",
       noReveal: "no_reveal",
       noValid: "no_valid",

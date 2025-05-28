@@ -21,7 +21,6 @@ If not, see <https://www.gnu.org/licenses/>.
 import { jsLogger } from 'jsLogger'
 import { getTheme, subscribeWhenReady } from 'functools'
 
-import _anything from 'overlord'    // Enforce dependencies/import order
 
 
 
@@ -64,8 +63,33 @@ CONFIG.ACE_COLOR_THEME.aceStyle = {
 
 
 
+
+
+
+/**Define a MutationObserver to modify on the fly all the figures, when content is added to them:
+ *
+ * Whatever the figure, at some point, the content is removed, then replaced.
+ * When the figure is low enough in the page, when it disappears, the page might scroll down
+ * because it's not high enough anymore to fill the viewport.
+ * This observer automatically sets a min-height on the figure div so that it doesn't shrink
+ * anymore when its content is removed. This avoids the damn "flickering page scroll".
+ * */
+const FIGURE_HEIGHT_OBSERVER = new MutationObserver((entries)=>{
+  for(const entry of entries){
+    if(entry.addedNodes.length){
+      // Wait for a long time so that the DOM has been updated (needed because of mermaid...)
+      setTimeout(_=>{
+        const target = $(entry.target)
+        const actualHeight = Math.min(1500, target.height())
+        target.css('min-height', actualHeight+'px')
+      }, 150)
+    }
+  }
+})
+
+
 $("div.py_mk_figure").each(function(){
-  CONFIG.figureObserver.observe(this, {childList:true})
+  FIGURE_HEIGHT_OBSERVER.observe(this, {childList:true})
 })
 
 
@@ -91,7 +115,7 @@ document.querySelector("[data-md-color-scheme]")
         });
 
 
-;(function(){
+;await (async function(){
 
   /**Elements in tabbed divs, that may need GUI makeup actions when the tab gets clicked on.
    * */
@@ -173,21 +197,27 @@ document.querySelector("[data-md-color-scheme]")
 
 
 
-  const waitForOverlord=()=>{
+  const waitForOverlord = async()=>{
 
     if(!CONFIG.overlordIsReady){
-      LOGGER_CONFIG.ACTIVATE && jsLogger('[Overlord] (...waiting from subscription)')
+      LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscriptions] (...waiting from subscription)')
       setTimeout(waitForOverlord, 50)
       return
     }
-    LOGGER_CONFIG.ACTIVATE && jsLogger('[Overlord] - Done waiting: starting subscriptions')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscriptions] - Done waiting: starting subscriptions')
+
+
+    const ideManagerClass = CONFIG.CLASSES_POOL.GlobalRunnersManager
+    if(ideManagerClass){
+      ideManagerClass._defineIdesManagerProxyLike()
+    }
+
 
 
     const to_build = TO_BUILD_CONFIG.map(
       ([query, className, transformId]) => [$(query), className, transformId]
     )
     const some_runners = to_build.some( ([jCollection,]) => jCollection.length>0 )
-    let gotSomeIdes = false
 
     if(some_runners){
       to_build.forEach( ([jCollection, className, transformId])=>{
@@ -195,8 +225,8 @@ document.querySelector("[data-md-color-scheme]")
           const id  = transformId ? transformId(this.id) : this.id
           const elt = new CONFIG.CLASSES_POOL[className](id)
           elt.build()
+          elt.makeUpYourGui()
           if(elt.terminal) ALL_TERMINALS.push([elt.terminal, ''])
-            gotSomeIdes ||= Boolean(elt.editor)
 
           // Store the runner objects that couldn't be fully initiated (GUI-wise / normally happens
           // because they are in tabs) :
@@ -205,12 +235,12 @@ document.querySelector("[data-md-color-scheme]")
       })
     }
 
-    if(gotSomeIdes){
+    const runner = CONFIG.CLASSES_POOL.Ide
+    if(runner){
       // On next tick because the DOM isn't up to date yet:
-      const runner = CONFIG.CLASSES_POOL.Ide
       setTimeout(runner.enforceAceGutterFillAfterHeightsTroubles.bind(runner))
     }
-    LOGGER_CONFIG.ACTIVATE && jsLogger('[Overlord] - Subscriptions done')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscriptions] - Subscriptions done')
 
     if(CONFIG.CLASSES_POOL.Qcm){                          // Building qcms only if the class is defined in the page
       subscribeWhenReady("QCM", function(){
@@ -218,8 +248,25 @@ document.querySelector("[data-md-color-scheme]")
         CONFIG.CLASSES_POOL.Qcm.buildQcms()
       }, {now:true, runOnly:true})
     }
+
+
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[MathJax] - subscribe to document$ after pyodide started')
+    // Done _LATE_ because of chrome troubles in capytale: subscribing after everything has been
+    // set/updated will avoid useless calls/reactions to DOM mutations.
+    subscribeWhenReady(
+        'MathJax',
+        mathJaxUpdate,
+        {
+          delay: 200,
+          maxTries: 50,   // because some useless reschedule before pyodide actually starts
+          waitFor: _=>{
+            const ready = Boolean(window.window.MathJax.startup.output)
+            return ready && (!some_runners || CONFIG.pyodideIsReady)
+          }
+        }
+    )
   }
 
-  waitForOverlord()   // Start waiting...
+  await waitForOverlord()   // Start waiting...
 
 })()

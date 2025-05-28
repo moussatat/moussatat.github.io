@@ -63,25 +63,6 @@ CONFIG.pythonLibs            = new Set(CONFIG.pythonLibs)
 
 
 
-/**Define a MutationObserver to modify on the fly all the figures, when content is added to them:
- *
- * Whatever the figure, at some point, the content is removed, then replaced.
- * When the figure is low enough in the page, when it disappears, the page might scroll down
- * because it's not high enough anymore to fill the viewport.
- * This observer automatically set a min-height on the figure div so that it doesn't shrink
- * anymore when its content is removed. This avoids the damn "flickering page scroll".
- * */
-CONFIG.figureObserver = new MutationObserver((entries)=>{
-    for(const entry of entries){
-        if(entry.addedNodes.length){
-            // (Note: Should never insert more than one element:)
-            const currentHeight = $(entry.addedNodes[0]).height() + 'px'
-            $(entry.target).css('min-height', currentHeight)
-        }
-    }
-})
-
-
 
 
 //----------------------------------------------------------

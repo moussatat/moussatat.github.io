@@ -42,10 +42,12 @@ globalThis.LOGGER_CONFIG = CONFIG.loggerOptions = {
     Runtime:            false,
     ScreenMode:         false,
     Scroll:             false,
+    Sequence:           false,
     SetupIDEs:          false,
     SetupLoneTerms:     false,
     StdoutController:   false,
     Subscribing:        false,
+    Subscriptions:      false,
     Terminal:           false,
     Testing:            false,
     TrashCan:           false,
@@ -56,7 +58,7 @@ globalThis.LOGGER_CONFIG = CONFIG.loggerOptions = {
 
 
 export const jsLogger=(...msgs)=>{
-    if(!CONFIG.loggerOptions.ACTIVATE) return
+    // if(!CONFIG.loggerOptions.ACTIVATE) return          // No need anymore
 
     if(CONFIG.loggerOptions.all || msgs[0] && isLoggedOption(msgs[0])){
         console.log(...msgs)

@@ -123,8 +123,9 @@ mais sans lien dessus */
 
 .tooltip {
   position: relative;
-  display: grid;
+  /* display: grid;  FIX - py_btn in span not working anymore */
   cursor: pointer;
+  align-items: center;
 }
 
 .tooltip .tooltiptext code {

@@ -24,9 +24,9 @@ import {
   PythonError,
   txtFormat,
   waitForPyodideReady,
+  RunningProfile,
 } from 'functools'
 import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
-import { RunningProfile } from '2-pyodideSectionsRunner-runner-pyodide'
 import { IdeRunner } from '4-ideRunner-ide'
 
 
@@ -45,9 +45,9 @@ class IdeTesterGuiManager extends IdeRunner {
     this.toSwap      = [this.data, ()=>""] // nothing to swap...
     this.ides_cache  = {}
     this.test_cases  = []   // List[conf]: Linearized version of CASES_DATA
-    this.std_capture = []   // Full stdout+stdErr capture,. Considering jQTerm formatting:
-                            //  * any content coming from pyodide stdout is NOT FORMATTED YET
-                            //  * any content coming from JS logistic IS ALREADY FORMATTED.
+    this.std_capture = []   // Full stdout+stdErr capture. Considering jQTerm formatting:
+                            //    * any content coming from pyodide stdout is NOT FORMATTED YET
+                            //    * any content coming from JS logistic IS ALREADY FORMATTED.
     this.counters    = {skip:0, remaining:0, failed:0, success:0}
     this.stopTests   = false
     this.fullCode    = ""   // Initial loaded code (associated to one conf/test)
@@ -487,16 +487,15 @@ export class IdeTester extends IdeTesterGuiManager {
 
 
   // @Override
-  build(){
-    super.build()
+  buildRunners(){
+    super.buildRunners()
 
-    this.runners = {
-      play: this.playFactory(RunningProfile.PROFILE.testingPlay),
-      validate: this.validateFactory(RunningProfile.PROFILE.testingValid),
-      validateCorr: this.validateCorrFactory(RunningProfile.PROFILE.testingCorr),
-      terminal: async ()=>{ await this.runnerTerm(this.conf.term_cmd) },
-      auto_run: this.runner,
-    }
+    const runCmdTerm = this.buildAsyncPythonExecutors(RunningProfile.PROFILE.testingCmd)
+    this.addRunnerIfNotDefinedYet(async ()=>{ await runCmdTerm(this.conf.term_cmd) }, RunningProfile.PROPS.testingCmd)
+    this.addRunnerIfNotDefinedYet(this.playFactory(RunningProfile.PROFILE.testingPlay), RunningProfile.PROPS.testingPlay)
+    this.addRunnerIfNotDefinedYet(this.validateFactory(RunningProfile.PROFILE.testingValid), RunningProfile.PROPS.testingValid)
+    this.addRunnerIfNotDefinedYet(this.validateCorrFactory(RunningProfile.PROFILE.testingCorr), RunningProfile.PROPS.testingCorr)
+    this.addRunnerIfNotDefinedYet(this.runners.testingPlay, RunningProfile.PROPS.testingRun)
   }
 
 
@@ -537,11 +536,11 @@ export class IdeTester extends IdeTesterGuiManager {
         LOGGER_CONFIG.ACTIVATE && jsLogger('[Testing] - start', conf.ide_name)
 
         const hasCmd      = conf.term_cmd !== undefined
-        const runningKind = conf.auto_run ? (hasCmd ? 'terminal' : 'auto_run')
-                          : hasCmd        ? 'terminal'
-                          : conf.run_play ? 'play'
-                          : conf.run_corr ? 'validateCorr'
-                                          : 'validate'
+        const runningKind = conf.auto_run ? (hasCmd ? RunningProfile.PROPS.testingCmd : RunningProfile.PROPS.testingRun)
+                          : hasCmd        ? RunningProfile.PROPS.testingCmd
+                          : conf.run_play ? RunningProfile.PROPS.testingPlay
+                          : conf.run_corr ? RunningProfile.PROPS.testingCorr
+                                          : RunningProfile.PROPS.testingValid
 
         await this.runners[ runningKind ]()
         LOGGER_CONFIG.ACTIVATE && jsLogger('[Testing] - done', conf.ide_name, '\n')
@@ -658,11 +657,6 @@ export class IdeTester extends IdeTesterGuiManager {
     }
   }
 
-  // @Override
-  buildAsyncPythonExecutors(){
-    super.buildAsyncPythonExecutors(RunningProfile.PROFILE.testingCmd)
-  }
-
 
 
 
@@ -675,7 +669,7 @@ export class IdeTester extends IdeTesterGuiManager {
   revealSolutionAndRems(){
     if(!this.conf) return;
     this.conf.revealedCorrRems = true
-    this.hiddenDivContent = false      // Mimic actual behavior
+    this.hiddenDivContent = false      // Mimic actual behavior, logic-wise
   }
 
 

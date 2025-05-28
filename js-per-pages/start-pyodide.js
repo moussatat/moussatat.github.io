@@ -27,15 +27,6 @@ import {
 import { PyodideSectionsRunner } from '2-pyodideSectionsRunner-runner-pyodide'
 
 
-import _anything from 'overlord'
-    // Enforce dependencies/import order and make sure pyodide isn't started before other
-    // elements are loaded and initialized: this avoids some troubles with Chrome|Chromium.
-    // (note: this alone is not enough: need to also avoid big async delays, otherwise these
-    // browsers just cancel the executions, at some point... :rolleyes: )
-
-
-
-
 
 
 
@@ -169,7 +160,9 @@ const setupPyodideFatalCbk =()=> {
  * */
 const startPyodideSync =()=> {
     LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - WASM: starting')
-    loadPyodide().then(setupPyodideEnvironmentTools, console.error)
+    loadPyodide()
+        .then(setupPyodideEnvironmentTools)
+        .catch(e=>console.error(e))
 }
 
 
@@ -195,17 +188,28 @@ const setupPyodideEnvironmentTools =(pyodide)=> {
     CONFIG.pyodideIsReady = true
     $("#header-hourglass-svg").attr("class", "py_mk_vanish")
 
-    LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - Environment setup ok')
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Pyodide] - Environment setup done')
 }
 
 
-const start = new Date()
-const waitForStart =()=> new Date()-start >= CONFIG.pyodideDelay
+const waiterForStart=()=>{
+    let start;
+    return ()=>{
+        if(!CONFIG.overlordIsReady) return false
+
+        const now = new Date()
+        if(!start) start = now
+        return now-start >= CONFIG.pyodideDelay
+    }
+}
 
 // Using this because Chrome-like browser may sometime just cancel a delayed execution if
 // there is too much time in between two synch steps... (FML...):
-subscribeWhenReady('Wait4StartPyodide', startPyodideSync, {waitFor:waitForStart, runOnly:true})
-
+subscribeWhenReady('Wait4StartPyodide', startPyodideSync, {
+    runOnly: true,
+    waitFor: waiterForStart(),
+    maxTries: 60,
+})
 
 
 

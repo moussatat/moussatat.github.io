@@ -33,7 +33,7 @@ If not, see <https://www.gnu.org/licenses/>.
   font-size: 90%;
 }
 .history-btn {
-  width: fit-content;
+  width: max-content;
   padding: 2px 8px;
   cursor: pointer;
 }

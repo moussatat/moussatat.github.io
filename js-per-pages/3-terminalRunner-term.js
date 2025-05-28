@@ -24,8 +24,9 @@ import {
   textShortener,
   txtFormat,
   withPyodideAsyncLock,
+  RunningProfile
  } from 'functools'
-import { PyodideSectionsRunner, RunningProfile } from "2-pyodideSectionsRunner-runner-pyodide"
+import { PyodideSectionsRunner } from "2-pyodideSectionsRunner-runner-pyodide"
 import { RuntimeManager } from '1-runtimeManager-runtime-pyodide'
 
 
@@ -477,13 +478,25 @@ assert False, 'slgjkhjkgfhd\n\nlkhsgkjhsdg'
 
 
 
+
+
+
+
+
 class _TerminalHandler extends PyodideSectionsRunner {
+
+
+  get isTerminal() { return true }
+  get hasTerminal(){ return true }
+
 
   constructor(id, callInit=true){
     super(id, false)
     this.terminal      = null     // jQuery.terminal object
     this.termWrapper   = null     // jQuery Html element
+    this.activatedFocus= true     // Forbid/allow focusing on the terminal (or the editor)
     this.termEnabled   = false    // Flag to enforce activation of the terminal (admonitions+tabbed troubles)
+    this.clearTerminalWhenLocking = true
     this.isIsolated    = id.startsWith("term_only")
     this.cmdChunk      = ""               // SINGLE line command to run
     this.cmdOnTheRun   = ""               // Complete code of the currently written multiline command ("executed so far")
@@ -506,12 +519,13 @@ class _TerminalHandler extends PyodideSectionsRunner {
    *           the id of the terminal div ! (hence the use of the termId argument)
    * */
   build(termId=null){
+
+    super.build()
+
     if(!termId) termId = this.id
     const jqTermId = '#' + termId
 
     LOGGER_CONFIG.ACTIVATE && jsLogger("[Terminal] - build " + jqTermId)
-
-    this.buildAsyncPythonExecutors()
 
     const termOptions = {
       greetings: "",                            // Cancel terminal banner (welcome message),
@@ -530,7 +544,7 @@ class _TerminalHandler extends PyodideSectionsRunner {
     }                                           // DO NOT PUT ANY CODE INSIDE THIS !! (I don't understand what's going
                                                 // on here, but  this is the only way I found to make all this work...)
 
-    this.terminal    = $(jqTermId).terminal(this.runnerTerm, termOptions)
+    this.terminal    = $(jqTermId).terminal(this.runners.cmd.asEvent, termOptions)
     this.termWrapper = this.terminal.parent()
 
     this.terminal.history().clear()             // Clear the history from localeStorage.
@@ -552,12 +566,32 @@ class _TerminalHandler extends PyodideSectionsRunner {
     this.updateStdoutCutFeedback(this.cutFeedback)
 
     this.prefillTermIfAny()
-
-    super.build()
   }
 
 
+  lockDisplay(){ this.terminal.pause() }
+  unlockDisplay(){ this.terminal.resume() }
 
+  focusTerminal(arg=undefined){
+    // Shenanigans here to be sure to get around the crazy terminal implementation,
+    // introducing `focusTerminal` without doing any change in the logic
+    if(!this.activatedFocus) return;
+
+    if(arg===undefined) this.terminal.focus()
+    else                this.terminal.focus(arg)
+  }
+
+  activateFocus(isActive=true){
+    this.activatedFocus = isActive
+  }
+
+  focusElement(){
+    this.focusTerminal()
+  }
+
+  scrollIntoView(){
+    super.scrollIntoView( this.termWrapper[0] )
+  }
 
 
 
@@ -588,7 +622,7 @@ class _TerminalHandler extends PyodideSectionsRunner {
   ensureTerminalActivationOnClick(){
     if(!this.termEnabled){
       if(!getSelectionText()){
-        this.terminal.focus(true)
+        this.focusTerminal(true)
         this.terminal.enable()
       }
       this.termEnabled = true
@@ -675,10 +709,6 @@ class _TerminalHandler extends PyodideSectionsRunner {
   }
 
 
-  buildAsyncPythonExecutors(){
-    throw new Error('Should be overridden in the child class.')
-  }
-
 
   prefillTermIfAny(){
     if(this.prefillTerm){
@@ -692,8 +722,9 @@ class _TerminalHandler extends PyodideSectionsRunner {
   setupGlobalConfig(){
     super.setupGlobalConfig()
     CONFIG.cutFeedback = this.cutFeedback
-    CONFIG.termMessage = this.termFeedbackFromPyodide.bind(this)
   }
+
+
 
 
   /**When a terminal is available, display stdout and errors in it, if any.
@@ -756,22 +787,28 @@ class _TerminalHandler extends PyodideSectionsRunner {
 
 export class TerminalRunner extends _TerminalHandler {
 
+  // @Override
+  buildRunners(){
+    this.pyodideConsoleRunner = this.runPyodideConsole.bind(this)
+    this.addRunnerIfNotDefinedYet(
+      this.buildAsyncPythonExecutors(), RunningProfile.PROPS.cmd, true
+    )
+  }
+
 
   /**Generate the async-locked callback used to run commands typed into the terminal.
    * */
   buildAsyncPythonExecutors(running=RunningProfile.PROFILE.cmd){
-
-    this.runnerTerm = this.lockedRunnerWithBigFailWarningFactory(
+    return this.lockedRunnerWithBigFailWarningFactory(
       running,
       this.setupRuntimeTerminalCmd,
       this.runTermCommand,
       this.teardownRuntimeTerminalCmd,
     )
-    this.pyodideConsoleRunner = this.runPyodideConsole.bind(this)
   }
 
   async applyAutoRun(){
-    await this.runnerTerm(this.prefillTerm)
+    await this.runners.cmd(this.prefillTerm)
   }
 
 
@@ -817,7 +854,7 @@ export class TerminalRunner extends _TerminalHandler {
     this.cmdChunk    = this._handleMultilineCommands(cmdChunk)
     this.cmdOnTheRun = !this.cmdOnTheRun ? this.cmdChunk : this.cmdOnTheRun + '\n' + this.cmdChunk
     this.storeUserCodeInPython('__USER_CMD__', this.cmdOnTheRun)
-    this.terminal.pause()
+    this.lockDisplay()
 
     let runtime
     if(!this.alreadyRanEnv){
@@ -889,7 +926,9 @@ export class TerminalRunner extends _TerminalHandler {
    * */
   async teardownRuntime(runtime) {
     LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - TerminalRunner teardownRuntime")
-    if(!this.cmdStack.length) this.terminal.resume()
+    if(!this.cmdStack.length){
+      this.unlockDisplay()
+    }
     await super.teardownRuntime(runtime)              // Runs ONLY if `env` has also been run
     this.storeUserCodeInPython('__USER_CMD__', "")
   }

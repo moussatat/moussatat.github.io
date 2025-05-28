@@ -18,10 +18,10 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 /*
--------------------------
-     GENERATED FILE
-  (see mkdocs_hooks.py)
--------------------------
+
+ONLY USEFUL FOR MathJax SUBSCRIPTIONS
+-------------------------------------
+
 
 This module is loaded as "text/javascript", for backward compatibility, providing globals to
 avoid failure of old codes.
@@ -38,7 +38,7 @@ Purposes/notes:
     defined in the modules: those are explicitly imported where needed, in the modules.
     On the other hand, jsLogger becomes unusable in non modules...
 
-  - The modules will override this globals with their own once they are loaded
+  - The modules will override these globals with their own once they are loaded.
 */
 
 
@@ -54,68 +54,51 @@ globalThis.LOGGER_CONFIG = {ACTIVATE:true, all:1}
 
 
 
-function subscribeWhenReady(waitId, callback, options={}){
-    LOGGER_CONFIG.ACTIVATE && console.log('[Subscribing] (legacy) - Enter', waitId)
-
-    if(waitId in CONFIG.subscriptionReady){
-        throw new Error(`Cannot subscribe several times to "${ waitId }".`)
+/**Drop the current mathJaxUpdate function and hack the window object content to use a new one.
+ * */
+function subscribeWhenReady(waitId){
+    if(waitId !== 'MathJax'){
+        throw new Error("Should never use the legacy version of `subscribeWhenReady` for "+waitId)
     }
 
-    let {now, delay, waitFor, runOnly, maxTries} = {
-        delay: 50,
-        now: false,
-        waitFor: null,  // or string or boolean provider
-        runOnly: false,
-        maxTries: 20,
-        ...options
-    }
-    now = now && !waitFor                   // Has to wait if waitFor is used (... XD )
-    CONFIG.subscriptionReady[waitId] = now
+    // Allow to requeue the update if mathjax is not ready, if the last call was at least 750ms
+    // away from now.
+    let lastMathJaxUpdateCall = null
+    let maxMathJaxAttempts = 50
+    const mathJaxTimeDelta = 100           // ms
 
-    const waitForProp = typeof (waitFor)=='string'
-    const checkReady  = !waitFor    ? ()=>null
-                      : waitForProp ? ()=>{ CONFIG.subscriptionReady[waitId] = $(waitFor).length > 0 }
-                                    : ()=>{ CONFIG.subscriptionReady[waitId] = waitFor() }
+    function trueMathJaxUpdate(){
+        LOGGER_CONFIG.ACTIVATE && console.log('[MathJax] (legacy) - Page formatting')
 
-    const isNotReady =()=>{
-        checkReady()
-        return !( CONFIG.subscriptionReady[waitId] && globalThis.document$ )
-    }
+        if(window.MathJax.startup.output){
+            window.MathJax.startup.output.clearCache()
+            window.MathJax.typesetClear()
+            window.MathJax.texReset()
+            window.MathJax.typesetPromise()
+            return
+        }
 
-    function autoSubscribe(){
-
-        if(isNotReady()){
-            const nTries = CONFIG.subscriptionsTries[waitId]+1 || 1
-            if(nTries > maxTries){
-                throw new Error(`Impossible to subscribe to ${ waitId } in time: too many tries.`)
-            }
-            CONFIG.subscriptionsTries[waitId] = nTries
-            setTimeout(autoSubscribe, delay)
+        const now = new Date()
+        const reschedule = (
+            (lastMathJaxUpdateCall===null || now-lastMathJaxUpdateCall > mathJaxTimeDelta)
+            && maxMathJaxAttempts-- > 0
+        )
+        if(reschedule){
+            lastMathJaxUpdateCall = now
+            setTimeout(trueMathJaxUpdate, mathJaxTimeDelta)
 
         }else{
-            LOGGER_CONFIG.ACTIVATE && console.log('[Subscribing] (legacy) -', waitId)
-            const wrapper=function(){
-                try{
-                    callback()
-                }catch(e){
-                    console.error(e)
-                }
-            }
-            if(runOnly){
-                wrapper()
-            }else{
-                const subscript = document$.subscribe(wrapper)
-                document.addEventListener(CONFIG.onDoneEvent, function(){
-                    LOGGER_CONFIG.ACTIVATE && console.log('[Unsubscribing] (legacy) -', waitId)
-                    subscript.unsubscribe()
-                })
-            }
+            console.error("Cannot update MathJax (CDN failed to load?)")
         }
     }
-    autoSubscribe()
 
-    if(!now){
-        return ()=>{ CONFIG.subscriptionReady[waitId]=true }
+    if(!window.mathJaxUpdate){
+        throw new Error("window.mathJaxUpdate should already be defined...")
     }
+
+    // Hack the function on the fly, so that it always uses the desired behavior, even for users
+    // who override the mathjax-libs.js file in PMT:
+    window.mathJaxUpdate = trueMathJaxUpdate
+
+    return ()=>0        // SINK!
 }
-// TOKEN: end subscribeWhenReady

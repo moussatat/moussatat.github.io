@@ -21,6 +21,8 @@ If not, see <https://www.gnu.org/licenses/>.
 
 import { jsLogger } from 'jsLogger'
 import {
+  buildJqHistoryBtn,
+  cancelEvent,
   choice,
   decompressLZW,
   downloader,
@@ -31,9 +33,9 @@ import {
   subscribeWhenReady,
   txtFormat,
   uploader,
+  RunningProfile,
 } from 'functools'
 // import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
-import { RunningProfile } from '2-pyodideSectionsRunner-runner-pyodide'
 import { observeResizeOf } from '3-terminalRunner-term'
 import {
   IdeSplitScreenManager,
@@ -148,9 +150,16 @@ class IdeHistoryManager extends IdeAceManager {
     this.validations = []
   }
 
-  pushValidation(code, done){
-    const time = (Date()+'').split(' GMT')[0].slice(-8)
+
+  getTime(){
+    return (Date()+'').split(' GMT')[0].slice(-8)
+  }
+
+  pushValidation(code, done){     // CodCap
+    const time = this.getTime()
     this.validations.push([done, time, code])
+
+    // Suppress entries that are too old:
     if(this.validations.length > CONFIG.N_IDE_VALIDATIONS){
       this.validations.splice(0, this.validations.length-CONFIG.N_IDE_VALIDATIONS)
     }
@@ -158,64 +167,37 @@ class IdeHistoryManager extends IdeAceManager {
 
 
   /**Update the color of an element to show a validation state (green/ref/normal).
-   * By default, color the "check" button of the current IDE instance. To color another
-   * element, pass in a second argument (jQuery collection).
-   * @returns: the jQuery updated element/collection.
+   *
+   * By default, color the "check" button of the current IDE instance.
+   * To color another element, pass in a second argument (jQuery collection).
+   *
+   * @returns: the updated jQuery element/collection.
    * */
   updateValidationBtnColor(done=undefined, jElt=undefined){
     done ??= this.storage.done
     jElt ??= this.global.find("button[btn_kind=check]")
-    const color = !done ? "unset" : done<0 ? 'red' : 'green'
+    const color = this.getIdeStateColor(done)
     jElt.css('--ide-btn-color',  color)
     return jElt
   }
 
 
+  getIdeStateColor(done){     // CodCap
+    return !done ? "unset" : done<0 ? 'red' : 'green'
+  }
+
   clearValidations(){ this.validations.length = 0 }
 
 
-  openHistoryModal(){
 
-    // Exit if nothing to show or already displayed:
-    const histId = `history_${ this.id }`
-    if(!this.validations.length || $('#'+histId)[0]) return;
-
-    const jHist = $(`<button id="${ histId }" class="history-box"></button>`)
-    // Use button instead of div, so that focusout and co are actually working...
-
-    const buttons = this.validations.map(data=>this._buildHistoryBtn(data,this))
-    jHist.append(buttons)
-
-    // Remove the window if left or clicking somewhere else:
-    jHist.on('focusout mouseleave', function(e){ jHist.off().remove() })
-
-    // Once entered, clicking on a button would close the window if the focusout event is still defined.
-    jHist.on('mouseenter', function(e){ jHist.off('focusout') })
-
-    // Make sure events are not transferred to upper level, (whatever they are)
-    jHist.on('keyup click', function(e){ e.stopPropagation() ; e.preventDefault() })
-
-    // Forbid going full screen and close if not needed anymore.
-    jHist.on('keydown', function(e){
-      e.stopPropagation() ; e.preventDefault()
-      if(e.key=='Escape') jHist.off().remove()
+  setupHistoryBtn(jHistItem, [done, time, code]){
+    jHistItem.text(time)
+    jHistItem.on('click', e=>{
+      cancelEvent(e)
+      this.applyCodeToEditorAndSave(code)
+      this.updateValidationBtnColor(done)
     })
-
-    // Force focus once mounter: activates focusout, in case the user never enters the panel.
-    jHist.appendTo(this.global.find('button[btn_kind=check]')).focus()
-  }
-
-
-  _buildHistoryBtn([done, time, code], ideThis){
-
-    const btn = $(`<button class="history-btn">${ time }</button>`)
-    this.updateValidationBtnColor(done, btn)
-
-    return btn.on('click', function(e){
-      e.stopPropagation() ; e.preventDefault()
-      ideThis.applyCodeToEditorAndSave(code)
-      ideThis.updateValidationBtnColor(done)
-    })
+    this.updateValidationBtnColor(done, jHistItem)
   }
 }
 
@@ -283,7 +265,7 @@ class IdeFeedbackManager extends IdeHistoryManager {
     let msg = `${ intro }${ section }: ${ ok }`   // Default section message
     if(!code) msg = ""                            // No default message if no code in the section...
     if(playing && !this.hasCheckBtn){             // ...but ensure the default ending message is shown,
-      msg = CONFIG.lang.successMsgNoTests.msg     //    if this is "playing" dans nothing else to do after.
+      msg = CONFIG.lang.successMsgNoTests.msg     //    if this is "playing" and nothing else to do after.
     }
 
     if(msg) this.terminalEcho(msg)
@@ -375,7 +357,7 @@ class IdeFeedbackManager extends IdeHistoryManager {
    * @waitForMathJax: if true, the call is done with profile=="revealed", so mathjax might not be
    * ready yet, and the update must be delayed.
    * */
-  revealSolutionAndRems(waitForMathJax=false){
+  revealSolutionAndRems(waitForMathJax=false){    // CodCap
     LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - Enter revealSolutionAndRems")
 
     // Need to check here _one more_ time against hiddenDivContent because of the "show"
@@ -397,7 +379,13 @@ class IdeFeedbackManager extends IdeHistoryManager {
       // Enforce formatting
       if(waitForMathJax){
         subscribeWhenReady(
-          "revealOnLoad", mathJaxUpdate, {runOnly:true, waitFor:()=>CONFIG.subscriptionReady.mathJax}
+          "revealOnLoad", mathJaxUpdate, {
+            waitFor: ()=>CONFIG.subscriptionReady.MathJax,
+            runOnly: true,
+            delay: 100,
+            maxTries: 200,  // Needs a lot of tries, to make sure everything can be setup
+                            // properly if pyodide is starting "too soon".
+          }
         )
       }else{
         mathJaxUpdate()
@@ -529,14 +517,20 @@ class IdeRunnerLogic extends IdeFeedbackManager {
     this.save(editorCode)
     this.storeUserCodeInPython('__USER_CODE__', editorCode)
 
-    this.terminal.pause()             // Deactivate user actions in the terminal until resumed
-    this.terminal.clear()             // To do AFTER pausing... (otherwise, prompt is showing up)
+    this.lockDisplay()
     this.terminalDisplayOnIdeStart()  // Handle the terminal display for the current action
     await sleep(this.delay)           // Terminal "blink", so that the user always sees a change
 
     return await this.setupRuntimeTrackingEnvRun()
   }
 
+
+  lockDisplay(){
+    super.lockDisplay()
+    if(!this.running.isTermCmd && this.clearTerminalWhenLocking){
+      this.terminal.clear()   // To clear AFTER pausing... (otherwise, prompt is showing up)
+    }
+   }
 
 
   async teardownRuntimeIDE(runtime) {
@@ -568,7 +562,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
 
 
-  async playThroughRunner(runtime){
+  async playThroughRunner(runtime){   // CodCap
     const code = this.getCodeToTest()
     await this.runPythonCodeWithOptionsIfNoStdErr(code, runtime, CONFIG.section.editor)
   }
@@ -718,7 +712,23 @@ export class IdeRunner extends IdeRunnerLogic {
 
 
   // @Override
+  buildRunners(){
+    this.addRunnerIfNotDefinedYet(this.playFactory(), RunningProfile.PROPS.play, true)
+
+    if(this.hasCheckBtn){
+      this.addRunnerIfNotDefinedYet(this.validateFactory(), RunningProfile.PROPS.validate)
+    }
+    if(this.hasCorrBtn){
+      this.addRunnerIfNotDefinedYet(this.validateCorrFactory(), RunningProfile.PROPS.validateCorr)
+    }
+    super.buildRunners()
+
+  }
+
+
+  // @Override
   build(){
+    super.build()
 
     // Create and define this.editor + define all needed listeners:
     this.setupAceEditor()
@@ -728,8 +738,6 @@ export class IdeRunner extends IdeRunnerLogic {
     // update (this way, the user is not bothered with updates of the starting content of an IDE
     // they didn't even tried yet, when the author is making updates):
     this.setStartingCode({extractFromLocalStorage: true, saveOnceApplied: false})
-
-    super.build()
 
     this.announceCodeChangeBasedOnSrcHash()
 
@@ -756,8 +764,18 @@ export class IdeRunner extends IdeRunnerLogic {
     if(width != innerTermWidth){
       this.termWrapper.width(width)
     }
+    if(this.isInSplit) this.ideScreenModeVerticalResize()
   }
 
+
+  /**Center the complete IDE or its terminal if the element is too tall.
+   * */
+  scrollIntoView(){
+    const screenSize = window.innerHeight
+    const globSize   = this.global.height()
+    const target     = globSize < screenSize*1.2 ? this.global : this.termWrapper
+    super.scrollIntoView(target[0])
+  }
 
 
 
@@ -787,7 +805,6 @@ export class IdeRunner extends IdeRunnerLogic {
     }
 
     this.editor = ace.edit(this.id, options);
-    this.runner = this.playFactory()
     this.gutter = this.global.find('div.ace_gutter-layer')
 
     if(CONFIG._devMode) CONFIG.editors[this.id] = this.editor
@@ -804,13 +821,13 @@ export class IdeRunner extends IdeRunnerLogic {
     this.editor.commands.addCommand({
         name: "runPublicTests",
         bindKey: { win: "Ctrl-S", mac: "Cmd-S" },
-        exec: this.runner,
+        exec: this.runners.play.asEvent,
     })
     if(this.hasCheckBtn){
       this.editor.commands.addCommand({
         name: "runValidationTests",
         bindKey: { win: "Ctrl-Enter", mac: "Cmd-Enter" },
-        exec: this.validateFactory(),
+        exec: this.runners.validate.asEvent,
       })
     }
 
@@ -845,40 +862,37 @@ export class IdeRunner extends IdeRunnerLogic {
     // Bind all buttons below the IDE
     const ideThis = this
     this.global.find("button").each(function(){
+
       const btn  = $(this)
       const kind = btn.attr('btn_kind')
       let callback
 
       switch(kind){
-        case 'play':      callback = ideThis.playFactory() ; break
-        case 'check':     callback = ideThis.validateFactory()
-                          ideThis.updateValidationBtnColor()
-                          break
+        case 'play':      callback = ideThis.runners.play.asEvent ; break
+        case 'check':     ideThis.updateValidationBtnColor()
+                          buildJqHistoryBtn(
+                            btn,
+                            `history_${ ideThis.id }`,
+                            ideThis.validations,
+                            ideThis.setupHistoryBtn.bind(ideThis),
+                          )
+                          callback = ideThis.runners.validate.asEvent ; break
 
-        case 'download':  callback = _=>ideThis.download() ; break
-        case 'upload':    callback = _=>uploader( txt=>{
-                                        ideThis.applyCodeToEditorAndSave(txt)
-                                        ideThis.focusEditor()
-                                      }) ; break
+        case 'download':  callback = _=>{ ideThis.download() } ; break
+        case 'upload':    callback = _=>{ ideThis.upload() } ; break
 
-        case 'restart':   callback = _=>ideThis.restart() ; break
-        case 'save':      callback = _=>{ideThis.save(); ideThis.focusEditor()} ; break
+        case 'restart':   callback = _=>{ ideThis.restart() } ; break
+        case 'save':      callback = _=>{ ideThis.save(); ideThis.focusEditor() } ; break
         case 'zip':       callback = ideThis.buildZipExportsToolsAndCbk(btn) ; break
 
         case 'corr_btn':  if(!CONFIG.inServe) return;
-                          callback = ideThis.validateCorrFactory() ; break
+                          callback = ideThis.runners.validateCorr.asEvent ; break
         case 'show':      if(!CONFIG.inServe) return;
                           callback = ()=>ideThis.revealSolutionAndRems() ; break
 
         default:          throw new Error(`Y'should never get there, mate... (${ kind })`)
       }
       btn.on('click', callback)
-
-      if(kind=='check') btn.on('contextmenu', function(e){
-        e.stopPropagation()
-        e.preventDefault()
-        ideThis.openHistoryModal()
-      })
     })
   }
 
@@ -890,7 +904,7 @@ export class IdeRunner extends IdeRunnerLogic {
     const asyncTerminalFocus=(cbk)=>async e=>{
       await cbk(e)
       this.editor.blur()
-      this.terminal.focus()
+      this.focusTerminal()
     }
     const bindings = {
       ...super.getTerminalBindings(),
@@ -906,7 +920,7 @@ export class IdeRunner extends IdeRunnerLogic {
 
 
 
-  respondToKeyDown(event){
+  respondToKeyDown(_event){   // CodCap
     // Doesn't work to catch the Esc applying "exit full screen"... :/
     IdeFullScreenGlobalManager.currentIde = this  // Register the IDE currently in use
   }
@@ -924,6 +938,9 @@ export class IdeRunner extends IdeRunnerLogic {
 
     }else if(event.altKey && event.key==':'){
       this.switchSplitScreenFromButton(event)
+
+    }else{
+      this.makeDirty()
     }
     this.guiIdeFlags.escapeIdeSearch = false
   }
@@ -961,14 +978,22 @@ export class IdeRunner extends IdeRunnerLogic {
     codeLines.splice(iTestsToken+1, toggled.length, ...toggled)
     const repl = codeLines.join('\n')
     this.applyCodeToEditorAndSave(repl)
+    this.makeDirty()
     this.focusEditor()
   }
 
 
+  upload(){           // CodCap
+    uploader( txt=>{
+      this.applyCodeToEditorAndSave(txt)
+      this.makeDirty()
+      this.focusEditor()
+    })
+  }
 
   /**Download the current content of the editor to the download folder of the user.
    * */
-  download(){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Download]")
+  download(){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Download]")    // CodCap
 
     let ideContent = this.getCodeToTest() + "" // enforce stringification in any case
     downloader(ideContent, this.pyName)
@@ -976,23 +1001,32 @@ export class IdeRunner extends IdeRunnerLogic {
   }
 
 
+
+
   /**Reset the content of the editor to its initial content, and reset the localStorage for
    * this editor on the way.
+   *
+   * @returns; true if the user confirmed the reset.
    * */
-  restart(){    LOGGER_CONFIG.ACTIVATE && jsLogger("[Restart]")
+  restart(){    LOGGER_CONFIG.ACTIVATE && jsLogger("[Restart]")   // CodCap
 
-    const code   = this.setStartingCode({extractFromLocalStorage: false, saveOnceApplied: true})
-    this.storage = freshStore(code, {}, this)
+    if(!window.confirm(CONFIG.lang.restartConfirm.msg)) return false
+
+    this.setStartingCode({extractFromLocalStorage: false})
+    this.storage = freshStore("", {}, this)
+    localStorage.removeItem(this.id)
     this.updateValidationBtnColor()
     this.clearValidations()
     if(Number.isFinite(this.srcAttemptsLeft)){
       this.setAttemptsCounter(this.srcAttemptsLeft)
     }
     $("#solution_" + this.id).addClass('py_mk_hidden')
+    this.makeDirty()
     this.hiddenDivContent = true
     this.terminal.clear()
     // clearPyodideScope()    // v4.2.0: no scope cleaning anymore.
     this.focusEditor()
+    return true
   }
 }
 

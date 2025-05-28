@@ -41,7 +41,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.6.8">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.6.14">
     
     
       
@@ -49,7 +49,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -61,14 +61,14 @@ If not, see <https://www.gnu.org/licenses/>.
     
   
   
-  <style>:root{--md-admonition-icon--coeur:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z"/></svg>');}</style>
+  <style>:root{--md-admonition-icon--coeur:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m12%2021.35-1.45-1.32C5.4%2015.36%202%2012.27%202%208.5%202%205.41%204.42%203%207.5%203c1.74%200%203.41.81%204.5%202.08C13.09%203.81%2014.76%203%2016.5%203%2019.58%203%2022%205.41%2022%208.5c0%203.77-3.4%206.86-8.55%2011.53z%22/%3E%3C/svg%3E');}</style>
 
 
 
     
     
 
-<script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
+<script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
 
 
 
@@ -93,6 +93,7 @@ If not, see <https://www.gnu.org/licenses/>.
 <script src="../../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script type="text/javascript">
+if(!window.CONFIG) window.CONFIG={}
 CONFIG.argsFigureDivId="figure1"
 CONFIG.exportZipWithNames=false
 CONFIG.exportZipPrefix=""
@@ -105,8 +106,9 @@ CONFIG.language="fr"
 CONFIG.pmtUrl="https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
 CONFIG.pythonLibs=['alien_python', 'turtle']
 CONFIG.siteUrl="http://127.0.0.1:8000/"
-CONFIG.version="4.2.5"
-CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "kbd": ""}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}</script>
+CONFIG.version="4.4.5"
+CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "kbd": ""}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "restartConfirm": {"em": 0, "msg": "ATTENTION: r\u00e9initialiser l'\u00e9diteur fera perdre les anciens codes, status de validation et historiques.", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}
+</script>
 <script src="../../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script src="../../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -251,11 +253,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -294,6 +298,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
@@ -326,9 +331,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../.." class="md-tabs__link">
         
+  
   
     
   
@@ -343,9 +350,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       
+  
   
   
   
@@ -354,6 +363,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <li class="md-tabs__item">
         <a href="../../teds/" class="md-tabs__link">
           
+  
   
   Terminale
 
@@ -370,11 +380,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../1eds/" class="md-tabs__link">
           
+  
   
   Première
 
@@ -388,11 +400,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../2gt/" class="md-tabs__link">
           
+  
   
   Seconde
 
@@ -405,6 +419,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
         
   
   
+  
     
   
   
@@ -413,6 +428,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../" class="md-tabs__link">
           
+  
   
   🐍 Python
 
@@ -426,11 +442,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../snt/" class="md-tabs__link">
           
+  
   
   🤖 SNT
 
@@ -444,11 +462,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../dnl/" class="md-tabs__link">
           
+  
   
   DNL
 
@@ -462,9 +482,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../../tags/" class="md-tabs__link">
         
+  
   
     
   
@@ -531,6 +553,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🏡 Accueil
     
@@ -551,6 +574,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -564,6 +588,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Terminale
@@ -590,6 +615,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -603,6 +629,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Ens. de spécialité
@@ -630,6 +657,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../teds/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -652,6 +680,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../teds/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -673,6 +702,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../teds/progression2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -710,6 +740,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -723,6 +754,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Première
@@ -750,6 +782,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../1eds/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -771,6 +804,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../1eds/cours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🎯 Cours et exercices
@@ -794,6 +828,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../1eds/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -815,6 +850,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../1eds/progression2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -844,6 +880,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -857,6 +894,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Seconde
@@ -884,6 +922,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../2gt/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -905,6 +944,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../2gt/cours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🎯 Cours et exercices
@@ -928,6 +968,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../2gt/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -949,6 +990,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../2gt/progression/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -980,6 +1022,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
         
         
@@ -996,6 +1039,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
+  
   
   <span class="md-ellipsis">
     🐍 Python
@@ -1023,6 +1067,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🏡 Ressources pour la classe
     
@@ -1046,6 +1091,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1059,6 +1105,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     👣 Parcours de découverte
@@ -1086,6 +1133,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-00/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) Découvrir Python en 1h
     
@@ -1107,6 +1155,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-01/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     IDE et consoles
@@ -1130,6 +1179,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-02/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Types de valeurs et opérations
     
@@ -1151,6 +1201,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-03/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Variables et affectations
@@ -1174,6 +1225,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-04/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Librairies et compléments
     
@@ -1195,6 +1247,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-05/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les fonctions
@@ -1218,6 +1271,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-06/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Les instructions conditionnelles
     
@@ -1240,6 +1294,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-07/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) Fonctions et tests
     
@@ -1261,6 +1316,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-08/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     (TD) Silent Teacher
@@ -1293,6 +1349,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
     Les boucles finies
     
@@ -1304,6 +1361,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
+  
   
   <span class="md-ellipsis">
     Les boucles finies
@@ -1374,6 +1432,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-10/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Les boucles conditionnées
     
@@ -1396,6 +1455,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-11/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) PY-rates
     
@@ -1417,6 +1477,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-1eds-00/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les listes
@@ -1447,6 +1508,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1460,6 +1522,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     ⚙️ TP (seconde)
@@ -1487,6 +1550,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../TP_alien/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🚧 Alien (débranché)
     
@@ -1508,6 +1572,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../TP_turtle/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🚧 Le module turtle
@@ -1531,6 +1596,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../TP_kandinsky/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🚧 Le module kandinsky
     
@@ -1552,6 +1618,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../TP_test/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🚧 Test
@@ -1583,6 +1650,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../bac_a_sable/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     💻 Bac à Sable
     
@@ -1611,6 +1679,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1624,6 +1693,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     🤖 SNT
@@ -1651,6 +1721,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Introduction
     
@@ -1672,6 +1743,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1685,6 +1757,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Codage de l'information
@@ -1712,6 +1785,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/CodagesA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Le binaire
     
@@ -1733,6 +1807,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/CodagesB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Le hexadécimal
@@ -1756,6 +1831,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/CodagesC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Les caractères
     
@@ -1777,6 +1853,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/CodagesD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - Les images
@@ -1807,6 +1884,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1820,6 +1898,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Données structurées
@@ -1847,6 +1926,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/DonneesA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -1868,6 +1948,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/DonneesB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Structurer
@@ -1891,6 +1972,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/DonneesC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Traiter
     
@@ -1912,6 +1994,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/DonneesD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - Projet
@@ -1942,6 +2025,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1955,6 +2039,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Internet
@@ -1982,6 +2067,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2003,6 +2089,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/InternetB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Les protocoles
@@ -2026,6 +2113,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Simuler un réseau
     
@@ -2048,6 +2136,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetD/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     4 - Impact écologique
     
@@ -2069,6 +2158,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/InternetE/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     5 - 🚧 P2P
@@ -2099,6 +2189,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2112,6 +2203,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Le Web
@@ -2139,6 +2231,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2160,6 +2253,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/WebB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Les langages
@@ -2183,6 +2277,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Les protocoles
     
@@ -2205,6 +2300,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebD/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     4 - 🚧 PageRank
     
@@ -2226,6 +2322,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/WebE/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     5 - 🚧 Les cookies
@@ -2256,6 +2353,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2269,6 +2367,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Les réseaux sociaux
@@ -2296,6 +2395,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2317,6 +2417,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Modélisation
@@ -2340,6 +2441,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - 🚧 Les infox
     
@@ -2361,6 +2463,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - 🚧 Données personnelles
@@ -2384,6 +2487,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxE/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     5 - 🚧 Harcèlement et cyberviolences
     
@@ -2405,6 +2509,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxCours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     6 - Le bilan
@@ -2435,6 +2540,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2448,6 +2554,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Objets connectés
@@ -2474,6 +2581,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ObjetsConnectesA/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     1 - Découverte
@@ -2504,6 +2612,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2517,6 +2626,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Le Numérique
@@ -2544,6 +2654,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/NumeriqueA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - 🚧 Découverte
     
@@ -2566,6 +2677,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/NumeriqueB/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     2 - 🚧 Numérique et logistique
     
@@ -2587,6 +2699,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/NumeriqueC/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     3 - 🚧 Parcours PIX
@@ -2624,6 +2737,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2637,6 +2751,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     DNL
@@ -2664,6 +2779,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../dnl/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -2685,6 +2801,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../dnl/archive2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🗂️ Archives 2023-2024
@@ -2714,6 +2831,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../tags/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     ️🏷️ tags
@@ -3104,7 +3222,7 @@ Le compteur est <strong>incrémenté</strong> à chaque répétition d'une boucl
 </ol>
 <p><div id="global_editor_be678bcbdfddedeeb6ed65a2160bf3ad8b00bfc5" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_be678bcbdfddedeeb6ed65a2160bf3ad8b00bfc5"></div><span id="comment_editor_be678bcbdfddedeeb6ed65a2160bf3ad8b00bfc5" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:10;" id="term_editor_be678bcbdfddedeeb6ed65a2160bf3ad8b00bfc5" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_be678bcbdfddedeeb6ed65a2160bf3ad8b00bfc5">5</span>/<span id="compteur_editor_be678bcbdfddedeeb6ed65a2160bf3ad8b00bfc5-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_be678bcbdfddedeeb6ed65a2160bf3ad8b00bfc5"      class="py_mk_hidden" data-search-exclude >
-.128013àneca u2m1o3lb/0dit5*pr)hyvg(=;+k9S:Pw4sf050r0d0t0f0s0n0O0g0e0n0f0O0O0E010t0s0w010406050O0h0j0j0f0x0A040J0l0n0h0*0l0c050p0;0?0^0`0/0w04051a131d0p1a0/0r0s0B0Y0!0$0(0z0s0C0z0n1r0z0t0-050T0o0n0d1m0#0%011q1s1u1s0t1A1C1y0t0x1b0t0z0Y0}0O0w0f0c0(0i011E1o010P0V0d0c0f0j0d1y1X1Z1(1G1+1C1.1:0-0a0g0L0x0l0w0l0O0s100c0g0R1V0x0x0d0e28131?0c1b0p1T2l1Q1S1R1z0r1^0(1u0c1-251y1j1l0Z1F2v0s2x0c0l2B1y0w2e1b2j2l2P0:1Y292D1)2I0x0@0n0-0k2i2T0.2S1@2V1G2X2Z0-0i2%1Z2)2j2u012.0f2!040m2=2k0/2^2,0(2{2}0N302@2T2_360-0u391e2N132B2o0r1S2t34010e2J1;1b3k1c3i2R142(053r0R2O3b3p0H0-0R0P390g2*2U1n2-0P0-0O0l0?0d3g333P0(0,040D0y3L3N2_3#0K39060g3:3M3Y2E2`0-0f0e0e0=0h0!0t0d0h0x3)3?1)0l0-0E443F3Z010j0s0-0q3L3;4j4k4l4k3*3p0e0k0-030g2G270s2|0s0O0f282a1D0n02030m0I0F3`3|0j3~4B41433z2?3/3;4o4c3H040P0l4R2P3=4b3@0c0-0s4a2+4c0l0M4,124S2k4(4/4*0o0-0x1Z0C3W4^3E4{1)3#0D3X4)1)4e2#0q2$534W3@3#3(534`3O5i0-3-5l4m5s4V451G4q4s4u0g2M1-2t1C0X0B2|4Q0X0q0g0b0g0I0I3M534U4l5h2W3_3{3}3 4Q4.5n46485#3c5W4M4O40425)3p47040G5:4c4+044-5g5v0(5=0v0v59551G5c042;5r5u5a5w4r044t0f0h0C1:0c400x0g4L5Y4P424D5z3.4j5U1G4Y2e0t424@4%6w355+6p5.4$2(0/0p3C0d2l5B2l3v2m3m132p6V0f1B6O3j1k2)0p0R0T0V0O04.
+.128013oswe =5iryntS2(p4dP*gc+àl1)avhu;3/m:k90fb050s0e0m0C0i0z0c0f0w0z0C0c0c0g010m0i0q010406050c0F0J0J0C0j0k040n0b0z0F0*0b0l050I0;0?0^0`0/0q04051a131d0I1a0/0s0i0D0Y0!0$0(0E0i0v0E0z1r0E0m0-050T0P0z0e1m0#0%011q1s1u1s0m1A1C1y0m0j1b0m0E0Y0}0c0q0C0l0(0o011E1o010O0V0e0l0C0J0e1y1X1Z1(1G1+1C1.1:0-0a0f0t0j0b0q0b0c0i100l0f0R1V0j0j0e0w28131?0l1b0I1T2l1Q1S1R1z0s1^0(1u0l1-251y1j1l0Z1F2v0i2x0l0b2B1y0q2e1b2j2l2P0:1Y292D1)2I0j0@0z0-0A2i2T0.2S1@2V1G2X2Z0-0o2%1Z2)2j2u012.0C2!040H2=2k0/2^2,0(2{2}0r302@2T2_360-0h391e2N132B2o0s1S2t34010w2J1;1b3k1c3i2R142(053r0R2O3b3p0L0-0R0O390f2*2U1n2-0O0-0c0b0?0e3g333P0(0,040p0B3L3N2_3#0K39060f3:3M3Y2E2`0-0C0w0w0=0F0!0m0e0F0j3)3?1)0b0-0g443F3Z010J0i0-0N3L3;4j4k4l4k3*3p0w0A0-030f2G270i2|0i0c0C282a1D0z02030H0M0G3`3|0J3~4B41433z2?3/3;4o4c3H040O0b4R2P3=4b3@0l0-0i4a2+4c0b0d4,124S2k4(4/4*0P0-0j1Z0v3W4^3E4{1)3#0p3X4)1)4e2#0N2$534W3@3#3(534`3O5i0-3-5l4m5s4V451G4q4s4u0f2M1-2t1C0X0D2|4Q0X0N0f0y0f0M0M3M534U4l5h2W3_3{3}3 4Q4.5n46485#3c5W4M4O40425)3p47040x5:4c4+044-5g5v0(5=0u0u59551G5c042;5r5u5a5w4r044t0C0F0v1:0l400j0f4L5Y4P424D5z3.4j5U1G4Y2e0m424@4%6w355+6p5.4$2(0/0I3C0e2l5B2l3v2m3m132p6V0C1B6O3j1k2)0I0R0T0V0c04.
 </div>
 </div>
 <details class="question" open="open">
@@ -3112,7 +3230,7 @@ Le compteur est <strong>incrémenté</strong> à chaque répétition d'une boucl
 <p>Compléter le script de la fonction d'appel <code>produit()</code> qui renvoie le produit <span class="arithmatex">\(1\times 2\times 3\times 4\times \ldots \times 50\)</span>.</p>
 <p><div id="global_editor_5f4b8b30ed40efa99040eb0876cf31471d7243bf" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_5f4b8b30ed40efa99040eb0876cf31471d7243bf"></div><span id="comment_editor_5f4b8b30ed40efa99040eb0876cf31471d7243bf" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:10;" id="term_editor_5f4b8b30ed40efa99040eb0876cf31471d7243bf" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_5f4b8b30ed40efa99040eb0876cf31471d7243bf">5</span>/<span id="compteur_editor_5f4b8b30ed40efa99040eb0876cf31471d7243bf-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_5f4b8b30ed40efa99040eb0876cf31471d7243bf"      class="py_mk_hidden" data-search-exclude >
-.128013àneca u2m1o3,lb/0dit5*pr)hyvg(=;k9S:Pw4sf050s0d0u0f0t0o0O0g0e0o0f0O0O0F010u0t0x010406050O0h0j0j0f0y0B040J0l0o0h0*0l0c050q0;0?0^0`0/0x04051a131d0q1a0/0s0t0C0Y0!0$0(0A0t0D0A0o1r0A0u0-050T0p0o0d1m0#0%011q1s1u1s0u1A1C1y0u0y1b0u0A0Y0}0O0x0f0c0(0i011E1o010P0V0d0c0f0j0d1y1X1Z1(1G1+1C1.1:0-0a0g0L0y0l0x0l0O0t100c0g0R1V0y0y0d0e28131?0c1b0q1T2l1Q1S1R1z0s1^0(1u0c1-251y1j1l0Z1F2v0t2x0c0l2B1y0x2e1b2j2l2P0:1Y292D1)2I0y0@0o0-0k2i2T0.2S1@2V1G2X2Z0-0i2%1Z2)2j2u012.0f2!040m2=2k0/2^2,0(2{2}0N302@2T2_360-0v391e2N132B2o0s1S2t34010e2J1;1b3k1c3i2R142(053r0R2O3b3p0H0-0R0P390g2*2U1n2-0P0-2M2J0h273g333P0(0,040E0z3L3N2_3#0K39060g3:3M3Y2E2`0-0f0e0e0=0h0!0u0d0h0y3)3?1)0l0-0F443F3Z010j0t2#3L3;4i4j4k4i3*3p0e0k0-030g2G270t2|0t0O0f282a1D0o02030m0I0G3`3|0j3~4A41433z2?3/3;4n4c3H040P0l4Q2P3=4b3@0c0-0o0l234a2+4c0l0M0-2G4/3O4)0p0-0y1Z0D0d3X4(1)3#0E524:3@4e4g4R2k4V3@3#0n574`1)5a040v2$5c3E58540-3(5p4%5r1G3,4h4l5B5e1)4p4r4t0g2M1-2t1C0X0C2|4P0X0k0g0b0g0v0r3M5p4T4k5D2-3_3{3}3 4P4_2_4704495v5$355(4L4N40425-3p5/0w5}4c4*040t5A5w5j1G5F044s4M0o0*0x1u0d0y0g4E4G4I4K5*4O425I0^5H3.4m451G4X2e0u42125=6x5@046o6d6q4#2(0/0q3C0d2l5J2l3v2m3m132p6X0f1B6Q3j1k2)0q0R0T0V0O04.
+.128013oswe =5,iryntS2(p4dP*gcàl1)avhu;3/m:k90fb050t0e0n0C0j0z0c0f0x0z0C0c0c0g010n0j0r010406050c0F0J0J0C0k0l040o0b0z0F0*0b0m050I0;0?0^0`0/0r04051a131d0I1a0/0t0j0D0Y0!0$0(0E0j0w0E0z1r0E0n0-050T0P0z0e1m0#0%011q1s1u1s0n1A1C1y0n0k1b0n0E0Y0}0c0r0C0m0(0p011E1o010O0V0e0m0C0J0e1y1X1Z1(1G1+1C1.1:0-0a0f0u0k0b0r0b0c0j100m0f0R1V0k0k0e0x28131?0m1b0I1T2l1Q1S1R1z0t1^0(1u0m1-251y1j1l0Z1F2v0j2x0m0b2B1y0r2e1b2j2l2P0:1Y292D1)2I0k0@0z0-0A2i2T0.2S1@2V1G2X2Z0-0p2%1Z2)2j2u012.0C2!040H2=2k0/2^2,0(2{2}0s302@2T2_360-0h391e2N132B2o0t1S2t34010x2J1;1b3k1c3i2R142(053r0R2O3b3p0L0-0R0O390f2*2U1n2-0O0-2M2J0F273g333P0(0,040q0B3L3N2_3#0K39060f3:3M3Y2E2`0-0C0x0x0=0F0!0n0e0F0k3)3?1)0b0-0g443F3Z010J0j2#3L3;4i4j4k4i3*3p0x0A0-030f2G270j2|0j0c0C282a1D0z02030H0M0G3`3|0J3~4A41433z2?3/3;4n4c3H040O0b4Q2P3=4b3@0m0-0z0b234a2+4c0b0d0-2G4/3O4)0P0-0k1Z0w0e3X4(1)3#0q524:3@4e4g4R2k4V3@3#0i574`1)5a040h2$5c3E58540-3(5p4%5r1G3,4h4l5B5e1)4p4r4t0f2M1-2t1C0X0D2|4P0X0A0f0y0f0h0N3M5p4T4k5D2-3_3{3}3 4P4_2_4704495v5$355(4L4N40425-3p5/0v5}4c4*040j5A5w5j1G5F044s4M0z0*0r1u0e0k0f4E4G4I4K5*4O425I0^5H3.4m451G4X2e0n42125=6x5@046o6d6q4#2(0/0I3C0e2l5J2l3v2m3m132p6X0C1B6Q3j1k2)0I0R0T0V0c04.
 </div>
 </details>
 <details class="question" open="open">
@@ -3120,7 +3238,7 @@ Le compteur est <strong>incrémenté</strong> à chaque répétition d'une boucl
 <p>Compléter le script de la fonction d'appel <code>sominv()</code> qui renvoie la somme <span class="arithmatex">\(1+\dfrac{1}{2}+\dfrac{1}{3}+\dfrac{1}{4}+\ldots+\dfrac{1}{20}\)</span></p>
 <p><div id="global_editor_5d6c8c633bb86c34459c17ace4a687a182eb4cc1" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_5d6c8c633bb86c34459c17ace4a687a182eb4cc1"></div><span id="comment_editor_5d6c8c633bb86c34459c17ace4a687a182eb4cc1" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:10;" id="term_editor_5d6c8c633bb86c34459c17ace4a687a182eb4cc1" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_5d6c8c633bb86c34459c17ace4a687a182eb4cc1">5</span>/<span id="compteur_editor_5d6c8c633bb86c34459c17ace4a687a182eb4cc1-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_5d6c8c633bb86c34459c17ace4a687a182eb4cc1"      class="py_mk_hidden" data-search-exclude >
-.128013àneca u2m1o3,lb/0dit5pr)hyvg(=;+k9S:Pw4sf050s0d0u0f0t0o0O0g0e0o0f0O0O0E010u0t0w010406050O0h0j0j0f0x0A040J0l0o0h0*0l0c050q0;0?0^0`0/0w04051a131d0q1a0/0s0t0B0Y0!0$0(0z0t0C0z0o1r0z0u0-050T0p0o0d1m0#0%011q1s1u1s0u1A1C1y0u0x1b0u0z0Y0}0O0w0f0c0(0i011E1o010P0V0d0c0f0j0d1y1X1Z1(1G1+1C1.1:0-0a0g0L0x0l0w0l0O0t100c0g0R1V0x0x0d0e28131?0c1b0q1T2l1Q1S1R1z0s1^0(1u0c1-251y1j1l0Z1F2v0t2x0c0l2B1y0w2e1b2j2l2P0:1Y292D1)2I0x0@0o0-0k2i2T0.2S1@2V1G2X2Z0-0i2%1Z2)2j2u012.0f2!040m2=2k0/2^2,0(2{2}0N302@2T2_360-0v391e2N132B2o0s1S2t34010e2J1;1b3k1c3i2R142(053r0R2O3b3p0H0-0R0P390g2*2U1n2-0P0-0O0l0j2G0B3g333P0(0,040D0y3L3N2_3$0K39060g3;3M3Z2E2`0-0f0e0e0=0h0!0u0d0h0x3*3@1)0l0-0E453F3!013V0-0r3L3=4j4k4l4j3+3p0e0k0-030g2G270t2|0t0O0f282a1D0o02030m0I0F3{3}0j3 4B42443z2?3:3=4o4d3H040P0l4R2P3?4c3^0c0-0o0l234b2+4d0l0M0-2G4:3O4*0p0-0x1Z0C0d3Y4)1)3$0D534;3^4f042$4S2k4W3^3$0n584{1)5b0i5d2R461G3$3)5e044(59550-3.5v4m5D3;5g1)4q4s4u0g2M1-2t1C0X0B2|4Q0X0k0g0b0g0i0r3M5v4U4l5G2-3`3|3~404Q4`2_48044a5C5)355+4M4O41435:3p5=0G604d5b5p3A5r0(5=0q5k3c4,4.0w4i5F693q4r044t4N0o0*0w1u0d0x0g4F4H4J4L5-4P435L0^5K3/4n6k4Y2e0u43125^6k4+046A6p6C4$2(0/0q3C0d2l5M2l3v2m3m132p6,0f1B6#3j1k2)0q0R0T0V0O04.
+.128013oswe =5,iryntS2(p4dPgc+àl1)avhu;3/m:k90fb050t0e0n0C0j0z0c0f0w0z0C0c0c0g010n0j0r010406050c0F0J0J0C0k0l040o0b0z0F0*0b0m050I0;0?0^0`0/0r04051a131d0I1a0/0t0j0D0Y0!0$0(0E0j0v0E0z1r0E0n0-050T0P0z0e1m0#0%011q1s1u1s0n1A1C1y0n0k1b0n0E0Y0}0c0r0C0m0(0p011E1o010O0V0e0m0C0J0e1y1X1Z1(1G1+1C1.1:0-0a0f0u0k0b0r0b0c0j100m0f0R1V0k0k0e0w28131?0m1b0I1T2l1Q1S1R1z0t1^0(1u0m1-251y1j1l0Z1F2v0j2x0m0b2B1y0r2e1b2j2l2P0:1Y292D1)2I0k0@0z0-0A2i2T0.2S1@2V1G2X2Z0-0p2%1Z2)2j2u012.0C2!040H2=2k0/2^2,0(2{2}0s302@2T2_360-0h391e2N132B2o0t1S2t34010w2J1;1b3k1c3i2R142(053r0R2O3b3p0L0-0R0O390f2*2U1n2-0O0-0c0b0J2G0D3g333P0(0,040q0B3L3N2_3$0K39060f3;3M3Z2E2`0-0C0w0w0=0F0!0n0e0F0k3*3@1)0b0-0g453F3!013V0-0N3L3=4j4k4l4j3+3p0w0A0-030f2G270j2|0j0c0C282a1D0z02030H0M0G3{3}0J3 4B42443z2?3:3=4o4d3H040O0b4R2P3?4c3^0m0-0z0b234b2+4d0b0d0-2G4:3O4*0P0-0k1Z0v0e3Y4)1)3$0q534;3^4f042$4S2k4W3^3$0i584{1)5b0p5d2R461G3$3)5e044(59550-3.5v4m5D3;5g1)4q4s4u0f2M1-2t1C0X0D2|4Q0X0A0f0y0f0p0N3M5v4U4l5G2-3`3|3~404Q4`2_48044a5C5)355+4M4O41435:3p5=0x604d5b5p3A5r0(5=0I5k3c4,4.0r4i5F693q4r044t4N0z0*0r1u0e0k0f4F4H4J4L5-4P435L0^5K3/4n6k4Y2e0n43125^6k4+046A6p6C4$2(0/0I3C0e2l5M2l3v2m3m132p6,0C1B6#3j1k2)0I0R0T0V0c04.
 </div>
 </details>
 <details class="question" open="open">
@@ -3128,7 +3246,7 @@ Le compteur est <strong>incrémenté</strong> à chaque répétition d'une boucl
 <p>Compléter le script de la fonction d'appel <code>s()</code> de paramètre <code>n</code>  qui renvoie la somme <span class="arithmatex">\(1+\dfrac{1}{2}+\dfrac{1}{2^2}+\dfrac{1}{2^3}+\ldots+\dfrac{1}{2^n}\)</span></p>
 <p><div id="global_editor_f6d3c8d3e51f7ca267a67129fb0e0d6b444b04c6" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_f6d3c8d3e51f7ca267a67129fb0e0d6b444b04c6"></div><span id="comment_editor_f6d3c8d3e51f7ca267a67129fb0e0d6b444b04c6" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:10;" id="term_editor_f6d3c8d3e51f7ca267a67129fb0e0d6b444b04c6" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_f6d3c8d3e51f7ca267a67129fb0e0d6b444b04c6">5</span>/<span id="compteur_editor_f6d3c8d3e51f7ca267a67129fb0e0d6b444b04c6-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_f6d3c8d3e51f7ca267a67129fb0e0d6b444b04c6"      class="py_mk_hidden" data-search-exclude >
-.128013àneca u2m1o3,lb/0dit5*pr)hyvg(=;+k9S:Pw4sf050s0d0u0f0t0o0P0g0e0o0f0P0P0F010u0t0x010406050P0h0j0j0f0y0B040K0l0o0h0+0l0c050q0=0@0_0{0:0x04051b141e0q1b0:0s0t0C0Z0#0%0)0A0t0D0A0o1s0A0u0.050U0p0o0d1n0$0(011r1t1v1t0u1B1D1z0u0y1c0u0A0Z0~0P0x0f0c0)0i011F1p010Q0W0d0c0f0j0d1z1Y1!1)1H1,1D1/1;0.0a0g0M0y0l0x0l0P0t110c0g0S1W0y0y0d0e29141@0c1c0q1U2m1R1T1S1A0s1_0)1v0c1.261z1k1m0!1G2w0t2y0c0l2C1z0x2f1c2k2m2Q0;1Z2a2E1*2J0y0^0o0.0k2j2U0/2T1^2W1H2Y2!0.0i2(1!2*2k2v012/0f2#040m2?2l0:2_2-0)2|2~0O312^2U2`370.0v3a1f2O142C2p0s1T2u35010e2K1=1c3l1d3j2S152)053s0S2P3c3q0I0.0S0Q3a0g2+2V1o2.0Q0.0P3h343Q0)0-040E3V3G3X2{0.133A2@3O2`3Z0z3M3.3q3Z0L3a060g3|3N3W2F3)040f0e0e0?0h0#0u0d0h0y3=3 1*0l0.0F4d3%400j0t0.0r3M3}4r4s4t4r3?3(0e0k0.030g2H280t2}0t0P0f292b1E0o02030m0J0G43450j474J4a4c3,324v4e1H3I040Q0l4Z2Q3~4k2X0.0o0l244j2,3(0l0N0.2H4_3P400c0p0.0y1!0D0d3$4`403Z3#4!3F5b1*4m2$5a511*3Z0n5l3d3*5q3q4g040H5t3(5j042%5f4w5c0.3;5f4/5h1H3^4q4u5O5E1*4y4A4C0g2N1.2u1D0Y0C2}4Y0Y0k0g0b0g0i0r3N5f3{4u5Q2.0.4T46484Y502`5v4i5I5?365^445`4X4b5}5u0.5x614%0)5A5C2S6e015v0q5y4l4n042=5D6j5v0w0w6n4;044?4^5I3}623r4z044B4V0o0+0x1v0d0y0g4N4P4R5_6J676P1Z6P0t5/2Q5;3|6E4)2f0u4b3+4.6E0c644U4W49685:143D0d2m5W2m3w2n3n142q740f1C6}3k1l2*0q0S0U0W0P04.
+.128013oswe =5,iryntS2(p4dP*gc+àl1)avhu;3/m:k90fb050t0e0n0D0j0A0c0f0x0A0D0c0c0g010n0j0r010406050c0G0K0K0D0k0l040o0b0A0G0+0b0m050J0=0@0_0{0:0r04051b141e0J1b0:0t0j0E0Z0#0%0)0F0j0w0F0A1s0F0n0.050U0Q0A0e1n0$0(011r1t1v1t0n1B1D1z0n0k1c0n0F0Z0~0c0r0D0m0)0p011F1p010P0W0e0m0D0K0e1z1Y1!1)1H1,1D1/1;0.0a0f0u0k0b0r0b0c0j110m0f0S1W0k0k0e0x29141@0m1c0J1U2m1R1T1S1A0t1_0)1v0m1.261z1k1m0!1G2w0j2y0m0b2C1z0r2f1c2k2m2Q0;1Z2a2E1*2J0k0^0A0.0B2j2U0/2T1^2W1H2Y2!0.0p2(1!2*2k2v012/0D2#040I2?2l0:2_2-0)2|2~0s312^2U2`370.0h3a1f2O142C2p0t1T2u35010x2K1=1c3l1d3j2S152)053s0S2P3c3q0M0.0S0P3a0f2+2V1o2.0P0.0c3h343Q0)0-040q3V3G3X2{0.133A2@3O2`3Z0C3M3.3q3Z0L3a060f3|3N3W2F3)040D0x0x0?0G0#0n0e0G0k3=3 1*0b0.0g4d3%400K0j0.0O3M3}4r4s4t4r3?3(0x0B0.030f2H280j2}0j0c0D292b1E0A02030I0N0H43450K474J4a4c3,324v4e1H3I040P0b4Z2Q3~4k2X0.0A0b244j2,3(0b0d0.2H4_3P400m0Q0.0k1!0w0e3$4`403Z3#4!3F5b1*4m2$5a511*3Z0i5l3d3*5q3q4g040y5t3(5j042%5f4w5c0.3;5f4/5h1H3^4q4u5O5E1*4y4A4C0f2N1.2u1D0Y0E2}4Y0Y0B0f0z0f0p0O3N5f3{4u5Q2.0.4T46484Y502`5v4i5I5?365^445`4X4b5}5u0.5x614%0)5A5C2S6e015v0J5y4l4n042=5D6j5v0v0v6n4;044?4^5I3}623r4z044B4V0A0+0r1v0e0k0f4N4P4R5_6J676P1Z6P0j5/2Q5;3|6E4)2f0n4b3+4.6E0m644U4W49685:143D0e2m5W2m3w2n3n142q740D1C6}3k1l2*0J0S0U0W0c04.
 </div>
 </details>
 <details class="question" open="open">
@@ -3163,7 +3281,7 @@ Le compteur est <strong>incrémenté</strong> à chaque répétition d'une boucl
 </code></pre></div>
     <div id="global_editor_550461a936d87ccb0f2616f8afb68e216de207e0" class="py_mk_ide"><div class="py_mk_wrapper_v md-typeset"><div class="comment_py_mk_wrapper"><div is_v="true" mode="_v" id="editor_550461a936d87ccb0f2616f8afb68e216de207e0"></div><span id="comment_editor_550461a936d87ccb0f2616f8afb68e216de207e0" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="True" style="line-height:24px;" id="term_editor_550461a936d87ccb0f2616f8afb68e216de207e0" class="term_editor_v py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_550461a936d87ccb0f2616f8afb68e216de207e0">5</span>/<span id="compteur_editor_550461a936d87ccb0f2616f8afb68e216de207e0-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_550461a936d87ccb0f2616f8afb68e216de207e0"      class="py_mk_hidden" data-search-exclude >
-.128013neca u27m1o3,lb/0dit5*pr)h-y@vg(=;qk6S:Pw4sf050s0c0u0e0t0o0R0f0d0o0e0R0R0H010u0t0x010406050R0g0j0j0e0y0C040M0l0o0g0-0l0b050q0@0_0{0}0=0x04051d161g0q1d0=0s0t0E0#0%0)0+0A0t0F0A0o1u0A0u0:050W0p0o0c1p0(0*011t1v1x1v0u1D1F1B0u0y1e0u0A0#100R0x0e0b0+0h011H1r010S0Y0c0b0e0j0c1B1!1$1+1J1.1F1;1?0:0a0f0O0y0l0x0l0R0t130b0f0U1Y0y0y0c0d2b161_0b1e0q1W2o1T1V1U1C0s1{0+1x0b1:281B1m1o0$1I2y0t2A0b0l2E1B0x2h1e2m2o2S0?1#2c2G1,2L0y0`0o0:0k2l2W0;2V1`2Y1J2!2$0:0h2*1$2,2m2x012;0e2%040m2^2n0=2{2/0+2~300Q332`2W2|390:0v3c353e372}0l2#2 0:0L3j2-2X1q2:3o2=040i3c1h2Q162E2r0s1V2w3m0d2M1@1e3G1f3E2U172+053M0U2R3l3w0+0K0:0U0S3c0f3u3f0S0:1T0t1$0F1F2)3U2_3-3m0/040G3C363#2}0:153`2n3|433~0z3+492H013~0N3+0f4k4l4m0f064m4e1,3%040S3o4d424f0b0:0t4x3!4f0l0P4B462S3,4y2Z0p0:0y3?0c414E1,3~40473Z2.434A044J3V4M1J4b4D4!4f4h3j4n4l4r2:4O042P2J0u4T4.4V0:4X2U4*0+0R1)04020J0g0l0u0I0f595b5d4~3v4F0:0w5j3f4B5o3}0:0n4-5k1,560:5g5c0I0D5A5i4Y4@0+0l5m5r4a515L4z455O1,5J040B5R2:5q5G544g0:4c4Y4L4U4+5$3+063k4 1J4t3)5v3.3(3=0F142 0c3_535*0+4W5W385Q5Z615#045%4K5H694i5(4=4n4p4?5!4t4v0y5@3m4$4C5(6d4G4I6p4#4_4Q0b0F4S675:625N6E5w5X4%64695u6I2|0j0t0:0r6M3~6O606F015T5V6P3m6R2(6V5,6t5!4:4Y6j4=6d0b4_4{0b4}6%5M3 6M5y585a5B5f725F6Y6J5I5K6|4/6H775p046s7e5s6a6X4)68705E0I0q7p6+6a3t0q3X0c2o2P7y3F1n3H2r2u2p0e1E7B0q3G0=7L0V0X0Z04.
+.128013osweq =5,iry@nt-S2(p4dP*gcl1)avhu;37/6m:k0fb050w0e0p0E0k0B0c0g0A0B0E0c0c0h010p0k0u010406050c0H0N0N0E0l0m040r0b0B0H0-0b0o050L0@0_0{0}0=0u04051d161g0L1d0=0w0k0F0#0%0)0+0G0k0z0G0B1u0G0p0:050W0S0B0e1p0(0*011t1v1x1v0p1D1F1B0p0l1e0p0G0#100c0u0E0o0+0s011H1r010R0Y0e0o0E0N0e1B1!1$1+1J1.1F1;1?0:0a0g0x0l0b0u0b0c0k130o0g0U1Y0l0l0e0A2b161_0o1e0L1W2o1T1V1U1C0w1{0+1x0o1:281B1m1o0$1I2y0k2A0o0b2E1B0u2h1e2m2o2S0?1#2c2G1,2L0l0`0B0:0C2l2W0;2V1`2Y1J2!2$0:0s2*1$2,2m2x012;0E2%040J2^2n0=2{2/0+2~300v332`2W2|390:0i3c353e372}0b2#2 0:0M3j2-2X1q2:3o2=040K3c1h2Q162E2r0w1V2w3m0A2M1@1e3G1f3E2U172+053M0U2R3l3w0+0P0:0U0R3c0g3u3f0R0:1T0k1$0z1F2)3U2_3-3m0/040t3C363#2}0:153`2n3|433~0D3+492H013~0O3+0g4k4l4m0g064m4e1,3%040R3o4d424f0o0:0k4x3!4f0b0d4B462S3,4y2Z0S0:0l3?0e414E1,3~40473Z2.434A044J3V4M1J4b4D4!4f4h3j4n4l4r2:4O042P2J0p4T4.4V0:4X2U4*0+0c1)04020f0H0b0p0I0g595b5d4~3v4F0:0y5j3f4B5o3}0:0j4-5k1,560:5g5c0I0n5A5i4Y4@0+0b5m5r4a515L4z455O1,5J040q5R2:5q5G544g0:4c4Y4L4U4+5$3+063k4 1J4t3)5v3.3(3=0z142 0e3_535*0+4W5W385Q5Z615#045%4K5H694i5(4=4n4p4?5!4t4v0l5@3m4$4C5(6d4G4I6p4#4_4Q0o0z4S675:625N6E5w5X4%64695u6I2|0N0k0:0Q6M3~6O606F015T5V6P3m6R2(6V5,6t5!4:4Y6j4=6d0o4_4{0o4}6%5M3 6M5y585a5B5f725F6Y6J5I5K6|4/6H775p046s7e5s6a6X4)68705E0I0L7p6+6a3t0L3X0e2o2P7y3F1n3H2r2u2p0E1E7B0L3G0=7L0V0X0Z04.
 </div>
 </li>
 <li>
@@ -3182,14 +3300,14 @@ Le compteur est <strong>incrémenté</strong> à chaque répétition d'une boucl
 </code></pre></div>
     <div id="global_editor_cc58b014644c5116aabaf0c6289b12151958e9f4" class="py_mk_ide"><div class="py_mk_wrapper_v md-typeset"><div class="comment_py_mk_wrapper"><div is_v="true" mode="_v" id="editor_cc58b014644c5116aabaf0c6289b12151958e9f4"></div><span id="comment_editor_cc58b014644c5116aabaf0c6289b12151958e9f4" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="True" style="line-height:24px;" id="term_editor_cc58b014644c5116aabaf0c6289b12151958e9f4" class="term_editor_v py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button type="button" btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)</span></button><button type="button" btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;width:9em;" class="tooltiptext bottom">Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)</span></button><button type="button" btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Télécharger</span></button><button type="button" btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip "><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Téléverser</span></button><button type="button" btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Réinitialiser l'éditeur</span></button><button type="button" btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Sauvegarder dans le navigateur</span></button><button type="button" btn_kind="corr_btn" style="margin-left:1em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:green;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Tester la correction (serve)</span></button><button type="button" btn_kind="show" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip "><img src="../../assets/images/icons8-check-64.png" style="--ide-btn-color:gray;" class="skip_light_box" /><span style="--tool_shift: 50%;" class="tooltiptext bottom">Afficher corr &amp; REMs</span></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_cc58b014644c5116aabaf0c6289b12151958e9f4">5</span>/<span id="compteur_editor_cc58b014644c5116aabaf0c6289b12151958e9f4-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_cc58b014644c5116aabaf0c6289b12151958e9f4"      class="py_mk_hidden" data-search-exclude >
-.128013neca u2m1o3,lb/dit*pr)h-yvg(=;+qkS:Pwsf050q0c0s0e0r0n0M0f0d0n0e0M0M0D010s0r0u010406050M0g0i0i0e0v0z040I0k0n0g0(0k0b050p0/0;0?0^0-0u040518111b0p180-0q0r0A0W0Y0!0$0x0r0B0x0n1p0x0s0+050R0o0n0c1k0Z0#011o1q1s1q0s1y1A1w0s0v190s0x0W0{0M0u0e0b0$0h011C1m010N0T0c0b0e0i0c1w1V1X1$1E1)1A1,1.0+0a0f0K0v0k0u0k0M0r0~0b0f0P1T0v0v0c0d26111;0b190p1R2j1O1Q1P1x0q1?0$1s0b1+231w1h1j0X1D2t0r2v0b0k2z1w0u2c192h2j2N0.1W272B1%2G0v0=0n0+0j2g2R0,2Q1=2T1E2V2X0+0h2#1X2%2h2s012,0e2Y040l2:2i1c2L112z2m0q1Q2r2*0$0d2H1/19331a312P122$053a0P2M2R2@0H0+0P0N2~040f2(2S1l2+0N0+0u0z0v1-0r0P3u3x2@0*040C3J2?382^0+103i2;3K3R3M0w3u3w3Q3z0$3M0J3#0f060f3/3$3o3R3q040N0k0v3#3X3(3S040r3|3%2C010k0L0+2E423=3~0b0o0+3F0b0B0c3P4b443M3O3V2 432U3T4k2)3~3Z4a4v4m0+3+4p0,3:4F3;4z2U4e042K2E0s4u3y4A3N4y4Q1%0M1!04020G0g0k0s0E0f4Z4#4%4P2@0k0+0t4-3Y0+4o2P4r2+4t4D3}444/040y4=4c48534R0w0m4T2@4W0+4*4$0E0t5e4,4}4`0$504;5k4l1%4n561%0i0r2Z5t1E500F5y0$5v2.5C454:5G0b555p4I1E4x4D4H4U5O0+3!4D0-0p3l0c2j2K5!321i342m2p2k0e1z5%0p335X0P0R0T0M04.
+.128013osweq =,irynt-S2(pdP*gcl1)avhu;3/m:k+fb050t0e0n0B0j0y0c0g0x0y0B0c0c0h010n0j0s010406050c0E0I0I0B0k0l040p0b0y0E0(0b0m050H0/0;0?0^0-0s040518111b0H180-0t0j0C0W0Y0!0$0D0j0w0D0y1p0D0n0+050R0N0y0e1k0Z0#011o1q1s1q0n1y1A1w0n0k190n0D0W0{0c0s0B0m0$0q011C1m010M0T0e0m0B0I0e1w1V1X1$1E1)1A1,1.0+0a0g0u0k0b0s0b0c0j0~0m0g0P1T0k0k0e0x26111;0m190H1R2j1O1Q1P1x0t1?0$1s0m1+231w1h1j0X1D2t0j2v0m0b2z1w0s2c192h2j2N0.1W272B1%2G0k0=0y0+0z2g2R0,2Q1=2T1E2V2X0+0q2#1X2%2h2s012,0B2Y040G2:2i1c2L112z2m0t1Q2r2*0$0x2H1/19331a312P122$053a0P2M2R2@0K0+0P0M2~040g2(2S1l2+0M0+0s0l0k1-0j0P3u3x2@0*040r3J2?382^0+103i2;3K3R3M0A3u3w3Q3z0$3M0J3#0g060g3/3$3o3R3q040M0b0k3#3X3(3S040j3|3%2C010b0d0+2E423=3~0m0N0+3F0m0w0e3P4b443M3O3V2 432U3T4k2)3~3Z4a4v4m0+3+4p0,3:4F3;4z2U4e042K2E0n4u3y4A3N4y4Q1%0c1!04020f0E0b0n0F0g4Z4#4%4P2@0b0+0v4-3Y0+4o2P4r2+4t4D3}444/040o4=4c48534R0A0i4T2@4W0+4*4$0F0v5e4,4}4`0$504;5k4l1%4n561%0I0j2Z5t1E500L5y0$5v2.5C454:5G0m555p4I1E4x4D4H4U5O0+3!4D0-0H3l0e2j2K5!321i342m2p2k0B1z5%0H335X0P0R0T0c04.
 </div>
 </li>
 </ol>
 </details><script type="text/javascript">
 CONFIG.needMermaid = false;
-CONFIG.overlordClasses = ["Terminal", "Qcm", "Ide"];
-globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/}%5{!prh]y[gFqkSx4sD:fNa2 ,oV0ditE*-)AUI@j_v(=+C69zw\x1e0r010c0S0T0U0P0u0(0d0e0q0.0J0g0S0g0e0L0.0j0k0M0F0c0L0 0/0.0g0c0k0g0q0M0e0g0g0F0F0q0J0S0d0S0.0q0m010I0N0=0t0x0(0b0L0h0c1B0N011F0U0v0P0b0X0M0z0U0X0R0/0X0c0E1J0t0l0c0R0j0L0a1F010O1N0c0b0)0(0e1S0U1@0U1M011;1?1^0(1}0u0h1`1|1~2022010f0G0c0|1{0b1}2k200J0{0N1~0T2h0N0T0b0N0u0L0b0z0c0*0k0Y0N0I092w0N2K0t0u2v0U0*09010l0T0z0b0c0N0M0N2R1=1@0S0+2R2R0Y2I2K2L2N2k2Q2S2U2W0N0k2+2-2.2I2M2O2=0G0f0_2X0S0f0N2M0P0z2y0h1K2{0b2I2o0u0N0b0P0h0m0u2X2v2x2z2B0*0q2F2H2J2/302R0W2#2q0b2(2*012F2|3A2;3l3n3p2$3G2)012+2!3z382:2P2R0n3E2%3T3f2.3W2 2;2R0A2v2+2d1{0u2i2a2m1C211=1O0f0m2T0e250c0G0U0G2c3~2g0e3p0U4446483|2d0t0P464427292k2b4i3~4k4m2j2l1 4s1?0E0e0l0f0S0@1M0y0w3~1$4C4E0@0(1K1Q0P0S4h0N4I4K4B4D4F0S0(0C0;4U4W1N1P1R0b0(2T0m4)010U0f0u0U1*2d0L2T1@0(4,1S014J4+0x0t0T0(0;0v341M0b0f0l0l3~3p432T0h0_1M0X0j3~5a344/0T464H54010L0f0`0(0u0f0b1M0J4}2g4t0u0P0J0T4{4z5z0U1}0h0t474/0c0J4y1N0#0b5O0b0_0x4|5B0P4/3a0(0L0G2g4_1M0U5E0c3~3@0|3p0h0G4P5?0C1M0R3~0v5?1`0v0c0e0C0(0m0U5G1C5I0l5K1N6a635 6h6j5H5J5}6p6b3p0)1d0l6t6k0N6m6o016q295F266v6n6x015v0(1@4c561}0S5`5|3~6S6B5_1C5{0f6Q0h0L0E0(0T4F5u2W4U0j0d3~5m4.6;0c6?451M0k3~4F4c1d2g5=5T0c5V5X1S0(2f2h296=5I5P4^1L3|0@0_0{2d4F1e0U0T0)0L1}0(460S0P5B0(3i7A6e4d4U6*6Q0G1R0;0(1S0l1G5?5^7v7e2h5M0u637G4b7J6O6I0G0u436q0v200/1s0.0m0d0j0q1p0q1k1l0d0q0c0m0k0k0.140k120m0e0e0j120L0M870@0e0R0q0j0R0F0m0S800m0R0d0F0S1k0S0R0m0J851w2d0U0;5/1{6n7)7M0U4#0C0c5,5R1$4k6(6G6w4a8L7D4e0e7E5N0J1M0M0R681N8!4e0J0c0@0m1e666)5|0o4K0^0`0|0R0c0M0d0L7^0L0/820S0/0c7?0d0d0/1b0m0/0d0g0R8A9a0J0j0/1v0j1j0m0g1M1E1G1I1K20511T1V1X1Z1#1%5V1*1,0m1/5,4K244w4r1N2d1@1_26289Q3{9S3~7g3_4q9Z013i2u2u2w2y2A2C5q3w2G3L3Y300T3D019|1=0T2,3X2~3Z31331}0N363Y3a3c3e3J2I3h2p0%9-3s9:2D0O0g3x9^3-3!010$3C0%a13+a33B013:3g3J3?0{9%4x494+40424f47aJ017%0c4e1}4gaP4uaT2h9X3`5#3}4+4l8Za#aP4L4Z4G1C4*0?4Y4N4#4Q1R4T5x4X4M4!4$4(a|554R4.4:4=4@4_4{3~4}2s4.9B534t56585s1}5d5f5h1N5j5u5m5#5p5r5b7z2T5wa:5y5A5C5E6F6H6Q395O5Q9!1N7y5U5W631*5!205%5)5+5-5C0l5;7U2h5#7L5~aG5D7b636-0G8@0N8+6J6b0e6d6f6E8J69b@b*6ibF8V6y636A6Cb{6lc2b?6r7D4q0ub|1N6S6U0u6Wa/0Nb(cg636%b%6!1N6-6/6~706^6`ct2v6:6=2T6@72747I776 bN7bbP7Q4.9$7i6 7k4D3p207p8}7s1d0e7v7x7z7B8Y7F0{7H76aO8^6+4a7OcO7S5=5@b$0T7X3^0{7#c,aRc/8U6P4a7,0(7.208n0d8)170L0q160J0d0k0m191h0.0R0L5I0e0k7;9k0.1n9o0j0e0F1o1d0d82859n0F1q8r7|1t0L0R0k0L9j8D8F298Ic8d51N7B4$8Oa,0E8S5#bG8W7C7E8-7Q0J8%1C8)b=d.8/8;8?6Z6+8`1?8|c,1e8p1g0d118u9c0F9cdl800S1x188t0/0J0e0m1t8b0edE8)9v1O9x1J7nb34-1U1W1Y1!1$1(9Jdz9M9T9Pa+8Q249W4paI5RcQ9Ya$9+0Taj9/3u5q8l0O0Map3Xar0*9{3C3feSeU3t9;68680X2E9@e$a4e)010X3=b)3^eM9Ra%3 410T43aUd3f2d2aN4Uf2aX4na!9(a$4ja)f09)9Ta?4!b2a=a~4Oa_4S4)5ya-a@b0fwbhb45u4;4H4?4^4`1Lbb4~be0xb4bg555759bweu5e5g5i6ebr5n1Cbu1Nbk6 by5#a;bC5/bEcf1O5MbJeuf2cL7cbQ5Za$bU2vbWbb5.5:0zc_7Vd|6Q6s61b-6567b}6rb_6gc0f;6K6sgjdW6I6Kc54}c7d4gpb~6M2hf;ch0b6V5Wclcn6Rcpb$g86{6.cCf*2v711C6_6{cBcwcEgP2_cH765?cK7af{cO7f5^cR7F0L7lcV7oe0cecH7u7w7y6 c)7E7$cId3gF7N0P7P7R7Tc`4_c|4.7Yc c+0|d24Ud*dYd7d97o0F0M4Fdg149k0Se90dei9pdl8m1e9ndidB1q0JdB92900Jek897|99hr0L1+0S7@0c0F0.ej0j0jdS8G0PdVgu8K8Md#8Qd%0{d)c9g{8Z8#d:8(8*5~g|8:hPd{c:0cd~0?g;0(0g7^0F9h9a950SdfdA149i1a8phP1d0m1b0j1i811ti20Meq1F1Het9AfOew9Dez9GeC1+0M1.1:9O1_eQa,eKaZflfi9#g*iG3|e,3reV2C0.e#3+e%0T3R3H3Uae5(ahe-al9?3yiWa42R0L3%3S3Ia1e%2R0me}8,b*iObLf3aMf7fc2dfaj2aWfkeLi~fdfkjafnfs6YbAa}a.a^aSa`fB4AjffAfq9BfEb7fIbabMfM50iu525y1FfSf)bmfXbpfZ5lf#0Nf%01f)5ubz4VbBg3f:gobHf?5Pf^4|g$cNbRf~5(g00U9NbMg3bZg5b#8TgFgab,64b/gec36c6egi6ujWgf29e gnh#k3gr6Dk6hgca6Lcdgz63cickjgcmcsgG0(cqgJctgLgUgO6^0qgS6}cDkucG1N753pg!79bO7dcPiN4ScSg-cUf^cX7rg?c#g^c(8Xg|d1g~7Kkmh1h30bc^j=7Wh9c~7!hcc-7(k2hh7-5?7/3|0L14ek85dz8r8odr850/0e9a9j178:1khVhR100R0MdghS9j0m0F0RdA150R14dq8A99ht0.0.hXdUhfh-8Ld!8Pi 8Rh+f;h.1`h:d;2Yh?8,h^d`6fg8h~kQ0|hN0S1n0k0d9k8idB1k1ghP82dO80878j0c0gdQ0/801-1xipes9z3|9Bex9EeA9H1)iA9LiD23iFeIlDiI4ojdiM7hjaiQ9.e.0*iUe@i-9`iZ3)i$3+9+aiiRmii+9^mm3.5zi;i!3*2.i^01i`aEe~aHf14jaLf5fbaPj545f8fj4mj9m8jb4vmXjejjfqfya fua{jhjojjjqm,erfDb6fGb8fJ4|jybfjCbifT5c1CfWbo01bqjKbt5qf(fUjQf,jTbD5Ff;bIjZaPf`j%f}bTj*5*j,bX5/j:g6gIh|mJb+62j`b:b=glghgtkcglb k1k7j}k9nFc9nHgxcek=knkigDkkgF6$nvklc;krcvkzcFgQkwcAkygNn)gXkCcIkFnkkIg)mekLg,g.kPg;cZg@c%g`kW8.kYc.k!n#aQc?h4nuh7c}7Zd0hdkZlGhik^200k1m17dP0/99150g1y0.lY0@hP141thu0Ml:dl7 di0e0Mdidc7;0F0kll0J7`lg0Jll0c0q0/ovlw8HlydXaQlA8NlCf2lE8TkclHd.8$h=d@lOh`lQh|lSi0dIe5oNdO1-hSoK1ehmdP0FdN0q8y0/0joxlj161l0L8cl_irl{ev1Sl~ix1$2h0ef51+0jeFiEiKiH9ViJmc1NePmXmgak3u84a10T0J2_0q0N0p9,0+0+b;az2;a0aFe pDj0mOj65RmRaV5RfemWfhj7mZp/h)jfm%foftjlfvp^jp4%jnm;4-jtm@jvfKjxbdjzfPm}jEfUjGn3n50Tbs5on8jOnaf+fqf.5DnfnSnhbKf_j$5Xj(nnbVnqg2bYb!h6cro9j^nzb.nBk3b^j nNo%nHk5nJnG6z0c6BgskbnOgwkfnSgAgC6XkqknkpnScugMcx1M7_kxq:gV4U73n;gZ78n@637epF7jkN7mcWn kSc$g_7Ao4k/heq+k$c@h57Vh86Tk-ohk:aSo$7*ol7Ndaox0jed9n8b8v1u8k9o0eow106_9g0.0@9rl=d:ht0Le90k8udN1hrw0e96hrlWlY168xo!hZrqh$lBd$d(lGrco;h;d=lM01d^h_8=o`n!h}8{7q0|1-895Z8s0R1h1Z850k0j9g0q1t9r0J1ndAi40FhD7|0~dtpk9yf^l}iw9FeB9I1+0kpxm6pzeJpBmbm!mdmK9)4FpN0b3o4!7w5v0c4^0*sK0uiV2.1{7csP3j0NpU0R3+s%2K039-0_0Tbc5^0N1*0NsWgD4^0N0L7x2ks:0L0N0m7D4C0c9^pHiS0*5qsS0,0jsUs(pM2KsSpQpSs#2Gs)cmmS2X0GeTtgmSa8sNtp412X0t0L3jeTmxs(s=3ms@3jpUs?1}s^0,0N0j9^4d4^2wtJsYpZsGiLaKf4f6mSj34ag~mPp,j8pCsEa(p;eNlDp_kka;m(p`4Rm+jSjifzp jrjAb50TfFa:fHb9q65zm{u1fQerqcn03kbnfY5kqhjLjNjPqnm:qpjVnKf=5Nni5Rq 5YbS3|f npj-5zj/qEg7nwi|e gbnAj|kdqNb`qZqQb~qSc1uSc4qWc6uRgvcbnQkg6TgBcjnVq+nYo.c9q/ktn/q?n,q^kA1Cq{01kDcJkGcMn^r2kMn}r6r o0kTo2rbd,o5oio7rfobk(ric{ofhbg}vfnS7+k@rtiPs90F8ls5l50@0g0/le9c7;0MhT1z9n8:9cdf87oJ9o7?0Slrsas5df8oi4oJ91850qe5r%h!o/o)h(t;r-vpr/lJo?h@8.r_h{r|o|r 6hl6dEejvQed0@8:0mrJ1x0q8epd8y0JdP1v8rw90 soisl|u1ppstm19J0Fsy0?eHp=8,0l7U0N0D0U8?i,2}i#2R0N0*5%26dr2X090f8*1+a8wKwMl42N3pa82z0Gs:00wP8 0/3lgBwZ0c0/3KwC3U3XsI0N0(6:npw;0*2g0l0J0Y1Cw_0J0aw;460C0+4I9^w/0t2f0vw^0cw`1=0)w|0Nw~x0rb0C0a0L0t0t2%0*xfx65Z380P0txbw`xgtQ0u2wxix10Uxl4kxxax2.w/ch7c0xxyw{1CxB2w3l0Uxhxcw xF66pyp.t:f2pFwsu}xu0G3m1K0*e#09wy8a0f0h5fg_s^tjtDx x s*j+s-by7yh8a82X0l001e8!x`wutK0uaf0Ut5mivw3xy0yoy23Y2%s:450N7x1*4^wWs$w(s$os3Wx?x?ycx_x{ygs!s_x^yex|3jtMeT3+s*5A0z1KcdyMydyJsYy89,yixTyZyIyftUnxjaw/x.3d2Cx=x@y!y-x}b;yoy~2.y2npy45vy61Sy%yayHyOygyiykal8ltbtky s(yq2Mys1*wWywsYyz2!wL8 yC0/yE0UyGyNy#y|z9zByQ2u0W0W2ZyTs_0fyW1~2tzDy{3j4Fy(3g5{aStRy+zay.tYj1t#mQt(p(n;pNj2x;1C3W3+8RyLs$zix t42peTmuze1,ynyotC2Kz?pUz?yRzHzJay3XywyLy=x:3K3X620zyL0J2Rya2v465EkTz6Afy@a80P0_2x9U0P0x2t0r8R0o2qxWw$1Dyw0owDs*0is~0`wys;af3Xk*yv4}s!A6d%1=AjAUz.2Fy10N0Ktx5?0N7Df42t0Sybxoxc2twu6G1SAs2wzTj20aB30N0s0N0Ea14F0ltm4gtDs*0DeT0)7DwW2^Bi5f0c0:38A/wu5vs/B12yl50GB30amUaYsDx+BBsA1NAOs~4bk+xv46tE2kbdxWa91{zTzT2R2W5TAB0L2B3EyBs_xo2T0B6+3j0G0x46w(0/6-7vB+7b1~2IyU2Mw(0dwWB^yttEzTaSytwWj2s_BQzswQzyztw)s}w%Ce0/ByB{0N0-2X9Y37ts1$B;8-B;0N0hw(etxheT5F2X7Yy$s~B;CdwQyt0)B;txyhCi0eB;4Fy?2k1=0D0Z0!0ACACll57a2q3^y$390)CazTA|BKy70V0K0QBAt}fpm:t^jkt`q0C|m/t|pnu2u44Vu6m_fLq8m|bhuebln1uhjIujqif$qkun5vncqCf/qrusqtj!bbqwf|uz0Nn+uEqDj;qFq+qIgcj{gQqMnEk6gFqR0|DMkmgquYqYnJDNq#6NuInTu*kju-gHu/o%u;n(gWu@016|u_n/u|u~n?Dwg(v3n|kOv6cYr8kUo3vcrdojDZrgock*rkhak.vnk;usvqd8om3|0Srw0S8a0Mrw1i1498l/0.e9dqpchmhN96oo7^0R0gl1oX8k1,1g1qijpi5IoKl:7_hD6Y3~8EhYv%lzh%o+fnv,Efv.4eo=r=o@v=lPb:7Lv_8}0(1tdbl*0@lk5Z95vBE`8r9ihTwa0jdIEp1bdklK9wplsqwjssm0pspulewp9UBGr@wu5@wwx@0CwA2K3IwDwFcdwICbzuwOCPwS35wVwXB;w$CQCiw+Ftw.xuw;j+w@w~xgxExkx40wxtpNx87NxQxeFSxYxjx2xmA_3GxrxK2Kx7xwxQxAzXxCxXw`F)xG1/F=F/y8pNxN5WxPFRxSF^xU0PxWFTx2eGsCfgx(2dx*x(x75M360_x;e@zzy`yPyLz_FszV9+bZxwi)3u2KA1GvyiGry,GtpUzxy*zQyPtVFkGl4Sa6Gp3yGHz!y|0jGvA+y3s.z5B0y9ybzAzRzc2pGz0tGB9;0O8kGEz_zk3p3GC6AXyx7!tNFywNpazxGWzEyLGNyK0W9,z0Cw5f7v1)2s3jz8G,GttytAGLG8zZzEmMtZt)i p*f8w/A)z:9^A5H2G!s%z{Hpz~eWG@zgz:z_A32qd%yLz?HcySy~9^AdpU39Gn2PAh3+AjAlAn00Ap6*A aaH$Gp7CAyG|BiAC3jAEd%AGC5AJ0rALAN0NAPcmGa4}wJ3gAVqFG AZHR0tA$0G0zA(t#GpA+A-BqwWA;4~zSA^xp1*Hks~2ogBBLB1t#BzB5B7B9xcBc47BewwBhBj3k2XBm1*BptywWBsh6y%5{1e45BzBFx%mL4tjcmXBIxXH:aXBO7v1~a837BT35wJ01BX0`0xB!t322B%xnHiB^B-B/CIw!B?0TB^yXzy0bB|COwMB 0NC1s;I`AHG~C8g-I@CHCvwuChwQCkJhCmCo3`CqBNCsCP5BCvCxCeCztp0NCCC(3ps^CGCiJaCf1*CLCiCNCtCR7bJfCVCXCZtpC#aSa7CEs^C+C-y9BJ6eBLC=C@m#a@p}m.m*C t=D1a;jsm?u5m^jwu9DaubqbbjqdDfjHn4jJukn7bv5tuoD2DBDquV6IDtnjD_qy1CDAqpntk*DFb*uLqKq=DKqODQo9DOgtDWuXqXkaDVDRDXgyDZq(u+q*KYD(h,D*ksD,kvq@u=gWD?n=q~D_r1kKr3v5g:v7E0valHEdrpvgh2rhodk+rlogE4voEfrsk_1N849ci28=1x9erw1m110L1a901n15939gi2wavv1pljhvrP90piEEEu7?hmdI0e0Jehv$r)d+r+h)E#v(E3r:lKd?v;7Fv?r{E/r~E;0q1xenrE830m7@hTrR1sl4ELl5p80.9ipidc81dB8bwgpmq1poFd9GFfl5dOFiwrx(4Cwvwxwz9^Ft01wEwG2hFxB%0SCtFCwU0bIWwYCiFHB;FKwCFMpNFOw?0(F?w}F(x!FVFX38x9F#yvF%F{x!F+xpF-xsMAxvxxG6Azb8xDMHxkF~xJMKG3j,MFM!zYxVF`xZxkGeffFkGikKx+y;3m2v0)GUyiHay$GKGFGxG/0PGAHK2CGDzhN7yFy_GIyKGKy)HrN44^GPy:x-M 1^N2zVNotHy}HGs%z1s,G%ICG*NxG.HkNaG;Nct7eZHNHGG{zmyuzpyyH2B%8)H6NiGXNyNx0NtM0j0nG:zKyeHhItwXN%HozUx?GMHmygHuz%p+Hxz*z(EjxuHBGwz=HSx~NAO52.zdHLEoG_y HQHEA7tN0nHWA2AcAYpUy=N0Gp9^H*pUAm2SH-MsH/BLH#GT2FH@xWH_ABADAFJqI1I3MiI.ARI9yEIc7Vs_4;xrAY0XIg0Y059r0Xn+A%IbA)y0s*IpIVA:mNA?IvA`IyA}IBy7ID4gIFB6B82IBaIKwWzjINyvIPBl7DITIqs}BtA?2XI!BxI%I+mVt,BEPma*x+I.C:z6I;4wC-I_kLy%BWJ/BZB#J3Ces$J5B*B,xhJ9B;JcJeB`JBxnJj8 JlJnJDC4xWznP5C9JuJVJw2zFIJz0aClCnI=1@JFxWJHwQCuCiCwCy1KCAJP2^J;3jJUCcJwqWCM3YJ$CiCSJ)wwJ+C!JBC$J:C)J=5MC,I@C.J_H:J|C^m-J C{K4K2K0t~b1m:K7u3juu7m`KdqaDcKgufn2uif!Knn9KpDnqojUDrkcKwuwKynmKADpg4L5KFuKj_KIDJj}uPk06FKQk4DPKUKNqVKSKPKVu$q$r|6#khD#u,K$konZkcD+n.D-DAD:K.q`gYkEK=kHr0kJn`K_D}K{D n;o1raK o6Eeh0vhk)qFEarmL9Eeo/Lc2ndP7`6el5dy8shH101yp3dosf0ghH0dl/10oR0qdIei0MEohy81hD1e0L8e1s1nw4LMr.EYr,lFv-LTv/E*LXd_o_E.8_L$c,8A8ven8voW8cLsvFl:rU0Meh8rhO7?1r8n8mrEM0Fbb4wkFe7,Fgwom5wqm7x+McFnMe6fFr2!w,MjFwI#H3s$MoFB0TwTi8MsFFMvA~MxSGFL3+w/MC0_FQxYMPM?x2MJMWFZxaw~F$MGMQM(J5xqMVSZxuxIM.y*GcF}S}G0xMkhxOS~HrM;T0x#szI)fmsFGQxuN3N`N5HGNIOaGwN^NnTjNpy/mXy;sRy^N%O8O90NNC7vNEO}NGTryhN8NJNbmhze0O0btaOfy NRG}P#NUH1GZNXyAzVH7zRH9THN(Ok0MzHN,HeN.0THiA{G+GsyKN?tBzVN_T^z#p$t!N~f9O0U2HAImxgz;Ob2p2wNMeX8*tcs%HEz^TAHQOcG?TPNPN7y OiHSN)0nT,0WOmy0HQHZxhTwU9s(Ov6GH,H.ArOCGmOEAwH^AAH{1DOLI0z6I24}AMOPI5AQI8ATIbx AW0LOXAdO!8RO$O(O*IjIl4gInIMO:A/IsHja8O^Ixs}O{H:O~47P0IHP3IJC8P7BgP92fIQVePdO;IXBuPiBwI$B3I(PoGhPqFkPtJ`y7Pw1|PyC3I{SGI~PEJ21=J4B)JdPLB.B:CiPP6+JfClPTB~C06+C2JpC5P#JsCaJvP{JxP,w!JAs*P:Cp2qJG0ECtJJP{JLwMJNCBQ1QkQ3H30/JWzwJYQ8B}CPJ%CT0UJ*CYQgs*QiCDV~aaQns|QpI/J{C?Qtfrm$QwjpQyWsm.t QCu1q3K9q5QH4 DbfRQLDeugKjqgDjjMDlqmQTupQVKujXuuquj#Rkuy5#KBuFDDuHR1uJ60Q,gdQ.uODLQ_6QKOKMW=Q{uZW;qMccDYW)D!q)gEkmu.K(6IRaq;gQ0.K-K+kBx,q}g#WYK@Rnv4Rpd K|Rsv9RurcL0g k#Rzvjoek,L8XsLNk?Ehvs1NdI99R#1i1w8717SdhVhylY8284Lqw38tlj158zedPV897?8o8iijEq8:dw0LR?R{LPv+R`E$R|E(r;lLE+LYE-lRS40|1m8a1aR.5Zi8E`EDzu1b1Z1ddq11oE8290oxdNSpitSrM4prSuM7w6M9SzVsTcVrI*pEM|Gkxu16C)TwSFUmYEHQmFau9}0bIIz-2N3t1*YH3XYGYMSFmyasYK0We(TQYNttB!1SI9YSmrz|G=Y,tDmFSGUxT*2*09Y`i{r@i}t-U0HwU3c.Z1VqBDYu1OI,PpQuC`KrD0WuZdK4WxKrQDD50yD7KbbcWEKeQKm WIQNDhQPqjKobxWQKruqQWc9QYi uxKz5$nog1j.DCQ)DZDGuM1CnCb@W:WTW|uUgkW_DUZXQ/W}KXusKZD$R6q-W X7q_72b=ReXcn*Rhu uxXi3_Ror5RqkRXor9kVE3XAL2k%RArjvlEcRwL1vpRHEjoxoB1cov0kedljEuoYR.ei18p08 91hP9hekF3oU1iXSvF1yEDhmRVrZ1b0qX.X?X:o,h*D)7*E%d/LVr?r^X}o{X E=pahS1-0/841v15ej9kvFpddidqXU90pd4F8)1i0RYkwiYmeywlM61+1zYsFkSBwWSDFqMgSHFvwHSKMnMpSPFDSSyaFGSVFJSXMzS{MBw=S$MEMZTaS,#tMLF!S:MOS=S*F}S^MUT3S|F=MZS M%F*T2M+T5G4T7M#3kGaM=F|TbSyM_p#Gjf1HAYP2A1*0jUDHCa2#?w/0^Y)1I#/#;NqTuO3#-0z#|YMNfUzYTY.NM$4YWmEi.Mi3CiYSGYZsR0Xa00NAhV9pN#_0zY*$3TRs(HI9,$90Oe;HNYI$dY?e(0Y0O3#Y|x8Hvz+Z24dZ1U6U^U8UEIgz@TAHPOoBbpUTYAiIjH+010H7b2z4F3jyw6;G(zLW6JkwWzTBizWaa8/c`4^I4I6ORU%9^AWHZA!G;IiIkO,U7O.A,A.IrO?IuS^V1A|IAV4PiIEB4P1IIBbVbNBP8BmBkIRPcBoPeVkPhklI#ByVpVtTdtXZ8t/f1VvI:a)I=VAJpBVI}PDJ0PFVHPHB(J6VLPNVOy6PQ2kVS$?PVVVy9PYCDP!yuV#P(Q5V(P+B;V,JCP;5eV:P@V=JIW2P|JMP~JOJQQ2s_W0(8W4J!Q9W7QbJ(1~WbJ,0TJ.C%(eJ?QoJ^WmC;WoJ~Zct@Qxp{t{(Dp~QBZjWzK8D6Kau8ZpfNQJWGZtfVDgKkDiulWOQSjRf-WSngjYWWDvWYZJW#ZOKEZQKGW,DItNKKuQW{Z(ZZDZDSQ|W@W|u%R6nUK#W X4q+Z;u`2_Z@gTZ_tNDAD@Rjv1Rln_Z Xk!1XmRrx,Rt!6c*!8E6XvL5RCXz!fd3RGvrLd01lkw389dq1vLKoPR+7|i9hNpd7@)T1cl=9a!=997?8:lo99dkRX8bdQeii4vB!OLS!QE!X=LSc*LUv:lNE,S1X~)rc,8av!8rF3EudBrC0.R.8=oUrE91960jEo8kl=RXeh0F! D3SsM5Yp#50e#7ja#9FoMfa2#eMk0uMm%#SNP_MqSRMt#oJyw!My2*MWS#4e#xS(#G###AxLS|MM#Exf*VMR#J0SF.MKS}#OHrTaM)x;#T6TT6*.#XT9#QxGM^%KaP#*sHS|0x3c6~#}TtM}+3+54F#;TnA}HJTM3u$a$C30SG$E1Ta0VH9}3Ct70,T,$l0YN|p%O1N Z3$M$Q47z/2}3XUi$WziHYOpNW$$AkOw2R$*6-3G2t$/i8BL5A%/0cJl$_GawTbI452g$ UZ%1U$Ia%4Id%6$U%9U@+FA*U`%fO=A=%iA_%kIzA~NFP5V7P2+V%tt#IMVd%xVgIS%BVjg-IYBv%GPlt.BCGgYx%MPrx(%POC%RPxQoPzBUI|VE%YVGSL%$PK2tVMW2VPB_%-PS+#PWVWJoPAVZ%_,dJts|V%CJV)% P.JBV.JE(4HRV?(8V_8 V{Q0WgJSV ,$w!CKW5PUw)V*w)Qc(oQeWcJ-QhJ/,_C*QmJ@V2Pu2wQs(Bcl(HK1(FK3(Iq0ZkQFD8q7Zq(SudWH(VWKKlWMumWP($ndKt()WVDubMQ!Dy(/nsuGnZj@(?qJW-(_Q/ZWq+W?(|kdnM)2Z()4)8R3X1nWX3K%)aK*Rbq`)en-X8)hZ{D^XhRm)oD|)qh Xn)tXp)vkXveRxXuL3E8RB!drnre!h)G208fi2l=U+dAdpdE7;hHrP11dzlWdcR.dtd:rP1,rPoO1Z8z*a1t8s*h0.0/dN8vdtek);EX)?4XLREX)`R}X`R LZS2d}0o.'
+CONFIG.overlordClasses = ["Ide", "Terminal", "GlobalRunnersManager", "Qcm"];
+globalThis.PAGE_IDES_CONFIG = '.\x1esqeNC]E5_rin-[VS4c!xahvu6m0).b8owk =,y@UtA(2pd*gzj1l}%{37D/L:I9+fF\x1e0$010c0T0k0O0F0j0i0E0r0h0y0:0(0T0(0r0u0y0Y0%0R0q0c0u0 0.0y0(0c0%0(0h0R0r0(0(0q0q0h0:0T0E0T0y0h0D010,0I0=0S0L0i0l0u0z0c1B0I011F0O0v0F0l0m0R0V0O0m0A0.0m0c0t1J0S0Z0c0A0Y0u0C1F010K1N0c0l0w0i0r1S0O1@0O1M011;1?1^0i1}0j0z1`1|1~2022010x0a0c0|1{0l1}2k200:0{0I1~0k2h0I0k0l0I0j0u0l0V0c0Q0%0B0I0,092w0I2K0S0j2v0O0Q09010Z0k0V0l0c0I0R0I2R1=1@0T0J2R2R0B2I2K2L2N2k2Q2S2U2W0I0%2+2-2.2I2M2O2=0a0x0_2X0T0x0I2M0F0V2y0z1K2{0l2I2o0j0I0l0F0z0D0j2X2v2x2z2B0Q0h2F2H2J2/302R0U2#2q0l2(2*012F2|3A2;3l3n3p2$3G2)012+2!3z382:2P2R0*3E2%3T3f2.3W2 2;2R0;2v2+2d1{0j2i2a2m1C211=1O0x0D2T0r250c0a0O0a2c3~2g0r3p0O4446483|2d0S0F464427292k2b4i3~4k4m2j2l1 4s1?0t0r0Z0x0T0@1M0n0f3~1$4C4E0@0i1K1Q0F0T4h0I4I4K4B4D4F0T0i0H0G4U4W1N1P1R0l0i2T0D4)010O0x0j0O1*2d0u2T1@0i4,1S014J4+0L0S0k0i0G0v341M0l0x0Z0Z3~3p432T0z0_1M0m0Y3~5a344/0k464H54010u0x0`0i0j0x0l1M0:4}2g5i5F0i3b0F0x0S5o5q1N0{4F0|2v5N0j5P5R1C5p4a0c0b5D5F494+5!0:0k4{4z5z0O1}0z0S474/0c0:4y1N0-0l5;0l0_0L4|5B0F4/3a0i0u0a2g4_1M0O5E0c3~3@0|3p0z0a4P6f0H1M0A3~0v6f1`0v0c0r0H0i0D0O5G1C5I0Z5K1N6z6s6o6G6I5H5J6m6O6A3p0w1d0Z6S6J0I6L6N016P295F266U6M6W015v0i1@4c561}0T6j6l3~6^6!6i1C6k0x6?0z0u0t0i0k4F5u2W4U0Y0E3~5m4.7d0c7f451M0%3~4F4c1d2g6e5_0c5{5}1S0i2f2h297e5I5=4^1L3|0@0_0{2d4F1e0O0k0w0u1}0i460T5P4e3i7Z6D4d4U766?0a1R0G0i1S0Z1G6f6h7U7D2h5!0j6s7(4b7+6;6+0a0j436P0v200.1s0y0D0E0Y0h1p0h1k1l0E0h0c0D0%0%0y140%120D0r0r0Y120u0R8v0@0r0A0h0Y0A0q0D0T8o0D0A0E0q0T1k0T0A0D0:8t1w2d7!4$0c685@0O0G6b1{6M846?1$4k746)6V4a0O7#5B1`8}0F0:0:1M0R0A6x1N0r8}0:0c0@0D1e6v756l0!4K0^0`0|0A0c0R0E0u8g0u0.8q0T0.0c8e0E0E0.1b0D0.0E0(0A8Y9y0:0Y0.1v0Y1j0D0(1M1E1G1I1K20511T1V1X1Z1#1%5{1*1,0D1/684K244w4r1N2d1@1_26289=3{9@3~7F3_4q9~013i2u2u2w2y2A2C5q3w2G3L3Y300k3D01ak1=0k2,3X2~3Z31331}0I363Y3a3c3e3J2I3h2p0Xa83sab2D0K0(3xag3-3!010M3C0Xap3+ar3B013:3g3J3?0{a24x5.3 410k431}4ga+820c4ea:47a+4ua^2h9|3`613}4+4l4e9}b19^4Y4N6~1C4*0?b94!4Pa@1R4T5x4X4Mbg4%4)5y9Z5u4;4H4?4^4`1L3~4}2s4.9Z534t56585s1}5d5f5h1N5j5u5m615(1NbJ7o2T5wbc5y5A5C5E6(6*6?b%5Z5#5S3~5V7G5Y5O5Qb.1N2g5+b%a{5:5=7M9 1N7X5`5|6s1*6020636567695C0Z6d7_2h617-6na(5D7A6s790a9f0I966,6A0r6C6E6%8:6ycwcm6Hb(8_6X6s6Z6#cA6KcHcv6Q5P4q0jcB1N6^6`0j6|4G9g77716s73cj701N797b7n7p7h7jc,5Yc/2T7g7r7t7*7w7oc37Ac57=4.a17H7o7J4D3p207O9l7R1d0r7U7W7Y7!7$0i81c}a`c#7.7:d37@6e6gci0k7|3^0{800{7)7vdp8^6=4a870i89208L0E94170u0h160:0E0%0D191h0y0A0u5I0r0%8c9I0y1n9M0Y0r0q1o1d0E8q8t9L0q1q8P8k1t0u0A0%0u9H8#8{8%8)c14?8,298/cNdI4A8?61b)8`8|b58 9193956n999b0T9d6E6 779i1?9kdD1e8N1g0E118S9A0q9AdY8o0T1x188R0.0:0r0D1t8z0rd^949T1O9V1Jc0e%4R9!1W1Y1!1$1(9+d:9.9^9;b0a+9_4na a3b7a06h4pa*3|a60kaHaa3u5q8J0K0RaN3XaP0Qaj3C3ff7f93tac6x6x0m2Eaffhasfk010m3=cl3^f49?b2a,424fdGfGa?a}a;5@a|e~fEa44jb4fSf14Abnc!4V5y4L4Z4O4Qbjbqbmf(4#bpbl55e,bt4=4@4_4{bA4~bD0Le,bF5557595bbK1C5e5g5i6DbQ5n5%5T01bV5ubYf#bA6a5,cGeg01b+b?5$0IbT01b:5X4.gsb^01b`gnb}90b a+d07Bc65 b1ca2vccglcecgdw8@ck97cm6qcp6u6wcC6Qcy6FcFcUcP29fDg+ef6+6-cK4}cMdHg=cD6/2hg,cW0l6{5|f!gW6@c(ciey787a7c7ec_7q1C7i7kc@hd2vhf2_c|7v6fc 7zgKd37Ef31{7I0u7Kda7NeCcTc|7T7V7X7odk99dDfM7,c+gCds7?7^gU7{4.7}dBdmhMdo4Uekb_dKdM7N0q0R4FdT149I0TeL0EeU9NdY8K1e9LdVd=1q0:d=9q9o0:eW8x8k9xh=0u1+ev0E0c0q0yeV0Y0Ye6f/8(a+8+8-0Feeg`8;0teig,hKen4e90921C94cu987%euewcs7-eA0?hD0i0(8g0q9F9y9t0TdSd;149G1a8Nev1d0D1b0Y1i8p1tiQ0Re$1F1He)9Yf 4-1Ue.9%e;9*1+0R1.1:9:1_b6e|249{fWa+d5j6f62pf83rfa2C0yfg3+fi0k3R3H3UaC64aFfoaJae3yjmas2R0u3%3S3Iapfi2R0DfBgXfDjdea0S40fIa_4UfLdofJjTfU4mj9jNfGfQj#b8fZbbgkfYf.bh4RbkbZf-ba4$4(f;e+4-f@bvf_by4|f}50i_52brbHg45cg7bMga5k0kbRgBghbX61bdb#6bb|g;b*5MgAgeb/0j5W7cgz5!b@ksb_5*gEfPb~5?eagJd2c7gN64gP0O9/c2gmcf0Vdv7`h9fC6pco6tcrg$cI6B6Dg*6Tkog%g.0|g:itk-g@6$k:h%g-1{g}cTk,cV6scXcZj+h572h8dq7khbc^hl7h0hhi7mhkc`1C7s1N7u3phq7yc47Cd4hw4Sd7hzd9e*dc7QhFdghHdj8{dldndFhOc$b_hR0lduch4_dyhWdA7 hZ0|hNixh)6f8a3|0u14eW8td:8P8Md(8t0.0r9y9H179b1kijif100A0RdTig9H0D0q0Ad;150A14d%8Y9xh@0y0yile8ioec8.h$cO8=0{ejcOiy8~iAepiDer97et9c9eh9iMly0|ib0T1n0%0E9I8Gd=1k1gev8qe28o8v8H0c0(e40.8o1-1xi;e(9X3|9Zi{9$e:9)1)j09-j323j5e{5@e}j!m?eajcm`a5jfjv3ujkfvjzaijp3)js3+a6aGjhfp3vjl3+2.jH5zjDjq3*nhjA01jJa$kXjafPjQa.jWa=jVjSa{fVm_f0nB4vm}j)f.j`f%j@f*4Sf,j-j@f:j=f=j|4:f^bxf{c2k2bEk6g3bVbLg9bOgb5lgdgugfkh5vkjb!gmknk;bOkqkygtgvgxkwb,kzn:5)b{5-kEgGkGfGkI5}kKc9kM66kOcd6bkSkUl60Ih56RgZk!cscu6-cxk)g_k_owcEk+n{g-k?ozcOoBk|g l0h1cYh3l3hPl5gVhPc-hcbWlb1M8hleoWc:c{lkc}lnod6s7Dm|hyhAlxhDdehGdihJlEhLlVh#kWlK0F7;hSonlPdz7~dCo}lHlX88lZ200%1m17e30.9x150(1y0ymG0@ev141th^0RmUdY8ndV0r0RdVdP8c0q0%m30:8il~0:m30c0h0.pmme0Hin8*mhirmjgpml8@k_mpiG7=ms2Ymu01p%9amxexdqmAiOd|eHpEe21-igpB1eh-e30qe10h8W0.0Ypom1161l0u8Am!i?m$nU1Sm)e/9(2h0ra.1+0Ye^j4nteam^a~qsfGm|nEje3jjga9nd8sap0k0:2_0h0I0#a70J0JctaX2;aoa%jMnH4tnva/45fK8#nzq!jX4tnCqvj(q*nGqzqtbff!bdnLbgnNj;j,bej*j^nPj{7DnWj~nYbzn!bCk3g0n%bIg5c0g8bNgqn-ken/gvn=gjkkn_o8oEgrn~k$gwkub;kxb-hgo6kDjOkFe*4|hskJgMogcbojgRolgTkVl7jLkY6rotruowg)oHgpoBg/oDoA6Y0c6!g^k^oIg|cSoL6_oNl2o h60ic)g,oVlalh0Io!c?lfoXr lj01llc~lod1lqhv7Ghxluo;dbo?lAdhhI7Zo{7%h!parRhQp1dthT7`lQ6_lSp8dE83k~gClY7/dNpo0YeP9L8z8T1u8I9M0rpn107i9E0y0@9PmW91h@0ueL0%8Se11hsK0r9uh=mEmG168VpRpTeaipedpX6+pZmngpp$eoiCp*iFmwevmyp;9j7P0|1-8x5 8Q0A1h1Z8t0%0Y9E0h1t9P0:1nd;iS0qi18k0~d*qd9We*m(9#qji~m-e2qqm;qwe_9`q,qW1Nqyf5o)qI0l3o4!7V5v0c4^0QtW0jnf2K1{7Bt#3j0IqP0Angt?03a80_0kbB6h0I1*0It,h34^0I0u7W2kt~0u0I0D5P4C0cagfnncaJ5qt(0/0Yt*ngqH2Kt(qLqNt;2G2Kt^a_2X0af8urq!awtZuA412X0S0uqB3Wt?t?u11}u3qPuPt.0I0/s0ag4d4^2wuT4^qUa)fF4jqYnx5@fMu-jOq+4oq-b3q/tTfGq^q?f$q=4#q`r0u|f/j_nTr14.r3bcbwf`r65zn#k45Grbk8g63kkbn,kdkfkAggrdgin@rNrCk_rsrzs0ktkvb=rtrAkBo76(j$rEgIrHoerJ3|gOoikP5zkRrPoooqgYkZcqouk-oxczr-r!cDr$gog{cJr*cLv)v.6.r:sEh0h26}r^oSt06+r}lghms1017lo$he4Us6s8o+vMo-lrseltdmlv7Lsitco@lBo_snemlUsCa@lIdrsup3lOhVszp7wslWsE86pcsHf6tm0q8Jtil:0@0(0.l|9A8c0Rih1z9L9b9AdS8vpA9M8e0Tm9tntidS8MiSpA9p8t0heHs^e9fGs{mig,s ixsomqp(t4iEesiHp/iK9htb9l6Gl;d^eVw*eP0@9b0DsX1x0h8Cq68W0:e31v8Pxr0 tBi@m%vgqii}m,9+0qtK0?e`q:p,0Z7_0I0p0O9ejy2}jr2R0I0Q6326d(2X090x951+awx$x(l/2N3paw2z0at~00x+9n0.3lh1x^0c0.3KxU3U3X4FqI0ikw0_y60Q2g0Z0:0B1Cyb0:0Cy6460H0J4Iagy4382f0vya0cyc1=0wye0Iygyisn0H0C0u0S0S2%0Qyxyo5 380F0SytycyyuZ0j2wyAyj0OyD4kyPaV2.ypcW7B0LyQyd1CyT2w3l0OyzyuyhyX6vqrnDu`2dtSfFyp0a3m1K0Qfg09xQ8y0x0z5fhIuRctuNzgzht^kNt{bX7XlQaw2X0Z001e98zbxMuQ0jaD0OugqDui953xzhzGzj3Y2%t~450I7W1*4^x=t=x}t=pj3Wz7z7ztzazczxt:u4z9zvzd3juWf83+t^5A0V1KcSz(zuz#uU4Fa7zzy/z^z!zwt.u(qwz1z32Cz6z8z_A2zet=zGAfuwt_7Ut|zn1Szpx?zZz*zxzzzBaIfb1,zFAgt@a72MzK1*x=zOt.zR2!x%9nzU0.zW0OzYz)z`zeApARz,2u0U0U2Zz/u40xz=1~2tATAc3jz|f8z~a@u!A0AqA3qXa-qZfOeau/nA3|ypjSz51CuM2.8=z%AeAyuNufm uhAvumuvzGag3+B6qPB6z-AXAZaW3XzOz%z23dA8B42K6r0Vz%0:2Rzr2v465ElBAmBuz42F7#0_2x9_0F0L2t0$8=0!2qy=x{1DzO0!xVt^0+u90`xQt aD3XwzzN4}t:Bliv1=BzB.B12Fzgt^0duI6f0I5Pa-2t0TzsyGyu2txM6)1SBI2wz|jS0CCj0I0s0I0tap4F0Zopq(uNt^0pf80w5Px=2^Cy5f0c0W38C2xM5vt}Ch2yl:0aCj0CjYa}u?tQ1OfVj#B(u94bhVyN46u01|bCy=axsfAn2R2W5_BR0u2B3EzTu4yG2T0b773j0a0L46x}0.797UC}7A1~2Iz:2Mx}0Ex=D7zLC(z|a@zLx=jSu4C*AIx,AOAJx~u8x|Dt0.CODa0I0e2X9}37uD1$D3iGD30I0zx}e)yzf85F2X7}uUu9D3Dsx,zL0wD3uIzyDx0rD34FBv2k1=0p0P0N0;DPDAl:7z2q3^uU390wDpz|CcC!zo0g0d0oCQj?4!nKu j/f+Eaq~nSq|bsv94Vvbk0f|r8n$bGn(rdn*rgbPn.bSn;vskij`klvwcOvyo40RvBrxo3gtgfgDn`vJoarFbAwd5~c81CldkQgSkTwzr^orvZg#vFk`rYk:h5r#k/oDE.r)r+k@E;hPoJv^opoRoMv{h4E~r`ook_w1s4w3EXw5hjF7w9holm7xo,huo/sglwwlddsklCo`wrlGsDE}lJstp2lMswdxp6hYFswupbdLpdA sK0T8y0RsK1i149wmT0yeLd%q5h-ib9upf8g0A0(l,pO8I1,1g1qi+qb5IpBmU8hi16~elmfpUiqisk_w wFx1p%iBeqt6x7t8p:Fu0cp=tc0i1tdOmO0@m25 9twRGh8P9Gihxs0Yd|FN1bdXt49UqetDxBtFxDqlqnl|xHe}j#4CxNxPxRag3IxVxXcSx!DqAKx*D(x.35x;x?D3x{D)Dxy0GNy3yMy6kNy9ygyyyWyCym0fyLqIjP7/y,ywG:y@yBykyEC93GyJy$2Kypy!y,ySA:yUy?ycH0yY1/yOz5G^2ul0y*Hay.Hcy:0Fy=G;yktNfRu@2elsxKH85!360_z5fvAPAbz+z%B92KAs2pcfyOn02C2KAxHNzzHJA1HLqPANz A*z+A4j#HD4SauHH3yHZA?ze0YHNB~Aizl5vAlCgzqzsAQA+HP3jHR0SHT0QadBfB3HNzIAB3GDlB;zP7 s0GSx)q3ANH=AUz%H)z$0Ua72.t^zv7U1)2sI5I1HKz$uJuLA/f_2wItA@4+u,A~A|q%A{s7yMB|B3agBkIlH_ngBbuLBdac0K8IHWAyBiB5ivz%B6Ivz.AfagBsqP39HF2P3K3XBzBBBD00BF76CfayI~HHBNy=3p1^BRBTBVBX3kAm0$B#B%0IB)opHt4}x#3gB/hUIiB?2qB^DL0a0VB{q(HHH`C0CGx=C44~A,C8yH1*I5u92oh1C#Chq(CPClCnCpyuCs4gCuxOCxCz3k2XCC1*CFuJx=CIgUAn6k1e45CPCRHyCUj%m}CYy?J8a|C(2kD 37C-z|C/a@0`0LC?ue22C_yFIBD7C D1DXx_D50kD7z?AO0lDbD%x(De0IDgt C-DkADJ(47Do1~Im0.KrDuxMDwx,DzKyDBDD3`DFC%DHD(5BDKDMDtDOuA0IDRD`3pu3DVDxKPAM1*D!DxD$DID*7AKwD.D:D=uAD@KfDSD{u3D}D zqCZ6DC#E4E6nIbaEej.v1LknRv5Ehvgj}vaj nZveEovgg1e%Erk9vln+rhvorkEy5tEAv6ECn`vxn}vzs6o1vDvzEMkCEO4jvK5@FhofEWvvomE#ssE%rUv!oZv$E,E_FvE/g_E=v/E@L^E`r/6:ssv`oOv|M0h7p!cOF6o%hgF9w6r~hmwao*FgETo.lso:FlhCwmFowpmpFDdGh57/wxFyp4wAhXlTMss}7.sGl!1N8s9AiQ9d1x9CsK1m110u1a9o1n159r9EiQxswL1pm1h_s%9oqbF$FS8eh-d|0r0:eTw_mgF{MD4XiwF wrG1p)x5mvG5iJmzxbdD0h1xeZsS8r0D8fihs)1sl/F-l:q10y9GqbdP8pd=8zxyqfv7xCm+GCl:tJm:xIm=xKGI6gxOz80HxSHOy1xWxY2hGRC_0TDIGWx:0lJ@x@DxG#D3G(xUG*y5y74e0iHpHey^G=ynN%yqG{ygG}yfG y_H2yHH4yKN;H9G/HqIKN-HgyZHjH6zpqIy)5|y+O2BPO4y;O5y_Hxy|u*f2wgHCyMBu2v0wH:zzIMzeH_I4t~0FHSI)0QHVBgHX3gAOAaH!z$H$IJA;OxhErSA5Or3mOtOvOJORB7I#AzzkAkJWI0OROAI6I85qFMI-AyIeJe0TIhAFzQIlC_94IpOLH?3jqPO!uW0Y0*O.IxDL5fIAJNAoI2HLIHz}OJH(Pgzxu+A_u:jUdFPqB0JGyyBxJAI7uuO$2}3XAtjiI9feIbOz3XBjI;B@I7P60*I^BhBrB=qPOs1^HHagJ2qPBC2SJ5NVJ7C#I}H/BM0FBOJeCyBS3jBUivBWDkBZJm4}B$010IK4B+JtzWJw7`u44;yJB=0mPy0B059P0mEXB`JvB|zi0IJJJ?C3nvC6JPCaJSCdJVzoJX4gJZCmCo2ICqKJx=AzCwzNJ-CB5PJ;JKu8CJC62XJ{CNJ~q.CSe y}QXqwK4E2AmK74wKaDi35x#01C:KgKiC^Dtt=KmC|C~yzKqD3KtKvD9KVyFKA9nKCKEKXDjy=KIDnhzKMDWDKKRG$KT0CDADCK82lKZy=K#x,DJDxDLDN1KDPK-2^DTK;KNK@DZD#3YK}DxD+L0xOL2D?KVD^avRC3jLaKME0LdJ8LgE7nQE9v6v3EcnOLnboLpbdEi0kbuLtr5k1LxraEqrcLCrfkcgcEx5rEzn?EBrpv-kpryo40qEIgyEKL/vGrCEP5;obrGlpgLEV0IF9ECL)hUE$vYL-E)vAk%v%k*6(L_k.L|L?E?v;L=6?E{L G8c%r=F0oQFvv~r|l9w2lco#MdFdo)hpMhSmFiMkFkwkMnFno)o^smMrsqFtMulLlNhUsyMAsBwEoEwGFGwI1NxsdS1i8y0cd/8Qi5101yp|d#ts0(i5ie1l11tpd|eU0RFMh|8pi11e0u8C1s1nxmM?F`s|w~ivmmx0M}t3G3x6dmiIt9G8Gaxc8Y8TeZ8TpN8AMVwVmUs,0ReT8Pic8e1r8L8KsSNsGye,Nvqk87GDxGNAGGm}NEx=GK6ENJ2!NLGPxZJ|Imt=NRGV0kx/iWNVGZNYCeN!U2G)3+ypG,oiG.y@G~Hfy_G?HlG`ysN@zNUrN.H1KmyIN UlyMO1UqO3A;HvHhH9O9y(HnOdN,z OiUMy`tLOmfTOou)a4ypOwPmuUH$OIz7a6PxOPHdORH+m}z1t%A9O!PAPBAhO(zmO*PfIFt.O-OCI7OEujulO=AgO@ACzMO{IkH^O~zSOJIqA+IsU*u3PP0RAXP9AhIz0kIBCbIEOMD|uKPjz7PlV4u%A^jRq(nyPsIQIUqIIWHOPD2p2wV90KwMunPLPzzfU~Pxn9BczCfb0K0lVbOHI.PKuNIZBms00*Vt0UPRzhI/2KI{yzU`V)2.P!6)J4J6BHP+HEP-awP/JdBQP?1DJiP{JlJnQ0Q2JsB-JvzgB:0uQ9BsQc8=QeQgQiJDJF4gJHJ*QoC2JMICawQtJRu8QwJ8Qz47QBJ#QEJ%DnQIJ,2fJ.QKCDJ=CHhzJ_CLJ|COCjJ UZfXCVu_fFQ%LezoQ*C)RWKbltC.Q:KfC=C@KkQ^C`KnQ|D0D2DxR077KwDAR4DdDf77DhKGRbzMRdDpRgRvRiD3KUt^RnDE2qK!0tDIK%RvK)x(K+DQRBL83jK=DrRhr*RHDcD(K~D,0OL1D;RPt^RRL7K:RU5!D~RWLcK5LfE5R#q}nJR(EbLmX^EfR.k6f?Ej0nElLvbB4 Epg2R|vkR~vnS0kgS3rnn^b$rqLOS9gtF9LSYkSfgCLWrqSigHL!ETL$SpL(vVoTFvL,g!k#E*rXoyE-L}cQv,r^g?v:r,SJv$cRSMl4E M2F1SSM5v hac.SWoZ0ySYY(liFes9FhMjwgMlS,eBMoS/woS;x1MCr^MvFxS`sxFBMBS?FEwFMFdNwQpNd|0c1w8v17TZijh|mG8q8sMTxl8Rm1158XePR68x8e8M8Gi+FO9bd-0uTBs`pVF|mkTFM6t1G0TJmtG4TMx8N4Y^xc1m8y1aTw5 iWGhF#AK1b1Z1dd%11pv8q9opoe1T/i^T;GANwT@NyxoGFxJQ!UYtPxKy~HBu`yp16D{U`U1PEnd0lyeW0ah3.aR3C!eWXVR2N3t1*!aI%a7OE!eU1n4!iaSalfjVbJ$qI0^C?1SJt!rVUI(V,2C!v!gniU2V}uVUj09!VjKp,cmHzjPPpVPq$VOVMfPu=QZOnu^b5CUv3R,f)biR+X{j.EgR/LrY0Y2vdY4f~R`Y7vjrevmLFYcvqrmvuEYkmYiEELPo4o0rwSdkro5SgLX4tLZkHYwvO62ohgQ#e6cE!StL+SvYEv#SzL;S7YSYMsEYOL{v=SKL~g~v_YWr@M4F3YBY$w7oYlicuMcY,s0F9wbS%sbwesd3_Y?hBZUlzY`sllDFrZ6MthPZ0svMyS|sAwDo~Z8wHMGs7pops1cpm0%ePm1FSpPTweU18p_9n9pev9FeWGqpL1iZnwV1yF#h-Tis;1b0hZFw{ZHM_ehTGM|dlM~x4p+p-TNG7iLN50|tp8K189t8s1v15eV9IwVq6dVd%Zp9oq64F941i0AZ?xAZ^i|Z`qmZ|m/vST{NDxMNFT NIGMU3NN0jNPX9U9RtNTUdNWG!UhG%UjN$UGN(G-N+OfUWUuO0yrG|UzN_UsyCN|UEUPUHHjOfz UWHiy#HlOckOUTHrJkHuN`yCOl!2!0HAOp!6IV!o2A1*0YW4IXaq%*yp!F0V!H%$%(U@Oq!nt{%#T9%(Ag!sqCAu!NV!nnaY!RjoU2!z0Ut%0mao0IJ0!muE!G1I%:!eV;zg%}I80l0KfsIb!Pno!Rfj0B0K3#!X!#VLIT!(4dPtIVPvIcIYPMV%V(I_PTCrqPVjJ1JDJ3010)7A2z5WIi7dH~A#XUKBx=z|Cy6kD$90452g4^JoJqQ3WsagB:I{PN0IB_WEQkPvQmWJJLQrJOUDWPCcJUWSQTJYCkQCJ$CrWZngCvW#CAJ/QNCEQPJ^CKQTCMJ}W;Q#W?nF!:xKW{K6b4RoQ,KcQ/Q;X6Kj1=KlC{KuXcQ~XfznR12kXj((R6XmzqR9DSXqDmCtReu7XuDYXwDxXyKWRo1@RqJAXFRFXI9nXKRAX(DUREXRK`x,K|XVRKK 1~XZL30kL5D_RTayX,u7RXX/E3X;LiR%q|R)X`*qEb!|X~nVR;nXvcR^Y5Lyvin)kaLEEvrjS1bUYe#dvTYh#Jn|YovqYnSevqENYsLYEQvLS(YxSqvU#BrQSNOTosL.YGcw#IYNv+E:SCYKcn#OYRSzYT#S*,r_l1oPv}Y!r^M8w87r#%FbM9#*Y.wcS(Y;#;S+#?iNY_IUS:#{lF#}wv4aS_Fzp5lRwCY~$7T2$9m2xl8xd%1vM;pGTt8kiXibq68f+O1cmW9y$*9x8e9bm69xdXie8ze4eUiSwR$F2dw|pWTEM{T0ZNmr$OZQp.G6x9ez$U1`0 d^1,ig1r0 ij0yTw9dpLsS9p9u0YFM8ImWieeT0q$@qge-m*T?$|1+dTZ~NCu`T}NGGLaq%7GQU6NQNSUbGXUezr%hKSx_N#2*N;Uny8%pUJOjN/G@%tN?y@N^,TUCH30TH5Uv%E,S%G%RH1UO%KUR%M%F%OUV,-yY%TCT!3U#OUG_0L3c7n%;nsH,UH-11J-3(j%)V*!L% %((s30U2(u1Tao)Nal3CI90/Vt(b0BPo(Bq#5)!)ITPuWGPwPxIZB8(MV (Oz%(R3+W7P$(W793G2tzO(#C#5A)YZe(*)o(-ay9adw(=WpJpB*WrJu(`Jx(|Py(~JCJE)1-C)3C1)5C5)7C9)9JTCeV2Ci)fWW-R)iCtW!W()nW(QOQp)sQSE}W/QW!/K0,}.mCX-+*lQ))FQ+X0Q-X3)KKhX7)NX9Q`)Q2tXdK@XgD8)WR3-XR7XnKFX2KHXr)*XtK?Rh2zRjx_);XAKYXCRrXEK$){RxuzXL*0RD)-x_RGK{RI*7x,RL*aRNX!L4RQL6K/D|X+LbWQQ(2wR!*ou}E8!@j:v2*uX}bGX *yr4*AEn*C#4LAY8#7*Hrivp#ovrLJS4LLS6g,EFn gf*U#ngv*XvI*ZSjERc2#uSo*(EZMySufD*.SxgfYHv(*}k`oC*_SGL`SI/)#QcQoK#W+3M3+1STss+8##2_+bs3+dw4#,hr+hwf+jwishS-#^+oY{+qo|wt#~Fv$0wyS{Z4S~$6T0Z93|8DiQmWWwd;d$d^8ci5s%11d:mEdPTwd*91s%1,s%pF1Z8X,71t8Q,e0y0.e18Td*eW+,3~+.ZIpYZKY#el$MZOt5TL+`N3p;0!.'
 </script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -3198,9 +3316,13 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/}%5{!prh]y[gFqkSx4sD:fNa2 ,oV0
 
 <script src="../../js-per-pages/1-runtimeManager-runtime-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
+<script src="../../js-per-pages/2-0-runnersManager-runners.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
 <script src="../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/3-terminalRunner-term.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../js-per-pages/4-0-idesManager-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/4-ideLogistic-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
@@ -3368,16 +3490,6 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/}%5{!prh]y[gFqkSx4sD:fNa2 ,oV0
           <form class="md-consent__form md-grid md-typeset" name="consent">
             
 
-  
-    
-  
-
-
-  
-    
-  
-
-
 
 
 <h4>Consentement aux cookies</h4>
@@ -3386,31 +3498,42 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/}%5{!prh]y[gFqkSx4sD:fNa2 ,oV0
 <div class="md-consent__settings">
   <ul class="task-list">
     
-      
-      
-        
-        
-      
-      <li class="task-list-item">
-        <label class="task-list-control">
-          <input type="checkbox" name="analytics" checked>
-          <span class="task-list-indicator"></span>
-          Google Analytics
-        </label>
-      </li>
     
       
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
       
         
-        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
       
-      <li class="task-list-item">
-        <label class="task-list-control">
-          <input type="checkbox" name="github" checked>
-          <span class="task-list-indicator"></span>
-          GitHub
-        </label>
-      </li>
+    
     
   </ul>
 </div>
@@ -3440,12 +3563,14 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8cu7mL13lb/}%5{!prh]y[gFqkSx4sD:fNa2 ,oV0
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
     
     
 
 
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
       

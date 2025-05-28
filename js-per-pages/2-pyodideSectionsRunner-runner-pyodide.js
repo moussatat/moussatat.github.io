@@ -26,43 +26,13 @@ import {
   unEscapeSquaredBrackets,
   withPyodideAsyncLock,
   youAreInTroubles,
+  RunningProfile,
 } from 'functools'
 import { _DUMMY } from 'process_and_gui'   // Enforce dependencies order (if ever a runner is needed)
 
 import { pyodideFeatureRunCode } from '0-generic-python-snippets-pyodide'
 import { RuntimeManager } from '1-runtimeManager-runtime-pyodide'
-
-
-
-
-
-export class RunningProfile {
-
-  static PROFILE = Object.freeze({
-    cmd:          'Command',
-    btn:          'PyBtn',
-    play:         'Play',
-    validate:     'Validate',
-    validateCorr: 'ValidateCorr',
-    testing:      'Testing',
-    testingPlay:  'TestingPlay',
-    testingValid: 'TestingValidate',
-    testingCorr:  'TestingValidateCorr',
-    testingCmd:   'TestingCommand',
-    zipExport:    'zipExport',
-    zipImport:    'zipImport',
-  })
-
-  static build(profile){
-    return Object.freeze({
-      name: profile,
-      isTermCmd:  profile.includes(RunningProfile.PROFILE.cmd),
-      isPlaying:  profile.includes(RunningProfile.PROFILE.play),
-      isChecking: profile.includes(RunningProfile.PROFILE.validate),
-      isTesting:  profile.includes(RunningProfile.PROFILE.testing),
-    })
-  }
-}
+import { RUNNERS_MANAGER } from '2-0-runnersManager-runners'
 
 
 
@@ -76,21 +46,25 @@ export class RunningProfile {
 
 
 
-
-
-
-
-export class PyodideSectionsRunner {
+class PyodideSectionsRunnerBase {
 
   static pyFuncs = {}
 
-  no_undefined = prop =>{
-      const getter = v => {
-        if(v!==undefined) return v
-        throw new Error(`Undefined is not allowed: ${this.constructor.name}.${prop}.`)
-      }
-      return getter
-  }
+    no_undefined = prop =>{
+        const getter = v => {
+          if(v!==undefined) return v
+          throw new Error(`Undefined is not allowed: ${this.constructor.name}.${prop}.`)
+        }
+        return getter
+    }
+
+    // Getters so that the RunnersManager can identify which is what more easily (if ever needed)
+  get isRunner()   { return true  }   // Always true, so far... Kept just in case
+  get isPyBtn()    { return false }
+  get isTerminal() { return false }
+  get isIde()      { return false }
+  get hasTerminal(){ return false }
+
 
   //JS_CONFIG_DUMP
   get attemptsLeft()      { return this.data.attempts_left }
@@ -115,6 +89,7 @@ export class PyodideSectionsRunner {
   get isVert()            { return this.data.is_vert }
   get maxIdeLines()       { return this.data.max_ide_lines }
   get minIdeLines()       { return this.data.min_ide_lines }
+  get orderInGroup()      { return this.data.order_in_group }
   get postContent()       { return this.data.post_content }
   get postTermContent()   { return this.data.post_term_content }
   get prefillTerm()       { return this.data.prefill_term }
@@ -124,7 +99,9 @@ export class PyodideSectionsRunner {
   get pypiWhite()         { return this.data.pypi_white }
   get pythonLibs()        { return this.data.python_libs }
   get recLimit()          { return this.data.rec_limit }
+  get runGroup()          { return this.data.run_group }
   get secretTests()       { return this.data.secret_tests }
+  get seqRun()            { return this.data.seq_run }
   get showOnlyAssertionErrorsForSecrets(){ return this.data.show_only_assertion_errors_for_secrets }
   get srcHash()           { return this.data.src_hash }
   get stdKey()            { return this.data.std_key }
@@ -136,26 +113,31 @@ export class PyodideSectionsRunner {
 
 
 
-
-
   constructor(id, callInit=true){
     LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - Constructor for', this.constructor.name, id)
 
     decompressPagesIfNeeded()
 
+
     this.id = id
-    this.data = this._prepareData(PAGE_IDES_CONFIG[id])
+    this.data = this._prepareData(PAGE_IDES_CONFIG[id])   // Inner mutable object holding infos coming from mkdocs
+    this.getCodeToTest = ()=>"" // If no editor, nothing to test...
+    this.running = undefined    // RunningProfile.build output (object of boolean flags, mostly)
+    this.allowPrint = true      // Control stdout display during executions
+    this.isGuiCompliant = false // All the GUI makeup has been applied (may not always be, typically for hidden tabbed contents)
+
+    this.runners = RunningProfile.buildDefaultRunnersObject() // Hold all the async callbacks related to events (but only
+                                                              // the part of the logic disconnected to the UI itself)
+
     if(CONFIG._devMode)
       CONFIG.objs[this.id] = this
     else{
       delete PAGE_IDES_CONFIG[id]
     }
-    this.getCodeToTest = ()=>""   // If no editor, nothing to test...
-    this.running = undefined      // RunningProfile
-    this.allowPrint = true
-    this.isGuiCompliant = false   // All the GUI makeup has been applied (may not be, right at the beginning, for tabbed contents, typically)
 
     if(callInit) this._init()
+
+    RUNNERS_MANAGER.registerRunner(this)
   }
 
 
@@ -165,24 +147,42 @@ export class PyodideSectionsRunner {
   }
 
 
-  _init(){}     // Super calls sink...
 
+  _init(){}         // Super calls sink...
 
-  build(){
-    // Using setTimeout to be sure the `build` step will be complete (some children classes
-    // may have subsequent operations after the super method, aka here, has been called).
-    if(this.autoRun){
-      setTimeout(async ()=>await this.applyAutoRun())
-    }
-    this.makeUpYourGui()
+  buildRunners(){
+    throw new Error("buildRunners() is not implemented (should have been overridden).")
   }
 
 
 
+  addRunnerIfNotDefinedYet(routine, runningProp='', asDefault=false){
+
+    // Build an additional version of the routine that wont return anything (useful for
+    // events bindings, to avoid any interaction with their logic)
+    routine.asEvent ??= RUNNERS_MANAGER.wrapForEventAndSequentialRunIfNeeded(
+      this, runningProp, routine, this.seqRun,
+    )
+    this.runners[ runningProp || "default" ] ??= routine
+    if(asDefault) this.runners.default ??= routine
+  }
+
+
+  build(){
+    this.buildRunners()
+
+    // Using setTimeout to be sure the `build` step will be complete (some children classes
+    // may have subsequent operations after the super method, aka, has been called here).
+    if(this.autoRun){
+      setTimeout(async ()=>await this.applyAutoRun())
+    }
+  }
+
+
   /**Actions to perform when the element becomes "visible" in the page.
-   * Here "visible" is "not hidden", CSS-wise (see `=== "tabbed"`, typically).
+   * Here "visible" means "not hidden", CSS-wise (see `=== "tabbed"`, typically).
    * */
-  makeUpYourGui(){
+  makeUpYourGui(){        // Cap overload
     return this.isGuiCompliant = true
   }
 
@@ -198,8 +198,8 @@ export class PyodideSectionsRunner {
    * class has its own logic for autoRun.
    * */
   async _defaultAutoRun(){
-    while(!this.runner) await sleep(40)
-    await this.runner()
+    while(!this.runners.default) await sleep(40)
+    await this.runners.default()
   }
 
 
@@ -249,26 +249,34 @@ export class PyodideSectionsRunner {
    *       happen, whatever the outcome of the others executions was: the only exception would
    *       be a crash during @setup, that wouldn't return any `runtime` object (this would lead
    *       to a BIG_FAIL error thrown in he JS console).
+   *
+   * @returns: The RuntimeManager object (needed to handle sequential runs. Events are bound with
+   *           a version of the function that doesn't return anything, keeping the legacy behavior)
    * */
   lockedRunnerWithBigFailWarningFactory(
     actionName,       // string, logging purpose + used to identify what's currently running.
     setup,            // async, args: eventOrTermCmdString
     action,           // async, args: runtime
     finallyTeardown,  // async, args: runtime (guaranteed to run)
-    sendEventOrCmdToAction = false,   // Useful for drag & drop (IDE zip imports)
+    sendEventOrRuntimeToAction = false,   // Useful for drag & drop (IDE zip imports)
   ){
     const loggerName = `[${actionName}]`
     const runningMan = RunningProfile.build(actionName)
 
-    return withPyodideAsyncLock(actionName, async(eventOrCmd)=>{
+    return withPyodideAsyncLock(actionName, async(eventOrCmd, ...args)=>{
       if(eventOrCmd && eventOrCmd.preventDefault) eventOrCmd.preventDefault()
       LOGGER_CONFIG.ACTIVATE && jsLogger(loggerName)
 
+      CONFIG.calledMermaid = false
+      this.makeDirty(false)       // Assume executions will go well (see note in finally block)
       this.running = runningMan
       let runtime
+
       try{
         runtime = await setup.call(this, eventOrCmd)
-        await action.call(this, sendEventOrCmdToAction ? eventOrCmd : runtime)
+        const callArgs = sendEventOrRuntimeToAction ? [eventOrCmd, ...args] : [runtime]
+        await action.apply(this, callArgs)
+        return runtime
 
       }catch(e){
         LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - BIG FAIL", actionName)
@@ -278,7 +286,7 @@ export class PyodideSectionsRunner {
         const stdErr = youAreInTroubles(e)
         this.giveFeedback(stdErr)
 
-        if(runtime){                  // (`runtime` may be undefined if the error was in setup...)
+        if(runtime){                  // runtime may be undefined JS error during setup...
           runtime.gotBigFail = true
           runtime.stdErr     = stdErr
         }
@@ -286,6 +294,14 @@ export class PyodideSectionsRunner {
 
       }finally{
         LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - finally", actionName)
+
+        // For isDirty update, DO NOT only rely on `this.isDirty = runtime.stopped`, so that the
+        // runner itself can set the value on a success if needed, and it won't be overridden here
+        // (useful if a valid "play" is still considered dirty when a validation exists...).
+        if(!runtime || runtime.stopped){
+          this.makeDirty()
+        }
+
         if(runtime){
           await finallyTeardown.call(this, runtime)
         }
@@ -301,15 +317,23 @@ export class PyodideSectionsRunner {
   /**Build the default configuration runtime to use to run the user's code.
    * */
   setupGlobalConfig(){
-    CONFIG.runningId      = this.id
-    CONFIG.running        = this.running.name
-    CONFIG.termMessage    = ()=>undefined    // sink
+    CONFIG.runningId = this.id
+    CONFIG.running   = this.running.name
     for(const prop of 'get del set keys'.split(' ')){
       const globName = prop+'Storage'
       const method   = `pyodide${ _.capitalize(prop) }Storage`
       globalThis[globName] = this[method].bind(this)    // Legacy behavior
     }
+    this.setupTerminalMessageRoutine()
   }
+
+
+  setupTerminalMessageRoutine(){
+    if(this.rotateTerminalMessage){
+      CONFIG.termMessage = this.termFeedbackFromPyodide.bind(this)
+    }
+  }
+
 
   pyodideGetStorage(key)  { noStorage() }   // sink
   pyodideKeysStorage()    { noStorage() }   // sink
@@ -317,13 +341,26 @@ export class PyodideSectionsRunner {
   pyodideDelStorage(key)  { noStorage() }   // sink
 
 
+  makeDirty(){ throw new Error('Not implemented') } // sink
 
+  /**Lock the terminal (if any) */
+  lockDisplay(){}     // sink
 
-  // Sink: Just in case the implementation goes wrong somewhere...
-  //       CONFIG.termMessage normally has no effect: see this.setupGlobalConfig.
-  termFeedbackFromPyodide(){
-    throw new Error("Y'shall never get there, mate...")
-  }
+  /**Unlock the terminal (if any) */
+  unlockDisplay(){}   // sink
+
+  /**Give focus to the default element. */
+  focusElement(){}    // sink
+
+  /**Activate or deactivate automatic focusing behaviors. */
+  activateFocus(bool){}   // sink
+
+  /**Method bound and assigned to CONFIG/terminalMessage, to automatically redirect python
+   * calls to `terminal_message` to the current terminal's display. */
+  termFeedbackFromPyodide(){}   // sink
+
+  /**Generic steps to apply at the very end of a `runPythonCodeWithOptionsIfNoStdErr` call. */
+  codeSnippetEndFeedback(runtime, step, code){}   // sink
 
 
 
@@ -350,7 +387,7 @@ export class PyodideSectionsRunner {
     await runtime.runWithCtx({
       section:    section ?? 'env',
       method:     this.refreshPyodideFeatures,
-      autoImport: false,    // Nothing to install, with the Pyodide Features!
+      autoImport: false,    // Nothing to install, when redeclaring the Pyodide Features!
     })
     return runtime
   }
@@ -379,7 +416,7 @@ export class PyodideSectionsRunner {
    * logics. It mutates the RuntimeManager objects on the way, keeping track of the current state
    * of the executions (error or not, keep running or not, ...).
    *
-   * Operations done:
+   * Operations done:   (TODO: this is outdated...)
    *    1. Run methods exclusion check (if not needed, the method is called but won't do anything).
    *    2. If the runtime is marked as stopped, stop here.
    *    3. Try to install/import missing packages or python_libs.
@@ -392,12 +429,13 @@ export class PyodideSectionsRunner {
   async runPythonCodeWithOptionsIfNoStdErr(code, runtime, testsStep){
     LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - Enter generic running function')
 
-    // Do nothing if nothing to do...!
+    // Do nothing if nothing to do...!    (TODO: I _think_, this step is now useless...? Maybe not...)
     if(runtime.stopped) return;
 
     const someCodeToRun = code.trim()
     if(someCodeToRun){
 
+      // Code Runtime configuration:
       const ctx = {
         code,
         section: 'code',
@@ -417,20 +455,18 @@ export class PyodideSectionsRunner {
         isEnvSection: false,
         applyExclusionsIfAny: true,
       }
+
       // No ast exclusions for validations' code:
       if(testsStep!==CONFIG.section.editor){
         ctx.kwsExclusions = ctx.methodsExclusions = false
       }
+
       await runtime.runWithCtx(ctx)
     }
 
     // Potentially give some feedback in the terminal to the user, about what happened:
     this.codeSnippetEndFeedback(runtime, testsStep, code)
   }
-
-
-  /** Nothing to do by default (specific to IDEs) */
-  codeSnippetEndFeedback(runtime, step, code){}
 
 
 
@@ -454,7 +490,7 @@ export class PyodideSectionsRunner {
   async handleMermaids(runtime){
     LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - teardown mermaid")
 
-    if(!CONFIG.needMermaid || runtime.stopped){
+    if(!CONFIG.needMermaid || !CONFIG.calledMermaid){
       return
     }
 
@@ -472,3 +508,91 @@ export class PyodideSectionsRunner {
     }catch(e){}
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+class PyodideSequentialRunner extends PyodideSectionsRunnerBase {
+
+
+  get isStarredGroup()   { return !this.orderInGroup }
+  get isInSequentialRun(){ return this.runGroup != -1 }
+
+
+  constructor(id){
+    super(id)
+
+    this.rotateTerminalMessage = true
+    this.isDirty = true         // Tell if the last run wa successful or not, or if the content has been modified
+                                // without being run (handled unconditionally for all elements, even if they aren't
+                                // "in sequential run". The RUNNERS_MANAGER handles what is actually to be run or not).
+  }
+
+
+  makeDirty(isDirty=true){
+    this.isDirty = isDirty
+    RUNNERS_MANAGER.overridePriorityElement(this)
+  }
+
+
+  /**If an html element is passed in, scroll it into view.
+   * */
+  scrollIntoView(element=undefined){
+    if(element){
+      const currentElement = $('#'+this.id)
+      this.unhideTabbedContentIfNeeded(currentElement)
+      element.scrollIntoView({
+        block:"center", inline:"nearest", behavior:"smooth",
+      })
+      // this.focusElement()        // Doesn't work... :/
+    }
+  }
+
+
+  /**Recursively reveal elements that are inside tabbed contents (`=== "..."`).
+   * @returns: true if something had been revealed.
+   * */
+  unhideTabbedContentIfNeeded(jElement){
+    const parent = jElement && jElement[0] && jElement.parents('.tabbed-block')
+
+    if(!parent || !parent[0] || parent.is(':visible')){
+      return false
+    }
+
+    // Unhide possible parents layers first:
+    this.unhideTabbedContentIfNeeded(parent)
+
+    // Extract the related label nad triggers it:
+    const nthChild = 1 + parent.index()
+    const label = parent.parent().prev().children(`:nth-child(${ nthChild })`)
+    label.trigger('click')
+    return true
+  }
+
+
+  showWillRunThis(previousRunner){
+    if(this.hasTerminal){
+      this.giveFeedback(`Running: ${ previousRunner.pyName }`, 'info')
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+export class PyodideSectionsRunner extends PyodideSequentialRunner{}

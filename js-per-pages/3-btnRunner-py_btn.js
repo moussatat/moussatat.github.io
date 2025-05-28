@@ -18,29 +18,47 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-import { PyodideSectionsRunner, RunningProfile } from "2-pyodideSectionsRunner-runner-pyodide"
+import { PyodideSectionsRunner } from "2-pyodideSectionsRunner-runner-pyodide"
+import { RunningProfile } from 'functools'
+
+
 
 
 export class BtnRunner extends PyodideSectionsRunner {
 
+  get isPyBtn(){ return true }
+
   // @Override
   build(){
     super.build()
-
-    this.runner = this.lockedRunnerWithBigFailWarningFactory(
-      RunningProfile.PROFILE.btn,
-      this.setupRuntimeBtn,
-      ()=>null,                 // No "user" action!
-      this.teardownRuntime,
-    )
-
-    $('#'+this.id).find("button").on('click', this.runner)
+    $('#'+this.id).find("button").on('click', this.runners.default.asEvent)
   }
+
+
+  // @Override
+  buildRunners(){
+    this.addRunnerIfNotDefinedYet(
+      this.lockedRunnerWithBigFailWarningFactory(
+        RunningProfile.PROFILE.btn,
+        this.setupRuntimeBtn,
+        async ()=>null,             // No "user" action! (only env stuff)
+        this.teardownRuntime,
+      ),
+      RunningProfile.PROPS.btn,
+      true,
+    )
+  }
+
 
   async setupRuntimeBtn(){
     // Can get an argument (eventOrCmd), depending on how it's run/called.
     //    => Override to not transmit it
     return await this.setupRuntime()
+  }
+
+
+  scrollIntoView(){
+    super.scrollIntoView( $('#'+this.id)[0] )
   }
 }
 

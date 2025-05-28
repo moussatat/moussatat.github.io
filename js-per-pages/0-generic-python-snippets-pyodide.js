@@ -221,9 +221,15 @@ def _hack_io_stuff():
                 src_name = f"__{ func_name }_src__"
                 object_or_function    = getattr(__builtins__, src_name, None) or object_or_function.func
 
-        doc = render_doc(object_or_function)
+        name = getattr(object_or_function, '__name__', None)
+        if name is None or name not in PMT_TOOLS:
+            doc = render_doc(object_or_function)
+        else:
+            doc = object_or_function.__doc__
         print(re.sub(r"\x08.", "", doc))
 
+
+    PMT_TOOLS = ['p5', 'vis_network']
 
 
     @wraps_builtin
@@ -246,8 +252,7 @@ def _hack_io_stuff():
         @returns:  None
         """
 
-        # NOTE: **__ arguments are used as sinks when using terminal_message as a replacement.
-
+        # NOTE: arguments are used as sinks when using terminal_message as a replacement for print
         msg = sep.join(map(str, msg))
         if end is not None:
             new_line = False
@@ -589,6 +594,7 @@ def _hack_mermaid():
             if debug: print(code)
             code = f'<pre class="mermaid">{ code }</pre>'
             js.document.getElementById(div_id).innerHTML = code
+            js.config().calledMermaid = True
 
         return to_mermaid
 

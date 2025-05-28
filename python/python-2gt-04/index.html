@@ -41,7 +41,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.6.8">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.6.14">
     
     
       
@@ -49,7 +49,7 @@ If not, see <https://www.gnu.org/licenses/>.
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -61,14 +61,14 @@ If not, see <https://www.gnu.org/licenses/>.
     
   
   
-  <style>:root{--md-admonition-icon--coeur:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z"/></svg>');}</style>
+  <style>:root{--md-admonition-icon--coeur:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m12%2021.35-1.45-1.32C5.4%2015.36%202%2012.27%202%208.5%202%205.41%204.42%203%207.5%203c1.74%200%203.41.81%204.5%202.08C13.09%203.81%2014.76%203%2016.5%203%2019.58%203%2022%205.41%2022%208.5c0%203.77-3.4%206.86-8.55%2011.53z%22/%3E%3C/svg%3E');}</style>
 
 
 
     
     
 
-<script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
+<script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
 
 
 
@@ -93,6 +93,7 @@ If not, see <https://www.gnu.org/licenses/>.
 <script src="../../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script type="text/javascript">
+if(!window.CONFIG) window.CONFIG={}
 CONFIG.argsFigureDivId="figure1"
 CONFIG.exportZipWithNames=false
 CONFIG.exportZipPrefix=""
@@ -105,8 +106,9 @@ CONFIG.language="fr"
 CONFIG.pmtUrl="https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
 CONFIG.pythonLibs=['alien_python', 'turtle']
 CONFIG.siteUrl="http://127.0.0.1:8000/"
-CONFIG.version="4.2.5"
-CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "kbd": ""}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}</script>
+CONFIG.version="4.4.5"
+CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "comments": {"em": 17, "msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "kbd": "Ctrl+I"}, "splitScreen": {"em": 23, "msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "fullScreen": {"em": 10, "msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)", "kbd": "Esc"}, "feedback": {"em": 19, "msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "kbd": ""}, "wrapTerm": {"em": 19, "msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "kbd": ""}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "validation": {"msg": "Validation - ", "format": "info"}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "rem": {"msg": "Remarques"}, "pyBtn": {"em": 9, "msg": "Ex\u00e9cuter le code", "kbd": ""}, "play": {"em": 9, "msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "kbd": "Ctrl+S"}, "check": {"em": 9, "msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "kbd": ""}, "download": {"em": 0, "msg": "T\u00e9l\u00e9charger", "kbd": ""}, "upload": {"em": 0, "msg": "T\u00e9l\u00e9verser", "kbd": ""}, "restart": {"em": 0, "msg": "R\u00e9initialiser l'\u00e9diteur", "kbd": ""}, "restartConfirm": {"em": 0, "msg": "ATTENTION: r\u00e9initialiser l'\u00e9diteur fera perdre les anciens codes, status de validation et historiques.", "kbd": ""}, "save": {"em": 0, "msg": "Sauvegarder dans le navigateur", "kbd": ""}, "zip": {"em": 14, "msg": "Archiver les codes des IDEs exportables de la page", "kbd": ""}, "corrBtn": {"em": 0, "msg": "Tester la correction (serve)", "kbd": ""}, "show": {"em": 0, "msg": "Afficher corr & REMs", "kbd": ""}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "testIdes": {"em": 7, "msg": "Lance tous les tests...", "kbd": ""}, "testStop": {"em": 6, "msg": "Arr\u00eate les tests", "kbd": ""}, "test1Ide": {"em": 7, "msg": "Lance ce test", "kbd": ""}, "loadIde": {"em": 10, "msg": "Configure l'IDE avec ces donn\u00e9es", "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "qcmMaskTip": {"em": 11, "msg": "Les r\u00e9ponses resteront cach\u00e9es...", "kbd": ""}, "qcmCheckTip": {"em": 11, "msg": "V\u00e9rifier les r\u00e9ponses", "kbd": ""}, "qcmRedoTip": {"em": 9, "msg": "Recommencer", "kbd": ""}, "tipTrash": {"em": 15, "msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "p5Start": {"em": 0, "msg": "D\u00e9marre l'animation", "kbd": ""}, "p5Stop": {"em": 0, "msg": "Arr\u00eate l'animation", "kbd": ""}, "p5Step": {"em": 0, "msg": "Avance d'une image", "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}
+</script>
 <script src="../../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script src="../../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -251,11 +253,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -294,6 +298,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
@@ -326,9 +331,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../.." class="md-tabs__link">
         
+  
   
     
   
@@ -343,9 +350,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       
+  
   
   
   
@@ -354,6 +363,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <li class="md-tabs__item">
         <a href="../../teds/" class="md-tabs__link">
           
+  
   
   Terminale
 
@@ -370,11 +380,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../1eds/" class="md-tabs__link">
           
+  
   
   Première
 
@@ -388,11 +400,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../2gt/" class="md-tabs__link">
           
+  
   
   Seconde
 
@@ -405,6 +419,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
         
   
   
+  
     
   
   
@@ -413,6 +428,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../" class="md-tabs__link">
           
+  
   
   🐍 Python
 
@@ -426,11 +442,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../snt/" class="md-tabs__link">
           
+  
   
   🤖 SNT
 
@@ -444,11 +462,13 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../dnl/" class="md-tabs__link">
           
+  
   
   DNL
 
@@ -462,9 +482,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../../tags/" class="md-tabs__link">
         
+  
   
     
   
@@ -531,6 +553,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🏡 Accueil
     
@@ -551,6 +574,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -564,6 +588,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Terminale
@@ -590,6 +615,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -603,6 +629,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Ens. de spécialité
@@ -630,6 +657,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../teds/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -652,6 +680,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../teds/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -673,6 +702,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../teds/progression2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -710,6 +740,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -723,6 +754,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Première
@@ -750,6 +782,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../1eds/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -771,6 +804,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../1eds/cours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🎯 Cours et exercices
@@ -794,6 +828,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../1eds/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -815,6 +850,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../1eds/progression2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -844,6 +880,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -857,6 +894,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Seconde
@@ -884,6 +922,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../2gt/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -905,6 +944,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../2gt/cours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🎯 Cours et exercices
@@ -928,6 +968,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../2gt/evaluations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🎓 Evaluations
     
@@ -949,6 +990,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../2gt/progression/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     📋 Progression 2024-2025
@@ -980,6 +1022,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
         
         
@@ -996,6 +1039,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
+  
   
   <span class="md-ellipsis">
     🐍 Python
@@ -1023,6 +1067,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🏡 Ressources pour la classe
     
@@ -1046,6 +1091,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1059,6 +1105,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     👣 Parcours de découverte
@@ -1086,6 +1133,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-00/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) Découvrir Python en 1h
     
@@ -1107,6 +1155,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-01/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     IDE et consoles
@@ -1130,6 +1179,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-02/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Types de valeurs et opérations
     
@@ -1151,6 +1201,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-03/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Variables et affectations
@@ -1183,6 +1234,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
     Librairies et compléments
     
@@ -1194,6 +1246,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
+  
   
   <span class="md-ellipsis">
     Librairies et compléments
@@ -1264,6 +1317,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-05/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Les fonctions
     
@@ -1285,6 +1339,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-06/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les instructions conditionnelles
@@ -1308,6 +1363,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-07/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) Fonctions et tests
     
@@ -1329,6 +1385,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-08/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     (TD) Silent Teacher
@@ -1352,6 +1409,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-09/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Les boucles finies
     
@@ -1373,6 +1431,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-2gt-10/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les boucles conditionnées
@@ -1396,6 +1455,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../python-2gt-11/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     (TD) PY-rates
     
@@ -1417,6 +1477,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../python-1eds-00/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Les listes
@@ -1447,6 +1508,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1460,6 +1522,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     ⚙️ TP (seconde)
@@ -1487,6 +1550,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../TP_alien/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🚧 Alien (débranché)
     
@@ -1508,6 +1572,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../TP_turtle/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🚧 Le module turtle
@@ -1531,6 +1596,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../TP_kandinsky/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     🚧 Le module kandinsky
     
@@ -1552,6 +1618,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../TP_test/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🚧 Test
@@ -1583,6 +1650,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../bac_a_sable/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     💻 Bac à Sable
     
@@ -1611,6 +1679,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1624,6 +1693,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     🤖 SNT
@@ -1651,6 +1721,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Introduction
     
@@ -1672,6 +1743,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1685,6 +1757,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Codage de l'information
@@ -1712,6 +1785,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/CodagesA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Le binaire
     
@@ -1733,6 +1807,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/CodagesB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Le hexadécimal
@@ -1756,6 +1831,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/CodagesC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Les caractères
     
@@ -1777,6 +1853,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/CodagesD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - Les images
@@ -1807,6 +1884,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1820,6 +1898,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Données structurées
@@ -1847,6 +1926,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/DonneesA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -1868,6 +1948,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/DonneesB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Structurer
@@ -1891,6 +1972,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/DonneesC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Traiter
     
@@ -1912,6 +1994,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/DonneesD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - Projet
@@ -1942,6 +2025,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -1955,6 +2039,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Internet
@@ -1982,6 +2067,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2003,6 +2089,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/InternetB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Les protocoles
@@ -2026,6 +2113,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Simuler un réseau
     
@@ -2048,6 +2136,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/InternetD/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     4 - Impact écologique
     
@@ -2069,6 +2158,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/InternetE/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     5 - 🚧 P2P
@@ -2099,6 +2189,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2112,6 +2203,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Le Web
@@ -2139,6 +2231,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2160,6 +2253,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/WebB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Les langages
@@ -2183,6 +2277,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - Les protocoles
     
@@ -2205,6 +2300,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/WebD/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     4 - 🚧 PageRank
     
@@ -2226,6 +2322,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/WebE/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     5 - 🚧 Les cookies
@@ -2256,6 +2353,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2269,6 +2367,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Les réseaux sociaux
@@ -2296,6 +2395,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - Découverte
     
@@ -2317,6 +2417,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxB/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     2 - Modélisation
@@ -2340,6 +2441,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxC/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     3 - 🚧 Les infox
     
@@ -2361,6 +2463,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxD/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     4 - 🚧 Données personnelles
@@ -2384,6 +2487,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/ReseauxSociauxE/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     5 - 🚧 Harcèlement et cyberviolences
     
@@ -2405,6 +2509,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ReseauxSociauxCours/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     6 - Le bilan
@@ -2435,6 +2540,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2448,6 +2554,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Objets connectés
@@ -2474,6 +2581,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/ObjetsConnectesA/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     1 - Découverte
@@ -2504,6 +2612,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2517,6 +2626,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Le Numérique
@@ -2544,6 +2654,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/NumeriqueA/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     1 - 🚧 Découverte
     
@@ -2566,6 +2677,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../snt/NumeriqueB/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     2 - 🚧 Numérique et logistique
     
@@ -2587,6 +2699,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../snt/NumeriqueC/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     3 - 🚧 Parcours PIX
@@ -2624,6 +2737,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     
     
     
+    
       
       
     
@@ -2637,6 +2751,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     DNL
@@ -2664,6 +2779,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
       <a href="../../dnl/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     📅 Déroulement
     
@@ -2685,6 +2801,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../dnl/archive2024/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     🗂️ Archives 2023-2024
@@ -2714,6 +2831,7 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
     <li class="md-nav__item">
       <a href="../../tags/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     ️🏷️ tags
@@ -2899,8 +3017,8 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
 </div>
 </div><script type="text/javascript">
 CONFIG.needMermaid = false;
-CONFIG.overlordClasses = ["Terminal", "Ide"];
-globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8c2 au7m1o3,lb/0dB}i5t{*pr-h)]Iyj[gv(+=qCk69:xw4s_f\x1e0z010c0t0w0y0m0C0!0n0d0Y0f0n0f0;0x0Y0T0e0j0t0Y0#0#0t0q0q0`0s0e0n0(0f0j0/0U0U0s0#0T0T0c0l0e010V0g0$0B0I0!0b0h0k0c1m0g011q0y0E0m0b0D0f0L0y0D0s0Y0D0e0m0k1v0b0y0h0w0C0c0Z0a1q010o1y0c0b0M0!1N1R1%0y1x011!1$1(0!0y0c0C0k1*1D1^1R1/1;010i0Z1_1|1,1 1n1z0C0w1R0N0l0F0g030g0M0m0w0e0w0g0i0b0g1N1P1-1T1V090b2i0B2b2d0f0F2y2i0+0i0y2s0c0g0Q0i2o0#0w0L0i1V0g0h2B090i0s0s0c0d0Z2p2r0)2Z2#2%240g1W2K2S0b0,2-2$0U0a2y2B2c0y0N0f0O0n2F0b09012k2m2o2q2s1O1Q1S1U2M0Z2U0g2I1^0g0p0h3p2@0c382~2C310f0A0A352y3v013v0b0R0c2n2;0Z2K3d0t0m0e3M2C0L0a0g3I3e2u1R2w2M1-0m2U2`0c0U0g0B0h0C3m0C2l0Z2y2T0w0p0p0c1v0y2)0B0c2J0g0Z003*0U1~0t2V3k3:0B0p230w420C2)0p3t1X0g0g3D3F4r211N0C0-1+1~1.29210B0i0q4l0e1@2=0Z201#01240e1V0y4H3M4J4A4L0B0m3M4H1`264y4K1y4W4Y4x1-4%0%0W0e4f0t0(1x0K0G4L0c4/4;0(0!3~1C0t4T0g4^4`4|0i4=0t0!0S0X53554(0I1B1D0!4l0q5e010y2U0y3|210h4l1%0!1A1C0b014_5g0B0w0!0X0E0*1w1n0b0i3{4L1V4G4l0k0*1x0D0l4L5H5J5k0w3M4@5C010h2J0m0!0C2q1x0#5u244V3=2R5s4U1y0h0y1^0k0B3 5k0c0#4z1y0H0b2R0b0*0I5t5,5k0m0L0!0h0Z240C670y5/0c4L4u0-1V0k0Z4 6l0S1x0s4L0E6l1*0E3J0S0!0q0y5A1n5=0p5@1y6F6y6u6L6N5;5?6s6T6G1V0M0c5u6X6O0g6Q6S016U1|2q1^0C6Z6R6#015$0!1%4O0I624?1n6q0i6|6~6)6o6`6:0k0h0W0!0w4=5#0b1W1x0l0f4L5T0b7h7j4l7l530n4L4=4O6*246k5 3}626y5j23251N7j5=3`2U5K1$0)0+6_7z6*0e0y0w0M5~0c0!3M3P2J0!0#0,7(3J4P53766|0Z1C0X0!1D0p1r6l6n7Z5j1_3=4j7,7.4N7;7c7@0C4G6U0E1/650U0l0q0e0q0T0f0h0d0d1b0j0j0e0d0n130d0|0j0h8p0f0T8m0l0Y1d0#0q0n0h0x180Y0 0j0l0j110t8C0`0c0s1a0l1g0t210y0X5-1N6R8a4L7)5b0c6e5|4.4W7b6P6!8:0y7*4Q0e7+0m101x0f2#6t7+0#0c0(0q0h0e6B756r0v4L6^1{7|1r0s0h4=8u0f0e0#0U8U0j0x0t2#1d9z0#0Y0t0j970t8$0h0{0l0U9F0d9x1x1p1r1t1v1/5y1D1F1H1J0Y1Y6e4`1?4+281y211%1)9m4#4,8^7K4w1}9^9/6t0,9{27671:4V4D4F4R3 4-880c4Q1^4S4-4)ad1_1{9-a34B4X919|9.a41$57595(564:584~500m52awatay595b5daE1z5h5z5#5m4@5o5q5s4L5u4h7s9Z5A5)1q5E5G5I1^1x5M5O1y5Q5#5T675W5Ya(7%4l5%1n5f5*6g5/6-6/6|2B653`0p4Z0k1/3=2q0t0N0n0x0x0r0l0l0n0g1#0Y0F217)3(9193951n976D1y924Q9b9d9f9h3;779k1y9?9o6L0l0t0x0j0dbibi0t0:0#0j8L9b0Y0x0h0s0d0x0f0c0x9x0x8z9H8p0jb*9TaL1s1u7RaL5i1E1G1I1K9)9:9,aqam9+9=aj9@ar219`c9c5bya0cdaga62ma853as4M7:acclagaob7ch8^ahcv9~aF4}8(a{5)4{aGaAac515ecEau4~5ccK4VaM5j5l5n5p6oaT5}5vaXcRaZcQa$5Za)5L5N0p5P3Ja/5U1na=1yc)a^5$67a|5+0+5.5:8|6{5^b43{b71/3|0b0N000u1D0J3(0C00bo8~901*bt0#9698by9a9c12bD1x7?bH5oc8bK8T9e0s0j8i8I0U121e0:0n8x0d1f0n8u0x8K8v0U0q8r2#0:0qb?1qb^9X29aY9#b 9(1Zc6cycn9;cual4-ccd?8^6Wd_cz1zcj4Gaea98^abaiafcwct9?d|cncxea9:cMcC54cLcG5aaBaDcDaxcBaIcP5gb|aOcUaS1waUcZ5xc#5Bc%5Fc^a*c,c.5R0wa:5V5Xc@a@5#a`ehaUa~d06.8}4(1V5`b69m1/7e0W0N0Y3A7y0g0n3Abnbl0g7re*e,1#e/0Abnbp8 brdl4Q94dnbvdp01bz7,ds9e9gdv9j9ldz0b7}0!bWb(9C8m0 9B0h8o8I0c0TbT0h0U0nb,0ndD8t0U0f0q0sbf0Yd!9Vb_9Yc#d*9%c1d.edd.e9c4d@6nd/4tcgfS4(d cre3cpe5e2d}cxfUa2cs4*fV8^cFcBaKf^azekcIaCer4.ejeqaKaYeuaQcV5rexcYaWeAb|eC5DeEa@eGa,01a.5Sc;0gc?01c^eQc{5)c}5-a 8/eYd4e#aj1/30da7o0xdhe~dkf8f3dobxf7drbCfc9ibGff4!bK0q0tfA8B18170f0U1j9q9u100d8K8r0YdN0d0=8Wbi0 g/fI1n9Ud$b`d)b~fPd-1=1)f#0%1?f/4$9_fXh8d{f?f-f%e1cmbpf*f(f-e8c8h8echhd:eff`ef4 f~emeScAf|g3enesaNcTg7ew5tezaYgfaLc(gic+gkgmeKgogqgsa_gueTc~gyd16:b3e!d6293S2e0f0xdi1ybq7+gMbu0gbw99bAfadugU0cdxbJfh1r5=be1jfD7o0l6*0q0#0n8Wif9P0x6*0T0hgZ8k8k0ldD9f8xfJh0fMb|fOc0h5h9h7huc2c74!h8d^iF9 4vfYa54EckhkaahniSe74Yhb9}ebcth8f{avhGg1epelg0i%cNaJi)g5hJa{aRcWga5*hNeBa!72gh5Jgjc-a-c/gna;eNgrePh!aKgwc b0eX2agBh-5}5mbd0ah=gKf0h`f4h|f6f8bBdtgTbFi3gW9ni67,0lio0t0T0j0sbe0d8Z0n0{0n7o0U1i1h8L8mjPg@9fdX7oiw9Wh1fNh3iB9*h6iOj-iYca4LiKf:d`f!iLf$iQe04IiT7Bf+hl4VhqiIj`1zi#k6i.ega|kahz5ihBkchycOg4c#g6i@g8cXi{gchOi~hRj1hTj3glj5hWj7a?5!jbi)jdh(eWd2gAh,e$29io0Z0N1F0ah;h?4Me h_dmgOh~f9gSbEdw4`7T7.0`0d8n0Ug@dE0s0Tk=0jk?9M0ejH9c9f0_ifdL0Y0s8j3+0l0Tj$fLd(j)9$1K0DeK8`0yl3fQj-i$hahrk6j?hc1y2i0#3=0ke?5~0E0glf0,2K5E2~0wfZiNhshjj~f)k0hoi!iXlnj@hpf=lRhvejhxg2i,lXepkji;kli?54i^g9hMkri}eDa%kv0ga+kxhVeLc=j8hZc`jceUjfkJ2a943`b`5t7F61633|661/696b6d6fc~0p6i6k6m1_6p6riM6v3}6y7e0ZbEgP6=0e6I9g6,gz6;6G6W6Mm16:6=6(6*b6mHmDmy3(1,6_h)786y700C721^eg7?4L79mnmDe(7tc_7w1x0T7q2cm,7k7m1ne-017A1V6l7%5~607H7{7siK7N1T4f1V8gk*7V1y4=9f7Z7#1^7(kWbA87f*7=mph@7_n3fi7 mn0w824v0,6y7-0-e453b18:8c0!8e1/0qbf0t0eft0U0h0Y8udN0tg*9r0q0@0sfx0e0`9G1jg-dCg=0fk-l3dNk{653+0Y0h8B0e9xbM0`8)8+1|8.mUdj8=8@d}4{lgmDh^bsf2h{h}dqh k$fdgV7S0*7.8n0lbQn:0#dNnL0`fuornN8ndD0n0#0s0q0cdL121j0n0`0jl8d%hH9!j*1LlA6o8!ljiDj.oVj:ce22hehuoR2K7e1B4oo+o,2io%3s0q0C2w4hlw1B3D1t0g0Po^0E1Y2oo,o-2W103J3o3*0s2s3p3r7#3|3l4=3-0w2y0qo|o~0a0Z0Q6o322go+2i0hp57Y2Mp8pb0go=2n7l2s3/0C47py0b0eplo)o 1NkP2fp2pupwp72!2$p9pk3|3e0Z2c230gpg0lpB9r0w0h0b3@370b2 2d3r1#pk1#0e362yo/o=0b3Plvp22hlz61lBo:o=1Uo@q1q34pp=p@31p,q21O0aqegF5X0T2gpsq62^0ko;2M5u475~2l2V1-2Vp+ac0gl7mqoW4Cj|lNhmlMiVlSaik5lUanlTlqlVf_i)kdlZq#kii:hCb{hI0waPknhLeyl.gektj0c*l?eHj4eJl`gpl|jal~kFm0mD2Bm45{d}n07Gma65a3me2cmgh$5-mj6jnu8{jzqK6wmt6A6C6EmFmA6KmOo26$6VcgrzkImJ6%0c6)6+rEnFrB6?mSmD6~mXmZ74rp1ym(rorM01m+7im-m^0g0l0xm;7sr$m@7x7W7Bm~7En1637Jo#n67Pn9290(olncm{7Xng7$njdknB7/k0no778:nrbKrn817s83nz86nCnno9nHnJ298mnNfE8Yill60t0f0f8K4=nS8S9zb#0x170#bO9f8z0s9KjKnQoIfD0_8wbedH0e8Cb*0cdZ9ln 8-nEjg8;0S8?4-o7lBo9nkf17{odjugRjxk%feok7U0!bQl2dDif0T0_t6s!fFbZ0TjOjM0t0#n`0etc9Q8n0qjJoLj(izoPleq8oS0noUd;lliHakloo#lUlt1Oo~q7lg0g0Ao,2ytElvqetFo/tK4o2ytLp?3x0N44pp31h=4o1#qo2d5Xis0FkUhgqViPa7qRcne4qOk3lPqUqYqWapt:hDi(q+q$hAi-q)g0i=q.evi_l-5wksl:eFkweIc:kBeOkDr3q+kGeVrZr75`m6aUm8n2mbrf6arh0yj,a}mimkshoi6|6Wrr6zmvrurNmz6JmCrAmErCiNrLjgmKrImMuTrF6|mQ6@1_rQmWpKmY73m#np6}6y7a67rZr#7u2cr(r+1y7rm?7vr(m`m|7Cm uxr_n4r{7%7On8b`s07U21ne7Y7!s6oasmsa89i2se0m7`sgmm6onwsjny85s9nDsp8d6l8fssfD0enOoC8j0`0#b)k}tf0Tl2bOb*dP8r8HvRnYg)k^tc0Y189zdL14jQ16vVin180cfIs%8,0mo1u(o3s-o5hvo8uUvpjrkZofk#s|uJ0v0v.'
+CONFIG.overlordClasses = ["Ide", "Terminal", "GlobalRunnersManager"];
+globalThis.PAGE_IDES_CONFIG = '.\x1e8osqew =C]5,_riynt-[(2p4d*Igc+j1l)x}Bahvu{.37/6m:k90fb\x1e0P010e0y0o0r0b0n0m0R0a0x0v0R0v0;0k0x0U0C0S0y0x0!0!0y0#0#0`0Z0C0R0(0v0S0/0Y0Y0Z0!0U0U0e0F0C010W0g0$0w0p0m0q0L0V0e1m0g011q0r0M0b0q0s0v0B0r0s0Z0x0s0C0b0V1v0q0r0L0o0n0e0c0Q1q010l1y0e0q0N0m1N1R1%0r1x011!1$1(0m0r0e0n0V1*1D1^1R1/1;010O0c1_1|1,1 1n1z0n0o1R0u0F0H0g030g0N0b0o0C0o0g0O0q0g1N1P1-1T1V090q2i0w2b2d0v0H2y2i0+0O0r2s0e0g0d0O2o0!0o0B0O1V0g0L2B090O0Z0Z0e0a0c2p2r0)2Z2#2%240g1W2K2S0q0,2-2$0Y0Q2y2B2c0r0u0v0D0R2F0q09012k2m2o2q2s1O1Q1S1U2M0c2U0g2I1^0g0G0L3p2@0e382~2C310v0z0z352y3v013v0q0i0e2n2;0c2K3d0y0b0C3M2C0B0Q0g3I3e2u1R2w2M1-0b2U2`0e0Y0g0w0L0n3m0n2l0c2y2T0o0G0G0e1v0r2)0w0e2J0g0c003*0Y1~0y2V3k3:0w0G230o420n2)0G3t1X0g0g3D3F4r211N0n0-1+1~1.29210w0O0#4l0C1@2=0c201#01240C1V0r4H3M4J4A4L0w0b3M4H1`264y4K1y4W4Y4x1-4%0%0I0C4f0y0(1x0t0j4L0e4/4;0(0m3~1C0y4T0g4^4`4|0O4=0y0m0X0f53554(0p1B1D0m4l0#5e010r2U0r3|210L4l1%0m1A1C0q014_5g0w0o0m0f0M0*1w1n0q0O3{4L1V4G4l0V0*1x0s0F4L5H5J5k0o3M4@5C010L2J0b0m0n2q1x0!5u245P2q0m0B3=0O0w1x0Z4L0,4=0-2c5`5|5~1n5X1y240d5.5:4U4(3=2R5s6g5*0r1^0V0w3 5k0e0!4z1y0A0q2R0q0*0p5t5,5k0b0B0m0L0c240n6v0r5/0e4L4u0-1V0V0c4 6J0X5 4L0M6J1*0M3J0X0m0#0r5A1n5=0G5@1y6$6W6S6,6.5;5?6Q6@6%1V0N0e5u6{6/0g6;6?016^1|2q1^0n6}6=6 015$0m1%4O0p6q4?1n6O0O7j7l736M7h7a0V0L0I0m0o4=5#0q1W1x0F0v4L5T0q7E7G4l7I530R4L4=4O74246I6n3}6q6W5j23251N7G5=3`2U5K1$0)0+7g7W740C0r0o0N0L1^0m3M3P2J0m0!0,823J4P537t7j0c1C0f0m1D0G1r6J6L7}5j1_3=4j86884N8b7z8e0n4G6^0M1/6t0Y0F0#0C0#0U0v0L0a0a1b0S0S0C0a0R130a0|0S0L8M0v0U8J0F0x1d0!0#0R0L0k180x0 0S0F0S110y8Z0`0e0Z1a0F1g0y21835b0e6C6l0r0f5-1N6=8x564W7y6:6~4L833(4Q0C850b101x0v2#6R850!0e0(0#0L0C6Z7s6P0J4L7f1{8j1r0Z0L4=8R0v0C0!0Y8^0S0k0y2#1d9V0!0x0y0S9t0y900L0{0F0Y9#0a9T1x1p1r1t1v1/5y1D1F1H1J0x1Y6C4`1?4+281y211%1)9I4#4,6l7+4w1}aea86R0,ah276v1:4V4D4F4R3 4-8v0e4Q1^4S4-4)az1_1{a6ap4B4X9naia7aq1$57595(564:584~500b52aSaPaU595b5da!1z5h5z5#5m4@5o5q5s4L5u4h7P9|5A5)1q5E5G5I1^1x5M5O1y5Q5#5T6v5W5Yb10e5#5%1n5f5*6E5/77797jbl663(680g6a016225655{br7K9k0e6dblaC1V6j0G4Z0V1/5|0q0y0u0R0k0k0T0F0F0R0g1#0x0H930r849n9p9r1n9t601y9o4Q9x9z9B9D3;7u9G1yac9K6,0F0y0k0S0abVbV0y0:0!0S8,9x0x0k0L0Z0a0k0v0e0k9T0k8W9%8M0Sck9?a+1s1u7=a+5i1E1G1I1Ka2a9a5aMaIa4abaFadaN21agcMcIb/amcQaCas2mau53aO4M8aaycYaCaKbKcU6laDc,aka#4}92bh5)4{a$aWay515ec^aQ4~5cc~4Va,5j5l5n5p6Ma?1ya^5wa{5Bd4a 5Zb25L5N0G5P3Jb85U1nbb1ydjbe4lbg545)5+0+6ebm9jb65_bz5}9s610n637E7PdIbsbu6cdDbG6t3`bJ9I1/3|0q0u000K1D0E3(0n00b#9kb%9m1*b*0!9s9ub/9w9y12b@1x8db{5ocLb~8@9A0Z0S8F8)0Y121e0:0R8U0a1f0R8R0k8+8S0Y0#8O2#0:0#ct1qcv9`29a{9~cCa11ZcJc/c!aac+aH4-cPeK6l6`eNc:1zcW4GaAav6laxaEaBc-c*aceQc!c.e(a9d0c?dzaTc=4 c|aYd3c;aV5ad2a*a{a.d8a=1wa@5va`d5a|dh5Fdvb3dmdo5R0ob95Vbudvbf6vbidB5-bF9i7i5^dP671x7V1ybw64ftbA69bCbE6feR2BdW3{bK1/7B0I0u0x3Afw0R3Ab!bY0g7OfOfQ1#fS0zb!b$b(d?4Q9qd^b,d`01b:86d}9A9Ce09F9He40q8k0mcaci9Y8J0 9X0L8L8)0e0Uc70L0Y0Rcm0Re88Q0Y0v0#0ZbS0xev9^cw9{f6eBa0cEeFe+eFe%cHeL6LeG4tcTgy4(eTc(eXc$eZeWfGe$cLgH1zc*gSc_c=a*gWe`e=5iaZc@e:g!e|g(5gcze a:d95rf2dcf45xf6dg5Df9bdfbb501b75Sdr0gdt01fjdxfldAbkfFbnfsbqdJ1n0xdLdNbyfufC6bbDdUc-bHdXfK2930d%7L0kd.f(d=f;f,d_b.f:d|b?f^9Eb`f{4!b~0#0ygg8Y18170v0Y1j9M9Q100a8+8O0xei0a0=8`bV0 h%go1n9@excxeAcBgveE1=1)gV1?gAaogC7,gBeOgGi6fGgJeVcZ93gMgKgP4Yi24$e#4*i9eHe-gYe-g#c}iqc`e{a)g,cya-d7g:f15tg^dfa}7pg}5Jg dnb6dph3bafibdfka*fnhr78dFh1dHhn0g0khkbxfAhhbtfDiWe)htfJdZ293S2e0v0kd/6bd;85hEb+0gb-9vb;f?d hM0ee2b}f}1r5=bR1jgj7L0F740#0!0R8`jk9/0k740U0LhR8H8H0Fe89B8Ugph^gsczgucDh}0%cGi36leIijajc!eMingF4vgEar4EcXicawifjYilaE4!gSe*jRg)aRiygZa%aXg%e/e_a%g+j?izd60oa/bha;dag?5*iFg`iHdig~dlh0h2ffh4h6h85$haa@hcdEfrdGi*bs0Ui(fzhgdRi-fpfGi:dYaF1/jt0cbQ0Qi`hCi~d@hGj3f=hKb^e1hO9Jjb860Fjt0y0U0S0ZbR0a8}0R0{0R7L0Y1i1h8,8Jk%h,9Bes7LjB9_h_gth{jGa3h~jUk~jNcN4LjQjKeRePj+gIjWeU4IjZ7YgNid4VgQj(l8gTiml5ioiviue;j;e^4.iva(lte~iBj g;dbk3a_g_czg{a+k7iKk9iMh1iOkciQbc5!h9iUkj9ekmks1x0SkqdOlYhoc#fE77i/fIky1`kA5m0u1F0Qi_i{4Mi}b)f+j0j2d{j4kMf_hN7?0*880`0a8K0Yh,e90Z0Ume0Smf9,0CkV9y9B0_jkeg0x0Z8G3+0F0Uk@grezk`9 1K0sff9g0rmsgwk~i0cKljlncOgDe(2i0!3=0VfW800M0gmE0,2K5E2~0ojSanikialaigc!eYm.aJiigRlkj*mNj,7rj`j/c{g$ltm~iwlxf6g/lAiDf3lEiGf8b0lK0gb4lMkbfgdsiRlSkglUdCkvhelXdQ1x0al#hmfBi,hpl*bG9q3`cx5t7$6p6r3|6u1/6x6z6B6DdC0G6G6I6K1_6N6PaljT6U6W7B0cb^hH7c0C6)9C76lW7b6%6`6-kk7a7c7274bJn@n:n+3(1,7gfq7a7l7n0n7p1^e.8d4L7wnWn:fM7Qdw2c7J1nkp1y7Ooi7Hol0gfw017X1V6Jbe806o7(8i7PjQ7.1T4f1V8D7@0,214=9B7}7 819l9w8ugM8cnY6b8goDf~8mnW0o8p4v0,6W870-eY53nr4M8z0m8B1/0#bS0y0Cg90Y0L0x8Rei0yhY9N0#0@0Zgd0C0`9$1jh#e7h*0vm9mseimk6t3+0x0L8Y0C9Tc00`f(9597eR999b0b9do47j4{mFn:oTl|8il~f/f;b=d~hLb_j84`oL0-8K0Fc4pm0!eio{0`gap$o}8Ke80R0!0Z0#0eeg121j0R0`0Smxeyg-5zjF1LmZ6M8~mIjIh lkjMm@m`1yl4m+7k6pm!mV1B4oqlqm2iq32K5l0n2w4hqj0M3D1t0g0hqv1Y2oqmqn2W103J3o3*0Z2s3p3r7 3|3l4=3-0o2y0#qzqB0c0d6M322gql2i0LqH7|2MqKqN0gqs2n7I2s3/0n47q-0q0CqX7B1B0Q1NkC2fqEq)q+qJ2!2$qLqW3|3e0c2c230gqS0Fq:9N0o0L0q3@370q2 2d3r1#qW1#0C362yqprlbO1OqE4oqoqh6M3s0#qs1UquqsrEmUqxrt31rD3P0V0QrQ0)2d5X0U2gq%2hnf1OrM2M5u47802l2V1-2Vrkay0gmwnZm*jO4BiblcgLlem;lhm?mMqfm=aLqclugXj.irlslqg*ixj`lyj}f0k1iEnak5ncfalLfddqlQduiSlTiyiVnqiYbpnt1n0YnwknbBnAi.4B6inE4-oA7%nJ6tapnN2cnPkinRnTo%9hpTr~5.3}n$6Y6!706_n-6+n~pF6#n=cTs_iXkln;6Wn{75s~o=o07e1_n:o6q|o87qoboY7k6W7x6vo=oh7Foj7T7Ki%oo65tnor7U7`7Yoy7#oB6r7*mPaYbe7/oIcx0(m67_1yoO7|7~80bepK8to/oWm38eo!b~s)8o7P8qo,tU89leo;iY0co@o_298Jo}gk8|jqmv0y0v0v8+4=p28?9Vcf0k170!c29B8W0Z9*kYp0p`gj0_8TbRec0C8Zck0eeud:e{964-pB1|pEs 7apHm!pJl{f*pMf-j1pOhJpRkNf`m57^0mc4mre8jk0U0_uTunglcd0Uk$k!0y0!pt0CuZ9:8K0#kXp}k_jEk{q2rJmG0Rq6eImKeJlkqejOmSrFq mXrC0zqm2yv1mUr!rFv5ql2yv7rs3x0u44q!31i`4o1#r!hx5Xjx0Hl_l7sd4Cm-j#eRm:vAe)liaGm^gUq9ipsglvsivLe;j_bisnj~54k0g=srdestg|nddknffciNfenjh5nl81sCj`sEhdsGi!nyjxsLl%nzl)sP4VsR6keRsUnI6WnKsY6ys!0rk}bjs%6Ht#tXs,n#6Xn(s;t16(6*n/s`s=1|jTt5iYn`0e73t46|wqwm1Nt8o3ux7v6Wo7o9m|oc1yoes*tl7Coq7Sostr01optuwTtwtNc$tzw3oCtDi5oG7:oJ29tK7^oN7{oQtR82uCo.t+8wj79ktZkRt#o)t%o+8sw{o:pJt:6J8Ct=gj0Co~p;8G0`0!cjmmu$0Umrc2ckek8O8(xkp8hXmhuZ0x189Veg14k(16xojs180egouqpyut9auvt-t0uzwPt.uCi uFl hIm1uJtX0J0J.'
 </script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -2909,9 +3027,13 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8c2 au7m1o3,lb/0dB}i5t{*pr-h)]Iyj[gv(+=qC
 
 <script src="../../js-per-pages/1-runtimeManager-runtime-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
+<script src="../../js-per-pages/2-0-runnersManager-runners.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
 <script src="../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/3-terminalRunner-term.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../js-per-pages/4-0-idesManager-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/4-ideLogistic-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
@@ -3077,16 +3199,6 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8c2 au7m1o3,lb/0dB}i5t{*pr-h)]Iyj[gv(+=qC
           <form class="md-consent__form md-grid md-typeset" name="consent">
             
 
-  
-    
-  
-
-
-  
-    
-  
-
-
 
 
 <h4>Consentement aux cookies</h4>
@@ -3095,31 +3207,42 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8c2 au7m1o3,lb/0dB}i5t{*pr-h)]Iyj[gv(+=qC
 <div class="md-consent__settings">
   <ul class="task-list">
     
-      
-      
-        
-        
-      
-      <li class="task-list-item">
-        <label class="task-list-control">
-          <input type="checkbox" name="analytics" checked>
-          <span class="task-list-indicator"></span>
-          Google Analytics
-        </label>
-      </li>
     
       
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
       
         
-        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
       
-      <li class="task-list-item">
-        <label class="task-list-control">
-          <input type="checkbox" name="github" checked>
-          <span class="task-list-indicator"></span>
-          GitHub
-        </label>
-      </li>
+    
     
   </ul>
 </div>
@@ -3149,12 +3272,14 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e.ne8c2 au7m1o3,lb/0dB}i5t{*pr-h)]Iyj[gv(+=qC
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
     
     
 
 
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
       

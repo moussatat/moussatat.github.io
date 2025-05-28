@@ -21,15 +21,14 @@ If not, see <https://www.gnu.org/licenses/>.
 
 import { jsLogger } from 'jsLogger'
 import {
-  escapePyodideCodeForJsTemplates,
   getIdeDataFromStorage,
   PythonError,
   sleep,
   PMT_LOCAL_STORAGE_KEYS_WRITE,
+  RunningProfile,
 } from 'functools'
-import { RunningProfile } from '2-pyodideSectionsRunner-runner-pyodide'
+import { RUNNERS_MANAGER } from '4-0-idesManager-ide'
 import { TerminalRunner } from '3-terminalRunner-term'
-
 
 
 
@@ -74,13 +73,17 @@ export const cssPx =(jObj,prop='height')=> +jObj.css(prop).slice(0,-2)
  */
 class IdeStorageManager extends TerminalRunner {
 
+  get isIde(){ return true }
+  get hasTerminal(){ return true }
+  get isTerminal(){ return false }
+
   /**Process to "re-initiate" the internal state of the IDE (useful for testing) */
   constructor(editorId, callInit=false){
     super(editorId, callInit)
     this.storage = this.getStorage()
   }
 
-  // First class, making sure the change of argument if handled
+  // First class, making sure the change of argument is handled
   build(){
     super.build(this.termId)
   }
@@ -90,25 +93,29 @@ class IdeStorageManager extends TerminalRunner {
   getStorage(editorId=null){
     editorId ??= this.id
     const extractForThis = editorId==this.id
-    const [storage,upToDate]  = getIdeDataFromStorage(editorId, extractForThis?this:null)
-    if(!upToDate) this.forceUpdateStorage(storage)
+    const [storage,upToDate] = getIdeDataFromStorage(editorId, extractForThis?this:null)
+    this.updateGenericStorageData(storage)
     return storage
   }
 
 
-  forceUpdateStorage(storage){
+  updateGenericStorageData(storage){
     storage.name   = this.pyName
-    storage.zip    = this.export
-    storage.hash ??= this.srcHash    // Only if undefined, so that no alert shown for ALL updated IDEs by default
+    storage.hash ??= this.srcHash   // Only if undefined, so that no alert shown for ALL updated
+                                    // IDEs that are still using the default code.
   }
 
 
 
-  setStorage(changes){
+  setStorage(changes={}){
+    this._updateInternalStorage(changes)
+    localStorage.setItem(this.id, JSON.stringify(this.storage))
+  }
+
+  _updateInternalStorage(changes){
     if(changes){
       for(const k in changes) this.storage[k] = changes[k]
     }
-    localStorage.setItem(this.id, JSON.stringify(this.storage))
   }
 
 
@@ -126,7 +133,13 @@ class IdeStorageManager extends TerminalRunner {
   /**Automatically gives the focus to the ACE editor with the given id.
    * */
   focusEditor(){
-    this.editor.focus()
+    if(this.activatedFocus){
+      this.editor.focus()
+    }
+  }
+
+  focusElement(){
+    this.focusEditor()
   }
 
 
@@ -208,6 +221,8 @@ class IdeStorageManager extends TerminalRunner {
 class IdeZipManager extends IdeStorageManager {
 
   buildZipExportsToolsAndCbk(jBtn){
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
+    // https://stackoverflow.com/questions/43180248/firefox-ondrop-event-datatransfer-is-null-after-update-to-version-52
 
     // Add drag&Drop behavior for zip archives:
     jBtn.on("dragenter dragstart dragend dragleave dragover drag", e=>e.preventDefault())
@@ -217,7 +232,7 @@ class IdeZipManager extends IdeStorageManager {
       this.lockedRunnerWithBigFailWarningFactory(
         RunningProfile.PROFILE.zipImport,
         this.setupRuntimeZip,
-        this.dropArchive,
+        async(_e, zipFile)=>{ RUNNERS_MANAGER.readZipContentAndUpdateIdes(zipFile) },
         this.teardownRuntimeZip,
         true,
       )
@@ -245,158 +260,41 @@ class IdeZipManager extends IdeStorageManager {
   }
 
 
-  _getDataForExportableIdeInPage(){
-    const toArchive = []
-    const ideThis   = this
-
-    $(`[id^=editor_]`).each(function(){
-      if(localStorage.getItem(this.id)===null){
-        return                                      // Should never happen... But just in case...
-      }
-      const storage = ideThis.getStorage(this.id)   // WARNING: this is ANY IDE in the page, here.
-      storage.id = this.id                          // (Wut? why? Should already be up to date...)
-      if(storage.zip){                              // "Is exportable"...
-        toArchive.push(storage)
-      }
-    })
-    return toArchive
-  }
-
-
-  _buildZipNameFirstChunks(){
-    const zipChunks = []
-
-    if(CONFIG.exportZipPrefix){
-      zipChunks.push(CONFIG.exportZipPrefix)
-    }
-    if(CONFIG.exportZipWithNames){
-      let names = ""
-      while(!names){
-        names = window.prompt(CONFIG.lang.zipAskForNames.msg)
-      }
-      zipChunks.push(names)
-    }
-    return zipChunks
-  }
-
 
   async zipExport(_runtime){
     this.terminalEcho('Generate zip for '+location.href)
-
-    const toArchive = this._getDataForExportableIdeInPage()
-    const zipChunks = this._buildZipNameFirstChunks()
-    const code      = this._buildZipExportPythonCode(toArchive, zipChunks)
-    pyodide.runPython(code)
+    RUNNERS_MANAGER.exportIdesAsZip()
     this.focusEditor()
   }
 
 
-  _buildZipExportPythonCode(toArchive, zipChunks){
-    const pyJson = escapePyodideCodeForJsTemplates( JSON.stringify(toArchive) )
-    return `
-@__builtins__.auto_run
-def _hack_build_zip():
+  dropArchiveFactory(asyncLockedZipDropper){
+    return async dropEvent=>{
+      this.giveFeedback("Loading archive content, please wait...")
 
-    import shutil, json
-    from pathlib import Path
-    from itertools import count
+      // Files _HAVE_ to be extracted here, because the locked runner is automatically calling
+      // e.preventDefault(), which _SEEMS_ to remove the files (... it _MIGHT_ also be related
+      // to the async aspects...).
+      const zipFiles = RUNNERS_MANAGER.getArchiveFiles(dropEvent)
 
-    def unique_name(p:Path):
-        while p.exists():
-            p = p.with_name(f"{ p.stem }_{ p.suffix }")
-        return p
+      if(!zipFiles.length){
+        this.giveFeedback("No archive file found.")
 
-    dirname = unique_name(Path('tmp_zip'))
-    dirname.mkdir()
+      }else if(zipFiles.length>1){
+        this.giveFeedback("Cannot Import multiple archives.")
 
-    url    = ${ JSON.stringify(location.href) }
-    origin = ${ JSON.stringify(location.origin) }
-    chunks = ${ JSON.stringify(zipChunks) }
-
-    # Always make sure the url part of the filename is not empty:
-    zip_url = url[len(origin):].strip('/').replace('/','_').replace('.','_') or 'home'
-    chunks.append(zip_url)
-
-    zip_name = unique_name( Path( '-'.join(chunks) + '.zip') )
-
-    data = json.loads("""${ pyJson }""")
-    for ide in data:
-        name = dirname / (ide['id'] + '${ CONFIG.ZIP.pySep }' + ide['name'])
-        name.write_text(ide['code'], encoding="utf-8")
-
-    shutil.make_archive(zip_name.with_suffix(''), 'zip', dirname)
-
-    pyodide_downloader(
-        zip_name.read_bytes(),
-        zip_name.name,
-        "application/zip"   # "application/x-zip-compressed" on Windaube...?
-                            # => no need (probably because in WASM)
-    )
-    shutil.rmtree(dirname)
-    zip_name.unlink()
-`
-  }
-
-  dropArchiveFactory(asyncRuntimeConsumer){
-    return async ev=>{
-      ev.preventDefault()
-      CONFIG.loadIdeContent = this.loadIdeContent.bind(this)
-      await asyncRuntimeConsumer(ev)
-    }
-  }
-
-
-  async dropArchive(ev){
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
-    // https://stackoverflow.com/questions/43180248/firefox-ondrop-event-datatransfer-is-null-after-update-to-version-52
-
-    const useItems = Boolean(ev.dataTransfer.items)
-    const files = [...ev.dataTransfer[ useItems?'items':'files' ]]
-
-    if(files.length!=1){
-      this.giveFeedback("Cannot Import multiple archives.")
-      return
-    }
-
-    files.forEach((itemOrFile) => {
-      if(useItems && itemOrFile.kind !== "file"){
-        // If dropped items aren't files, reject them
-        return
+      }else{
+        CONFIG.loadIdeContent = this.loadIdeContent.bind(this)
+        await asyncLockedZipDropper(dropEvent, zipFiles[0])
       }
-      this.getZipContentAsBytes( useItems ? itemOrFile.getAsFile():itemOrFile)
-    })
-  }
-
-
-  getZipContentAsBytes(file){
-    const reader = new FileReader();
-
-    reader.onload = function(event){
-      const bytesArr = event.target.result
-      pyodide.unpackArchive(bytesArr, "zip", {extractDir: CONFIG.ZIP.tmpZipDir})
-      pyodide.runPython(`
-@__builtins__.auto_run
-def _hack_zip_loading():
-    from pathlib import Path
-    import js
-    loadIdeContent = js.config().loadIdeContent
-
-    tmp_dir = Path('${ CONFIG.ZIP.tmpZipDir }')
-    for py in tmp_dir.iterdir():
-        content = py.read_text(encoding='utf-8')
-        loadIdeContent(py.name, content)
-        py.unlink()
-    tmp_dir.rmdir()
-`)
     }
-    reader.readAsArrayBuffer(file)
   }
 
 
-  loadIdeContent(pyName, code){
-    const i        = pyName.indexOf(CONFIG.ZIP.pySep)
-    const editorId = pyName.slice(0, i)
-    const name     = pyName.slice(i+1)
+  loadIdeContent(zippedPyName, code){
+    const i        = zippedPyName.indexOf(CONFIG.ZIP.pySep)
+    const editorId = zippedPyName.slice(0, i)
+    const name     = zippedPyName.slice(i+1)
     const jIde     = $('#'+editorId)
 
     if(!jIde[0]){
@@ -476,7 +374,6 @@ export class IdeGuiManager extends IdeZipManager {
       splitSlider: null,              // jQuery object
       initTermH: 0,                   // Initial height of the terminal, before entering any screen mode
       initGlobH: 0,                   // Initial height of this.global, before entering any screen mode
-      // initGlobHY: 0,                  // Initial Y position of this.global or its replacement, before entering full screen mode
       hasObserver: false,             // (should be actually useless, now) Has already built auto-completion MutationObserver or not
       escapeIdeSearch: false,         // Stroke Esc while the search/replace IDE tool was on focus
       viewport: window.screen.height,
@@ -511,7 +408,8 @@ export class IdeGuiManager extends IdeZipManager {
    * been applied before.
    * Note that the logic is rather intricate with super calls...
    * */
-  makeUpYourGui(){
+  makeUpYourGui(){      // Cap overload
+
     if(this.global.is(':hidden')) return false    // Nothing to do yet (tabbed content).
 
     const todo = [
@@ -636,7 +534,7 @@ export class IdeGuiManager extends IdeZipManager {
 
       const btns  = this.global.find('.ide_buttons_div_wrapper')
       const lineH = cssPx( this.global.find('div.ace_gutter-layer').children().first() )
-      const btnsH = cssPx(btns) + cssPx(btns,'margin-top') //+ cssPx(btns,'margin-bottom')
+      const btnsH = cssPx(btns) + cssPx(btns,'margin-top') + cssPx(btns,'margin-bottom')
 
       const globH = -2 * this.guiIdeFlags.fullScreenPadPx + ( goingFullScreen
         ? this.guiIdeFlags.viewport
@@ -800,8 +698,8 @@ export class IdeFullScreenGlobalManager extends IdeGuiManager {
   }
 
 
-  build(){
-    super.build()
+
+  makeUpYourGui(){        // Cap overload
 
     /* Add the logistic to track the use of ESC while the IDE search/replace tool is used
       ...
@@ -831,6 +729,8 @@ export class IdeFullScreenGlobalManager extends IdeGuiManager {
 
       }
     }).observe(scroller[0], {childList:true})
+
+    return super.makeUpYourGui()
   }
 }
 

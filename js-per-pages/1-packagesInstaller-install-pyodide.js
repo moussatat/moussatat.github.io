@@ -101,7 +101,10 @@ export const installPythonPackages=(function(){
    * (Loaded scripts names are cached, to avoid multiple imports)
    * */
   const asyncJsScriptCdnLoader = (name, scriptOptions={})=> async ()=>{
-    if(CACHE_JS_INSTALLED.has(name)) return;
+    if(CACHE_JS_INSTALLED.has(name)){
+      console.log(name, 'already loaded...')
+      return
+    }
 
     scriptOptions = {
       crossorigin:    "anonymous",
@@ -120,6 +123,7 @@ export const installPythonPackages=(function(){
 
     document.body.appendChild(script)
 
+    console.log(`Loading ${ name }...`)
     while(!loaded) await sleep(50)
     CACHE_JS_INSTALLED.add(name)
     console.log(name, 'ready')
@@ -132,6 +136,24 @@ export const installPythonPackages=(function(){
     let out = pyodideFeatureRunCode(feature, repl)
     if(outputConverter) out = outputConverter(out)
     return out
+  }
+
+
+  const importChecker=(name)=>(code)=>{
+    const badImport = new RegExp(`from ${ name }\\S* import`).test(code)
+    if(badImport){ throw new PythonError(
+      `ImportError: Invalid ${ name } import.\nThe ${ name } module must be used as a namespace.`
+      +`Example:\n    import ${ name }\n    p5.createCanvas(...)`
+    )}
+  }
+
+  const confImportWithPostCdn=(name, options)=>{
+    return {
+      [name]: {
+        codeCheck: importChecker(name),
+        post: asyncJsScriptCdnLoader(name, options)
+      }
+    }
   }
 
 
@@ -157,18 +179,13 @@ export const installPythonPackages=(function(){
       toInstall: "Pillow"
     },
 
-    p5: {
-      codeCheck: (code)=>{
-        const badP5Import = /from p5\S* import/.test(code)
-        if(badP5Import){ throw new PythonError(
-          "ImportError: Invalid p5 import.\nThe p5 module must be used as a namespace. Example:"
-          +"\n    import p5\n    p5.createCanvas(...)"
-        )}
-      },
-      post: asyncJsScriptCdnLoader(
-        'p5', {src: "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.min.js"}
-      )
-    },
+    ...confImportWithPostCdn(
+      'p5', {src: "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.min.js"}
+    ),
+
+    ...confImportWithPostCdn(
+      'vis_network', {src: "https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"}
+    ),
   }
 
 
@@ -255,7 +272,7 @@ __hack_std_import_attempt()
 
 
   const FORBID_EXTERNALS = new Set(['py_lib', 'pylib', 'pylibs', 'py-lib', 'py-libs'])
-  const PMT_TOOLS = ['p5']
+  const PMT_TOOLS = ['p5', 'vis_network']
 
 
   /**Extract all the packages names currently available in pyodide. */
@@ -268,7 +285,7 @@ __hack_std_import_attempt()
   const predicatesFactory=(runner)=>{
 
     const importedModules  = getAlreadyImportedPackagesAsSet()
-    return {
+    const predicates = {
       isNotImportedYet:     (name) => !importedModules.has(name),
       isNotWhiteList:       (name) => !runner.whiteList.includes(name),
       isExcluded:           (name) =>  runner.excluded.includes(name),
@@ -277,6 +294,7 @@ __hack_std_import_attempt()
       isNotKnownPythonLib:  (name) => !CONFIG.pythonLibs.has(name) && !PMT_TOOLS.includes(name),
       isWrongPyLib:         (name) =>  FORBID_EXTERNALS.has(name),
     }
+    return predicates
   }
 
 
@@ -320,7 +338,7 @@ del _hack_imports`  // (not using the auto_run decorator because it might not be
     const runner = runtime.runner
     const code   = ctx.code
 
-    const wantedLibs = getWantedImports(code)
+    const wantedLibs = getWantedImports(code).toJs()
     const pred       = predicatesFactory(runner)
 
 

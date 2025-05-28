@@ -114,6 +114,10 @@ export const withPyodideAsyncLock = (_=>{
 
 
 
+
+
+
+
 /**Allow to delay the executions of various functions, until the pyodide environment
  * is ready.
  *
@@ -124,19 +128,20 @@ export const withPyodideAsyncLock = (_=>{
  *       that are actually locked (otherwise, deadlock!).
  * */
 export const waitForPyodideReady = async()=>{
-    LOGGER_CONFIG.ACTIVATE && jsLogger("[Wait4Pyodide] - ...")
 
     const maxWaitingTime = 20  // in seconds
     const attempts = 80
     const step_ms = Math.round(1000 * maxWaitingTime / attempts)
 
+    LOGGER_CONFIG.ACTIVATE && jsLogger(`[Wait4Pyodide] with ${ step_ms } ms in between attempts`)
     let counter = 0
     while(!CONFIG.pyodideIsReady){
         await sleep(step_ms);
-        if(++counter == attempts){
+        counter++
+        LOGGER_CONFIG.ACTIVATE && jsLogger("[Wait4Pyodide] -", counter,'/',attempts, "attempts")
+        if(counter == attempts){
             throw new Error(`Couldn't access to pyodide environment in time (${maxWaitingTime}s)`)
         }
-        LOGGER_CONFIG.ACTIVATE && jsLogger("[Wait4Pyodide] -", counter,'/',attempts, "attempts")
     }
 }
 
@@ -198,6 +203,9 @@ export function subscribeWhenReady(waitId, callback, options={}){
 
     function autoSubscribe(){
 
+        LOGGER_CONFIG.ACTIVATE && jsLogger(
+            '[Subscribing] - Attempt', waitId,'Tries:', CONFIG.subscriptionsTries[waitId]
+        )
         if(isNotReady()){
             const nTries = CONFIG.subscriptionsTries[waitId]+1 || 1
             if(nTries > maxTries){
@@ -207,9 +215,11 @@ export function subscribeWhenReady(waitId, callback, options={}){
             setTimeout(autoSubscribe, delay)
 
         }else{
-            LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscribing] -', waitId)
             const wrapper=function(){
                 try{
+                    LOGGER_CONFIG.ACTIVATE && jsLogger(
+                        '[Subscribing] - Running', waitId, 'runOnly', runOnly,'Tries:', CONFIG.subscriptionsTries[waitId]
+                    )
                     callback()
                 }catch(e){
                     console.error(e)
@@ -483,9 +493,21 @@ export function decompressAndConvert(compressed){
 
 
 
+/**Build bare divs from the given strings.
+ * @returns: - A jQuery <div> object if only one argument.
+ *           - An array of jQuery <div> objects if several arguments.
+ * */
+export const jDiv=(...elements)=>{
+    const out = elements.map( s => $(`<div>${ s }</div>`) )
+    return elements.length==1 ? out[0] : out
+}
+
+
+
 const defaultOptions=(options, prop)=>({
     tagClass: "vertical",
     tagId: prop,
+    fontSize: "",
     extraStyles: "",    // For the outer element/tag, as "width:min-content;..."
 
     label: prop,
@@ -498,15 +520,16 @@ const defaultOptions=(options, prop)=>({
     tipText: "",
     shift: 50,          // %
     tipWidth: 0,        // em ; 0 => auto
-    tipClass: '',
+    tipClass: '',       // top bottom left right (default: bottom)
+
+    autoCbk: true,     // If true, automatic event routine added
+    disabled: undefined,
 
     ...options
 })
 
 
-
-
-const _buildTipSpan=(options)=>{
+export const buildTipSpan=(options)=>{
     if(!options.tipText) return ""
 
     const tipClass = ['tooltiptext', options.tipClass || 'bottom'].join(' ')
@@ -514,11 +537,12 @@ const _buildTipSpan=(options)=>{
     const tipSpan  = `<span class="${ tipClass }" style="width:${ tipWidth }">${ options.tipText }</span>`
     return tipSpan
 }
-const _getTagStyle=(options)=>{
+
+export const getTagStyle=(options)=>{
     const styles = []
-    if(options.tipText)       styles.push(`--tool_shift:${ options.shift }%"`)
-    if(options.fontSize)      styles.push(`font-size:${ options.fontSize }em`)
-    if(options.extraStyleTag) styles.push(options.extraStyleTag)
+    if(options.tipText)    styles.push(`--tool_shift:${ options.shift }%`)
+    if(options.fontSize)   styles.push(`font-size:${ options.fontSize }em`)
+    if(options.extraStyle) styles.push(options.extraStyle)
     return ` style="${ styles.join(';') }"`
 }
 
@@ -534,8 +558,8 @@ const stuffWithTooltip = (tag, options, content) =>{
 
     const tagClass = !classes.length  ? '':`class="${ classes.join(' ') }"`
     const tagId    = !options.tagId   ? '':`id="${ options.tagId }"`
-    const tagStyle = _getTagStyle(options)
-    const tipSpan  = _buildTipSpan(options)
+    const tagStyle = getTagStyle(options)
+    const tipSpan  = buildTipSpan(options)
     const label    = `<label for="${ options.inputId }" style="align-self:center">${ options.label }</label>`
 
     const buttonType = ' type="button"'.repeat(tag=='button')
@@ -548,7 +572,6 @@ const stuffWithTooltip = (tag, options, content) =>{
         `</${tag}>`
     ].join(''))
 }
-
 
 
 
@@ -573,19 +596,16 @@ export const makeIdeJqButton = (kind, options) => {
 
 
 
-
-
 /**Generic "change" event factory.
  *
  * @obj: object to mutate
  * @prop: property of the object to update
  * @inputProp; property name of the context object from which to extract the _already updated_ value.
  * */
-const valueAssigner=(obj, prop, inputProp='value')=>function(){
+export const valueAssigner=(obj, prop, inputProp='value')=>function(){
     obj[prop] = this[inputProp]
     // console.log(JSON.stringify(obj[prop]))
 }
-
 
 
 /**Create a textarea object automatically updating the @obj[@prop] value.
@@ -604,7 +624,7 @@ export function buildJqTextArea(obj, prop, options={}){
     txtArea.css('overflow-y','auto')
     txtArea.attr('rows', nLines)
     if(options.resize) txtArea.css('resize', options.resize)
-    txtArea.on('change', valueAssigner(obj, prop))
+    if(options.autoCbk) txtArea.on('change', valueAssigner(obj, prop))
 
     return html
 }
@@ -623,7 +643,26 @@ export function buildJqCheckBox(obj, prop, options={}){
         'div', options,
         `<input type="checkbox" id="${ options.inputId }" ${kls} ${ obj[prop]?'checked':'' }>`,
     )
-    return $(html).on('click', 'input', valueAssigner(obj, prop, 'checked'))
+    if(options.autoCbk) html.on('click', 'input', valueAssigner(obj, prop, 'checked'))
+    return html
+}
+
+
+
+/**Create an input[number]
+ * */
+export function buildJqNumber(obj, prop, options={}){
+    options.tagClass    = ("horizontal "+(options.tagClass??"")).trim()
+    options.extraStyles = "grid-template-columns: max-content max-content;grid-gap:5px;"
+    options.labelFirst ??= false
+    options = defaultOptions(options, prop)
+    const kls = options.inputClass ? `class="${ options.inputClass }"`:""
+    const html = stuffWithTooltip(
+        'div', options,
+        `<input type="number" id="${ options.inputId }" ${kls} ${ obj[prop]?'checked':'' }>`,
+    )
+    if(options.autoCbk) html.on('change', 'input', valueAssigner(obj, prop))
+    return html
 }
 
 
@@ -637,7 +676,8 @@ export function buildJqText(obj, prop, options={}){
         'div', options,
         `<input type="text" id="${ options.inputId }" ${kls} value="${ obj[prop]??"" }" placeholder="${ options.placeholder??"" }">`
     )
-    return $(html).on('change', 'input', valueAssigner(obj, prop))
+    if(options.autoCbk) html.on('change', 'input', valueAssigner(obj, prop))
+    return html
 }
 
 
@@ -654,12 +694,76 @@ export function buildJqSelect(obj, prop, valuesArr, options={}){
 
     const kls    = options.inputClass ? `class="${ options.inputClass }"`:""
     const select = `<select id="${ options.inputId }" ${kls}>`+valuesArr.map( v=>
-        `<option value="${ v }"${ v!==obj[prop]?'' : ' selected="selected"' }>${ v }</option>`
+        `<option value="${ v }"${ v!==obj[prop] ? '' : ' selected="selected"' }>${ v }</option>`
     ).join('')+"</select>"
 
     const html = stuffWithTooltip('div', options, select)
-    return html.on('change', 'select', valueAssigner(obj, prop))
+    if(options.autoCbk)  html.on('change', 'select', valueAssigner(obj, prop))
+    return html
 }
+
+
+
+
+
+export const cancelEvent=(e)=>{
+    if(!e) return;
+    if(e.stopPropagation) e.stopPropagation()
+    if(e.preventDefault)  e.preventDefault()
+}
+
+
+
+export function buildJqHistoryBtn(
+    jHolder,        // jQuery element holding the contextmenu
+    historyId,      // Id if the "contextmenu" element
+    historyArr,     // [data]
+    itemSetupCbk,   // Additional things to do with each jQuery/html item in this history, at creation time
+                    // (jBtn, data) => void
+){
+
+    const appendHistory=()=>{
+        if(!historyArr.length || $('#'+historyId).length) return;
+
+        // Use button instead of div, so that focusout and co' are actually working...
+        const jHist = $(
+            `<button id="${ historyId }" class="history-box"></button>`
+        )
+
+        jHist.append(
+            historyArr.map(data=>{
+                const btn = $(`<button class="history-btn">${ itemSetupCbk?"":data }</button>`)
+                if(itemSetupCbk) itemSetupCbk(btn, data)
+                return btn
+            })
+        )
+
+        // Forbid going full screen and close if not needed anymore.
+        jHist.on('keydown', function(e){
+            cancelEvent(e)
+            if(e.key=='Escape') jHist.off().remove()
+        })
+
+        // Remove the window if left or clicking somewhere else:
+        jHist.on('focusout mouseleave', function(e){ jHist.off().remove() })
+
+        // Once entered, clicking on a button would close the window if the focusout event is
+        // still defined, so remove it:
+        jHist.on('mouseenter', function(e){ jHist.off('focusout') })
+
+        // Make sure events are not transferred to upper level, (whatever they are)
+        jHist.on('click keyup', function(e){ cancelEvent(e) })  // wrapper so that jQ.off() works
+
+        jHist.appendTo(jHolder)     // Mount...
+        jHist.trigger('focus')      // Force focus to activate focusout, in case the user never enters the panel.
+    }
+
+    return jHolder.on('contextmenu', function(e){
+        cancelEvent(e)
+        appendHistory()
+    })
+}
+
 
 
 
@@ -819,7 +923,6 @@ export const PMT_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
     done
     hash
     name
-    zip
 `.trim().split(/\s+/))
 
 
@@ -830,7 +933,7 @@ export const PMT_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
  *
  * WARNING:
  *  1) Redactors might store extra fields in the LocalStorage, so DO NOT cleanup the thing...
- *  2) used in CodEx...
+ *  2) This function is used in CodEx.
  * */
 export function getIdeDataFromStorage(editorId, ide=null){
 
@@ -860,10 +963,61 @@ export function freshStore(code, storage={}, ide=null){
 
     storage.code = code || ""
     storage.done ??= 0              // -1: fail, 0: unknown, 1:success
-    if(ide) ide.forceUpdateStorage(storage)
+    if(ide) ide.updateGenericStorageData(storage)
     return storage
 }
 
+
+
+
+
+
+
+
+
+
+export class RunningProfile {
+
+  static PROFILE = Object.freeze({
+    cmd:          'Command',
+    btn:          'PyBtn',
+    play:         'Play',
+    validate:     'Validate',
+    validateCorr: 'ValidateCorr',
+    testing:      'Testing',
+    testingPlay:  'TestingPlay',
+    testingValid: 'TestingValidate',
+    testingCorr:  'TestingValidateCorr',
+    testingCmd:   'TestingCommand',
+    testingRun:   'TestingRun',
+    zipExport:    'zipExport',
+    zipImport:    'zipImport',
+  })
+
+  /**Custom initialization of the runners objects for pyodide runners elements
+   * (done this way to get autocompletion support when coding in js, without
+   * breaking the current implementation logic).
+   * */
+  static buildDefaultRunnersObject(asProperties=false){
+    const obj = {...RunningProfile.PROFILE}
+    for(const k in obj) obj[k] = asProperties ? k : undefined
+    obj.default = undefined
+    return obj
+  }
+
+  /**Mirroring PROFILE property names (giving autocompletion hints) */
+  static PROPS = RunningProfile.buildDefaultRunnersObject(true)
+
+  static build(profile){
+    return Object.freeze({
+      name: profile,
+      isTermCmd:  profile.includes(RunningProfile.PROFILE.cmd),
+      isPlaying:  profile.includes(RunningProfile.PROFILE.play),
+      isChecking: profile.includes(RunningProfile.PROFILE.validate),
+      isTesting:  profile.includes(RunningProfile.PROFILE.testing),
+    })
+  }
+}
 
 
 

@@ -18,20 +18,10 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-function mathJaxUpdate(){
-  LOGGER_CONFIG.ACTIVATE && console.log('[MathJax] - Page formatting')
+// Must be defined to fulfill the legacy subscription logistic:
+function mathJaxUpdate(){}
 
-  if(!window.MathJax.startup.output){
-    console.error("Cannot update MathJax (CDN failed to load?)")
-    return
-  }
-
-  window.MathJax.startup.output.clearCache()
-  window.MathJax.typesetClear()
-  window.MathJax.texReset()
-  window.MathJax.typesetPromise()
-}
-const mathJaxIsReady = subscribeWhenReady('MathJax', mathJaxUpdate, {maxTries:100})
+subscribeWhenReady('MathJax')
 
 
 window.MathJax = {
@@ -40,7 +30,6 @@ window.MathJax = {
       LOGGER_CONFIG.ACTIVATE && console.log("[MathJax] - Setting up");
       MathJax.startup.defaultReady();
       LOGGER_CONFIG.ACTIVATE && console.log("[MathJax] - Ready");
-      mathJaxIsReady()
     },
   },
   loader: {
