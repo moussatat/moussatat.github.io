@@ -1,0 +1,337 @@
+site_name: "Maths au CSJA"
+site_description: Les progressions communes, les cahiers de texte, les supports de cours, les exercices et les évaluations.</br>   
+    Choisissez l'onglet de votre classe ou consultez la page des liens pour tous les niveaux
+
+site_url: !ENV [CI_PAGES_URL, "http://127.0.0.1:8000/"] 
+site_author: !ENV [CI_COMMIT_AUTHOR, "Nizar MOUSSATAT"]
+repo_url: !ENV [CI_PROJECT_URL, "https://github.com/moussatat/journal"]  # la sauvegarde github du code source du site
+edit_uri: !ENV [EDIT_VARIABLE, "./edit/main/docs/"]
+
+use_directory_urls: true # REQUIS pour pyodide-mkdocs-theme
+ 
+# À modifier, avec votre nom et la licence choisie
+# Ou activer dans my_hooks pour configuration automatique
+copyright: |  
+    <a href="https://moussatat.github.io/about">Nizar MOUSSATAT, 2025</a>
+    <a style="vertical-align:middle" rel="Sous licence CC BY-NC-SA 4.0" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Sous licence CC BY-NC-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>   
+    
+# À modifier, avec votre mail
+extra:
+    social:
+        - icon: fontawesome/regular/envelope
+          link: mailto:nizar.moussatat@ac-grenoble.fr
+          name: Écrire à l'auteur
+        - icon: fontawesome/brands/x-twitter
+          link: https://x.com/zenxbear
+          name: Tweeter à l'auteur
+        - icon: fontawesome/brands/discord
+          link: https://discord.gg/zyvrR4P5Rr
+          name: Joindre le discord  
+        - icon: fontawesome/brands/github
+          link: https://github.com/moussatat
+          name: Dépôt github
+        - icon: fontawesome/solid/school 
+          link: https://www.csja.fr/
+          name: Lycée Jeanne d'Arc
+    # automatically exposed as a variable and can be used from the template
+    # https://t.pxeger.com/mkdocs-material/reference/variables/
+    # https://www.mkdocs.org/user-guide/configuration/#environment-variables 
+    #CI_COMMIT_AUTHOR : "Nizar MOUSSATAT" 
+    CI_PROJECT_URL : "https://github.com/moussatat/moussatat.github.io"  
+    # analytics:   
+        # provider : google
+        # property: G-GBSMT6Z1K0
+        # anonymize_ip : True
+        # feedback:
+          # title: Avez-vous trouvé le contenu de la page utile?
+          # ratings:
+            # - icon: material/emoticon-happy-outline
+              # name: Le contenu de la page est utile
+              # data: 1
+              # note: >-
+                # Merci pour votre avis !
+            # - icon: material/emoticon-sad-outline
+              # name: Le contenu peut être amélioré
+              # data: 0
+              # note: >- 
+                # Merci pour votre avis !
+    # consent:
+        # title: Consentement aux cookies
+        # description: >- 
+            # Ce site intègre des cookies analytics (pour des statistiques de fréquentation anonymes, les requêtes dans la barre de recherche) et des cookies de l'hébergeur <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement#our-use-of-cookies-and-tracking-technologies">GitHub</a>. 
+            # Dès lors qu’une donnée est susceptible d’être collectée, vous pouvez vous y opposer dans les choix de paramètres ci-dessous.
+        # actions:
+          # - manage
+          # - accept
+          # - reject 
+    # generator: false
+    
+docs_dir: docs
+
+
+nav:
+    - "Accueil": index.md
+    - Terminale : 
+        - Ens. de spécialité :  
+            - 📅 Déroulement 2025-2026 : teds/index.md 
+            - 📋 Progression 2025-2026 :  teds/progression2025.md 
+            - 🎓 Evaluations :  teds/evaluations.md
+            - 📅 Déroulement 2024-2025 : teds/deroulement2024.md 
+            - 📋 Progression 2024-2025 :  teds/progression2024.md 
+    - Première :  
+        - 📅 Déroulement 2025-2026 : 1eds/index.md
+        - 📋 Progression 2025-2026 : 1eds/progression2025.md 
+        - 🎯 Cours et exercices :  1eds/cours.md
+        - 🎓 Evaluations :  1eds/evaluations.md
+        - 📅 Déroulement 2024-2025: 1eds/deroulement2024.md
+        - 📋 Progression 2024-2025 : 1eds/progression2024.md 
+    - Seconde :  
+        - 📅 Déroulement 2025-2026 : 2gt/index.md
+        - 📋 Progression 2025-2026 : 2gt/progression2025.md 
+        - 🎯 Cours et exercices :  2gt/cours.md 
+        - 🎓 Evaluations :  2gt/evaluations.md
+        - 📅 Déroulement 2024-2025: 2gt/deroulement2024.md
+        - 📋 Progression 2024-2025 : 2gt/progression2024.md 
+    - 🐍 Python : 
+        - 🏡 Ressources pour la classe : python/index.md
+        - 👣 Parcours de découverte : 
+            - (TD) Découvrir Python en 1h : python/python-2gt-00/index.md
+            - IDE et consoles : python/python-2gt-01/index.md
+            - Types de valeurs et opérations : python/python-2gt-02/index.md
+            - Variables et affectations : python/python-2gt-03/index.md
+            - Librairies et compléments : python/python-2gt-04/index.md
+            - Les fonctions : python/python-2gt-05/index.md
+            - Les instructions conditionnelles : python/python-2gt-06/index.md
+            - (TD) Fonctions et tests : python/python-2gt-07/index.md
+            - (TD) Silent Teacher  : python/python-2gt-08/index.md
+            - Les boucles finies : python/python-2gt-09/index.md
+            - Les boucles conditionnées : python/python-2gt-10/index.md 
+            - (TD) PY-rates : python/python-2gt-11/index.md 
+            - Les listes : python/python-1eds-00/index.md
+        - ⚙️ TP (seconde) :
+            - 🚧 Alien (débranché) : python/TP_alien/index.md 
+            - 🚧 Le module turtle : python/TP_turtle/index.md 
+            - 🚧 Le module kandinsky : python/TP_kandinsky/index.md  
+        - 💻 Bac à Sable : python/bac_a_sable/index.md 
+        - 🚧 Tests de modules:
+            - 🚧 Module P5: python/TP_test_p5/index.md 
+            - 🚧 Module Alien: python/TP_test_alien/index.md 
+            - 🚧 Module Matplotlib: python/TP_test_matplolib/index.md 
+            - 🚧 Module Sympy: python/TP_test_sympy/index.md 
+            - 🚧 Module Turle: python/TP_test_turtle/index.md 
+    - 🤖 SNT :  
+        - Introduction : snt/index.md
+        - Codage de l'information :
+            - 1 - Le binaire : snt/CodagesA/index.md
+            - 2 - Le hexadécimal : snt/CodagesB/index.md
+            - 3 - Les caractères : snt/CodagesC/index.md
+            - 4 - Les images : snt/CodagesD/index.md
+        - Données structurées :
+            - 1 - Découverte : snt/DonneesA/index.md
+            - 2 - Structurer : snt/DonneesB/index.md
+            - 3 - Traiter : snt/DonneesC/index.md
+            - 4 - Projet : snt/DonneesD/index.md
+        - Internet :
+            - 1 - Découverte : snt/InternetA/index.md
+            - 2 - Les protocoles : snt/InternetB/index.md
+            - 3 - Simuler un réseau : snt/InternetC/index.md
+            - 4 - Impact écologique : snt/InternetD/index.md
+            - 5 - 🚧 P2P : snt/InternetE/index.md
+        - Le Web :
+            - 1 - Découverte : snt/WebA/index.md
+            - 2 - Les langages : snt/WebB/index.md
+            - 3 - Les protocoles : snt/WebC/index.md
+            - 4 - 🚧 PageRank : snt/WebD/index.md
+            - 5 - 🚧 Les cookies : snt/WebE/index.md
+        - Les réseaux sociaux :
+            - 1 - Découverte : snt/ReseauxSociauxA/index.md
+            - 2 - Modélisation : snt/ReseauxSociauxB/index.md
+            - 3 - 🚧 Les infox : snt/ReseauxSociauxC/index.md
+            - 4 - 🚧 Données personnelles : snt/ReseauxSociauxD/index.md
+            - 5 - 🚧 Harcèlement et cyberviolences : snt/ReseauxSociauxE/index.md
+            - 6 - Le bilan : snt/ReseauxSociauxCours/index.md
+        - Objets connectés :    
+            - 1 - Découverte : snt/ObjetsConnectesA/index.md
+        - Le Numérique :    
+            - 1 - 🚧 Découverte : snt/NumeriqueA/index.md
+            - 2 - 🚧 Numérique et logistique : snt/NumeriqueB/index.md
+            - 3 - 🚧 Parcours PIX : snt/NumeriqueC/index.md
+    - DNL :  
+        - 📅 Déroulement : dnl/index.md
+        - 🗂️ Archives 2024-2025 :  dnl/archive2025.md
+        - 🗂️ Archives 2023-2024 :  dnl/archive2024.md
+    - ️🏷️ tags : tags.md
+    - ️⚙️ Demo : demo/index.md
+
+# Pour supprimer certains fichiers markdown de la navigation (pattern shell):
+# not_in_nav: |
+#   */**/*.md
+
+
+# exclude_docs: Nécessite mkdocs 1.6+ pour fonctionner correctement. Sinon, vous pouvez
+# utiliser le plugin mkdocs-exclude à la place.
+# Ne surtout pas mettre de commentaires sur la ligne d'exclusion des fichiers python... !
+# (exclure les fichiers python n'affecte pas les "python_libs")
+exclude_docs: |
+  **/*_REM.md
+  **/*.py
+
+
+# Configuration du thème:
+theme:
+    name: pyodide-mkdocs-theme
+    custom_dir: overrides 
+
+    features:
+        #- navigation.instant    # Ne surtout pas activer cette option ! 
+        - navigation.tabs   #Pour avoir le menu vertical il fallait supprimer ça
+        #- navigation.tabs.sticky # navigation tab will be lock below the header
+        #- navigation.expand # when enabled all collapsible subsection are expanded
+        #- navigation.sections
+        - navigation.path  
+        - navigation.footer
+        #- toc.integrate 
+        - toc.follow
+        - navigation.top
+        - header.autohide
+        - content.code.annotate   # Pour les annotations de code deroulantes avec +
+        - content.code.copy  # Ajout après MAJ pour pouvoir copier du code 
+        - content.code.select  
+        - announce.dismiss
+        - content.action.edit
+        - content.action.view 
+        - search.suggest
+        - search.highlight
+        - search.share
+    palette:  
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: indigo
+          accent: red
+          toggle:
+            icon: material/weather-sunny # material/lightbulb # see https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
+            name: Passer au mode nuit
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: black
+          accent: red
+          toggle:
+            icon: material/weather-night # material/lightbulb-outline
+            name: Passer au mode jour
+    favicon: images/favicon.ico
+    logo: images/logo.svg
+       
+    icon:
+        admonition:
+            coeur: material/heart
+
+
+# Configuration minimale pour les plugins
+plugins:
+    - awesome-pages: 
+    # Pas indispensable, mais... (pip install mkdocs-awesome-pages-plugin)
+        collapse_single_pages: true
+    
+    - tags:
+        tags_file: tags.md 
+    - open-in-new-tab
+    - search # macros disables search 
+    # - exclude-search:         # APRÈS le plugin search (pip install mkdocs-exclude-search)
+    #     exclude:              # Pour les fichiers inclus dans le build, que la recherche ne doit pas indexer
+    #       - bac_a_sable.md   
+    - pyodide_macros:         # !!REQUIS!!
+        on_error_fail: true   # Fortement conseillé...
+        _dev_mode: true
+        build: 
+            python_libs:
+                - turtle 
+                - alien_python
+                
+
+markdown_extensions: 
+    # Extensions indispensables pour le thème:
+    - md_in_html              # !!REQUIS!!
+    - admonition              # !!REQUIS!! Blocs colorés:  !!! info "ma remarque"
+    - attr_list               # !!REQUIS!! Un peu de CSS et des attributs HTML, ex: { #id .class style="display:none" }
+    - pymdownx.details        # !!REQUIS!! Admonition: ??? -> peuvent se déplier ;
+    - pymdownx.emoji:         # !!REQUIS!! Émojis:  :boom:
+        emoji_index: !!python/name:material.extensions.emoji.twemoji
+        emoji_generator: !!python/name:material.extensions.emoji.to_svg
+    - pymdownx.highlight :     # !!REQUIS!! Coloration syntaxique du code   
+        auto_title: true
+        auto_title_map:
+            "Python": "🐍 Script Python"
+            "Python Console Session": "🐍 Console Python"
+            "Text Only": "📋 Texte"
+            "E-mail": "📥 Entrée"
+            "Text Output": "📤 Sortie"
+    - pymdownx.inlinehilite   # !!REQUIS!! Coloration syntaxique pour les "code spans": `#!python  code_python` 
+    - pymdownx.snippets:      # !!REQUIS!! Inclusion de fichiers
+        check_paths: true     # Fortement conseillé...
+        base_path: ["docs"] 
+    - pymdownx.superfences:    # !!REQUIS!!
+        custom_fences:
+            - name: mermaid
+              class: mermaid
+              format: !!python/name:pymdownx.superfences.fence_code_format 
+    - pymdownx.arithmatex:    # !!REQUIS!! Pour LaTex
+        generic: true
+    - pymdownx.striphtml:
+        strip_js_on_attributes: false     # !!REQUIS!!
+        strip_attributes: ""              # !!REQUIS!!  
+        
+    # Extensions conseillées:
+
+    - abbr  
+    - def_list                ## Les listes de définition.  
+    - footnotes                 # Notes[^1] de bas de page.  [^1]: ma note.  
+    - pymdownx.caret          # Passage ^^souligné^^ ou en ^exposant^.
+    - pymdownx.keys           # ???+ -> peuvent se replier. 
+    - pymdownx.mark           # Passage ==surligné==.
+    - pymdownx.tilde          # Passage ~~barré~~ ou en ~indice~.  
+    - pymdownx.tasklist:            # Cases à cocher  - [ ]  et - [x] 
+        custom_checkbox:    false   #   avec cases d'origine
+        clickable_checkbox: true    #   et cliquables. 
+    - pymdownx.tabbed:
+        alternate_style: true   # compatibilité pour mobiles
+        slugify: !!python/object/apply:pymdownx.slugs.slugify
+            kwds:
+              case: lower
+
+    - pymdownx.critic           # https://squidfunk.github.io/mkdocs-material/reference/formatting/?h=keybo#adding-keyboard-keys
+    - pymdownx.pathconverter  :
+        absolute: true # default: false 
+    - pymdownx.magiclink:
+          normalize_issue_symbols: true
+          repo_url_shorthand: true
+          user: zenxbear
+          repo: moussatat.github.io 
+    
+    - toc:
+        permalink: ⚓︎
+        toc_depth: 3 
+        # toc_depth: 0 Si vous voulez supprimer la ToC des pages
+
+# En remplacement de mkdocs-exclude. Tous les fichiers correspondant aux patterns indiqués seront
+# exclu du site final et donc également de l'indexation de la recherche.
+# Nota: ne pas mettre de commentaires dans ces lignes !
+exclude_docs: |
+    **/*_REM.md
+    **/*.py 
+
+extra_javascript: 
+    - xtra/javascripts/extra.js
+
+    
+extra_css: 
+    - xtra/stylesheets/ajustements.css  # ajustements
+    - xtra/stylesheets/extra.css
+    
+
+# Si mkdocs est lancé en mode strict (mkdocs ... --strict), les warnings lèveront une erreur
+# en utilisant ces réglages :
+validation:
+    omitted_files: warn
+    unrecognized_links: warn
+    links:
+        absolute_links: relative_to_docs
