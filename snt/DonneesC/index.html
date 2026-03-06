@@ -3091,20 +3091,16 @@ calculs sur ces données, réaliser une visualisation graphique des données. </
 Nous allons au travers d'un exemple simple, apprendre à lire et traiter des données au format csv à l'aide de Python et du module <code>pandas</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Consignes</p>
-<p>Utilisez l'interface <a class="md-button md-button--primary" href="https://basthon.fr/">basthon</a> en mode <a class="md-button md-button--primary" href="https://notebook.basthon.fr/">notebook</a>   </p>
+<p>Utilisez l'interface Capytale pour tester les instructions Python et répondre aux questions.   </p>
 <ul>
 <li>pour exécuter une instruction dans notebook, il faut taper simultanément sur les touches Shift+Enter </li>
-<li>pour effacer une entrée dans notebook, taper simultanément sur Esc+D, et répéter une seconde fois.  </li>
-</ul>
-<p>Pour rendre le travail (ou le sauvegarder)</p>
-<ul>
-<li>dans le notebook, à l'aide du bouton <i class="fas fa-share-alt-square"></i>, générer un lien permanent vers le contenuy actuel</li>
-<li>copier le dans le presse-papier</li>
-<li>coller le dans votre document <a class="md-button md-button--primary" href="https://link.dgpad.net/6mgz">doctools</a>, codes wims.</li>
-<li>rédiger les réponses aux questions 6 à 8, et 11 à 19.  </li>
+<li>pour effacer une entrée dans notebook, taper simultanément sur Esc+D, et répéter une seconde fois.   </li>
+<li>sauvegarder votre travail au fur et à mesure. Vous pouvez ainsi poursuivre en cas de coupure.  </li>
 </ul>
 </div>
 <h3 id="exercice">Exercice<a class="headerlink" href="#exercice" title="Permanent link">⚓︎</a></h3>
+<details class="warning">
+<summary>Chargement des données si le TP est fait en dehors de CAPYTALE</summary>
 <ol>
 <li>Télécharger le fichier <a class="md-button md-button--primary" href="notes.csv"><code>notes.csv</code></a></li>
 <li>En ouvrant le fichier à l'aide de blocnotes vérifiez le séparateur utilisé.</li>
@@ -3117,6 +3113,20 @@ Nous allons au travers d'un exemple simple, apprendre à lire et traiter des don
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>   
 <span class="hll"><span class="n">donnees</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span> <span class="o">...</span>  <span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">decimal</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div></li>
+</ol>
+</details>
+<details class="warning">
+<summary>Chargement des données si le TP est fait via CAPYTALE</summary>
+<p>Compléter les pointillées à la ligne 3 afin d'enregistrer le contenu du fichier notes.csv dans le tableau <code>donnees</code>. 
+Puis exécuter la céllule.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">🐍 Script Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>   
+<span class="hll"><span class="n">donnees</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span> <span class="o">...</span>  <span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">decimal</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div></p>
+</details>
+<ol>
 <li>Quel est le rôle des paramètres  <code>sep=';'</code> et <code>decimal=","</code> dans la ligne 3 précédente ?</li>
 <li>Exécuter l'instruction ci-dessous, et compléter la phrase :
     <div class="highlight"><span class="filename">🐍 Script Python</span><pre><span></span><code><span class="n">donnees</span><span class="o">.</span><span class="n">shape</span>

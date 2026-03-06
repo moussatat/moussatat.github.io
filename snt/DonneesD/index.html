@@ -3153,16 +3153,11 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
 <h1 id="projet-arbres-du-grand-lyon">Projet - Arbres du Grand Lyon<a class="headerlink" href="#projet-arbres-du-grand-lyon" title="Permanent link">⚓︎</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Consignes</p>
-<p>Pour ce projet<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, utilisez l'interface basthon en mode <a class="md-button md-button--primary" href="https://notebook.basthon.fr/">notebook</a> </p>
+<p>Utilisez l'interface Capytale pour tester les instructions Python et répondre aux questions.    </p>
 <ul>
-<li>pour exécuter une instruction dans notebook, il faut taper simultanément sur les touches Shift+Enter</li>
-<li>pour effacer une entrée dans notebook, taper simultanément sur Esc+D, et répéter une seconde fois.</li>
-</ul>
-<p>Pour rendre le travail (ou le sauvegarder)</p>
-<ul>
-<li>dans le notebook, à l'aide du bouton <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M352 224c53 0 96-43 96-96s-43-96-96-96-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9 0 53 43 96 96 96s96-43 96-96-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9.7-7.8.7-11.9s-.2-8-.7-11.9l94.1-47c17.2 16.7 40.7 26.9 66.6 26.9"/></svg></span>, générer un lien permanent vers le contenuy actuel</li>
-<li>copier le dans le presse-papier</li>
-<li>coller le dans votre document <a class="md-button md-button--primary" href="https://link.dgpad.net/FBvq">doctools</a>, codes wims.</li>
+<li>pour exécuter une instruction dans notebook, il faut taper simultanément sur les touches Shift+Enter </li>
+<li>pour effacer une entrée dans notebook, taper simultanément sur Esc+D, et répéter une seconde fois.   </li>
+<li>sauvegarder votre travail au fur et à mesure. Vous pouvez ainsi poursuivre en cas de coupure.  </li>
 <li>rédiger les réponses aux questions </li>
 </ul>
 </div>
@@ -3171,6 +3166,8 @@ CONFIG.lang={"tests": {"msg": "\n\n# Tests\n\n", "as_pattern": "#\\s*Tests"}, "c
 Généralement localisé le long des voies de circulation ou sur les espaces publics, il est caractérisé par des informations de gestion (genre, espèce, variété, essence botanique, hauteur, diamètre couronne, localisation, date et année de plantation, ...)<br />
 Ces informations sont regroupées dans un fichier disponible librement sur <a href="https://www.data.gouv.fr/fr/datasets/arbres-dalignement-de-la-metropole-de-lyon/">geo.data.gouv.fr</a>.</p>
 <p>À l'aide des instructions vues dans le TP précédent répondre aux questions suivantes :</p>
+<details class="warning">
+<summary>Chargement des données si le TP est fait en dehors de CAPYTALE</summary>
 <ol>
 <li>Télécharger le fichier <code>arbres.csv</code> <a class="md-button md-button--primary" href="https://drive.google.com/file/d/1b6gSVT3M3r-IguvZlIBJ2EwL7uMxmMuu/view?usp=sharing"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v144H176c-35.3 0-64 28.7-64 64v144H64c-35.3 0-64-28.7-64-64zm384 64H256V0zM200 352h16c22.1 0 40 17.9 40 40v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-4.4-3.6-8-8-8h-16c-4.4 0-8 3.6-8 8v80c0 4.4 3.6 8 8 8h16c4.4 0 8-3.6 8-8v-8c0-8.8 7.2-16 16-16s16 7.2 16 16v8c0 22.1-17.9 40-40 40h-16c-22.1 0-40-17.9-40-40v-80c0-22.1 17.9-40 40-40m133.1 0H368c8.8 0 16 7.2 16 16s-7.2 16-16 16h-34.9c-7.2 0-13.1 5.9-13.1 13.1 0 5.2 3 9.9 7.8 12l37.4 16.6c16.3 7.2 26.8 23.4 26.8 41.2 0 24.9-20.2 45.1-45.1 45.1H304c-8.8 0-16-7.2-16-16s7.2-16 16-16h42.9c7.2 0 13.1-5.9 13.1-13.1 0-5.2-3-9.9-7.8-12l-37.4-16.6c-16.3-7.2-26.8-23.4-26.8-41.2 0-24.9 20.2-45.1 45.1-45.1m98.9 0c8.8 0 16 7.2 16 16v31.6c0 23 5.5 45.6 16 66 10.5-20.3 16-42.9 16-66V368c0-8.8 7.2-16 16-16s16 7.2 16 16v31.6c0 34.7-10.3 68.7-29.6 97.6l-5.1 7.7c-3 4.5-8 7.1-13.3 7.1s-10.3-2.7-13.3-7.1l-5.1-7.7c-19.3-28.9-29.6-62.9-29.6-97.6V368c0-8.8 7.2-16 16-16"/></svg></span></a>   (le fichier original contient des données indésirables).</li>
 <li>En ouvrant le fichier à l'aide de blocnotes vérifiez le séparateur utilisé.</li>
@@ -3181,6 +3178,23 @@ Ces informations sont regroupées dans un fichier disponible librement sur <a hr
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span> 
 <span class="hll"><span class="n">data0</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;...&#39;</span> <span class="p">,</span><span class="n">decimal</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div></li>
+</ol>
+</details>
+<details class="warning">
+<summary>Chargement des données si le TP est fait via CAPYTALE</summary>
+<p>Exécuter le préambule pour charger les données du projet
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">🐍 Script Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>  
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;arbres.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">z</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;arbres.csv&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data0</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span> <span class="p">,</span><span class="n">decimal</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+</details>
+<ol>
 <li>À l'aide d'une instruction python, déterminer le nombre d'objets et de descripteurs de ce tableau.</li>
 <li>À l'aide d'une instruction python, donner quelques exemples de descripteurs mentionnés.</li>
 <li>La longitude et latitude d'un arbre figurent-elles parmi les descripteurs mentionnés ? En quelles colonnes ?</li>
@@ -3246,9 +3260,11 @@ Cette <a href="https://www.geogebra.org/m/gq4ewapb#material/kbwhwe8j">animation 
 </iframe>
 
 <h2 id="mise-en-situation">Mise en situation<a class="headerlink" href="#mise-en-situation" title="Permanent link">⚓︎</a></h2>
-<p>Le <code>"Noisetier de Byzance"</code> est un  arbre dont le pollen a un fort potentiel allergisant.
-1. Modifier la ligne 7 du script pour faire apparaitre sur la carte uniquement les positions des "Noisetier de Byzance".
-1. Quels quartiers de Lyon sont à éviter au printemps si l'on est allergique au pollen du Noisetier ?</p>
+<p>Le <code>"Noisetier de Byzance"</code> est un  arbre dont le pollen a un fort potentiel allergisant.</p>
+<ol>
+<li>Modifier la ligne 7 du script pour faire apparaitre sur la carte uniquement les positions des "Noisetier de Byzance".</li>
+<li>Quels quartiers de Lyon sont à éviter au printemps si l'on est allergique au pollen du Noisetier ?</li>
+</ol>
 <div class="admonition tip bilan">
 <p class="admonition-title">Tip</p>
 <p>Si pour des quantités de données relativement petites, le tableur reste une solution acceptable. La démarche guidée dans ce projet est bien plus adaptée au traitement rapide de banques de données massives. Il existe d'autres langages de programation comme R,  utilisés dans l'analyse et l'exploration de données.</p>
