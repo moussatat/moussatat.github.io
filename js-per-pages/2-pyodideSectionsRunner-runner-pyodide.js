@@ -20,17 +20,18 @@ If not, see <https://www.gnu.org/licenses/>.
 
 import { jsLogger } from 'jsLogger'
 import {
+  RunningProfile,
   decompressPagesIfNeeded,
   noStorage,
+  renderMermaidGraphs,
   sleep,
   unEscapeSquaredBrackets,
   withPyodideAsyncLock,
   youAreInTroubles,
-  RunningProfile,
 } from 'functools'
 import { _DUMMY } from 'process_and_gui'   // Enforce dependencies order (if ever a runner is needed)
 
-import { pyodideFeatureRunCode } from '0-generic-python-snippets-pyodide'
+import { pyodideFeatureRunCode, pyodideFeatureSetupRedirections } from '0-generic-python-snippets-pyodide'
 import { RuntimeManager } from '1-runtimeManager-runtime-pyodide'
 import { RUNNERS_MANAGER } from '2-0-runnersManager-runners'
 
@@ -65,6 +66,10 @@ class PyodideSectionsRunnerBase {
   get isIde()      { return false }
   get hasTerminal(){ return false }
 
+  get isDelayedRevelation(){
+    return this.profile === CONFIG.PROFILES.delayedReveal
+  }
+
 
   //JS_CONFIG_DUMP
   get attemptsLeft()      { return this.data.attempts_left }
@@ -85,7 +90,6 @@ class PyodideSectionsRunnerBase {
   get hasCorrBtn()        { return this.data.has_corr_btn }
   get hasCounter()        { return this.data.has_counter }
   get hasRevealBtn()      { return this.data.has_reveal_btn }
-  get isEncrypted()       { return this.data.is_encrypted }
   get isVert()            { return this.data.is_vert }
   get maxIdeLines()       { return this.data.max_ide_lines }
   get minIdeLines()       { return this.data.min_ide_lines }
@@ -99,8 +103,10 @@ class PyodideSectionsRunnerBase {
   get pypiWhite()         { return this.data.pypi_white }
   get pythonLibs()        { return this.data.python_libs }
   get recLimit()          { return this.data.rec_limit }
+  get removeAssertionsStacktrace(){ return this.data.remove_assertions_stacktrace }
   get runGroup()          { return this.data.run_group }
   get secretTests()       { return this.data.secret_tests }
+  get seqPlay()           { return this.data.seq_play }
   get seqRun()            { return this.data.seq_run }
   get showOnlyAssertionErrorsForSecrets(){ return this.data.show_only_assertion_errors_for_secrets }
   get srcHash()           { return this.data.src_hash }
@@ -111,7 +117,9 @@ class PyodideSectionsRunnerBase {
   get whiteList()         { return this.data.white_list }
   //JS_CONFIG_DUMP
 
-
+  // Control stdout display during executions
+  get allowPrint()     { return this._manager.allowPrint }
+  set allowPrint(flag) { this._manager.allowPrint = flag }
 
   constructor(id, callInit=true){
     LOGGER_CONFIG.ACTIVATE && jsLogger('[CheckPoint] - Constructor for', this.constructor.name, id)
@@ -120,10 +128,9 @@ class PyodideSectionsRunnerBase {
 
 
     this.id = id
-    this.data = this._prepareData(PAGE_IDES_CONFIG[id])   // Inner mutable object holding infos coming from mkdocs
+    this.data = this._dataPostConversion(PAGE_IDES_CONFIG[id])   // Inner mutable object holding infos coming from mkdocs
     this.getCodeToTest = ()=>"" // If no editor, nothing to test...
     this.running = undefined    // RunningProfile.build output (object of boolean flags, mostly)
-    this.allowPrint = true      // Control stdout display during executions
     this.isGuiCompliant = false // All the GUI makeup has been applied (may not always be, typically for hidden tabbed contents)
 
     this.runners = RunningProfile.buildDefaultRunnersObject() // Hold all the async callbacks related to events (but only
@@ -141,7 +148,9 @@ class PyodideSectionsRunnerBase {
   }
 
 
-  _prepareData(data){
+  /**Apply any desired data conversion on the info coming directly from mkdocs, before they are used.
+   * */
+  _dataPostConversion(data){
     data.python_libs = new Set(data.python_libs)
     return data
   }
@@ -170,12 +179,6 @@ class PyodideSectionsRunnerBase {
 
   build(){
     this.buildRunners()
-
-    // Using setTimeout to be sure the `build` step will be complete (some children classes
-    // may have subsequent operations after the super method, aka, has been called here).
-    if(this.autoRun){
-      setTimeout(async ()=>await this.applyAutoRun())
-    }
   }
 
 
@@ -268,6 +271,7 @@ class PyodideSectionsRunnerBase {
       LOGGER_CONFIG.ACTIVATE && jsLogger(loggerName)
 
       CONFIG.calledMermaid = false
+      const wasDirty = this.isDirty
       this.makeDirty(false)       // Assume executions will go well (see note in finally block)
       this.running = runningMan
       let runtime
@@ -298,8 +302,14 @@ class PyodideSectionsRunnerBase {
         // For isDirty update, DO NOT only rely on `this.isDirty = runtime.stopped`, so that the
         // runner itself can set the value on a success if needed, and it won't be overridden here
         // (useful if a valid "play" is still considered dirty when a validation exists...).
-        if(!runtime || runtime.stopped){
+        if(!runtime || runtime.stopped || runningMan.isPlaying && wasDirty){
           this.makeDirty()
+        }
+
+        // AFTER updating isDirty, remove the validation button border if the current execution
+        // is a validation:
+        if(runningMan.isValidating){
+          this._getJValidationButton().removeClass("dirty-validation")
         }
 
         if(runtime){
@@ -307,7 +317,7 @@ class PyodideSectionsRunnerBase {
         }
         this.running = undefined
       }
-    })
+    }, RUNNERS_MANAGER, this)
   }
 
 
@@ -317,8 +327,13 @@ class PyodideSectionsRunnerBase {
   /**Build the default configuration runtime to use to run the user's code.
    * */
   setupGlobalConfig(){
-    CONFIG.runningId = this.id
-    CONFIG.running   = this.running.name
+    CONFIG.runningInfos = {
+      action: this.running.name,
+      htmlId: this.id,
+      attemptsLeft: this.data.attempts_left,
+      errorMsg: "",
+    }
+
     for(const prop of 'get del set keys'.split(' ')){
       const globName = prop+'Storage'
       const method   = `pyodide${ _.capitalize(prop) }Storage`
@@ -341,7 +356,9 @@ class PyodideSectionsRunnerBase {
   pyodideDelStorage(key)  { noStorage() }   // sink
 
 
-  makeDirty(){ throw new Error('Not implemented') } // sink
+  resetElement(){}    // sink
+
+  makeDirty(){ throw new Error('Not implemented') } // sink with security
 
   /**Lock the terminal (if any) */
   lockDisplay(){}     // sink
@@ -443,6 +460,8 @@ class PyodideSectionsRunnerBase {
           code,
           purgeTrace: runtime.purgeStackTrace,
           autoAssertExtraction: runtime.autoLogAssert,
+          purgeAssertionTrace: this.removeAssertionsStacktrace, // This is independent of the step running => not
+                                                                // tide to `runtime`, but directly to the runner.
         },
         asyncSecrets: testsStep === CONFIG.section.secrets,
         method: async (ctx)=>{
@@ -475,7 +494,7 @@ class PyodideSectionsRunnerBase {
     LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - PyodideSectionsRunner teardownRuntime")
 
     await runtime.runWithCtx('post')
-    await this.handleMermaids(runtime)
+    this.renderPyodideGeneratedMermaids(runtime)
     await this._baseTeardownRuntime(runtime)
   }
 
@@ -487,7 +506,7 @@ class PyodideSectionsRunnerBase {
 
 
 
-  async handleMermaids(runtime){
+  renderPyodideGeneratedMermaids(runtime){
     LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - teardown mermaid")
 
     if(!CONFIG.needMermaid || !CONFIG.calledMermaid){
@@ -500,12 +519,26 @@ class PyodideSectionsRunnerBase {
         +'Please contact the author of the exercice.'
       )
     }
-    try{
-      await mermaid.run()
-      // mermaid.run systematically throws an error, even on valid graphs...
-      // Worse: If mermaid.run({suppressErrors:true}) is used, nothing is rendered at all...
-      //        (I love JS...)
-    }catch(e){}
+    renderMermaidGraphs()
+  }
+
+
+
+  /**Setup the pyodide environment so that requests to relative urls are automatically redirected
+   * to the correct (original) locations, and setup various sinks to avoids DOM interactions to
+   * fail, typically when trying to update img tags through `PyodidePlot` or `mermaid_figure`.
+   *
+   * @withJsMock: if true, any access to a property of the js module other than
+   *
+   * NOTE: this may be run outside of the usual runtime logistic, so no @auto_run decorator used.
+   * */
+  setupFetchers(url, withJsMock){
+    pyodideFeatureSetupRedirections(url, withJsMock)
+  }
+
+
+  teardownFetchers(){
+    pyodide.runPython("teardown_url_redirections()")
   }
 }
 
@@ -531,7 +564,7 @@ class PyodideSequentialRunner extends PyodideSectionsRunnerBase {
     super(id)
 
     this.rotateTerminalMessage = true
-    this.isDirty = true         // Tell if the last run wa successful or not, or if the content has been modified
+    this.isDirty = true         // Tell if the last run was successful or not, or if the content has been modified
                                 // without being run (handled unconditionally for all elements, even if they aren't
                                 // "in sequential run". The RUNNERS_MANAGER handles what is actually to be run or not).
   }
@@ -540,6 +573,11 @@ class PyodideSequentialRunner extends PyodideSectionsRunnerBase {
   makeDirty(isDirty=true){
     this.isDirty = isDirty
     RUNNERS_MANAGER.overridePriorityElement(this)
+  }
+
+  resetElement(){
+    super.resetElement()
+    this.makeDirty()
   }
 
 

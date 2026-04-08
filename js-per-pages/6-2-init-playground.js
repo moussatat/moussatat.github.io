@@ -17,23 +17,25 @@ along with this program.
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-.history-box {
-  --hist-size: 20px;
-  position: absolute;
-  left: 50%;
-  bottom: 50%;
-  z-index: 4;   /* above bare tooltips */
-  background: var(--main-theme);
-  border-radius: 10px;
-  padding: var(--hist-size);
-  display: grid;
-  grid-auto-rows: 1fr;
-  gap: calc(var(--hist-size) / 1.6);
-  cursor: auto;
-  font-size: 90%;
-}
-.history-btn {
-  width: max-content;
-  padding: 2px 8px;
-  cursor: pointer;
-}
+
+import { getIdeOptions } from 'functools'
+import { chaining } from 'subscriptions'    // Enforce proper imports resolution order
+
+const options = getIdeOptions()
+$('.dev-sandbox').each(function(){
+  const editor = ace.edit(this.id, options);
+
+  editor.commands.bindKey(
+    { win: "Ctrl-Space", mac: "Cmd-Space" }, "startAutocomplete"
+  )
+  editor.commands.addCommand({
+    name: "runPublicTests",
+    bindKey: { win: "Ctrl-S", mac: "Cmd-S" },
+    exec: ()=>runPlay(),
+  })
+  editor.commands.addCommand({
+    name: "runValidationTests",
+    bindKey: { win: "Ctrl-Enter", mac: "Cmd-Enter" },
+    exec: ()=>runValidation(),
+  })
+})

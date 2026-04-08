@@ -26,8 +26,32 @@ import {
   waitForPyodideReady,
   RunningProfile,
 } from 'functools'
-import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
+import { clearPyodideScope, pyodideFeatureSetupRedirections } from '0-generic-python-snippets-pyodide'
 import { IdeRunner } from '4-ideRunner-ide'
+
+
+
+const TEST_OUTCOME = Object.freeze([CONFIG.qcm.failTest, CONFIG.qcm.passBad, CONFIG.qcm.ok, CONFIG.qcm.failOk])
+
+
+
+const confWithProxy=(conf, parent=undefined)=>{
+  return new Proxy(conf, {
+    get(o, prop, prox){
+      switch(prop){
+        case "__conf_updated": return o.__conf_updated      // No proxy transmission here...
+        case "isIde":          return !parent
+        case "hasSubCases":    return !parent && Boolean(o.subcases.length)
+        default:               return o[prop] ?? (parent && parent[prop])
+      }
+    },
+    has(o, prop){
+      return (prop in o) || Boolean(parent) && (prop in parent)
+    }
+  })
+}
+
+
 
 
 
@@ -36,185 +60,91 @@ import { IdeRunner } from '4-ideRunner-ide'
 
 class IdeTesterGuiManager extends IdeRunner {
 
+
+  /**Dedicated getter to unify this.assertions implementation.
+   * */
+  get revealCorrRems(){ return this.conf.reveal_corr_rems }
+
+
   constructor(editorId){
     super(editorId)
     this.globalTestsJq = $("#py_mk_test_global_wrapper")
     this.delay       = 0     // Override: no pause when starting the executions
     this.conf        = null
     this.testing     = false
-    this.toSwap      = [this.data, ()=>""] // nothing to swap...
-    this.ides_cache  = {}
-    this.test_cases  = []   // List[conf]: Linearized version of CASES_DATA
+    this.toSwap      = [this.data, ()=>""]      // nothing to swap, by default...
+    this.ides_cache  = {}                       // To cache the URL requests
+    this.test_cases  = []                       // All the Conf/ConfProxy objects for all the tests (in order)
     this.std_capture = []   // Full stdout+stdErr capture. Considering jQTerm formatting:
                             //    * any content coming from pyodide stdout is NOT FORMATTED YET
                             //    * any content coming from JS logistic IS ALREADY FORMATTED.
-    this.counters    = {skip:0, remaining:0, failed:0, success:0}
     this.stopTests   = false
     this.fullCode    = ""   // Initial loaded code (associated to one conf/test)
+
+    this._extractJsData()
   }
 
 
-  // @Override
-  announceCodeChangeBasedOnSrcHash(){}
+  _extractJsData(){
+    const test_cases = decompressAndConvert(CASES_DATA)
+    const debug = []
 
+    // Linearize test_cases and build all proxies:
+    for(const ideConf of test_cases){
 
-  // @Override
-  build(){
-    super.build()
+      const proxIde = confWithProxy(ideConf)
+      this._finalizeConf(proxIde)
+      this.test_cases.push(proxIde)
+      debug.push([ideConf, proxIde])
 
-    this.finalizeFilters()
-    this.finalizeControllers()
-
-    // Configure all the tests before the counters, so that counts are up to date
-    const confsArr = Object.values(CASES_DATA)
-    confsArr.forEach( conf=>this.setupOneConfCaseAndAllSubcases(conf) )
-
-    this.finalizeCounters(confsArr.length, this.test_cases.length)
-  }
-
-
-
-  finalizeFilters(){
-    const ideThis = this
-    $(".filter-btn").each(function(){
-
-      const jBtn = $(this)
-      const kind = this.id.split('-')[1]
-      ideThis.globalTestsJq.css(`--display-${ kind }`, 'unset')
-
-      jBtn.find(".status_filter").html(CONFIG.QCM_SVG).addClass([CONFIG.qcm.multi, kind])
-
-      jBtn.on('click', function(){
-        const state = 1 ^ +jBtn.attr('state')
-        jBtn.attr('state', state)
-        ideThis.globalTestsJq.css(`--display-${ kind }`, state?'unset':'none')
+      const subcases = ideConf.subcases??[]
+      subcases.forEach( (sub,i)=>{
+        const proxSub = confWithProxy(sub, ideConf)
+        this._finalizeConf(proxSub, i)
+        this.test_cases.push(proxSub)
+        debug.push([sub, proxSub])
       })
-    })
-  }
-
-
-
-  finalizeControllers(){
-
-    // configure "run all" and "stop" buttons:
-    this.global.parent()
-               .find('button[btn_kind=test_ides]')
-               .on('click', ()=>this.runAllTests())
-               .parent()
-               .find('button[btn_kind=test_stop]')
-               .on('click', ()=>{ this.stopTests=true })
-
-
-    // Configure global buttons (select-all, unselect-all):
-    ;[ [false, ''], [true, 'un'] ].forEach(([state,prefix])=>{
-      $(`button#${ prefix }select-all`).on('click', _=>{
-        this.test_cases.forEach(o=>{
-          o.skip = state
-          this.setSvgAndCounters(o, prefix+'checked')
-        })
-        this.displayCounters()
-      })
-    })
-
-    // Configure 'human" global button:
-    $(`button#toggle-human`).on('click', _=>{
-      this.test_cases.forEach(o=>{
-        if(!o.human) return;
-        o.skip = !o.skip
-        this.setSvgAndCounters(o, o.skip?CONFIG.qcm.unchecked:CONFIG.qcm.checked)
-      })
-      this.displayCounters()
-    })
-  }
-
-
-
-  setupOneConfCaseAndAllSubcases(conf){
-    const batchOfTests = []
-
-    if(!conf.subcases){
-      // Simple case (one test only):
-      this.registerOneTestAndSetupUI(conf, batchOfTests)
-
-    }else{
-      // If subcases are defined:
-      const propsToReport = 'editor_id ide_link ide_name page_url rel_dir_url'.split(' ')
-      conf.subcases.forEach( (subConf, i)=>{
-        if(i) subConf.no_clear ??= true            // Keep original choice
-        for(const prop of propsToReport){
-          subConf[prop] = conf[prop]
-        }
-        this.registerOneTestAndSetupUI(subConf, batchOfTests, i+1)
-
-        // Bind subcases "play" buttons: "run all subcases until this one"
-        $(`#play${i+1}-${ conf.editor_id } > button[btn_kind=test_1_ide]`).on(
-          'click', ((targets)=>()=>this.runAllTests(targets, true))(batchOfTests.slice())
-        )
-        $(`#play${i+1}-${ conf.editor_id } > button[btn_kind=load_ide]`).on(
-          'click', this.loadFactory(conf)
-        )
-      })
+      if(CONFIG._devMode){
+        window._CASES_DATA = debug
+      }
     }
-
-    // Bind the top level case buttons:
-    $(`#test-btns-${ conf.editor_id } > button[btn_kind=test_1_ide]`).on(
-      'click', ()=>this.runAllTests(batchOfTests, true)
-    )
-    $(`#test-btns-${ conf.editor_id } > button[btn_kind=load_ide]`).on(
-      'click', this.loadFactory(conf)
-    )
   }
-
-
-  registerOneTestAndSetupUI(conf, batchOfTests, tailId=""){
-
-    this.test_cases.push(conf)
-    batchOfTests.push(conf)
-
-    this.testConfStandardization(conf, tailId)
-
-    const [countProp, setupClass] = conf.skip ? ['skip',      CONFIG.qcm.unchecked]
-                                              : ['remaining', CONFIG.qcm.checked]
-    this.counters[countProp]++
-
-    const jDiv = $(conf.divSvgBtnsId)
-      .html(CONFIG.QCM_SVG)
-      .addClass([ 'multi', setupClass])
-      .on( 'click', _=>{
-        if(this.testing) return;
-        this.setSvgAndCounters(conf, conf.skip ? CONFIG.qcm.checked : CONFIG.qcm.unchecked)
-        this.displayCounters()
-      })
-    this.updateItemVar(jDiv, setupClass)
-  }
-
-
 
   /**Initial conversion steps, to finalize the python->JS transfer of the tests data.
+   * Also define composed values that are specific to this tests.
+   *
+   * WARNING: these composed values MUST NEVER override some original properties, otherwise the
+   * finalization of the parent may occasionally mess up the finalization of some of the children.
    * */
-  testConfStandardization(conf, tailId){
+  _finalizeConf(conf, iCase=null){
+    conf.doFail = Boolean(conf.fail || conf.in_error_msg || conf.not_in_error_msg)
+    conf.doSkip = Boolean(conf.skip || conf.human)
+    conf.reveal_corr_rems = false
 
-    conf.divSvgBtnsId = `#status${ tailId }-${ conf.editor_id }`
-
-    conf.fail = Boolean( conf.fail || conf.in_error_msg || conf.not_in_error_msg )
-    conf.skip = Boolean( conf.skip || conf.human )
-
-    // `reveal_corr_rems:undefined` means this won't be tested:
-    if('reveal_corr_rems' in conf){
-      conf.reveal_corr_rems = Boolean(conf.reveal_corr_rems)
+    if(iCase!==null && iCase>0){
+      conf.no_clear ??= true
     }
-    // Initialize the test state flag (to know if it has been done in the tests or not):
-    conf.revealedCorrRems = false
 
-    ;'std_capture_regex not_std_capture_regex'.split(' ').forEach( prop=>{
+    // Convert regexps patterns to RegExp objects:
+    const regexps = 'std_capture_regex not_std_capture_regex'.split(' ')
+    regexps.forEach( prop=>{
       try{
-        if(conf[prop]) conf[prop] = new RegExp(conf[prop], 'si')
+        // Warning: subcases may hold an empty string that is cancelling the use of the parent
+        // pattern. In that case, keep the empty string instead of a RegExp, to avoid applying
+        // the regexp check of the parent on the child test:
+        const pattern = conf[prop]
+        if(typeof(pattern)=='string'){
+          conf[prop] = pattern && new RegExp(pattern, 'si')
+        }
       }catch(e){
         throw new PythonError(`Invalid Regex generation for ${ prop }, using ${ conf[prop] }`)
       }
     })
 
-    conf.assertions = !conf.assertions ? [] : conf.assertions.split(' ').map(rule=>{
+    if(Array.isArray(conf.assertions)) return;
+
+    // Convert assertions string to a list of predicates:
+    conf.assertions = conf.assertions && conf.assertions.split(' ').map(rule=>{
       const prop = _.camelCase( rule.replace(/^!/, '') )
       const revExpected = rule.startsWith('!')  // Reversing to enforce booleans everywhere
       return (obj) =>{
@@ -224,49 +154,203 @@ class IdeTesterGuiManager extends IdeRunner {
     })
   }
 
+  // @Override
+  announceCodeChangeBasedOnSrcHash(){}
 
 
+  // @Override
+  build(){
+    super.build()
+    const playBtns = $(".py_mk_test_element > [btn_kind=test_1_ide]")
 
-  finalizeCounters(nIdes, nTests){
-    // Finalize and display initial counters state, once all the tests have been registered:
-    const allHtml = nTests==nIdes ? nIdes : `${ nIdes }<br>(${ nTests } cases)`
-    $('#cnt-all').html(allHtml)
-    this.displayCounters()
+    this.bindLoadButtons(playBtns)
+    this.bindPlayButtons(playBtns, this)
+    this.bindDivSvgCheckboxesAndFillConfs(playBtns, this)
+    const updateIdesVisibility = this.buildIdeRowVisibilityUpdateRoutine(playBtns, this)
+    this.bindFilters(updateIdesVisibility, this)
+    this.bindGlobalPlayStopButtons()
+    this.bindGlobalSelectorButtons(updateIdesVisibility)
+  }
+
+  bindLoadButtons(playBtns){
+    // Bind load buttons (if they exist):
+    playBtns.prev("[btn_kind=load_ide]").on('click', async (e)=>{
+      if(this.testing) return;    // Deactivated during tests (otherwise, big troubles...)
+
+      // Do NOT use the pyodideAsyncLock utility here, so that the call is just cancelled
+      // if occurring during a test session (see above), instead of being delayed until
+      // the tests are done.
+      await waitForPyodideReady()
+
+      const plyBtn = $(e.currentTarget).next()
+      const iIde   = +plyBtn.data('iIde')
+      this.conf    = this.test_cases[iIde]
+      this.data    = await this.getIdeData(this.conf)   // Update first (see getters)
+
+      this.getCodeToTest =()=> this.editor.getSession().getValue()
+      this.applyCodeToEditorAndSave(this.conf.loadedCode)
+      this._applyConfAndData(true)
+    })
   }
 
 
-  updateItemVar(jDivSvg, kind){
-    const itemVar = jDivSvg.attr('itemVar')
-    this.globalTestsJq.css(itemVar, `var(--display-${ kind })`)
+  bindPlayButtons(playBtns, ideThis){
+    playBtns.on('click', async function(){
+      const iIde    = +this.dataset.iIde
+      const iRow    = +this.dataset.iRow
+      const confIde = ideThis.test_cases[iIde]
+      const conf    = ideThis.test_cases[iRow]
+      const iLast   = conf.hasSubCases ? iIde+confIde.subcases.length : iRow
+      await ideThis.runAllTests(iIde, iLast+1, true)
+    })
+  }
+
+  bindDivSvgCheckboxesAndFillConfs(playBtns, ideThis){
+
+    const iRowOnPlayBtnFromSvgDiv =(jSvgDiv)=> +jSvgDiv.parent().next().find('[btn_kind=test_1_ide]').data('iRow')
+
+    // Associate the jSvg holders with the related conf object:
+    const svgDivs = playBtns.parent().prev().find('[data-state]')
+    svgDivs.on('click', (e)=>{
+      const jSvg = e.currentTarget
+      const iRow   = iRowOnPlayBtnFromSvgDiv($(jSvg))
+      const conf   = this.test_cases[iRow]
+      this.setSvgAndCounters(conf)
+    })
+
+    // Assign iRow values and archive the related jDiv holding the svg for each test/conf:
+    svgDivs.each(function(){
+      const jSvgDiv = $(this)
+      const iRow    = iRowOnPlayBtnFromSvgDiv(jSvgDiv)
+      const conf    = ideThis.test_cases[iRow]
+      conf.jSvg   = jSvgDiv
+      conf.iRow     = iRow
+    })
+  }
+
+  buildIdeRowVisibilityUpdateRoutine(playBtns, ideThis){
+    const playBtnsArr = [...playBtns].map(o=>$(o))
+    const idesWithChildren = [];
+    _.zip(this.test_cases, playBtnsArr).forEach( ([conf, jDiv], iRow) => {
+      if(conf.hasSubCases){
+        idesWithChildren.push( [jDiv, playBtnsArr.slice(iRow+1, iRow+1+conf.subcases.length)] )
+      }
+    })
+
+    const updateIdesVisibility=()=>{
+      idesWithChildren.forEach(([jIde, jChildren])=>{
+        const visible = jChildren.some(jDiv=>jDiv.css('display')!='none')
+        ideThis.globalTestsJq.css(`--item-${ jIde[0].dataset.iRow }`, visible ? 'unset':'none')
+      })
+    }
+    return updateIdesVisibility
+  }
+
+  bindFilters(updateIdesVisibility, ideThis){
+    $(".filter-btn").on('click', function(){
+      const active = 1 ^ +this.getAttribute('active')
+      this.setAttribute('active', active)
+      for(const state of this.dataset.states.split('|')){
+        ideThis.globalTestsJq.css(`--display-${ state }`, active?'unset':'none')
+      }
+      updateIdesVisibility()
+    })
+  }
+
+  bindGlobalPlayStopButtons(){
+    // Configure "run all" and "stop" buttons:
+    this.global.parent()
+               .find('button[btn_kind=test_ides]')
+               .on('click', ()=>{ this.runAllTests() })
+               .parent()
+               .find('button[btn_kind=test_stop]')
+               .on('click', ()=>{ this.stopTests=true })
+  }
+
+  bindGlobalSelectorButtons(updateIdesVisibility){
+
+    // Configure global buttons (select-all, unselect-all):
+    ;[
+      [false, ''],
+      [true, 'un']
+    ].forEach( ([skipped,prefix]) => {
+      $(`button#${ prefix }select-all`).on('click', _=>{
+        this.test_cases.forEach(conf=>{
+          if(conf.hasSubCases) return;
+          conf.doSkip = skipped
+          this.setSvgAndCounters(conf, prefix+'checked', false)
+        })
+        this._updateCounters()
+        updateIdesVisibility()
+      })
+    })
+
+    // Configure "human" toggle button:
+    $(`button#toggle-human`).on('click', _=>{
+      this.test_cases.forEach(conf=>{
+        if(!conf.human || conf.hasSubCases) return;
+        conf.doSkip = !conf.doSkip
+        const state = conf.doSkip ? CONFIG.qcm.unchecked : CONFIG.qcm.checked
+        this.setSvgAndCounters(conf, state, false)
+      })
+      this._updateCounters()
+      updateIdesVisibility()
+    })
+  }
+
+
+
+  updateDisplayCssVar(conf, state){
+    this.globalTestsJq.css(`--item-${ conf.iRow }`, `var(--display-${ state })`)
   }
 
 
 
   /**Update the html class of the svg container with the given id.
+   * If @newState is null, automatically toggle the current element, based on the current conf.doSkip value.
    * */
-  setSvgAndCounters(conf, kls){
-    const jDiv = $(conf.divSvgBtnsId)
-    this.updateItemVar(jDiv, kls)
-    this.updateCountersFor(jDiv, -1)
-    jDiv.removeClass(CONFIG.qcm_clean_up)
-    jDiv.addClass(kls)
-    this.updateCountersFor(jDiv, +1)
-    conf.skip = jDiv.hasClass(CONFIG.qcm.unchecked)
+  setSvgAndCounters(conf, newState=null, updateCounters=true){
+    if(!newState){
+      // swapping the state:
+      newState = conf.doSkip ? CONFIG.qcm.checked : CONFIG.qcm.unchecked
+    }
+    this.updateDisplayCssVar(conf, newState)
+    if(updateCounters) this.updateCounter(conf.jSvg.attr('data-state'), -1)
+    conf.jSvg.attr('data-state', newState)
+    if(updateCounters) this.updateCounter(newState, +1)
+    conf.doSkip = newState==CONFIG.qcm.unchecked
   }
 
 
-  updateCountersFor(jDiv, delta){
-    if(jDiv.hasClass(CONFIG.qcm.ok))        this.counters.success   += delta
-    if(jDiv.hasClass(CONFIG.qcm.wrong))     this.counters.failed    += delta
-    if(jDiv.hasClass(CONFIG.qcm.checked))   this.counters.remaining += delta
-    if(jDiv.hasClass(CONFIG.qcm.unchecked)) this.counters.skip      += delta
+  updateCounter(state, delta){
+    let cntProp = this.getCounterProp(state)
+    const cnt = $("#cnt-"+cntProp)
+    cnt.text( +cnt.text() + delta )
+  }
+
+  getCounterProp(state){
+    switch(state){
+      case CONFIG.qcm.ok:
+      case CONFIG.qcm.failOk:   return "success"
+      case CONFIG.qcm.failTest:
+      case CONFIG.qcm.passBad:  return "failed"
+    }
+    return state
   }
 
 
-  /**Update the values of each counter.
+  /**Update the values of each counter, after a global update, analyzing the states of all confs.
    * */
-  displayCounters(){
-    Object.entries(this.counters).forEach( ([cnt,n])=>{ $('#cnt-'+cnt).text(n) })
+  _updateCounters(){
+    const counts = { checked:0, unchecked:0, success:0, failed:0 }
+    this.test_cases.forEach(conf=>{
+      if(conf.hasSubCases) return;
+      const state = conf.jSvg.attr('data-state')
+      counts[ this.getCounterProp(state) ]++
+    })
+    for(const prop in counts){
+      $("#cnt-"+prop).text(counts[prop])
+    }
   }
 
 
@@ -278,8 +362,8 @@ class IdeTesterGuiManager extends IdeRunner {
   }
 
 
-  swapConfAndData(data=undefined, codeGetter=undefined){
-    if(data!==undefined){
+  swapConfAndData(data=null, codeGetter=null){
+    if(data!==null){
       this.toSwap = [ data, codeGetter ]
     }
     ;[this.data, this.toSwap[0]]          = [this.toSwap[0], this.data]
@@ -293,35 +377,13 @@ class IdeTesterGuiManager extends IdeRunner {
     super.terminalDisplayOnIdeStart()
   }
 
-  announceTest(clearFromTerm){
+  announceTest(clearTerm){
     if(this.testing){
-      if(clearFromTerm) this.terminal.clear()
+      if(clearTerm) this.terminal.clear()
       this.terminal.echo(`Testing: ${ this.conf.ide_name }`)
     }
   }
 
-
-
-  /**Runtime to apply when clicking on a button to "download" all the code of an
-   * IDE in the testing one.
-   * */
-  loadFactory(conf){
-    return async ()=>{
-      if(this.testing) return;    // Deactivated during tests (otherwise, big troubles...)
-
-      // Do NOT use the pyodideAsyncLock utility here, so that the call is just cancelled
-      // if occurring during a test session (see above), instead of being delayed until
-      // the tests are done.
-      await waitForPyodideReady()
-
-      this.conf = conf
-      this.data = await this.getIdeData(conf)   // Update first (see getters)
-
-      this.getCodeToTest =()=> this.editor.getSession().getValue()
-      this.applyCodeToEditorAndSave(conf.loadedCode)
-      this._applyConfAndData(true)
-    }
-  }
 
   // @Override
   /**Reset the content of the editor to its initial content, and reset the localStorage for
@@ -342,9 +404,16 @@ class IdeTesterGuiManager extends IdeRunner {
 
   _applyConfAndData(onLoad=false){
 
+    // Always reset the "done" state, to make tests independent of each others.
+    this.storage.done = 0
+    if('done' in this.conf){
+      this.storage.done = this.conf.done
+    }
+    this.updateValidationBtnColor()
+
     const hasSetMaxHide = 'set_max_and_hide' in this.conf
     if(onLoad || hasSetMaxHide){
-      this.conf.revealedCorrRems = false
+      this.conf.reveal_corr_rems = false
       this.hiddenDivContent      = true
       this.srcAttemptsLeft       = hasSetMaxHide ? this.conf.set_max_and_hide
                                                  : this.conf.srcAttemptsLeft
@@ -356,7 +425,7 @@ class IdeTesterGuiManager extends IdeRunner {
 
     this.setAttemptsCounter(this.attemptsLeft, true)
     this._clearStateIfNeededAndReinit(onLoad)
-    this.setupFetchers()
+    this.setupFetchers(this.conf.rel_dir_url, true)
     this.clearLibsIfNeeded()
   }
 
@@ -373,10 +442,7 @@ class IdeTesterGuiManager extends IdeRunner {
 
   save(_){}
 
-
-  async runAllTests(targets, forceRun=false){ throw new Error('Not implemented') }
-  setupFetchers(){ throw new Error('Not implemented') }
-  clearLibsIfNeeded(){ throw new Error('Not implemented') }
+  async runAllTests(start, end, forceRun=false){ throw new Error('Not implemented') }
 
 
 
@@ -398,13 +464,7 @@ class IdeTesterGuiManager extends IdeRunner {
       const configs  = decompressAndConvert(fix_comp)
 
       Object.entries(configs).forEach( ([editor,data])=>{
-        // WARNING, the conf object matches only ONE of the data extracted from one page, so the
-        // data object cannot be updated right away with decrease_attempts_on_user_code_failure
-        // and so on...
-        conf._profile = data.profile
-        if(!conf.keep_profile) data.profile = null   // Remove profile info for tests (by default).
-
-        this.ides_cache[editor] = this._prepareData(data)
+        this.ides_cache[editor] = this._dataPostConversion(data)
       })
     }
 
@@ -418,7 +478,7 @@ class IdeTesterGuiManager extends IdeRunner {
     )
 
     // Update the global values, once only:
-    if(!conf.__conf_updated){
+    if(1 || !conf.__conf_updated){
       conf.__conf_updated = 1
 
       ;`decrease_attempts_on_user_code_failure
@@ -451,7 +511,6 @@ class IdeTesterGuiManager extends IdeRunner {
       conf.loadedCode    = codeToTest.trim() + commented
     }
 
-
     // Send back a copy, to allow runtime mutation while keeping a clean initial state
     // (no need for a deep copy, so far...)
     const freshData = {...data}
@@ -465,7 +524,7 @@ class IdeTesterGuiManager extends IdeRunner {
   /**Build a sub section of the original python file.
    * */
   _toSection(py_section, content){
-    return content && `\n\n# --- PYODIDE:${ py_section } --- #\n${ content }`
+    return content && `\n\n# --- PMT:${ py_section } --- #\n${ content }`
   }
 
 }
@@ -499,7 +558,7 @@ export class IdeTester extends IdeTesterGuiManager {
   }
 
 
-  async runAllTests(targets, forceRun=false){
+  async runAllTests(start, end, forceRun=false){
     if(this.testing) return;
 
     // Do NOT use the pyodideAsyncLock utility here, so that the call is just cancelled if
@@ -511,26 +570,25 @@ export class IdeTester extends IdeTesterGuiManager {
     await waitForPyodideReady()
 
     this.terminal.clear()
-    const start    = Date.now()
-    this.testing   = true
-    this.stopTests = false
+    const startTime = Date.now()
+    this.testing    = true
+    this.stopTests  = false
 
-    const confsToRun = (targets ?? this.test_cases).filter( conf =>{
-      const skipped = (!targets || !forceRun) && conf.skip
-      if(!skipped){
-        this.setSvgAndCounters(conf, CONFIG.qcm.checked)
-      }
-      return !skipped
-    })
-
-    this.displayCounters()
+    start ??= 0
+    end ??= this.test_cases.length
 
     /* Running everything in order: it's actually a bit faster (probably because not queueing again
        and again while waiting in getIdeData...?). So don't bother with Promise.all anymore...  */
     let errOrNull = null
     try{
-      for(const conf of confsToRun){
+      for(let i=start;i<end;i++){
         if(this.stopTests) break
+
+        const conf    = this.test_cases[i]
+        const skipped = conf.doSkip && !forceRun || conf.hasSubCases
+        if(skipped){
+          continue
+        }
 
         this.conf = conf
         LOGGER_CONFIG.ACTIVATE && jsLogger('[Testing] - start', conf.ide_name)
@@ -546,9 +604,9 @@ export class IdeTester extends IdeTesterGuiManager {
         LOGGER_CONFIG.ACTIVATE && jsLogger('[Testing] - done', conf.ide_name, '\n')
       }
     }catch(e){
-      errOrNull=e
+      errOrNull = e
     }finally{
-      this._endTests(start, errOrNull)
+      this._endTests(startTime, errOrNull)
     }
   }
 
@@ -598,24 +656,23 @@ export class IdeTester extends IdeTesterGuiManager {
     if(!this.testing) return;
 
     this.conf.attempts_end = this.attemptsLeft  // Store before swap
-    const testOutcome = this._analyzeTestOutcome(runtime)
+    const failedTestMsg    = this._analyzeTestOutcome(runtime)
 
-    const success     = !testOutcome
-    const classToBe   = !success        ? CONFIG.qcm.wrong
-                      : !this.conf.fail ? CONFIG.qcm.ok
-                                        : [CONFIG.qcm.ok,CONFIG.qcm.failOk]
-                                                      // warning: failOk always last!
+    const iClass   = 2 * !failedTestMsg + this.conf.doFail
+    const newState = TEST_OUTCOME[iClass]
+    this.setSvgAndCounters(this.conf, newState)
 
-    this.swapConfAndData()    // Has to always occur
-    this.teardownFetchers()   // Has to always occur
-
-    this.setSvgAndCounters(this.conf, classToBe)
-    this.displayCounters()
+    this.swapConfAndData()        // must always occur
+    this.teardownFetchers()       // Must always occur
     this.std_capture.length = 0   // Always...
 
-    if(testOutcome){
-      if(!runtime) throw new Error(testOutcome)
-      else         console.error(testOutcome)
+
+    if(failedTestMsg){
+      if(runtime){                      // Normal executions
+        console.error(failedTestMsg)
+      }else{
+        throw new Error(failedTestMsg)  // Something went wrong => will trigger BigFail
+      }
     }
   }
 
@@ -626,6 +683,7 @@ export class IdeTester extends IdeTesterGuiManager {
     await this.setupRuntimeTests()
     return await super.setupRuntimeIDE()
   }
+
   // @Override
   async teardownRuntimeIDE(runtime){
     try{
@@ -668,7 +726,7 @@ export class IdeTester extends IdeTesterGuiManager {
   // Override
   revealSolutionAndRems(){
     if(!this.conf) return;
-    this.conf.revealedCorrRems = true
+    this.conf.reveal_corr_rems = true
     this.hiddenDivContent = false      // Mimic actual behavior, logic-wise
   }
 
@@ -701,15 +759,7 @@ export class IdeTester extends IdeTesterGuiManager {
     }
 
 
-    if(('reveal_corr_rems' in this.conf)){
-      if(this.conf.reveal_corr_rems !== this.conf.revealedCorrRems) msg.push(
-        this.conf.reveal_corr_rems ? "Corr/REMs should have been revealed."
-                                   : "Corr/REMs should NOT have been revealed."
-      )
-    }
-
-
-    const failedAssertions = this.conf.assertions.map(check=>check(this)).join('')
+    const failedAssertions = (this.conf.assertions??[]).map(check=>check(this)).join('')
     if(failedAssertions) msg.push(failedAssertions)
 
 
@@ -737,7 +787,7 @@ export class IdeTester extends IdeTesterGuiManager {
     checkMessageInclusionOrMatch('not_std_capture_regex')
 
 
-    if(!msg.length && runtime.stopped === this.conf.fail){
+    if(!msg.length && runtime.stopped === this.conf.doFail){
       return ""
     }
     return this._formatErrMsgArray(runtime, msg)
@@ -754,97 +804,9 @@ ${ msg.join('\n') }`
   }
 
 
-
-  /**Setup the pyodide environment so that requests to relative urls are automatically redirected
-   * to the correct (original) locations, and setup various sinks to avoids DOM interactions to
-   * fail, typically when trying to update img tags through `PyodidePlot` or `mermaid_figure`.
-   * */
-  setupFetchers(){
-
-    CONFIG.relUrlRedirect = `${ CONFIG.baseUrl }/${ this.conf.rel_dir_url }/`.replace(/[/]{2}/g, '/')
-
-    pyodide.runPython(`
-
-def __hack_pyfetch():
-    import re, js
-    from functools import wraps
-    import pyodide.http as http
-
-    pure_pyfetch = http.pyfetch
-    pure_import  = __import__
-
-
-    @wraps(pure_pyfetch)
-    async def pyfetch(url, *a, **kw):
-        if isinstance(url,str) and not re.match(r'(https?|ftps?|file)://|www[.]', url):
-            url = js.config().relUrlRedirect + url
-        #print(url)
-        return await pure_pyfetch(url, *a, **kw)
-    http.pyfetch = pyfetch
-
-
-    async def fake_fetch(url, *a):
-        if isinstance(url,str) and not re.match(r'(https?|ftps?|file)://|www[.]', url):
-            url = js.config().relUrlRedirect + url
-        #print(url)
-        return await js.fetch(url, *a)
-
-
-    class JsMock(int):
-        """ Extends int so that computations when pyplot tries to update the DOM do not
-            crash (even if wrong)
-        """
-
-        # ASYNC_CALLS = set('uploaderAsync'.split())
-
-        def __getattr__(self, k):
-            if k=='fetch':  return fake_fetch
-
-            # if k in self.ASYNC_CALLS:  return self.async_sink_js
-
-            if self is sink_js or k in ('document',):
-                return sink_js
-            return getattr(js,k)
-
-        async def async_sink_js(self, *a,**kw):
-            return sink_js
-
-        def __call__(self, *a, **kw):
-            return sink_js
-
-        def __setattr__(self, k,v):
-            setattr(js, k, v)
-
-    fake_js = JsMock(1)
-    sink_js = JsMock(1)  # HAS to be another instance than fake_js!
-
-    def fake_import(name, *a, **kw):
-        if name == 'js':
-            return fake_js
-        return pure_import(name, *a, **kw)
-    __builtins__.__import__ = fake_import
-
-
-    def teardown_tests():
-        http.pyfetch = pure_pyfetch
-        __builtins__.__import__ = pure_import
-    __builtins__.teardown_tests = teardown_tests
-
-
-__hack_pyfetch()
-del __hack_pyfetch`)
-  }
-
-
-  teardownFetchers(){
-    CONFIG.relUrlRedirect = ''
-    pyodide.runPython("teardown_tests()")
-  }
-
-
   clearLibsIfNeeded(){
-    if(!this.conf.clear_libs) return
-    pyodide.runPython(`
+    if(this.conf.clear_libs){
+      pyodide.runPython(`
 def _hack_remove_libs():
     import sys, shutil
     from pathlib import Path
@@ -856,8 +818,8 @@ def _hack_remove_libs():
         if p.exists():
             shutil.rmtree(p)
 _hack_remove_libs()
-del _hack_remove_libs
-`)
+del _hack_remove_libs`)
+    }
   }
 }
 

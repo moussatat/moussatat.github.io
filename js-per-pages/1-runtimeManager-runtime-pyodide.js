@@ -66,6 +66,10 @@ class Ctx {
         code:                 runtime.runner[`${ section }Content`].trim(),
         keepRunningOnAssert:  section.startsWith('env'),
         method:               this.genericEnvSectionRunnerAsync,
+        logConfig: {
+          purgeAssertionTrace: runtime.runner.removeAssertionsStacktrace,
+          // This is independent of the step running => not tide to `runtime`, but directly to the runner.
+        }
       }
     }
 
@@ -95,7 +99,7 @@ class Ctx {
 
       qualname: `${ section || '?' }_${ ctx.method.name }`, // "qualified name" = section + method to run in the current action (debugging purpose)
       ...ctx,
-      section,                      // As in "PYODIDE:{section}", or "unknown" instead. Visible in the stacktrace on errors.
+      section,                      // As in "PMT:{section}", or "unknown" instead. Visible in the stacktrace on errors.
                                     // Always AFTER unpacking @ctx, because section either is consistent, or has been correctly updated.
     }
 
@@ -368,13 +372,14 @@ export class RuntimeManager {
     generateErrorLog(ctx)
 
     // If ever multiple errors happen, an assertion error will always be the very
-    // first one, so always keep if any (avoid the need to condition the update)
+    // first one, so always keep if any (avoid the need to use conditional updates)
     if(!this.gotBigFail){
       this.isAssertErr ||= ctx.isAssertErr
       this.stdErr        = ctx.stdErr
       this.gotBigFail    = ctx.gotBigFail
     }
     ctx.success = ctx.keepRunningOnAssert && ctx.isAssertErr
+    CONFIG.runningInfos.errorMsg ||= ctx.stdErr
   }
 }
 

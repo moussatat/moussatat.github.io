@@ -29,18 +29,18 @@ globalThis.LOGGER_CONFIG = {ACTIVATE:true, all:1}
 
 
 
-/**For backward compatibility, in case the user is still using the function from the original
- * synch implementation.
+/**Defined for backward compatibility, incase the user is still using the function from the
+ * original synch implementation of subscribeWhenReady.
  *
  * Facts:
  *  1. MathJax subscription is now done from the js-scripts/subscriptions.js module, so any
  *     call for mathjax coming from a user override is totally useless and can just be skipped.
- *  2. If ever another subscription is tried, just transmit the call to the module version
- *     directly, to unify the implementations/logics.
+ *  2. If ever another subscription is done, just directly transmit the call to the module
+ *     version, to unify the implementations/logics.
  * */
-function subscribeWhenReady(waitId, ...args){
+function subscribeWhenReady(subscriptionId, ...args){
 
-    if(waitId.toLowerCase() == 'mathjax'){
+    if(subscriptionId.toLowerCase() == 'mathjax'){
         // Make sure anything defined by the user won't ever have any effect (by contract, the
         // user should never have changed it, so I can do whatever I want about it... :p )
         window.mathJaxUpdate = function(){}
@@ -49,7 +49,7 @@ function subscribeWhenReady(waitId, ...args){
         // Any other subscription has to be transferred to the module version.
         // NOTE: anything relying on the returned value may break!
         import('functools').then(module=>{
-            module.subscribeWhenReady(waitId, ...args)
+            module.subscribeWhenReady(subscriptionId, ...args)
         })
     }
 

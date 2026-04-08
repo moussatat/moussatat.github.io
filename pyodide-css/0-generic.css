@@ -67,6 +67,9 @@ If not, see <https://www.gnu.org/licenses/>.
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+.md-typeset div.highlight {
+  display: grid;
+}
 
 /* Override */
 .md-typeset div.highlight code,
@@ -78,7 +81,7 @@ If not, see <https://www.gnu.org/licenses/>.
 [dir="ltr"] .md-header__source {
   margin-left: 0;
 }
-.md-typeset .highlighttable {  /* so that code blocks do not overflow from admonitions */
+.md-typeset .highlighttable, .md-typeset div.highlight > pre {  /* so that code blocks do not overflow from admonitions */
   overflow: auto;
 }
 
@@ -126,6 +129,10 @@ mais sans lien dessus */
   /* display: grid;  FIX - py_btn in span not working anymore */
   cursor: pointer;
   align-items: center;
+  text-decoration: underline dashed gray;
+}
+.tooltip[data-tip-txt] {
+  cursor:unset;
 }
 
 .tooltip .tooltiptext code {
@@ -272,6 +279,15 @@ mais sans lien dessus */
 .p5_btns_wrapper.p5_top    { flex-direction: row; }
 .p5_btns_wrapper.p5_bottom { flex-direction: row; }
 
-.tooltip.p5-btn > img {
-  width: 24px;
+.tooltip.p5-btn > img { width: 24px; }
+
+
+#floating-tip { position: absolute; z-index: 1 }
+#floating-tip > span { visibility: unset; }
+
+
+input#playground-url {
+  border: 2px solid var(--main-theme);
+  width: 100%;
+  font-size: 1.1em;
 }

@@ -44,77 +44,87 @@ const CONFIG = {
        once this script got loaded */
     //JS_CONFIG_DUMP
     argsFigureDivId: null,
-    exportZipWithNames: null,
-    exportZipPrefix: null,
     baseUrl: null,
     buttonIconsDirectory: null,
     editorFontFamily: null,
     editorFontSize: null,
+    exportZipPrefix: null,
+    exportZipWithNames: null,
     inServe: null,
+    keyStrokesAutoSave: null,
     language: null,
     pmtUrl: null,
+    projectId: null,
+    projectMoveFromOldId: null,
+    projectNoJsWarning: null,
     pythonLibs: null,
     siteUrl: null,
     version: null,
     lang: {
-        tests: null,
+        allOthersTrash: null,
+        attemptsLeft: null,
+        check: null,
         comments: null,
-        splitScreen: null,
-        splitModePlaceholder: null,
-        fullScreen: null,
-        feedback: null,
-        wrapTerm: null,
-        runScript: null,
-        installStart: null,
-        installDone: null,
-        refresh: null,
-        validation: null,
+        complementTrash: null,
+        corr: null,
+        corrBtn: null,
+        delayedReveal: null,
+        download: null,
         editorCode: null,
-        publicTests: null,
-        secretTests: null,
-        successMsg: null,
-        successMsgNoTests: null,
-        unforgettable: null,
-        successHead: null,
-        successHeadExtra: null,
-        successTail: null,
         failHead: null,
+        failTail: null,
+        feedback: null,
+        figureAdmoTitle: null,
+        figureText: null,
+        fullScreen: null,
+        installDone: null,
+        installStart: null,
+        loadIde: null,
+        noCodesTrash: null,
+        p5Start: null,
+        p5Step: null,
+        p5Stop: null,
+        pickerFailure: null,
+        play: null,
+        publicTests: null,
+        pyBtn: null,
+        qcmCheckTip: null,
+        qcmMaskTip: null,
+        qcmRedoTip: null,
+        qcmTitle: null,
+        refresh: null,
+        rem: null,
+        removeTrash: null,
+        restart: null,
+        restartConfirm: null,
         revealCorr: null,
         revealJoin: null,
         revealRem: null,
-        failTail: null,
-        titleCorr: null,
-        titleRem: null,
-        corr: null,
-        rem: null,
-        pyBtn: null,
-        play: null,
-        check: null,
-        download: null,
-        upload: null,
-        restart: null,
-        restartConfirm: null,
+        runScript: null,
         save: null,
-        zip: null,
-        corrBtn: null,
+        secretTests: null,
         show: null,
-        attemptsLeft: null,
-        testsDone: null,
+        splitModePlaceholder: null,
+        splitScreen: null,
+        storageIdCollision: null,
+        successHead: null,
+        successHeadExtra: null,
+        successMsg: null,
+        successMsgNoTests: null,
+        successTail: null,
+        test1Ide: null,
         testIdes: null,
         testStop: null,
-        test1Ide: null,
-        loadIde: null,
-        qcmTitle: null,
-        qcmMaskTip: null,
-        qcmCheckTip: null,
-        qcmRedoTip: null,
+        tests: null,
+        testsDone: null,
         tipTrash: null,
-        figureAdmoTitle: null,
-        figureText: null,
-        p5Start: null,
-        p5Stop: null,
-        p5Step: null,
-        pickerFailure: null,
+        titleCorr: null,
+        titleRem: null,
+        unforgettable: null,
+        upload: null,
+        validation: null,
+        wrapTerm: null,
+        zip: null,
         zipAskForNames: null
 },
    //JS_CONFIG_DUMP
@@ -123,11 +133,21 @@ const CONFIG = {
     // automatic redirection for relative urls fetching:
     cutFeedback: null,
     relUrlRedirect : "",
-    running: null,          // Current running profile. Set through lockedRunnerWithBigFailWarningFactory.
-    runningId: null,        // html id of the current IDE, terminal or py_btn running
 
     termMessage: null,      // (key, msg, format=null) -> undefined
     loadIdeContent: null,   // (editorId, name, code) -> undefined (used for ZIP imports)
+
+
+    runningInfos: {
+      action: null,         // Current running profile. Set through lockedRunnerWithBigFailWarningFactory.
+      htmlId: null,         // html id of the current IDE, terminal or py_btn running.
+      attemptsLeft: null,   // number of attempts left for the current IDE.
+      errorMsg: "",         // First error message encountered in previous sections (updated once only, at the end of a section).
+    },
+
+    get running()       { return CONFIG.runningInfos.action },          // Backward compatibility
+    get runningId()     { return CONFIG.runningInfos.htmlId },          // Backward compatibility
+    get runningAttempt(){ return CONFIG.runningInfos.attemptsLeft },    // Backward compatibility
 
 
     /* Constants, to archive the  terminal, ace_editors, and all the PythonSectionRunner
@@ -142,12 +162,11 @@ const CONFIG = {
     INFINITY: "∞",
     LZW: '\x1e',
     pyodideDelay: 100,
-    ideKeyStrokesSave: 30,
     onDoneEvent: 'unload',
 
     // Various UI elements identifiers
     element: {
-      allEditors:      'editor_ tester_'.split(' '),
+      allEditors:      'editor_ tester_ playground_'.split(' '),
       searchBlock:     "div.md-search",
       searchBtnsLeft:  "#search-btns-left",
       searchBtnsRight: "#search-btns-right",
@@ -159,7 +178,6 @@ const CONFIG = {
       qcmCounterCls:   ".qcm-counter",
       qcmWrapper:      ".qcm_wrapper",
       testsResults:    "div.py_mk_tests_results",
-      testElement:     ".py_mk_test_element",
       trashCan:        "#trash-can-svg",
       aceSettings:     'div#ace_settingsmenu',
       aceF1Cmds:       'div.ace_prompt_container',
@@ -182,6 +200,7 @@ const CONFIG = {
     CLASSES_POOL: {
       GlobalRunnersManager: null,
       Ide: null,
+      IdePlayground: null,
       IdeTester: null,
       PyBtn: null,
       Qcm: null,
@@ -203,8 +222,7 @@ const CONFIG = {
 
     COMMENTED_PATTERN:  /(^\s*)(\S)(.?)/,
     MODULE_REG:         /File "<(env[^>]*|post[^>]*|exec|console)>", line (\d+)($|, in (?!redirect_cmd))/,
-    TRACE_REG:          /  File "(?:<env[^>]*>|<post[^>]*>|<exec>|<console>|\/lib\/python[^"]+)"/,
-    TRACE_NUM_LINE:     /File "<(?:env[^>]*|post[^>]*|exec|console)>", line (\d+)/,
+    TRACE_NUM_LINE:     / *File "([^"]+)", line (\d+)/,
 
     ESCAPE_SQ_B:        /\[|\]/g,
     UNESCAPE_SQ_B:      new RegExp(`${ SqBs.L }|${ SqBs.R }`, 'g'),
@@ -272,24 +290,22 @@ const CONFIG = {
     },
 
     QCM_SVG: `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-  <svg class="qcm" viewBox="0 0 12 12" role="img" version="1.1"
-    xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
-    style="stroke-width:1.25;stroke-linecap:round">
-    <path class="bgd-svg" style="fill:var(--qcm-fill);stroke:none;"
-      d="M 5.93,1.93 3.29,2.40 2.70,2.75 1.86,5.70 2.38,8.76 2.75,9.29 5.82,10.13 9.07,9.45 9.36,9.13 10.12,6.11 9.49,2.93 9.12,2.65 Z"></path>
-    <path class="tick"
-      style="display:var(--tick);fill:var(--qcm-light);stroke:var(--qcm-light);stroke-width:0;stroke-linecap:butt;stroke-linejoin:round"
-      d="M 6.34,8.49 C 6.49,7.32 7.07,5.36 9.05,4.06 L 8.93,3.91 C 7.13,4.50 6.38,5.52 5.63,7.03 5.36,6.61 3.91,5.92 3.47,5.86 L 3.32,6.00 C 4.41,6.54 5.06,7.30 5.63,8.77"></path>
-    <g style="display:var(--cross);fill:var(--qcm-light);stroke:var(--qcm-light)"
-      transform="matrix(0.91,0,0,0.91,0.52,0.52)">
+<svg class="qcm" viewBox="0 0 12 12" role="img" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
+  style="stroke-width:1.25;stroke-linecap:round">
+  <path class="bgd-svg" style="fill:var(--qcm-fill);stroke:none;" d="M 5.93,1.93 3.29,2.40 2.70,2.75 1.86,5.70 2.38,8.76 2.75,9.29 5.82,10.13 9.07,9.45 9.36,9.13 10.12,6.11 9.49,2.93 9.12,2.65 Z"></path>
+  <g style="fill:var(--qcm-light);stroke:var(--qcm-light)">
+    <path class="tick" style="display:var(--tick);stroke-width:0;stroke-linecap:butt;stroke-linejoin:round" d="M 6.34,8.49 C 6.49,7.32 7.07,5.36 9.05,4.06 L 8.93,3.91 C 7.13,4.50 6.38,5.52 5.63,7.03 5.36,6.61 3.91,5.92 3.47,5.86 L 3.32,6.00 C 4.41,6.54 5.06,7.30 5.63,8.77"></path>
+    <g style="display:var(--cross);" transform="matrix(0.91,0,0,0.91,0.52,0.52)">
       <rect width="8.33" height="0.59" x="-5.86" y="8.02" transform="rotate(-56.54)"></rect>
       <rect width="8.33" height="0.59" x="-12.47" y="-1.99" transform="matrix(-0.55,-0.83,-0.83,0.55,0,0)"></rect>
     </g>
-    <g style="fill:none;stroke:var(--qcm-border)">
+  </g>
+  <g style="fill:none;stroke:var(--qcm-border)">
     <circle style="display:var(--circle)" cy="6" cx="6" r="4.2"></circle>
     <rect style="display:var(--square)" class="square" width="7.41" height="7.36" x="2.29" y="2.32"></rect>
-    </g>
-  </svg>`,
+  </g>
+</svg>`,
 
   qcm: {
     checked:   "checked",
@@ -300,8 +316,10 @@ const CONFIG = {
     multi:     'multi',
     single:    'single',
     failOk:    'must-fail',
+    failTest:  'fail-test',
+    passBad:   'pass-bad',
   },
   qcm_clean_up: [
-    'checked', 'unchecked', 'correct', 'incorrect', 'must-fail'
+    'checked', 'unchecked', 'correct', 'incorrect', 'must-fail', 'fail-test', 'pass-bad'
   ],
 }

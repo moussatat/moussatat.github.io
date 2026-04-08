@@ -30,7 +30,7 @@ WARNING:  This file HAS to be loaded before the DOM is built, otherwise
 }
 
 
-.md-typeset div.py_mk_admonition_qcm.inner {
+.md-typeset .layout-qcm-wrapper .inner {
   text-align: justify;
   width: 100%;
   margin: 0;
@@ -43,7 +43,7 @@ WARNING:  This file HAS to be loaded before the DOM is built, otherwise
           Buttons and counter
 ---------------------------------------
 */
-.md-typeset div.py_mk_admonition_qcm .qcm_wrapper {
+.md-typeset .layout-qcm-wrapper .qcm_wrapper {
   display: flex;
   align-self: end;
   justify-self: end;
@@ -51,11 +51,11 @@ WARNING:  This file HAS to be loaded before the DOM is built, otherwise
   flex-direction: column;
   gap: 4px;
 }
-.md-typeset div.py_mk_admonition_qcm .qcm_wrapper > button {
+.md-typeset .layout-qcm-wrapper .qcm_wrapper > button {
   margin: auto;
 }
 
-.md-typeset .qcm_wrapper .qcm-counter {
+.md-typeset .layout-qcm-wrapper .qcm_wrapper .qcm-counter {
   text-align: center;
   justify-items: center;
   color: var(--main-theme);
@@ -80,14 +80,14 @@ WARNING:  This file HAS to be loaded before the DOM is built, otherwise
     grid-template-columns: 1fr;
     grid-template-rows: auto min-content;
   }
-  .md-typeset div.py_mk_admonition_qcm .qcm_wrapper {
+  .md-typeset .layout-qcm-wrapper .qcm_wrapper {
     flex-direction: row;
     width: unset;
   }
-  .md-typeset div.py_mk_admonition_qcm .qcm_wrapper > button {
+  .md-typeset .layout-qcm-wrapper .qcm_wrapper > button {
     margin: 4px;
   }
-  .md-typeset .qcm_wrapper .qcm-counter {
+  .md-typeset .layout-qcm-wrapper .qcm_wrapper .qcm-counter {
     margin: auto 4px;
   }
 }
@@ -164,31 +164,31 @@ svg.qcm {
   opacity: var(--opacity, 1);
 }
 
-.multi svg.qcm {
+.multi svg.qcm, svg.qcm[data-state=multi] {
   --circle:none;
   --square:unset;
 }
-.single svg.qcm {
+.single svg.qcm, svg.qcm[data-state=single] {
   --circle:unset;
   --square:none;
 }
 /* Override variables depending on the class of the parent item node */
-.correct svg.qcm {
+.correct svg.qcm, svg.qcm[data-state=correct] {
   --qcm-fill: #20A020;
   --tick:unset;
 }
-.missed svg.qcm {
+.missed svg.qcm, svg.qcm[data-state=missed] {
   --qcm-fill: red;
   --tick:unset;
 }
-.incorrect svg.qcm {
+.incorrect svg.qcm, svg.qcm[data-state=incorrect] {
   --qcm-fill: red;
   --cross:unset;
 }
-.unchecked svg.qcm {
+.unchecked svg.qcm, svg.qcm[data-state=unchecked] {
   --qcm-fill: none;
 }
-.checked svg.qcm {
+.checked svg.qcm, svg.qcm[data-state=checked] {
   --qcm-fill: var(--md-default-fg-color);
 }
 

@@ -46,13 +46,18 @@ class GlobalRunnersManagerBase {
 
   constructor(){
     this.allRunners = {}    // runnerId: runner instance
+    this.allowPrint = true  // Mutated from the runners instances... (see related getter+setter)
   }
 
   registerRunner(runner){
     this.allRunners[runner.id] = runner
+    runner._manager = this
   }
 
-  static _defineIdesManagerProxyLike(){   // Cap override
+  /**Define a global intermediate object transferring silently the calls to the "inner/hidden"
+   * RunnerManager, without exposing it directly.
+   */
+  static _defineIdesManagerProxyLike(){
 
     const IdesManagerClass = CONFIG.CLASSES_POOL.GlobalRunnersManager
     const IDE_MANAGER_SRC  = new IdesManagerClass()
@@ -91,7 +96,49 @@ class GlobalRunnersManagerBase {
 
 
 
-class GlobalSequentialRunner extends GlobalRunnersManagerBase {
+class GlobalAutoRunManager extends GlobalRunnersManagerBase {
+
+  constructor(){
+    super()
+    this.autoRuns = []      // Sparse defined (but values are actually contiguous except for index 0)
+    this.currentAutoRun = null
+  }
+
+  registerRunner(runner){     // Cap override
+    super.registerRunner(runner)
+    if(runner.autoRun){
+      this.autoRuns[runner.autoRun] = runner
+    }
+  }
+
+  async autoRunInOrder(){
+    for(const runner of this.autoRuns){
+      if(runner){         // 'of' extracts undefined for the empty slot at index 0.
+        this.currentAutoRun = runner
+        await runner.applyAutoRun()
+      }
+    }
+    this.autoRuns = []
+  }
+
+  /**Forbid executions of any runner, as long as all the autoRuns have been executed, EXCEPT if
+   * the runner asking for permission" is the one supposed to be run automatically.
+   * */
+  waitForAutoRunFinished(runner){
+    return this.autoRuns.length && this.currentAutoRun !== runner
+  }
+}
+
+
+
+
+
+
+
+
+
+
+class GlobalSequentialRunner extends GlobalAutoRunManager {
 
   constructor(){
     super()
@@ -101,7 +148,7 @@ class GlobalSequentialRunner extends GlobalRunnersManagerBase {
     // of the runners is not guaranteed. So rely on the ordering of the groups in the page.
   }
 
-  registerRunner(runner){
+  registerRunner(runner){     // Cap override
     super.registerRunner(runner)
 
     if(!runner.isInSequentialRun) return;
@@ -120,10 +167,10 @@ class GlobalSequentialRunner extends GlobalRunnersManagerBase {
     }
   }
 
-  overridePriorityElement(elt){
-    if(elt.isInSequentialRun){
-      const iGroup = elt.runGroup
-      this.priority[iGroup] = elt
+  overridePriorityElement(runner){
+    if(runner.isInSequentialRun){
+      const iGroup = runner.runGroup
+      this.priority[iGroup] = runner
     }
   }
 
@@ -146,7 +193,9 @@ class GlobalSequentialRunner extends GlobalRunnersManagerBase {
     const runningMan = RunningProfile.build(RunningProfile.PROFILE[actionProp])
     const useSequential = (
       sequentialRun && pyoRunner.isInSequentialRun && (
-        !pyoRunner.isIde || pyoRunner.isIde && runningMan.isChecking
+        !pyoRunner.isIde || pyoRunner.isIde && (
+          runningMan.isValidating || pyoRunner.seqPlay && runningMan.isPlaying
+        )
       )
     )
     if(!useSequential){
@@ -164,6 +213,7 @@ class GlobalSequentialRunner extends GlobalRunnersManagerBase {
       let previousRunner
 
       pyoRunner.running = runningMan    // Dirty override, but needed here or there... :rolleyes:
+      pyoRunner.allowPrint = !this.deactivateStdoutForSecrets   // Because always used for validations
       pyoRunner.lockDisplay()
       pyoRunner.setupTerminalMessageRoutine()
 
@@ -206,6 +256,7 @@ class GlobalSequentialRunner extends GlobalRunnersManagerBase {
 
       }finally{
         pyoRunner.unlockDisplay()
+        pyoRunner.allowPrint = true
 
         // Defensive programming: deactivate again, so that it's always done, even on JS errors.
         if(previousRunner) previousRunner.activateFocus(true)

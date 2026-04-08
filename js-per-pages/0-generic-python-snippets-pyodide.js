@@ -30,7 +30,7 @@ export const pyodideFeatureCode=(()=>{
     const PYODIDE_SNIPPETS = {
 
 
-    /**Creates the PyodideConsole, which is the runtime tool behind the "terminal", and setup
+    /**Creates the PyodideConsole, which is the runtime tool behind any "terminal", and setup
      * the JS routines so that Runners can interact with it.
      *
      * https://pyodide.org/en/stable/usage/api/python-api/console.html#pyodide.console.PyodideConsole
@@ -43,7 +43,7 @@ export const pyodideFeatureCode=(()=>{
      *      - `redirect_cmd(cmd:string)` to run commands written by a user in the terminal.
      *
      *      - `complete(cmd:string)` to ask for an array of all the possible auto-completion
-     *         suggestions for the command currently typed in the terminal by a user.
+     *         suggestions for the given command (currently typed in the terminal by a user).
      *
      *      - `clear_console()` to cancel the PyodideConsole current buffer, if ever needed
      *        (for example: an incomplete command triggering an error about imports => the previous
@@ -108,7 +108,100 @@ _hack_start_pyodide()
 del _hack_start_pyodide     # (no auto_run tool yet)
 `,
 
-    autoRunCleaner: `__builtins__.auto_run.clean()`,
+
+    /**Replace on the fly pyodide.http.pyfetch and js.fetch with wrappers that will consider any
+     * value set in `CONFIG.relUrlRedirect` to prepend it to the urls given as arguments to the
+     * wrappers, before actually fetching the address. Only relative urls are affected.
+     *
+     * `{FORMAT_TOKEN}` must be given as a python boolean string.
+     *   - If False, accessing js.fetch will return a wrapper equivalent to the `pyfetch` one.
+     *   - If True, this behavior is also added: any access to the js.document and subsequent
+     *     accesses will return a Mock object.
+     * */
+    relUrlsRedirections: `
+def __hack_redirection_and_fake_js():
+    import re, js
+    from functools import wraps
+    import pyodide.http as http
+
+    with_js_mock = {FORMAT_TOKEN}
+    pure_pyfetch = http.pyfetch
+    pure_import  = __import__
+    js_config = js.config()
+
+
+    def get_url(url:str):
+        if isinstance(url,str) and not re.match(r'(https?|ftps?|file)://|www[.]', url):
+            url = js.config().relUrlRedirect + url
+        # print(url)
+        return url
+
+
+    @wraps(pure_pyfetch)
+    async def fake_pyfetch(url, *a, **kw):
+        url = get_url(url)
+        return await pure_pyfetch(url, *a, **kw)
+
+    http.pyfetch = fake_pyfetch
+
+
+    async def fake_js_fetch(url, *a):
+        url = get_url(url)
+        return await js.fetch(url, *a)
+
+
+    class JsMock(int):
+        """
+        Extends int so that computations when pyplot tries to update the DOM do not crash
+        (even if wrong...!)
+        """
+
+        # ASYNC_CALLS = set('uploaderAsync'.split())
+
+        def __getattr__(self, k):
+            if k=='fetch':
+                return fake_js_fetch
+
+            # if k in self.ASYNC_CALLS:
+            #     return self.async_sink_js
+
+            if with_js_mock and (k=='document' or self is sink_js ):
+                return sink_js
+
+            return getattr(js, k)
+
+        async def async_sink_js(self, *a,**kw):
+            return sink_js
+
+        def __call__(self, *a, **kw):
+            return sink_js
+
+        def __setattr__(self, k,v):     # (why is that needed?)
+            setattr(js, k, v)
+
+
+    fake_js = JsMock(1)
+    sink_js = JsMock(1)  # Using another instance, to get the fetch behavior at top level only
+
+    def fake_import(name, *a, **kw):
+        if name == 'js':
+            return fake_js
+        return pure_import(name, *a, **kw)
+
+    __builtins__.__import__ = fake_import
+
+
+    def teardown_url_redirections():
+        js_config.relUrlRedirect = ''
+        http.pyfetch = pure_pyfetch
+        __builtins__.__import__ = pure_import
+
+    __builtins__.teardown_url_redirections = teardown_url_redirections
+
+
+__hack_redirection_and_fake_js()
+del __hack_redirection_and_fake_js
+`,
 
     autoRun: `
 def _hack_auto_run():
@@ -243,6 +336,9 @@ del _hack_auto_run
 `,
 
 
+    autoRunCleaner: `__builtins__.auto_run.clean()`,
+
+
     version: `
 def version(get_version=False):
     """ Print (also returns) the current version number of pyodide-mkdocs-theme. """
@@ -339,8 +435,12 @@ def _hack_io_stuff():
         try:
             js.config().termMessage(key, msg, format or 'none', False, new_line)
         except Exception as e:
-            stripped_js_err = str(e)[ len('Error: '): ]
-            raise ValueError(stripped_js_err) from None
+            msg = str(e)
+            target = 'Error: '      # Error might be Error, or PythonError
+            i = msg.find(target)
+            if i<0: i = -len(target)
+            stripped_js_err = msg[ i+len(target): ]
+            raise Exception(stripped_js_err) from None
 `,
 
 
@@ -452,7 +552,6 @@ def _hack_uploader_downloader():
     from typing import Callable, Any, Literal
     from argparse import Namespace
 
-
     class ReadAs(Namespace):
         txt = 'readAsText'
         bytes = 'readAsArrayBuffer'
@@ -463,7 +562,6 @@ def _hack_uploader_downloader():
             return ', '.join(
                 repr(p) for p in dir[cls] if not p.startswith('_') and p != 'get_props'
             )
-
 
     def wrapping(
         cbk: Callable[[str],Any],
@@ -496,22 +594,96 @@ def _hack_uploader_downloader():
 
 
     @as_builtin
-    async def pyodide_uploader_async(*args, **kw) -> Any :
-        js_args, out_getter = wrapping(*args, **kw)
+    async def pyodide_uploader_async(
+        cbk: Callable[[str],Any],
+        *,
+        read_as: Literal["txt","bytes","img"] = 'txt',
+        with_name:bool = False,
+        multi:bool = False,
+    ) -> Any :
+        '''
+        Async uploader, to import files into pyodide environment. The files are available right
+        after the function call.
+
+        @cbk: receive the content of a file (as str, bytes or DataURL, depending on @read_as), and
+        possibly the filename (if @with_name is True). It can return an output of any kind.
+
+        @read_as: set the input type of the @cbk first argument:
+        - "txt": sends str
+        - "bytes": sends bytes
+        - "img"; sends the content of an image file as a DataURL, that can be directly inserted
+        into an img tag.
+
+        @with_name=False: if True, @cbk must accept an extra argument, which will be the name of
+        the uploaded file.
+
+        @multi=False: if True, several files can be uploaded at once. In that case, @cbk returns
+        a tuple of the output for each file.
+
+        @returns: the output of @cbk, as a tuple if @multi is True.
+        '''
+
+        js_args, out_getter = wrapping(cbk, read_as=read_as, with_name=with_name, multi=multi)
         await js.uploaderAsync(*js_args)
         out = out_getter()
-        if kw.get('multi'):
+        if multi:
             return tuple(out)
         return out.pop() if out else None
 
+
+
     @as_builtin
-    def pyodide_uploader(*args, **kw) -> None :
-        js_args, _ = wrapping(*args, **kw)
+    def pyodide_uploader(
+        cbk: Callable[[str],None],
+        *,
+        read_as: Literal["txt","bytes","img"] = 'txt',
+        with_name:bool = False,
+        multi:bool = False,
+    ) -> None :
+        '''
+        Sync version of the uploader, to import files into pyodide environment. The files are
+        available only after the PMT sections have all been completed (meaning, after the post
+        section).
+
+        @cbk: receive the content of a file (as str, bytes or DataURL, depending on @read_as), and
+        possibly the filename (if @with_name is True). Any action related to handling the files
+        content must be done from within this callback.
+
+        @read_as: set the input type of the @cbk first argument:
+        - "txt": sends str
+        - "bytes": sends bytes
+        - "img"; sends the content of an image file as a DataURL, that can be directly inserted
+        into an img tag.
+
+        @with_name=False: if True, @cbk must accept an extra argument, which will be the name of
+        the uploaded file.
+
+        @multi=False: if True, several files can be uploaded at once. In that case, @cbk returns
+        a tuple of the output for each file.
+
+        @returns: Nothing.
+        '''
+        js_args, _ = wrapping(cbk, read_as=read_as, with_name=with_name, multi=multi)
         js.uploader(*js_args)
 
 
+
     @as_builtin
-    def pyodide_downloader(content:str|bytes|list[int], filename:str, type="text/plain"):
+    def pyodide_downloader(
+        content:str|bytes|list[int],
+        filename:str,
+        type="text/plain"
+    ) -> None :
+        '''
+        Send content from pyodide to the user's download directory.
+
+        @content: the content to send to the user (str, bytes, list[int], bytearray).
+
+        @filename: the name of the downloaded file.
+
+        @type_mime: type of the downloaded file. See:
+        https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+        '''
         if not isinstance(content, str):
             content = js.Uint8Array.new(content)
         js.downloader(content, filename, type)
@@ -802,7 +974,7 @@ __builtins__._stdout_value
 
 /*
 ------------------------------------------------------------------
-          Manage python stdout redirection in terminal
+          Various helpers, centralizing some logic
 ------------------------------------------------------------------
 */
 
@@ -811,6 +983,30 @@ export const pyodideFeatureRunCode=(name, repl=null)=>{
     const code = pyodideFeatureCode(name, repl)
     return pyodide.runPython(code)
 }
+
+
+export const pyodideFeatureSetupRedirections=(relUrlRedirection, withJsMock)=>{
+
+    // Replace "//"" to ease the way for the user: no need to care about adding or not trailing
+    // or leading slashes.
+    CONFIG.relUrlRedirect = `${ CONFIG.baseUrl }/${ relUrlRedirection||"" }/`.replace(/[/]{2}/g, '/')
+
+    const code = pyodideFeatureCode("relUrlsRedirections", withJsMock ? "True":"False")
+    pyodide.runPython(code)
+}
+
+
+
+
+
+
+
+
+/*
+------------------------------------------------------------------
+          Manage python stdout redirection in terminal
+------------------------------------------------------------------
+*/
 
 
 /**Use a StringIO stdout, so that the full content can be extracted later.

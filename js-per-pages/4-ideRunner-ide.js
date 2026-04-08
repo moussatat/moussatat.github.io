@@ -26,17 +26,16 @@ import {
   choice,
   decompressLZW,
   downloader,
-  freshStore,
-  getTheme,
+  getIdeOptions,
   perennialMathJaxUpdate,
   PythonError,
+  renderMermaidGraphs,
   sleep,
   subscribeWhenReady,
   txtFormat,
   uploader,
   RunningProfile,
 } from 'functools'
-// import { clearPyodideScope } from '0-generic-python-snippets-pyodide'
 import { observeResizeOf } from '3-terminalRunner-term'
 import {
   IdeSplitScreenManager,
@@ -78,7 +77,7 @@ class IdeAceManager extends IdeSplitScreenManager {
   * */
   save(givenCode=""){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Save]")
     const currentCode = givenCode || this.getCodeToTest()
-    this.setStorage({code: currentCode, hash:this.srcHash})
+    this.setStorage({code: currentCode, hash: this.srcHash})
   }
 
 
@@ -95,7 +94,7 @@ class IdeAceManager extends IdeSplitScreenManager {
     let exerciseCode = ""
 
     if(attemptLocalStorageExtraction){
-      exerciseCode = this.storage.code
+      exerciseCode = this.getCodeFromStorage()
     }
     if(!exerciseCode){
       exerciseCode = this._joinCodeAndPublicSections(this.userContent)
@@ -156,6 +155,8 @@ class IdeHistoryManager extends IdeAceManager {
     return (Date()+'').split(' GMT')[0].slice(-8)
   }
 
+  /**Store the data of the current run/validation to this.validations.
+   * */
   pushValidation(code, done){     // CodCap
     const time = this.getTime()
     this.validations.push([done, time, code])
@@ -176,10 +177,16 @@ class IdeHistoryManager extends IdeAceManager {
    * */
   updateValidationBtnColor(done=undefined, jElt=undefined){
     done ??= this.storage.done
-    jElt ??= this.global.find("button[btn_kind=check]")
-    const color = this.getIdeStateColor(done)
-    jElt.css('--ide-btn-color',  color)
+    jElt ??= this._getJValidationButton()
+    if(!this.isDelayedRevelation){
+      const color = this.getIdeStateColor(done)
+      jElt.css('--ide-btn-color',  color)
+    }
     return jElt
+  }
+
+  _getJValidationButton(){
+    return this.global.find("button[btn_kind=check]")
   }
 
 
@@ -189,6 +196,13 @@ class IdeHistoryManager extends IdeAceManager {
 
   clearValidations(){ this.validations.length = 0 }
 
+
+  makeDirty(isDirty=true){
+    super.makeDirty(isDirty)
+    if(isDirty){
+      this._getJValidationButton().addClass("dirty-validation")
+    }
+  }
 
 
   setupHistoryBtn(jHistItem, [done, time, code]){
@@ -259,22 +273,27 @@ class IdeFeedbackManager extends IdeHistoryManager {
     if(runtime.stopped || !step) return
 
     const playing = this.running.isPlaying
-    const intro   = playing ? "" : CONFIG.lang.validation.msg
     const section = CONFIG.lang[step].msg
-    const ok      = CONFIG.lang.successMsg.msg
+    const isDone  = this.storage.done > 0
+    const okMsg   = CONFIG.lang.successMsg.msg
+    const intro   = playing ? "" : CONFIG.lang.validation.msg
 
-    let msg = `${ intro }${ section }: ${ ok }`   // Default section message
-    if(!code) msg = ""                            // No default message if no code in the section...
-    if(playing && !this.hasCheckBtn){             // ...but ensure the default ending message is shown,
-      msg = CONFIG.lang.successMsgNoTests.msg     //    if this is "playing" and nothing else to do after.
+    let msg = `${ intro }${ section }: ${ okMsg }`  // Default section message
+    if(!code) msg = ""                              // No default message if no code in the section...
+    if(playing && !this.hasCheckBtn){               // ...but ensure the default ending message is shown,
+      msg = CONFIG.lang.successMsgNoTests.msg       //    if this is "playing" and nothing else to do after.
     }
 
     if(msg) this.terminalEcho(msg)
 
-    // If no error yet and a validation button is present while running the editor's code only,
-    // prepare a "very final" message reminding to try the validations:
-    if(playing && this.hasCheckBtn){
+    // Prepare a "very final" message if needed:
+    if(playing && this.hasCheckBtn && (!isDone || this.isDirty)){
+      // If a validation button is present while running the public tests
       runtime.finalMsg = CONFIG.lang.unforgettable.msg
+    }
+    else if(this.isDelayedRevelation && this.attemptsLeft>0 && this.running.isValidating){
+      // If a validation button is present while running the public tests
+      runtime.finalMsg = CONFIG.lang.delayedReveal.msg.replace('{N}', this.attemptsLeft-1+"")
     }
   }
 
@@ -286,13 +305,14 @@ class IdeFeedbackManager extends IdeHistoryManager {
    * Do not forget that any error related feedback has already been printed to the console, so
    * when it comes to feedback given in this method, it's only about a potential "final message".
    * */
-  handleRunOutcome(runtime, allowCountDecrease, code){
+  handleValidationOutcome(runtime, allowCountDecrease, code){
+    const isDelayed    = this.isDelayedRevelation
     const success      = !runtime.stopped
-    const done         = success ? 1:-1
-    const isDelayed    = this.profile === CONFIG.PROFILES.delayedReveal
+    const done         = isDelayed ? 0 : success ? 1:-1
     const someToReveal = this.corrRemsMask && this.hiddenDivContent && (!this.profile || isDelayed)
+    const trueSuccess  = success && !isDelayed
 
-    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - handleRunOutcome")
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - handleValidationOutcome")
     // console.log("[OutCome]", JSON.stringify({
     //   success, pof:this.profile, revealable, hidden:this.hiddenDivContent,
     //   allowCountDecrease: !!allowCountDecrease, mask:this.corrRemsMask, N:this.attemptsLeft
@@ -302,12 +322,12 @@ class IdeFeedbackManager extends IdeHistoryManager {
     this.setStorage({done})
     this.updateValidationBtnColor(done)
 
-    if(allowCountDecrease && (!success || isDelayed)){
+    if(allowCountDecrease && !trueSuccess){
       this.decreaseIdeCounter()
     }
 
     // Reveal if success and not delayed, or if attempts==0 (means last error, are last delayed)
-    const isRevelation =  someToReveal && (success && !isDelayed || this.attemptsLeft===0)
+    const doReveal = someToReveal && (this.attemptsLeft===0 || trueSuccess)
 
     /*If success, a custom final message has to be built:
           - If the revelation already occurred, return no message at all
@@ -318,11 +338,11 @@ class IdeFeedbackManager extends IdeHistoryManager {
      */
     const isSuccessNoReveal = success && this.hiddenDivContent && !isDelayed
 
-    if(isRevelation){
+    if(doReveal){
       LOGGER_CONFIG.ACTIVATE && jsLogger("[OutCome]", 'reveal!', success)
       runtime.finalMsg = success ? this._buildSuccessMessage(someToReveal, isDelayed)
                                  : this._getSolRemTxt(false)
-      this.revealSolutionAndRems()
+      this.revealSolutionAndRems({show:trueSuccess})
 
     }else if(isSuccessNoReveal){
       // Always display the "bravo" message on success, if corr&REMs exist but are not revealable
@@ -355,11 +375,20 @@ class IdeFeedbackManager extends IdeHistoryManager {
    * The only piece of contract this method is holding is that it flags the revelation as done,
    * and decides if the div content has to be decompressed or not on the way.
    *
-   * @waitForMathJax: if true, the call is done with profile=="revealed", so mathjax might not be
-   * ready yet, and the update must be delayed.
+   * @options:
+   *  .waitForMathJax (=false):
+   *      If true, the call is done with profile=="revealed", so mathjax might not be ready yet,
+   *      and the update must be delayed.
+   *  .show (=false):
+   *      If true, deploy the admonition.
    * */
-  revealSolutionAndRems(waitForMathJax=false){    // CodCap
+  revealSolutionAndRems(options={}){    // CodCap
     LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - Enter revealSolutionAndRems")
+
+    const {waitForMathJax, show} = {
+      waitForMathJax:false, show:false,
+      ...options
+    }
 
     // Need to check here _one more_ time against hiddenDivContent because of the "show"
     // button logic...
@@ -367,38 +396,35 @@ class IdeFeedbackManager extends IdeHistoryManager {
       LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - revealed!")
 
       const sol_div = $(this.solutionH)
-
-      if(this.isEncrypted){
-        const compressed = sol_div.text().trim()
-        const content    = compressed && decompressLZW(compressed, "ides.encrypt_corrections_and_rems")
-        sol_div.html(content)
-        this.data.is_encrypted = false  // Never decompress again
+      const content = sol_div.text().trim()
+      const isCompressed = content.includes(CONFIG.LZW)
+      if(isCompressed){
+        const unCompressed = decompressLZW(content, "ides.encrypt_corrections_and_rems")
+        sol_div.html(unCompressed)
       }
       sol_div.attr('class', '')         // Unhide
+      if(show){
+        sol_div.children("details").first().prop('open', true)
+      }
       this.hiddenDivContent = false     // Never reveal again (last in case of errors...)
 
-      // Enforce formatting
+      // Enforce formattings of REM contents
+      renderMermaidGraphs()
+
       if(!waitForMathJax){
         perennialMathJaxUpdate()
       }else{
         subscribeWhenReady(
           "revealOnLoad", perennialMathJaxUpdate, {
             waitFor: ()=>CONFIG.subscriptionReady.MathJax,
+            ignoreMultipleSubscriptions: true,
             runOnly: true,
-            delay: 100,
+            delay: 150,
             maxTries: 200,  // Needs a lot of tries, to make sure everything can be setup
                             // properly if pyodide is starting "too soon".
           }
         )
       }
-
-      /* DOESN'T WORK
-      // Enforce mermaid rendering if any
-      try{
-        // Need to make an async call, but i don't want to make this method an async one...
-        setTimeout(async ()=>console.log('yup?') || await mermaid.run())
-      }catch(e){}
-      //*/
     }
   }
 
@@ -478,19 +504,18 @@ class IdeFeedbackManager extends IdeHistoryManager {
  * */
 class IdeRunnerLogic extends IdeFeedbackManager {
 
-
   /**Is the current action "running the public tests"? (legacy) */
   isPlaying(){  return this.running.isPlaying }
 
   /**Is the current action "running the validation tests"? (legacy) */
-  isChecking(){ return this.running.isChecking }
+  isValidating(){ return this.running.isValidating }
 
   /**Does nothing, but catch any call on the parent class, which would raise an error
    * because prefillTerm is undefined, for IDEs.
    * */
   prefillTermIfAny(){}
 
-  // @OVERRIDE
+  // @OVERRIDE terminal behavior
   async applyAutoRun(){
     await this._defaultAutoRun()
   }
@@ -594,7 +619,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
       // ... but decrease the number attempts and run teardown if this was AssertionError.
       if(runtime.isAssertErr){
-        this.handleRunOutcome(runtime, decrease_count, code)
+        this.handleValidationOutcome(runtime, decrease_count, code)
       }
 
     }else{
@@ -624,7 +649,7 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 
       // Reveal solution and REMs on success, or if the counter reached 0 and the corr&REMs content
       // is still hidden, then prepare an appropriate revelation message if needed (`finalMsg`).
-      this.handleRunOutcome(runtime, decrease_count, code)
+      this.handleValidationOutcome(runtime, decrease_count, code)
     }
   }
 
@@ -661,9 +686,9 @@ class IdeRunnerLogic extends IdeFeedbackManager {
     LOGGER_CONFIG.ACTIVATE && jsLogger("[CheckPoint] - corr_btn start")
 
     this._corrConfigSwap = {            // (not defined in the constructor. MEH!  xp )
-      codeGetter:   this.getCodeToTest,
-      profile:      this.profile,
       currentCode:  this.getCodeToTest(),
+      codeGetter:   this.getCodeToTest,
+      profile:      this.profile,       // The profile/MODE has to be ignored for the CORR button => store original
     }
 
     this.getCodeToTest = ()=>this.corrContent
@@ -678,9 +703,10 @@ class IdeRunnerLogic extends IdeFeedbackManager {
     try{
       out = await this.teardownRuntimeIDE(runtime)
     }finally{
-      const {codeGetter, profile, currentCode} = this._corrConfigSwap
-      this.getCodeToTest = codeGetter
+      // Restore normal values:
+      const {currentCode, codeGetter, profile} = this._corrConfigSwap
       this.data.profile  = profile
+      this.getCodeToTest = codeGetter
       this.save(currentCode)     // Ensure the corr content doesn't stay stored in localStorage
     }
     return out
@@ -703,6 +729,42 @@ class IdeRunnerLogic extends IdeFeedbackManager {
 /**Controller. Linking behaviors and UI.
  * */
 export class IdeRunner extends IdeRunnerLogic {
+
+  static KEY_UP_NO_CHANGES = new Set(`
+    Control
+    Alt
+    AltGraph
+    Meta
+    CapsLock
+    NumLock
+    Shift
+    ContextMenu
+    F1
+    F2
+    F3
+    F4
+    F5
+    F6
+    F7
+    F8
+    F9
+    F10
+    F11
+    F12
+    Insert
+    PageUp
+    PageDown
+    End
+    Home
+    Escape
+  `.trim().split(/\s+/g))
+
+  static KEY_UP_ARROWS = new Set(`
+    ArrowLeft
+    ArrowRight
+    ArrowUp
+    ArrowDown
+  `.trim().split(/\s+/g))
 
 
   /**Process to "re-initiate" the internal state of the IDE (useful for testing) */
@@ -746,7 +808,7 @@ export class IdeRunner extends IdeRunnerLogic {
 
     // Check for initial actions on page load:
     if(this.profile===CONFIG.PROFILES.revealed){
-      this.revealSolutionAndRems(true)
+      this.revealSolutionAndRems({waitForMathJax:true})
     }
     if(this.twoCols){
       this.switchSplitScreenFromButton(null, false)
@@ -784,29 +846,9 @@ export class IdeRunner extends IdeRunnerLogic {
   /**Create and setup the ACE editor for the current Ide instance.
    * */
   setupAceEditor() {
-
-    // https://github.com/ajaxorg/ace/wiki/Configuring-Ace
-    const options = {
-        autoScrollEditorIntoView: false,
-        copyWithEmptySelection:   true,               // active alt+flèches pour déplacer une ligne, aussi
-        enableBasicAutocompletion:true,
-        enableLiveAutocompletion: false,
-        enableSnippets:           true,
-        tabSize:                  4,
-        useSoftTabs:              true,               // Spaces instead of tabs
-        navigateWithinSoftTabs:   false,              // this is _fucking_ actually "Atomic Soft Tabs"...
-        printMargin:              false,              // hide ugly margins...
-        maxLines:                 this.maxIdeLines,
-        minLines:                 this.minIdeLines,
-        mode:                     "ace/mode/python",
-        theme:                    getTheme(),
-        fontSize:                 CONFIG.editorFontSize,
-        fontFamily:               [CONFIG.editorFontFamily, "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
-                                   "Source Code pro", "source-code-pro", "monospace"],   // Fix apple troubles...
-    }
-
-    this.editor = ace.edit(this.id, options);
-    this.gutter = this.global.find('div.ace_gutter-layer')
+    const options = getIdeOptions(this)
+    this.editor   = ace.edit(this.id, options);
+    this.gutter   = this.global.find('div.ace_gutter-layer')
 
     if(CONFIG._devMode) CONFIG.editors[this.id] = this.editor
 
@@ -831,16 +873,23 @@ export class IdeRunner extends IdeRunnerLogic {
         exec: this.runners.validate.asEvent,
       })
     }
+    this._buildAutoSaveOnKeyStroke()
+  }
 
-    // Content of the editor is saved every `CONFIG.ideKeyStrokesSave` keystrokes:
+
+  _buildAutoSaveOnKeyStroke(){
+    // Content of the editor is saved every `CONFIG.keyStrokesAutoSave` keystrokes:
     let nChange = 0;
     this.editor.addEventListener("input", _=>{
-        if(nChange++ >= CONFIG.ideKeyStrokesSave){
+        if(nChange++ >= CONFIG.keyStrokesAutoSave){
           nChange=0
           this.save()
         }
     })
   }
+
+
+  buildCorrStuff(){ return CONFIG.inServe }
 
 
 
@@ -851,7 +900,7 @@ export class IdeRunner extends IdeRunnerLogic {
 
     // Add fullscreen activation binding, but NOT through the ACE editor commands
     // cannot control the exit :/ )
-    this.global.on('keyup', this.respondToEscapeKeyUp.bind(this))
+    this.global.on('keyup', this.respondToKeyUp.bind(this))
 
     // Bind editor extra buttons:
     this.global.find(".comment.tooltip" ).on("click", this.toggleComments.bind(this))
@@ -862,6 +911,8 @@ export class IdeRunner extends IdeRunnerLogic {
 
     // Bind all buttons below the IDE
     const ideThis = this
+    const corrStuff = this.buildCorrStuff()
+
     this.global.find("button").each(function(){
 
       const btn  = $(this)
@@ -886,10 +937,10 @@ export class IdeRunner extends IdeRunnerLogic {
         case 'save':      callback = _=>{ ideThis.save(); ideThis.focusEditor() } ; break
         case 'zip':       callback = ideThis.buildZipExportsToolsAndCbk(btn) ; break
 
-        case 'corr_btn':  if(!CONFIG.inServe) return;
+        case 'corr_btn':  if(!corrStuff) return;
                           callback = ideThis.runners.validateCorr.asEvent ; break
-        case 'show':      if(!CONFIG.inServe) return;
-                          callback = ()=>ideThis.revealSolutionAndRems() ; break
+        case 'show':      if(!corrStuff) return;
+                          callback = ()=>ideThis.revealSolutionAndRems({show:true}) ; break
 
         default:          throw new Error(`Y'should never get there, mate... (${ kind })`)
       }
@@ -927,22 +978,34 @@ export class IdeRunner extends IdeRunnerLogic {
   }
 
 
-  async respondToEscapeKeyUp(event){
-    if(
+  async respondToKeyUp(event){
+
+    const goFullScreen = (
       event.key == 'Escape'
       && !IdeFullScreenGlobalManager.someMenuOpened
       && !this.guiIdeFlags.escapeIdeSearch
       && !somethingFullScreen()
-    ){
+    )
+    const noChanges = (
+      this.constructor.KEY_UP_NO_CHANGES.has(event.key)
+      || this.constructor.KEY_UP_ARROWS.has(event.key) && !event.altKey
+      || event.ctrlKey && "acfhs Enter".includes(event.key)    // Ctrl+V or X _are_ modifying the content!
+      || event.key == 'Escape'
+    )
+    const inAceEditor = $(event.target).parent().is(".ace_editor")
+
+    if(goFullScreen){
       this.requestFullScreen()
-      // The browser already handles on its own going out of fullscreen with escape => no else needed
+      // The browser already handles on its own going out of fullscreen with escape
+      // => no "else" secifically needed for that case.
 
     }else if(event.altKey && event.key==':'){
       this.switchSplitScreenFromButton(event)
 
-    }else{
+    }else if(!noChanges && inAceEditor){
       this.makeDirty()
     }
+
     this.guiIdeFlags.escapeIdeSearch = false
   }
 
@@ -994,13 +1057,12 @@ export class IdeRunner extends IdeRunnerLogic {
 
   /**Download the current content of the editor to the download folder of the user.
    * */
-  download(){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Download]")    // CodCap
+  download(content=null){   LOGGER_CONFIG.ACTIVATE && jsLogger("[Download]")    // CodCap
 
-    let ideContent = this.getCodeToTest() + "" // enforce stringification in any case
+    let ideContent = content ?? this.getCodeToTest() + "" // enforce stringification in any case
     downloader(ideContent, this.pyName)
     this.focusEditor()
   }
-
 
 
 
@@ -1009,25 +1071,28 @@ export class IdeRunner extends IdeRunnerLogic {
    *
    * @returns; true if the user confirmed the reset.
    * */
-  restart(){    LOGGER_CONFIG.ACTIVATE && jsLogger("[Restart]")   // CodCap
+  restart(){                                                      // CodCap
+    LOGGER_CONFIG.ACTIVATE && jsLogger("[Restart]")
 
-    if(!window.confirm(CONFIG.lang.restartConfirm.msg)) return false
+    const doReset = window.confirm(CONFIG.lang.restartConfirm.msg)
+    if(doReset){
+      this.resetElement()
+    }
+    return doReset
+  }
 
-    this.setStartingCode({extractFromLocalStorage: false})
-    this.storage = freshStore("", {}, this)
-    localStorage.removeItem(this.id)
+  resetElement(){
+    super.resetElement()
+    this.setStartingCode({extractFromLocalStorage: false, saveOnceApplied: false})
     this.updateValidationBtnColor()
     this.clearValidations()
     if(Number.isFinite(this.srcAttemptsLeft)){
       this.setAttemptsCounter(this.srcAttemptsLeft)
     }
     $("#solution_" + this.id).addClass('py_mk_hidden')
-    this.makeDirty()
     this.hiddenDivContent = true
-    this.terminal.clear()
-    // clearPyodideScope()    // v4.2.0: no scope cleaning anymore.
     this.focusEditor()
-    return true
+    // clearPyodideScope()    // v4.2.0: no scope cleaning anymore.
   }
 }
 

@@ -22,6 +22,7 @@ If not, see <https://www.gnu.org/licenses/>.
 import { jsLogger } from 'jsLogger'
 import {
   getIdeDataFromStorage,
+  freshStore,
   PythonError,
   sleep,
   PMT_LOCAL_STORAGE_KEYS_WRITE,
@@ -98,6 +99,10 @@ class IdeStorageManager extends TerminalRunner {
     return storage
   }
 
+  getCodeFromStorage(){
+    return this.storage.code
+  }
+
 
   updateGenericStorageData(storage){
     storage.name   = this.pyName
@@ -110,6 +115,12 @@ class IdeStorageManager extends TerminalRunner {
   setStorage(changes={}){
     this._updateInternalStorage(changes)
     localStorage.setItem(this.id, JSON.stringify(this.storage))
+  }
+
+  resetElement(){
+    super.resetElement()
+    this.storage = freshStore("", {}, this)
+    localStorage.removeItem(this.id)
   }
 
   _updateInternalStorage(changes){
@@ -645,6 +656,7 @@ export class IdeFullScreenGlobalManager extends IdeGuiManager {
    * */
   static buildBodyObserver(){
     new MutationObserver((records)=>{
+      if(!this.currentIde) return
 
       for(const record of records) {
 
@@ -768,6 +780,7 @@ class IdeFullScreenManager extends IdeFullScreenGlobalManager {
 
     this.storeInitPositionsDataIfNeeded()
     const focused = document.activeElement
+    const floatingTip = $("#floating-tip").detach()
 
     this.global[0].requestFullscreen().then(async _=>{
       LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Full screen ready")
@@ -779,6 +792,8 @@ class IdeFullScreenManager extends IdeFullScreenGlobalManager {
       this.guiIdeFlags.internalIsFullScreen = true
       splitScreenBtn.addClass('deactivated')
       this.ideScreenModeVerticalResize({goingFullScreen: true})
+      this.global.append(floatingTip)
+
       focused.focus()   // Always give back the focus to the element which had it before.
 
       LOGGER_CONFIG.ACTIVATE && jsLogger('[ScreenMode]', "Full screen setup - DONE")
@@ -794,6 +809,7 @@ class IdeFullScreenManager extends IdeFullScreenGlobalManager {
         '[ScreenMode]', "Full screen reversion with", minLines, maxLines
       )
 
+      floatingTip.detach().appendTo('body')
       if(this.splitScreenActivated) splitScreenBtn.removeClass('deactivated')
       this.guiIdeFlags.internalIsFullScreen = false
       const resizeOption = this.isInSplit ? {topDivH:this.setupTopDivHeight()}

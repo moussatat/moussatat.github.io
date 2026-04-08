@@ -18,33 +18,49 @@ If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-import { makeIdeJqButton } from 'functools'
+import {
+    decompressLZW,
+    makeIdeJqButton,
+    perennialMathJaxUpdate,
+    renderMermaidGraphs,
+} from 'functools'
 
 
 
 
-
-
-const shuffleDomInPlace=(shufflable)=>{
-
-    const parent = $($(shufflable.shuffleParentPath)[0])
-    const items  = [...parent.find(shufflable.shuffleChildrenPath).detach()]
-
-    const shuffledItems = _.shuffle(items)
-    shuffledItems.forEach(item=>parent.append(item))
-}
 
 const removeEmptyParagraphsFrom = rule => $(rule).filter(':empty').remove()
+
+const shuffleChildrenInPlace = (shufflable) => {
+    const items = [...shufflable.children().detach()]
+    const shuffledItems = _.shuffle(items)
+    shufflable.append(shuffledItems)
+}
+
+
+
 
 
 
 
 class QCM {
 
+    constructor(id, shuffle, reveal){
+        this.qcmClass     = id      // this class is actually used only once, so equivalent to an id
+        this.shuffle      = shuffle
+        this.reveal       = reveal
+        this.questions    = []      // Question[]
+        this.locked       = false
+        this.jCounter     = null    // JQuery element of the counter (results)
+        this.jItemsHolder = null    // Jquery list holding the questions
+    }
+
+    //------------------------------------------------------------------------
+
     static buildQcms(){
 
-        const questions     = ".py_mk_questions_list_qcm > li.py_mk_question_qcm "
-        const questionItems = " ul.py_mk_item_qcm > li.py_mk_item_qcm"
+        const questions        = ".py_mk_questions_list_qcm > li.py_mk_question_qcm "
+        const questionItems    = "ul.py_mk_item_qcm > li.py_mk_item_qcm"
 
         // Clean up empty <p>, that are messing the layout, BUT, beware that the md rendered
         // qcm description, or the questions descriptions ALSO will contain some, and those
@@ -109,20 +125,6 @@ class QCM {
 
     //------------------------------------------------------------------------
 
-    constructor(id, shuffle, reveal){
-        this.qcmClass     = id      // this class is actually used only once, so equivalent to an id
-        this.shuffle      = shuffle
-        this.reveal       = reveal
-        this.questions    = []      // Question[]
-        this.locked       = false
-
-        this.counterPath  = `.${ id } p${ CONFIG.element.qcmCounterCls }`
-        this.shuffleParentPath = `.${ id } .py_mk_questions_list_qcm`
-        this.shuffleChildrenPath = "> li.py_mk_question_qcm"
-    }
-
-    //------------------------------------------------------------------------
-
     addQuestion(question){
         this.questions.push(question)
         question._inject(this)
@@ -143,14 +145,16 @@ class QCM {
     check(){
         if(this.reveal){
             this.questions.forEach(quest=>quest._reveal())
+            perennialMathJaxUpdate()
+            renderMermaidGraphs()
         }
-        const [good,all] = this.questions.reduce( (track,quest)=>quest._validate(...track), [0,0])
+        const [good,all] = this.questions.reduce( (track,quest)=>quest._validate(this.reveal, ...track), [0,0])
         this.updateCounter(`${good}/${all}`)
         this.locked = true
     }
 
     updateCounter(content=""){
-        $(this.counterPath).text(content)
+        this.jCounter.text(content)
     }
 
 
@@ -158,10 +162,10 @@ class QCM {
      * */
     randomize(){
         if(this.shuffle){
-            shuffleDomInPlace(this)
+            shuffleChildrenInPlace(this.jItemsHolder)
         }
         this.questions.forEach(quest=>{
-            if(quest.shuffle) shuffleDomInPlace(quest)
+            if(quest.shuffle) shuffleChildrenInPlace(quest.jItemsHolder)
         })
     }
 
@@ -191,6 +195,10 @@ class QCM {
 
         const layoutWrapper = $(`<div class="layout-qcm-wrapper"></div>`)
         layoutWrapper.append(innerDiv, btnWrapper)
+
+        // Ths list holding the questions may be ul or ol, so make the request more generic:
+        this.jItemsHolder = layoutWrapper.find(".inner > * > li").parent()
+        this.jCounter = counter
 
         if(no_admo){
             divAdmo.replaceWith(layoutWrapper)
@@ -231,10 +239,24 @@ class Question {
         this.isMulti = isMulti
         this.shuffle = q_shuffled
         this.qcm     = null
-        this.byId    = {}       /* itemId: { checked:boolean, correct:boolean } */
+        this.byId    = {}           // itemId: { checked:boolean, correct:boolean }
+        this.jItemsHolder = null    // Defined on the fly when registering items (dirty, but...)
 
-        this.shuffleParentPath=`#${ this.questId }>ul.py_mk_item_qcm`
-        this.shuffleChildrenPath = ">li.py_mk_item_qcm"
+        this.reveal_rems = false
+        this.comment = this.jThis.find(".py_mk_comment_qcm")
+
+        if(this.comment.length){
+            this.comment.detach()
+        }else{
+            this.comment = null
+        }
+        if(this.comment && this.comment.is('.py_mk_encrypted_qcm')){
+            const summary = this.comment.find('summary').detach()
+            const txt = this.comment.text().trim()
+            const unCompressed = decompressLZW(txt, "qcms.encrypt_comments")
+            this.comment.html(unCompressed).prepend(summary)
+            this.reveal_rems = this.comment.hasClass("qcm_reveal_rems")
+        }
     }
 
     _clickFactory(itemId){
@@ -246,24 +268,32 @@ class Question {
         }
     }
 
-    _validate(goods, all){
+    _validate(revealed, goods, all){
         const values = Object.values(this.byId)
 
         /*
         // Count per item:
-        goods += values.reduce( (s,o)=>s+(o.checked === o.correct), 0)
-        all += values.length
+        const localGood = values.reduce( (s,o)=>s+(o.checked === o.correct), 0)
+        const localAll  = values.length
 
         /*/
         // Count per question:
-        goods += values.every( o => o.checked === o.correct )
-        all++
+        const localGood = values.every( o => o.checked === o.correct )
+        const localAll  = true
         //*/
 
-        return [goods, all]
+        const allGood = localGood===localAll
+        if(this.comment && revealed && (allGood || this.reveal_rems)){
+            this.comment.prop('open', true)
+        }
+
+        return [goods+localGood, all+localAll]
     }
 
     _reveal(){
+        if(this.comment){
+            this.jThis.append(this.comment)
+        }
         Object.entries(this.byId).forEach(([itemId,it])=>{
             const classes = []
             if(it.checked) classes.push(it.correct ? CONFIG.qcm.ok : CONFIG.qcm.wrong)
@@ -289,6 +319,7 @@ class Question {
 
 
     resetAllItems(always=false){
+        if(this.comment) this.comment.detach().prop('open', false)
         Object.entries(this.byId).forEach(([itemId,it])=>{
             if(always || it.checked) this.updateItem(itemId, false)
         })
@@ -302,6 +333,7 @@ class Question {
 
 
     registerItem(jLiItem, iItem){
+        this.jItemsHolder = jLiItem.parent()        // Dirty, but whatever...
         const itemId = this.questId + '-'+iItem
 
         // Build the new/augmented <li> tag, bind behaviors and replace the original with it:

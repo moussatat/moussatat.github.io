@@ -21,16 +21,31 @@ If not, see <https://www.gnu.org/licenses/>.
 import { jsLogger } from 'jsLogger'
 
 
+let _mathJaxReady = false
 
+export const checkMathJaxReady =()=> (_mathJaxReady = _mathJaxReady || Boolean(
+    window.MathJax.startup
+    && window.MathJax.startup.output
+    && [
+        window.MathJax.startup.output.clearCache,
+        window.MathJax.typesetClear,
+        window.MathJax.texReset,
+        window.MathJax.typesetPromise,
+    ].every( f => typeof(f)=='function' )
+))
 
 /**Isolated version, to make sure it doesn't clash with the original one from
  * mathjax-libs.js.
  * */
 export function perennialMathJaxUpdate(){
-    window.MathJax.startup.output.clearCache()
-    window.MathJax.typesetClear()
-    window.MathJax.texReset()
-    window.MathJax.typesetPromise()
+    // Extra security so that any CDN loading failure doesn't cause crashes when
+    // the function is used in IDEs.
+    if(_mathJaxReady){
+        window.MathJax.startup.output.clearCache()
+        window.MathJax.typesetClear()
+        window.MathJax.texReset()
+        window.MathJax.typesetPromise()
+    }
 }
 
 
@@ -44,6 +59,30 @@ export function getTheme(){
 
     const style = CONFIG.ACE_COLOR_THEME.customTheme[curPalette]
     return "ace/theme/" + CONFIG.ACE_COLOR_THEME.aceStyle[style];
+}
+
+
+
+export function getIdeOptions(ide={}){
+    // https://github.com/ajaxorg/ace/wiki/Configuring-Ace
+    return {
+        autoScrollEditorIntoView: false,
+        copyWithEmptySelection:   true,               // active alt+flèches pour déplacer une ligne, aussi
+        enableBasicAutocompletion:true,
+        enableLiveAutocompletion: false,
+        enableSnippets:           true,
+        tabSize:                  4,
+        useSoftTabs:              true,               // Spaces instead of tabs
+        navigateWithinSoftTabs:   false,              // this is _fucking_ actually "Atomic Soft Tabs"...
+        printMargin:              false,              // hide ugly margins...
+        maxLines:                 ide.maxIdeLines ?? 30,
+        minLines:                 ide.minIdeLines ?? 10,
+        mode:                     "ace/mode/python",
+        theme:                    getTheme(),
+        fontSize:                 CONFIG.editorFontSize,
+        fontFamily:               [CONFIG.editorFontFamily, "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+                                   "Source Code pro", "source-code-pro", "monospace"],   // Fix apple troubles...
+    }
 }
 
 
@@ -87,25 +126,41 @@ export const withPyodideAsyncLock = (_=>{
 
     /**Function factory ("decorator like"), managing the global pyodide lock.
      * If a call is done while pyodide is locked, it is delayed until the lock is available.
+     * Also allow to force some PyodideRunners to wait for the end of the RUNNER_MANAGER.autoRuns
+     * executions, to ensure executions order are always predictable (aka, AUTO_RUN always first).
      *
      * @name: Logging purpose only
      *
      * @asyncCallback: async function or method to wrap with the Lock. The calls are:
      *      - Passing in the current `@this` context.
      *      - And ofc the arguments (any number)
+     *
+     * @runnerManager=null: if given, this is the RUNNER_MANAGER instance. See @runner argument.
+     *
+     * @runner=null: if @runnerManager is given, this is the runner opbject currently "asking for
+     * permission" to run. The RUNNER_MANAGER qill auhorize the execution or not, depending on
+     * AUTO_RUNs being completed or not (and if AUTO_RUNs are going on, authorize the current
+     * runner).
      * */
-    return function withPyodideAsyncLock(name, asyncCallback){
+    return function withPyodideAsyncLock(
+        name,
+        asyncCallback,
+        runnerManager = null,
+        runner = null,
+    ){
         const logName = asyncCallback.name || name
+        const logData = runner && " - Executing:\n"+(runner.prefillTerm || runner.envContent) || ""
 
         const wrapper = async function(...args){
             await waitForPyodideReady()
 
-            LOGGER_CONFIG.ACTIVATE && jsLogger("[LOCK?] -", logName, pyodideLocked)
-            while(pyodideLocked){
+            LOGGER_CONFIG.ACTIVATE && jsLogger("[LOCK?] -", logName, "is waiting:", pyodideLocked)
+            while(pyodideLocked || runnerManager && runnerManager.waitForAutoRunFinished(runner)){
                 await sleep(60)
+                LOGGER_CONFIG.ACTIVATE && jsLogger("[LOCK?] -", logName, "is waiting:", pyodideLocked)
             }
             pyodideLocked = true
-            LOGGER_CONFIG.ACTIVATE && jsLogger("[LOCK ACQUIRE] -", logName)
+            LOGGER_CONFIG.ACTIVATE && jsLogger("[LOCK ACQUIRE] -", logName, logData)
             let ret;
             try{
                 ret = await asyncCallback.apply(this, args)
@@ -168,69 +223,86 @@ export const waitForPyodideReady = async()=>{
  * If the subscription is not possible yet (readyForSubscription[waitOn] is falsy), try again
  * @delay later until it works.
  *
- * @waitId :  Property to observe in readyForSubscription global object.Also used as subscription
- *            identifier.
- * @callback: Routine to run when the document changes
+ * @subscriptionId : Property to observe in readyForSubscription global object.Also used as
+ *                   subscription identifier.
+ * @callback: Routine to run when the document isReady/conditions are fulfilled.
  * @options : An object with optional fields:
- *      .delay (=50): Time interval (in ms) to wait in between two subscription attempts.
- *      .now (=false): If true, ignore the CONFIG.subscriptionReady property and subscribe at call
- *              time. If false, a callback will be returned by the `subscribeWhenReady` function,
- *              that the caller can use to signal when the subscription is ready.
- *      .waitFor (=null): If given, it must be a boolean provider or a jquery identifier string,
- *              which will result in a function checking for the existence of that element in
- *              the DOM. This function will be called every .delay ms and the subscription will
- *              be delayed until it returns true. This has precedence over the .now option.
- *      .runOnly: if truthy, run the callback when ready, but do not subscribe to document changes.
- *      .maxTries: if not given 20 tries allowed.
+ *      .delay (=50):
+ *          Time interval (in ms) to wait in between two subscription attempts.
+ *      .now (=false):
+ *          If true, ignore the CONFIG.subscriptionReady property and subscribe at call time.
+ *          If false, a callback will be returned by the `subscribeWhenReady` function, that
+ *          the caller can use to signal when the subscription is ready.
+ *      .waitFor (=null):
+ *          If given, it must be a boolean provider or a jquery identifier string, which will
+ *          result in a function checking for the existence of that element in the DOM.
+ *          This function will be called every .delay ms and the subscription will be delayed
+ *          until it returns true. This has precedence over the .now option.
+ *      .runOnly (=false):
+ *          If truthy, run the callback when ready, but do not subscribe to document changes.
+ *      .maxTries (=20):
+ *          Maximal number of subscription attempts before throwing an error.
+ *      .ignoreMultipleSubscriptions (=false):
+ *          If false, subscribing several times to the same event throws an error. If true,
+ *          just ignore the current subscription call.
  *
- * @throws: Error if maxTries subscriptions attempts are done without success.
+ * @throws:
+ *      - Error if maxTries subscriptions attempts are done without success.
+ *      - Error if the same witId is registered several times and options.ignoreMultipleSubscriptions
+ *        is false.
  * */
-export function subscribeWhenReady(waitId, callback, options={}){
-    LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscribing] - Enter', waitId)
+export function subscribeWhenReady(subscriptionId, callback, options={}){
+    LOGGER_CONFIG.ACTIVATE && jsLogger('[Subscribing] - Enter', subscriptionId)
 
-    if(waitId in CONFIG.subscriptionReady){
-        throw new Error(`Cannot subscribe several times to "${ waitId }".`)
-    }
 
-    let {now, delay, waitFor, runOnly, maxTries} = {
+    let {now, delay, waitFor, runOnly, maxTries, ignoreMultipleSubscriptions} = {
         delay: 50,
         now: false,
         waitFor: null,  // or string or boolean provider
         runOnly: false,
         maxTries: 20,
+        ignoreMultipleSubscriptions: false, // If true, do not raise if a registration has already been done and skip the current call.
         ...options
     }
+
+    if(subscriptionId in CONFIG.subscriptionReady){
+        if(ignoreMultipleSubscriptions){
+            return
+        }
+        throw new Error(`Cannot subscribe several times to "${ subscriptionId }".`)
+    }
+
     now = now && !waitFor                   // Has to wait if waitFor is used (... XD )
-    CONFIG.subscriptionReady[waitId] = now
+    CONFIG.subscriptionReady[subscriptionId] = now
 
     const waitForProp = typeof (waitFor)=='string'
     const checkReady  = !waitFor    ? ()=>null
-                      : waitForProp ? ()=>{ CONFIG.subscriptionReady[waitId] = $(waitFor).length > 0 }
-                                    : ()=>{ CONFIG.subscriptionReady[waitId] = waitFor() }
+                      : waitForProp ? ()=>{ CONFIG.subscriptionReady[subscriptionId] = $(waitFor).length > 0 }
+                                    : ()=>{ CONFIG.subscriptionReady[subscriptionId] = waitFor() }
 
     const isNotReady =()=>{
         checkReady()
-        return !( CONFIG.subscriptionReady[waitId] && globalThis.document$ )
+        return !( CONFIG.subscriptionReady[subscriptionId] && globalThis.document$ )
     }
 
     function autoSubscribe(){
 
         LOGGER_CONFIG.ACTIVATE && jsLogger(
-            '[Subscribing] - Attempt', waitId,'Tries:', CONFIG.subscriptionsTries[waitId]
+            '[Subscribing] - Attempt', subscriptionId,'Tries:', CONFIG.subscriptionsTries[subscriptionId]
         )
         if(isNotReady()){
-            const nTries = CONFIG.subscriptionsTries[waitId]+1 || 1
+            const nTries = CONFIG.subscriptionsTries[subscriptionId]+1 || 1
             if(nTries > maxTries){
-                throw new Error(`Impossible to subscribe to ${ waitId } in time: too many tries.`)
+                throw new Error(`Impossible to subscribe to ${ subscriptionId } in time: too many tries.`)
             }
-            CONFIG.subscriptionsTries[waitId] = nTries
+            CONFIG.subscriptionsTries[subscriptionId] = nTries
             setTimeout(autoSubscribe, delay)
 
         }else{
             const wrapper=function(){
                 try{
                     LOGGER_CONFIG.ACTIVATE && jsLogger(
-                        '[Subscribing] - Running', waitId, 'runOnly', runOnly,'Tries:', CONFIG.subscriptionsTries[waitId]
+                        '[Subscribing] - Running', subscriptionId, 'runOnly', runOnly,'Tries:', CONFIG.subscriptionsTries[subscriptionId]
                     )
                     callback()
                 }catch(e){
@@ -242,7 +314,7 @@ export function subscribeWhenReady(waitId, callback, options={}){
             }else{
                 const subscript = document$.subscribe(wrapper)
                 document.addEventListener(CONFIG.onDoneEvent, function(){
-                    LOGGER_CONFIG.ACTIVATE && jsLogger('[Unsubscribing] -', waitId)
+                    LOGGER_CONFIG.ACTIVATE && jsLogger('[Unsubscribing] -', subscriptionId)
                     subscript.unsubscribe()
                 })
             }
@@ -251,10 +323,9 @@ export function subscribeWhenReady(waitId, callback, options={}){
     autoSubscribe()
 
     if(!now){
-        return ()=>{ CONFIG.subscriptionReady[waitId]=true }
+        return ()=>{ CONFIG.subscriptionReady[subscriptionId]=true }
     }
 }
-// TOKEN: end subscribeWhenReady
 
 
 
@@ -327,6 +398,24 @@ export function config(){ return CONFIG }
  * */
 export function isDark(){
     return !$('label[for=__palette_0]').attr('hidden')
+}
+
+
+
+export function renderMermaidGraphs(removeCodeTags=true){
+    if(removeCodeTags){
+        $('pre.mermaid').each(function(){
+            const code = $(this).children('code')
+            if(code.length){
+                code.replaceWith(code.text())
+            }
+        })
+    }
+    setTimeout(async ()=>{
+        try{
+            await mermaid.run()
+        }catch(e){}
+    })
 }
 
 
@@ -517,15 +606,19 @@ export const jDiv=(...elements)=>{
 
 
 const defaultOptions=(options, prop)=>({
+
+    // Outer html element:
     tagClass: "vertical",
     tagId: prop,
     fontSize: "",
     extraStyles: "",    // For the outer element/tag, as "width:min-content;..."
 
+    // If a label is used:
     label: prop,
     labelFirst: true,
     noLabel: false,
 
+    // If an input element is used:
     inputId: prop+'-input',     // to link the label to the input/element
     inputClass: "",
 
@@ -720,6 +813,7 @@ export function buildJqSelect(obj, prop, valuesArr, options={}){
 
 export const cancelEvent=(e)=>{
     if(!e) return;
+    if(e.originalEvent) e=e.originalEvent
     if(e.stopPropagation) e.stopPropagation()
     if(e.preventDefault)  e.preventDefault()
 }
@@ -781,6 +875,29 @@ export function buildJqHistoryBtn(
 
 
 
+
+
+
+
+
+// ATTEMPT. Not finished -> archived just in case...
+// export function fileContentToDom(content, mime, readerMethod, domQuery, domTemplate, templateRepl="{}", domAppend=false){
+//     const elt = $(domQuery)
+//     if(!domAppend) elt.html("")
+
+//     const reader = new FileReader()
+//     reader.abort = function(e){
+//       console.log('ERROR!')
+//     }
+//     reader.onload = function(e){
+//       const data = e.target.result
+//       const html = domTemplate.replace(templateRepl, data)
+//       elt.append(html)
+//     }
+
+//     const blob = new Blob([content], {type: mime})
+//     reader[readerMethod](blob)
+//   }
 
 
 
@@ -906,9 +1023,10 @@ export var [uploader, uploaderAsync] = (function(){
 
 
 /**Special JS Error: methods calls exclusions are tested from the JS runtime, instead of pyodide.
- * So, JS has to throw a special error that will mimic ("enough"...) the pattern of pyodide errors
- * and hance, will be considered legit errors.
- */
+ * So, JS has to throw a special error that will mimic ("enough", aka starts with Python...) the
+ * pattern of pyodide errors and will be considered legit errors from the JS runtime point of
+ * view, instead of triggering a BigFail error message.
+ * */
 export class PythonError extends Error {
     toString() { return "Python" + super.toString() }
 }
@@ -928,6 +1046,57 @@ export const noStorage = function () {
 
 
 
+
+/**Extract all the cmd histories and the IDEs data from the localStorage.
+ *
+ * There is a dirty bug somewhere (unknown for now), where the bare code string can be stored in
+ * a localStorage entry instead of the usual object. Just spot those entries and remove them.
+ * Also warn the user and ask for raising an issue on the repo...
+ */
+export const getStorageEntries=()=>{
+
+    const somethingWrong = []
+    const data  = Object.entries(localStorage)
+    const cmds  = data.filter( ([id,_]) => /^\d+_commands$/.test(id) )
+    const ides  = data.filter( ([id,_])=>/^editor_[\da-f]{16,}$/.test(id) )
+                      .map( ([k,s])=>{
+                        try{
+                            return [k,JSON.parse(s)]
+                        }catch(_){
+                            somethingWrong.push([k,s])
+                            localStorage.removeItem(k)
+                        }
+                    })
+
+    if(somethingWrong.length){
+        const msg = `
+Some invalid data have been found in the localStorage.
+Please contact the author of Pyodide-MkDocs-Theme, opening an issue on the repository with the data you may find in the console of your browser (F12).
+
+Repository:
+  ${ CONFIG.pmtUrl }
+`
+        console.error('\nInformation to give on the PMT repository:\n')
+        console.log(somethingWrong.map(([k,s])=>'\n---\n  '+k+':\n'+s).join('\n'))
+        window.alert(msg)
+    }
+    return {cmds, ides}
+}
+
+
+
+//Update all potential old entries if required:
+if((CONFIG.projectMoveFromOldId??null) !== null){
+  const {ides} = getStorageEntries()
+
+  ides.forEach(([k,o])=>{
+    if(o.project!==CONFIG.projectMoveFromOldId) return;
+    o.project = CONFIG.projectId
+    localStorage.setItem(k, JSON.stringify(o))
+  })
+}
+
+
 /**Forbid writing these properties from pyodide.
  * */
 export const PMT_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
@@ -935,6 +1104,7 @@ export const PMT_LOCAL_STORAGE_KEYS_WRITE = Object.freeze(`
     done
     hash
     name
+    project
 `.trim().split(/\s+/))
 
 
@@ -959,8 +1129,27 @@ export function getIdeDataFromStorage(editorId, ide=null){
       code = obj.code ?? ""
     }catch(_){}
 
-    const upToDate = PMT_LOCAL_STORAGE_KEYS_WRITE.every(k=> k in obj)
-    const storage  = upToDate ? obj : freshStore(code, obj, ide)
+    // If the update to 5.4.0 has occurred before the `project.id` was filled by the author,
+    // users might have the localStorage updated with a `project: null` entry. This is not to
+    // be considered "up to date", to avoid bazillions of warning for the users (1 per IDE!).
+    const pmt_540_ok = (obj.project??null)!==null
+    const upToDate   = PMT_LOCAL_STORAGE_KEYS_WRITE.every(k=> k in obj) && pmt_540_ok
+    const storage    = upToDate ? obj : freshStore(code, obj, ide)
+
+    if(ide && !CONFIG.projectNoJsWarning && storage.project !== CONFIG.projectId){
+        const msg = [
+            CONFIG.lang.storageIdCollision.msg,
+            '',
+            `Project id: "${ CONFIG.projectId }"`,
+            `Page: ${ document.location }`,
+            `py_name: ${ ide.pyName }`,
+            `(id: ${ editorId })`,
+            '------------------------\nCollision source:',
+            `Project id: "${ storage.project }"`,
+            `py_name: ${ storage.name }`,
+        ]
+        window.alert(msg.join('\n'))
+    }
 
     return [storage, upToDate]
 }
@@ -976,6 +1165,7 @@ export function freshStore(code, storage={}, ide=null){
     storage.code = code || ""
     storage.done ??= 0              // -1: fail, 0: unknown, 1:success
     if(ide) ide.updateGenericStorageData(storage)
+    storage.project ??= CONFIG.projectId
     return storage
 }
 
@@ -1025,7 +1215,7 @@ export class RunningProfile {
       name: profile,
       isTermCmd:  profile.includes(RunningProfile.PROFILE.cmd),
       isPlaying:  profile.includes(RunningProfile.PROFILE.play),
-      isChecking: profile.includes(RunningProfile.PROFILE.validate),
+      isValidating: profile.includes(RunningProfile.PROFILE.validate),
       isTesting:  profile.includes(RunningProfile.PROFILE.testing),
     })
   }
@@ -1055,3 +1245,4 @@ globalThis.isDark        = isDark
 globalThis.downloader    = downloader
 globalThis.uploader      = uploader
 globalThis.uploaderAsync = uploaderAsync
+// globalThis.fileContentToDom = fileContentToDom
