@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exerciseur Dynamique : Primitives de composées affines</title>
+    
+    <!-- Intégration de MathJax pour le rendu LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$']] }
+        };
+    </script>
+
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #2c3e50; padding: 20px; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+        h1 { text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; color: #2980b9;}
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; margin-top: 20px; }
+        .question { font-size: 1.3em; margin-bottom: 10px; font-weight: bold; }
+        .interval { font-size: 1.1em; margin-bottom: 25px; color: #555; }
+        .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        button { font-size: 1em; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .btn-toggle { background-color: #3498db; }
+        .btn-toggle:hover { background-color: #2980b9; }
+        .btn-new { background-color: #27ae60; }
+        .btn-new:hover { background-color: #219a52; }
+        .solution { display: none; margin-top: 25px; padding: 15px; background-color: #eafaf1; border-left: 4px solid #3498db; text-align: left; border-radius: 0 5px 5px 0;}
+        .solution.active { display: block; animation: fadeIn 0.4s; }
+        .category-badge { display: inline-block; background: #eee; color: #555; padding: 3px 10px; border-radius: 15px; font-size: 0.8em; margin-bottom: 15px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <h1>Primitives : Composées Affines de la forme $x\mapsto f(ax+b)$</h1>
+    
+    <div class="card">
+        <div id="categoryLabel" class="category-badge">Catégorie</div>
+        <p>Déterminer une primitive $F(x)$ de la fonction $f$ sur l'intervalle $I$.</p>
+        
+        <!-- Zones d'affichage -->
+        <div id="questionArea" class="question">Chargement...</div>
+        <div id="intervalArea" class="interval"></div>
+        
+        <div class="controls">
+            <button id="btnToggle" class="btn-toggle" onclick="toggleSolution()">Voir la correction</button>
+            <button class="btn-new" onclick="generateExercise()">Nouvel exercice aléatoire</button>
+        </div>
+        
+        <!-- Zone de correction -->
+        <div id="solutionArea" class="solution">
+            <strong>Explication détaillée :</strong><br><br>
+            <span id="explanationText"></span><br><br>
+            <strong>Primitive finale :</strong><br><br> 
+            <span id="solutionText" style="font-size: 1.2em; font-weight: bold; color: #2980b9;"></span>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // FONCTIONS UTILITAIRES DE MATHÉMATIQUES
+        // ==========================================
+
+        function getRand(min, max, excludeZero = false) {
+            let val = Math.floor(Math.random() * (max - min + 1)) + min;
+            if (excludeZero && val === 0) return getRand(min, max, true);
+            return val;
+        }
+
+        function gcd(a, b) {
+            a = Math.abs(a); b = Math.abs(b);
+            while (b) { let t = b; b = a % b; a = t; }
+            return a;
+        }
+
+        // Formater une fraction
+        function formatFrac(n, d, isCoefficient = true) {
+            let sign = (n * d < 0) ? "-" : "";
+            n = Math.abs(n); d = Math.abs(d);
+            let div = gcd(n, d);
+            n /= div; d /= div;
+            
+            if (n === 0) return "0";
+            if (d === 1) {
+                if (isCoefficient && n === 1) return sign; 
+                return sign + n;
+            }
+            return `${sign}\\frac{${n}}{${d}}`;
+        }
+
+        // Formater l'expression affine (bx + c)
+        function formatAffine(b, c) {
+            let res = "";
+            if (b === 1) res += "x";
+            else if (b === -1) res += "-x";
+            else res += b + "x";
+
+            if (c > 0) res += "+" + c;
+            else if (c < 0) res += c;
+            return res;
+        }
+
+        // ==========================================
+        // GÉNÉRATEUR D'EXERCICES
+        // ==========================================
+
+        function generateExercise() {
+            let type = getRand(0, 5);
+            let a = getRand(-8, 8, true); // Coefficient devant (a)
+            let b = getRand(-5, 5, true); // Coefficient de x (b)
+            let c = getRand(-5, 5);       // Constante (c)
+            let n = getRand(2, 5);        // Puissance
+
+            let u = formatAffine(b, c);
+            let rootStr = formatFrac(-c, b, false); // Calcul de la racine -c/b
+            
+            let fx = "", Fx = "", expl = "", cat = "", intervalle = "";
+
+            let aStr = (a === 1) ? "" : ((a === -1) ? "-" : a);
+
+            switch (type) {
+                case 0: // Exponentielle
+                    cat = "Fonction exponentielle : $f(x) = a\\mathrm{e}^{bx+c}$";
+                    intervalle = "\\mathbb{R}";
+                    fx = `${aStr}\\mathrm{e}^{${u}}`;
+                    Fx = `${formatFrac(a, b, true)}\\mathrm{e}^{${u}}`;
+                    expl = `La primitive de $\\mathrm{e}^{ax+b}$ est $\\frac{1}{a}\\mathrm{e}^{ax+b}$.`;
+                    break;
+
+                case 1: // Puissance positive
+                    cat = `Fonction puissance : $f(x) = a(bx+c)^n$`;
+                    intervalle = "\\mathbb{R}";
+                    fx = `${a}(${u})^${n}`;
+                    Fx = `${formatFrac(a, b * (n + 1), true)}(${u})^{${n + 1}}`;
+                    expl = `La primitive de $(ax+b)^n$ est $\\frac{1}{a(n+1)}(ax+b)^{n+1}$.<br>Ici, on a divisé par $${b} \\times ${n+1} = ${b*(n+1)}$.`;
+                    break;
+
+                case 2: // Puissance inverse
+                    cat = `Inverse de puissance : $f(x) = \\frac{a}{(bx+c)^n}$`;
+                    let isRightSide = (getRand(0, 1) === 0);
+                    intervalle = isRightSide ? `]${rootStr} ; +\\infty[` : `]-\\infty ; ${rootStr}[`;
+                    
+                    fx = `\\frac{${a}}{(${u})^${n}}`;
+                    let newDenomCoeff = b * (-n + 1);
+                    if (n - 1 === 1) {
+                        Fx = `${formatFrac(a, newDenomCoeff)}\\frac{1}{${u}}`;
+                    } else {
+                        Fx = `${formatFrac(a, newDenomCoeff)}\\frac{1}{(${u})^{${n - 1}}}`;
+                    }
+                    expl = `On réécrit la fonction avec un exposant négatif : $f(x) = ${a}(${u})^{-${n}}$.<br>La primitive est $\\frac{1}{a(-n+1)}(ax+b)^{-n+1}$.<br>On divise par $${b} \\times (-${n}+1) = ${newDenomCoeff}$.`;
+                    break;
+
+                case 3: // Racine carrée au dénominateur
+                    cat = `Racine carrée : $f(x) = \\frac{a}{\\sqrt{bx+c}}$`;
+                    intervalle = (b > 0) ? `]${rootStr} ; +\\infty[` : `]-\\infty ; ${rootStr}[`;
+                    
+                    fx = `\\frac{${a}}{\\sqrt{${u}}}`;
+                    Fx = `${formatFrac(a * 2, b, true)}\\sqrt{${u}}`;
+                    expl = `Sur l'intervalle $I$, $${u} > 0$.<br>La primitive de $\\frac{u'}{\\sqrt{u}}$ est $2\\sqrt{u}$.<br>Ici $u'(x) = ${b}$. On ajuste le coefficient : $\\frac{${a} \\times 2}{${b}}$.`;
+                    break;
+
+                case 4: // Logarithme (u'/u)
+                    cat = `Forme u'/u (Logarithme) : $f(x) = \\frac{a}{bx+c}$`;
+                    let isPositiveRegion = (getRand(0, 1) === 0); // Choix aléatoire de la zone
+                    let lnArg = "";
+                    
+                    if (isPositiveRegion) {
+                        intervalle = (b > 0) ? `]${rootStr} ; +\\infty[` : `]-\\infty ; ${rootStr}[`;
+                        lnArg = u; 
+                        expl = `Sur l'intervalle $I$, l'expression $${u} > 0$.<br>La primitive de $\\frac{u'}{u}$ s'écrit donc $\\ln(u)$.<br>Ici $u'(x) = ${b}$, on multiplie donc par le coefficient inverse : $\\frac{${aStr === "" ? "1" : aStr}}{${b}}$.`;
+                    } else {
+                        intervalle = (b > 0) ? `]-\\infty ; ${rootStr}[` : `]${rootStr} ; +\\infty[`;
+                        let uNeg = formatAffine(-b, -c); // Calcul de l'opposé : -ax-b
+                        lnArg = uNeg; 
+                        expl = `Sur l'intervalle $I$, l'expression $${u} < 0$.<br>La primitive de $\\frac{u'}{u}$ est $\\ln(|u|)$. Puisque $u < 0$, on simplifie en retirant les valeurs absolues et en prenant l'opposé : $\\ln(-u) = \\ln(${lnArg})$.<br>Ici $u'(x) = ${b}$, on multiplie donc par $\\frac{${aStr === "" ? "1" : aStr}}{${b}}$.`;
+                    }
+                    
+                    fx = `\\frac{${a}}{${u}}`;
+                    Fx = `${formatFrac(a, b, true)}\\ln(${lnArg})`;
+                    if (Fx === `1\\ln(${lnArg})`) Fx = `\\ln(${lnArg})`;
+                    if (Fx === `-1\\ln(${lnArg})`) Fx = `-\\ln(${lnArg})`;
+                    break;
+
+                case 5: // Trigonométrie (Cos ou Sin)
+                    intervalle = "\\mathbb{R}";
+                    let isCos = (getRand(0, 1) === 0);
+                    if (isCos) {
+                        cat = `Fonction trigonométrique : Cosinus`;
+                        fx = `${aStr}\\cos(${u})`;
+                        Fx = `${formatFrac(a, b, true)}\\sin(${u})`;
+                        if (Fx === `1\\sin(${u})`) Fx = `\\sin(${u})`;
+                        if (Fx === `-1\\sin(${u})`) Fx = `-\\sin(${u})`;
+                        expl = `La primitive de $\\cos(ax+b)$ est $\\frac{1}{a}\\sin(ax+b)$.`;
+                    } else {
+                        cat = `Fonction trigonométrique : Sinus`;
+                        fx = `${aStr}\\sin(${u})`;
+                        Fx = `${formatFrac(-a, b, true)}\\cos(${u})`;
+                        if (Fx === `1\\cos(${u})`) Fx = `\\cos(${u})`;
+                        if (Fx === `-1\\cos(${u})`) Fx = `-\\cos(${u})`;
+                        expl = `La primitive de $\\sin(ax+b)$ est $-\\frac{1}{a}\\cos(ax+b)$. Attention au signe !`;
+                    }
+                    break;
+            }
+
+            // ==========================================
+            // INJECTION DANS LE HTML
+            // ==========================================
+
+            document.getElementById('categoryLabel').innerHTML = cat;
+            document.getElementById('questionArea').innerHTML = `$f(x) = ${fx}$`;
+            document.getElementById('intervalArea').innerHTML = `sur $I = ${intervalle}$`;
+            
+            document.getElementById('explanationText').innerHTML = expl;
+            document.getElementById('solutionText').innerHTML = `$F(x) = ${Fx} + C \\quad (C \\in \\mathbb{R})$`;
+            
+            // Cacher la solution pour le nouvel exercice
+            document.getElementById('solutionArea').classList.remove('active');
+            let btnToggle = document.getElementById('btnToggle');
+            btnToggle.textContent = "Voir la correction";
+            btnToggle.style.backgroundColor = "#3498db";
+            
+            // Demander à MathJax de recalculer l'affichage (crucial !)
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Fonction pour afficher/masquer
+        function toggleSolution() {
+            const solDiv = document.getElementById('solutionArea');
+            const btn = document.getElementById('btnToggle');
+            
+            solDiv.classList.toggle('active');
+            
+            if (solDiv.classList.contains('active')) {
+                btn.textContent = "Masquer la correction";
+                btn.style.backgroundColor = "#e74c3c"; // Rouge
+            } else {
+                btn.textContent = "Voir la correction";
+                btn.style.backgroundColor = "#3498db"; // Bleu
+            }
+        }
+
+        // Lancer un premier exercice au chargement de la page
+        window.onload = generateExercise;
+    </script>
+</body>
+</html>

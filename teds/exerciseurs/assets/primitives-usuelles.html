@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exerciseur : Primitives de fonctions de référence</title>
+    
+    <!-- Intégration de MathJax pour le rendu LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$']] }
+        };
+    </script>
+
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #2c3e50; padding: 20px; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+        h1 { text-align: center; border-bottom: 2px solid #9b59b6; padding-bottom: 10px; color: #8e44ad; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; margin-top: 20px; }
+        .question { font-size: 1.3em; margin-bottom: 10px; font-weight: bold; }
+        .interval { font-size: 1.1em; margin-bottom: 25px; color: #555; }
+        .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        button { font-size: 1em; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .btn-toggle { background-color: #9b59b6; }
+        .btn-toggle:hover { background-color: #8e44ad; }
+        .btn-new { background-color: #27ae60; }
+        .btn-new:hover { background-color: #219a52; }
+        .solution { display: none; margin-top: 25px; padding: 15px; background-color: #f5eef8; border-left: 4px solid #9b59b6; text-align: left; border-radius: 0 5px 5px 0;}
+        .solution.active { display: block; animation: fadeIn 0.4s; }
+        .category-badge { display: inline-block; background: #eee; color: #555; padding: 3px 10px; border-radius: 15px; font-size: 0.8em; margin-bottom: 15px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <h1>Primitives : Fonctions de référence</h1>
+    
+    <div class="card">
+        <div id="categoryLabel" class="category-badge">Catégorie</div>
+        <p>Déterminer une primitive $F(x)$ de la fonction $f$ sur l'intervalle $I$.</p>
+        
+        <!-- Zones d'affichage -->
+        <div id="questionArea" class="question">Chargement...</div>
+        <div id="intervalArea" class="interval"></div>
+        
+        <div class="controls">
+            <button id="btnToggle" class="btn-toggle" onclick="toggleSolution()">Voir la correction</button>
+            <button class="btn-new" onclick="generateExercise()">Nouvel exercice aléatoire</button>
+        </div>
+        
+        <!-- Zone de correction -->
+        <div id="solutionArea" class="solution">
+            <strong>Rappel de cours :</strong><br>
+            <span id="explanationText"></span><br><br>
+            <strong>Primitive finale :</strong><br><br>
+            <span id="solutionText" style="font-size: 1.2em; font-weight: bold; color: #8e44ad;"></span>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // FONCTIONS UTILITAIRES
+        // ==========================================
+
+        function getRand(min, max, excludeZero = false) {
+            let val = Math.floor(Math.random() * (max - min + 1)) + min;
+            if (excludeZero && val === 0) return getRand(min, max, true);
+            return val;
+        }
+
+        function gcd(a, b) {
+            a = Math.abs(a); b = Math.abs(b);
+            while (b) { let t = b; b = a % b; a = t; }
+            return a;
+        }
+
+        function formatFrac(n, d, isCoefficient = true) {
+            let sign = (n * d < 0) ? "-" : "";
+            n = Math.abs(n); d = Math.abs(d);
+            let div = gcd(n, d);
+            n /= div; d /= div;
+            
+            if (n === 0) return "0";
+            if (d === 1) {
+                if (isCoefficient && n === 1) return sign; 
+                return sign + n;
+            }
+            return `${sign}\\frac{${n}}{${d}}`;
+        }
+
+        // ==========================================
+        // GÉNÉRATEUR D'EXERCICES
+        // ==========================================
+
+        function generateExercise() {
+            let type = getRand(0, 8); 
+            
+            let a = getRand(-9, 9, true); 
+            let b = getRand(2, 6); 
+            let n = getRand(2, 6); 
+            
+            // Choix aléatoire de l'intervalle pour les fractions
+            let isPositiveInterval = (getRand(0, 1) === 0);
+            
+            let fx = "", Fx = "", expl = "", cat = "", intervalle = "";
+
+            let aStr = (a === 1) ? "" : ((a === -1) ? "-" : a);
+
+            switch (type) {
+                case 0: // a*x^n
+                    cat = "Polynôme : $ax^n$";
+                    intervalle = "\\mathbb{R}";
+                    fx = `${aStr}x^{${n}}`;
+                    Fx = `${formatFrac(a, n + 1)}x^{${n + 1}}`;
+                    expl = `La primitive de $x^n$ est $\\frac{1}{n+1}x^{n+1}$. On garde le coefficient multiplicateur.`;
+                    break;
+
+                case 1: // a/(b*x^n)
+                    cat = "Inverse de polynôme : $\\frac{a}{bx^n}$";
+                    intervalle = isPositiveInterval ? "]0 ; +\\infty[" : "]-\\infty ; 0[";
+                    fx = `\\frac{${a}}{${b === 1 ? "" : b}x^{${n}}}`;
+                    Fx = `${formatFrac(a, b * (1 - n))}\\frac{1}{x^{${n - 1}}}`;
+                    expl = `On peut réécrire $f(x) = \\frac{${a}}{${b}}x^{-${n}}$.<br>La primitive de $x^{-${n}}$ est $\\frac{1}{-${n}+1}x^{-${n}+1}$.`;
+                    break;
+
+                case 2: // a/x
+                    cat = "Fonction inverse : $\\frac{a}{x}$";
+                    intervalle = isPositiveInterval ? "]0 ; +\\infty[" : "]-\\infty ; 0[";
+                    let lnArg2 = isPositiveInterval ? "x" : "|x|";
+                    
+                    fx = `\\frac{${a}}{x}`;
+                    Fx = `${aStr === "" ? "1" : (aStr === "-" ? "-1" : aStr)}\\ln(${lnArg2})`;
+                    
+                    if (Fx === `1\\ln(${lnArg2})`) Fx = `\\ln(${lnArg2})`;
+                    if (Fx === `-1\\ln(${lnArg2})`) Fx = `-\\ln(${lnArg2})`;
+                    
+                    expl = `La primitive de $\\frac{1}{x}$ sur $${intervalle}$ est $\\ln(${lnArg2})$.`;
+                    break;
+
+                case 3: // a/(b*x)
+                    cat = "Fonction inverse avec coefficient : $\\frac{a}{bx}$";
+                    intervalle = isPositiveInterval ? "]0 ; +\\infty[" : "]-\\infty ; 0[";
+                    let lnArg3 = isPositiveInterval ? "x" : "|x|";
+                    
+                    let divInitial = gcd(a, b);
+                    let aInit = a/divInitial; let bInit = b/divInitial;
+                    
+                    fx = `\\frac{${aInit}}{${bInit === 1 ? "" : bInit}x}`;
+                    Fx = `${formatFrac(aInit, bInit, true)}\\ln(${lnArg3})`;
+                    
+                    if(Fx === `\\ln(${lnArg3})`) Fx = `\\ln(${lnArg3})`; 
+                    
+                    expl = `On peut réécrire $f(x) = \\frac{${aInit}}{${bInit}} \\times \\frac{1}{x}$.<br>La primitive de $\\frac{1}{x}$ sur $${intervalle}$ est $\\ln(${lnArg3})$.`;
+                    break;
+
+                case 4: // a*exp(x)
+                    cat = "Fonction exponentielle : $a\\mathrm{e}^x$";
+                    intervalle = "\\mathbb{R}";
+                    fx = `${aStr}\\mathrm{e}^x`;
+                    Fx = `${aStr}\\mathrm{e}^x`;
+                    if(aStr === "") { fx = "\\mathrm{e}^x"; Fx = "\\mathrm{e}^x"; }
+                    if(aStr === "-") { fx = "-\\mathrm{e}^x"; Fx = "-\\mathrm{e}^x"; }
+                    expl = `La fonction exponentielle est sa propre primitive.`;
+                    break;
+
+                case 5: // a*sin(x)
+                    cat = "Fonction trigonométrique : $a\\sin(x)$";
+                    intervalle = "\\mathbb{R}";
+                    fx = `${aStr}\\sin(x)`;
+                    Fx = `${formatFrac(-a, 1, true)}\\cos(x)`;
+                    if(Fx === "\\cos(x)") Fx = "\\cos(x)";
+                    expl = `La primitive de $\\sin(x)$ est $-\\cos(x)$. Attention au changement de signe !`;
+                    break;
+
+                case 6: // a*cos(x)
+                    cat = "Fonction trigonométrique : $a\\cos(x)$";
+                    intervalle = "\\mathbb{R}";
+                    fx = `${aStr}\\cos(x)`;
+                    Fx = `${aStr}\\sin(x)`;
+                    if(aStr === "") Fx = "\\sin(x)";
+                    if(aStr === "-") Fx = "-\\sin(x)";
+                    expl = `La primitive de $\\cos(x)$ est $\\sin(x)$.`;
+                    break;
+
+                case 7: // a*sqrt(x)
+                    cat = "Fonction racine : $a\\sqrt{x}$";
+                    intervalle = "]0 ; +\\infty["; // La racine impose le domaine positif
+                    fx = `${aStr}\\sqrt{x}`;
+                    Fx = `${formatFrac(a * 2, 3, true)}x\\sqrt{x}`;
+                    expl = `On peut réécrire $\\sqrt{x} = x^{\\frac{1}{2}}$.<br>Sa primitive est $\\frac{1}{\\frac{1}{2}+1}x^{\\frac{1}{2}+1} = \\frac{2}{3}x^{\\frac{3}{2}} = \\frac{2}{3}x\\sqrt{x}$.`;
+                    break;
+
+                case 8: // a/sqrt(x)
+                    cat = "Inverse de racine : $\\frac{a}{\\sqrt{x}}$";
+                    intervalle = "]0 ; +\\infty["; // La racine impose le domaine strictement positif
+                    fx = `\\frac{${a}}{\\sqrt{x}}`;
+                    Fx = `${formatFrac(a * 2, 1, true)}\\sqrt{x}`;
+                    if(Fx === "\\sqrt{x}") Fx = "\\sqrt{x}";
+                    expl = `La primitive de $\\frac{1}{\\sqrt{x}}$ est $2\\sqrt{x}$.`;
+                    break;
+            }
+
+            // ==========================================
+            // INJECTION DANS LE HTML
+            // ==========================================
+
+            document.getElementById('categoryLabel').innerHTML = cat;
+            document.getElementById('questionArea').innerHTML = `$f(x) = ${fx}$`;
+            document.getElementById('intervalArea').innerHTML = `sur $I = ${intervalle}$`;
+            
+            document.getElementById('explanationText').innerHTML = expl;
+            
+            // Utilisation de la constante C majuscule
+            document.getElementById('solutionText').innerHTML = `$F(x) = ${Fx} + C \\quad (C \\in \\mathbb{R})$`;
+            
+            // Cacher la solution pour le nouvel exercice
+            document.getElementById('solutionArea').classList.remove('active');
+            let btnToggle = document.getElementById('btnToggle');
+            btnToggle.textContent = "Voir la correction";
+            btnToggle.style.backgroundColor = "#9b59b6";
+            
+            // Recalculer le rendu MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Fonction pour afficher/masquer
+        function toggleSolution() {
+            const solDiv = document.getElementById('solutionArea');
+            const btn = document.getElementById('btnToggle');
+            
+            solDiv.classList.toggle('active');
+            
+            if (solDiv.classList.contains('active')) {
+                btn.textContent = "Masquer la correction";
+                btn.style.backgroundColor = "#e74c3c"; // Rouge
+            } else {
+                btn.textContent = "Voir la correction";
+                btn.style.backgroundColor = "#9b59b6"; // Violet
+            }
+        }
+
+        // Lancer un exercice au démarrage
+        window.onload = generateExercise;
+    </script>
+</body>
+</html>

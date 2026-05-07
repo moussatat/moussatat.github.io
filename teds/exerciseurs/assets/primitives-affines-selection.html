@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exerciseur Expert : Primitives de composées affines</title>
+    
+    <!-- Intégration de MathJax pour le rendu LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+    </script>
+
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #2c3e50; padding: 20px; max-width: 850px; margin: 0 auto; line-height: 1.6; }
+        h1 { text-align: center; border-bottom: 2px solid #2980b9; padding-bottom: 10px; color: #1e6fa3;}
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; margin-top: 20px; }
+        
+        .menus-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; background: #f4f8fa; padding: 15px; border-radius: 8px; border: 1px solid #bce0fd; }
+        .menu-group { display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 250px; }
+        select { padding: 8px 12px; font-size: 1em; border-radius: 5px; border: 1px solid #bdc3c7; background-color: white; cursor: pointer; color: #2c3e50; font-family: inherit; width: 100%; }
+        select:focus { outline: none; border-color: #3498db; }
+        
+        .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        button { font-size: 1em; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .btn-toggle { background-color: #3498db; }
+        .btn-toggle:hover { background-color: #2980b9; }
+        .btn-new { background-color: #27ae60; }
+        .btn-new:hover { background-color: #219a52; }
+        
+        .consigne { font-size: 1.15em; margin-bottom: 5px; color: #34495e; font-weight: 500; }
+        .question-box { font-size: 1.3em; margin-bottom: 25px; padding: 15px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; }
+        .solution { display: none; margin-top: 15px; padding: 20px; background-color: #fdfefe; border-left: 4px solid #3498db; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; border-radius: 0 5px 5px 0;}
+        .solution.active { display: block; animation: fadeIn 0.4s; }
+        .category-badge { display: inline-block; background: #e0f0ff; color: #1e6fa3; padding: 4px 12px; border-radius: 15px; font-size: 0.85em; margin-bottom: 15px; font-weight: bold; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <h1>Primitives : Composées Affines</h1>
+    
+    <div class="card">
+        
+        <!-- Menus de paramétrage -->
+        <div class="menus-container">
+            <div class="menu-group">
+                <label for="typeSelect" style="margin-bottom: 5px;"><strong>Type de fonction :</strong></label>
+                <select id="typeSelect" onchange="generateExercise()">
+                    <option value="all">🔀 Mélange aléatoire (Tout)</option>
+                    <option value="0">1. Puissances : u'uⁿ</option>
+                    <option value="1">2. Inverses de puissances : u'/uⁿ</option>
+                    <option value="2">3. Formes u'/u (Logarithmes)</option>
+                    <option value="3">4. Exponentielles : u' e^u</option>
+                    <option value="4">5. Sinus : u' sin(u)</option>
+                    <option value="5">6. Cosinus : u' cos(u)</option>
+                    <option value="6">7. Inverses de racines : u'/√u</option>
+                </select>
+            </div>
+            
+            <div class="menu-group">
+                <label for="coeffSelect" style="margin-bottom: 5px;"><strong>Coefficients de départ :</strong></label>
+                <select id="coeffSelect" onchange="generateExercise()">
+                    <option value="all">🔀 Mélange (Entiers ou Fractions)</option>
+                    <option value="int">🔢 Entiers uniquement</option>
+                    <option value="frac">➗ Rationnels uniquement</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="categoryLabel" class="category-badge">Catégorie</div>
+        
+        <p class="consigne">Déterminer les primitives de la fonction $f$ définie par :</p>
+        
+        <!-- Affichage de la question -->
+        <div id="questionArea" class="question-box">Chargement...</div>
+        
+        <div class="controls">
+            <button id="btnToggle" class="btn-toggle" onclick="toggleSolution()">Voir la correction</button>
+            <button class="btn-new" onclick="generateExercise()">Nouvel exercice</button>
+        </div>
+        
+        <!-- Affichage de la solution (style LaTeX Aligned) -->
+        <div id="solutionArea" class="solution">
+            <div id="solutionText" style="font-size: 1.15em;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // FONCTIONS UTILITAIRES DE MATHÉMATIQUES
+        // ==========================================
+
+        function getRand(min, max, excludeZero = false) {
+            let val = Math.floor(Math.random() * (max - min + 1)) + min;
+            if (excludeZero && val === 0) return getRand(min, max, true);
+            return val;
+        }
+
+        function gcd(a, b) {
+            a = Math.abs(a); b = Math.abs(b);
+            while (b) { let t = b; b = a % b; a = t; }
+            return a;
+        }
+
+        function formatFrac(n, d, isCoefficient = true) {
+            let sign = (n * d < 0) ? "-" : "";
+            n = Math.abs(n); d = Math.abs(d);
+            let div = gcd(n, d);
+            n /= div; d /= div;
+            
+            if (n === 0) return "0";
+            if (d === 1) {
+                if (isCoefficient && n === 1) return sign; 
+                return sign + n;
+            }
+            return `${sign}\\frac{${n}}{${d}}`;
+        }
+
+        function formatAffine(a, b) {
+            let res = "";
+            if (a === 1) res += "x";
+            else if (a === -1) res += "-x";
+            else res += a + "x";
+
+            if (b > 0) res += "+" + b;
+            else if (b < 0) res += b;
+            return res;
+        }
+
+        // ==========================================
+        // GÉNÉRATEUR D'EXERCICES
+        // ==========================================
+
+        function generateExercise() {
+            let typeSelect = document.getElementById('typeSelect').value;
+            let type = (typeSelect === "all") ? getRand(0, 6) : parseInt(typeSelect);
+            let coeffSelect = document.getElementById('coeffSelect').value;
+            
+            // Génération de la fraction P/Q
+            let P, Q;
+            do {
+                P = getRand(-8, 8);
+                if (coeffSelect === "int") Q = 1; 
+                else if (coeffSelect === "frac") Q = getRand(2, 5); 
+                else Q = getRand(1, 5); 
+                
+                let divInit = gcd(P, Q);
+                P /= divInit; Q /= divInit;
+            } while (P === 0 || (coeffSelect === "frac" && Math.abs(Q) === 1));
+
+            let A = getRand(-5, 5, true); 
+            let B = getRand(-6, 6);       
+            let n = getRand(2, 5);        
+            
+            let u = formatAffine(A, B);
+            let rootStr = formatFrac(-B, A, false); 
+            
+            // Intervalles formatés LaTeX
+            let intervallePositif = (A > 0) ? `\\left] ${rootStr} ; +\\infty \\right[` : `\\left] -\\infty ; ${rootStr} \\right[`;
+            let intervalleNegatif = (A > 0) ? `\\left] -\\infty ; ${rootStr} \\right[` : `\\left] ${rootStr} ; +\\infty \\right[`;
+            
+            // Variables pour le rendu final
+            let fx = "", Fx = "", rest = "", cat = "", intervalle = "", note = "";
+            let signP = P < 0 ? "-" : "";
+            let absP = Math.abs(P);
+
+            // 1. Construction du préfixe des étapes intermédiaires : "Coeff x 1/A x ..."
+            let prefixParts = [];
+            if (P !== 1 || Q !== 1) prefixParts.push(formatFrac(P, Q, false));
+            if (A !== 1) prefixParts.push(`\\frac{1}{${A}}`);
+            
+            let F_inter_prefix = prefixParts.join(" \\times ");
+            if (F_inter_prefix !== "") F_inter_prefix += " \\times ";
+
+            // 2. Traitement par cas mathématique
+            switch (type) {
+                case 0: 
+                    cat = `Fonction puissance`;
+                    intervalle = "\\mathbb{R}";
+                    fx = `${formatFrac(P, Q, true)}(${u})^${n}`;
+                    rest = `\\frac{1}{${n + 1}}(${u})^{${n + 1}}`;
+                    Fx = `${formatFrac(P, Q * A * (n + 1), true)}(${u})^{${n + 1}}`;
+                    break;
+
+                case 1: 
+                    cat = `Inverse de puissance`;
+                    let isRight1 = (getRand(0, 1) === 0);
+                    intervalle = isRight1 ? intervallePositif : intervalleNegatif;
+                    fx = `${signP}\\frac{${absP}}{${Q === 1 ? "" : Q}(${u})^${n}}`;
+                    
+                    let exp = n - 1;
+                    rest = `\\frac{-1}{${exp === 1 ? "" : exp}(${u})${exp === 1 ? "" : "^{" + exp + "}"}}`;
+                    let denFx1 = Q * A * (1 - n);
+                    Fx = `${formatFrac(P, denFx1, true)}\\frac{1}{${exp === 1 ? "("+u+")" : "("+u+")^{"+exp+"}"}}`;
+                    break;
+
+                case 2: 
+                    cat = `Forme u'/u (Logarithme)`;
+                    let isPosRegion = (getRand(0, 1) === 0);
+                    let lnArg = "";
+                    
+                    if (isPosRegion) {
+                        intervalle = intervallePositif;
+                        lnArg = u; 
+                    } else {
+                        intervalle = intervalleNegatif;
+                        lnArg = formatAffine(-A, -B);
+                        note = `&& (\\text{car } ${u} < 0)`; 
+                    }
+                    
+                    if (B === 0) fx = `${signP}\\frac{${absP}}{${Q === 1 ? "" : Q}(${A === 1 ? "" : (A === -1 ? "-" : A)}x)}`;
+                    else fx = `${signP}\\frac{${absP}}{${Q === 1 ? "" : Q}(${u})}`;
+
+                    rest = `\\ln|${u}|`;
+                    Fx = `${formatFrac(P, Q * A, true)}\\ln(${lnArg})`;
+                    if (Fx === `\\ln(${lnArg})`) Fx = `\\ln(${lnArg})`;
+                    if (Fx === `-\\ln(${lnArg})`) Fx = `-\\ln(${lnArg})`;
+                    break;
+
+                case 3: 
+                    cat = "Fonction exponentielle";
+                    intervalle = "\\mathbb{R}";
+                    fx = `${formatFrac(P, Q, true)}\\mathrm{e}^{${u}}`;
+                    rest = `\\mathrm{e}^{${u}}`;
+                    Fx = `${formatFrac(P, Q * A, true)}\\mathrm{e}^{${u}}`;
+                    break;
+
+                case 4: 
+                    cat = "Fonction Sinus";
+                    intervalle = "\\mathbb{R}";
+                    fx = `${formatFrac(P, Q, true)}\\sin(${u})`;
+                    rest = `(-\\cos(${u}))`;
+                    Fx = `${formatFrac(-P, Q * A, true)}\\cos(${u})`; 
+                    if (Fx === `\\cos(${u})`) Fx = `\\cos(${u})`;
+                    if (Fx === `-\\cos(${u})`) Fx = `-\\cos(${u})`;
+                    break;
+
+                case 5: 
+                    cat = "Fonction Cosinus";
+                    intervalle = "\\mathbb{R}";
+                    fx = `${formatFrac(P, Q, true)}\\cos(${u})`;
+                    rest = `\\sin(${u})`;
+                    Fx = `${formatFrac(P, Q * A, true)}\\sin(${u})`;
+                    if (Fx === `\\sin(${u})`) Fx = `\\sin(${u})`;
+                    if (Fx === `-\\sin(${u})`) Fx = `-\\sin(${u})`;
+                    break;
+
+                case 6: 
+                    cat = `Inverse de racine`;
+                    intervalle = intervallePositif; 
+                    fx = `${signP}\\frac{${absP}}{${Q === 1 ? "" : Q}\\sqrt{${u}}}`;
+                    rest = `2\\sqrt{${u}}`;
+                    Fx = `${formatFrac(P * 2, Q * A, true)}\\sqrt{${u}}`;
+                    break;
+            }
+
+            // Assemblage de l'étape intermédiaire
+            let F_inter = F_inter_prefix + rest;
+
+            // 3. Construction du bloc LaTeX "Aligned" final
+            document.getElementById('categoryLabel').innerHTML = cat;
+            
+            // Affichage de la question avec la consigne au-dessus
+            document.getElementById('questionArea').innerHTML = `$$ f(x) = ${fx} \\quad \\text{sur } ${intervalle} $$`;
+            
+            // Construction de la solution mathématique alignée
+            let alignBlock = `$$ \n\\begin{aligned}\n`;
+            alignBlock += `f(x) &= ${fx} && \\text{sur } ${intervalle} \\\\\n`;
+            alignBlock += `F(x) &= ${F_inter} + C ${note} \\\\\n`;
+            
+            // On affiche la dernière ligne uniquement si elle apporte une simplification visuelle
+            if (F_inter !== Fx) {
+                alignBlock += `F(x) &= ${Fx} + C\n`;
+            }
+            alignBlock += `\\end{aligned}\n $$`;
+            
+            document.getElementById('solutionText').innerHTML = alignBlock;
+            
+            // Réinitialiser la vue de la correction
+            document.getElementById('solutionArea').classList.remove('active');
+            let btnToggle = document.getElementById('btnToggle');
+            btnToggle.textContent = "Voir la correction";
+            btnToggle.style.backgroundColor = "#3498db";
+            
+            // Lancement du rendu MathJax
+            if (window.MathJax) { MathJax.typesetPromise(); }
+        }
+
+        // Action du bouton
+        function toggleSolution() {
+            const solDiv = document.getElementById('solutionArea');
+            const btn = document.getElementById('btnToggle');
+            
+            solDiv.classList.toggle('active');
+            if (solDiv.classList.contains('active')) {
+                btn.textContent = "Masquer la correction";
+                btn.style.backgroundColor = "#e74c3c"; 
+            } else {
+                btn.textContent = "Voir la correction";
+                btn.style.backgroundColor = "#3498db"; 
+            }
+        }
+
+        // Lancement initial
+        window.onload = generateExercise;
+    </script>
+</body>
+</html>
