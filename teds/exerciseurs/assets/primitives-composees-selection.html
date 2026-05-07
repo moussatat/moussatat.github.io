@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exerciseur Expert : Primitives de composées non affines</title>
+    
+    <!-- Intégration de MathJax pour le rendu LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+    </script>
+
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #2c3e50; padding: 20px; max-width: 850px; margin: 0 auto; line-height: 1.6; }
+        h1 { text-align: center; border-bottom: 2px solid #16a085; padding-bottom: 10px; color: #117a65;}
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; margin-top: 20px; }
+        
+        .menus-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; background: #f2fbf9; padding: 15px; border-radius: 8px; border: 1px solid #a2d9ce; }
+        .menu-group { display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 250px; }
+        select { padding: 8px 12px; font-size: 1em; border-radius: 5px; border: 1px solid #bdc3c7; background-color: white; cursor: pointer; color: #2c3e50; font-family: inherit; width: 100%; max-width: 400px; margin: 0 auto;}
+        select:focus { outline: none; border-color: #16a085; }
+        
+        .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        button { font-size: 1em; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .btn-toggle { background-color: #16a085; }
+        .btn-toggle:hover { background-color: #117a65; }
+        .btn-new { background-color: #2980b9; }
+        .btn-new:hover { background-color: #2471a3; }
+        
+        .consigne { font-size: 1.15em; margin-bottom: 5px; color: #34495e; font-weight: 500; }
+        .question-box { font-size: 1.3em; margin-bottom: 25px; padding: 15px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; overflow-x: auto; }
+        .solution { display: none; margin-top: 15px; padding: 20px; background-color: #fdfefe; border-left: 4px solid #16a085; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; border-radius: 0 5px 5px 0; overflow-x: auto;}
+        .solution.active { display: block; animation: fadeIn 0.4s; }
+        .category-badge { display: inline-block; background: #e8f6f3; color: #117a65; padding: 4px 12px; border-radius: 15px; font-size: 0.9em; margin-bottom: 15px; font-weight: bold; border: 1px solid #d1f2eb;}
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <h1>Primitives : Composées générales</h1>
+    
+    <div class="card">
+        
+        <!-- Menu de paramétrage -->
+        <div class="menus-container">
+            <div class="menu-group" style="align-items: center; width: 100%;">
+                <label for="typeSelect" style="margin-bottom: 8px;"><strong>Cibler une forme de fonction :</strong></label>
+                <select id="typeSelect" onchange="generateExercise()">
+                    <option value="all">🔀 Mélange aléatoire (Toutes les formes)</option>
+                    <option value="0">1. Forme u'uⁿ (Puissances)</option>
+                    <option value="1">2. Forme u'/uⁿ (Inverses de puissances)</option>
+                    <option value="2">3. Forme u'/u (Logarithmes)</option>
+                    <option value="3">4. Forme u'eᵘ (Exponentielles)</option>
+                    <option value="4">5. Forme u'/√u (Racines)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="categoryLabel" class="category-badge">Catégorie</div>
+        
+        <p class="consigne">Déterminer les primitives de la fonction $f$ définie par :</p>
+        
+        <!-- Affichage de la question -->
+        <div id="questionArea" class="question-box">Chargement...</div>
+        
+        <div class="controls">
+            <button id="btnToggle" class="btn-toggle" onclick="toggleSolution()">Voir la correction détaillée</button>
+            <button class="btn-new" onclick="generateExercise()">Nouvel exercice</button>
+        </div>
+        
+        <!-- Affichage de la solution (style LaTeX Aligned avec identification u et u') -->
+        <div id="solutionArea" class="solution">
+            <div id="solutionText" style="font-size: 1.15em;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // FONCTIONS UTILITAIRES DE MATHÉMATIQUES
+        // ==========================================
+
+        function getRand(min, max, excludeZero = false) {
+            let val = Math.floor(Math.random() * (max - min + 1)) + min;
+            if (excludeZero && val === 0) return getRand(min, max, true);
+            return val;
+        }
+
+        function gcd(a, b) {
+            a = Math.abs(a); b = Math.abs(b);
+            while (b) { let t = b; b = a % b; a = t; }
+            return a;
+        }
+
+        // Formatage intelligent d'une fraction
+        function formatFrac(n, d, isCoefficient = true) {
+            let sign = (n * d < 0) ? "-" : "";
+            n = Math.abs(n); d = Math.abs(d);
+            let div = gcd(n, d);
+            n /= div; d /= div;
+            
+            if (n === 0) return "0";
+            if (d === 1) {
+                if (isCoefficient && n === 1) return sign; 
+                return sign + n;
+            }
+            return `${sign}\\frac{${n}}{${d}}`;
+        }
+
+        // ==========================================
+        // BASE DE FONCTIONS DE RÉFÉRENCE (u et u')
+        // Garantit des résultats pédagogiquement parfaits
+        // ==========================================
+        const baseFuncs = [
+            {
+                u: "x^2+1", du: "2x", duCoeff: 2,
+                f0: (k, n) => `${k}x(x^2+1)^${n}`,
+                f1: (P, n) => `\\frac{${P === 1 ? "x" : (P === -1 ? "-x" : P + "x")}}{(x^2+1)^${n}}`,
+                f2: (P) => `\\frac{${P === 1 ? "x" : (P === -1 ? "-x" : P + "x")}}{x^2+1}`,
+                f3: (k) => `${k}x\\mathrm{e}^{x^2+1}`,
+                f4: (P) => `\\frac{${P === 1 ? "x" : (P === -1 ? "-x" : P + "x")}}{\\sqrt{x^2+1}}`,
+                interval: "\\mathbb{R}", condition: "x^2+1>0"
+            },
+            {
+                u: "x^2-3x", du: "2x-3", duCoeff: 1,
+                f0: (k, n) => `${k}(2x-3)(x^2-3x)^${n}`,
+                f1: (P, n) => `\\frac{${P === 1 ? "(2x-3)" : (P === -1 ? "-(2x-3)" : P + "(2x-3)")}}{(x^2-3x)^${n}}`,
+                f2: (P) => `\\frac{${P === 1 ? "(2x-3)" : (P === -1 ? "-(2x-3)" : P + "(2x-3)")}}{x^2-3x}`,
+                f3: (k) => `${k}(2x-3)\\mathrm{e}^{x^2-3x}`,
+                f4: (P) => `\\frac{${P === 1 ? "(2x-3)" : (P === -1 ? "-(2x-3)" : P + "(2x-3)")}}{\\sqrt{x^2-3x}}`,
+                interval: "\\left] 3 ; +\\infty \\right[", condition: "x^2-3x>0"
+            },
+            {
+                u: "x^3+8", du: "3x^2", duCoeff: 3,
+                f0: (k, n) => `${k}x^2(x^3+8)^${n}`,
+                f1: (P, n) => `\\frac{${P === 1 ? "x^2" : (P === -1 ? "-x^2" : P + "x^2")}}{(x^3+8)^${n}}`,
+                f2: (P) => `\\frac{${P === 1 ? "x^2" : (P === -1 ? "-x^2" : P + "x^2")}}{x^3+8}`,
+                f3: (k) => `${k}x^2\\mathrm{e}^{x^3+8}`,
+                f4: (P) => `\\frac{${P === 1 ? "x^2" : (P === -1 ? "-x^2" : P + "x^2")}}{\\sqrt{x^3+8}}`,
+                interval: "\\left] -2 ; +\\infty \\right[", condition: "x^3+8>0"
+            },
+            {
+                u: "1+\\mathrm{e}^{2x}", du: "2\\mathrm{e}^{2x}", duCoeff: 2,
+                f0: (k, n) => `${k}\\mathrm{e}^{2x}(1+\\mathrm{e}^{2x})^${n}`,
+                f1: (P, n) => `\\frac{${P === 1 ? "\\mathrm{e}^{2x}" : (P === -1 ? "-\\mathrm{e}^{2x}" : P + "\\mathrm{e}^{2x}")}}{(1+\\mathrm{e}^{2x})^${n}}`,
+                f2: (P) => `\\frac{${P === 1 ? "\\mathrm{e}^{2x}" : (P === -1 ? "-\\mathrm{e}^{2x}" : P + "\\mathrm{e}^{2x}")}}{1+\\mathrm{e}^{2x}}`,
+                f3: (k) => `${k}\\mathrm{e}^{2x}\\mathrm{e}^{1+\\mathrm{e}^{2x}}`,
+                f4: (P) => `\\frac{${P === 1 ? "\\mathrm{e}^{2x}" : (P === -1 ? "-\\mathrm{e}^{2x}" : P + "\\mathrm{e}^{2x}")}}{\\sqrt{1+\\mathrm{e}^{2x}}}`,
+                interval: "\\mathbb{R}", condition: "1+\\mathrm{e}^{2x}>0"
+            },
+            {
+                u: "\\ln(x)", du: "\\frac{1}{x}", duCoeff: 1,
+                f0: (k, n) => `\\frac{${k === "" ? "1" : (k === "-" ? "-1" : k)}}{x}(\\ln(x))^${n}`,
+                f1: (P, n) => `\\frac{${P === 1 ? "1" : (P === -1 ? "-1" : P)}}{x(\\ln(x))^${n}}`,
+                f2: (P) => `\\frac{${P === 1 ? "1" : (P === -1 ? "-1" : P)}}{x\\ln(x)}`,
+                f3: (k) => `\\frac{${k === "" ? "1" : (k === "-" ? "-1" : k)}}{x}\\mathrm{e}^{\\ln(x)}`, 
+                f4: (P) => `\\frac{${P === 1 ? "1" : (P === -1 ? "-1" : P)}}{x\\sqrt{\\ln(x)}}`,
+                interval: "\\left] 1 ; +\\infty \\right[", condition: "\\ln(x)>0"
+            },
+            {
+                u: "\\sin(x)", du: "\\cos(x)", duCoeff: 1,
+                f0: (k, n) => `${k}\\cos(x)(\\sin(x))^${n}`,
+                f1: (P, n) => `\\frac{${P === 1 ? "\\cos(x)" : (P === -1 ? "-\\cos(x)" : P + "\\cos(x)")}}{(\\sin(x))^${n}}`,
+                f2: (P) => `\\frac{${P === 1 ? "\\cos(x)" : (P === -1 ? "-\\cos(x)" : P + "\\cos(x)")}}{\\sin(x)}`,
+                f3: (k) => `${k}\\cos(x)\\mathrm{e}^{\\sin(x)}`,
+                f4: (P) => `\\frac{${P === 1 ? "\\cos(x)" : (P === -1 ? "-\\cos(x)" : P + "\\cos(x)")}}{\\sqrt{\\sin(x)}}`,
+                interval: "\\left] 0 ; \\frac{\\pi}{2} \\right[", condition: "\\sin(x)>0"
+            }
+        ];
+
+        // ==========================================
+        // GÉNÉRATEUR D'EXERCICES
+        // ==========================================
+
+        function generateExercise() {
+            let typeSelect = document.getElementById('typeSelect').value;
+            let type = (typeSelect === "all") ? getRand(0, 4) : parseInt(typeSelect);
+            
+            // On sélectionne une fonction de base au hasard
+            let bf = baseFuncs[getRand(0, baseFuncs.length - 1)];
+            
+            // Pour éviter les expressions trop lourdes, e^{\ln(x)} est exclus
+            if (type === 3 && bf.u === "\\ln(x)") bf = baseFuncs[0];
+
+            let P = getRand(-6, 6, true); // Coefficient multiplicateur (entier pour ne pas surcharger)
+            let n = getRand(2, 5);        // Puissance
+            
+            let kStr = (P === 1) ? "" : (P === -1 ? "-" : P);
+            
+            let fx = "", formU = "", formF = "", F_final = "", cat = "", note = "";
+
+            // 1. Construction de l'expression de départ f(x)
+            switch (type) {
+                case 0: fx = bf.f0(kStr, n); break;
+                case 1: fx = bf.f1(P, n); break;
+                case 2: fx = bf.f2(P); break;
+                case 3: fx = bf.f3(kStr); break;
+                case 4: fx = bf.f4(P); break;
+            }
+
+            // 2. Construction de l'étape intermédiaire (K * Forme générique)
+            let K_inter_show_1 = formatFrac(P, bf.duCoeff, false); // Affiche toujours "1" si = 1, pour la clarté pédagogique
+            
+            switch (type) {
+                case 0: 
+                    cat = "Forme : $u'u^n$";
+                    formU = `u'(x)(u(x))^${n}`;
+                    formF = `\\frac{1}{${n+1}}(u(x))^{${n+1}}`;
+                    F_final = `${formatFrac(P, bf.duCoeff * (n+1), true)}(${bf.u})^{${n+1}}`;
+                    break;
+
+                case 1: 
+                    cat = "Forme : $u'/u^n$";
+                    let exp = n - 1;
+                    formU = `\\frac{u'(x)}{(u(x))^${n}}`;
+                    formF = `\\frac{-1}{${exp === 1 ? "" : exp}(u(x))${exp === 1 ? "" : "^{"+exp+"}"}}`;
+                    F_final = `${formatFrac(-P, bf.duCoeff * exp, true)}\\frac{1}{${exp === 1 ? "("+bf.u+")" : "("+bf.u+")^{"+exp+"}"}}`;
+                    break;
+
+                case 2: 
+                    cat = "Forme : $u'/u$ (Logarithme)";
+                    formU = `\\frac{u'(x)}{u(x)}`;
+                    formF = `\\ln(|u(x)|)`;
+                    // La condition du domaine assure que u(x) > 0, on retire les valeurs absolues
+                    F_final = `${formatFrac(P, bf.duCoeff, true)}\\ln(${bf.u})`;
+                    if (F_final === `\\ln(${bf.u})`) F_final = `\\ln(${bf.u})`;
+                    if (F_final === `-\\ln(${bf.u})`) F_final = `-\\ln(${bf.u})`;
+                    note = `&& (\\text{car } ${bf.condition})`;
+                    break;
+
+                case 3: 
+                    cat = "Forme : $u'\\mathrm{e}^u$";
+                    formU = `u'(x)\\mathrm{e}^{u(x)}`;
+                    formF = `\\mathrm{e}^{u(x)}`;
+                    F_final = `${formatFrac(P, bf.duCoeff, true)}\\mathrm{e}^{${bf.u}}`;
+                    break;
+
+                case 4: 
+                    cat = "Forme : $\\frac{u'}{\\sqrt{u}}$";
+                    formU = `\\frac{u'(x)}{\\sqrt{u(x)}}`;
+                    formF = `2\\sqrt{u(x)}`;
+                    F_final = `${formatFrac(P * 2, bf.duCoeff, true)}\\sqrt{${bf.u}}`;
+                    break;
+            }
+
+            // 3. Construction du bloc LaTeX "Aligned" final
+            document.getElementById('categoryLabel').innerHTML = cat;
+            document.getElementById('questionArea').innerHTML = `$$ f(x) = ${fx} \\quad \\text{sur } ${bf.interval} $$`;
+            
+            // Formatage LaTeX rigoureux
+            let alignBlock = `$$ \n\\begin{aligned}\n`;
+            
+            // Ligne 1 : Identification de u et u'
+            alignBlock += `f(x) &= ${fx} && \\text{sur } ${bf.interval} \\quad \\left| \\begin{array}{l} u(x)=${bf.u} \\\\ u'(x)=${bf.du} \\end{array} \\right. \\\\\n`;
+            
+            // Ligne 2 : Réécriture de f(x) avec u'(x)
+            alignBlock += `f(x) &= ${K_inter_show_1} \\times ${formU} \\\\\n`;
+            
+            // Ligne 3 : Primitive abstraite
+            alignBlock += `F(x) &= ${K_inter_show_1} \\times ${formF} + C ${type === 2 ? note : ""} \\\\\n`;
+            
+            // Ligne 4 : Simplification finale (uniquement si elle diffère de l'étape précédente)
+            if (`${K_inter_show_1} \\times ${formF}` !== F_final && `${K_inter_show_1}${formF}` !== F_final) {
+                alignBlock += `F(x) &= ${F_final} + C\n`;
+            }
+            
+            alignBlock += `\\end{aligned}\n $$`;
+            
+            document.getElementById('solutionText').innerHTML = alignBlock;
+            
+            // Réinitialiser la vue de la correction
+            document.getElementById('solutionArea').classList.remove('active');
+            let btnToggle = document.getElementById('btnToggle');
+            btnToggle.textContent = "Voir la correction détaillée";
+            btnToggle.style.backgroundColor = "#16a085";
+            
+            // Lancement du rendu MathJax
+            if (window.MathJax) { MathJax.typesetPromise(); }
+        }
+
+        // Action du bouton
+        function toggleSolution() {
+            const solDiv = document.getElementById('solutionArea');
+            const btn = document.getElementById('btnToggle');
+            
+            solDiv.classList.toggle('active');
+            if (solDiv.classList.contains('active')) {
+                btn.textContent = "Masquer la correction";
+                btn.style.backgroundColor = "#e74c3c"; 
+            } else {
+                btn.textContent = "Voir la correction détaillée";
+                btn.style.backgroundColor = "#16a085"; 
+            }
+        }
+
+        // Lancement initial
+        window.onload = generateExercise;
+    </script>
+</body>
+</html>

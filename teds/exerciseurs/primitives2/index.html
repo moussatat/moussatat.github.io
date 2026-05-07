@@ -31,26 +31,28 @@ If not, see <https://www.gnu.org/licenses/>.
         <meta name="author" content="Nizar MOUSSATAT">
       
       
-        <link rel="canonical" href="https://moussatat.github.io/demo/">
+        <link rel="canonical" href="https://moussatat.github.io/teds/exerciseurs/primitives2/">
       
       
-        <link rel="prev" href="../tags/">
+        <link rel="prev" href="../primitives/">
       
       
+        <link rel="next" href="../../../1eds/">
       
-      <link rel="icon" href="../images/favicon.ico">
+      
+      <link rel="icon" href="../../../images/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>️⚙️ Demo - Maths au CSJA</title>
+        <title>Primitives (2) - Maths au CSJA</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
   
@@ -66,7 +68,7 @@ If not, see <https://www.gnu.org/licenses/>.
     
     
 
-<script type="importmap">{"imports": {"functools": "../js-libs/functools.js", "jsLogger": "../js-libs/jsLogger.js", "process_and_gui": "../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../js-per-pages/qcms-qcm.js", "start-pyodide": "../js-per-pages/start-pyodide.js", "overlord": "../js-scripts/overlord.js", "subscriptions": "../js-scripts/subscriptions.js"}}</script>
+<script type="importmap">{"imports": {"functools": "../../../js-libs/functools.js", "jsLogger": "../../../js-libs/jsLogger.js", "process_and_gui": "../../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../../../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../../../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../../js-per-pages/start-pyodide.js", "overlord": "../../../js-scripts/overlord.js", "subscriptions": "../../../js-scripts/subscriptions.js"}}</script>
 
 
 
@@ -80,22 +82,14 @@ If not, see <https://www.gnu.org/licenses/>.
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/js/jquery.terminal.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.min.js" integrity="sha512-GQpIYSKNIPIC763JKTNALj+t18/nfLdzw5gITgFGa31aK/4NmjyPKsfqrjh7CuzpJaG3nqEleeVcWUhHad9Axg==" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js" integrity="sha512-iK7yTkCkv7MbFwTqRgHTbmIqoiiLq6BsyNjymnFyB5a7pEQwYThj9QIgqBy9+XPPwj7+hAEHyR2npOHL1bz4Qg==" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
-
-<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
-
-<script src="../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+<script src="../../../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
 <script type="text/javascript">
 if(!window.CONFIG) window.CONFIG={}
 CONFIG._devMode=true
 CONFIG.argsFigureDivId="figure1"
-CONFIG.baseUrl=".."
-CONFIG.buttonIconsDirectory="../assets/images"
+CONFIG.baseUrl="../../.."
+CONFIG.buttonIconsDirectory="../../../assets/images"
 CONFIG.editorFontFamily="monospace"
 CONFIG.editorFontSize=15
 CONFIG.exportZipPrefix=""
@@ -112,31 +106,31 @@ CONFIG.siteUrl="https://moussatat.github.io/"
 CONFIG.version="5.4.16"
 CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au projet en cours a \u00e9t\u00e9 trouv\u00e9e. Voulez-vous la supprimer ?\n(Vous risquez de perdre des donn\u00e9es d'un site voisin !)", "plural": "{N} entr\u00e9es non associ\u00e9es au projet en cours ont \u00e9t\u00e9 trouv\u00e9es. Voulez-vous toutes les supprimer ?\n(Vous risquez de perdre des donn\u00e9es d'un site voisin !)"}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "check": {"msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "em": 9, "kbd": ""}, "comments": {"msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "em": 17, "kbd": "Ctrl+I"}, "complementTrash": {"msg": "Nota : 1 entr\u00e9e non associ\u00e9e \u00e0 ce projet", "plural": "Nota : {N} entr\u00e9es non associ\u00e9es \u00e0 ce projet"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "corrBtn": {"msg": "Tester la correction (serve)", "em": 0, "kbd": ""}, "delayedReveal": {"msg": "Solution affich\u00e9e dans {N} essai(s).", "format": "info"}, "download": {"msg": "T\u00e9l\u00e9charger", "em": 0, "kbd": ""}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "feedback": {"msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "em": 19, "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "fullScreen": {"msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)<br>(<kbd>Esc</kbd>)", "em": 10, "kbd": "Esc"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "loadIde": {"msg": "Configure l'IDE avec ces donn\u00e9es", "em": 10, "kbd": ""}, "noCodesTrash": {"msg": "Pas de codes trouv\u00e9s pour le projet en cours sur ce navigateur."}, "p5Start": {"msg": "D\u00e9marre l'animation", "em": 0, "kbd": ""}, "p5Step": {"msg": "Avance d'une image", "em": 0, "kbd": ""}, "p5Stop": {"msg": "Arr\u00eate l'animation", "em": 0, "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "play": {"msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "em": 9, "kbd": "Ctrl+S"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "pyBtn": {"msg": "Ex\u00e9cuter le code", "em": 9, "kbd": ""}, "qcmCheckTip": {"msg": "V\u00e9rifier les r\u00e9ponses", "em": 11, "kbd": ""}, "qcmMaskTip": {"msg": "Les r\u00e9ponses resteront cach\u00e9es...", "em": 11, "kbd": ""}, "qcmRedoTip": {"msg": "Recommencer", "em": 9, "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "rem": {"msg": "Remarques"}, "removeTrash": {"msg": "Il y a actuellement 1 r\u00e9f\u00e9rence enregistr\u00e9e sur ce navigateur.\nVoulez-vous l'effacer ?", "plural": "Il y a actuellement {N} r\u00e9f\u00e9rences enregistr\u00e9es sur ce navigateur.\nVoulez-vous toutes les effacer ?"}, "restart": {"msg": "R\u00e9initialiser l'\u00e9diteur", "em": 0, "kbd": ""}, "restartConfirm": {"msg": "ATTENTION: r\u00e9initialiser l'\u00e9diteur fera perdre les anciens codes, status de validation et historiques.", "em": 0, "kbd": ""}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "save": {"msg": "Sauvegarder dans le navigateur", "em": 0, "kbd": ""}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "show": {"msg": "Afficher corr & REMs", "em": 0, "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "splitScreen": {"msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "em": 23, "kbd": ""}, "storageIdCollision": {"msg": "Contacter l'auteur du site web en lui fournissant ce message complet. Une collision potentielle d'ids entre plusieurs projets \u00e0 \u00e9t\u00e9 rencontr\u00e9e. Il faut ajouter ou modifier l'argument ID pour l'IDE suivant:"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "test1Ide": {"msg": "Lance ce test", "em": 7, "kbd": ""}, "testIdes": {"msg": "Lance tous les tests...", "em": 7, "kbd": ""}, "testStop": {"msg": "Arr\u00eate les tests", "em": 6, "kbd": ""}, "tests": {"msg": "\n\n\n# Tests\n\n\n", "as_pattern": "^#\\s*Tests"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "tipTrash": {"msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "em": 15, "kbd": ""}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "upload": {"msg": "T\u00e9l\u00e9verser", "em": 0, "kbd": ""}, "validation": {"msg": "Validation - ", "format": "info"}, "wrapTerm": {"msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "em": 19, "kbd": ""}, "zip": {"msg": "Archiver les codes des IDEs exportables de la page", "em": 14, "kbd": ""}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}
 </script>
-<script src="../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+<script src="../../../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
-<script src="../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+<script src="../../../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../js-libs/jsLogger.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+<script src="../../../js-libs/jsLogger.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../js-libs/mathjax-libs.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+<script src="../../../js-libs/mathjax-libs.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
-<script src="../js-libs/process_and_gui.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+<script src="../../../js-libs/process_and_gui.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<link href="../pyodide-css/0-generic.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+<link href="../../../pyodide-css/0-generic.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../pyodide-css/btns-header.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+<link href="../../../pyodide-css/btns-header.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../pyodide-css/history.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+<link href="../../../pyodide-css/history.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../pyodide-css/hourglass.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+<link href="../../../pyodide-css/hourglass.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../pyodide-css/ide.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+<link href="../../../pyodide-css/ide.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../pyodide-css/qcm.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+<link href="../../../pyodide-css/qcm.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../pyodide-css/terminal.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+<link href="../../../pyodide-css/terminal.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
-<link href="../pyodide-css/testing.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+<link href="../../../pyodide-css/testing.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
 
@@ -147,11 +141,11 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
     
     
-      <link rel="stylesheet" href="../xtra/stylesheets/ajustements.css">
+      <link rel="stylesheet" href="../../../xtra/stylesheets/ajustements.css">
     
-      <link rel="stylesheet" href="../xtra/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../xtra/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -187,7 +181,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
     <div data-md-component="skip">
       
         
-        <a href="#demo-de-capacites" class="md-skip">
+        <a href="#methodes-avancees-du-calcul-de-primitives" class="md-skip">
           Aller au contenu
         </a>
       
@@ -201,9 +195,9 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="En-tête">
-    <a href=".." title="Maths au CSJA" class="md-header__button md-logo" aria-label="Maths au CSJA" data-md-component="logo">
+    <a href="../../.." title="Maths au CSJA" class="md-header__button md-logo" aria-label="Maths au CSJA" data-md-component="logo">
       
-  <img src="../images/logo.svg" alt="logo">
+  <img src="../../../images/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -220,7 +214,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ️⚙️ Demo
+              Primitives (2)
             
           </span>
         </div>
@@ -338,7 +332,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -355,6 +349,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
   
+    
+  
   
     
     
@@ -362,11 +358,13 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../teds/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
   
@@ -389,7 +387,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
     
     
       <li class="md-tabs__item">
-        <a href="../1eds/" class="md-tabs__link">
+        <a href="../../../1eds/" class="md-tabs__link">
           
   
   
@@ -409,7 +407,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
     
     
       <li class="md-tabs__item">
-        <a href="../2gt/" class="md-tabs__link">
+        <a href="../../../2gt/" class="md-tabs__link">
           
   
   
@@ -429,7 +427,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
     
     
       <li class="md-tabs__item">
-        <a href="../python/" class="md-tabs__link">
+        <a href="../../../python/" class="md-tabs__link">
           
   
   
@@ -449,7 +447,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
     
     
       <li class="md-tabs__item">
-        <a href="../snt/" class="md-tabs__link">
+        <a href="../../../snt/" class="md-tabs__link">
           
   
   
@@ -469,7 +467,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
     
     
       <li class="md-tabs__item">
-        <a href="../dnl/" class="md-tabs__link">
+        <a href="../../../dnl/" class="md-tabs__link">
           
   
   
@@ -487,7 +485,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-tabs__item">
-      <a href="../tags/" class="md-tabs__link">
+      <a href="../../../tags/" class="md-tabs__link">
         
   
   
@@ -504,11 +502,9 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../../demo/" class="md-tabs__link">
         
   
   
@@ -532,9 +528,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -545,9 +539,9 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Maths au CSJA" class="md-nav__button md-logo" aria-label="Maths au CSJA" data-md-component="logo">
+    <a href="../../.." title="Maths au CSJA" class="md-nav__button md-logo" aria-label="Maths au CSJA" data-md-component="logo">
       
-  <img src="../images/logo.svg" alt="logo">
+  <img src="../../../images/logo.svg" alt="logo">
 
     </a>
     Maths au CSJA
@@ -574,7 +568,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -593,24 +587,29 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -623,7 +622,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Terminale
@@ -634,6 +633,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
                 
   
   
+    
+  
   
   
     
@@ -644,11 +645,11 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
@@ -664,7 +665,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             Ens. de spécialité
@@ -678,7 +679,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../teds/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -703,7 +704,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../teds/progression2025/" class="md-nav__link">
+      <a href="../../progression2025/" class="md-nav__link">
         
   
   
@@ -728,7 +729,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../teds/deroulement2024/" class="md-nav__link">
+      <a href="../../deroulement2024/" class="md-nav__link">
         
   
   
@@ -750,6 +751,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
                 
   
   
+    
+  
   
   
     
@@ -760,11 +763,11 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
@@ -780,7 +783,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1_4">
             <span class="md-nav__icon md-icon"></span>
             Exerciseurs
@@ -794,7 +797,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../teds/exerciseurs/primitives/" class="md-nav__link">
+      <a href="../primitives/" class="md-nav__link">
         
   
   
@@ -816,10 +819,19 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../teds/exerciseurs/primitives2/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -832,6 +844,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 
       </a>
+      
     </li>
   
 
@@ -908,7 +921,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../1eds/" class="md-nav__link">
+      <a href="../../../1eds/" class="md-nav__link">
         
   
   
@@ -933,7 +946,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../1eds/progression2025/" class="md-nav__link">
+      <a href="../../../1eds/progression2025/" class="md-nav__link">
         
   
   
@@ -958,7 +971,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../1eds/deroulement2024/" class="md-nav__link">
+      <a href="../../../1eds/deroulement2024/" class="md-nav__link">
         
   
   
@@ -1031,7 +1044,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../2gt/" class="md-nav__link">
+      <a href="../../../2gt/" class="md-nav__link">
         
   
   
@@ -1063,7 +1076,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../2gt/progression2025/" class="md-nav__link">
+      <a href="../../../2gt/progression2025/" class="md-nav__link">
         
   
   
@@ -1095,7 +1108,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../2gt/deroulement2024/" class="md-nav__link">
+      <a href="../../../2gt/deroulement2024/" class="md-nav__link">
         
   
   
@@ -1168,7 +1181,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/" class="md-nav__link">
+      <a href="../../../python/" class="md-nav__link">
         
   
   
@@ -1232,7 +1245,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-00/" class="md-nav__link">
+      <a href="../../../python/python-2gt-00/" class="md-nav__link">
         
   
   
@@ -1255,7 +1268,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-01/" class="md-nav__link">
+      <a href="../../../python/python-2gt-01/" class="md-nav__link">
         
   
   
@@ -1278,7 +1291,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-02/" class="md-nav__link">
+      <a href="../../../python/python-2gt-02/" class="md-nav__link">
         
   
   
@@ -1301,7 +1314,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-03/" class="md-nav__link">
+      <a href="../../../python/python-2gt-03/" class="md-nav__link">
         
   
   
@@ -1324,7 +1337,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-04/" class="md-nav__link">
+      <a href="../../../python/python-2gt-04/" class="md-nav__link">
         
   
   
@@ -1347,7 +1360,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-05/" class="md-nav__link">
+      <a href="../../../python/python-2gt-05/" class="md-nav__link">
         
   
   
@@ -1370,7 +1383,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-06/" class="md-nav__link">
+      <a href="../../../python/python-2gt-06/" class="md-nav__link">
         
   
   
@@ -1393,7 +1406,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-07/" class="md-nav__link">
+      <a href="../../../python/python-2gt-07/" class="md-nav__link">
         
   
   
@@ -1416,7 +1429,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-08/" class="md-nav__link">
+      <a href="../../../python/python-2gt-08/" class="md-nav__link">
         
   
   
@@ -1439,7 +1452,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-09/" class="md-nav__link">
+      <a href="../../../python/python-2gt-09/" class="md-nav__link">
         
   
   
@@ -1462,7 +1475,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-10/" class="md-nav__link">
+      <a href="../../../python/python-2gt-10/" class="md-nav__link">
         
   
   
@@ -1485,7 +1498,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-2gt-11/" class="md-nav__link">
+      <a href="../../../python/python-2gt-11/" class="md-nav__link">
         
   
   
@@ -1508,7 +1521,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/python-1eds-00/" class="md-nav__link">
+      <a href="../../../python/python-1eds-00/" class="md-nav__link">
         
   
   
@@ -1580,7 +1593,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/TP_alien/" class="md-nav__link">
+      <a href="../../../python/TP_alien/" class="md-nav__link">
         
   
   
@@ -1603,7 +1616,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/TP_turtle/" class="md-nav__link">
+      <a href="../../../python/TP_turtle/" class="md-nav__link">
         
   
   
@@ -1626,7 +1639,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/TP_kandinsky/" class="md-nav__link">
+      <a href="../../../python/TP_kandinsky/" class="md-nav__link">
         
   
   
@@ -1657,7 +1670,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/bac_a_sable/" class="md-nav__link">
+      <a href="../../../python/bac_a_sable/" class="md-nav__link">
         
   
   
@@ -1721,7 +1734,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/TP_test_p5/" class="md-nav__link">
+      <a href="../../../python/TP_test_p5/" class="md-nav__link">
         
   
   
@@ -1744,7 +1757,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/TP_test_alien/" class="md-nav__link">
+      <a href="../../../python/TP_test_alien/" class="md-nav__link">
         
   
   
@@ -1767,7 +1780,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/TP_test_matplolib/" class="md-nav__link">
+      <a href="../../../python/TP_test_matplolib/" class="md-nav__link">
         
   
   
@@ -1790,7 +1803,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/TP_test_sympy/" class="md-nav__link">
+      <a href="../../../python/TP_test_sympy/" class="md-nav__link">
         
   
   
@@ -1813,7 +1826,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../python/TP_test_turtle/" class="md-nav__link">
+      <a href="../../../python/TP_test_turtle/" class="md-nav__link">
         
   
   
@@ -1892,7 +1905,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/" class="md-nav__link">
+      <a href="../../../snt/" class="md-nav__link">
         
   
   
@@ -1956,7 +1969,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/CodagesA/" class="md-nav__link">
+      <a href="../../../snt/CodagesA/" class="md-nav__link">
         
   
   
@@ -1979,7 +1992,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/CodagesB/" class="md-nav__link">
+      <a href="../../../snt/CodagesB/" class="md-nav__link">
         
   
   
@@ -2002,7 +2015,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/CodagesC/" class="md-nav__link">
+      <a href="../../../snt/CodagesC/" class="md-nav__link">
         
   
   
@@ -2025,7 +2038,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/CodagesD/" class="md-nav__link">
+      <a href="../../../snt/CodagesD/" class="md-nav__link">
         
   
   
@@ -2097,7 +2110,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/DonneesA/" class="md-nav__link">
+      <a href="../../../snt/DonneesA/" class="md-nav__link">
         
   
   
@@ -2120,7 +2133,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/DonneesB/" class="md-nav__link">
+      <a href="../../../snt/DonneesB/" class="md-nav__link">
         
   
   
@@ -2143,7 +2156,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/DonneesC/" class="md-nav__link">
+      <a href="../../../snt/DonneesC/" class="md-nav__link">
         
   
   
@@ -2166,7 +2179,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/DonneesD/" class="md-nav__link">
+      <a href="../../../snt/DonneesD/" class="md-nav__link">
         
   
   
@@ -2238,7 +2251,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/InternetA/" class="md-nav__link">
+      <a href="../../../snt/InternetA/" class="md-nav__link">
         
   
   
@@ -2261,7 +2274,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/InternetB/" class="md-nav__link">
+      <a href="../../../snt/InternetB/" class="md-nav__link">
         
   
   
@@ -2284,7 +2297,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/InternetC/" class="md-nav__link">
+      <a href="../../../snt/InternetC/" class="md-nav__link">
         
   
   
@@ -2307,7 +2320,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/InternetD/" class="md-nav__link">
+      <a href="../../../snt/InternetD/" class="md-nav__link">
         
   
   
@@ -2330,7 +2343,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/InternetE/" class="md-nav__link">
+      <a href="../../../snt/InternetE/" class="md-nav__link">
         
   
   
@@ -2402,7 +2415,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/WebA/" class="md-nav__link">
+      <a href="../../../snt/WebA/" class="md-nav__link">
         
   
   
@@ -2425,7 +2438,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/WebB/" class="md-nav__link">
+      <a href="../../../snt/WebB/" class="md-nav__link">
         
   
   
@@ -2448,7 +2461,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/WebC/" class="md-nav__link">
+      <a href="../../../snt/WebC/" class="md-nav__link">
         
   
   
@@ -2471,7 +2484,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/WebD/" class="md-nav__link">
+      <a href="../../../snt/WebD/" class="md-nav__link">
         
   
   
@@ -2494,7 +2507,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/WebE/" class="md-nav__link">
+      <a href="../../../snt/WebE/" class="md-nav__link">
         
   
   
@@ -2566,7 +2579,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/ReseauxSociauxA/" class="md-nav__link">
+      <a href="../../../snt/ReseauxSociauxA/" class="md-nav__link">
         
   
   
@@ -2589,7 +2602,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/ReseauxSociauxB/" class="md-nav__link">
+      <a href="../../../snt/ReseauxSociauxB/" class="md-nav__link">
         
   
   
@@ -2612,7 +2625,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/ReseauxSociauxC/" class="md-nav__link">
+      <a href="../../../snt/ReseauxSociauxC/" class="md-nav__link">
         
   
   
@@ -2635,7 +2648,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/ReseauxSociauxD/" class="md-nav__link">
+      <a href="../../../snt/ReseauxSociauxD/" class="md-nav__link">
         
   
   
@@ -2658,7 +2671,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/ReseauxSociauxE/" class="md-nav__link">
+      <a href="../../../snt/ReseauxSociauxE/" class="md-nav__link">
         
   
   
@@ -2681,7 +2694,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/ReseauxSociauxCours/" class="md-nav__link">
+      <a href="../../../snt/ReseauxSociauxCours/" class="md-nav__link">
         
   
   
@@ -2753,7 +2766,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/ObjetsConnectesA/" class="md-nav__link">
+      <a href="../../../snt/ObjetsConnectesA/" class="md-nav__link">
         
   
   
@@ -2825,7 +2838,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/NumeriqueA/" class="md-nav__link">
+      <a href="../../../snt/NumeriqueA/" class="md-nav__link">
         
   
   
@@ -2848,7 +2861,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/NumeriqueB/" class="md-nav__link">
+      <a href="../../../snt/NumeriqueB/" class="md-nav__link">
         
   
   
@@ -2871,7 +2884,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../snt/NumeriqueC/" class="md-nav__link">
+      <a href="../../../snt/NumeriqueC/" class="md-nav__link">
         
   
   
@@ -2950,7 +2963,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../dnl/" class="md-nav__link">
+      <a href="../../../dnl/" class="md-nav__link">
         
   
   
@@ -2975,7 +2988,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../dnl/archive2025/" class="md-nav__link">
+      <a href="../../../dnl/archive2025/" class="md-nav__link">
         
   
   
@@ -3007,7 +3020,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
     <li class="md-nav__item">
-      <a href="../tags/" class="md-nav__link">
+      <a href="../../../tags/" class="md-nav__link">
         
   
   
@@ -3026,32 +3039,10 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    ️⚙️ Demo
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../demo/" class="md-nav__link">
         
   
   
@@ -3062,62 +3053,6 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#apercu-ide" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aperçu IDE
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apercu-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aperçu section
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apercu-terminal" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aperçu terminal
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apercu-multi_qcm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aperçu multi_qcm
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3130,9 +3065,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -3143,50 +3076,6 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
     
   
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#apercu-ide" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aperçu IDE
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apercu-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aperçu section
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apercu-terminal" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aperçu terminal
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apercu-multi_qcm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aperçu multi_qcm
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -3203,7 +3092,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
                   
 
   
-    <a href="https://github.com/moussatat/journal/edit/main/docs/demo/index.md" title="Editer cette page" class="md-content__button md-icon">
+    <a href="https://github.com/moussatat/journal/edit/main/docs/teds/exerciseurs/primitives2.md" title="Editer cette page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -3212,211 +3101,21 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
     
       
     
-    <a href="https://github.com/moussatat/journal/raw/main/docs/demo/index.md" title="Consulter la source de cette page" class="md-content__button md-icon">
+    <a href="https://github.com/moussatat/journal/raw/main/docs/teds/exerciseurs/primitives2.md" title="Consulter la source de cette page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="demo-de-capacites">Demo de capacités<a class="headerlink" href="#demo-de-capacites" title="Permanent link">⚓︎</a></h1>
-<p><em>Version actuelle de PMT : 5.4.16</em></p>
-<p><br> </p>
-<h2 id="apercu-ide">Aperçu <code>IDE</code><a class="headerlink" href="#apercu-ide" title="Permanent link">⚓︎</a></h2>
-<p>Une installation complète permet d'obtenir ce résultat, en ajoutant cette commande dans un fichier markdown :</p>
-<div class="highlight"><span class="filename">Markdown</span><pre><span></span><code>{{ IDE(&#39;exo&#39;) }}
-</code></pre></div>
-<p><br></p>
-<div id="global_editor_c4d4e540ac366b54e104697bb1def131b7647fb5" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_c4d4e540ac366b54e104697bb1def131b7647fb5"></div><span id="comment_editor_c4d4e540ac366b54e104697bb1def131b7647fb5" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:10;" id="term_editor_c4d4e540ac366b54e104697bb1def131b7647fb5" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip " data-tip-txt="Exécuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)" data-tip-width="9"><img src="../assets/images/icons8-play-64.png" class="skip_light_box" /></button><button btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip " data-tip-txt="Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)" data-tip-width="9"><img src="../assets/images/icons8-check-64.png" class="skip_light_box" /></button><button btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip " data-tip-txt="Télécharger"><img src="../assets/images/icons8-download-64.png" class="skip_light_box" /></button><button btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip " data-tip-txt="Téléverser"><img src="../assets/images/icons8-upload-64.png" class="skip_light_box" /></button><button btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip " data-tip-txt="Réinitialiser l'éditeur"><img src="../assets/images/icons8-restart-64.png" class="skip_light_box" /></button><button btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip " data-tip-txt="Sauvegarder dans le navigateur"><img src="../assets/images/icons8-save-64.png" class="skip_light_box" /></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_c4d4e540ac366b54e104697bb1def131b7647fb5">5</span>/<span id="compteur_editor_c4d4e540ac366b54e104697bb1def131b7647fb5-low">5</span></div></div></div></div>
+<h1 id="methodes-avancees-du-calcul-de-primitives">Méthodes avancées du calcul de primitives<a class="headerlink" href="#methodes-avancees-du-calcul-de-primitives" title="Permanent link">⚓︎</a></h1>
+<iframe src="../assets/primitives-identification-selection.html" width="100%" height="900" frameborder="0" allowfullscreen></iframe>
 
-<div class="py_mk_hidden" id="solution_editor_c4d4e540ac366b54e104697bb1def131b7647fb5">
-.128013w odbSy2=nr:tg%_Pevfspculamih/1k)(050e0s0n0A0C0z0v0c0x0z0A0v0v0j010n0C0w010406050v0y0B0B0A0l0h040g0d0z0y0Z0d0k050E0*0,0.0:0(0w0405130|160E130(0e0C0t0R0T0V0X0D0C0o0D0z1k0D0n0$050M0f0z0s1f0U0W011j1l1n1l0n1t1v1r0n0l140n0D0R0?0v0w0A0k0X0i011x1h010u0O0s0k0A0B0s1r1Q1S1X1z1!1v1%1)0$0a0c0r0l0d0w0d0v0C0_0k0c0K1O0l0l0s0x210|1,0k140E1M2e1J1L1K1s0e1.0X1n0k1$1~1r1c1e0S1y2o0C2q0k0d2u1r0w27142c2e2I0)1R222w1Y2B0l0-0z0$0F2b2M0%2L1-2O1z2Q2S0$0i2W1S2e2F0s2e2u2h0e1L2m2#0X0x2C1*142;152G2Z2d2+332{0K2H2M2n010G0$0K0u34382!1g1z0b0$0c3g323a0k0u0$0s0v0n0q1R0C0l3o2c3a0#040I3B392_010k0$0{0}2X3p3J3E0H0m3g060c3X3n3C3J3c04270n0y0l3N2I3Z3I3j0X0d3l042B0n3g3.3i2x3K3M3H3|1Y0d0$0p402N3:010B0C2)3V0|362/17310E2 2f2?0|2i4n0A1u4g4j1d2Y4j0L0N0P04.
-</div>
-<h2 id="apercu-section">Aperçu <code>section</code><a class="headerlink" href="#apercu-section" title="Permanent link">⚓︎</a></h2>
-<div class="highlight"><span class="filename">Markdown</span><pre><span></span><code>{{ section(&#39;exo&#39;, &#39;secrets&#39;) }}
-</code></pre></div>
-<p><br></p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">📋 Texte</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>def tests():
-    for n in range(100):
-        val = est_pair(n)
-        exp = n%2 == 0
-
-        msg = f&quot;est_pair({n})&quot;                           # Minimum vital
-        msg = f&quot;est_pair({n}): valeur renvoyée {val}&quot;    # Conseillé
-        msg = f&quot;est_pair({n}): {val} devrait être {exp}&quot; # La totale
-
-        assert val == exp, msg
-
-tests()         # Ne pas oublier d&#39;appeler la fonction de tests... ! x)
-del tests       # Si vous ne voulez pas laisser de traces...
-</code></pre></div></td></tr></table></div>
-<h2 id="apercu-terminal">Aperçu <code>terminal</code><a class="headerlink" href="#apercu-terminal" title="Permanent link">⚓︎</a></h2>
-<div class="highlight"><span class="filename">Markdown</span><pre><span></span><code>{{ terminal(FILL=&quot;3+9&quot;) }}
-</code></pre></div>
-<p><br></p>
-<div style="--n-buttons:2" class="term_wrapper"><div style="line-height:24px;--n-lines:10;" id="term_only_23c0f057abba819f87727c822c2ec5b2c0156a32" class="py_mk_wrapper term_solo py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div>
-
-<h2 id="apercu-multi_qcm">Aperçu <code>multi_qcm</code><a class="headerlink" href="#apercu-multi_qcm" title="Permanent link">⚓︎</a></h2>
-<details class="help">
-<summary>Appel complet de la macro</summary>
-<div class="highlight"><span class="filename">Markdown</span><pre><span></span><code>{{ multi_qcm(
-    [
-        &quot;&quot;&quot;
-        On a saisi le code suivant :
-<span class="sb">        ```python</span><span class="w"> </span>title=&#39;&#39;
-        <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>
-        <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
-<span class="sb">        ```</span>
-
-        Que vaut <span class="sb">`n`</span> après l&#39;exécution du code ?
-        &quot;&quot;&quot;,
-        [
-            &quot;0&quot;,
-            &quot;1&quot;,
-            &quot;2&quot;,
-            &quot;4&quot;,
-        ],
-        [2]
-    ],
-    [
-        &quot;Quelle est la machine qui va exécuter un programme JavaScript inclus dans une page HTML ?&quot;,
-        [
-            &quot;La machine de l’utilisateur sur laquelle s’exécute le navigateur web.&quot;,
-            &quot;La machine de l’utilisateur ou du serveur, selon celle qui est la plus disponible.&quot;,
-            &quot;La machine de l’utilisateur ou du serveur, suivant la conﬁdentialité des données manipulées.&quot;,
-            &quot;Le serveur web sur lequel est stockée la page HTML.&quot;
-        ],
-        [1],
-        {&#39;multi&#39;:True}
-    ],
-    [
-        &quot;&quot;&quot;
-        Cocher toutes les bonnes réponses, avec :
-<span class="sb">        ```python</span><span class="w"> </span>title=&#39;&#39;
-        <span class="n">meubles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Table&#39;</span><span class="p">,</span> <span class="s1">&#39;Commode&#39;</span><span class="p">,</span> <span class="s1">&#39;Armoire&#39;</span><span class="p">,</span> <span class="s1">&#39;Placard&#39;</span><span class="p">,</span> <span class="s1">&#39;Buffet&#39;</span><span class="p">]</span>
-<span class="sb">        ```</span>
-        &quot;&quot;&quot;,
-        [
-            &quot;<span class="sb">`#!py meubles[1]`</span> vaut <span class="sb">`#!py Table`</span>&quot;,
-            &quot;<span class="sb">`#!py meubles[1]`</span> vaut <span class="sb">`#!py Commode`</span>&quot;,
-            &quot;<span class="sb">`#!py meubles[4]`</span> vaut <span class="sb">`#!py Buffet`</span>&quot;,
-            &quot;<span class="sb">`#!py meubles[5]`</span> vaut <span class="sb">`#!py Buffet`</span>&quot;,
-        ],
-        [2, 3]
-    ],
-    multi = False,
-    qcm_title = &quot;Un QCM avec mélange automatique des questions (bouton en bas pour recommencer)&quot;,
-    DEBUG = False,
-    shuffle = True,
-    description = &quot;<span class="ge">_(Une description additionnelle peut être ajoutée au début de l&#39;admonition...)_</span>\n{style=\&quot;color:orange\&quot;}&quot;
-) }}
-</code></pre></div>
-</details>
-<p><br></p>
-<div class="admonition tip py_mk_admonition_qcm qcm_shuffle qcm_single py_mk_qcm_id_00000">
-<p class="admonition-title">Un QCM avec mélange automatique des questions (bouton en bas pour recommencer)</p>
-<p style="color:orange"><em>(Une description additionnelle peut être ajoutée au début de l'admonition...)</em></p>
-<p></p KEEP><ol class="py_mk_questions_list_qcm py_mk_question_qcm"></p>
-<p></p KEEP><li class="py_mk_question_qcm qcm_single qcm_shuffle" correct="2" markdown>
-On a saisi le code suivant :
-<div class="highlight"><pre><span></span><code><span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
-</code></pre></div></p>
-<p>Que vaut <code>n</code> après l'exécution du code ?</p>
-<p></p KEEP><ul class="py_mk_item_qcm">
-<li class="py_mk_item_qcm" markdown="1">
-0</p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-1</p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-2</p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-4</p>
-<p></li>
-</ul>
-</li></p>
-<p></p KEEP><li class="py_mk_question_qcm qcm_multi qcm_shuffle" correct="1" markdown>
-Quelle est la machine qui va exécuter un programme JavaScript inclus dans une page HTML ?</p>
-<p></p KEEP><ul class="py_mk_item_qcm">
-<li class="py_mk_item_qcm" markdown="1">
-La machine de l’utilisateur sur laquelle s’exécute le navigateur web.</p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-La machine de l’utilisateur ou du serveur, selon celle qui est la plus disponible.</p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-La machine de l’utilisateur ou du serveur, suivant la conﬁdentialité des données manipulées.</p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-Le serveur web sur lequel est stockée la page HTML.</p>
-<p></li>
-</ul>
-</li></p>
-<p></p KEEP><li class="py_mk_question_qcm qcm_multi qcm_shuffle" correct="2,3" markdown>
-Cocher toutes les bonnes réponses, avec :
-<div class="highlight"><pre><span></span><code><span class="n">meubles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Table&#39;</span><span class="p">,</span> <span class="s1">&#39;Commode&#39;</span><span class="p">,</span> <span class="s1">&#39;Armoire&#39;</span><span class="p">,</span> <span class="s1">&#39;Placard&#39;</span><span class="p">,</span> <span class="s1">&#39;Buffet&#39;</span><span class="p">]</span>
-</code></pre></div></p>
-<p></p KEEP><ul class="py_mk_item_qcm">
-<li class="py_mk_item_qcm" markdown="1">
-<code class="highlight"><span class="n">meubles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></code> vaut <code class="highlight"><span class="n">Table</span></code></p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-<code class="highlight"><span class="n">meubles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></code> vaut <code class="highlight"><span class="n">Commode</span></code></p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-<code class="highlight"><span class="n">meubles</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span></code> vaut <code class="highlight"><span class="n">Buffet</span></code></p>
-<p></li>
-<li class="py_mk_item_qcm" markdown="1">
-<code class="highlight"><span class="n">meubles</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span></code> vaut <code class="highlight"><span class="n">Buffet</span></code></p>
-<p></li>
-</ul>
-</li></p>
-<p></p KEEP></ol></p>
-</div><script type="text/javascript">
+<iframe src="../assets/primitives-decomposition-selection.html" width="100%" height="900" frameborder="0" allowfullscreen></iframe><script type="text/javascript">
 CONFIG.needMermaid = false;
-CONFIG.overlordClasses = ["Qcm", "Ide", "Terminal", "GlobalRunnersManager"];
-globalThis.PAGE_IDES_CONFIG = '.\x1ewAo6]dby2nC:x.g%_ezs0cuamhI1ktT+(4V }8,7ES=-[5rvfLUpFlN9{i!M3q)\x1e0(010r0f0)0D0c0U0q0v0H0f0H0r0T0H0u0x0v0,0d0d0g100r0B0u0H0d0%0N0g0g0B0f0r0W0B0,0B0g0N0d0H0N0W18010l0J0/0Z0h0q0j0x0y0r1x0J011k0y0c0R0r0m0c0n1B010M1J0r0j0V0`0c0j0D1X0D1I010v0#0x0t0t0J0P0D130C0l090j0J1|0J09011 1 0J0G0A1$0r0U0W130r1~0w0u0u0r0u0J0f092d2f0%0v0U0)0U2b0f0x0j1:0#002k2e0r0%0j1#0v2z2m0.1~202K1`1}2i1l0J0q0q0)0j0?2R0G0t0r0#0W0.1y2Y2!0n2R0t0D0C0Q0S0e2M1}1k0W0J0Z0w0t0z2X2Z0W1V0V2$0J2(0W2*0q2,0C0n0x0Z0Z1X0f0G322=1|2@2_0c0Z2~2!332r0D0w0U1{3537391S3n0G0.3j2O2^0)0t0q0r0y0Z0D0h3p2#1y3s3u1{2D0D342 3y2-1U1W1Y0q1%0U0y1!261$1*3#012{273,1%3.1y1K2P0r2,0q0Z0x2q0G0j2$3E0n473:0v0^0_4a3-1)3`3l3}0D3 410U43451{1}3S3v0J3V4t0p0i3:2`0g0#0)0v3(4i0t1*1.2Y0U3W4i4k420,2I3H0J0!0x0#2Y1`4I274L3~40420i0H4Q1:0E0U0w1H1V012Y2o0r4j1%2,4G4g2P4_0D0t3C1_4p1|0W0^4t0J2T0J0U2u0o0r0G1b0u4o2N2N0V4U0J0Q0J4M4$4m443E2N1P0Z5n4v0i5n5o0u1`5u1}0y0t0o5y0W1 5q4l0G0(0j0K3D015j5V5W5X0J030J0+2T0)0y0w0y0J0V0?4U5F1|5H5J5o5L0:4#5O5Q5S1y5l0#0r3u5a1X0V0c0h2G2B2b0(5 0K221}5!0k1#2Y0)0#0#680%5:0J5=5K5M5`425|336b4U0K2O0V5b0?2c2A0x0D2r1z5w6d5U5!0X0x0J0@1?605E535j4Y4K5,5m0Q5o5w1V5=6V4~502I5X5!0$2b401:0c0w4A0)272i003c3e600U0J1-0J550j0v0D0)1#2O6R4F470n0J0*0J0m3D0j1k0#7d4`5W5!0P0)5,6^1:0j2b650w600s2_1.73411/6|1k6R5b0v3}7f4y0c3~3)3+4d3^4f1J7Q3~7V1(1*6O6Q4=797b0Z7R3W7V6{1$2i0w0J4a7K7K1 7y0D0@0h0x5d1 1V682h6 4B0-4.720t0h2,6n0y6H0)893K1(1`5!3c0U680L1:8j732b7_2b4@8u1:6,0J411(6F2m0D6n7G776n0t0n8m0J0k8v1#3^7@4i5p0m6n0v0w8H2l2B6q681F2b0t7u0w7y5p0U2r626Q6n8#2A0%8u0V6n6=8p8$2n6n1L1G1$1V0P0b0Y0!340)8O7N7~8x8;61720Z0U0c5-8E7K747*7a1{0O0$0I0n3:1P1,0w1k0f1I2:4:9A0#9C0;0q1G0D0z0c0f4{0J9G1W0m9B9D0q0C0a9S9U011B9O1#0q4B0g9$013t4K603:4U7;3 0h9*0j010e4:1B0Z0)0q0a0z0?1H1y0j7B0#4:2r4D4B0y0?1I0R0B4:a5a79,3H7X9%0x8!0c0q4-9}1y0uad8.0q0o9m0w0Z1IaA1J0^1k0_2TaDaFaH1yal1J2Y0-aw8.3/4:aV3 1-0h1I294V0ra09m0W6ka87Y4:6H1%3L4 9,1l7X0Ta?au9,0c0o0q6Y7X6I4.4:4a8;aw3K3I8g0t0C1IaT010z1.0`0z0r0v0C0q0g0Day7Lb81Jbl3Iba0_btbva*2Y4:bzbc0V0r4Ubsbua)4UbGbybm4a8.3)1Ib7a,1J3H0qbK4KbPa+4:8g0m2S1kap7y9S0,aJ01ah0jb.0rb:3}1I0,4:1k4?1.b|a@3K3M3I9+3=4c9Qb|296k3ua;0:0=0@0U3:1k13795l1%380D0f6^4j550_4=3s9SbYad3K9nc57I4K9t3I2,1@6I2ab)bR4;9P0a0q1#0#1Cb59t3J8;0^3Icy38bpcBcQbZ4;0U4Dbz0z1*1a0L0L0r0d0u150x0L0g0f171i0N0u0d0i0i1b0x0x0d0T0B0;1cd20;0x0N0x2g1n0v0W1cd0d70g0%0x0T0i0%0H0W0v0v0B0L3:2,0f9Z0ra(3`3:0D0aav4a4Vc-9H0m7-b(1ybFc.dHcw0`8!cV0W0W1I0i2eb9d(0W0r0;0g1@bX4-0r0K4:7TcV0jcX0q0i0,0v0udq0Tdl1hc 0B0%0W0L0N0N0i0N0v0Ld80v0ibp0T0g0ie50B0T0d0x0,4x1y1A1C1E1G1*1L1R1T9H3%7#3_a=3$1Zd~eL7X013:cb3@7$dMb94beWeMeTa06_4B4D6,aZaUc+4@4E4`e-9(7.4E3*e#eS7Z4jeRe?9I9K9E1y9%f19Y9N9P9R9F9 9V9X9L9!9$fc9(9{9Pb`9-9/9;0D9?a?4B1X9`9|9~a00ha2a4a61%1Iaa6lcEaf5(ai1yakamfCb|4B2,fba 0@aXbvb@axaP6^aR0JbjaL3?aOaEf!bia!0raWaxe?a#0Za%dT1J2r1MbKb4cI7+2vctcN7Ma;dZa-1l6k0#e_0y1*0,0F0%dGcud$8Z4j0cd*d,d.1Jgk0qd;d?d^1ybY0K0K.'
-</script><script src="../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/1-packagesInstaller-install-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/1-runtimeManager-runtime-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/2-0-runnersManager-runners.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/3-terminalRunner-term.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/4-0-idesManager-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/4-ideLogistic-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/4-ideRunner-ide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/qcms-qcm.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
-<script src="../js-per-pages/start-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
-
+CONFIG.overlordClasses = [];
+globalThis.PAGE_IDES_CONFIG = '.\x1e{}\x1e0a0b.'
+</script>
 
 
 
@@ -3431,8 +3130,6 @@ globalThis.PAGE_IDES_CONFIG = '.\x1ewAo6]dby2nC:x.g%_ezs0cuamhI1ktT+(4V }8,7ES=-
 
   
 
-
-  
 
 
   <form class="md-feedback" name="feedback" hidden>
@@ -3508,12 +3205,10 @@ globalThis.PAGE_IDES_CONFIG = '.\x1ewAo6]dby2nC:x.g%_ezs0cuamhI1ktT+(4V }8,7ES=-
   
     
       
-        
-      
       <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
         
           
-          <a href="../tags/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: ️🏷️ tags">
+          <a href="../primitives/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Primitives (1)">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3523,11 +3218,27 @@ globalThis.PAGE_IDES_CONFIG = '.\x1ewAo6]dby2nC:x.g%_ezs0cuamhI1ktT+(4V }8,7ES=-
                 Précédent
               </span>
               <div class="md-ellipsis">
-                ️🏷️ tags
+                Primitives (1)
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../../../1eds/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Déroulement 2025-2026">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              <div class="md-ellipsis">
+                Déroulement 2025-2026
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
@@ -3683,21 +3394,21 @@ globalThis.PAGE_IDES_CONFIG = '.\x1ewAo6]dby2nC:x.g%_ezs0cuamhI1ktT+(4V }8,7ES=-
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "header.autohide", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "header.autohide", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
     
     
 
 
-      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
-        <script src="../xtra/javascripts/extra.js"></script>
+        <script src="../../../xtra/javascripts/extra.js"></script>
       
-        <script src="../js/open_in_new_tab.js"></script>
+        <script src="../../../js/open_in_new_tab.js"></script>
       
     
-<script src="../js-scripts/overlord.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+<script src="../../../js-scripts/overlord.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
-<script src="../js-scripts/subscriptions.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+<script src="../../../js-scripts/subscriptions.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 
 

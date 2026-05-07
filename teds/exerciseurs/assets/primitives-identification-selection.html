@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exerciseur Expert : Identification de Primitives</title>
+    
+    <!-- Intégration de MathJax pour le rendu LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+    </script>
+
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #2c3e50; padding: 20px; max-width: 850px; margin: 0 auto; line-height: 1.6; }
+        h1 { text-align: center; border-bottom: 2px solid #3f51b5; padding-bottom: 10px; color: #1a237e;}
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; margin-top: 20px; }
+        
+        .menus-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; background: #e8eaf6; padding: 15px; border-radius: 8px; border: 1px solid #c5cae9; }
+        .menu-group { display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 250px; }
+        select { padding: 8px 12px; font-size: 1em; border-radius: 5px; border: 1px solid #9fa8da; background-color: white; cursor: pointer; color: #1a237e; font-family: inherit; width: 100%; max-width: 450px; margin: 0 auto;}
+        select:focus { outline: none; border-color: #3f51b5; }
+        
+        .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        button { font-size: 1em; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .btn-toggle { background-color: #3f51b5; }
+        .btn-toggle:hover { background-color: #303f9f; }
+        .btn-new { background-color: #f39c12; }
+        .btn-new:hover { background-color: #e67e22; }
+        
+        .consigne { font-size: 1.15em; margin-bottom: 10px; color: #283593; font-weight: 500; text-align: left;}
+        .question-box { font-size: 1.3em; margin-bottom: 25px; padding: 15px; background: #fff; border: 2px dashed #9fa8da; border-radius: 8px; overflow-x: auto; text-align: center; }
+        .solution { display: none; margin-top: 15px; padding: 20px; background-color: #fdfefe; border-left: 4px solid #3f51b5; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; border-radius: 0 5px 5px 0; overflow-x: auto;}
+        .solution.active { display: block; animation: fadeIn 0.4s; }
+        .category-badge { display: inline-block; background: #e8eaf6; color: #303f9f; padding: 4px 12px; border-radius: 15px; font-size: 0.9em; margin-bottom: 15px; font-weight: bold; border: 1px solid #c5cae9;}
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <h1>Primitives : par identification</h1>
+    
+    <div class="card">
+        
+        <!-- Menu de paramétrage -->
+        <div class="menus-container">
+            <div class="menu-group" style="flex: 1.5;">
+                <label for="typeSelect" style="margin-bottom: 5px;"><strong>Forme de la fonction :</strong></label>
+                <select id="typeSelect" onchange="generateExercise()">
+                    <option value="all">🔀 Mélange aléatoire (Tout)</option>
+                    <option value="0" selected>1. Exponentielle : P(x)e^{mx+p} avec deg(P)=1</option>
+                    <option value="1">2. Exponentielle : P(x)e^{mx+p} avec deg(P)=2</option>
+                    <option value="2">3. Logarithme : P(x)ln(x) + Q(x) avec deg ≤ 1</option>
+                </select>
+            </div>
+            
+            <div class="menu-group">
+                <label for="coeffSelect" style="margin-bottom: 5px;"><strong>Solution attendue :</strong></label>
+                <select id="coeffSelect" onchange="generateExercise()">
+                    <option value="all">🔀 Mélange (Entiers ou Fractions)</option>
+                    <option value="int" selected>🔢 Coefficients Entiers uniquement</option>
+                    <option value="frac">➗ Coefficients Rationnels (Fractions)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="categoryLabel" class="category-badge">Catégorie</div>
+        
+        <p id="consigneText" class="consigne">Chargement...</p>
+        
+        <!-- Affichage de la question -->
+        <div id="questionArea" class="question-box"></div>
+        
+        <div class="controls">
+            <button id="btnToggle" class="btn-toggle" onclick="toggleSolution()">Voir la correction détaillée</button>
+            <button class="btn-new" onclick="generateExercise()">Nouvel exercice</button>
+        </div>
+        
+        <!-- Affichage de la solution -->
+        <div id="solutionArea" class="solution">
+            <div id="solutionText" style="font-size: 1.1em;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // MOTEUR MATHÉMATIQUE DE FRACTIONS (Rationnels)
+        // ==========================================
+        function gcd(a, b) {
+            a = Math.abs(a); b = Math.abs(b);
+            while (b) { let t = b; b = a % b; a = t; }
+            return a === 0 ? 1 : a;
+        }
+
+        function simplify(f) {
+            let n = f[0], d = f[1];
+            if (d === 0) return [1, 1]; 
+            let sign = (n * d < 0) ? -1 : 1;
+            n = Math.abs(n); d = Math.abs(d);
+            let g = gcd(n, d);
+            return [sign * n / g, d / g];
+        }
+
+        function frac(n, d=1) { return simplify([n, d]); }
+        function add(f1, f2) { return simplify([f1[0]*f2[1] + f2[0]*f1[1], f1[1]*f2[1]]); }
+        function sub(f1, f2) { return simplify([f1[0]*f2[1] - f2[0]*f1[1], f1[1]*f2[1]]); }
+        function mul(f1, f2) { return simplify([f1[0]*f2[0], f1[1]*f2[1]]); }
+
+        // Formatage LaTeX d'une fraction
+        function formatFrac(f, isCoefficient = true) {
+            let n = f[0], d = f[1];
+            if (n === 0) return "0";
+            let sign = n < 0 ? "-" : "";
+            n = Math.abs(n);
+            if (d === 1) {
+                if (isCoefficient && n === 1) return sign; 
+                return sign + n;
+            }
+            return `${sign}\\frac{${n}}{${d}}`;
+        }
+
+        // Formatage d'un polynôme à partir d'un tableau de coefficients [coeff_xN, ..., coeff_x0]
+        function formatPoly(coeffs, variable="x") {
+            let res = "";
+            let deg = coeffs.length - 1;
+            for(let i=0; i<=deg; i++) {
+                let c = coeffs[i];
+                if (c[0] === 0) continue;
+
+                let power = deg - i;
+                let term = "";
+
+                if (power > 0) {
+                    let cStr = formatFrac(c, true);
+                    term += cStr + variable;
+                    if (power > 1) term += "^" + power;
+                } else {
+                    term += formatFrac(c, false);
+                }
+
+                if (res !== "" && !term.startsWith("-")) {
+                    res += " + " + term;
+                } else if (res !== "" && term.startsWith("-")) {
+                    res += " - " + term.substring(1);
+                } else {
+                    res += term;
+                }
+            }
+            return res === "" ? "0" : res;
+        }
+
+        function getRand(min, max, excludeZero = false) {
+            let val = Math.floor(Math.random() * (max - min + 1)) + min;
+            if (excludeZero && val === 0) return getRand(min, max, true);
+            return val;
+        }
+
+        // ==========================================
+        // GÉNÉRATEUR D'EXERCICES ET CORRECTIONS
+        // ==========================================
+
+        function generateExercise() {
+            let typeSelect = document.getElementById('typeSelect').value;
+            let type = (typeSelect === "all") ? getRand(0, 2) : parseInt(typeSelect);
+            let coeffSelect = document.getElementById('coeffSelect').value;
+            
+            // Fonction pour générer un coefficient (Entier ou Fraction)
+            function getGenFrac() {
+                let n = getRand(-5, 5, true);
+                let d = 1;
+                if (coeffSelect === "frac") d = getRand(2, 4);
+                else if (coeffSelect === "all" && getRand(0,1)===1) d = getRand(2, 4);
+                return frac(n, d);
+            }
+
+            let a = getGenFrac();
+            let b = getGenFrac();
+            let c = getGenFrac(); 
+            let d = getGenFrac(); 
+
+            let m = getRand(-4, 4, true); 
+            let p = getRand(-5, 5);       
+            let m_frac = frac(m);
+
+            let consigneHTML = "", questionHTML = "", solutionLaTeX = "", cat = "";
+
+            if (type === 0) {
+                // TYPE 1 : Exponentielle (ax+b)e^{mx+p}
+                cat = "Exponentielle : $P(x)\\mathrm{e}^{mx+p}$ avec $\\deg(P)=1$";
+                let expStr = `\\mathrm{e}^{${m===1 ? "x" : (m===-1 ? "-x" : m+"x")}${p>0 ? "+"+p : (p<0 ? p : "")}}`;
+                
+                let alpha = mul(a, m_frac);
+                let beta = add(a, mul(b, m_frac));
+
+                let polyF = formatPoly([a, b]);
+                let polyf = formatPoly([alpha, beta]);
+
+                consigneHTML = `Déterminer les réels $a$ et $b$ sachant que la fonction $F : x \\mapsto (ax+b) ${expStr}$ est une primitive sur $\\mathbb{R}$ de la fonction $f$ définie par :`;
+                questionHTML = `$$f(x) = (${polyf}) ${expStr} \\quad \\text{sur } \\mathbb{R}$$`;
+
+                solutionLaTeX = `
+                &\\text{Dire que } F \\text{ est une primitive de } f \\text{ signifie que pour tout } x \\in \\mathbb{R}, \\; F'(x) = f(x). \\\\
+                &\\text{On dérive } F \\text{ qui est de la forme } u \\times v \\text{ avec :} \\\\
+                &\\quad u(x) = ax+b \\implies u'(x) = a \\\\
+                &\\quad v(x) = ${expStr} \\implies v'(x) = ${m}${expStr} \\\\
+                &F'(x) = a ${expStr} + (ax+b) \\times ${m}${expStr} \\\\
+                &F'(x) = (${m}ax + a + ${m}b) ${expStr} \\\\
+                &\\text{Par identification avec } f(x) = (${polyf}) ${expStr} \\text{, on identifie les coefficients :} \\\\
+                &\\begin{cases} ${m}a = ${formatFrac(alpha, false)} \\\\[0.5em] a + ${m}b = ${formatFrac(beta, false)} \\end{cases} \\implies \\begin{cases} a = ${formatFrac(a, false)} \\\\[0.5em] ${m}b = ${formatFrac(beta, false)} - (${formatFrac(a, false)}) \\end{cases} \\implies \\begin{cases} a = ${formatFrac(a, false)} \\\\[0.5em] b = ${formatFrac(b, false)} \\end{cases} \\\\
+                &\\text{Conclusion : } F(x) = (${polyF}) ${expStr}
+                `;
+            } 
+            else if (type === 1) {
+                // TYPE 2 : Exponentielle (ax²+bx+c)e^{mx+p}
+                cat = "Exponentielle : $P(x)\\mathrm{e}^{mx+p}$ avec $\\deg(P)=2$";
+                let expStr = `\\mathrm{e}^{${m===1 ? "x" : (m===-1 ? "-x" : m+"x")}${p>0 ? "+"+p : (p<0 ? p : "")}}`;
+                
+                let alpha = mul(a, m_frac);
+                let beta = add(mul(frac(2), a), mul(b, m_frac));
+                let gamma = add(b, mul(c, m_frac));
+
+                let polyF = formatPoly([a, b, c]);
+                let polyf = formatPoly([alpha, beta, gamma]);
+
+                consigneHTML = `Déterminer les réels $a$, $b$ et $c$ sachant que la fonction $F : x \\mapsto (ax^2+bx+c) ${expStr}$ est une primitive sur $\\mathbb{R}$ de la fonction $f$ définie par :`;
+                questionHTML = `$$f(x) = (${polyf}) ${expStr} \\quad \\text{sur } \\mathbb{R}$$`;
+
+                solutionLaTeX = `
+                &\\text{Dire que } F \\text{ est une primitive de } f \\text{ signifie que pour tout } x \\in \\mathbb{R}, \\; F'(x) = f(x). \\\\
+                &\\text{On dérive } F \\text{ de la forme } u \\times v \\text{ : } \\\\
+                &F'(x) = (2ax+b) ${expStr} + (ax^2+bx+c) \\times ${m}${expStr} \\\\
+                &F'(x) = (${m}ax^2 + (2a+${m}b)x + b+${m}c) ${expStr} \\\\
+                &\\text{Par identification avec } f(x) = (${polyf}) ${expStr} \\text{, on obtient le système :} \\\\
+                &\\begin{cases} ${m}a = ${formatFrac(alpha, false)} \\\\[0.5em] 2a+${m}b = ${formatFrac(beta, false)} \\\\[0.5em] b+${m}c = ${formatFrac(gamma, false)} \\end{cases} \\implies \\begin{cases} a = ${formatFrac(a, false)} \\\\[0.5em] ${m}b = ${formatFrac(beta, false)} - 2(${formatFrac(a, false)}) \\\\[0.5em] ${m}c = ${formatFrac(gamma, false)} - (${formatFrac(b, false)}) \\end{cases} \\implies \\begin{cases} a = ${formatFrac(a, false)} \\\\[0.5em] b = ${formatFrac(b, false)} \\\\[0.5em] c = ${formatFrac(c, false)} \\end{cases} \\\\
+                &\\text{Conclusion : } F(x) = (${polyF}) ${expStr}
+                `;
+            }
+            else if (type === 2) {
+                // TYPE 3 : Logarithme P(x)ln(x) + Q(x)
+                cat = "Logarithme : $P(x)\\ln(x) + Q(x)$ avec $\\deg \\leqslant 1$";
+                
+                let alpha = mul(frac(2), a);
+                let beta_val = b;
+                let gamma = add(a, mul(frac(2), c));
+                let delta = add(b, d);
+
+                let polyF_ln = formatPoly([a, b, frac(0)]); 
+                let polyF_rest = formatPoly([c, d, frac(0)]); 
+                
+                let polyf_ln = formatPoly([alpha, beta_val]); 
+                let polyf_rest = formatPoly([gamma, delta]);
+
+                let f_rest_str = polyf_rest;
+                if (f_rest_str !== "0" && !f_rest_str.startsWith("-")) f_rest_str = "+ " + f_rest_str;
+                if (f_rest_str === "0") f_rest_str = "";
+
+                let conclusionRest = polyF_rest;
+                if (conclusionRest !== "0" && !conclusionRest.startsWith("-")) conclusionRest = "+ " + conclusionRest;
+                if (conclusionRest === "0") conclusionRest = "";
+
+                consigneHTML = `Déterminer les réels $a, b, c$ et $d$ sachant que la fonction $F : x \\mapsto (ax^2+bx)\\ln(x) + cx^2+dx$ est une primitive sur $\\left] 0 ; +\\infty \\right[$ de la fonction $f$ définie par :`;
+                questionHTML = `$$f(x) = (${polyf_ln})\\ln(x) ${f_rest_str} \\quad \\text{sur } \\left] 0 ; +\\infty \\right[$$`;
+
+                solutionLaTeX = `
+                &\\text{Dire que } F \\text{ est une primitive de } f \\text{ signifie que pour tout } x \\in \\left] 0 ; +\\infty \\right[, \\; F'(x) = f(x). \\\\
+                &\\text{On dérive } F \\text{ : } \\\\
+                &F'(x) = (2ax+b)\\ln(x) + (ax^2+bx)\\times \\frac{1}{x} + 2cx + d \\\\
+                &F'(x) = (2ax+b)\\ln(x) + (ax+b) + 2cx + d \\\\
+                &F'(x) = (2ax+b)\\ln(x) + (a+2c)x + (b+d) \\\\
+                &\\text{Par identification avec } f(x) = (${polyf_ln})\\ln(x) ${f_rest_str} \\text{, on obtient le système :} \\\\
+                &\\begin{cases} 2a = ${formatFrac(alpha, false)} \\\\[0.5em] b = ${formatFrac(beta_val, false)} \\\\[0.5em] a+2c = ${formatFrac(gamma, false)} \\\\[0.5em] b+d = ${formatFrac(delta, false)} \\end{cases} \\implies \\begin{cases} a = ${formatFrac(a, false)} \\\\[0.5em] b = ${formatFrac(b, false)} \\\\[0.5em] 2c = ${formatFrac(gamma, false)} - (${formatFrac(a, false)}) \\\\[0.5em] d = ${formatFrac(delta, false)} - (${formatFrac(b, false)}) \\end{cases} \\implies \\begin{cases} a = ${formatFrac(a, false)} \\\\[0.5em] b = ${formatFrac(b, false)} \\\\[0.5em] c = ${formatFrac(c, false)} \\\\[0.5em] d = ${formatFrac(d, false)} \\end{cases} \\\\
+                &\\text{Conclusion : } F(x) = (${polyF_ln})\\ln(x) ${conclusionRest}
+                `;
+            }
+
+            // 3. Injection HTML
+            document.getElementById('categoryLabel').innerHTML = cat;
+            document.getElementById('consigneText').innerHTML = consigneHTML;
+            document.getElementById('questionArea').innerHTML = questionHTML;
+            
+            // Formatage final de la solution Aligned
+            let alignBlock = `$$ \n\\begin{aligned}\n${solutionLaTeX}\n\\end{aligned}\n $$`;
+            document.getElementById('solutionText').innerHTML = alignBlock;
+            
+            // Réinitialiser la vue
+            document.getElementById('solutionArea').classList.remove('active');
+            let btnToggle = document.getElementById('btnToggle');
+            btnToggle.textContent = "Voir la correction détaillée";
+            btnToggle.style.backgroundColor = "#3f51b5";
+            
+            if (window.MathJax) { MathJax.typesetPromise(); }
+        }
+
+        function toggleSolution() {
+            const solDiv = document.getElementById('solutionArea');
+            const btn = document.getElementById('btnToggle');
+            
+            solDiv.classList.toggle('active');
+            if (solDiv.classList.contains('active')) {
+                btn.textContent = "Masquer la correction";
+                btn.style.backgroundColor = "#e74c3c"; 
+            } else {
+                btn.textContent = "Voir la correction détaillée";
+                btn.style.backgroundColor = "#3f51b5"; 
+            }
+        }
+
+        window.onload = generateExercise;
+    </script>
+</body>
+</html>

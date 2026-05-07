@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exerciseur Expert : Décomposition en éléments simples</title>
+    
+    <!-- Intégration de MathJax pour le rendu LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+    </script>
+
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #2c3e50; padding: 20px; max-width: 850px; margin: 0 auto; line-height: 1.6; }
+        h1 { text-align: center; border-bottom: 2px solid #c0392b; padding-bottom: 10px; color: #922b21;}
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; margin-top: 20px; }
+        
+        .menus-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; background: #fdedec; padding: 15px; border-radius: 8px; border: 1px solid #fadbd8; }
+        .menu-group { display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 250px; }
+        select { padding: 8px 12px; font-size: 1em; border-radius: 5px; border: 1px solid #e6b0aa; background-color: white; cursor: pointer; color: #922b21; font-family: inherit; width: 100%; max-width: 450px; margin: 0 auto;}
+        select:focus { outline: none; border-color: #c0392b; }
+        
+        .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        button { font-size: 1em; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .btn-toggle { background-color: #c0392b; }
+        .btn-toggle:hover { background-color: #922b21; }
+        .btn-new { background-color: #d35400; }
+        .btn-new:hover { background-color: #a04000; }
+        
+        .question-box { font-size: 1.25em; margin-bottom: 25px; padding: 20px; background: #fff; border: 2px dashed #e6b0aa; border-radius: 8px; overflow-x: auto; text-align: left; line-height: 1.8;}
+        ol { margin-top: 10px; margin-bottom: 0; padding-left: 25px;}
+        li { margin-bottom: 10px; }
+        .solution { display: none; margin-top: 15px; padding: 20px; background-color: #fdfefe; border-left: 4px solid #c0392b; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; border-radius: 0 5px 5px 0; overflow-x: auto;}
+        .solution.active { display: block; animation: fadeIn 0.4s; }
+        .category-badge { display: inline-block; background: #fdedec; color: #922b21; padding: 4px 12px; border-radius: 15px; font-size: 0.9em; margin-bottom: 15px; font-weight: bold; border: 1px solid #fadbd8;}
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <h1>Primitives : Décomposition en éléments simples</h1>
+    
+    <div class="card">
+        
+        <!-- Menu de paramétrage -->
+        <div class="menus-container">
+            <div class="menu-group" style="align-items: center; width: 100%;">
+                <label for="typeSelect" style="margin-bottom: 5px;"><strong>Cibler un type de décomposition :</strong></label>
+                <select id="typeSelect" onchange="generateExercise()">
+                    <option value="all">🔀 Mélange aléatoire (Tout)</option>
+                    <option value="0">1. Forme f(x) = (ax+b) / (cx+d)</option>
+                    <option value="1">2. Forme f(x) = (ax+b) / ((x-r₁)(x-r₂))</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="categoryLabel" class="category-badge">Catégorie</div>
+        
+        <!-- Affichage de la question -->
+        <div id="questionArea" class="question-box">Chargement...</div>
+        
+        <div class="controls">
+            <button id="btnToggle" class="btn-toggle" onclick="toggleSolution()">Voir la correction détaillée</button>
+            <button class="btn-new" onclick="generateExercise()">Nouvel exercice</button>
+        </div>
+        
+        <!-- Affichage de la solution -->
+        <div id="solutionArea" class="solution">
+            <div id="solutionText" style="font-size: 1.1em;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // FONCTIONS UTILITAIRES
+        // ==========================================
+        function gcd(a, b) {
+            a = Math.abs(a); b = Math.abs(b);
+            while (b) { let t = b; b = a % b; a = t; }
+            return a === 0 ? 1 : a;
+        }
+
+        function formatFrac(n, d, isCoefficient = true) {
+            let sign = (n * d < 0) ? "-" : "";
+            n = Math.abs(n); d = Math.abs(d);
+            let g = gcd(n, d);
+            n /= g; d /= g;
+            
+            if (n === 0) return "0";
+            if (d === 1) {
+                if (isCoefficient && n === 1) return sign; 
+                return sign + n;
+            }
+            return `${sign}\\frac{${n}}{${d}}`;
+        }
+
+        function formatAffine(a, b) {
+            let res = "";
+            if (a === 1) res += "x";
+            else if (a === -1) res += "-x";
+            else if (a !== 0) res += a + "x";
+
+            if (b > 0 && a !== 0) res += "+" + b;
+            else if (b < 0 || a === 0) res += b;
+            return res === "" ? "0" : res;
+        }
+
+        function getRand(min, max, excludeZero = false) {
+            let val = Math.floor(Math.random() * (max - min + 1)) + min;
+            if (excludeZero && val === 0) return getRand(min, max, true);
+            return val;
+        }
+
+        // ==========================================
+        // GÉNÉRATEUR D'EXERCICES ET CORRECTIONS
+        // ==========================================
+
+        function generateExercise() {
+            let typeSelect = document.getElementById('typeSelect').value;
+            let type = (typeSelect === "all") ? getRand(0, 1) : parseInt(typeSelect);
+
+            let questionHTML = "", solutionLaTeX = "", cat = "";
+
+            if (type === 0) {
+                // CAS 0 : (numA*x + numB)/(cx+d) = A + B/(cx+d)
+                cat = "Forme $a + \\frac{b}{cx+d}$";
+                
+                let c = getRand(1, 4);
+                let d = getRand(-5, 5, true);
+                
+                // On génère la réponse attendue A et B
+                let A_ans = getRand(-5, 5, true);
+                let B_ans = getRand(-5, 5, true);
+                
+                // On calcule les coefficients initiaux
+                let numA = A_ans * c;
+                let numB = A_ans * d + B_ans;
+
+                let denom = formatAffine(c, d);
+                let numer = formatAffine(numA, numB);
+                
+                // Valeur interdite
+                let val_int_str = formatFrac(-d, c, false);
+                let val_int_val = -d/c;
+
+                // Choix de l'intervalle I
+                let isRight = (getRand(0, 1) === 0);
+                let I_str = isRight ? `\\left] ${val_int_str} ; +\\infty \\right[` : `\\left] -\\infty ; ${val_int_str} \\right[`;
+                
+                // Signe de cx+d sur I
+                let isDenomPos = isRight ? (c > 0) : (c < 0);
+                let absDenom = isDenomPos ? denom : formatAffine(-c, -d);
+                let absNote = isDenomPos ? `${denom} > 0` : `${denom} < 0`;
+
+                questionHTML = `
+                Soit $f$ définie sur $\\mathbb{R}\\setminus\\left\\{ ${val_int_str} \\right\\}$ par $f(x) = \\frac{${numer}}{${denom}}$.
+                <ol>
+                    <li>Déterminer deux réels $a$ et $b$ tels que pour tout $x \\in \\mathbb{R}\\setminus\\left\\{ ${val_int_str} \\right\\}$, $f(x) = a + \\frac{b}{${denom}}$.</li>
+                    <li>En déduire les primitives de $f$ sur l'intervalle $I = ${I_str}$.</li>
+                </ol>`;
+
+                solutionLaTeX = `
+                &\\textbf{1. Recherche des réels } a \\textbf{ et } b \\\\
+                &\\text{On met l'expression au même dénominateur :} \\\\
+                &a + \\frac{b}{${denom}} = \\frac{a(${denom}) + b}{${denom}} = \\frac{${c === 1 ? "" : c}ax + (${d > 0 ? d : "("+d+")"}a + b)}{${denom}} \\\\
+                &\\text{Par identification avec } f(x) = \\frac{${numer}}{${denom}} \\text{, on identifie les coefficients :} \\\\
+                &\\begin{cases} ${c === 1 ? "a" : c+"a"} = ${numA} \\\\[0.5em] ${d}a + b = ${numB} \\end{cases} \\implies \\begin{cases} a = ${A_ans} \\\\[0.5em] b = ${numB} - (${d})(${A_ans}) \\end{cases} \\implies \\begin{cases} a = ${A_ans} \\\\[0.5em] b = ${B_ans} \\end{cases} \\\\
+                &\\text{Ainsi, pour tout } x \\neq ${val_int_str}, \\quad f(x) = ${A_ans} + \\frac{${B_ans}}{${denom}}. \\\\
+                &\\\\
+                &\\textbf{2. Primitives sur l'intervalle } I \\\\
+                &\\text{On cherche les primitives de } f(x) = ${A_ans} + ${B_ans} \\times \\frac{1}{${denom}} \\\\
+                &\\text{La forme } \\frac{1}{u} \\text{ a pour primitive } \\frac{1}{u'}\\ln(|u|)\\text{, d'où :} \\\\
+                &F(x) = ${formatAffine(A_ans, 0)} + ${B_ans} \\times ${formatFrac(1, c, true)} \\ln(|${denom}|) + C \\\\
+                &F(x) = ${formatAffine(A_ans, 0)} ${formatFrac(B_ans, c, false).startsWith('-') ? formatFrac(B_ans, c, false) : "+ "+formatFrac(B_ans, c, false)}\\ln(|${denom}|) + C \\\\
+                &\\text{Sur l'intervalle } I = ${I_str} \\text{, on a } ${absNote} \\text{, donc } |${denom}| = ${absDenom}. \\\\
+                &\\text{La primitive s'écrit donc :} \\\\
+                &F(x) = ${formatAffine(A_ans, 0)} ${formatFrac(B_ans, c, false).startsWith('-') ? formatFrac(B_ans, c, false) : "+ "+formatFrac(B_ans, c, false)}\\ln(${absDenom}) + C \\quad (C \\in \\mathbb{R})
+                `;
+            } 
+            else {
+                // CAS 1 : (numA*x + numB)/((x-r1)(x-r2)) = A/(x-r1) + B/(x-r2)
+                cat = "Forme $\\frac{a}{x-r_1} + \\frac{b}{x-r_2}$";
+                
+                // Racines distinctes
+                let r1 = getRand(-4, 2);
+                let r2 = getRand(r1 + 1, 5);
+                
+                // On génère la réponse attendue A et B
+                let A_ans = getRand(-4, 4, true);
+                let B_ans = getRand(-4, 4, true);
+                
+                // Calcul du numérateur original
+                let numA = A_ans + B_ans;
+                let numB = -A_ans * r2 - B_ans * r1;
+                let numer = formatAffine(numA, numB);
+
+                let denom1 = formatAffine(1, -r1);
+                let denom2 = formatAffine(1, -r2);
+                let denomFull = `(${denom1})(${denom2})`;
+
+                // Choix de l'intervalle (3 zones possibles)
+                let zone = getRand(0, 2);
+                let I_str = "";
+                let absNote1 = "", absNote2 = "", absD1 = "", absD2 = "";
+
+                if (zone === 0) {
+                    I_str = `\\left] -\\infty ; ${r1} \\right[`;
+                    absNote1 = `< 0`; absD1 = formatAffine(-1, r1);
+                    absNote2 = `< 0`; absD2 = formatAffine(-1, r2);
+                } else if (zone === 1) {
+                    I_str = `\\left] ${r1} ; ${r2} \\right[`;
+                    absNote1 = `> 0`; absD1 = denom1;
+                    absNote2 = `< 0`; absD2 = formatAffine(-1, r2);
+                } else {
+                    I_str = `\\left] ${r2} ; +\\infty \\right[`;
+                    absNote1 = `> 0`; absD1 = denom1;
+                    absNote2 = `> 0`; absD2 = denom2;
+                }
+
+                questionHTML = `
+                Soit $f$ définie sur $\\mathbb{R}\\setminus\\left\\{ ${r1}; ${r2} \\right\\}$ par $f(x) = \\frac{${numer}}{${denomFull}}$.
+                <ol>
+                    <li>Déterminer deux réels $a$ et $b$ tels que pour tout $x \\in \\mathbb{R}\\setminus\\left\\{ ${r1}; ${r2} \\right\\}$, $f(x) = \\frac{a}{${denom1}} + \\frac{b}{${denom2}}$.</li>
+                    <li>En déduire les primitives de $f$ sur l'intervalle $I = ${I_str}$.</li>
+                </ol>`;
+
+                solutionLaTeX = `
+                &\\textbf{1. Recherche des réels } a \\textbf{ et } b \\\\
+                &\\text{On met l'expression au même dénominateur :} \\\\
+                &\\frac{a}{${denom1}} + \\frac{b}{${denom2}} = \\frac{a(${denom2}) + b(${denom1})}{${denomFull}} = \\frac{(a+b)x + (${-r2}a ${-r1 > 0 ? "+ "+(-r1) : -r1}b)}{${denomFull}} \\\\
+                &\\text{Par identification avec } f(x) = \\frac{${numer}}{${denomFull}} \\text{, on obtient le système :} \\\\
+                &\\begin{cases} a+b = ${numA} \\\\[0.5em] ${-r2}a ${-r1 > 0 ? "+"+(-r1) : -r1}b = ${numB} \\end{cases} \\implies \\begin{cases} b = ${numA} - a \\\\[0.5em] ${-r2}a ${-r1 > 0 ? "+"+(-r1) : -r1}(${numA} - a) = ${numB} \\end{cases} \\implies \\begin{cases} a = ${A_ans} \\\\[0.5em] b = ${B_ans} \\end{cases} \\\\
+                &\\text{Ainsi, } f(x) = \\frac{${A_ans}}{${denom1}} + \\frac{${B_ans}}{${denom2}}. \\\\
+                &\\\\
+                &\\textbf{2. Primitives sur l'intervalle } I \\\\
+                &F(x) = ${A_ans} \\ln(|${denom1}|) ${B_ans < 0 ? B_ans : "+ "+B_ans}\\ln(|${denom2}|) + C \\\\
+                &\\text{Sur l'intervalle } I = ${I_str} \\text{, on a } ${denom1} ${absNote1} \\text{ et } ${denom2} ${absNote2}. \\\\
+                &\\text{On retire donc les valeurs absolues de manière adaptée :} \\\\
+                &F(x) = ${A_ans} \\ln(${absD1}) ${B_ans < 0 ? B_ans : "+ "+B_ans}\\ln(${absD2}) + C \\quad (C \\in \\mathbb{R})
+                `;
+            }
+
+            // 3. Injection HTML
+            document.getElementById('categoryLabel').innerHTML = cat;
+            document.getElementById('questionArea').innerHTML = questionHTML;
+            
+            // Formatage final de la solution Aligned
+            let alignBlock = `$$ \n\\begin{aligned}\n${solutionLaTeX}\n\\end{aligned}\n $$`;
+            document.getElementById('solutionText').innerHTML = alignBlock;
+            
+            // Réinitialiser la vue
+            document.getElementById('solutionArea').classList.remove('active');
+            let btnToggle = document.getElementById('btnToggle');
+            btnToggle.textContent = "Voir la correction détaillée";
+            btnToggle.style.backgroundColor = "#c0392b";
+            
+            if (window.MathJax) { MathJax.typesetPromise(); }
+        }
+
+        function toggleSolution() {
+            const solDiv = document.getElementById('solutionArea');
+            const btn = document.getElementById('btnToggle');
+            
+            solDiv.classList.toggle('active');
+            if (solDiv.classList.contains('active')) {
+                btn.textContent = "Masquer la correction";
+                btn.style.backgroundColor = "#e74c3c"; 
+            } else {
+                btn.textContent = "Voir la correction détaillée";
+                btn.style.backgroundColor = "#c0392b"; 
+            }
+        }
+
+        window.onload = generateExercise;
+    </script>
+</body>
+</html>
