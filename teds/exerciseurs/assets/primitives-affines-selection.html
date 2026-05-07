@@ -33,7 +33,7 @@
         .question-box { font-size: 1.3em; margin-bottom: 25px; padding: 15px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; }
         .solution { display: none; margin-top: 15px; padding: 20px; background-color: #fdfefe; border-left: 4px solid #3498db; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; border-radius: 0 5px 5px 0;}
         .solution.active { display: block; animation: fadeIn 0.4s; }
-        .category-badge { display: inline-block; background: #e0f0ff; color: #1e6fa3; padding: 4px 12px; border-radius: 15px; font-size: 0.85em; margin-bottom: 15px; font-weight: bold; }
+        .category-badge { display: inline-block; background: #e0f0ff; color: #1e6fa3; padding: 4px 12px; border-radius: 15px; font-size: 0.9em; margin-bottom: 15px; font-weight: bold; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -47,16 +47,16 @@
         <!-- Menus de paramétrage -->
         <div class="menus-container">
             <div class="menu-group">
-                <label for="typeSelect" style="margin-bottom: 5px;"><strong>Type de fonction :</strong></label>
+                <label for="typeSelect" style="margin-bottom: 5px;"><strong>Forme de la fonction :</strong></label>
                 <select id="typeSelect" onchange="generateExercise()">
                     <option value="all">🔀 Mélange aléatoire (Tout)</option>
-                    <option value="0">1. Puissances : u'uⁿ</option>
-                    <option value="1">2. Inverses de puissances : u'/uⁿ</option>
-                    <option value="2">3. Formes u'/u (Logarithmes)</option>
-                    <option value="3">4. Exponentielles : u' e^u</option>
-                    <option value="4">5. Sinus : u' sin(u)</option>
-                    <option value="5">6. Cosinus : u' cos(u)</option>
-                    <option value="6">7. Inverses de racines : u'/√u</option>
+                    <option value="0">1. Puissances : (ax+b)ⁿ</option>
+                    <option value="1">2. Inverses de puissances : 1 / (ax+b)ⁿ</option>
+                    <option value="2">3. Inverses (Logarithmes) : 1 / (ax+b)</option>
+                    <option value="3">4. Exponentielles : e^(ax+b)</option>
+                    <option value="4">5. Sinus : sin(ax+b)</option>
+                    <option value="5">6. Cosinus : cos(ax+b)</option>
+                    <option value="6">7. Inverses de racines : 1 / √(ax+b)</option>
                 </select>
             </div>
             
@@ -178,7 +178,7 @@
             // 2. Traitement par cas mathématique
             switch (type) {
                 case 0: 
-                    cat = `Fonction puissance`;
+                    cat = `Forme : $k(ax+b)^n$`;
                     intervalle = "\\mathbb{R}";
                     fx = `${formatFrac(P, Q, true)}(${u})^${n}`;
                     rest = `\\frac{1}{${n + 1}}(${u})^{${n + 1}}`;
@@ -186,7 +186,7 @@
                     break;
 
                 case 1: 
-                    cat = `Inverse de puissance`;
+                    cat = `Forme : $\\frac{k}{(ax+b)^n}$`;
                     let isRight1 = (getRand(0, 1) === 0);
                     intervalle = isRight1 ? intervallePositif : intervalleNegatif;
                     fx = `${signP}\\frac{${absP}}{${Q === 1 ? "" : Q}(${u})^${n}}`;
@@ -198,7 +198,7 @@
                     break;
 
                 case 2: 
-                    cat = `Forme u'/u (Logarithme)`;
+                    cat = `Forme : $\\frac{k}{ax+b}$`;
                     let isPosRegion = (getRand(0, 1) === 0);
                     let lnArg = "";
                     
@@ -221,7 +221,7 @@
                     break;
 
                 case 3: 
-                    cat = "Fonction exponentielle";
+                    cat = `Forme : $k\\mathrm{e}^{ax+b}$`;
                     intervalle = "\\mathbb{R}";
                     fx = `${formatFrac(P, Q, true)}\\mathrm{e}^{${u}}`;
                     rest = `\\mathrm{e}^{${u}}`;
@@ -229,7 +229,7 @@
                     break;
 
                 case 4: 
-                    cat = "Fonction Sinus";
+                    cat = `Forme : $k\\sin(ax+b)$`;
                     intervalle = "\\mathbb{R}";
                     fx = `${formatFrac(P, Q, true)}\\sin(${u})`;
                     rest = `(-\\cos(${u}))`;
@@ -239,7 +239,7 @@
                     break;
 
                 case 5: 
-                    cat = "Fonction Cosinus";
+                    cat = `Forme : $k\\cos(ax+b)$`;
                     intervalle = "\\mathbb{R}";
                     fx = `${formatFrac(P, Q, true)}\\cos(${u})`;
                     rest = `\\sin(${u})`;
@@ -249,7 +249,7 @@
                     break;
 
                 case 6: 
-                    cat = `Inverse de racine`;
+                    cat = `Forme : $\\frac{k}{\\sqrt{ax+b}}$`;
                     intervalle = intervallePositif; 
                     fx = `${signP}\\frac{${absP}}{${Q === 1 ? "" : Q}\\sqrt{${u}}}`;
                     rest = `2\\sqrt{${u}}`;
