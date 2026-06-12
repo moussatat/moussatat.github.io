@@ -88,3 +88,8 @@ th, td {
     text-align: center; 
 }
  
+ 
+/* Permet aux iframes de prendre toute la largeur disponible de la grille */
+.md-typeset iframe {
+    max-width: 100%;
+}
