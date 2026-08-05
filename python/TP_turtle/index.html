@@ -67,6 +67,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
     
     
+    
 
 <script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "functoolsStorage": "../../js-libs/functoolsStorage.js", "functoolsTxt": "../../js-libs/functoolsTxt.js", "functoolsUi": "../../js-libs/functoolsUi.js", "functoolsUiBuilder": "../../js-libs/functoolsUiBuilder.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
 
@@ -153,6 +154,28 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle" data-ace-dark-mode="tomorrow_night_bright" data-ace-light-mode="crimson_editor">
 
 
+
+    <!--
+      TikZJax (rod2ik/tikzjax) — rendu de schémas TikZ/LaTeX côté navigateur,
+      sans installation LaTeX serveur.
+      Doc : https://rod2ik.github.io/tikzjax/installation/mkdocs/
+
+      Ordre important : config AVANT le bundle.
+      Vérifier de temps en temps la dernière version :
+      https://github.com/rod2ik/tikzjax/releases
+    -->
+    <script src="../../xtra/javascripts/tikzjax.config.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/fonts.min.css"
+    >
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/tikzjax.min.js"
+      defer
+    ></script>
+
     
       
     
@@ -160,6 +183,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       <link rel="stylesheet" href="../../xtra/stylesheets/ajustements.css">
     
       <link rel="stylesheet" href="../../xtra/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../xtra/stylesheets/rituels.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1190,6 +1215,38 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
   
+    <li class="md-nav__item">
+      <a href="../../1eds/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels d'entrée
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1202,10 +1259,10 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -1218,8 +1275,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             Archive
           </label>
@@ -3720,7 +3777,7 @@ Le  tracé sera affiché ici
 </details><script type="text/javascript">
 CONFIG.needMermaid = false;
 CONFIG.overlordClasses = ["GlobalRunnersManager", "Ide", "Terminal"];
-globalThis.PAGE_IDES_CONFIG = '.\x1e_M[47=Ei2begH+0hn{P:L19-(ymoJ]utv6.3cf5Ta)wkq}lxpS,jBIdzs 8N*r\x1e0r010k0$0h0F0B0-0a0v0j0$0$0O0M0o0J0*0O0J0O0O0H0v0i0M0L0e0O0L0w0d0j0d0e0j0j0M0K0j1c0L0d0w0w0L0L0H010t0)0.0W0z0a0q0O0A0k1x0)010N0s0a0F0E0-0F0U0k0x0k0V0k0A0W1S0o0v0I1B010Y1J0k0q0G0a0K0B0q0F1,0F1I010L0-0B0A0)0Z0(0)0h1Y0@0F0)0$0B0K0E1G1=090q0h0L0)09010-0k0(0F0O1Q2j220q0)0l0U0B0j0O0U0(0y0P0t2e0)2G0)2l2n2p0F2C2e2e0$0k2h0A0a0O0a0Z0y0K0h0j1S2D2F2H280q0k2N2t2)292b1@0I0l0k0F0g1S2c0F0!0z0#0$2Y2!2$0I0h0q2+0-0m0N0b0u0)0f0)0X0K2l1,2C0I0p0F0A0U2O0q1/330k3e2i012Z2#0k0_2j1)1+1-1N0k0-2T1:1=1@1_3E010E0(3I1/1;1?1=1_1{1}0)1O1Q1S22241Q0)0,2e0(0W0k0:0y0v0o0P3r2Q2h1S0F0F2l0C2C1y2H2G2(2G3:0q0E0W2-440l0B0?0y0o0Y3^460)480(0h0%2,0v0P2i2.471,280Q0q2C444C4D44030)2n0z2w0)1,4m0B4o0F0h1;4L3i0=1P0k3r443S0F0p0k0O0;0q0l0y0x0w4k4v0)2Z0-0K1S0y0 1*0v0*3^4E4D4G2Q0A0h0K3I4@3v3?4}270k0l2J4t2Q2I0O0z4S0 0I4l0L0@0Q2p313@4/2e3}3 0k410P3P1:0-0^3L3W1^1y013P0W0E2#543H2n0(3O1*013S3i2^5P0F5R5I5K4O0F3H3J3U3M3X5I2g3x2T2V0Z2r362u2w2y2A424l5;2W0y3t3A5A5T0W5%5+5G1_5/3h3j4A0P3m3o0U22210+1;0k2E4:5o0-5q0-314/5 2X622$3P1V4@0E2Q0$1I0c0D5T6B0U6D0:0a1G4#0B0$5!0)6H6J0V6C6E0a0R0Q6T6V1J1B6Q3s0U2!6%013$1R1H5T2z0h1,0a6*0p1;016I6)0z0W0h0a0Q0p0=1H1y490U0U5T2l0K0a6-535H0)0x0v5T76787h0h2n6G70010O0E0?0a0-0E0q1I4i1J7B3s5d0B4a7E5T0@2Q0^360a7J7L1y7n1J3S0S7A7C5S7X0k7Z1Z5i1I0L2z3S651|0L0h1S7$7w3~1X0W5Z7h2R7k010#0q7=2f0F0z3P7x7z2w0l2U0(3S1Q1I3 0E0k5T5C0^2l0A0(6O0O0(0R7M1J0p8s1/4$0K0R0a0j0F7D1y7-2A8k8w8y8m8D8F7,7.8K018x8q2l0G4%0U8O8G0)8I7/8L8q1:7C1?0-8Q8J5T7s0a8X8g8H8R5T0A0O0V0a0h2Q7r2+6T0v0M8{7R903B6-931I0J5T2Q5W8s3B0O7`1Y7}1;0a3R3T1:917-7?4W1_0:0=0@3P2Q0O0K4Q0G9k3B2n287y0a6q0a5V2l5Z8h7B8S8o0B8X8d8f4Q1;8q2K8B3 9D798$8`7X6}0Q0a1;0U1C8s9Z4R3s3I1|0-8q9N9P2^6T8%8S0(4?0a8U0p1_0o0H0H1h0H1b0e2R4}0*4}0M1o0d0*0j0i0k0K0e0i0}7-0i1s0j0v0w0J0i1u0o0oah0H0KaH0*0J4%0j0w550$aO550*3P9J6!0k875#5T0F0Q0B3U2A8/8(0/0V668^9,8:7X0F9K5(2a5(0B1u1I0iaH8l9L0L3;0$2y8B9S8j0T6J0;0?0^1rat1f0o0K0i0J2y0$4|0J1n0Kbt4(0w0$aN0L0J0|110M0M1c1f0d1I1A1C1E1G1_1L1N1P6=1U1W4?540k1#1%876J3G5F3N5I3Z1~203)a;26282a2|2e5/2j2J2o2q012s5_2x7.5}4:b^2L2C6A3G8-3K3Vb%1J3P9q5Ec95-1Jb)3#bQ3(23b-3,3.3:3=3@3_2t2Fcv2t5B0@ce5,805K5M6-7g1?5Q7^a15(cH9Ra$6)67c768ca5J6567b$cg012*2,ctb/2;1=2?2^2`1X1@2~300y2j3z1S0_0v2j6f36383a3c3w0(0G4+641+6X6L6E7u6W6Y6N6P6}6Sd9d5db0$6!6$dg016|9o6-0j6/6;7@6@6-6`do7D7v1B7375771?1I7b7d7Gat7r7j1I7m7odE9a7s7k6(7w7ya*7H8v2k7C7S1|7U0)7W017O3T7R7T0W1Id*7Y7!8#cU7%7)0U7+8_a@dn7;7?9+d_7_1?9m8q1S0L8082840=bZ1J89a*8b9Y3I7k8i8S8N8o8q8|8tdZ8U8zat8C8E8#a45Tev8Neza-8Sev8W8Y8!eGeC8M7K3M8.d~a.8=8@7keB1J8|8~99922md;96eY98919be%1y9e1J9g2l9i2U9l7|8q9ocd3U9t0O9v2l9xbe9A9f4%9E0h9G1?9Oa_7K5(a0at9Q6Ten7e1X9W9j8eel9`9$2o9(0-9*eM9.0B9:9=9@fp1Q9`0a9|0@9 0@9Ofha2fx5Ua7a9ab0*1f0H0ebl160L1m9D0L0o0k0H0J1g0O1r0K0*0e0M0w0i0i0K0d0v0Jbj0*0$bk0e1r0O0e18bF0 f/bDav111w5TaY0Ra!7^a(a*1:a,eS8S1Vb-fO9Jfe1/9La~0Lb0b21Ja|9Mb6b88u1yenbc1+f45E0v0H0*0v0e100k1s0*0i0*ad0J1#0L0Kf,0Of}0w0jae0db1fU0vf_9+bJ1D1Fe3bOdt1T1V7{1!0ibYc51.cX80cib+cm25272:b;2f2hb@2mb_0F5@2t2vb~5|2%c1hdc3d40/c63Ic8cB7^e}h13Y1|1~g^b,h63-0q3/b63?5u0q3{8$0h0l4W0y0q0Y0U2D4C4l484a4c2H4e4g4i4/44484y6e2H5n0@22b|fv4*2,0q4t6o4 6q6s31hT4l44e92Mavct2e7=hO2l4_0Y5thp8NhxcOdncE5OcM6Te4cK5Yil5$2n5)ht69ig66irife;6m2-c%2|c*2_2{c.2 31c=3u0a0ic`35373Ic~3d3fd1d36Ad66M6F1ydU6KiZ6O2^de6%7vi%6Z6#i,650z6+7rdr6G6:ck6?egdw3sdy6 i=dC7pdF7a0E7cfl7g7i0=dNd*j5dR7ti#7vehd@dZ7Hd$7Kd:1y0i7N6td-7Id%jrd)gc7(jmigd?7*a#a?a.0We17@ig9ke6e`7~ea1_ec36ee88dW7h0B8c9^elbaeocz7A1Xer8sgD0)7F8T8M8Aey8PgleN8*j*eFj`8)j+8X2zeLj j=j|8,3IfOeUj%k5eZ8 e,36e.d)e)01533se#e-6Te:cZfMe@jO7{9n3shw6R3B9u6Lf25I9ybf9Bf79F9Hfca`9MfKcKfj9Tfl0AfnekfE9#fc9D0R9)55gp9/9;0q9?kW9!9{5DfIkO0^kQgpfQ8saa5I0dgQf(1hg#0M0*0K0H160eg0b1f@0i4(fWgNg#f,gZaE0i0{gZlbf{0Jav0d14l3l51h0J0LgUgWaXa_aZjHe4gha+a39-a/gok5gq9Lgzgugwj;gzb50:gCj(gG0/gI8DaD0v1qaC0wfTaOf;acaianl3140}0jaL0O0jbA2R0Mg*0wbIdnbKg=bN1Mg^bS56bV0og}1(b!h0cfh2hz1 21h53+iC1@b=hb2khnb`b|hi5{2Bhl44c21Qc4mbiscScYcc8fmCme3!hBmi26hEhGcrh(cw4u1J8lj*iye45L5NcGhdipjB5WcLm!7^iwm(5*mViqa{md1_c!iBh82=2@iFc-1=c/iJ3yiL0ic_01c{iQ393biT4Hd2mzdhd70:dmi.dci*6Ri;ndi(i:dmdyi^dsi|88i 6{i?6}dzj374jgdGj8dImojb23jd1ydO1Jjg7rji6UjkjYdY1yj;jod/9dju7P8 jxjqd;jB7ZnTcbn)6{d|jHeXe0a~e27^kve7jReb83jV86jX8aj!k-j(mT5Dj+8p8retnUj{ew8Bk4jIeHeOo6j~ogoceJk3okn;eDeP8-ka8qeVfOkekokh94kkkmkfdR9ce/f69h3Se^jPkx9pmF9skBf0kDe3kGf5e;kJf9kLlLffkPfMcN3#kSdJkU9Xj$kXhFkZfufwlKk)fBk-fFfH9~k=fLm%lGd a67gfR5I0ofT0dfVfXagf!0Kf$f(f*2yf-g7f=f@f_f{0dp8f~aug1g30ig5p8f:bEbmgUlzdjgelC3PlEgjp2a.gn25gpfdlMgta jsgx3yb4gBk!lVbd9z0^0:g3gQ0dl40*1upwaif%0$1eax0K0M1daIbkgY0j1bl1l~1Bg;bM5Ig@i|m51Y1!0Jg~mAmVh3mh3*b.m^2dha3xmxhfb{5^msb mv2Hqmnchq1.cRm.5Tkzhub(mfmJqgcohFcq5shJhLi7hPhU44h.0-h:5^h=2@3?ib0eh_i02H0Q904#0y0hct4 gj0@0y190M7m0o0,0hibq@q_3@q^q,4Eh|5r0y0Jq~q#2Gi2r3hJqNi94tcyo6qz6)iimZcIjEo(iom*cQhsmGroixm;5Im?c$qi0FiEc,2|m~c;n03A0a0JiOc|iRn8d0nbhpnhi!nQdanedjddnkngiYi/dljji=i@dqns3%i}7wnvj1dA72nBdQnDj9dJnHdMnKjfdQnOdTnR7zn+nVd#nX1y0dnZjwjpd(d=jCn+imjCjGfOjKn?jMn,ege_7}i2jTn}85efdVo1j#fDemo+3yj*eqo9j/j;eDj@ofoqoi0^oplHeI0kk28ZsOd ork8eRol1Jkba=n;oykgoGkj97kns)kikre=4%oKn_jQe|oPkA9MoS9wkFgIkI9DkKfbo#o k@gEsB9Vo.szfro=k#fvk%o^fzk*k,o/k.fGk:o~fgp1k^p5k`1_gNf;0Jf{l{0og%0w4%0 0Mlb55btaR1dtE1#f`bw0kl71sfV1v3;0Hp*0:0o0M0klbae4}0kgSpDlBgga)lFfOpMs$lHt5lNpS0)b1lQpWlTpYt8bbp!bf0a0$0Hbmf,t*aw0ktzfZlspa0L4|1m1sf{l=1ab5bD1q0jq0m0q31Jq5r+m5bU5510qb3FmcqCchmfh4qGmkqjb?mo2Kmqqp5`qrh`qtmp2MrPhrm-rusn3Qs`uF1`qEi|hC3+mMqJhIq,mQ2FrecAiuu#mXcFrnrlm%u}u`rpuZu(m/rrrviArxb:m_c+iGm}iIrEc?3B0Jn3n5c}rMiUrOiXdirYdii)6Qdfr$nmr!nll r(6.i`g^nu6_j0nx6~r:j4r?j7r^nGdLnJ7lr}7q6-nPdUjls37es5jy1Ikkd,7Qn$scn-sfaXshn/sjjLe388spe87 ssedn 6@jYejtmo4gysDj,sFeuj?exsKsPsMwcsV8yonsTj_sZk63UsXou8?kcwls(oFki95s,oEe$kqoIe?s?v`k*oO9rs{kCs~gHp#t1f8fa9IpPo$k?o(kR8jkTkVtmtd9%tfo@wl0(o_k+fC9_9oo}fJwTtslKk_w)fSfUfWt%fZgZpff%f)f+pkf:pmf^tPpqf}f pug40O0wg6pzg9pCgclApFt.gi0Bgkwlt=eWt@wRgsa}t`t|b3ffpXb9u10klWoV0^0O0kf_g%ac0dbzp*4(7-lpaH0jbWgNf.1lp,0$1jg-f_usq2g?m3q6g`q8bW0duCqwv6uG3!uIcnuKhfqkhcuOqnmruRhkuT2GquuXqxrqrgu$wHu(cih=281~mKqHciqFcnu.hHcs3`2RhMi8c#43h-4:1S4*4#3wc_6ph/8+1=h;0Oh?q:3^y44Cq%0$q)yf362Mjtd)3^q 4DmN31t|yX4Cr16t0yyy0l4#y$mwhN3n3?0J0My.2Hr80i4tr64;xoq/yR1=4h1*q;0P0Yz12M7Fz5z7yI4)z9z4bD0Py|4:i11,y,0p3wy+yA0nkj3rrbc#mSw5rfu!mWriv0sgu ikrsm,itcTv5mVrw2PryrAvd2}vfiKrG0drJn6iSrNiWrTiZvsrUvui+z(nnr#rS71vCi_i#i{r+vGdxvJnz71vM78r@nF7fvR7knL01nNvWs0w0s27#ob7Gv$n%1y0Hs9v+sbjzsdn*Acu#jFv=k5sk7=sme4s@sqv|5IjUsuo0eio2w3xDo58nw7essGoc0KsJsUa.orojwksL8VsReKARohk7eQwpowkd8}wykpd;0*wxozs*s:ktwDoMe{kys`e f1oUt0f6t2oZt4xutrfiw4moo-fow-o;w#k$9+n;w)tjo`wZw.tpw:p0B7w?tuw^k|0HgQ0oaQ0$f;auaK4.bw0Ht#0$gZ0*0dg#t$l@xZ1l0wg21al70M0vBVbpaQl#4}aIadp;f@t,xligpIxopKgma:pNlKxut_gvpTt}xAt xCo*bb0T.'
+globalThis.PAGE_IDES_CONFIG = '.\x1eya{c.r-*ts=udH42f[i]lgbe0jMnpv}kqNB_ThS:8LE, P(17J69w5Io)z+m3x\x1e0c010x0m0s0i0%0f0J0V0w0m0m0b0#0y0,0O0b0,0b0b0Y0V0p0#0q0W0b0q0Z0o0w0o0W0w0w0#0d0w1c0q0o0Z0Z0q0q0Y010N0S0.0C0a0J0B0b0+0x1x0S010K0T0J0i0l0f0i0u0x0g0x0-0x0+0C1S0y0V0e1B010R1J0x0B0D0J0d0%0B0i1,0i1I010q0f0%0+0S0z0j0S0s1Y0@0i0S0m0%0d0l1G1=090B0s0q0S09010f0x0j0i0b1Q2j220B0S0v0u0%0w0b0u0j0U0(0N2e0S2G0S2l2n2p0i2C2e2e0m0x2h0+0J0b0J0z0U0d0s0w1S2D2F2H280B0x2N2t2)292b1@0e0v0x0i0Q1S2c0i0I0a0$0m2Y2!2$0e0s0B2+0f0n0K0A0P0S0k0S0M0d2l1,2C0e0L0i0+0u2O0B1/330x3e2i012Z2#0x0_2j1)1+1-1N0x0f2T1:1=1@1_3E010l0j3I1/1;1?1=1_1{1}0S1O1Q1S22241Q0S0h2e0j0C0x0:0U0V0y0(3r2Q2h1S0i0i2l0X2C1y2H2G2(2G3:0B0l0C2-440v0%0?0U0y0R3^460S480j0s0)2,0V0(2i2.471,280!0B2C444C4D44030S2n0a2w0S1,4m0%4o0i0s1;4L3i0=1P0x3r443S0i0L0x0b0;0B0v0U0g0Z4k4v0S2Z0f0d1S0U0 1*0V0O3^4E4D4G2Q0+0s0d3I4@3v3?4}270x0v2J4t2Q2I0b0a4S0 0e4l0q0@0!2p313@4/2e3}3 0x410(3P1:0f0^3L3W1^1y013P0C0l2#543H2n0j3O1*013S3i2^5P0i5R5I5K4O0i3H3J3U3M3X5I2g3x2T2V0z2r362u2w2y2A424l5;2W0U3t3A5A5T0C5%5+5G1_5/3h3j4A0(3m3o0u22210H1;0x2E4:5o0f5q0f314/5 2X622$3P1V4@0l2Q0m1I0r0t5T6B0u6D0:0J1G4#0%0m5!0S6H6J0-6C6E0J0F0!6T6V1J1B6Q3s0u2!6%013$1R1H5T2z0s1,0J6*0L1;016I6)0a0C0s0J0!0L0=1H1y490u0u5T2l0d0J6-535H0S0g0V5T76787h0s2n6G70010b0l0?0J0f0l0B1I4i1J7B3s5d0%4a7E5T0@2Q0^360J7J7L1y7n1J3S0G7A7C5S7X0x7Z1Z5i1I0q2z3S651|0q0s1S7$7w3~1X0C5Z7h2R7k010$0B7=2f0i0a3P7x7z2w0v2U0j3S1Q1I3 0l0x5T5C0^2l0+0j6O0b0j0F7M1J0L8s1/4$0d0F0J0w0i7D1y7-2A8k8w8y8m8D8F7,7.8K018x8q2l0D4%0u8O8G0S8I7/8L8q1:7C1?0f8Q8J5T7s0J8X8g8H8R5T0+0b0-0J0s2Q7r2+6T0V0#8{7R903B6-931I0,5T2Q5W8s3B0b7`1Y7}1;0J3R3T1:917-7?4W1_0:0=0@3P2Q0b0d4Q0D9k3B2n287y0J6q0J5V2l5Z8h7B8S8o0%8X8d8f4Q1;8q2K8B3 9D798$8`7X6}0!0J1;0u1C8s9Z4R3s3I1|0f8q9N9P2^6T8%8S0j4?0J8U0L1_0y0Y0Y1h0Y1b0W2R4}0O4}0#1o0o0O0w0p0x0d0W0p0}7-0p1s0w0V0Z0,0p1u0y0yah0Y0daH0O0,4%0w0Z550maO550O3P9J6!0x875#5T0i0!0%3U2A8/8(0/0-668^9,8:7X0i9K5(2a5(0%1u1I0paH8l9L0q3;0m2y8B9S8j0E6J0;0?0^1rat1f0y0d0p0,2y0m4|0,1n0dbt4(0Z0maN0q0,0|110#0#1c1f0o1I1A1C1E1G1_1L1N1P6=1U1W4?540x1#1%876J3G5F3N5I3Z1~203)a;26282a2|2e5/2j2J2o2q012s5_2x7.5}4:b^2L2C6A3G8-3K3Vb%1J3P9q5Ec95-1Jb)3#bQ3(23b-3,3.3:3=3@3_2t2Fcv2t5B0@ce5,805K5M6-7g1?5Q7^a15(cH9Ra$6)67c768ca5J6567b$cg012*2,ctb/2;1=2?2^2`1X1@2~300U2j3z1S0_0V2j6f36383a3c3w0j0D4+641+6X6L6E7u6W6Y6N6P6}6Sd9d5db0m6!6$dg016|9o6-0w6/6;7@6@6-6`do7D7v1B7375771?1I7b7d7Gat7r7j1I7m7odE9a7s7k6(7w7ya*7H8v2k7C7S1|7U0S7W017O3T7R7T0C1Id*7Y7!8#cU7%7)0u7+8_a@dn7;7?9+d_7_1?9m8q1S0q8082840=bZ1J89a*8b9Y3I7k8i8S8N8o8q8|8tdZ8U8zat8C8E8#a45Tev8Neza-8Sev8W8Y8!eGeC8M7K3M8.d~a.8=8@7keB1J8|8~99922md;96eY98919be%1y9e1J9g2l9i2U9l7|8q9ocd3U9t0b9v2l9xbe9A9f4%9E0s9G1?9Oa_7K5(a0at9Q6Ten7e1X9W9j8eel9`9$2o9(0f9*eM9.0%9:9=9@fp1Q9`0J9|0@9 0@9Ofha2fx5Ua7a9ab0O1f0Y0Wbl160q1m9D0q0y0x0Y0,1g0b1r0d0O0W0#0Z0p0p0d0o0V0,bj0O0mbk0W1r0b0W18bF0 f/bDav111w5TaY0Fa!7^a(a*1:a,eS8S1Vb-fO9Jfe1/9La~0qb0b21Ja|9Mb6b88u1yenbc1+f45E0V0Y0O0V0W100x1s0O0p0Oad0,1#0q0df,0bf}0Z0wae0ob1fU0Vf_9+bJ1D1Fe3bOdt1T1V7{1!0pbYc51.cX80cib+cm25272:b;2f2hb@2mb_0i5@2t2vb~5|2%c1hdc3d40/c63Ic8cB7^e}h13Y1|1~g^b,h63-0B3/b63?5u0B3{8$0s0v4W0U0B0R0u2D4C4l484a4c2H4e4g4i4/44484y6e2H5n0@22b|fv4*2,0B4t6o4 6q6s31hT4l44e92Mavct2e7=hO2l4_0R5thp8NhxcOdncE5OcM6Te4cK5Yil5$2n5)ht69ig66irife;6m2-c%2|c*2_2{c.2 31c=3u0J0pc`35373Ic~3d3fd1d36Ad66M6F1ydU6KiZ6O2^de6%7vi%6Z6#i,650a6+7rdr6G6:ck6?egdw3sdy6 i=dC7pdF7a0l7cfl7g7i0=dNd*j5dR7ti#7vehd@dZ7Hd$7Kd:1y0p7N6td-7Id%jrd)gc7(jmigd?7*a#a?a.0Ce17@ig9ke6e`7~ea1_ec36ee88dW7h0%8c9^elbaeocz7A1Xer8sgD0S7F8T8M8Aey8PgleN8*j*eFj`8)j+8X2zeLj j=j|8,3IfOeUj%k5eZ8 e,36e.d)e)01533se#e-6Te:cZfMe@jO7{9n3shw6R3B9u6Lf25I9ybf9Bf79F9Hfca`9MfKcKfj9Tfl0+fnekfE9#fc9D0F9)55gp9/9;0B9?kW9!9{5DfIkO0^kQgpfQ8saa5I0ogQf(1hg#0#0O0d0Y160Wg0b1f@0p4(fWgNg#f,gZaE0p0{gZlbf{0,av0o14l3l51h0,0qgUgWaXa_aZjHe4gha+a39-a/gok5gq9Lgzgugwj;gzb50:gCj(gG0/gI8DaD0V1qaC0ZfTaOf;acaianl3140}0waL0b0wbA2R0#g*0ZbIdnbKg=bN1Mg^bS56bV0yg}1(b!h0cfh2hz1 21h53+iC1@b=hb2khnb`b|hi5{2Bhl44c21Qc4mbiscScYcc8fmCme3!hBmi26hEhGcrh(cw4u1J8lj*iye45L5NcGhdipjB5WcLm!7^iwm(5*mViqa{md1_c!iBh82=2@iFc-1=c/iJ3yiL0pc_01c{iQ393biT4Hd2mzdhd70:dmi.dci*6Ri;ndi(i:dmdyi^dsi|88i 6{i?6}dzj374jgdGj8dImojb23jd1ydO1Jjg7rji6UjkjYdY1yj;jod/9dju7P8 jxjqd;jB7ZnTcbn)6{d|jHeXe0a~e27^kve7jReb83jV86jX8aj!k-j(mT5Dj+8p8retnUj{ew8Bk4jIeHeOo6j~ogoceJk3okn;eDeP8-ka8qeVfOkekokh94kkkmkfdR9ce/f69h3Se^jPkx9pmF9skBf0kDe3kGf5e;kJf9kLlLffkPfMcN3#kSdJkU9Xj$kXhFkZfufwlKk)fBk-fFfH9~k=fLm%lGd a67gfR5I0yfT0ofVfXagf!0df$f(f*2yf-g7f=f@f_f{0op8f~aug1g30pg5p8f:bEbmgUlzdjgelC3PlEgjp2a.gn25gpfdlMgta jsgx3yb4gBk!lVbd9z0^0:g3gQ0ol40O1upwaif%0m1eax0d0#1daIbkgY0w1bl1l~1Bg;bM5Ig@i|m51Y1!0,g~mAmVh3mh3*b.m^2dha3xmxhfb{5^msb mv2Hqmnchq1.cRm.5Tkzhub(mfmJqgcohFcq5shJhLi7hPhU44h.0fh:5^h=2@3?ib0Wh_i02H0!904#0U0sct4 gj0@0U190#7m0y0h0sibq@q_3@q^q,4Eh|5r0U0,q~q#2Gi2r3hJqNi94tcyo6qz6)iimZcIjEo(iom*cQhsmGroixm;5Im?c$qi0iiEc,2|m~c;n03A0J0,iOc|iRn8d0nbhpnhi!nQdanedjddnkngiYi/dljji=i@dqns3%i}7wnvj1dA72nBdQnDj9dJnHdMnKjfdQnOdTnR7zn+nVd#nX1y0onZjwjpd(d=jCn+imjCjGfOjKn?jMn,ege_7}i2jTn}85efdVo1j#fDemo+3yj*eqo9j/j;eDj@ofoqoi0^oplHeI0xk28ZsOd ork8eRol1Jkba=n;oykgoGkj97kns)kikre=4%oKn_jQe|oPkA9MoS9wkFgIkI9DkKfbo#o k@gEsB9Vo.szfro=k#fvk%o^fzk*k,o/k.fGk:o~fgp1k^p5k`1_gNf;0,f{l{0yg%0Z4%0 0#lb55btaR1dtE1#f`bw0xl71sfV1v3;0Yp*0:0y0#0xlbae4}0xgSpDlBgga)lFfOpMs$lHt5lNpS0Sb1lQpWlTpYt8bbp!bf0J0m0Ybmf,t*aw0xtzfZlspa0q4|1m1sf{l=1ab5bD1q0wq0m0q31Jq5r+m5bU5510qb3FmcqCchmfh4qGmkqjb?mo2Kmqqp5`qrh`qtmp2MrPhrm-rusn3Qs`uF1`qEi|hC3+mMqJhIq,mQ2FrecAiuu#mXcFrnrlm%u}u`rpuZu(m/rrrviArxb:m_c+iGm}iIrEc?3B0,n3n5c}rMiUrOiXdirYdii)6Qdfr$nmr!nll r(6.i`g^nu6_j0nx6~r:j4r?j7r^nGdLnJ7lr}7q6-nPdUjls37es5jy1Ikkd,7Qn$scn-sfaXshn/sjjLe388spe87 ssedn 6@jYejtmo4gysDj,sFeuj?exsKsPsMwcsV8yonsTj_sZk63UsXou8?kcwls(oFki95s,oEe$kqoIe?s?v`k*oO9rs{kCs~gHp#t1f8fa9IpPo$k?o(kR8jkTkVtmtd9%tfo@wl0jo_k+fC9_9oo}fJwTtslKk_w)fSfUfWt%fZgZpff%f)f+pkf:pmf^tPpqf}f pug40b0Zg6pzg9pCgclApFt.gi0%gkwlt=eWt@wRgsa}t`t|b3ffpXb9u10xlWoV0^0b0xf_g%ac0obzp*4(7-lpaH0wbWgNf.1lp,0m1jg-f_usq2g?m3q6g`q8bW0ouCqwv6uG3!uIcnuKhfqkhcuOqnmruRhkuT2GquuXqxrqrgu$wHu(cih=281~mKqHciqFcnu.hHcs3`2RhMi8c#43h-4:1S4*4#3wc_6ph/8+1=h;0bh?q:3^y44Cq%0mq)yf362Mjtd)3^q 4DmN31t|yX4Cr16t0Uyy0v4#y$mwhN3n3?0,0#y.2Hr80p4tr64;xoq/yR1=4h1*q;0(0Rz12M7Fz5z7yI4)z9z4bD0(y|4:i11,y,0L3wy+yA0*kj3rrbc#mSw5rfu!mWriv0sgu ikrsm,itcTv5mVrw2PryrAvd2}vfiKrG0orJn6iSrNiWrTiZvsrUvui+z(nnr#rS71vCi_i#i{r+vGdxvJnz71vM78r@nF7fvR7knL01nNvWs0w0s27#ob7Gv$n%1y0Ys9v+sbjzsdn*Acu#jFv=k5sk7=sme4s@sqv|5IjUsuo0eio2w3xDo58nw7essGoc0dsJsUa.orojwksL8VsReKARohk7eQwpowkd8}wykpd;0Owxozs*s:ktwDoMe{kys`e f1oUt0f6t2oZt4xutrfiw4moo-fow-o;w#k$9+n;w)tjo`wZw.tpw:p0B7w?tuw^k|0YgQ0yaQ0mf;auaK4.bw0Yt#0mgZ0O0og#t$l@xZ1l0Zg21al70#0VBVbpaQl#4}aIadp;f@t,xligpIxopKgma:pNlKxut_gvpTt}xAt xCo*bb0E.'
 </script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -3985,6 +4042,8 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e_M[47=Ei2begH+0hn{P:L19-(ymoJ]utv6.3cf5Ta)wk
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
+      
+        <script src="../../xtra/javascripts/rituels.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       

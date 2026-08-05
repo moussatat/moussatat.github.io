@@ -67,6 +67,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
     
     
+    
 
 <script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "functoolsStorage": "../../js-libs/functoolsStorage.js", "functoolsTxt": "../../js-libs/functoolsTxt.js", "functoolsUi": "../../js-libs/functoolsUi.js", "functoolsUiBuilder": "../../js-libs/functoolsUiBuilder.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
 
@@ -153,6 +154,28 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle" data-ace-dark-mode="tomorrow_night_bright" data-ace-light-mode="crimson_editor">
 
 
+
+    <!--
+      TikZJax (rod2ik/tikzjax) — rendu de schémas TikZ/LaTeX côté navigateur,
+      sans installation LaTeX serveur.
+      Doc : https://rod2ik.github.io/tikzjax/installation/mkdocs/
+
+      Ordre important : config AVANT le bundle.
+      Vérifier de temps en temps la dernière version :
+      https://github.com/rod2ik/tikzjax/releases
+    -->
+    <script src="../../xtra/javascripts/tikzjax.config.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/fonts.min.css"
+    >
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/tikzjax.min.js"
+      defer
+    ></script>
+
     
       
     
@@ -160,6 +183,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       <link rel="stylesheet" href="../../xtra/stylesheets/ajustements.css">
     
       <link rel="stylesheet" href="../../xtra/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../xtra/stylesheets/rituels.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1190,6 +1215,38 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
   
+    <li class="md-nav__item">
+      <a href="../../1eds/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels d'entrée
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1202,10 +1259,10 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -1218,8 +1275,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             Archive
           </label>
@@ -3547,7 +3604,7 @@ Le  tracé sera affiché ici
 </div><script type="text/javascript">
 CONFIG.needMermaid = false;
 CONFIG.overlordClasses = ["GlobalRunnersManager", "Ide", "Terminal"];
-globalThis.PAGE_IDES_CONFIG = '.\x1e_.3cM[f5Ta47)w=/kEqi}2blxegH0pnhS{P,:j19-(LBIdysm 8No*]utrv6\x1e0H010z0T0t0(0!0)0a0M0N0j0z0Y0T0w0M0C0z0w0c0j0l0w0+0g0d0l0N0v0k0c0l0g0.170v0j0Y0l190M140}010K0X0,0D0U0a0E0j0W0z1r0X010i0I0a0(0z0V0(1H0%0)0(0x0z0O0j0)0w0)0z1H0=0(0%0z0b1v010J1D0z0E0*0a0d0!0E1I1=1C010g0)0!0W0X0L0V0X0t0W0D1Z0X0T0!0d0%1A1=090E0t0g0X09011W1K1T0(2i210E0X0A0x0!0w0j0x0V0P0m0K2d0X2D0X2k0(2m2z2d2d0T0z2g0W0a0j0a0L0P0d0t0w1Q2A2C2E270E0z2J2q2#282a1,0(0b0A0z0(0r1Q2b0(0R0U0S0T2U2W2Y0b0t0E2%0)0B0i0e0Q0X0o0X0G0d1W1,2z0b0F0(0W0x2K0E1/300z3b2h012V2X1X0;1O1#2i1)1+1-1H0z0)2P1:1=2.1^3D010%0V3H1/1;1?0(1^1`1|0X1!1O1Q2123250#2d0V0D0z0.0P0 0m3o2M2g1T1V2(0x0o0 0C1*0E0o0h2Z2*2D0g0=0n1T2~0x3?46212g2q040X0C2B4f2E0X1Q0g0(0P0k442!4o2D3`1W0P0x0p0v410O0M4e4x2E0)0t0A3k0P0N0C4I4J0X4z3|4D4F4H4w4x4q4s4u4S2D2v0d0q4B4e2d4V0P0v0C400X443O1:0)0?3K3V3N1*010D0%2X0t0d3G1K0V511D3R3f2=590(5b1s013O241K3G3I3T3L1@5k2f3u2P2R0L2o332r2t2v2x2z4m4o5x2S0P3q3x0m5m0!5o4 3M5u2g3e3g0E3i3k3m21200Z1;0z5H2E480)4a0)2~4R2d5J2T5M2Y3O0z0y0d0x0%2M0T1C0f0$525|5~600.0a1A0(0F0!0T5j0X64665}5 610a0q0n6h6j1D1v6d1;0a0x2W6r013#1P1B522w0t1,0a6u6e0E01656t0U0D0t0a0n0F0:1B1s0E0%0x0x521W586y0W0:1C4G526U6W6x0t1K636O010j0%0;0a0)0%6M1s4^2j700a0A1{0%0D1C730=2M0?3376787a1s0M523R0s6~705c017n6J0x0j0U1C0g2w3R520D1{0g0t1Q7r0j0(1I235i6x2N3W5k0S0E7F2e0(7x6F6|0!6x0!0A2Q0V3R1O1C0(6 0z524|0?1W0W0V6b0j0V0q7b520F7`1/0F0z4,0a0w0(710X7z2x7/1D7 7^7;85877y7A8c018e6~0z0*0z2w8h888a7B8d801:701I0)8j8b526?0a8q7+1s8v8l0W0j0y0a0t2M6=2%6h0c736+3p8R1X6y8U1C0c522M5f7`1X7J7L0D7N6w3Q3S1:8S7z7G1N6X1+0/3z3O2M0j0d0(0t0*7J1X1K276|0a5-0a5e1W5i7,7.6%0z0W0!8q7(7*961;7^2l4,7-948~8L7m6e0n0a1;0x1w7`9s0t6w3H1{0)7^9f9h2=6h9B5d0)588e0F1^170h0`0d0M110Y0z0h0N0}0k0l0C0v0M0T0g170l9^0g0T9|0g0M0d0T0d0z0C0ka20N0M4?aa0j0+0k830k0v0w1d0Y0d0Y7z0k0j3O9b6o0z7x5k3O0(0n7!1:2x8D8w0-0y248J898k7m0(9c1L291L0!0g0g1C4?73aQ9e3/0}947|1s7-1#0u0u.'
+globalThis.PAGE_IDES_CONFIG = '.\x1eya{cq.Nr_T-B*ts=S:hud8LE,H P42(17f[i6]9lgwb5e0jMIo/)npvm3}xk\x1e0c010S0u0J0n0X0h0i0F0M0b0S0v0u0Q0F0T0S0Q0(0b0G0Q0K0H0d0G0M0D0C0(0G0H0.170D0b0v0G190F140}010r0A0,0#0a0i0!0b0%0S1r0A010j0B0i0n0S0o0n1H0t0h0n0N0S0k0b0h0Q0h0S1H0=0n0t0S0f1v010y1D0S0!0$0i0d0X0!1I1=1C010H0h0X0%0A0U0o0A0J0%0#1Z0A0u0X0d0t1A1=090!0J0H0A09011W1K1T0n2i210!0A0O0N0X0Q0b0N0o0E0Z0r2d0A2D0A2k0n2m2z2d2d0u0S2g0%0i0b0i0U0E0d0J0Q1Q2A2C2E270!0S2J2q2#282a1,0n0f0O0S0n0x1Q2b0n0l0a0W0u2U2W2Y0f0J0!2%0h0z0j0V0w0A0p0A0q0d1W1,2z0f0s0n0%0N2K0!1/300S3b2h012V2X1X0;1O1#2i1)1+1-1H0S0h2P1:1=2.1^3D010t0o3H1/1;1?0n1^1`1|0A1!1O1Q2123250m2d0o0#0S0.0E0 0Z3o2M2g1T1V2(0N0p0 0T1*0!0p0R2Z2*2D0H0=0P1T2~0N3?46212g2q040A0T2B4f2E0A1Q0H0n0E0C442!4o2D3`1W0E0N0Y0D410k0F4e4x2E0h0J0O3k0E0M0T4I4J0A4z3|4D4F4H4w4x4q4s4u4S2D2v0d0+4B4e2d4V0E0D0T400A443O1:0h0?3K3V3N1*010#0t2X0J0d3G1K0o511D3R3f2=590n5b1s013O241K3G3I3T3L1@5k2f3u2P2R0U2o332r2t2v2x2z4m4o5x2S0E3q3x0Z5m0X5o4 3M5u2g3e3g0!3i3k3m21200g1;0S5H2E480h4a0h2~4R2d5J2T5M2Y3O0S0*0d0N0t2M0u1C0I0L525|5~600.0i1A0n0s0X0u5j0A64665}5 610i0+0P6h6j1D1v6d1;0i0N2W6r013#1P1B522w0J1,0i6u6e0!01656t0a0#0J0i0P0s0:1B1s0!0t0N0N521W586y0%0:1C4G526U6W6x0J1K636O010b0t0;0i0h0t6M1s4^2j700i0O1{0t0#1C730=2M0?3376787a1s0F523R0e6~705c017n6J0N0b0a1C0H2w3R520#1{0H0J1Q7r0b0n1I235i6x2N3W5k0W0!7F2e0n7x6F6|0X6x0X0O2Q0o3R1O1C0n6 0S524|0?1W0%0o6b0b0o0+7b520s7`1/0s0S4,0i0Q0n710A7z2x7/1D7 7^7;85877y7A8c018e6~0S0$0S2w8h888a7B8d801:701I0h8j8b526?0i8q7+1s8v8l0%0b0*0i0J2M6=2%6h0(736+3p8R1X6y8U1C0(522M5f7`1X7J7L0#7N6w3Q3S1:8S7z7G1N6X1+0/3z3O2M0b0d0n0J0$7J1X1K276|0i5-0i5e1W5i7,7.6%0S0%0X8q7(7*961;7^2l4,7-948~8L7m6e0P0i1;0N1w7`9s0J6w3H1{0h7^9f9h2=6h9B5d0h588e0s1^170R0`0d0F110v0S0R0M0}0C0G0T0D0F0u0H170G9^0H0u9|0H0F0d0u0d0S0T0Ca20M0F4?aa0b0K0C830C0D0Q1d0v0d0v7z0C0b3O9b6o0S7x5k3O0n0P7!1:2x8D8w0-0*248J898k7m0n9c1L291L0X0H0H1C4?73aQ9e3/0}947|1s7-1#0)0).'
 </script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -3860,6 +3917,8 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e_.3cM[f5Ta47)w=/kEqi}2blxegH0pnhS{P,:j19-(LB
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
+      
+        <script src="../../xtra/javascripts/rituels.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       

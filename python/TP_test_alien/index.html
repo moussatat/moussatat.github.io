@@ -67,6 +67,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
     
     
+    
 
 <script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "functoolsStorage": "../../js-libs/functoolsStorage.js", "functoolsTxt": "../../js-libs/functoolsTxt.js", "functoolsUi": "../../js-libs/functoolsUi.js", "functoolsUiBuilder": "../../js-libs/functoolsUiBuilder.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
 
@@ -153,6 +154,28 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle" data-ace-dark-mode="tomorrow_night_bright" data-ace-light-mode="crimson_editor">
 
 
+
+    <!--
+      TikZJax (rod2ik/tikzjax) — rendu de schémas TikZ/LaTeX côté navigateur,
+      sans installation LaTeX serveur.
+      Doc : https://rod2ik.github.io/tikzjax/installation/mkdocs/
+
+      Ordre important : config AVANT le bundle.
+      Vérifier de temps en temps la dernière version :
+      https://github.com/rod2ik/tikzjax/releases
+    -->
+    <script src="../../xtra/javascripts/tikzjax.config.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/fonts.min.css"
+    >
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/tikzjax.min.js"
+      defer
+    ></script>
+
     
       
     
@@ -160,6 +183,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       <link rel="stylesheet" href="../../xtra/stylesheets/ajustements.css">
     
       <link rel="stylesheet" href="../../xtra/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../xtra/stylesheets/rituels.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1190,6 +1215,38 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
   
+    <li class="md-nav__item">
+      <a href="../../1eds/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels d'entrée
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1202,10 +1259,10 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -1218,8 +1275,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             Archive
           </label>
@@ -3658,7 +3715,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 </div><span id="auto_run_dea6d5df5f4d62091c4b82b2a2d8ce264ea274b4" class="py_mk_auto_run py_mk_hidden "></span><span id="auto_run_1beca5f2e96d4fe0b06925380e200d01e3b8fd63" class="py_mk_auto_run py_mk_hidden "></span><script type="text/javascript">
 CONFIG.needMermaid = false;
 CONFIG.overlordClasses = ["PyBtn", "GlobalRunnersManager", "Ide", "Terminal"];
-globalThis.PAGE_IDES_CONFIG = '.\x1e_.c3[fO5Ta4FD7)w=kqi}2blxegH0pnh{P,:19-(IKdysAm 8o*]utrv6\x1e0G010j0!0#0X0a0$0!0E0a0Q0z0j0(0Q0h0Q0f0h0f0k0Q0(0v0C0L0K0c0k0w0W0v0w0v0j0v0Q0W0c0z0v0(0k0^0v0n190k010J0V0)0D0R0a0E0j0U0z1t0V010i0H0a0#0z0S0#0a0j0x0t0z0E0M0z0y0.0K0b1x010I1F1S0%0a0c0X0E1K1-1E010t0U0D0X0$0#0V0D0h090E0f0$0X0U0V1P1R0=1x0#0F1,0V1=1@1_0V0Y1~1~0j0D0D0K0V0q0V0T2l0N09010f0t0A0!0$0z0K2u0o2i1A2l1Y0A0+0c0F0z0N0d2E2G2m0b0F0+0#0N0v2Q2k2S0Q210t1K0N0n2Q2j2H0b0@0S0S0t0E0z0$0a0D0j0$1+2z0S0N0o1#1%0E1)1K0$0U1*1,1.0#1:33010!0S2^3a1-1S3d1u013f1+0$2_1+3l1/3o3f0D0!0w1Q0c1J1L0#0S3e1$013i0c2A1N1K1M3H3x3J1@1M3E383k3c3I1F3U1N3u3Z3S1%0y0c0x0!0@0Q1E0e0Z3J1V3-3/0z0Q0a1C290X0Q3R0V3?3^3,3.3:0a0r0p43453#0R400=1Q0w4d010#2z0#0x1D3J251S2`4g2a0E013@4f0D0t0a0p0F2(1D1u0E0!0x0x3J2A3D1Q0U2(1E0M0K3J4F4H0a1Q1M3=4A0*0,0.0:4y1u4W1F4,0a0A210!0D1E0C3J1^0@2_2?4=4@4_4.3J3i0s0/0;3!3K0z570D0x0j0R1E0f1P3i4O0z0U0X0%0z1O2;2^0#0t1,0S0a1M0j0c0r0#0$5B4I0V5j0x3i0u4s4*580=0K0w0z0c0j0 0v0z0L0`0k0f0z0C0w0C0(0L0v0h0d0W0C1k0C0C0Q0C0K0z0d1a0f120d1E1w1y1A1C1:1H3E3V4t1T1V0.0v1Z5h3^353Y3m1:2022241Q4u284x2c1?1^1`2h0E2d6v1{1}0E2-0D0v2o2q2s2u2w2y2A0v2D2F2!6e2$0X4H0N0(2Z2l6e0w0j300h6Y6F0b2J0!2L2N0k6)6e2U0,2O6;2/2%2)2Y6E6!6$0N0K2,2R6S1L2=2@2_2{2}0X2 313f1(3W393(6k3*3g3i3t3b7k1F3q1^7o3v3n7r3T3A3C683G5a3L3N7B433p3T0X3V377i7p3w7x3#7K3%7O7w7I3+3`3:4%467Y3|3~0z40427!7X487%4b4d4(6r1,4!0t4k3=4m4o4q3f6a4v4h4z3T0R4C4E4G1K1E4K4M5m4Q1=4T1u4V4X885r4#7w4e4)0-5P1E0v4O0;517c530V4/014}3j504?8x1E8A568r7l8J5e5g5i5k0z5m5o5q5s7n5v5x5z0#5B5D5F1j8P5K0z5M1%0Q2(1^0a0L0d0d0j190L0n0h1a0j0_1m0(5$0K0h0j5|0_0h0k0c5|0c0f0c0c0h1j0d1s1u621z1B5H1G1I3P1N6a1U1W0a0d6f7f6i7j7P2v2123807?0E6t2e1`2r0D1$2!1$6,6.1$6T4H1$6?0#1$6#0S1~6z2f1|2F6E0b1j1-2A0$2t2v2x2z5{2D1F6h362^7N7v5a3h3j9B7V9R2M0N0ba82Q9Xa7a91~9U2)a80b2Q9!acai7s3s6j9C3y7z0t3D9r7H3f7E7)7G5a3$7hap7V3y7SaE1:2!0b5q0$0t2w3j0D214?1B1C0N0e000B0W001$aY0ha#0V000ma(a$0m0K0Ca)000la:000Z327#7.3;1u8o3_a}7(7*7;a|3{3}7:7,019H7^7`a 7|1_7~4s6p274w1,834B4D4Y894J4L4N4:5T7^4S7w8i1Fbr8l0t4$a 4(2V4+591u4{4:8v8F4^8s4|0$4~0a8E528H555c8K7Q5b5d5f5h1u5J5l3#212w7~7l0j0#1K1?3G4!0z0f7V0O1 2?2(6g1FbJ4!0X0A8V5u1E5E0!8R1F3r2_2A0U5y0U6$0r4`3J2U5y6.5C0a0w0#4-5I8Qcq6$3aaocwcyb-cf01cr0/0z5q1Pcvcx8)b.cJcC2~3l0$cRcIbF0aaM7wcH3Jcm0ybW0@7^2@430dbN014S0=0tc-1Qc/1E0d3J0@3M0^3i1Ob^5n0Db{7@a17oc-5j0t3.2A1:3|8/cXc 0^0c5v0%b@5r1M0Q7c1N0f8:ay7C1ucdcIcj5p5r6$8W5w0E5y5A5C5E5GcY552a0p0a1,0x1ydG5udI0a2^210$5ydw2_dy43c(1F0S2}0acr0F1:99941a0v99101i0d0Q0_0w981c0(1q9i5$3|0v5U0K8{d{0(0C0W0n0w0w0d94930n5Z0(0c0K1e5,120L0fax0#b80zb+b%0#0p0.1+5KdP3+9KeJ3Kezdu1*0,dT0fex1u14c=0ceRe80Q6#5Ccc0:8+3^8.0-2_ek930W0k8~0K0W0(0W0j0C0vet0W0W8`0j930K0{0he`1k1q0wese}61bb639n669q3F1Obk9u0.0k9y9{aI3o6m9Fbk816s9%9L2l9OfA0Va5cfafcf9X9Z6$9$6u9(6C9*2R9,3m9/9;6L9@0k9_9z9|3Xa3a07nfr1Fah1~f+0Ef-f/a8f,a8an7u3)b%3z3BataA8L5T7FavaBaH7Mf)7WbbaHf$3oaKaMaO1R79aS5F0UaVaXaZa=0Pa!a$0P0(a=0ggsa$0g0Kgngygq0da_a{7-b7bab1b7b32a7+bHb649b9gN4f4hbd4l4nbh4rc5fv9Hbofe86bD8abu8dby8g0VbB01bD7^bG44bI5O4,cpbO0=bQ8yc~1F8C4 g~bY54d.b#g{f b)8Ob,cAb/0Xb;9o7 d5b`5y4qb~1:c02w6y0#c48p0.0xc8ca1_e(ce3JchcLck3~cng|cTcs2McucFeMcKhFhPhe8*cB5y2AcN0xcPcGhfhL3a0;37eMc!c$eMc*c,bEc|1uc;c)50c_h=1Lc}dld16$dFhld75yd9f(1+dc0jde9@dhe,1^3f0@5Bdodq8ZdteZdxg07)43dB8SdEhA8XdJ8Z8#dN8(hUcS0SdRdT0EdVivdZd#1^d(iod1dzczhVd.d:d=1:15110Q0Q0d0cek0~f60L8^i$0L5?5U5/0n0(0j3|0n0f0Wa:0(es0n0W8@e#5U1new0Le;ej0(e55%5`3;55ez4aeB5aeEeG0XeIiCcI1VeLjmjdim3%eRhheU0VeWhEeZ0z3|e$codAe)0u0u.'
+globalThis.PAGE_IDES_CONFIG = '.\x1eya{cq.r_T-*tsh=:uDdK8H, P42F(1O7f[i6]9lgwb5e0Io)npvAm3}xk\x1e0c010b0q0l0U0h0g0q0W0h0s0R0b0J0s0Q0s0G0Q0G0z0s0J0A0S0L0D0d0z0P0u0A0P0A0b0A0s0u0d0R0A0J0z0^0A0F190z010p0x0)0X0a0h0W0b0!0R1t0x010i0y0h0l0R0m0l0h0b0M0I0R0W0j0R0%0.0D0f1x010w1F1S0Y0h0d0U0W1K1-1E010I0!0X0U0g0l0x0X0Q090W0G0g0U0!0x1P1R0=1x0l0n1,0x1=1@1_0x0k1~1~0b0X0X0D0x0o0x0Z2l0C09010G0I0N0q0g0R0D2u0V2i1A2l1Y0N0+0d0n0R0C0#2E2G2m0f0n0+0l0C0A2Q2k2S0s210I1K0C0F2Q2j2H0f0@0m0m0I0W0R0g0h0X0b0g1+2z0m0C0V1#1%0W1)1K0g0!1*1,1.0l1:33010q0m2^3a1-1S3d1u013f1+0g2_1+3l1/3o3f0X0q0P1Q0d1J1L0l0m3e1$013i0d2A1N1K1M3H3x3J1@1M3E383k3c3I1F3U1N3u3Z3S1%0%0d0M0q0@0s1E0H0K3J1V3-3/0R0s0h1C290U0s3R0x3?3^3,3.3:0h0(0O43453#0a400=1Q0P4d010l2z0l0M1D3J251S2`4g2a0W013@4f0X0I0h0O0n2(1D1u0W0q0M0M3J2A3D1Q0!2(1E0j0D3J4F4H0h1Q1M3=4A0*0,0.0:4y1u4W1F4,0h0N210q0X1E0S3J1^0@2_2?4=4@4_4.3J3i0e0/0;3!3K0R570X0M0b0a1E0G1P3i4O0R0!0U0Y0R1O2;2^0l0I1,0m0h1M0b0d0(0l0g5B4I0x5j0M3i0$4s4*580=0D0P0R0d0b0 0A0R0L0`0z0G0R0S0P0S0J0L0A0Q0#0u0S1k0S0S0s0S0D0R0#1a0G120#1E1w1y1A1C1:1H3E3V4t1T1V0.0A1Z5h3^353Y3m1:2022241Q4u284x2c1?1^1`2h0W2d6v1{1}0W2-0X0A2o2q2s2u2w2y2A0A2D2F2!6e2$0U4H0C0J2Z2l6e0P0b300Q6Y6F0f2J0q2L2N0z6)6e2U0,2O6;2/2%2)2Y6E6!6$0C0D2,2R6S1L2=2@2_2{2}0U2 313f1(3W393(6k3*3g3i3t3b7k1F3q1^7o3v3n7r3T3A3C683G5a3L3N7B433p3T0U3V377i7p3w7x3#7K3%7O7w7I3+3`3:4%467Y3|3~0R40427!7X487%4b4d4(6r1,4!0I4k3=4m4o4q3f6a4v4h4z3T0a4C4E4G1K1E4K4M5m4Q1=4T1u4V4X885r4#7w4e4)0-5P1E0A4O0;517c530x4/014}3j504?8x1E8A568r7l8J5e5g5i5k0R5m5o5q5s7n5v5x5z0l5B5D5F1j8P5K0R5M1%0s2(1^0h0L0#0#0b190L0F0Q1a0b0_1m0J5$0D0Q0b5|0_0Q0z0d5|0d0G0d0d0Q1j0#1s1u621z1B5H1G1I3P1N6a1U1W0h0#6f7f6i7j7P2v2123807?0W6t2e1`2r0X1$2!1$6,6.1$6T4H1$6?0l1$6#0m1~6z2f1|2F6E0f1j1-2A0g2t2v2x2z5{2D1F6h362^7N7v5a3h3j9B7V9R2M0C0fa82Q9Xa7a91~9U2)a80f2Q9!acai7s3s6j9C3y7z0I3D9r7H3f7E7)7G5a3$7hap7V3y7SaE1:2!0f5q0g0I2w3j0X214?1B1C0C0H000v0u001$aY0Qa#0x000ra(a$0r0D0Sa)000Ba:000K327#7.3;1u8o3_a}7(7*7;a|3{3}7:7,019H7^7`a 7|1_7~4s6p274w1,834B4D4Y894J4L4N4:5T7^4S7w8i1Fbr8l0I4$a 4(2V4+591u4{4:8v8F4^8s4|0g4~0h8E528H555c8K7Q5b5d5f5h1u5J5l3#212w7~7l0b0l1K1?3G4!0R0G7V0T1 2?2(6g1FbJ4!0U0N8V5u1E5E0q8R1F3r2_2A0!5y0!6$0(4`3J2U5y6.5C0h0P0l4-5I8Qcq6$3aaocwcyb-cf01cr0/0R5q1Pcvcx8)b.cJcC2~3l0gcRcIbF0haM7wcH3Jcm0%bW0@7^2@430#bN014S0=0Ic-1Qc/1E0#3J0@3M0^3i1Ob^5n0Xb{7@a17oc-5j0I3.2A1:3|8/cXc 0^0d5v0Yb@5r1M0s7c1N0G8:ay7C1ucdcIcj5p5r6$8W5w0W5y5A5C5E5GcY552a0O0h1,0M1ydG5udI0h2^210g5ydw2_dy43c(1F0m2}0hcr0n1:99941a0A99101i0#0s0_0P981c0J1q9i5$3|0A5U0D8{d{0J0S0u0F0P0P0#94930F5Z0J0d0D1e5,120L0Gax0lb80Rb+b%0l0O0.1+5KdP3+9KeJ3Kezdu1*0,dT0Gex1u14c=0deRe80s6#5Ccc0:8+3^8.0-2_ek930u0z8~0D0u0J0u0b0S0Aet0u0u8`0b930D0{0Qe`1k1q0Pese}61bb639n669q3F1Obk9u0.0z9y9{aI3o6m9Fbk816s9%9L2l9OfA0xa5cfafcf9X9Z6$9$6u9(6C9*2R9,3m9/9;6L9@0z9_9z9|3Xa3a07nfr1Fah1~f+0Wf-f/a8f,a8an7u3)b%3z3BataA8L5T7FavaBaH7Mf)7WbbaHf$3oaKaMaO1R79aS5F0!aVaXaZa=0ta!a$0t0Ja=0Egsa$0E0Dgngygq0#a_a{7-b7bab1b7b32a7+bHb649b9gN4f4hbd4l4nbh4rc5fv9Hbofe86bD8abu8dby8g0xbB01bD7^bG44bI5O4,cpbO0=bQ8yc~1F8C4 g~bY54d.b#g{f b)8Ob,cAb/0Ub;9o7 d5b`5y4qb~1:c02w6y0lc48p0.0Mc8ca1_e(ce3JchcLck3~cng|cTcs2McucFeMcKhFhPhe8*cB5y2AcN0McPcGhfhL3a0;37eMc!c$eMc*c,bEc|1uc;c)50c_h=1Lc}dld16$dFhld75yd9f(1+dc0bde9@dhe,1^3f0@5Bdodq8ZdteZdxg07)43dB8SdEhA8XdJ8Z8#dN8(hUcS0mdRdT0WdVivdZd#1^d(iod1dzczhVd.d:d=1:15110s0s0#0dek0~f60L8^i$0L5?5U5/0F0J0b3|0F0G0ua:0Jes0F0u8@e#5U1new0Le;ej0Je55%5`3;55ez4aeB5aeEeG0UeIiCcI1VeLjmjdim3%eRhheU0xeWhEeZ0R3|e$codAe)0$0$.'
 </script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -3973,6 +4030,8 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e_.c3[fO5Ta4FD7)w=kqi}2blxegH0pnh{P,:19-(IKdy
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
+      
+        <script src="../../xtra/javascripts/rituels.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       

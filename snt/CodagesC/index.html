@@ -67,6 +67,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
     
     
+    
 
 <script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "functoolsStorage": "../../js-libs/functoolsStorage.js", "functoolsTxt": "../../js-libs/functoolsTxt.js", "functoolsUi": "../../js-libs/functoolsUi.js", "functoolsUiBuilder": "../../js-libs/functoolsUiBuilder.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
 
@@ -149,6 +150,28 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle" data-ace-dark-mode="tomorrow_night_bright" data-ace-light-mode="crimson_editor">
 
 
+
+    <!--
+      TikZJax (rod2ik/tikzjax) — rendu de schémas TikZ/LaTeX côté navigateur,
+      sans installation LaTeX serveur.
+      Doc : https://rod2ik.github.io/tikzjax/installation/mkdocs/
+
+      Ordre important : config AVANT le bundle.
+      Vérifier de temps en temps la dernière version :
+      https://github.com/rod2ik/tikzjax/releases
+    -->
+    <script src="../../xtra/javascripts/tikzjax.config.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/fonts.min.css"
+    >
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/tikzjax.min.js"
+      defer
+    ></script>
+
     
       
     
@@ -156,6 +179,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       <link rel="stylesheet" href="../../xtra/stylesheets/ajustements.css">
     
       <link rel="stylesheet" href="../../xtra/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../xtra/stylesheets/rituels.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1186,6 +1211,38 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
   
+    <li class="md-nav__item">
+      <a href="../../1eds/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels d'entrée
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1198,10 +1255,10 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -1214,8 +1271,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             Archive
           </label>
@@ -3676,7 +3733,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 </details><script type="text/javascript">
 CONFIG.needMermaid = false;
 CONFIG.overlordClasses = ["GlobalRunnersManager", "Terminal"];
-globalThis.PAGE_IDES_CONFIG = '.\x1e_.c3[f5a47wkqi}2lbxeg0pnh{C,:19-dysm 8o]utrv6\x1e0z010P0t0Q0J0a0M0x0q0H0a0D0g0G0c0G0E0j0h0d0d0t0v0f0d0L0j0t0p0j0i0v0p0S0c0)0S0r0r0i0G0r0f0r0S0g0t0D0t0c010C0K0T0w0%0x0h0J0t1j0K010A0M0G0h0u0t0I0A0b1n010B1u0t0x0R0a0c0!0V0x0P1t011G1I1K0a0V0X1M1O1J1R1k1T1H010O0I0W1!1Q1$1S1U011N0Q0Q1/1P1%1u1?0w0O0r0q0n0c1X1B0P0I1=1*1-0c0Q0t0P260I282a1u0w0M2i261Z1N1:1Q2k012m2o2r1|2u0t0s0c0q0O0G0t0G1t0e0N1*2B2D2F2H0a1r0P0y1x291k2K2M2C2E2G0G0a0l0k2W0K2Y2l0H2T0!0a230r2+0e0U0O0Q0P0q1s1*0h231J0a1n2:0x012L2.0w0n0a0k0y0n0V1t0x0O0q0q1*2e25230J3g1t0F0D1*3e3g0t2=0n2i2J39010h0O0P0M0a0Q0O371k0v3n3M0a0u0Q0M0O0w1t3P1u0M0Q2G1`0n0x3S3U3W1t3v1u1-0m3K3M2u3;340q0h0H1t0f311-3n0t0J0M0R3z0h0I1-2|0n0!0I0a2i0h0c0l0P0Q4h1s1k3 0q412l2e0f0n3l2p0J3^0P0G3V2g0c3H0Z0f0f1t0p0v3Z1@4F0f0t2H0r4h0l1t4k0O0t0o1*1Y0Y0!0$0a0i0c0E0d130h0j0S0v0h1h0d0G4P0j0L1y0c0r0{0i0L1d0p0E0D0S0G0i0f0E2G0E1t1m1o1q4n1u1w1y1A1C1E3}2M1W2y1;1(1?1J1L4#1{5t1~1*1,1.5s2t5u1*1^1`5F1}1)2l2123250V2i2+5N012c2e2g5S2j5H2l2n5Z0W0Y5L2u2w4D1#5G5B1I2!2P2I2X3E2N2#2Q2S2U0G2^5{5@2$2(2*3D1*352U3*2?2^2`2|2~1?310n336a0!38690H3b3d3f3h1k3j3l423p0n3r1}3u3w6t3z233C5`303H3J3L3N0K4M6N3+3V3X1k3/013#3%0a3)6S3-6V2b0t3=6N3^6*3`3|3~400t4244460a484a0P4c0x4e4g4i4k4m6;4q6?4s0t4u4w4#4z4B4F4E2g0M4H4J4L5I4O4Q194T4V3L4Y0o.'
+globalThis.PAGE_IDES_CONFIG = '.\x1eya{cq.r_-tsh:ud8, 4217f[i6]9lCgwb5e0onpvm3}xk\x1e0c010j0I0g0O0h0K0L0C0a0h0u0H0o0d0o0B0v0b0P0P0I0J0w0P0p0v0I0t0v0s0J0t0z0d0)0z0G0G0s0o0G0w0G0z0H0I0u0I0d010m0r0T0M0%0L0b0O0I1j0r010D0K0o0b0E0I0k0D0f1n010q1u0I0L0N0h0d0!0V0L0j1t011G1I1K0h0V0X1M1O1J1R1k1T1H010n0k0W1!1Q1$1S1U011N0g0g1/1P1%1u1?0M0n0G0C0y0d1X1B0j0k1=1*1-0d0g0I0j260k282a1u0M0K2i261Z1N1:1Q2k012m2o2r1|2u0I0R0d0C0n0o0I0o1t0x0A1*2B2D2F2H0h1r0j0l1x291k2K2M2C2E2G0o0h0S0F2W0r2Y2l0a2T0!0h230G2+0x0U0n0g0j0C1s1*0b231J0h1n2:0L012L2.0M0y0h0F0l0y0V1t0L0n0C0C1*2e25230O3g1t0i0u1*3e3g0I2=0y2i2J39010b0n0j0K0h0g0n371k0J3n3M0h0E0g0K0n0M1t3P1u0K0g2G1`0y0L3S3U3W1t3v1u1-0e3K3M2u3;340C0b0a1t0w311-3n0I0O0K0N3z0b0k1-2|0y0!0k0h2i0b0d0S0j0g4h1s1k3 0C412l2e0w0y3l2p0O3^0j0o3V2g0d3H0Z0w0w1t0t0J3Z1@4F0w0I2H0G4h0S1t4k0n0I0Q1*1Y0Y0!0$0h0s0d0B0P130b0v0z0J0b1h0P0o4P0v0p1y0d0G0{0s0p1d0t0B0u0z0o0s0w0B2G0B1t1m1o1q4n1u1w1y1A1C1E3}2M1W2y1;1(1?1J1L4#1{5t1~1*1,1.5s2t5u1*1^1`5F1}1)2l2123250V2i2+5N012c2e2g5S2j5H2l2n5Z0W0Y5L2u2w4D1#5G5B1I2!2P2I2X3E2N2#2Q2S2U0o2^5{5@2$2(2*3D1*352U3*2?2^2`2|2~1?310y336a0!38690a3b3d3f3h1k3j3l423p0y3r1}3u3w6t3z233C5`303H3J3L3N0r4M6N3+3V3X1k3/013#3%0h3)6S3-6V2b0I3=6N3^6*3`3|3~400I4244460h484a0j4c0L4e4g4i4k4m6;4q6?4s0I4u4w4#4z4B4F4E2g0K4H4J4L5I4O4Q194T4V3L4Y0Q.'
 </script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -3935,6 +3992,8 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e_.c3[f5a47wkqi}2lbxeg0pnh{C,:19-dysm 8o]utrv
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
+      
+        <script src="../../xtra/javascripts/rituels.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       

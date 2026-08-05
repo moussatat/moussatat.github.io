@@ -1,0 +1,502 @@
+/* ============================================================
+   Styles pour les rituels d'entrée ("Do Now")
+   Esprit https://tipsforteachers.co.uk/do-now/ :
+   4 questions en grille, chrono bien visible au centre,
+   corrigé masqué et révélé au clic.
+
+   À placer dans docs/stylesheets/rituels.css
+   et déclarer dans mkdocs.yml :
+
+   extra_css:
+     - stylesheets/rituels.css
+   ============================================================ */
+
+/* --- Palette "Connections" (NYT) : jaune → vert → bleu → violet,
+   du plus facile au plus difficile. Toujours dans cet ordre :
+   Q1 = jaune, Q2 = vert, Q3 = bleu, Q4 = violet.
+   Couleurs pastel volontairement : lisibles en clair ET en
+   sombre avec du texte noir dessus (les cartes imposent donc
+   leur propre couleur, indépendamment du thème clair/sombre
+   de mkdocs-material). --- */
+:root {
+  --connections-yellow: #f9df6d;
+  --connections-green:  #a0c35a;
+  --connections-blue:   #b0c4ef;
+  --connections-purple: #ba81c5;
+}
+
+/* --- Ligne du haut : menu déroulant + bouton "Mode projection"
+   côte à côte. Ce sont deux <div> DISTINCTS exprès (et non un seul
+   bloc) : en mode projection, seul .ritual-picker-wrap est masqué,
+   .ritual-toolbar reste accessible (voir plus bas) pour pouvoir
+   sortir du plein écran. --- */
+.ritual-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 16px;
+  margin-bottom: 20px;
+}
+
+.ritual-picker-wrap {
+  text-align: center;
+}
+
+.ritual-picker-wrap label {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+#ritual-picker {
+  font-size: 1em;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.ritual-toolbar {
+  text-align: center;
+}
+
+#projection-toggle {
+  font-size: 0.85em;
+}
+
+/* ------------------------------------------------------------
+   Minuteur
+   Ce bloc n'existe qu'UNE seule fois dans le HTML (id unique) ;
+   rituels.js le déplace automatiquement dans le .timer-slot du
+   rituel actuellement affiché (voir showRitual()/relocateTimer()
+   dans rituels.js). Il reste donc toujours "au milieu des 4
+   questions", quel que soit le rituel choisi dans le menu.
+   ------------------------------------------------------------ */
+.ritual-timer {
+  border: 2px solid var(--md-primary-fg-color);
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+  background-color: var(--md-default-bg-color);
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ritual-timer__label {
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
+.ritual-timer__display {
+  display: block;
+  font-size: 2.4em;
+  font-weight: bold;
+  color: var(--md-accent-fg-color);
+  margin: 8px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.ritual-timer__controls {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.ritual-timer__controls .md-button {
+  padding: 6px 10px;
+  font-size: 0.8em;
+}
+
+/* ------------------------------------------------------------
+   Grille d'un rituel : 4 questions + chrono AU CENTRE
+
+   Desktop :  [ Q1 ][ chrono ][ Q2 ]
+              [ Q3 ][ chrono ][ Q4 ]
+
+   Le placement de chaque carte se fait via sa couleur
+   (.q-yellow = Q1, .q-green = Q2, .q-blue = Q3, .q-purple = Q4) :
+   l'ordre des balises dans le markdown n'a donc aucune importance,
+   ce qui simplifie la rédaction d'un nouveau rituel.
+   ------------------------------------------------------------ */
+.ritual-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(150px, 210px) 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "q1 timer q2"
+    "q3 timer q4";
+  gap: 16px 20px;
+  margin: 24px 0;
+  align-items: stretch;
+}
+
+.ritual-grid > .timer-slot { grid-area: timer; }
+.ritual-grid > .q-card.q-yellow { grid-area: q1; }
+.ritual-grid > .q-card.q-green  { grid-area: q2; }
+.ritual-grid > .q-card.q-blue   { grid-area: q3; }
+.ritual-grid > .q-card.q-purple { grid-area: q4; }
+
+/* En dessous de ~700px : une seule colonne, chrono repositionné
+   AU MILIEU de la pile des 4 questions (2 au-dessus, 2 en dessous) */
+@media (max-width: 700px) {
+  .ritual-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "q1"
+      "q2"
+      "timer"
+      "q3"
+      "q4";
+  }
+}
+
+/* --- Carte "question" : couleur généralisée à toute la carte
+   (fond + texte sombre lisible, quel que soit le thème
+   clair/sombre de mkdocs-material) --- */
+.q-card {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.q-card.q-yellow { background-color: var(--connections-yellow); color: #1a1a1a; }
+.q-card.q-green  { background-color: var(--connections-green);  color: #1a1a1a; }
+.q-card.q-blue   { background-color: var(--connections-blue);   color: #1a1a1a; }
+.q-card.q-purple { background-color: var(--connections-purple); color: #1a1a1a; }
+
+/* Ces 4 cartes gardent TOUJOURS un fond pastel clair, même quand le
+   thème du site passe en sombre. Or en thème sombre, mkdocs-material
+   (et MathJax/KaTeX pour les formules) redéfinissent le texte en
+   clair pour rester lisibles sur un fond sombre — ce qui rend au
+   contraire le texte illisible ici, sur fond clair. `color` ne
+   s'hérite pas si un descendant le redéfinit lui-même : on force
+   donc la couleur sombre sur TOUS les descendants, pas seulement
+   sur la carte, `!important` pour passer devant les règles de
+   thème sombre. */
+.q-card.q-yellow,
+.q-card.q-yellow *,
+.q-card.q-green,
+.q-card.q-green *,
+.q-card.q-blue,
+.q-card.q-blue *,
+.q-card.q-purple,
+.q-card.q-purple * {
+  color: #1a1a1a !important;
+}
+
+/* MathJax rend les formules en SVG et utilise souvent `currentColor`
+   pour le tracé (stroke/fill) : on le fixe aussi explicitement au
+   cas où le thème sombre l'aurait redéfini en dur. */
+.q-card.q-yellow mjx-container svg,
+.q-card.q-green mjx-container svg,
+.q-card.q-blue mjx-container svg,
+.q-card.q-purple mjx-container svg {
+  color: #1a1a1a !important;
+}
+
+/* le Défi reste hors grille et hors palette : il n'appartient pas
+   à la gradation à 4 niveaux, donc pas de fond coloré, juste un
+   liseré neutre pour le distinguer visuellement */
+.q-card.q-bonus {
+  margin: 16px 0 0;
+  border-top: 4px solid var(--md-default-fg-color--lighter);
+}
+
+/* badge Q1/Q2/Q3/Q4/Défi : une fois sur une carte déjà colorée,
+   on l'affiche en pastille sombre semi-transparente (sinon il se
+   fond dans le fond de la carte, de la même couleur) */
+.q-badge {
+  display: inline-block;
+  min-width: 2.6em;
+  padding: 3px 10px;
+  margin-right: 8px;
+  border-radius: 6px;
+  font-weight: 800;
+  text-align: center;
+  color: #1a1a1a;
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.q-card .q-badge {
+  background-color: rgba(0, 0, 0, 0.16);
+  color: #1a1a1a;
+}
+
+.q-badge.q-bonus {
+  background-color: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color);
+}
+
+/* ------------------------------------------------------------
+   Corrigé cliquable : on habille les blocs ??? (pymdownx.details)
+   placés dans une .q-card en simple bouton "Voir le corrigé" qui
+   déplie la réponse au clic. Le contenu révélé passe en mode
+   plus foncé, dans un cadre, pour bien le distinguer de l'énoncé.
+   ------------------------------------------------------------ */
+.q-card details {
+  margin: 10px 0 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* bouton "Voir le corrigé" : on repart de zéro pour éviter que
+   l'icône ✓ par défaut de mkdocs-material (positionnée en absolu,
+   pensée pour un gros padding-left) ne se superpose au texte. */
+.q-card details > summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px !important;
+  margin: 0 !important;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.16);
+  color: inherit;
+  font-weight: 600;
+  font-size: 0.85em;
+  min-height: 0 !important;
+}
+
+.q-card details > summary::marker,
+.q-card details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.q-card details > summary::before,
+.q-card details > summary::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+.q-card details > summary:hover {
+  background-color: rgba(0, 0, 0, 0.24);
+}
+
+.q-card details[open] > summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+
+/* panneau du corrigé une fois déplié : plus sombre, encadré */
+.q-card details > summary ~ * {
+  margin: 0 !important;
+}
+
+.q-card details[open] {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  border-radius: 8px !important;
+  padding-bottom: 8px;
+}
+
+.q-card details[open] > summary {
+  background-color: rgba(0, 0, 0, 0.28) !important;
+  border-radius: 8px 8px 0 0;
+}
+
+.q-card details[open] > summary ~ * {
+  padding: 8px 12px 0 !important;
+}
+
+/* corrigé imbriqué du Défi (??? question > ??? success)
+
+   Cette carte (contrairement aux 4 cartes couleur) garde un fond
+   qui suit le thème (var(--md-default-bg-color) — blanc en clair,
+   presque noir en sombre). Les surcouches doivent donc, elles
+   aussi, suivre le thème : on utilise les jetons mkdocs-material
+   --md-default-fg-color--lightest/--lighter (calculés à partir de
+   la couleur de TEXTE du thème, donc clairs sur fond sombre et
+   sombres sur fond clair) plutôt que des rgba(0,0,0,...) figés,
+   qui deviennent quasi invisibles en mode sombre. */
+.q-card.q-bonus details {
+  color: var(--md-default-fg-color);
+}
+
+.q-card.q-bonus details > summary {
+  background-color: var(--md-default-fg-color--lightest);
+}
+
+.q-card.q-bonus details[open] {
+  background-color: var(--md-default-fg-color--lightest) !important;
+  border: 1px solid var(--md-default-fg-color--lighter) !important;
+}
+
+.q-card.q-bonus details[open] > summary {
+  background-color: var(--md-default-fg-color--light) !important;
+}
+
+.q-card.q-bonus details details {
+  margin-left: 4px !important;
+}
+
+/* ------------------------------------------------------------
+   Mode projection (écran 16:9)
+   Ajouté/retiré via JS : document.body.classList.toggle('projection-mode')
+   Masque le menu/sidebar/footer de mkdocs-material ET le titre /
+   le sélecteur / les consignes de la page, pour ne garder que la
+   grille du rituel en cours (+ le Défi), dans un cadre 16:9 centré,
+   en letterbox sur fond noir si l'écran n'est pas exactement 16:9.
+   ------------------------------------------------------------ */
+body.projection-mode {
+  background-color: #000;
+  overflow: hidden;
+}
+
+/* chrome mkdocs-material à masquer */
+body.projection-mode .md-header,
+body.projection-mode .md-tabs,
+body.projection-mode .md-sidebar,
+body.projection-mode .md-footer,
+body.projection-mode .md-source,
+body.projection-mode .md-content__button {
+  display: none !important;
+}
+
+/* titre de PAGE (h1), sélecteur de rituel, consignes/admonitions
+   et séparateurs "---" : masqués pour ne garder que le rituel. */
+body.projection-mode .md-typeset > h1,
+body.projection-mode .md-typeset > p,
+body.projection-mode .md-typeset > hr,
+body.projection-mode .md-typeset > .admonition,
+body.projection-mode .ritual-picker-wrap {
+  display: none !important;
+}
+
+/* "Cette page vous a-t-elle été utile ?" : inutile en projection */
+body.projection-mode .md-feedback {
+  display: none !important;
+}
+
+/* titre du RITUEL (h2) : affiché et mis en valeur, centré,
+   au-dessus de la grille, au lieu d'être masqué comme le titre
+   de page et le reste du "chrome" */
+body.projection-mode .md-typeset > h2 {
+  text-align: center;
+  font-size: 2.2em;
+  margin: 0 0 24px;
+  padding-bottom: 14px;
+  border-bottom: 3px solid var(--md-primary-fg-color);
+  letter-spacing: 0.01em;
+}
+
+/* le bouton de bascule reste accessible, discret, en coin */
+body.projection-mode .ritual-toolbar {
+  position: fixed;
+  top: 10px;
+  right: 14px;
+  z-index: 1000;
+  margin: 0;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+
+body.projection-mode .ritual-toolbar:hover {
+  opacity: 1;
+}
+
+/* la zone principale prend tout l'écran disponible pour centrer
+   le cadre 16:9 dedans */
+body.projection-mode .md-main,
+body.projection-mode .md-main__inner,
+body.projection-mode .md-grid {
+  margin: 0 !important;
+  max-width: none !important;
+  height: 100vh !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* le cadre proprement dit : sa largeur est limitée soit par
+   la largeur de l'écran, soit par le ratio ci-dessous appliqué à
+   sa hauteur — la plus petite des deux — pour ne jamais déborder
+   ni dans un sens ni dans l'autre (letterboxing automatique).
+
+   Pour changer le format de projection, modifier UNIQUEMENT les
+   deux "16 / 9" ci-dessous (garder les mêmes valeurs aux deux
+   endroits) : par ex. "4 / 3" pour un vidéoprojecteur 4:3. */
+body.projection-mode .md-content__inner {
+  aspect-ratio: 16 / 9;
+  width: min(100vw, calc(100vh * 16 / 9));
+  max-height: 100vh;
+  margin: 0 auto !important;
+  padding: 2.5rem 3.5rem !important;
+  overflow-y: auto;
+  background-color: var(--md-default-bg-color);
+  box-sizing: border-box;
+  font-size: 1.7em; /* lisibilité à distance (vidéoprojecteur) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* la grille (et le Défi) remplissent tout l'espace vertical
+   disponible dans le cadre 16:9 au lieu de rester tassés au
+   centre avec de grands vides au-dessus/en-dessous */
+body.projection-mode .md-content__inner > * {
+  flex: none;
+}
+
+body.projection-mode .ritual-grid {
+  grid-template-columns: 1fr 220px 1fr;
+  gap: 28px 32px;
+  flex: 1 1 auto;
+  margin: 0;
+}
+
+body.projection-mode .q-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 32px;
+  font-size: 1.15em;
+  line-height: 1.5;
+}
+
+body.projection-mode .q-badge {
+  font-size: 1.1em;
+  padding: 5px 16px;
+  margin-bottom: 4px;
+}
+
+body.projection-mode .ritual-timer__display {
+  font-size: 3.4em;
+}
+
+body.projection-mode .ritual-timer__label {
+  font-size: 1em;
+}
+
+body.projection-mode .ritual-timer__controls .md-button {
+  font-size: 0.9em;
+  padding: 8px 14px;
+}
+
+body.projection-mode .q-card.q-bonus {
+  margin-top: 24px;
+  padding: 20px 28px;
+  font-size: 1.05em;
+}
+
+/* l'admonition "si tu as terminé avant..." reste lisible mais
+   discrète sous la grille */
+body.projection-mode #ritual-tip-box {
+  margin-top: 20px;
+  font-size: 0.75em;
+}

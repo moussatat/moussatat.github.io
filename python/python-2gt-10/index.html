@@ -67,6 +67,7 @@ If not, see <https://www.gnu.org/licenses/>.
 
     
     
+    
 
 <script type="importmap">{"imports": {"functools": "../../js-libs/functools.js", "functoolsStorage": "../../js-libs/functoolsStorage.js", "functoolsTxt": "../../js-libs/functoolsTxt.js", "functoolsUi": "../../js-libs/functoolsUi.js", "functoolsUiBuilder": "../../js-libs/functoolsUiBuilder.js", "jsLogger": "../../js-libs/jsLogger.js", "process_and_gui": "../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../js-per-pages/start-pyodide.js", "overlord": "../../js-scripts/overlord.js", "subscriptions": "../../js-scripts/subscriptions.js"}}</script>
 
@@ -153,6 +154,28 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle" data-ace-dark-mode="tomorrow_night_bright" data-ace-light-mode="crimson_editor">
 
 
+
+    <!--
+      TikZJax (rod2ik/tikzjax) — rendu de schémas TikZ/LaTeX côté navigateur,
+      sans installation LaTeX serveur.
+      Doc : https://rod2ik.github.io/tikzjax/installation/mkdocs/
+
+      Ordre important : config AVANT le bundle.
+      Vérifier de temps en temps la dernière version :
+      https://github.com/rod2ik/tikzjax/releases
+    -->
+    <script src="../../xtra/javascripts/tikzjax.config.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/fonts.min.css"
+    >
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/tikzjax.min.js"
+      defer
+    ></script>
+
     
       
     
@@ -160,6 +183,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       <link rel="stylesheet" href="../../xtra/stylesheets/ajustements.css">
     
       <link rel="stylesheet" href="../../xtra/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../xtra/stylesheets/rituels.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1190,6 +1215,38 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
   
   
+    <li class="md-nav__item">
+      <a href="../../1eds/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels d'entrée
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1202,10 +1259,10 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -1218,8 +1275,8 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             Archive
           </label>
@@ -3669,7 +3726,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <p>Corriger les 2 erreurs de ce script et valider votre réponse.</p>
 <p><div id="global_editor_75a1bdb93f41bebe773893972e83a2f0646a29fa" class="py_mk_ide"><div class="py_mk_wrapper md-typeset"><div class="comment_py_mk_wrapper"><div is_v="false" mode="" id="editor_75a1bdb93f41bebe773893972e83a2f0646a29fa"></div><span id="comment_editor_75a1bdb93f41bebe773893972e83a2f0646a29fa" class="comment tooltip">###<span style="--tool_shift: 95%;width:17em;" class="tooltiptext bottom">(Dés-)Active le code après la ligne <code># Tests</code> (insensible à la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)</span></span><div class="ide-split-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M3,3H11V5H3V3M13,3H21V5H13V3M3,7H11V9H3V7M13,7H21V9H13V7M3,11H11V13H3V11M13,11H21V13H13V11M3,15H11V17H3V15M13,15H21V17H13V15M3,19H11V21H3V19M13,19H21V21H13V19Z" /> </svg><span style="--tool_shift: 95%;width:23em;" class="tooltiptext bottom">Entrer ou sortir du mode "deux colonnes"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)</span></div><div class="ide-full-screen tooltip svg-switch-btn twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">   <path d="M17 4H20C21.1 4 22 4.9 22 6V8H20V6H17V4M4 8V6H7V4H4C2.9 4 2 4.9 2 6V8H4M20 16V18H17V20H20C21.1 20 22 19.1 22 18V16H20M7 18H4V16H2V18C2 19.1 2.9 20 4 20H7V18M18 8H6V16H18V8Z" /> </svg><span style="--tool_shift: 95%;width:10em;" class="tooltiptext bottom">Entrer ou sortir du mode "plein écran"<br>(<kbd>Esc</kbd>)<br>(<kbd>Esc</kbd>)</span></div></div><div style="--n-buttons:2" class="term_wrapper"><div is_v="False" style="line-height:24px;--n-lines:6;" id="term_editor_75a1bdb93f41bebe773893972e83a2f0646a29fa" class="term_editor py_mk_terminal"></div><div class="term_btns_wrapper"><div class="twemoji stdout-ctrl tooltip"><svg viewBox="0 0 24 24" fill="none"     stroke="var(--md-default-fg-color)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g>   <path d="M 4,21.4 V 2.6 C 4,2.3 4.3,2 4.6,2 h 11.65 c 0.16,0 0.31,0.06 0.42,0.18 l 3.15,3.15 C 19.94,5.44 20,5.59 20,5.75 V 21.4 C 20,21.73 19.73,22 19.4,22 H 4.6 C 4.3,22 4,21.73 4,21.4 Z" ></path>   <path d="M 16,5.4 V 2.35 C 16,2.16 16.16,2 16.35,2 c 0.09,0 0.18,0.03 0.25,0.10 l 3.29,3.29 C 19.96,5.46 20,5.55 20,5.65 20,5.84 19.84,6 19.65,6 H 16.6 C 16.27,6 16,5.73 16,5.4 Z" ></path>   <path d="m 8,9.25 h 8" ></path>   <path d="M 7.9,13.25 H 15.9"></path>   <path d="M 7.9,11.25 H 14.4" ></path>   <path d="M 7.9,19.25 H 14.4" ></path>   <path d="m 7.9,15.25 h 8" ></path>   <path d="M 7.9,17.25 H 11.9" ></path>   <path d="m 8,5.25 h 4" ></path>   <path d="m 8,7.25 h 4" ></path> </g> <g><path class="stdout-x-ray-svg" d="M 3,11.4 v 6 L 21,13.8 V 7.7 Z" style="fill:var(--md-default-bg-color);stroke-width:0;" ></path></g> </svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Tronquer ou non le feedback dans les terminaux (sortie standard &amp; stacktrace / relancer le code pour appliquer)</span></div><div class="stdout-wraps-btn tooltip svg-switch-btn twemoji deactivated"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M7 21H5V3h2v18m7-18h-2v6h2V3m0 12h-2v6h2v-6m5-3-3-3v2H9v2h7v2l3-3Z"> </path></svg><span style="--tool_shift: 97%;width:19em;" class="tooltiptext bottom">Si activé, le texte copié dans le terminal est joint sur une seule ligne avant d'être copié dans le presse-papier</span></div></div></div></div><div class="ide_buttons_div_wrapper"><div class="ide_buttons_div"><button btn_kind="play" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip " data-tip-txt="Exécuter le code\<br>(\<kbd>Ctrl\</kbd>+\<kbd>S\</kbd>)\<br>(\<kbd>Ctrl\</kbd>+\<kbd>S\</kbd>)" data-tip-width="9"><img src="../../assets/images/icons8-play-64.png" class="skip_light_box" /></button><button btn_kind="check" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip " data-tip-txt="Valider\<br>\<kbd>Ctrl\</kbd>+\<kbd>Enter\</kbd>\<br>(Clic droit pour l'historique)" data-tip-width="9"><img src="../../assets/images/icons8-check-64.png" class="skip_light_box" /></button><button btn_kind="download" style="margin-left:1em; margin-right:0.2em;" class="tooltip " data-tip-txt="Télécharger"><img src="../../assets/images/icons8-download-64.png" class="skip_light_box" /></button><button btn_kind="upload" style="margin-left:0.2em; margin-right:1em;" class="tooltip " data-tip-txt="Téléverser"><img src="../../assets/images/icons8-upload-64.png" class="skip_light_box" /></button><button btn_kind="restart" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip " data-tip-txt="Réinitialiser l'éditeur"><img src="../../assets/images/icons8-restart-64.png" class="skip_light_box" /></button><button btn_kind="save" style="margin-left:0.2em; margin-right:0.2em;" class="tooltip " data-tip-txt="Sauvegarder dans le navigateur"><img src="../../assets/images/icons8-save-64.png" class="skip_light_box" /></button></div><div class="compteur_wrapper"><div class="compteur"><span class="compteur_txt">Évaluations restantes : </span><span id="compteur_editor_75a1bdb93f41bebe773893972e83a2f0646a29fa">5</span>/<span id="compteur_editor_75a1bdb93f41bebe773893972e83a2f0646a29fa-low">5</span></div></div></div></div></p>
 <div markdown="1" id="solution_editor_75a1bdb93f41bebe773893972e83a2f0646a29fa" class="py_mk_hidden" data-search-exclude >
-.128013c3f;5a47)w=/kqié}2lbegx+phn0S{P:1(-dzsym o*utrv6050K0v0T0g0p0t0M0P0b0t0g0M0M0l010T0p0z010406050M0S0O0O0g0U0N040D0Q0t0S0;0Q0B050m0{0}0 110_0z04051h1a1k0m1h0_0K0p0V0)0+0-0/0A0p0w0A0t1y0A0T0@050!0u0t0v1t0,0.011x1z1B1z0T1H1J1F0T0U1i0T0A0)140M0z0g0B0/0s011L1v010d0$0v0B0g0O0v1F1(1*1/1N1=1J1^1`0@0a0P0F0U0Q0z0Q0M0p170B0P0Y1$0U0U0v0b2f1a1}0B1i0m1!2s1X1Z1Y1G0K1 0/1B0B1@2c1F1q1s0*1M2C0p2E0B0Q2I1F0z2l1i2q2s2W0`1)2g2K1:2P0U0~0t0@0H2p2!0^2Z1~2$1N2(2*0@0s2.1*2:2q2B012^0g2+040c2|2r0_2 2?0/32340h372~2!303d0@0f3g393i3b310Q2)330@0W3n2;2#1u2@3s2_040i3g1l2U1a2I2v0K1Z2A3q0b2Q1{1i3K1j3I2Y1b2/053Q0Y2V3p3A0/0n0@0Y0d3G3a3)010k0@0P3/3(2L310d0@0p0M0o0U0T3_2=3;0?040I443z3{0B0@193Y2}3y30470j3g3^3:3{470G3n0P4t4n3`2%3~4m4i3q0Q0@0l4z4o1:0O0p0@0C4s4u4A3;3+040k1x1J4F4w2@4y4g2r4O3{4C040R0R4a304I2`4V454$0@020t0T0e4E4Z044v4:4x044f2Y4G1N4q4m4u57584N530/0b0H0@030P0z1@0M0v0L0P0g0S0x0)0 0U0q0(1)0U0d0#0T0(4M594#2%0u0@2T2N434{5E540@495L5b010M0g0@3.5Q4W0/0M1-04020o0S0Q4^4+3q2d0@0E5,3;4d040p5;3{5.040r5_1:5!0@4*5X4~1N5{5:634b4 5^68305{5}6c5-5#4`525Y5S4J04676k643c4Y6q691N4%4)5~1N4-042{6g3;6e6z5Z5#4?5+6E5`6n6p3Z5R5?516Q6l6G6M5 6J5(5*0e6H014k560P06594t5M6s5@4/6v0/4%6j2/4}6?316t6`6/014%0y6=4,6n2-4{6,5a6l0B5G045I0B5K6u4j5O6%5T5V7l6Z5)6L7i5-6O6%5?6b7s6F6n6f7y5`5#627C5 7u6X4X6;7J5Z7A7o4D7l7I7G7K7x6U6r71617F7W6|6B6D7T7N0@7B7#6d6J0w7r7-7t5/7v4e7R7+7P5$6!7;4h5R6)4{6-6+57704Q2l0T0S0U6T2}6{3j6~806l4%0J6%6B772W848q58705d5f0P0$0P5y160P2l0B0V0Q0N0v0U0P0+0P0V330v8b5h5t0b0q0Y7g1K2i0p3^781a3#0v2s2T8%3J1r3L2v2y2t0g1I8*0m3K0_8@0Z0#0%04.
+.128013ya{cqr*-ts=Sh:ud P42(17fi;6lgwb5eé0o/)znpvm+3}xk050q0H0j0c0z0C0k0r0e0C0c0k0k0l010j0z0P010406050k0p0R0R0c0g0b040m0K0C0p0;0K0O050L0{0}0 110_0P04051h1a1k0L1h0_0q0z0Q0)0+0-0/0n0z0D0n0C1y0n0j0@050!0F0C0H1t0,0.011x1z1B1z0j1H1J1F0j0g1i0j0n0)140k0P0c0O0/0u011L1v010y0$0H0O0c0R0H1F1(1*1/1N1=1J1^1`0@0a0r0s0g0K0P0K0k0z170O0r0Y1$0g0g0H0e2f1a1}0O1i0L1!2s1X1Z1Y1G0q1 0/1B0O1@2c1F1q1s0*1M2C0z2E0O0K2I1F0P2l1i2q2s2W0`1)2g2K1:2P0g0~0C0@0w2p2!0^2Z1~2$1N2(2*0@0u2.1*2:2q2B012^0c2+040T2|2r0_2 2?0/32340t372~2!303d0@0G3g393i3b310K2)330@0B3n2;2#1u2@3s2_040x3g1l2U1a2I2v0q1Z2A3q0e2Q1{1i3K1j3I2Y1b2/053Q0Y2V3p3A0/0W0@0Y0y3G3a3)010E0@0r3/3(2L310y0@0z0k0f0g0j3_2=3;0?040v443z3{0O0@193Y2}3y30470M3g3^3:3{470o3n0r4t4n3`2%3~4m4i3q0K0@0l4z4o1:0R0z0@0J4s4u4A3;3+040E1x1J4F4w2@4y4g2r4O3{4C040h0h4a304I2`4V454$0@020C0j0A4E4Z044v4:4x044f2Y4G1N4q4m4u57584N530/0e0w0@030r0P1@0k0H0N0r0c0p0V0)0 0g0I0(1)0g0y0#0j0(4M594#2%0F0@2T2N434{5E540@495L5b010k0c0@3.5Q4W0/0k1-04020f0p0K4^4+3q2d0@0d5,3;4d040z5;3{5.040U5_1:5!0@4*5X4~1N5{5:634b4 5^68305{5}6c5-5#4`525Y5S4J04676k643c4Y6q691N4%4)5~1N4-042{6g3;6e6z5Z5#4?5+6E5`6n6p3Z5R5?516Q6l6G6M5 6J5(5*0A6H014k560r06594t5M6s5@4/6v0/4%6j2/4}6?316t6`6/014%0S6=4,6n2-4{6,5a6l0O5G045I0O5K6u4j5O6%5T5V7l6Z5)6L7i5-6O6%5?6b7s6F6n6f7y5`5#627C5 7u6X4X6;7J5Z7A7o4D7l7I7G7K7x6U6r71617F7W6|6B6D7T7N0@7B7#6d6J0D7r7-7t5/7v4e7R7+7P5$6!7;4h5R6)4{6-6+57704Q2l0j0p0g6T2}6{3j6~806l4%0i6%6B772W848q58705d5f0r0$0r5y160r2l0O0Q0K0b0H0g0r0+0r0Q330H8b5h5t0e0I0Y7g1K2i0z3^781a3#0H2s2T8%3J1r3L2v2y2t0c1I8*0L3K0_8@0Z0#0%04.
 </div>
 </div>
 <div class="admonition example">
@@ -3820,8 +3877,8 @@ Le plus grand entier <span class="arithmatex">\(n\)</span> tel que <span class="
 <p></p KEEP></ol></p>
 </div><script type="text/javascript">
 CONFIG.needMermaid = false;
-CONFIG.overlordClasses = ["GlobalRunnersManager", "Ide", "Terminal", "Qcm"];
-globalThis.PAGE_IDES_CONFIG = '.\x1e_[4F7=Ei2beg+0hn{:L19-(ymo]utv6.3cfUV5a)wkq}lx!pSC,IdzsA 8N*r\x1e0q010k0!0h0C0z0,0a0e0G0e0u0e0I0!0L0t0M0G0n0k0i0c0j0G160k190!0n0M0i0L0j0_0E1f0!0H0)0t0n0i0)010r0(0-0V0x0a0p0M0y0k1t0(011x0C0o0z0p0v0i0l0C0v1p0v0k0T1B0V0S0k0n0t0F1x010Y1F0k0p0D0a0H1K0C1*0C1E011%1)1+0a1:0,0y1-1/1;1?1^010B0$0k0@1.0p1:2a1?0p0(0f0(1p090p0O0o0h1X0(2e042g0n1u2j0(2w0(0V0,0h2a0w0p1(1*0!0f09010(2J0N2x030(0w0t0N0U2v2x2e2g2e0v2h2j2z2B0C0w2J0F2M2$2A2C0I2J0g2e0$0?0C0h0k0(0!2|0j0z0B0H2o2e0D0M0B0C1v0p0R2M231.0,28202c1u1@1(1G0B0j0S0h0H1{0k0$0C0$223m260H0,0k0C3t3v3x3k230V0z3v3t1}1 2a213I3m3K3M292b1=3S1)0T330B2~0!1E0b0A3m1T3$3(0a1C1I0z0!3H0(3+3-3#0S3%0/0a0P0O3_3{1F1H1J0p0a3q0j44010C0B0,0C1X230M3q1*0a471K013,460x0V0h0a2l0;1D1u0p0B0S0S3m3C3s3q0y0;1E1Q3m4y1:4a0h3v3*4s01370=0a0,0B0p1E0n4G4#0a0l0,310V4%3m0?2~0@2B4+4-0B4/1u0t3z0k0Q4Z4#3y1F26511W0M0x1E0I4l263T4-0I2n4A1F4k0C1:0y0V3w4a0k0I3Y1F0Z0p5h0p0;5a3m4X0z4a0z0l0a0M0$264h1E0C4!0k3m3f0@3C0y0$3;5J0P4:1F0o5J1-0o0k0H0P0a0j0C4$1u5c0S5e5#5%5S5-5/5b5d5Q5^5W3C0D0k4l5{5:0(5=5@015$5W1.4#1|5}5?5 014S0a635M5;5~3m0y0M0T0a0h2~4R0p3u1E0t4~1F4K496w0k6y6A1u0G3m2~3B64265I5m0k5o5q1K0a25271 6x5c2n4g5j0.0:0=0,232~0M0H2`364Q3v0!313E0I0?0a3A3C3w5N5P4G6U0z635I5K272`1K5W3v6;0P5O6;5j696j0$1J0O0a1K0S1y5J5L7c49274-0,5W6}0@703D3_7l3z0,3s6c0o1?640c0u0I151r0I0n0H0E0e0L0I0c0E0H0c0t0j0j0)0u0L0M0!0|1n7%0|1k7%7:0t0!0)0I0u0E0c640)0!0j0E0j0I0E0k0}0i0I0j236_410k5a3Z4e0O5E1.5?6h6a1T3K6o686q550C6`381-8A0z0I0I1E0i0n4(1F0H8A7R0/0j7g730B0k0R3-6,6~7Y0M7)840u0G7!7)0k0j8a0_7,0G0|0i0k0)0G1f7U801k0i7Q0M1E1w1y1A1C1?4p1L1N1P1R1T1V1X1q1#5B1_1,3W3R8K0S7u0(0W0C7g0r2V2w2J9u2K0w5w1|5c0H2|090B8I1Y2}9D9F0u3B0h3C2}0M0p0$0(0S009I140u0p1K0H9V0k0u2N9v9u2e2x2~0I0(0a6v5z3E0a0w260S0I0N1u9_0I0F9:3v0P0f3+9s2}5s2y250o9^0k9`1(0D9|0(9~a06 0C0P0F0M0V0V2G0waga69-2y0z0Vac9`ah714g2@ad9 a1am1#ay0w0Nava86l6U5p0xaA9{1uaD0,2e9Y39ajaI5Z3-1`1|1~9i3j5k3m6Z3h3Qa.01aw4S0Q4h2D2N9r9+2w0h2f0(0na64y2o0h0+0+0i0(052p1u2Lb02x2w2%2:2J0q0h0R0+bo0R0fboba0i0R050q3b2M2xa6bjb22gb20m2#bibl2)2;01bsbrbpbub9bb0R04bA3c01aNbiaX2e0ha63e0?a=3X1?a_0$a{2)0pa~a6bGb4b62mb8bwbd2Ybgbjc3c32Par9Q0k0#0(370T0(0H0M3g9#0u9R0Vcg6%3wbhc4bk2/bNbnbpbRbtbvbVbzbBb!bDbibFb3bIbKbjbM0wbObQbsbTbwbWbYbCcqa6b%0(0h1Qcqc!cq2P2n8v380(3C1+0z0x279S0M0(361X4g2y0,ci9!9E9W2~3Qa7cX1F3T3o3q3s1:3G54017E3Ed9723k0I4-0y0(6s1IcX5o2_680S0z0?2jdi0zdkdm0odo8ta#b=2jawdf0$aMbga67Cd32Bc+9P0l0k2R8Ib^cE2x8sb30Ids0?9^b=0w0h0N2NbjbE2xc@cGb;a|d*d-dW2w5V0ldZ2J9T2B3v4!6=0h1KcXd=2)bs2N6`0;c+1*0Dc.c:0q8s0R0(3D2pe50qc@bZ0(2P0sc=0=9p2od.2w7u7bc?4l2f2g8s1(d{2j2jdHaMc#2P0*2|cl9R313p2{0,2}00apar1XeX9l689Z7wd2dH0Fe.0(0U0(0Tb#2~0S0(dHc$9nb2ef252p2|e 1XcaeSc;4S5Le,0,7j0$e.0F3J3Lde27a,3i5u3l46fh3Pb.3ketc=3Ae+3U393W2{2a2}0Bce3@2|2~2L016z5mc.0MdR2J1(9#0ncbaq3q0Q8SeX0$0x3vcidm0hfW6U1;2j2Papc{c~8=9Rf)9S2|1.fHem1X9Re{0MfA39ci0Ccic;0pc}9Jfdf,0(0Xf^3ifD3u391Tc|38g40y9#1B2|0$b24#2|7y0kc_c=g2g41X0DcieRf/9Jg7c 6U1C2a1(0W0%0J0daib)0p2P9B6Tel3ggveX2z77g0d2e(fve42e0g0*0Kff3|3/0/4Ug:3~3:3=1J3^g?3!g;0!4143g}1G0x3?494b4d4f4h4j5C4m49954r3T4u4w4P5j4C4E754I0h4K5u4N1Fhl4R4T1u454W385E4!678J01hE4_4.6B4;0,4?9;hJ4{hL55505267fndchU588j8v6i5f8D5idb0M6T6V5W1X5t1E0L5ChC5F5HeB8u5O8S5Rb,4Z6U5W6s0$5Z4}3m6c5(5*5,5.67h}6ji95`id8qig5%62640S66iki85_313Q6.1uif3m6l6n5u7H6E6t6v6x3q6z3_6C6r4^6H6J3_6M1F6O3C5J6Ih,5n5p5W6Xa;6#6I6%3~3C7N8W6.6N64e36@6I6_6{0a7C6 5*713_iy1F5U77iW7a4hg*7e9p5+7i9Bir557o7q0p7s797vg*0a7y0?7B6~dd7G8wdc7J0a7L1?8E7*0n7Y7#6;0j6C0n0!0E0u5s0H0G7*1j0e0c0!0!0t0k1p0u1Z8c0)9B0n0j0c0H0u0)0L7}1k0ujE0_1h7Q0t8f8y8hh#hX0C8m1 8p6ph%3!dCjcdc8yi^8L3E8D8F1u8HhGk8i_0k8O8Qix5P0R0R.'
+CONFIG.overlordClasses = ["Qcm", "GlobalRunnersManager", "Ide", "Terminal"];
+globalThis.PAGE_IDES_CONFIG = '.\x1eya{c.r-*ts=ud42Ff[i]glbe0npvA}kqN_h!S:U8LE, (176V9wC5Io)z+m3x\x1e0c010x0m0s0i0$0f0H0U0+0U0X0U0q0m0!0T0b0+0y0x0o0n0w0+160x190m0y0b0o0!0w0_0V1f0m0d0N0T0y0o0N010L0R0-0A0a0H0z0b0*0x1t0R011x0i0I0$0z0g0o0u0i0g1p0g0x0,1B0A0v0x0y0T0e1x010Q1F0x0z0B0H0d1K0i1*0i1E011%1)1+0H1:0f0*1-1/1;1?1^010l0j0x0@1.0z1:2a1?0z0R0k0R1p090z0Y0I0s1X0R2e042g0y1u2j0R2w0R0A0f0s2a0S0z1(1*0m0k09010R2J0%2x030R0S0T0%0J2v2x2e2g2e0g2h2j2z2B0i0S2J0e2M2$2A2C0q2J0P2e0j0?0i0s0x0R0m2|0w0$0l0d2o2e0B0b0l0i1v0z0D2M231.0f28202c1u1@1(1G0l0w0v0s0d1{0x0j0i0j223m260d0f0x0i3t3v3x3k230A0$3v3t1}1 2a213I3m3K3M292b1=3S1)0,330l2~0m1E0r0t3m1T3$3(0H1C1I0$0m3H0R3+3-3#0v3%0/0H0E0Y3_3{1F1H1J0z0H3q0w44010i0l0f0i1X230b3q1*0H471K013,460a0A0s0H2l0;1D1u0z0l0v0v3m3C3s3q0*0;1E1Q3m4y1:4a0s3v3*4s01370=0H0f0l0z1E0y4G4#0H0u0f310A4%3m0?2~0@2B4+4-0l4/1u0T3z0x0F4Z4#3y1F26511W0b0a1E0q4l263T4-0q2n4A1F4k0i1:0*0A3w4a0x0q3Y1F0#0z5h0z0;5a3m4X0$4a0$0u0H0b0j264h1E0i4!0x3m3f0@3C0*0j3;5J0E4:1F0I5J1-0I0x0d0E0H0w0i4$1u5c0v5e5#5%5S5-5/5b5d5Q5^5W3C0B0x4l5{5:0R5=5@015$5W1.4#1|5}5?5 014S0H635M5;5~3m0*0b0,0H0s2~4R0z3u1E0T4~1F4K496w0x6y6A1u0+3m2~3B64265I5m0x5o5q1K0H25271 6x5c2n4g5j0.0:0=0f232~0b0d2`364Q3v0m313E0q0?0H3A3C3w5N5P4G6U0$635I5K272`1K5W3v6;0E5O6;5j696j0j1J0Y0H1K0v1y5J5L7c49274-0f5W6}0@703D3_7l3z0f3s6c0I1?640n0X0q151r0q0y0d0V0U0!0q0n0V0d0n0T0w0w0N0X0!0b0m0|1n7%0|1k7%7:0T0m0N0q0X0V0n640N0m0w0V0w0q0V0x0}0o0q0w236_410x5a3Z4e0Y5E1.5?6h6a1T3K6o686q550i6`381-8A0$0q0q1E0o0y4(1F0d8A7R0/0w7g730l0x0D3-6,6~7Y0b7)840X0+7!7)0x0w8a0_7,0+0|0o0x0N0+1f7U801k0o7Q0b1E1w1y1A1C1?4p1L1N1P1R1T1V1X1q1#5B1_1,3W3R8K0v7u0R0K0i7g0L2V2w2J9u2K0S5w1|5c0d2|090l8I1Y2}9D9F0X3B0s3C2}0b0z0j0R0v009I140X0z1K0d9V0x0X2N9v9u2e2x2~0q0R0H6v5z3E0H0S260v0q0%1u9_0q0e9:3v0E0k3+9s2}5s2y250I9^0x9`1(0B9|0R9~a06 0i0E0e0b0A0A2G0Saga69-2y0$0Aac9`ah714g2@ad9 a1am1#ay0S0%ava86l6U5p0aaA9{1uaD0f2e9Y39ajaI5Z3-1`1|1~9i3j5k3m6Z3h3Qa.01aw4S0F4h2D2N9r9+2w0s2f0R0ya64y2o0s0h0h0o0R052p1u2Lb02x2w2%2:2J0c0s0D0hbo0D0kboba0o0D050c3b2M2xa6bjb22gb20)2#bibl2)2;01bsbrbpbub9bb0D04bA3c01aNbiaX2e0sa63e0?a=3X1?a_0ja{2)0za~a6bGb4b62mb8bwbd2Ybgbjc3c32Par9Q0x0(0R370,0R0d0b3g9#0X9R0Acg6%3wbhc4bk2/bNbnbpbRbtbvbVbzbBb!bDbibFb3bIbKbjbM0SbObQbsbTbwbWbYbCcqa6b%0R0s1Qcqc!cq2P2n8v380R3C1+0$0a279S0b0R361X4g2y0fci9!9E9W2~3Qa7cX1F3T3o3q3s1:3G54017E3Ed9723k0q4-0*0R6s1IcX5o2_680v0$0?2jdi0$dkdm0Ido8ta#b=2jawdf0jaMbga67Cd32Bc+9P0u0x2R8Ib^cE2x8sb30qds0?9^b=0S0s0%2NbjbE2xc@cGb;a|d*d-dW2w5V0udZ2J9T2B3v4!6=0s1KcXd=2)bs2N6`0;c+1*0Bc.c:0c8s0D0R3D2pe50cc@bZ0R2P0Oc=0=9p2od.2w7u7bc?4l2f2g8s1(d{2j2jdHaMc#2P0G2|cl9R313p2{0f2}00apar1XeX9l689Z7wd2dH0ee.0R0J0R0,b#2~0v0RdHc$9nb2ef252p2|e 1XcaeSc;4S5Le,0f7j0je.0e3J3Lde27a,3i5u3l46fh3Pb.3ketc=3Ae+3U393W2{2a2}0lce3@2|2~2L016z5mc.0bdR2J1(9#0ycbaq3q0F8SeX0j0a3vcidm0sfW6U1;2j2Papc{c~8=9Rf)9S2|1.fHem1X9Re{0bfA39ci0icic;0zc}9Jfdf,0R0Zf^3ifD3u391Tc|38g40*9#1B2|0jb24#2|7y0xc_c=g2g41X0BcieRf/9Jg7c 6U1C2a1(0K0C0M0paib)0z2P9B6Tel3ggveX2z77g0d2e(fve42e0P0G0Wff3|3/0/4Ug:3~3:3=1J3^g?3!g;0m4143g}1G0a3?494b4d4f4h4j5C4m49954r3T4u4w4P5j4C4E754I0s4K5u4N1Fhl4R4T1u454W385E4!678J01hE4_4.6B4;0f4?9;hJ4{hL55505267fndchU588j8v6i5f8D5idb0b6T6V5W1X5t1E0!5ChC5F5HeB8u5O8S5Rb,4Z6U5W6s0j5Z4}3m6c5(5*5,5.67h}6ji95`id8qig5%62640v66iki85_313Q6.1uif3m6l6n5u7H6E6t6v6x3q6z3_6C6r4^6H6J3_6M1F6O3C5J6Ih,5n5p5W6Xa;6#6I6%3~3C7N8W6.6N64e36@6I6_6{0H7C6 5*713_iy1F5U77iW7a4hg*7e9p5+7i9Bir557o7q0z7s797vg*0H7y0?7B6~dd7G8wdc7J0H7L1?8E7*0y7Y7#6;0w6C0y0m0V0X5s0d0+7*1j0U0n0m0m0T0x1p0X1Z8c0N9B0y0w0n0d0X0N0!7}1k0XjE0_1h7Q0T8f8y8hh#hX0i8m1 8p6ph%3!dCjcdc8yi^8L3E8D8F1u8HhGk8i_0x8O8Qix5P0D0D.'
 </script><script src="../../js-per-pages/0-generic-python-snippets-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
 
 <script src="../../js-per-pages/1-error_logs-pyodide.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
@@ -4088,6 +4145,8 @@ globalThis.PAGE_IDES_CONFIG = '.\x1e_[4F7=Ei2beg+0hn{:L19-(ymo]utv6.3cfUV5a)wkq}
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../../xtra/javascripts/extra.js"></script>
+      
+        <script src="../../xtra/javascripts/rituels.js"></script>
       
         <script src="../../js/open_in_new_tab.js"></script>
       
