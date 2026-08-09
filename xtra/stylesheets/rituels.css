@@ -208,7 +208,7 @@
    liseré neutre pour le distinguer visuellement */
 .q-card.q-bonus {
   margin: 16px 0 0;
-  border-top: 4px solid var(--md-default-fg-color--lighter);
+  border-top: 3px solid var(--md-default-fg-color--lighter);
 }
 
 /* badge Q1/Q2/Q3/Q4/Défi : une fois sur une carte déjà colorée,
