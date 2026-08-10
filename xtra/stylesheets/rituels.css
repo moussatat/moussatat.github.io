@@ -19,10 +19,10 @@
    leur propre couleur, indépendamment du thème clair/sombre
    de mkdocs-material). --- */
 :root {
-  --connections-yellow: #f9df6d;
-  --connections-green:  #a0c35a;
-  --connections-blue:   #b0c4ef;
-  --connections-purple: #ba81c5;
+  --connections-yellow: #fdf3d3;
+  --connections-green:  #dfeece;
+  --connections-blue:   #dbe6f6;
+  --connections-purple: #ecdcef;
 }
 
 /* --- Ligne du haut : menu déroulant + bouton "Mode projection"
@@ -160,18 +160,19 @@
    (fond + texte sombre lisible, quel que soit le thème
    clair/sombre de mkdocs-material) --- */
 .q-card {
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 2px solid rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   padding: 14px 16px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
   background-color: var(--md-default-bg-color);
   color: var(--md-default-fg-color);
+  font-weight: 700;
 }
 
-.q-card.q-yellow { background-color: var(--connections-yellow); color: #1a1a1a; }
-.q-card.q-green  { background-color: var(--connections-green);  color: #1a1a1a; }
-.q-card.q-blue   { background-color: var(--connections-blue);   color: #1a1a1a; }
-.q-card.q-purple { background-color: var(--connections-purple); color: #1a1a1a; }
+.q-card.q-yellow { background-color: var(--connections-yellow); color: #1a1a1a; border-color: #b8952b; }
+.q-card.q-green  { background-color: var(--connections-green);  color: #1a1a1a; border-color: #2f6e2f; }
+.q-card.q-blue   { background-color: var(--connections-blue);   color: #1a1a1a; border-color: #263e8f; }
+.q-card.q-purple { background-color: var(--connections-purple); color: #1a1a1a; border-color: #7d1f8a; }
 
 /* Ces 4 cartes gardent TOUJOURS un fond pastel clair, même quand le
    thème du site passe en sombre. Or en thème sombre, mkdocs-material

@@ -146,10 +146,30 @@ function showRitual(id) {
     resetTimer();
 }
 
+/* ------------------------------------------------------------
+   Widget "Avez-vous trouvé le contenu de la page utile ?"
+   Sur cette page, il peut se retrouver mal placé (en haut à
+   droite, à côté des boutons "Modifier"/"Voir la source") au
+   lieu du bas de la page comme partout ailleurs sur le site.
+   On le replace simplement en tout dernier enfant du contenu :
+   quelle que soit la cause du décalage, ça le remet en bas,
+   dans le flux normal. Scopé à cette page uniquement (appelé
+   seulement si #ritual-picker existe, voir initRitualPicker).
+   ------------------------------------------------------------ */
+function relocateFeedback() {
+    const article = document.querySelector('.md-content__inner');
+    const feedback = document.querySelector('.md-feedback');
+    if (article && feedback) {
+        article.appendChild(feedback);
+    }
+}
+
 function initRitualPicker() {
     ritualsCache = collectRituals();
     const picker = document.getElementById('ritual-picker');
     if (!picker || ritualsCache.length === 0) return;
+
+    relocateFeedback();
 
     picker.innerHTML =
         '<option value="aleatoire">🎲 Rituel aléatoire</option>' +

@@ -33,7 +33,17 @@ window.TikzJaxOptions = {
              du tikzpicture (⚠️ ce n'est PAS le même moteur que le
              MathJax/KaTeX du reste du site : un \dfrac dans un
              $...$ normal de la page n'a rien à voir avec un \dfrac
-             utilisé DANS un \tkzTabInit, qui doit être chargé ici). */
+             utilisé DANS un \tkzTabInit, qui doit être chargé ici).
+
+           ⚠️ \mathscr NE MARCHE PAS dans un tikzpicture, même avec
+           "mathrsfs" chargé ici : le .sty se charge sans erreur (visible
+           dans les logs), mais la police rsfs (glyphes du \mathscr)
+           n'est apparemment pas incluse dans le bundle de polices de
+           TikZJax, donc \mathscr reste "Undefined control sequence" à
+           l'utilisation. Utiliser \mathcal{...} à la place à l'intérieur
+           des tikzpictures (police calligraphique standard, toujours
+           disponible, sans paquet) — \mathscr reste OK partout ailleurs
+           sur la page (texte normal, rendu par MathJax). */
         texPackages: {
             "tkz-tab": "",
             "amsmath": ""
