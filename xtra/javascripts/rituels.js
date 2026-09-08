@@ -13,6 +13,7 @@ function startTimer(minutes) {
     clearInterval(ritualTimer);
     let time = minutes * 60;
     const display = document.getElementById('time');
+    display.classList.remove('ritual-timer__display--ended');
     const render = () => {
         const m = String(Math.floor(time / 60)).padStart(2, "0");
         const s = String(time % 60).padStart(2, "0");
@@ -23,6 +24,7 @@ function startTimer(minutes) {
         time--;
         if (time < 0) {
             clearInterval(ritualTimer);
+            display.classList.add('ritual-timer__display--ended');
             display.textContent = "Temps écoulé !";
             return;
         }
@@ -33,7 +35,10 @@ function startTimer(minutes) {
 function resetTimer() {
     clearInterval(ritualTimer);
     const display = document.getElementById('time');
-    if (display) display.textContent = "05:00";
+    if (display) {
+        display.textContent = "05:00";
+        display.classList.remove('ritual-timer__display--ended');
+    }
 }
 
 /* ------------------------------------------------------------

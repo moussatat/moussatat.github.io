@@ -4050,33 +4050,20 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 </div>
 <div class="timer-slot"></div>
 <div class="q-card q-blue">
-<p><span class="q-badge q-blue">Q3</span> Soit <span class="arithmatex">\((u_n)\)</span> une suite géométrique de raison <span class="arithmatex">\(r=\dfrac{2}{3}\)</span> et telle que <span class="arithmatex">\(u_1=-1\)</span>. Exprimer <span class="arithmatex">\(u_n\)</span> en fonction de <span class="arithmatex">\(n\)</span>.</p>
+<p><span class="q-badge q-blue">Q3</span> Pour <span class="arithmatex">\(n\in\mathbb{N}\)</span>, montrer que <span class="arithmatex">\(\dfrac{\dfrac{n+5}{2n+1}-\dfrac{n+6}{2n+3}}{\dfrac{3}{2n+3}}=\dfrac{3}{2n+1}\)</span>.</p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p><span class="arithmatex">\((u_n)\)</span> est géométrique de raison <span class="arithmatex">\(r=\dfrac23\)</span> et de premier terme <span class="arithmatex">\(u_1=-1\)</span>, donc pour tout <span class="arithmatex">\(n\geqslant 1\)</span> :</p>
-<p><span class="arithmatex">\(u_n=u_1\times r^{n-1}=-\left(\dfrac23\right)^{n-1}\)</span>.</p>
+<p><span class="arithmatex">\(\dfrac{n+5}{2n+1}-\dfrac{n+6}{2n+3}=\dfrac{(n+5)(2n+3)-(n+6)(2n+1)}{(2n+1)(2n+3)}=\dfrac{9}{(2n+1)(2n+3)}\)</span> (même dénominateur).</p>
+<p><span class="arithmatex">\(\dfrac{\dfrac{n+5}{2n+1}-\dfrac{n+6}{2n+3}}{\dfrac{3}{2n+3}}=\dfrac{9}{(2n+1)(2n+3)}\times\dfrac{2n+3}{3}=\dfrac{3}{2n+1}\)</span> (on multiplie par l'inverse, puis on simplifie).</p>
 </details>
 </div>
 <div class="q-card q-purple">
-<p><span class="q-badge q-purple">Q4</span> Résoudre l'inéquation <span class="arithmatex">\(|x-7|\leqslant 4\)</span>.</p>
+<p><span class="q-badge q-purple">Q4</span> Soit la suite <span class="arithmatex">\((u_n)\)</span> définie pour tout entier <span class="arithmatex">\(n\geqslant 0\)</span> par <span class="arithmatex">\(u_0=0\)</span> et <span class="arithmatex">\(u_{n+1}=\dfrac{2}{3}u_n+1\)</span>. Montrer par récurrence que pour tout <span class="arithmatex">\(n\geqslant 0\)</span>, <span class="arithmatex">\(u_n=3-3\left(\dfrac{2}{3}\right)^n\)</span>. <em>Vous écrirez uniquement l'étape d'hérédité.</em></p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p>On cherche les réels <span class="arithmatex">\(x\)</span> qui sont à une distance inférieure ou égale à <span class="arithmatex">\(4\)</span> du réel <span class="arithmatex">\(7\)</span>. Les nombres qui sont à une distance <span class="arithmatex">\(4\)</span> du réel <span class="arithmatex">\(7\)</span> sont <span class="arithmatex">\(a=7-4=3\)</span> et <span class="arithmatex">\(b=7+4=11\)</span>.</p>
-<p><script type="text/tikz" data-show-console="true" data-disable-cache="true">
-\begin{tikzpicture}[xscale=0.9]
-    \draw[-&gt;,line width=1.2pt] (-0.3,0) -- (12.3,0) node[right,font=\small] {<span class="arithmatex">\(x\)</span>};
-    \draw[line width=1.6pt] (3,0) -- (11,0);
-    \filldraw[black] (3,0) circle (2pt);
-    \filldraw[black] (7,0) circle (2pt);
-    \filldraw[black] (11,0) circle (2pt);
-    \node[below,font=\small] at (3,-0.15) {<span class="arithmatex">\(3\)</span>};
-    \node[below,font=\small] at (7,-0.15) {<span class="arithmatex">\(7\)</span>};
-    \node[below,font=\small] at (11,-0.15) {<span class="arithmatex">\(11\)</span>};
-    \draw[&lt;-,&gt;=latex] (3,0.6) to[out=20,in=160] node[pos=0.5,fill=white,font=\small] {<span class="arithmatex">\(-4\)</span>} (7,0.6);
-    \draw[-&gt;,&gt;=latex] (7,0.6) to[out=20,in=160] node[pos=0.5,fill=white,font=\small] {<span class="arithmatex">\(+4\)</span>} (11,0.6);
-\end{tikzpicture}
-</script></p>
-<p><span class="arithmatex">\(\therefore |x-7|\leqslant 4 \iff x\in[3\,;11]\)</span>.</p>
+<p>Soit <span class="arithmatex">\(k\geqslant 0\)</span> quelconque. Supposons que <span class="arithmatex">\(u_k=3-3\left(\dfrac23\right)^k\)</span> (hypothèse de récurrence).</p>
+<p><span class="arithmatex">\(u_{k+1}=\dfrac23u_k+1=\dfrac23\left[3-3\left(\dfrac23\right)^k\right]+1=2-3\left(\dfrac23\right)^{k+1}+1=3-3\left(\dfrac23\right)^{k+1}\)</span>.</p>
+<p>La propriété est donc vraie au rang <span class="arithmatex">\(k+1\)</span>.</p>
 </details>
 </div>
 </div>
