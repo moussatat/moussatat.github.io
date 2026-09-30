@@ -1299,6 +1299,33 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rituel-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rituel-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 8
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rituel-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 9
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3706,6 +3733,33 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rituel-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rituel-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 8
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rituel-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 9
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3788,7 +3842,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
     \draw[->,line width=1.2pt] (0,-3.3) -- (0,5.3) node[above] {$y$};
     \foreach \x in {-6,-5,-4,-3,-2,-1,1,2,3,4,5} \draw (\x,0.08) -- (\x,-0.08) node[below,font=\small] {\x};
     \foreach \y in {-3,-2,-1,1,2,3,4,5} \draw (0.08,\y) -- (-0.08,\y) node[left,font=\small] {\y};
-    \draw[black,line width=1.4pt] plot[smooth] coordinates {(-6,0.6) (-5,3) (-4,4) (-3,3.9) (-2,3) (-1,1.6) (0,0) (1,-1.5) (2,-2.6) (3,-3) (4,-2.4) (5,-0.5)};
+    \draw[blue,line width=1.4pt,domain=-6:5,samples=100] plot (\x,{0.05*\x^3+0.05*\x^2-1.6*\x});
     \draw[dashed,line width=2pt] (-6,3) -- (5,3);
     \node[above right,font=\small] at (4.1,3) {$y=3$};
 \end{tikzpicture}
@@ -4106,11 +4160,12 @@ P(x) &amp;= a(x-r_1)(x-r_2) \\
 </details>
 </div>
 <div class="q-card q-green">
-<p><span class="q-badge q-green">Q2</span> Déterminer le domaine de définition de la fonction <span class="arithmatex">\(f\colon x\mapsto \sqrt{x^2-7x+6}\)</span>.</p>
+<p><span class="q-badge q-green">Q2</span> Résoudre l'inéquation <span class="arithmatex">\(2x^2-x-3\geqslant 0\)</span> et en déduire le domaine de définition de la fonction <span class="arithmatex">\(f\)</span> définie par <span class="arithmatex">\(f(x)=\sqrt{2x^2-x-3}\)</span>.</p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p>Il faut <span class="arithmatex">\(x^2-7x+6\geqslant 0\)</span>. Racines (somme <span class="arithmatex">\(=7\)</span>, produit <span class="arithmatex">\(=6\)</span>) : <span class="arithmatex">\(1\)</span> et <span class="arithmatex">\(6\)</span>, donc <span class="arithmatex">\(x^2-7x+6=(x-1)(x-6)\)</span>, positif à l'extérieur des racines (<span class="arithmatex">\(a=1&gt;0\)</span>).</p>
-<p><span class="arithmatex">\(D_f=\;]-\infty\,;1]\cup[6\,;+\infty[\)</span>.</p>
+<p><span class="arithmatex">\(\Delta=(-1)^2-4\times2\times(-3)=1+24=25\)</span>, donc les racines sont <span class="arithmatex">\(x_1=\dfrac{1-5}{4}=-1\)</span> et <span class="arithmatex">\(x_2=\dfrac{1+5}{4}=\dfrac{3}{2}\)</span>, et <span class="arithmatex">\(2x^2-x-3=2(x+1)\left(x-\dfrac{3}{2}\right)=(x+1)(2x-3)\)</span>.</p>
+<p>Comme <span class="arithmatex">\(a=2&gt;0\)</span>, le trinôme est positif à l'extérieur des racines : <span class="arithmatex">\(\mathscr{S}=\;]-\infty\,;-1]\cup\left[\dfrac{3}{2}\,;+\infty\right[\)</span>.</p>
+<p><span class="arithmatex">\(f(x)\)</span> existe si et seulement si <span class="arithmatex">\(2x^2-x-3\geqslant 0\)</span>, donc <span class="arithmatex">\(D_f=\;]-\infty\,;-1]\cup\left[\dfrac{3}{2}\,;+\infty\right[\)</span>.</p>
 </details>
 </div>
 <div class="timer-slot"></div>
@@ -4130,7 +4185,144 @@ P(x) &amp;= a(x-r_1)(x-r_2) \\
 <p>Si <span class="arithmatex">\(z\neq -3\)</span>, <span class="arithmatex">\(a^2=\dfrac{2u}{3+z}\)</span>, d'où <span class="arithmatex">\(a=\pm\sqrt{\dfrac{2u}{3+z}}\)</span> (à condition que <span class="arithmatex">\(\dfrac{2u}{3+z}\geqslant 0\)</span>).</p>
 </details>
 </div>
-</div><script type="text/javascript">
+</div>
+<hr />
+<h2 id="rituel-07">⏱️ Rituel 7<a class="headerlink" href="#rituel-07" title="Permanent link">⚓︎</a></h2>
+<div class="ritual-grid">
+<div class="q-card q-yellow">
+<p><span class="q-badge q-yellow">Q1</span> Factoriser par somme-produit le polynôme <span class="arithmatex">\(P(x)=x^2+10x+24\)</span> et en déduire les racines.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>On cherche deux nombres de somme <span class="arithmatex">\(-10\)</span> et de produit <span class="arithmatex">\(24\)</span> : <span class="arithmatex">\(-4\)</span> et <span class="arithmatex">\(-6\)</span> conviennent (car <span class="arithmatex">\(-4+(-6)=-10\)</span> et <span class="arithmatex">\(-4\times(-6)=24\)</span>).</p>
+<p>Ainsi <span class="arithmatex">\(x^2+10x+24=(x+4)(x+6)\)</span>, d'où les racines <span class="arithmatex">\(x=-4\)</span> et <span class="arithmatex">\(x=-6\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-green">
+<p><span class="q-badge q-green">Q2</span> Résoudre l'inéquation <span class="arithmatex">\(x^2-4x+3&lt;0\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(x^2-4x+3=(x-1)(x-3)\)</span> (somme <span class="arithmatex">\(=4\)</span>, produit <span class="arithmatex">\(=3\)</span>).</p>
+<p>Comme <span class="arithmatex">\(a=1&gt;0\)</span>, <span class="arithmatex">\(x^2-4x+3&lt;0\)</span> entre les racines : <span class="arithmatex">\(\mathscr{S}=\;]1\,;3[\)</span>.</p>
+</details>
+</div>
+<div class="timer-slot"></div>
+<div class="q-card q-blue">
+<p><span class="q-badge q-blue">Q3</span> Quel est l'ensemble de définition de la fonction <span class="arithmatex">\(g(x)=\dfrac{4}{(x+1)^2}\)</span> ?</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Le dénominateur s'annule pour <span class="arithmatex">\(x=-1\)</span> : <span class="arithmatex">\(D_g=\mathbb{R}\setminus\{-1\}\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-purple">
+<p><span class="q-badge q-purple">Q4</span> Déterminer les antécédents de <span class="arithmatex">\(4\)</span> par la fonction <span class="arithmatex">\(g\)</span> définie par <span class="arithmatex">\(g(x)=\dfrac{4}{(x+1)^2}\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(\dfrac{4}{(x+1)^2}=4 \iff (x+1)^2=1 \iff x+1=1\)</span> ou <span class="arithmatex">\(x+1=-1 \iff x=0\)</span> ou <span class="arithmatex">\(x=-2\)</span>.</p>
+</details>
+</div>
+</div>
+<hr />
+<h2 id="rituel-08">⏱️ Rituel 8<a class="headerlink" href="#rituel-08" title="Permanent link">⚓︎</a></h2>
+<div class="ritual-grid">
+<div class="q-card q-yellow">
+<p><span class="q-badge q-yellow">Q1</span> Justifier que <span class="arithmatex">\(1+\sqrt{2}\)</span> et <span class="arithmatex">\(1-\sqrt{2}\)</span> sont les racines de <span class="arithmatex">\(P(x)=-x^2+2x+1\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Pour <span class="arithmatex">\(P(x)=-x^2+2x+1\)</span> : somme attendue <span class="arithmatex">\(-\dfrac{b}{a}=-\dfrac{2}{-1}=2\)</span> et produit attendu <span class="arithmatex">\(\dfrac{c}{a}=\dfrac{1}{-1}=-1\)</span>.</p>
+<p>Somme : <span class="arithmatex">\((1+\sqrt{2})+(1-\sqrt{2})=2\)</span>.</p>
+<p>Produit : <span class="arithmatex">\((1+\sqrt{2})(1-\sqrt{2})=1-2=-1\)</span>.</p>
+<p>Les deux coïncident : ce sont bien les racines de <span class="arithmatex">\(P\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-green">
+<p><span class="q-badge q-green">Q2</span> Donner le tableau de variations de <span class="arithmatex">\(f(x)=\dfrac13\left(\dfrac12-x\right)^2-10\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(f(x)=\dfrac13\left(x-\dfrac12\right)^2-10\)</span> est sous forme canonique avec <span class="arithmatex">\(a=\dfrac13&gt;0\)</span> : minimum <span class="arithmatex">\(-10\)</span> atteint en <span class="arithmatex">\(x=\dfrac12\)</span>.</p>
+<div class="arithmatex">\[
+\begin{array}{c|ccccc}
+x &amp; -\infty &amp; &amp; \dfrac12 &amp; &amp; +\infty \\[4pt]
+\hline
+f(x) &amp; &amp; \searrow &amp; -10 &amp; \nearrow &amp;
+\end{array}
+\]</div>
+</details>
+</div>
+<div class="timer-slot"></div>
+<div class="q-card q-blue">
+<p><span class="q-badge q-blue">Q3</span> Déterminer l'équation réduite de la droite <span class="arithmatex">\((CD)\)</span> passant par <span class="arithmatex">\(C(-1\,;-2)\)</span> et <span class="arithmatex">\(D(3\,;10)\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Pente : <span class="arithmatex">\(m=\dfrac{y_D-y_C}{x_D-x_C}=\dfrac{10-(-2)}{3-(-1)}=\dfrac{12}{4}=3\)</span>.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+y-y_C &amp;= m(x-x_C) \\
+y-(-2) &amp;= 3(x-(-1)) \\
+y+2 &amp;= 3x+3 \\
+y &amp;= 3x+1
+\end{aligned}
+\]</div>
+</details>
+</div>
+<div class="q-card q-purple">
+<p><span class="q-badge q-purple">Q4</span> Simplifier <span class="arithmatex">\(\dfrac{x^2-36}{x^2+7x+6}\)</span> en factorisant le numérateur et le dénominateur.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(x^2-36=(x-6)(x+6)\)</span> et <span class="arithmatex">\(x^2+7x+6=(x+1)(x+6)\)</span> (les racines <span class="arithmatex">\(-1\)</span> et <span class="arithmatex">\(-6\)</span> ont pour somme <span class="arithmatex">\(-7\)</span> et pour produit <span class="arithmatex">\(6\)</span>).</p>
+<p>Donc, pour <span class="arithmatex">\(x\neq-1\)</span> et <span class="arithmatex">\(x\neq-6\)</span> : <span class="arithmatex">\(\dfrac{x^2-36}{x^2+7x+6}=\dfrac{(x-6)(x+6)}{(x+1)(x+6)}=\dfrac{x-6}{x+1}\)</span>.</p>
+</details>
+</div>
+</div>
+<hr />
+<h2 id="rituel-09">⏱️ Rituel 9<a class="headerlink" href="#rituel-09" title="Permanent link">⚓︎</a></h2>
+<div class="ritual-grid">
+<div class="q-card q-yellow">
+<p><span class="q-badge q-yellow">Q1</span> Déterminer le minimum de la fonction <span class="arithmatex">\(f\)</span> définie par <span class="arithmatex">\(f(x)=x^2+3x+1\)</span> et préciser en quel point il est atteint.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(\alpha=-\dfrac{b}{2a}=\dfrac{-3}{2}=-1,5\)</span> et <span class="arithmatex">\(\beta=-\dfrac{\Delta}{4a}=-\dfrac{3^2-4\times1\times1}{4}=-\dfrac{5}{4}=-1,25\)</span>.</p>
+<p><span class="arithmatex">\(f\)</span> a pour minimum <span class="arithmatex">\(-1,25\)</span>, atteint en <span class="arithmatex">\(x=-1,5\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-green">
+<p><span class="q-badge q-green">Q2</span> Donner le tableau de variations de <span class="arithmatex">\(f(x)=-\left(\dfrac{\sqrt7}{3}-x\right)^2-5\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(f(x)=-\left(x-\dfrac{\sqrt7}{3}\right)^2-5\)</span> (car <span class="arithmatex">\((a-b)^2=(b-a)^2\)</span>). Comme <span class="arithmatex">\(a=-1&lt;0\)</span> : maximum <span class="arithmatex">\(-5\)</span> atteint en <span class="arithmatex">\(x=\dfrac{\sqrt7}{3}\)</span>.</p>
+<div class="arithmatex">\[
+\begin{array}{c|ccccc}
+x &amp; -\infty &amp; &amp; \dfrac{\sqrt7}{3} &amp; &amp; +\infty \\[4pt]
+\hline
+f(x) &amp; &amp; \nearrow &amp; -5 &amp; \searrow &amp;
+\end{array}
+\]</div>
+</details>
+</div>
+<div class="timer-slot"></div>
+<div class="q-card q-blue">
+<p><span class="q-badge q-blue">Q3</span> Déterminer le domaine de définition de la fonction <span class="arithmatex">\(f\colon x\mapsto \sqrt{x^2-7x+6}\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Il faut <span class="arithmatex">\(x^2-7x+6\geqslant 0\)</span>. Racines (somme <span class="arithmatex">\(=7\)</span>, produit <span class="arithmatex">\(=6\)</span>) : <span class="arithmatex">\(1\)</span> et <span class="arithmatex">\(6\)</span>, donc <span class="arithmatex">\(x^2-7x+6=(x-1)(x-6)\)</span>, positif à l'extérieur des racines (<span class="arithmatex">\(a=1&gt;0\)</span>).</p>
+<p><span class="arithmatex">\(D_f=\;]-\infty\,;1]\cup[6\,;+\infty[\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-purple">
+<p><span class="q-badge q-purple">Q4</span> Déterminer l'équation réduite de la droite <span class="arithmatex">\((AB)\)</span> passant par <span class="arithmatex">\(A(4\,;1)\)</span> et <span class="arithmatex">\(B(6\,;2)\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Pente : <span class="arithmatex">\(m=\dfrac{y_B-y_A}{x_B-x_A}=\dfrac{2-1}{6-4}=\dfrac{1}{2}\)</span>.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+y-y_A &amp;= m(x-x_A) \\
+y-1 &amp;= \dfrac{1}{2}(x-4) \\
+y &amp;= \dfrac{1}{2}x-1
+\end{aligned}
+\]</div>
+</details>
+</div>
+</div>
+<hr /><script type="text/javascript">
 CONFIG.needMermaid = false;
 CONFIG.overlordClasses = [];
 globalThis.PAGE_IDES_CONFIG = '.\x1e{}\x1e0a0b.'
