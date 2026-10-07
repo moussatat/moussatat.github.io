@@ -1317,15 +1317,6 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#rituel-09" class="md-nav__link">
-    <span class="md-ellipsis">
-      ⏱️ Rituel 9
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -3751,15 +3742,6 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#rituel-09" class="md-nav__link">
-    <span class="md-ellipsis">
-      ⏱️ Rituel 9
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -4190,19 +4172,32 @@ P(x) &amp;= a(x-r_1)(x-r_2) \\
 <h2 id="rituel-07">⏱️ Rituel 7<a class="headerlink" href="#rituel-07" title="Permanent link">⚓︎</a></h2>
 <div class="ritual-grid">
 <div class="q-card q-yellow">
-<p><span class="q-badge q-yellow">Q1</span> Factoriser par somme-produit le polynôme <span class="arithmatex">\(P(x)=x^2+10x+24\)</span> et en déduire les racines.</p>
+<p><span class="q-badge q-yellow">Q1</span> Donner le tableau de variations de <span class="arithmatex">\(f(x)=-(x-\pi)^2+3\)</span>.</p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p>On cherche deux nombres de somme <span class="arithmatex">\(-10\)</span> et de produit <span class="arithmatex">\(24\)</span> : <span class="arithmatex">\(-4\)</span> et <span class="arithmatex">\(-6\)</span> conviennent (car <span class="arithmatex">\(-4+(-6)=-10\)</span> et <span class="arithmatex">\(-4\times(-6)=24\)</span>).</p>
-<p>Ainsi <span class="arithmatex">\(x^2+10x+24=(x+4)(x+6)\)</span>, d'où les racines <span class="arithmatex">\(x=-4\)</span> et <span class="arithmatex">\(x=-6\)</span>.</p>
+<p>Forme canonique avec <span class="arithmatex">\(a=-1&lt;0\)</span>, <span class="arithmatex">\(\alpha=\pi\)</span>, <span class="arithmatex">\(\beta=3\)</span> : maximum <span class="arithmatex">\(3\)</span> atteint en <span class="arithmatex">\(x=\pi\)</span>.</p>
+<div class="arithmatex">\[
+\begin{array}{c|ccccc}
+x &amp; -\infty &amp; &amp; \pi &amp; &amp; +\infty \[2pt]
+\hline
+f(x) &amp; &amp; \nearrow &amp; 3 &amp; \searrow &amp;
+\end{array}
+\]</div>
 </details>
 </div>
 <div class="q-card q-green">
-<p><span class="q-badge q-green">Q2</span> Résoudre l'inéquation <span class="arithmatex">\(x^2-4x+3&lt;0\)</span>.</p>
+<p><span class="q-badge q-green">Q2</span> Soit <span class="arithmatex">\(f\)</span> définie par <span class="arithmatex">\(f(x)=-x^2+2x+1\)</span>. Déterminer <span class="arithmatex">\(f(1+\sqrt{2})\)</span>.</p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p><span class="arithmatex">\(x^2-4x+3=(x-1)(x-3)\)</span> (somme <span class="arithmatex">\(=4\)</span>, produit <span class="arithmatex">\(=3\)</span>).</p>
-<p>Comme <span class="arithmatex">\(a=1&gt;0\)</span>, <span class="arithmatex">\(x^2-4x+3&lt;0\)</span> entre les racines : <span class="arithmatex">\(\mathscr{S}=\;]1\,;3[\)</span>.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+f\left(1+\sqrt{2}\right) &amp;= -\left(1+\sqrt{2}\right)^2+2\left(1+\sqrt{2}\right)+1 \
+&amp;= -\left(1+2\sqrt{2}+2\right)+2+2\sqrt{2}+1 \
+&amp;= -3-2\sqrt{2}+3+2\sqrt{2} \
+&amp;= 0
+\end{aligned}
+\]</div>
+<p>Donc <span class="arithmatex">\(1+\sqrt{2}\)</span> est une racine de <span class="arithmatex">\(f\)</span>.</p>
 </details>
 </div>
 <div class="timer-slot"></div>
@@ -4210,7 +4205,7 @@ P(x) &amp;= a(x-r_1)(x-r_2) \\
 <p><span class="q-badge q-blue">Q3</span> Quel est l'ensemble de définition de la fonction <span class="arithmatex">\(g(x)=\dfrac{4}{(x+1)^2}\)</span> ?</p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p>Le dénominateur s'annule pour <span class="arithmatex">\(x=-1\)</span> : <span class="arithmatex">\(D_g=\mathbb{R}\setminus\{-1\}\)</span>.</p>
+<p><span class="arithmatex">\(D_g=\mathbb{R}\setminus\{-1\}\)</span>.</p>
 </details>
 </div>
 <div class="q-card q-purple">
@@ -4225,77 +4220,18 @@ P(x) &amp;= a(x-r_1)(x-r_2) \\
 <h2 id="rituel-08">⏱️ Rituel 8<a class="headerlink" href="#rituel-08" title="Permanent link">⚓︎</a></h2>
 <div class="ritual-grid">
 <div class="q-card q-yellow">
-<p><span class="q-badge q-yellow">Q1</span> Justifier que <span class="arithmatex">\(1+\sqrt{2}\)</span> et <span class="arithmatex">\(1-\sqrt{2}\)</span> sont les racines de <span class="arithmatex">\(P(x)=-x^2+2x+1\)</span>.</p>
+<p><span class="q-badge q-yellow">Q1</span> Développer <span class="arithmatex">\(7\left(x-\dfrac37\right)^2-\dfrac{11}{7}\)</span>.</p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p>Pour <span class="arithmatex">\(P(x)=-x^2+2x+1\)</span> : somme attendue <span class="arithmatex">\(-\dfrac{b}{a}=-\dfrac{2}{-1}=2\)</span> et produit attendu <span class="arithmatex">\(\dfrac{c}{a}=\dfrac{1}{-1}=-1\)</span>.</p>
-<p>Somme : <span class="arithmatex">\((1+\sqrt{2})+(1-\sqrt{2})=2\)</span>.</p>
-<p>Produit : <span class="arithmatex">\((1+\sqrt{2})(1-\sqrt{2})=1-2=-1\)</span>.</p>
-<p>Les deux coïncident : ce sont bien les racines de <span class="arithmatex">\(P\)</span>.</p>
+<p><span class="arithmatex">\(7\left(x-\dfrac37\right)^2-\dfrac{11}{7}=7\left(x^2-\dfrac67x+\dfrac{9}{49}\right)-\dfrac{11}{7}=7x^2-6x+\dfrac97-\dfrac{11}{7}=7x^2-6x-\dfrac27\)</span>.</p>
 </details>
 </div>
 <div class="q-card q-green">
-<p><span class="q-badge q-green">Q2</span> Donner le tableau de variations de <span class="arithmatex">\(f(x)=\dfrac13\left(\dfrac12-x\right)^2-10\)</span>.</p>
+<p><span class="q-badge q-green">Q2</span> La fonction <span class="arithmatex">\(f(x)=-2(3-x)^2+2\)</span> admet-elle un maximum ou un minimum ? En quelle valeur est-il atteint ?</p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p><span class="arithmatex">\(f(x)=\dfrac13\left(x-\dfrac12\right)^2-10\)</span> est sous forme canonique avec <span class="arithmatex">\(a=\dfrac13&gt;0\)</span> : minimum <span class="arithmatex">\(-10\)</span> atteint en <span class="arithmatex">\(x=\dfrac12\)</span>.</p>
-<div class="arithmatex">\[
-\begin{array}{c|ccccc}
-x &amp; -\infty &amp; &amp; \dfrac12 &amp; &amp; +\infty \\[4pt]
-\hline
-f(x) &amp; &amp; \searrow &amp; -10 &amp; \nearrow &amp;
-\end{array}
-\]</div>
-</details>
-</div>
-<div class="timer-slot"></div>
-<div class="q-card q-blue">
-<p><span class="q-badge q-blue">Q3</span> Déterminer l'équation réduite de la droite <span class="arithmatex">\((CD)\)</span> passant par <span class="arithmatex">\(C(-1\,;-2)\)</span> et <span class="arithmatex">\(D(3\,;10)\)</span>.</p>
-<details class="success">
-<summary>Voir le corrigé</summary>
-<p>Pente : <span class="arithmatex">\(m=\dfrac{y_D-y_C}{x_D-x_C}=\dfrac{10-(-2)}{3-(-1)}=\dfrac{12}{4}=3\)</span>.</p>
-<div class="arithmatex">\[
-\begin{aligned}
-y-y_C &amp;= m(x-x_C) \\
-y-(-2) &amp;= 3(x-(-1)) \\
-y+2 &amp;= 3x+3 \\
-y &amp;= 3x+1
-\end{aligned}
-\]</div>
-</details>
-</div>
-<div class="q-card q-purple">
-<p><span class="q-badge q-purple">Q4</span> Simplifier <span class="arithmatex">\(\dfrac{x^2-36}{x^2+7x+6}\)</span> en factorisant le numérateur et le dénominateur.</p>
-<details class="success">
-<summary>Voir le corrigé</summary>
-<p><span class="arithmatex">\(x^2-36=(x-6)(x+6)\)</span> et <span class="arithmatex">\(x^2+7x+6=(x+1)(x+6)\)</span> (les racines <span class="arithmatex">\(-1\)</span> et <span class="arithmatex">\(-6\)</span> ont pour somme <span class="arithmatex">\(-7\)</span> et pour produit <span class="arithmatex">\(6\)</span>).</p>
-<p>Donc, pour <span class="arithmatex">\(x\neq-1\)</span> et <span class="arithmatex">\(x\neq-6\)</span> : <span class="arithmatex">\(\dfrac{x^2-36}{x^2+7x+6}=\dfrac{(x-6)(x+6)}{(x+1)(x+6)}=\dfrac{x-6}{x+1}\)</span>.</p>
-</details>
-</div>
-</div>
-<hr />
-<h2 id="rituel-09">⏱️ Rituel 9<a class="headerlink" href="#rituel-09" title="Permanent link">⚓︎</a></h2>
-<div class="ritual-grid">
-<div class="q-card q-yellow">
-<p><span class="q-badge q-yellow">Q1</span> Déterminer le minimum de la fonction <span class="arithmatex">\(f\)</span> définie par <span class="arithmatex">\(f(x)=x^2+3x+1\)</span> et préciser en quel point il est atteint.</p>
-<details class="success">
-<summary>Voir le corrigé</summary>
-<p><span class="arithmatex">\(\alpha=-\dfrac{b}{2a}=\dfrac{-3}{2}=-1,5\)</span> et <span class="arithmatex">\(\beta=-\dfrac{\Delta}{4a}=-\dfrac{3^2-4\times1\times1}{4}=-\dfrac{5}{4}=-1,25\)</span>.</p>
-<p><span class="arithmatex">\(f\)</span> a pour minimum <span class="arithmatex">\(-1,25\)</span>, atteint en <span class="arithmatex">\(x=-1,5\)</span>.</p>
-</details>
-</div>
-<div class="q-card q-green">
-<p><span class="q-badge q-green">Q2</span> Donner le tableau de variations de <span class="arithmatex">\(f(x)=-\left(\dfrac{\sqrt7}{3}-x\right)^2-5\)</span>.</p>
-<details class="success">
-<summary>Voir le corrigé</summary>
-<p><span class="arithmatex">\(f(x)=-\left(x-\dfrac{\sqrt7}{3}\right)^2-5\)</span> (car <span class="arithmatex">\((a-b)^2=(b-a)^2\)</span>). Comme <span class="arithmatex">\(a=-1&lt;0\)</span> : maximum <span class="arithmatex">\(-5\)</span> atteint en <span class="arithmatex">\(x=\dfrac{\sqrt7}{3}\)</span>.</p>
-<div class="arithmatex">\[
-\begin{array}{c|ccccc}
-x &amp; -\infty &amp; &amp; \dfrac{\sqrt7}{3} &amp; &amp; +\infty \\[4pt]
-\hline
-f(x) &amp; &amp; \nearrow &amp; -5 &amp; \searrow &amp;
-\end{array}
-\]</div>
+<p><span class="arithmatex">\(f(x)=-2(3-x)^2+2=-2(x-3)^2+2\)</span> : forme canonique avec <span class="arithmatex">\(a=-2&lt;0\)</span>, <span class="arithmatex">\(\alpha=3\)</span>, <span class="arithmatex">\(\beta=2\)</span>.</p>
+<p><span class="arithmatex">\(f\)</span> admet un maximum, égal à <span class="arithmatex">\(2\)</span>, atteint en <span class="arithmatex">\(x=3\)</span>.</p>
 </details>
 </div>
 <div class="timer-slot"></div>
@@ -4308,17 +4244,21 @@ f(x) &amp; &amp; \nearrow &amp; -5 &amp; \searrow &amp;
 </details>
 </div>
 <div class="q-card q-purple">
-<p><span class="q-badge q-purple">Q4</span> Déterminer l'équation réduite de la droite <span class="arithmatex">\((AB)\)</span> passant par <span class="arithmatex">\(A(4\,;1)\)</span> et <span class="arithmatex">\(B(6\,;2)\)</span>.</p>
+<p><span class="q-badge q-purple">Q4</span> Résoudre dans <span class="arithmatex">\(\mathbb{R}\)</span> l'inéquation <span class="arithmatex">\((7x+1)(-10x+2)\geqslant 0\)</span>.</p>
 <details class="success">
 <summary>Voir le corrigé</summary>
-<p>Pente : <span class="arithmatex">\(m=\dfrac{y_B-y_A}{x_B-x_A}=\dfrac{2-1}{6-4}=\dfrac{1}{2}\)</span>.</p>
+<p><span class="arithmatex">\(7x+1=0\iff x=-\dfrac17\)</span> et <span class="arithmatex">\(-10x+2=0\iff x=\dfrac15\)</span>.</p>
 <div class="arithmatex">\[
-\begin{aligned}
-y-y_A &amp;= m(x-x_A) \\
-y-1 &amp;= \dfrac{1}{2}(x-4) \\
-y &amp;= \dfrac{1}{2}x-1
-\end{aligned}
+\begin{array}{c|ccccccc}
+x &amp; -\infty &amp; &amp; -\dfrac17 &amp; &amp; \dfrac15 &amp; &amp; +\infty \[2pt]
+\hline
+7x+1 &amp; &amp; - &amp; 0 &amp; + &amp; &amp; + &amp; \[2pt]
+-10x+2 &amp; &amp; + &amp; &amp; + &amp; 0 &amp; - &amp; \[2pt]
+\hline
+\text{Produit} &amp; &amp; - &amp; 0 &amp; + &amp; 0 &amp; - &amp;
+\end{array}
 \]</div>
+<p><span class="arithmatex">\(\mathscr{S}=\left[-\dfrac17\,;\dfrac15\right]\)</span>.</p>
 </details>
 </div>
 </div>
