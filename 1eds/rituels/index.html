@@ -1317,6 +1317,15 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rituel-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 9
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3742,6 +3751,15 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rituel-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 9
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3791,9 +3809,9 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 
 <div class="ritual-timer" id="ritual-timer-box">
   <span class="ritual-timer__label">Temps restant :</span>
-  <span id="time" class="ritual-timer__display">05:00</span>
+  <span id="time" class="ritual-timer__display" data-default="08:00">08:00</span>
   <div class="ritual-timer__controls">
-    <button onclick="startTimer(5)" class="md-button md-button--primary">Démarrer (5 min)</button>
+    <button onclick="startTimer(8)" class="md-button md-button--primary">Démarrer (8 min)</button>
     <button onclick="resetTimer()" class="md-button">Réinitialiser</button>
   </div>
 </div>
@@ -3897,7 +3915,7 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <p>Zéro : <span class="arithmatex">\(-5x-1=0 \iff x=-\dfrac{1}{5}\)</span>.</p>
 <div class="arithmatex">\[
 \begin{array}{c|ccccc}
-x &amp; -\infty &amp; &amp; -\dfrac15 &amp; &amp; +\infty \\[2pt]
+x &amp; -\infty &amp; &amp; -\dfrac15 &amp; &amp; +\infty \\\[2pt]
 \hline
 f(x) &amp; &amp; + &amp; 0 &amp; - &amp;
 \end{array}
@@ -3936,7 +3954,7 @@ f(x) &amp; &amp; + &amp; 0 &amp; - &amp;
 <summary>Voir le corrigé</summary>
 <div class="arithmatex">\[
 \begin{array}{c|ccccccc}
-x &amp; -\infty &amp; &amp; 2 &amp; &amp; 6 &amp; &amp; +\infty \\[2pt]
+x &amp; -\infty &amp; &amp; 2 &amp; &amp; 6 &amp; &amp; +\infty \\\[2pt]
 \hline
 f(x) &amp; &amp; + &amp; 0 &amp; - &amp; 0 &amp; + &amp;
 \end{array}
@@ -3977,10 +3995,10 @@ f(x) &amp; &amp; + &amp; 0 &amp; - &amp; 0 &amp; + &amp;
 <p><span class="arithmatex">\(-4x-1\)</span> s'annule en <span class="arithmatex">\(-\dfrac14\)</span> (positif avant, négatif après) ; <span class="arithmatex">\(2x+4\)</span> s'annule en <span class="arithmatex">\(-2\)</span> (négatif avant, positif après) :</p>
 <div class="arithmatex">\[
 \begin{array}{c|ccccccc}
-x &amp; -\infty &amp; &amp; -2 &amp; &amp; -\dfrac14 &amp; &amp; +\infty \\[2pt]
+x &amp; -\infty &amp; &amp; -2 &amp; &amp; -\dfrac14 &amp; &amp; +\infty \\\[2pt]
 \hline
--4x-1 &amp; &amp; + &amp; &amp; + &amp; 0 &amp; - &amp; \\[2pt]
-2x+4 &amp; &amp; - &amp; 0 &amp; + &amp; &amp; + &amp; \\[2pt]
+-4x-1 &amp; &amp; + &amp; &amp; + &amp; 0 &amp; - &amp; \\\[2pt]
+2x+4 &amp; &amp; - &amp; 0 &amp; + &amp; &amp; + &amp; \\\[2pt]
 \hline
 f(x) &amp; &amp; - &amp; \| &amp; + &amp; 0 &amp; - &amp;
 \end{array}
@@ -4178,7 +4196,7 @@ P(x) &amp;= a(x-r_1)(x-r_2) \\
 <p>Forme canonique avec <span class="arithmatex">\(a=-1&lt;0\)</span>, <span class="arithmatex">\(\alpha=\pi\)</span>, <span class="arithmatex">\(\beta=3\)</span> : maximum <span class="arithmatex">\(3\)</span> atteint en <span class="arithmatex">\(x=\pi\)</span>.</p>
 <div class="arithmatex">\[
 \begin{array}{c|ccccc}
-x &amp; -\infty &amp; &amp; \pi &amp; &amp; +\infty \[2pt]
+x &amp; -\infty &amp; &amp; \pi &amp; &amp; +\infty \\[2pt]
 \hline
 f(x) &amp; &amp; \nearrow &amp; 3 &amp; \searrow &amp;
 \end{array}
@@ -4191,9 +4209,9 @@ f(x) &amp; &amp; \nearrow &amp; 3 &amp; \searrow &amp;
 <summary>Voir le corrigé</summary>
 <div class="arithmatex">\[
 \begin{aligned}
-f\left(1+\sqrt{2}\right) &amp;= -\left(1+\sqrt{2}\right)^2+2\left(1+\sqrt{2}\right)+1 \
-&amp;= -\left(1+2\sqrt{2}+2\right)+2+2\sqrt{2}+1 \
-&amp;= -3-2\sqrt{2}+3+2\sqrt{2} \
+f\left(1+\sqrt{2}\right) &amp;= -\left(1+\sqrt{2}\right)^2+2\left(1+\sqrt{2}\right)+1 \\
+&amp;= -\left(1+2\sqrt{2}+2\right)+2+2\sqrt{2}+1 \\
+&amp;= -3-2\sqrt{2}+3+2\sqrt{2} \\
 &amp;= 0
 \end{aligned}
 \]</div>
@@ -4250,10 +4268,10 @@ f\left(1+\sqrt{2}\right) &amp;= -\left(1+\sqrt{2}\right)^2+2\left(1+\sqrt{2}\rig
 <p><span class="arithmatex">\(7x+1=0\iff x=-\dfrac17\)</span> et <span class="arithmatex">\(-10x+2=0\iff x=\dfrac15\)</span>.</p>
 <div class="arithmatex">\[
 \begin{array}{c|ccccccc}
-x &amp; -\infty &amp; &amp; -\dfrac17 &amp; &amp; \dfrac15 &amp; &amp; +\infty \[2pt]
+x &amp; -\infty &amp; &amp; -\dfrac17 &amp; &amp; \dfrac15 &amp; &amp; +\infty \\[2pt]
 \hline
-7x+1 &amp; &amp; - &amp; 0 &amp; + &amp; &amp; + &amp; \[2pt]
--10x+2 &amp; &amp; + &amp; &amp; + &amp; 0 &amp; - &amp; \[2pt]
+7x+1 &amp; &amp; - &amp; 0 &amp; + &amp; &amp; + &amp; \\[2pt]
+-10x+2 &amp; &amp; + &amp; &amp; + &amp; 0 &amp; - &amp; \\[2pt]
 \hline
 \text{Produit} &amp; &amp; - &amp; 0 &amp; + &amp; 0 &amp; - &amp;
 \end{array}
@@ -4262,10 +4280,62 @@ x &amp; -\infty &amp; &amp; -\dfrac17 &amp; &amp; \dfrac15 &amp; &amp; +\infty \
 </details>
 </div>
 </div>
+<hr />
+<h2 id="rituel-09">⏱️ Rituel 9<a class="headerlink" href="#rituel-09" title="Permanent link">⚓︎</a></h2>
+<div class="ritual-grid">
+<div class="q-card q-yellow">
+<p><span class="q-badge q-yellow">Q1</span> Déterminer le minimum de la fonction <span class="arithmatex">\(f\)</span> définie par <span class="arithmatex">\(f(x)=x^2+3x+1\)</span> et préciser en quel point il est atteint.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(\alpha=-\dfrac{b}{2a}=\dfrac{-3}{2\times1}=-1,5\)</span></p>
+<p><span class="arithmatex">\(\beta=-\dfrac{\Delta}{4a}=-\dfrac{3^2-4\times1\times1}{4\times1}=-\dfrac{5}{4}=-1,25\)</span></p>
+<p><span class="arithmatex">\(f\)</span> a pour minimum <span class="arithmatex">\(-1,25\)</span>, atteint en <span class="arithmatex">\(x=-1,5\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-green">
+<p><span class="q-badge q-green">Q2</span> Donner le tableau de variations de <span class="arithmatex">\(f(x)=-\left(\dfrac{\sqrt7}{3}-x\right)^2-5\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(f(x)=-\left(\dfrac{\sqrt7}{3}-x\right)^2-5=-\left(x-\dfrac{\sqrt7}{3}\right)^2-5\)</span>.</p>
+<p>Forme canonique avec <span class="arithmatex">\(a=-1&lt;0\)</span>, <span class="arithmatex">\(\alpha=\dfrac{\sqrt7}{3}\)</span>, <span class="arithmatex">\(\beta=-5\)</span> : maximum <span class="arithmatex">\(-5\)</span> atteint en <span class="arithmatex">\(x=\dfrac{\sqrt7}{3}\)</span>.</p>
+<div class="arithmatex">\[
+\begin{array}{c|ccccc}
+x &amp; -\infty &amp; &amp; \dfrac{\sqrt7}{3} &amp; &amp; +\infty \\[4pt]
+\hline
+f(x) &amp; &amp; \nearrow &amp; -5 &amp; \searrow &amp;
+\end{array}
+\]</div>
+</details>
+</div>
+<div class="timer-slot"></div>
+<div class="q-card q-blue">
+<p><span class="q-badge q-blue">Q3</span> Déterminer l'équation réduite de la droite <span class="arithmatex">\((AB)\)</span> passant par <span class="arithmatex">\(A(4\,;1)\)</span> et <span class="arithmatex">\(B(6\,;2)\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Pente : <span class="arithmatex">\(m=\dfrac{y_A-y_B}{x_A-x_B}=\dfrac{1-2}{4-6}=\dfrac{1}{2}\)</span>.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+y-y_A &amp;= m(x-x_A) \\
+y-1 &amp;= \dfrac{1}{2}(x-4) \\
+y &amp;= \dfrac{1}{2}x-1
+\end{aligned}
+\]</div>
+</details>
+</div>
+<div class="q-card q-purple">
+<p><span class="q-badge q-purple">Q4</span> Déterminer le domaine de définition de la fonction <span class="arithmatex">\(f\)</span> définie par <span class="arithmatex">\(f(x)=\sqrt{x^2-4x+3}\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Il faut <span class="arithmatex">\(x^2-4x+3\geqslant 0\)</span>. Racines (somme <span class="arithmatex">\(=4\)</span>, produit <span class="arithmatex">\(=3\)</span>) : <span class="arithmatex">\(1\)</span> et <span class="arithmatex">\(3\)</span>, donc <span class="arithmatex">\(x^2-4x+3=(x-1)(x-3)\)</span>.</p>
+<p>Comme <span class="arithmatex">\(a=1&gt;0\)</span>, le trinôme est positif à l'extérieur des racines (et nul en <span class="arithmatex">\(1\)</span> et <span class="arithmatex">\(3\)</span>).</p>
+<p><span class="arithmatex">\(D_f=\;]-\infty\,;1]\cup[3\,;+\infty[\)</span>.</p>
+</details>
+</div>
+</div>
 <hr /><script type="text/javascript">
 CONFIG.needMermaid = false;
 CONFIG.overlordClasses = [];
-globalThis.PAGE_IDES_CONFIG = '.\x1e{}\x1e0a0b.'
+globalThis.PAGE_IDES_CONFIG = '.\x1e}{\x1e0b0a.'
 </script>
 
 

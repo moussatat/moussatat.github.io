@@ -36,7 +36,7 @@ function resetTimer() {
     clearInterval(ritualTimer);
     const display = document.getElementById('time');
     if (display) {
-        display.textContent = "05:00";
+        display.textContent = display.dataset.default || "05:00";
         display.classList.remove('ritual-timer__display--ended');
     }
 }
