@@ -1704,6 +1704,24 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rituel-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 23
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rituel-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 24
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3994,6 +4012,24 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rituel-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 23
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rituel-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 24
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4934,6 +4970,148 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <summary>Voir le corrigé</summary>
 <p><span class="arithmatex">\(b=8+\dfrac{12}{2}=14\)</span>, puis <span class="arithmatex">\(a=12-\dfrac{14}{2}=5\)</span>.</p>
 <p>En Python : <code>a = 5.0</code> et <code>b = 14.0</code>.</p>
+</details>
+</div>
+</div>
+<hr />
+<h2 id="rituel-23">⏱️ Rituel 23<a class="headerlink" href="#rituel-23" title="Permanent link">⚓︎</a></h2>
+<div class="ritual-grid">
+<div class="q-card q-yellow">
+<p><span class="q-badge q-yellow">Q1</span> La fonction <span class="arithmatex">\(f\)</span> est représentée ci-dessous. Donner <span class="arithmatex">\(D_f\)</span>, puis résoudre graphiquement : a. <span class="arithmatex">\(f(x)=0\)</span> ; b. <span class="arithmatex">\(f(x)\geqslant 1\)</span>.</p>
+<script data-disable-cache="true" data-show-console="true" type="text/tikz">
+\begin{tikzpicture}[scale=0.5]
+    \draw[gray,dotted,line width=0.8pt] (-5,-3) grid (4,3);
+    \draw[->,line width=1.2pt] (-5.3,0) -- (4.4,0) node[above,font=\scriptsize] {$x$};
+    \draw[->,line width=1.2pt] (0,-3.3) -- (0,3.4) node[right,font=\scriptsize] {$y$};
+    \foreach \x in {-5,-4,-3,-2,-1,1,2,3,4} \draw (\x,0.1) -- (\x,-0.1) node[below,font=\scriptsize] {\x};
+    \foreach \y in {-3,-2,-1,1,2,3} \draw (0.1,\y) -- (-0.1,\y) node[left,font=\scriptsize] {\y};
+    \draw[line width=1.2pt,smooth,tension=0.6] plot coordinates {(-4,-2) (-3,0) (-2,1) (-1,2) (0,1) (1,0) (2,-1) (3,0)};
+    \filldraw[black] (-4,-2) circle (4pt);
+    \filldraw[fill=white,draw=black,ultra thick] (3,0) circle (4pt);
+\end{tikzpicture}
+</script>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(D_f=[-4\,;3[\)</span> (le point d'abscisse <span class="arithmatex">\(3\)</span> est exclu).</p>
+<p>a. <span class="arithmatex">\(f(x)=0\)</span> : <span class="arithmatex">\(\mathscr{S}=\{-3\,;1\}\)</span>.</p>
+<p>b. <span class="arithmatex">\(f(x)\geqslant 1\)</span> : <span class="arithmatex">\(\mathscr{S}=[-2\,;0]\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-green">
+<p><span class="q-badge q-green">Q2</span> Déterminer <span class="arithmatex">\(x\)</span>.</p>
+<p><svg viewBox="0 0 320 110" width="100%" style="max-width:340px;display:block;margin:0.5rem auto" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="1.5" font-size="15" text-anchor="middle" fill="currentColor">
+    <rect x="10" y="15" width="170" height="35" fill="#4C6EF5" fill-opacity="0.25"/>
+    <rect x="180" y="15" width="130" height="35" fill="#4C6EF5" fill-opacity="0.1"/>
+    <rect x="10" y="60" width="90" height="35" fill="#4C6EF5" fill-opacity="0.15"/>
+    <rect x="100" y="60" width="210" height="35" fill="#4C6EF5" fill-opacity="0.35"/>
+    <text x="95" y="38" stroke="none" font-style="italic">5x</text>
+    <text x="245" y="38" stroke="none">35</text>
+    <text x="55" y="83" stroke="none" font-style="italic">2x</text>
+    <text x="205" y="83" stroke="none">146</text>
+  </g>
+</svg></p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Les deux barres ont la même longueur, donc <span class="arithmatex">\(5x+35=2x+146\)</span>.</p>
+<p><span class="arithmatex">\(5x-2x=146-35\iff 3x=111\iff x=37\)</span>.</p>
+</details>
+</div>
+<div class="timer-slot"></div>
+<div class="q-card q-blue">
+<p><span class="q-badge q-blue">Q3</span> Un article coûte <span class="arithmatex">\(65\)</span> €. Son prix diminue de <span class="arithmatex">\(15\,\%\)</span>. Déterminer, sans l'aide de la calculatrice, le nouveau prix.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(10\,\%\)</span> de <span class="arithmatex">\(65\)</span> vaut <span class="arithmatex">\(6,5\)</span> et <span class="arithmatex">\(5\,\%\)</span> vaut <span class="arithmatex">\(3,25\)</span>, donc la baisse est <span class="arithmatex">\(6,5+3,25=9,75\)</span> €.</p>
+<p>Nouveau prix : <span class="arithmatex">\(65-9,75=55,25\)</span> €.</p>
+<p>(Ou : <span class="arithmatex">\(65\times0,85=55,25\)</span> €, le coefficient multiplicateur étant <span class="arithmatex">\(1-\dfrac{15}{100}=0,85\)</span>.)</p>
+</details>
+</div>
+<div class="q-card q-purple">
+<p><span class="q-badge q-purple">Q4</span> Mettre au même dénominateur <span class="arithmatex">\(A=\dfrac{x+1}{x+4}+\dfrac{x}{5}\)</span> (<span class="arithmatex">\(x\neq-4\)</span>).</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Pour <span class="arithmatex">\(x\neq-4\)</span> :</p>
+<div class="arithmatex">\[
+\begin{aligned}
+A &amp;= \dfrac{5(x+1)}{5(x+4)}+\dfrac{x(x+4)}{5(x+4)} \\
+&amp;= \dfrac{5x+5+x^2+4x}{5(x+4)} \\
+&amp;= \dfrac{x^2+9x+5}{5(x+4)}
+\end{aligned}
+\]</div>
+</details>
+</div>
+</div>
+<hr />
+<h2 id="rituel-24">⏱️ Rituel 24<a class="headerlink" href="#rituel-24" title="Permanent link">⚓︎</a></h2>
+<div class="ritual-grid">
+<div class="q-card q-yellow">
+<p><span class="q-badge q-yellow">Q1</span> On donne ci-dessous la courbe <span class="arithmatex">\(\mathscr{C}_g\)</span> d'une fonction <span class="arithmatex">\(g\)</span>. La droite en pointillés a pour équation <span class="arithmatex">\(x=1\)</span>. Dresser le tableau de signes de <span class="arithmatex">\(g\)</span> sur son ensemble de définition.</p>
+<script data-disable-cache="true" data-show-console="true" type="text/tikz">
+\begin{tikzpicture}[scale=0.5]
+    \draw[gray,dotted,line width=0.8pt] (-4,-4) grid (6,4);
+    \draw[->,line width=1.2pt] (-4.3,0) -- (6.4,0) node[above,font=\scriptsize] {$x$};
+    \draw[->,line width=1.2pt] (0,-4.3) -- (0,4.4) node[right,font=\scriptsize] {$y$};
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4,5,6} \draw (\x,0.1) -- (\x,-0.1) node[below,font=\scriptsize] {\x};
+    \foreach \y in {-4,-3,-2,-1,1,2,3,4} \draw (0.1,\y) -- (-0.1,\y) node[left,font=\scriptsize] {\y};
+    \draw[line width=1.2pt,domain=-3:0.23,samples=80,smooth] plot (\x,{(\x+2)*(\x-3)/(2*(\x-1))});
+    \draw[line width=1.2pt,domain=1.63:5,samples=80,smooth] plot (\x,{(\x+2)*(\x-3)/(2*(\x-1))});
+    \draw[dashed,line width=1pt] (1,-4) -- (1,4);
+    \filldraw[black] (-3,-0.75) circle (4pt);
+    \filldraw[black] (5,1.75) circle (4pt);
+\end{tikzpicture}
+</script>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(\mathscr{D}_g=[-3\,;1[\,\cup\,]1\,;5]\)</span> ; les zéros de <span class="arithmatex">\(g\)</span> sont <span class="arithmatex">\(-2\)</span> et <span class="arithmatex">\(3\)</span> ; <span class="arithmatex">\(1\)</span> est une valeur interdite (double barre).</p>
+<p><span class="arithmatex">\(\mathscr{C}_g\)</span> est au-dessus de l'axe des abscisses entre <span class="arithmatex">\(-2\)</span> et <span class="arithmatex">\(1\)</span> et entre <span class="arithmatex">\(3\)</span> et <span class="arithmatex">\(5\)</span>, en dessous ailleurs.</p>
+<div class="arithmatex">\[
+\begin{array}{c|ccccccccc}
+x &amp; -3 &amp; &amp; -2 &amp; &amp; 1 &amp; &amp; 3 &amp; &amp; 5 \\[2pt]
+\hline
+g(x) &amp; &amp; - &amp; 0 &amp; + &amp; \| &amp; - &amp; 0 &amp; + &amp;
+\end{array}
+\]</div>
+</details>
+</div>
+<div class="q-card q-green">
+<p><span class="q-badge q-green">Q2</span> Déterminer <span class="arithmatex">\(x\)</span>.</p>
+<p><svg viewBox="0 0 300 220" width="100%" style="max-width:300px;display:block;margin:0.5rem auto" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="2" fill="none">
+    <line x1="73.4" y1="65.7" x2="226.6" y2="194.3"/>
+    <line x1="150" y1="130" x2="244" y2="95.8"/>
+    <path stroke-width="1.5" d="M 173,149.3 A 30 30 0 0 0 178.2,119.7"/>
+    <path stroke-width="1.5" d="M 185.7,117 A 38 38 0 0 0 120.9,105.6"/>
+  </g>
+  <g fill="currentColor" font-size="14" text-anchor="middle">
+    <text x="206" y="140">4x</text>
+    <text x="158" y="76">96°</text>
+    <text x="64" y="62" font-style="italic">C</text>
+    <text x="236" y="206" font-style="italic">A</text>
+    <text x="256" y="94" font-style="italic">B</text>
+    <text x="142" y="124" font-style="italic">O</text>
+  </g>
+</svg></p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Les angles <span class="arithmatex">\(4x\)</span> et <span class="arithmatex">\(96°\)</span> sont supplémentaires (ils forment un angle plat), donc <span class="arithmatex">\(4x+96=180\)</span>.</p>
+<p><span class="arithmatex">\(4x=84\iff x=21°\)</span>.</p>
+</details>
+</div>
+<div class="timer-slot"></div>
+<div class="q-card q-blue">
+<p><span class="q-badge q-blue">Q3</span> Déterminer la valeur interdite de l'expression <span class="arithmatex">\(\dfrac{5x-\frac{2}{3}}{7x+1}\)</span>. Donner, sous la forme d'une réunion d'intervalles, le domaine de la fonction <span class="arithmatex">\(f\)</span> définie par <span class="arithmatex">\(f(x)=\dfrac{5x-\frac{2}{3}}{7x+1}\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(7x+1=0\iff x=-\dfrac{1}{7}\)</span> : la valeur interdite est <span class="arithmatex">\(-\dfrac{1}{7}\)</span>.</p>
+<p><span class="arithmatex">\(\mathscr{D}_f=\left]-\infty\,;-\dfrac{1}{7}\right[\,\cup\,\left]-\dfrac{1}{7}\,;+\infty\right[\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-purple">
+<p><span class="q-badge q-purple">Q4</span> Calculer et donner le résultat le plus simple possible de <span class="arithmatex">\(\dfrac{-4}{\frac{3}{4}-\frac{9}{8}}\)</span>.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(\dfrac{3}{4}-\dfrac{9}{8}=\dfrac{6}{8}-\dfrac{9}{8}=-\dfrac{3}{8}\)</span>, donc <span class="arithmatex">\(\dfrac{-4}{-\frac{3}{8}}=4\times\dfrac{8}{3}=\dfrac{32}{3}\)</span>.</p>
 </details>
 </div>
 </div>
