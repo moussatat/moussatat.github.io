@@ -1722,6 +1722,15 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rituel-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 25
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4030,6 +4039,15 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rituel-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏱️ Rituel 25
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4977,6 +4995,67 @@ CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au proje
 <h2 id="rituel-23">⏱️ Rituel 23<a class="headerlink" href="#rituel-23" title="Permanent link">⚓︎</a></h2>
 <div class="ritual-grid">
 <div class="q-card q-yellow">
+<p><span class="q-badge q-yellow">Q1</span> La fonction <span class="arithmatex">\(f\)</span> est représentée ci-dessous. Donner le domaine <span class="arithmatex">\(D_f\)</span> de la fonction <span class="arithmatex">\(f\)</span>, puis résoudre graphiquement : a. <span class="arithmatex">\(f(x)&gt;0\)</span> ; b. <span class="arithmatex">\(f(x)=-1\)</span>.</p>
+<script data-disable-cache="true" data-show-console="true" type="text/tikz">
+\begin{tikzpicture}[scale=0.5]
+    \draw[gray,dotted,line width=0.8pt] (-4,-3) grid (5,3);
+    \draw[->,line width=1.2pt] (-4.3,0) -- (5.4,0) node[above,font=\scriptsize] {$x$};
+    \draw[->,line width=1.2pt] (0,-3.3) -- (0,3.4) node[right,font=\scriptsize] {$y$};
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4,5} \draw (\x,0.1) -- (\x,-0.1) node[below,font=\scriptsize] {\x};
+    \foreach \y in {-3,-2,-1,1,2,3} \draw (0.1,\y) -- (-0.1,\y) node[left,font=\scriptsize] {\y};
+    \draw[line width=1.2pt,smooth,tension=0.6] plot coordinates {(-3,2) (-2,0) (-1,-1) (0,-2) (1,-1) (2,0) (3,1) (4,2)};
+    \filldraw[fill=white,draw=black,ultra thick] (-3,2) circle (4pt);
+    \filldraw[black] (4,2) circle (4pt);
+\end{tikzpicture}
+</script>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(D_f=]-3\,;4]\)</span> (le point d'abscisse <span class="arithmatex">\(-3\)</span> est exclu).</p>
+<p>a. <span class="arithmatex">\(f(x)&gt;0\)</span> : <span class="arithmatex">\(\mathscr{S}=]-3\,;-2[\,\cup\,]2\,;4]\)</span>.</p>
+<p>b. <span class="arithmatex">\(f(x)=-1\)</span> : <span class="arithmatex">\(\mathscr{S}=\{-1\,;1\}\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-green">
+<p><span class="q-badge q-green">Q2</span> Déterminer <span class="arithmatex">\(x\)</span>.</p>
+<p><svg viewBox="0 0 300 160" width="100%" style="max-width:300px;display:block;margin:0.5rem auto" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="2" fill="none">
+    <line x1="50" y1="130" x2="250" y2="130"/>
+    <line x1="150" y1="130" x2="200" y2="43.4"/>
+    <path stroke-width="1.5" d="M 180,130 A 30 30 0 0 0 165,104"/>
+    <path stroke-width="1.5" d="M 169,97.1 A 38 38 0 0 0 112,130"/>
+  </g>
+  <g fill="currentColor" font-size="14" text-anchor="middle">
+    <text x="197" y="118">3x</text>
+    <text x="121" y="82">114°</text>
+  </g>
+</svg></p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Les angles <span class="arithmatex">\(3x\)</span> et <span class="arithmatex">\(114°\)</span> sont supplémentaires (ils forment un angle plat), donc <span class="arithmatex">\(3x+114=180\)</span>.</p>
+<p><span class="arithmatex">\(3x=66\iff x=22°\)</span>.</p>
+</details>
+</div>
+<div class="timer-slot"></div>
+<div class="q-card q-blue">
+<p><span class="q-badge q-blue">Q3</span> Écrire en compréhension l'intervalle <span class="arithmatex">\([-8\,;3]\)</span> sous la forme <span class="arithmatex">\(\{x\in\mathbb{R}\mid |x-a|\leqslant r\}\)</span>, où <span class="arithmatex">\(a\)</span> et <span class="arithmatex">\(r\)</span> sont des réels à déterminer.</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p><span class="arithmatex">\(a=\dfrac{-8+3}{2}=-\dfrac{5}{2}\)</span> et <span class="arithmatex">\(r=\dfrac{3-(-8)}{2}=\dfrac{11}{2}\)</span>.</p>
+<p>Donc <span class="arithmatex">\([-8\,;3]=\left\{x\in\mathbb{R}\mid \left|x+\dfrac{5}{2}\right|\leqslant\dfrac{11}{2}\right\}\)</span>.</p>
+</details>
+</div>
+<div class="q-card q-purple">
+<p><span class="q-badge q-purple">Q4</span> Mettre au même dénominateur <span class="arithmatex">\(A=\dfrac{5x}{x-2}-\dfrac{3}{x-3}\)</span> (<span class="arithmatex">\(x\neq2\)</span>, <span class="arithmatex">\(x\neq3\)</span>).</p>
+<details class="success">
+<summary>Voir le corrigé</summary>
+<p>Pour <span class="arithmatex">\(x\neq2\)</span> et <span class="arithmatex">\(x\neq3\)</span> : <span class="arithmatex">\(A=\dfrac{5x(x-3)}{(x-2)(x-3)}-\dfrac{3(x-2)}{(x-2)(x-3)}=\dfrac{5x^2-15x-3x+6}{(x-2)(x-3)}=\dfrac{5x^2-18x+6}{(x-2)(x-3)}\)</span>.</p>
+</details>
+</div>
+</div>
+<hr />
+<h2 id="rituel-24">⏱️ Rituel 24<a class="headerlink" href="#rituel-24" title="Permanent link">⚓︎</a></h2>
+<div class="ritual-grid">
+<div class="q-card q-yellow">
 <p><span class="q-badge q-yellow">Q1</span> La fonction <span class="arithmatex">\(f\)</span> est représentée ci-dessous. Donner <span class="arithmatex">\(D_f\)</span>, puis résoudre graphiquement : a. <span class="arithmatex">\(f(x)=0\)</span> ; b. <span class="arithmatex">\(f(x)\geqslant 1\)</span>.</p>
 <script data-disable-cache="true" data-show-console="true" type="text/tikz">
 \begin{tikzpicture}[scale=0.5]
@@ -5043,7 +5122,7 @@ A &amp;= \dfrac{5(x+1)}{5(x+4)}+\dfrac{x(x+4)}{5(x+4)} \\
 </div>
 </div>
 <hr />
-<h2 id="rituel-24">⏱️ Rituel 24<a class="headerlink" href="#rituel-24" title="Permanent link">⚓︎</a></h2>
+<h2 id="rituel-25">⏱️ Rituel 25<a class="headerlink" href="#rituel-25" title="Permanent link">⚓︎</a></h2>
 <div class="ritual-grid">
 <div class="q-card q-yellow">
 <p><span class="q-badge q-yellow">Q1</span> On donne ci-dessous la courbe <span class="arithmatex">\(\mathscr{C}_g\)</span> d'une fonction <span class="arithmatex">\(g\)</span>. La droite en pointillés a pour équation <span class="arithmatex">\(x=1\)</span>. Dresser le tableau de signes de <span class="arithmatex">\(g\)</span> sur son ensemble de définition.</p>
