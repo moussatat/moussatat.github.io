@@ -1,0 +1,4290 @@
+<!--
+pyodide-mkdocs-theme
+Copyleft GNU GPLv3 🄯 2024 Frédéric Zinelli
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.
+If not, see <https://www.gnu.org/licenses/>.
+-->
+
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Les progressions communes, les cahiers de texte, les supports de cours, les exercices et les évaluations.</br> Choisissez l'onglet de votre classe ou consultez la page des liens pour tous les niveaux">
+      
+      
+        <meta name="author" content="Nizar MOUSSATAT">
+      
+      
+        <link rel="canonical" href="https://moussatat.github.io/1eds/exerciseurs/derivees01/">
+      
+      
+        <link rel="prev" href="../../rituels/">
+      
+      
+        <link rel="next" href="../../deroulement2025/">
+      
+      
+      <link rel="icon" href="../../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>1. Formules de base - Maths au CSJA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+    
+
+<script type="importmap">{"imports": {"functools": "../../../js-libs/functools.js", "functoolsStorage": "../../../js-libs/functoolsStorage.js", "functoolsTxt": "../../../js-libs/functoolsTxt.js", "functoolsUi": "../../../js-libs/functoolsUi.js", "functoolsUiBuilder": "../../../js-libs/functoolsUiBuilder.js", "jsLogger": "../../../js-libs/jsLogger.js", "process_and_gui": "../../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../../../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../../../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../../js-per-pages/start-pyodide.js", "overlord": "../../../js-scripts/overlord.js", "subscriptions": "../../../js-scripts/subscriptions.js"}}</script>
+
+
+
+      
+    
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/css/jquery.terminal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<script src="../../../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script type="text/javascript">
+if(!window.CONFIG) window.CONFIG={}
+CONFIG._devMode=true
+CONFIG.argsFigureDivId="figure1"
+CONFIG.baseUrl="../../.."
+CONFIG.buttonIconsDirectory="../../../assets/images"
+CONFIG.editorFontFamily="monospace"
+CONFIG.editorFontSize=15
+CONFIG.exportZipPrefix=""
+CONFIG.exportZipWithNames=false
+CONFIG.inServe=false
+CONFIG.keyStrokesAutoSave=30
+CONFIG.language="fr"
+CONFIG.pmtUrl="https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
+CONFIG.projectId="csja"
+CONFIG.projectMoveFromOldId=null
+CONFIG.projectNoJsWarning=false
+CONFIG.pythonLibs=['alien_python', 'turtle']
+CONFIG.siteUrl="https://moussatat.github.io/"
+CONFIG.version="5.5.3"
+CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au projet en cours a \u00e9t\u00e9 trouv\u00e9e. Voulez-vous la supprimer ?\n(Vous risquez de perdre des donn\u00e9es d'un site voisin !)", "plural": "{N} entr\u00e9es non associ\u00e9es au projet en cours ont \u00e9t\u00e9 trouv\u00e9es. Voulez-vous toutes les supprimer ?\n(Vous risquez de perdre des donn\u00e9es d'un site voisin !)"}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "check": {"msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "em": 9, "kbd": ""}, "comments": {"msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "em": 17, "kbd": "Ctrl+I"}, "complementTrash": {"msg": "Nota : 1 entr\u00e9e non associ\u00e9e \u00e0 ce projet, qui ne sera pas supprim\u00e9e", "plural": "Nota : {N} entr\u00e9es non associ\u00e9es \u00e0 ce projet, qui ne seront pas supprim\u00e9es"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "corrBtn": {"msg": "Tester la correction (serve)", "em": 0, "kbd": ""}, "delayedReveal": {"msg": "Solution affich\u00e9e dans {N} essai(s).", "format": "info"}, "download": {"msg": "T\u00e9l\u00e9charger", "em": 0, "kbd": ""}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "feedback": {"msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "em": 19, "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "fullScreen": {"msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)<br>(<kbd>Esc</kbd>)", "em": 10, "kbd": "Esc"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "loadIde": {"msg": "Configure l'IDE avec ces donn\u00e9es", "em": 10, "kbd": ""}, "noCodesTrash": {"msg": "Pas de codes trouv\u00e9s pour le projet en cours sur ce navigateur."}, "p5Start": {"msg": "D\u00e9marre l'animation", "em": 0, "kbd": ""}, "p5Step": {"msg": "Avance d'une image", "em": 0, "kbd": ""}, "p5Stop": {"msg": "Arr\u00eate l'animation", "em": 0, "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "play": {"msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "em": 9, "kbd": "Ctrl+S"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "pyBtn": {"msg": "Ex\u00e9cuter le code", "em": 9, "kbd": ""}, "qcmCheckTip": {"msg": "V\u00e9rifier les r\u00e9ponses", "em": 11, "kbd": ""}, "qcmMaskTip": {"msg": "Les r\u00e9ponses resteront cach\u00e9es...", "em": 11, "kbd": ""}, "qcmRedoTip": {"msg": "Recommencer", "em": 9, "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "rem": {"msg": "Remarques"}, "removeTrash": {"msg": "Il y a actuellement 1 r\u00e9f\u00e9rence enregistr\u00e9e sur ce navigateur.\nVoulez-vous l'effacer ?", "plural": "Il y a actuellement {N} r\u00e9f\u00e9rences enregistr\u00e9es sur ce navigateur.\nVoulez-vous toutes les effacer ?"}, "restart": {"msg": "R\u00e9initialiser l'\u00e9diteur", "em": 0, "kbd": ""}, "restartConfirm": {"msg": "ATTENTION: r\u00e9initialiser l'\u00e9diteur fera perdre les anciens codes, status de validation et historiques.", "em": 0, "kbd": ""}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "save": {"msg": "Sauvegarder dans le navigateur", "em": 0, "kbd": ""}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "show": {"msg": "Afficher corr & REMs", "em": 0, "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "splitScreen": {"msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "em": 23, "kbd": ""}, "storageIdCollision": {"msg": "Contacter l'auteur du site web en lui fournissant ce message complet. Une collision potentielle d'ids entre plusieurs projets \u00e0 \u00e9t\u00e9 rencontr\u00e9e. Il faut ajouter ou modifier l'argument ID pour l'IDE suivant:"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "test1Ide": {"msg": "Lance ce test", "em": 7, "kbd": ""}, "testIdes": {"msg": "Lance tous les tests...", "em": 7, "kbd": ""}, "testStop": {"msg": "Arr\u00eate les tests", "em": 6, "kbd": ""}, "tests": {"msg": "\n\n\n# Tests\n\n\n", "as_pattern": "^#\\s*Tests"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "tipTrash": {"msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "em": 15, "kbd": ""}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "upload": {"msg": "T\u00e9l\u00e9verser", "em": 0, "kbd": ""}, "validation": {"msg": "Validation - ", "format": "info"}, "wrapTerm": {"msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "em": 19, "kbd": ""}, "zip": {"msg": "Archiver les codes des IDEs exportables de la page", "em": 14, "kbd": ""}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}
+</script>
+<script src="../../../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script src="../../../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/functoolsStorage.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/functoolsTxt.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/functoolsUi.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/functoolsUiBuilder.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/jsLogger.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/mathjax-libs.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script src="../../../js-libs/process_and_gui.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<link href="../../../pyodide-css/0-generic.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/btns-header.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/history.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/hourglass.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/ide.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/qcm.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/terminal.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/testing.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle" data-ace-dark-mode="tomorrow_night_bright" data-ace-light-mode="crimson_editor">
+
+
+
+    <!--
+      TikZJax (rod2ik/tikzjax) — rendu de schémas TikZ/LaTeX côté navigateur,
+      sans installation LaTeX serveur.
+      Doc : https://rod2ik.github.io/tikzjax/installation/mkdocs/
+
+      Ordre important : config AVANT le bundle.
+      Vérifier de temps en temps la dernière version :
+      https://github.com/rod2ik/tikzjax/releases
+    -->
+    <script src="../../../xtra/javascripts/tikzjax.config.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/fonts.min.css"
+    >
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/tikzjax.min.js"
+      defer
+    ></script>
+
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../xtra/stylesheets/ajustements.css">
+    
+      <link rel="stylesheet" href="../../../xtra/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../xtra/stylesheets/rituels.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-GBSMT6Z1K0"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-GBSMT6Z1K0",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-GBSMT6Z1K0",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Maths au CSJA" class="md-header__button md-logo" aria-label="Maths au CSJA" data-md-component="logo">
+      
+  <img src="../../../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Maths au CSJA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Formules de base
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Passer au mode nuit"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode nuit" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="red"  aria-label="Passer au mode jour"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode jour" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Partager" aria-label="Partager" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/moussatat/journal" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../teds/" class="md-tabs__link">
+          
+  
+  
+  Terminale
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Première
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../2gt/" class="md-tabs__link">
+          
+  
+  
+  Seconde
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../python/" class="md-tabs__link">
+          
+  
+  
+  🐍 Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../snt/" class="md-tabs__link">
+          
+  
+  
+  🤖 SNT
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../dnl/" class="md-tabs__link">
+          
+  
+  
+  DNL
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Maths au CSJA" class="md-nav__button md-logo" aria-label="Maths au CSJA" data-md-component="logo">
+      
+  <img src="../../../images/logo.svg" alt="logo">
+
+    </a>
+    Maths au CSJA
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/moussatat/journal" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accueil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Terminale
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Terminale
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V8h14v1h2V5a2 2 0 0 0-2-2m2.7 10.35-1 1-2.05-2 1-1c.2-.21.54-.22.77 0l1.28 1.28c.19.2.19.52 0 .72M12 18.94l6.07-6.06 2.05 2L14.06 21H12z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2026-2027
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/progression2026/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M7 8h2v4H8V9H7zm3 9v1H7v-.92L9 15H7v-1h2.25c.41 0 .75.34.75.75 0 .2-.08.39-.21.52L8.12 17zm1-13c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m6 13h-5v-2h5zm0-6h-5V9h5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2026-2027
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels de début d'heure
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    🧮 Exerciseurs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧮 Exerciseurs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/exerciseurs/limites01/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.6 6.62C21.58 6.62 24 9 24 12c0 2.96-2.42 5.37-5.4 5.37-1.45 0-2.8-.56-3.82-1.57L12 13.34l-2.83 2.51c-.97.97-2.33 1.53-3.77 1.53C2.42 17.38 0 14.96 0 12s2.42-5.38 5.4-5.38c1.44 0 2.8.56 3.82 1.58L12 10.66l2.83-2.51c.97-.97 2.33-1.53 3.77-1.53M7.8 14.39 10.5 12 7.84 9.65c-.68-.68-1.53-1.03-2.44-1.03C3.53 8.62 2 10.13 2 12s1.53 3.38 3.4 3.38c.91 0 1.76-.35 2.4-.99m8.4-4.78L13.5 12l2.66 2.35c.68.68 1.54 1.03 2.44 1.03 1.87 0 3.4-1.51 3.4-3.38s-1.53-3.38-3.4-3.38c-.91 0-1.76.35-2.4.99"/></svg>
+  
+  <span class="md-ellipsis">
+    Calcul de limites
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_2" id="__nav_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Primitives
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Primitives
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/exerciseurs/primitives01/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    1. Usuelles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/exerciseurs/primitives02/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    2. Affines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/exerciseurs/primitives03/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    3. Composées
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/exerciseurs/primitives04/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    4. Identification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/exerciseurs/primitives05/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    5. Décomposition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📁 Archive
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            📁 Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/deroulement2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/progression2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teds/deroulement2024/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2024-2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Première
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Première
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V8h14v1h2V5a2 2 0 0 0-2-2m2.7 10.35-1 1-2.05-2 1-1c.2-.21.54-.22.77 0l1.28 1.28c.19.2.19.52 0 .72M12 18.94l6.07-6.06 2.05 2L14.06 21H12z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2026-2027
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression2026/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M7 8h2v4H8V9H7zm3 9v1H7v-.92L9 15H7v-1h2.25c.41 0 .75.34.75.75 0 .2-.08.39-.21.52L8.12 17zm1-13c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m6 13h-5v-2h5zm0-6h-5V9h5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2026-2027
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels de début d'heure
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    🧮 Exerciseurs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧮 Exerciseurs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_1" id="__nav_3_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Dérivation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Dérivation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.42 5.29c-1.1-.1-2.07.71-2.17 1.82L10 10h2.82v2h-3l-.44 5.07A4.001 4.001 0 0 1 2 18.83l1.5-1.5c.33 1.05 1.46 1.64 2.5 1.3.78-.24 1.33-.93 1.4-1.74L7.82 12h-3v-2H8l.27-3.07a4.01 4.01 0 0 1 4.33-3.65c1.26.11 2.4.81 3.06 1.89l-1.5 1.5c-.25-.77-.93-1.31-1.74-1.38M22 13.65l-1.41-1.41-2.83 2.83-2.83-2.83-1.43 1.41 2.85 2.85-2.85 2.81 1.43 1.41 2.83-2.83 2.83 2.83L22 19.31l-2.83-2.81z"/></svg>
+  
+  <span class="md-ellipsis">
+    1. Formules de base
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📁 Archive
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            📁 Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deroulement2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deroulement2024/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2024-2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seconde
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Seconde
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V8h14v1h2V5a2 2 0 0 0-2-2m2.7 10.35-1 1-2.05-2 1-1c.2-.21.54-.22.77 0l1.28 1.28c.19.2.19.52 0 .72M12 18.94l6.07-6.06 2.05 2L14.06 21H12z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2026-2027
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/progression2026/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M7 8h2v4H8V9H7zm3 9v1H7v-.92L9 15H7v-1h2.25c.41 0 .75.34.75.75 0 .2-.08.39-.21.52L8.12 17zm1-13c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m6 13h-5v-2h5zm0-6h-5V9h5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2026-2027
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels de début d'heure
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📁 Archive
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            📁 Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/deroulement2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/progression2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/deroulement2024/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2024-2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    🐍 Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            🐍 Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🏡 Ressources pour la classe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    👣 Parcours de découverte
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            👣 Parcours de découverte
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (TD) Découvrir Python en 1h
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDE et consoles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types de valeurs et opérations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Variables et affectations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Librairies et compléments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les fonctions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les instructions conditionnelles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (TD) Fonctions et tests
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (TD) Silent Teacher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les boucles finies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les boucles conditionnées
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (TD) PY-rates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-1eds-00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les listes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    ⚙️ TP (seconde)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            ⚙️ TP (seconde)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/TP_alien/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚧 Alien (débranché)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/TP_turtle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚧 Le module turtle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/TP_kandinsky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚧 Le module kandinsky
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/bac_a_sable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    💻 Bac à Sable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    🤖 SNT
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            🤖 SNT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Codage de l'information
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Codage de l'information
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/CodagesA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Le binaire
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/CodagesB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Le hexadécimal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/CodagesC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - Les caractères
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/CodagesD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - Les images
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Données structurées
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            Données structurées
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/DonneesA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/DonneesB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Structurer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/DonneesC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - Traiter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/DonneesD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - Projet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Internet
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            Internet
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Les protocoles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - Simuler un réseau
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - Impact écologique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5 - 🚧 P2P
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Le Web
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            Le Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Les langages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - Les protocoles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - 🚧 PageRank
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5 - 🚧 Les cookies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Les réseaux sociaux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            Les réseaux sociaux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Modélisation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - 🚧 Les infox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - 🚧 Données personnelles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5 - 🚧 Harcèlement et cyberviolences
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxCours/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6 - Le bilan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Objets connectés
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            Objets connectés
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ObjetsConnectesA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Le Numérique
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_8">
+            <span class="md-nav__icon md-icon"></span>
+            Le Numérique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/NumeriqueA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - 🚧 Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/NumeriqueB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - 🚧 Numérique et logistique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/NumeriqueC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - 🚧 Parcours PIX
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    DNL
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            DNL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dnl/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V8h14v1h2V5a2 2 0 0 0-2-2m2.7 10.35-1 1-2.05-2 1-1c.2-.21.54-.22.77 0l1.28 1.28c.19.2.19.52 0 .72M12 18.94l6.07-6.06 2.05 2L14.06 21H12z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dnl/archive2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Archives 2024-2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+
+                  
+
+  
+    <a href="https://github.com/moussatat/journal/edit/main/docs/1eds/exerciseurs/derivees01.md" title="Editer cette page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/moussatat/journal/raw/main/docs/1eds/exerciseurs/derivees01.md" title="Consulter la source de cette page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">⚓︎</a></h1>
+<style>
+    #exo-derivees { background-color: #f8f9fa; color: #2c3e50; padding: 15px; border-radius: 8px; margin-top: 20px;}
+    #exo-derivees h2 { text-align: center; border-bottom: 2px solid #d35400; padding-bottom: 10px; color: #a04000; margin-top: 0;}
+    #exo-derivees .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+
+    #exo-derivees .menus-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; background: #fdf2e9; padding: 15px; border-radius: 8px; border: 1px solid #f5cba7;}
+    #exo-derivees .menu-group { display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 250px; }
+    #exo-derivees select { padding: 8px 12px; font-size: 1em; border-radius: 5px; border: 1px solid #bdc3c7; background-color: white; cursor: pointer; color: #2c3e50; width: 100%; box-sizing: border-box;}
+    #exo-derivees select:focus { outline: none; border-color: #d35400; }
+    #exo-derivees option:disabled { color: #aab2b7; }
+
+    #exo-derivees .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    #exo-derivees button { font-size: 1em; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+    #exo-derivees .btn-toggle { background-color: #d35400; }
+    #exo-derivees .btn-toggle:hover { background-color: #a04000; }
+    #exo-derivees .btn-new { background-color: #27ae60; }
+    #exo-derivees .btn-new:hover { background-color: #219a52; }
+
+    #exo-derivees .consigne { font-size: 1.15em; margin-bottom: 5px; color: #34495e; font-weight: 500; }
+    #exo-derivees .question-box { font-size: 1.25em; margin-bottom: 25px; padding: 15px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; overflow-x: auto;}
+    #exo-derivees .solution { display: none; margin-top: 15px; padding: 20px; background-color: #fdfefe; border-left: 4px solid #d35400; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; border-radius: 0 5px 5px 0; overflow-x: auto;}
+    #exo-derivees .solution.active { display: block; }
+    #exo-derivees .category-badge { display: inline-block; background: #fbeee6; color: #a04000; padding: 4px 12px; border-radius: 15px; font-size: 0.9em; margin-bottom: 15px; font-weight: bold; }
+    #exo-derivees .der-step { margin-bottom: 0.9em; padding-bottom: 0.4em; border-bottom: 1px dotted #d5dbdb; }
+    #exo-derivees .der-step:last-child { border-bottom: none; }
+    #exo-derivees .der-step p { margin: 0.35em 0; }
+    #exo-derivees .der-step-title { color: #a04000; }
+    #exo-derivees .der-note { color: #5d6d7e; font-style: italic; }
+</style>
+
+<div id="exo-derivees">
+    <h2>Dérivation : formules de base</h2>
+
+    <div class="card">
+
+        <div class="menus-container">
+            <div class="menu-group">
+                <label for="typeSelectDer" style="margin-bottom: 5px;"><strong>Type d'exercice :</strong></label>
+                <select id="typeSelectDer" onchange="derOnTypeChange()">
+                    <option value="all">🔀 Mélange aléatoire</option>
+                    <option value="ref">1. Dérivées de référence (domaines)</option>
+                    <option value="cu">2. Produit par une constante : cu</option>
+                    <option value="sum">3. Sommes : u + v</option>
+                    <option value="poly">4. Polynômes</option>
+                    <option value="rewrite">5. Réécrire avant de dériver</option>
+                </select>
+            </div>
+            <div class="menu-group">
+                <label for="coeffSelectDer" style="margin-bottom: 5px;"><strong>Coefficients :</strong></label>
+                <select id="coeffSelectDer" onchange="derGenerate()">
+                    <option value="int" selected>🔢 Entiers</option>
+                    <option value="frac">➗ Fractions</option>
+                    <option value="dec">🔟 Décimaux (polynômes)</option>
+                    <option value="mix">🔀 Mélange</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="categoryLabelDer" class="category-badge arithmatex">Catégorie</div>
+
+        <p id="consigneDer" class="consigne arithmatex">Déterminer la dérivée de la fonction \(f\) :</p>
+
+        <div id="questionAreaDer" class="question-box arithmatex">Chargement...</div>
+
+        <div class="controls">
+            <button id="btnToggleDer" class="btn-toggle" onclick="derToggleSolution()">Voir la correction</button>
+            <button class="btn-new" onclick="derGenerate()">Nouvel exercice</button>
+        </div>
+
+        <div id="solutionAreaDer" class="solution">
+            <div id="solutionTextDer" style="font-size: 1.05em;" class="arithmatex"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    "use strict";
+
+    /* =====================================================================
+       Outils numériques
+       ===================================================================== */
+    const R = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+    const RNZ = (a, b) => { let v; do { v = R(a, b); } while (v === 0); return v; };
+    const pick = t => t[Math.floor(Math.random() * t.length)];
+    const chance = p => Math.random() < p;
+    function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { const t = b; b = a % b; a = t; } return a || 1; }
+    function shuffle(t) { const a = t.slice(); for (let i = a.length - 1; i > 0; i--) { const j = R(0, i); const x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+    /* fractions */
+    function Fr(n, d) { if (d === undefined) d = 1; if (d < 0) { n = -n; d = -d; } const g = gcd(n, d); return { n: n / g, d: d / g }; }
+    const fmul = (a, b) => Fr(a.n * b.n, a.d * b.d);
+    const fabs = a => Fr(Math.abs(a.n), a.d);
+    const fval = a => a.n / a.d;
+    const isOne = a => a.n === 1 && a.d === 1;
+    function decimalable(f) { let d = f.d; while (d % 2 === 0) d /= 2; while (d % 5 === 0) d /= 5; return d === 1; }
+    const decTex = f => String(Math.round(fval(f) * 1e6) / 1e6).replace('.', '{,}');
+    /* polynômes à coefficients entiers : tableau c, c[k] coefficient de x^k */
+    function mulP(p, q) { const r = new Array(p.length + q.length - 1).fill(0); p.forEach((a, i) => q.forEach((b, j) => { r[i + j] += a * b; })); return r; }
+    const evalP = (c, x) => c.reduceRight((s, a) => s * x + a, 0);
+
+    /* =====================================================================
+       Outils LaTeX
+       ===================================================================== */
+    const M = t => '\\(' + t + '\\)';
+    const D = t => '\\[' + t + '\\]';
+    const par = t => '\\left(' + t + '\\right)';
+    const parNeg = t => (t.charAt(0) === '-' ? par(t) : t);
+    const xp = k => (k === 0 ? '' : (k === 1 ? 'x' : 'x^{' + k + '}'));
+    function numTex(f, dec) {
+        if (f.d === 1) return String(f.n);
+        if (dec && decimalable(f)) return decTex(f);
+        return (f.n < 0 ? '-' : '') + '\\frac{' + Math.abs(f.n) + '}{' + f.d + '}';
+    }
+    function polyTex(c) {
+        const parts = [];
+        for (let k = c.length - 1; k >= 0; k--) if (c[k] !== 0) parts.push({ c: Fr(c[k]), e: k });
+        return sumTex(parts);
+    }
+
+    /* Un terme : {c: fraction, e: exposant entier (négatif = 1/x^n) | 's' (racine) | 'h' (1/racine)} */
+    function termAbs(c, e, opt) {
+        opt = opt || {};
+        const dec = opt.dec && c.d !== 1 && decimalable(c);
+        if (e === 's' || (typeof e === 'number' && e > 0)) {
+            const xs = e === 's' ? '\\sqrt{x}' : xp(e);
+            if (c.d === 1) return (c.n === 1 ? '' : c.n) + xs;
+            if (dec) return decTex(c) + xs;
+            if (opt.over) return '\\frac{' + (c.n === 1 ? '' : c.n) + xs + '}{' + c.d + '}';
+            return '\\frac{' + c.n + '}{' + c.d + '}' + xs;
+        }
+        if (e === 0) return dec ? decTex(c) : (c.d === 1 ? String(c.n) : '\\frac{' + c.n + '}{' + c.d + '}');
+        if (e === 'h') return '\\frac{' + c.n + '}{' + (c.d === 1 ? '' : c.d) + '\\sqrt{x}}';
+        return '\\frac{' + c.n + '}{' + (c.d === 1 ? '' : c.d) + xp(-e) + '}';
+    }
+    const optOf = (t, opt) => Object.assign({}, opt || {}, t.over ? { over: true } : {});
+    const termTex = (t, opt) => (t.c.n < 0 ? '-' : '') + termAbs(fabs(t.c), t.e, optOf(t, opt));
+    function sumTex(ts, opt) {
+        const nz = ts.filter(t => t.c.n !== 0);
+        if (!nz.length) return '0';
+        return nz.map((t, i) => (i === 0 ? termTex(t, opt) : (t.c.n < 0 ? ' - ' : ' + ') + termAbs(fabs(t.c), t.e, optOf(t, opt)))).join('');
+    }
+    function deriv(t) {
+        if (t.e === 's') return { c: fmul(t.c, Fr(1, 2)), e: 'h' };
+        if (t.e === 0) return { c: Fr(0), e: 0 };
+        return { c: fmul(t.c, Fr(t.e)), e: t.e - 1 };
+    }
+    function evalT(t, x) { const c = fval(t.c); if (t.e === 's') return c * Math.sqrt(x); if (t.e === 'h') return c / Math.sqrt(x); return c * Math.pow(x, t.e); }
+    const evalS = (ts, x) => ts.reduce((s, t) => s + evalT(t, x), 0);
+    /* dérivée de la fonction de référence u = x^n, 1/x^n, racine */
+    function baseDer(e) {
+        if (e === 's') return '\\frac{1}{2\\sqrt{x}}';
+        if (e === 0) return '0';
+        if (e === 1) return '1';
+        if (e > 0) return e + xp(e - 1);
+        return '-\\frac{' + (-e) + '}{' + xp(1 - e) + '}';
+    }
+    const baseTex = e => (e === 's' ? '\\sqrt{x}' : (e < 0 ? '\\frac{1}{' + xp(-e) + '}' : (e === 0 ? '1' : xp(e))));
+    function formula(e) {
+        if (e === 's') return '\\left(\\sqrt{x}\\right)\' = \\frac{1}{2\\sqrt{x}}';
+        if (e === 1) return '(x)\' = 1';
+        if (e > 0) return '\\left(x^{n}\\right)\' = nx^{n-1}';
+        return '\\left(\\frac{1}{x^{n}}\\right)\' = -\\frac{n}{x^{n+1}}';
+    }
+    /* dérivée détaillée terme à terme : 2 × (3x^2) - 5 × (2x) + 0 */
+    function detail(ts, opt) {
+        const dec = opt && opt.dec;
+        return ts.filter(t => t.c.n !== 0).map((t, i) => {
+            const base = baseDer(t.e), a = fabs(t.c);
+            let piece;
+            if (t.e === 0) piece = '0';
+            else if (isOne(a)) piece = parNeg(base);
+            else piece = numTex(a, dec) + '\\times ' + (base === '1' ? '1' : par(base));
+            const neg = t.c.n < 0 && t.e !== 0;
+            return i === 0 ? (neg ? '-' : '') + piece : (neg ? ' - ' : ' + ') + piece;
+        }).join('');
+    }
+    /* domaines */
+    function dom(ts) {
+        const inv = ts.some(t => typeof t.e === 'number' && t.e < 0), sq = ts.some(t => t.e === 's');
+        const POS = '\\left]0\\,;+\\infty\\right[', POS0 = '\\left[0\\,;+\\infty\\right[';
+        if (sq) return { def: inv ? POS : POS0, der: POS, all: 'x\\gt 0', pts: [0.37, 1.3, 2.7], sq: true, inv };
+        if (inv) return { def: '\\mathbb{R}^{*}', der: '\\mathbb{R}^{*}', all: 'x\\neq 0', pts: [-2.3, -0.6, 0.45, 1.7], inv };
+        return { def: '\\mathbb{R}', der: '\\mathbb{R}', all: 'x\\in\\mathbb{R}', pts: [-2.1, -0.4, 0.7, 1.9] };
+    }
+    function randCoef(mode, allowOne) {
+        const m = mode === 'mix' ? pick(['int', 'frac']) : mode;
+        if (m === 'frac') { let p, q; do { q = R(2, 6); p = RNZ(-7, 7); } while (gcd(p, q) !== 1); return Fr(p, q); }
+        if (m === 'dec') { let v; do { v = RNZ(-25, 25); } while (v % 10 === 0); return Fr(v, 10); }
+        let k; do { k = RNZ(-9, 9); } while (!allowOne && Math.abs(k) === 1); return Fr(k);
+    }
+
+    /* mise en forme */
+    const step = (n, title, body) => '<div class="der-step"><p class="der-step-title"><strong>' + n + '. ' + title + '</strong></p>' + body + '</div>';
+    const P = t => '<p>' + t + '</p>';
+    const NOTE = t => '<p class="der-note">' + t + '</p>';
+    const boxed = t => D('\\boxed{' + t + '}');
+    /* calcul vertical aligné sur = (lignes 'lhs &= rhs', doublons supprimés),
+       puis la dernière ligne entière encadrée : lhsFinal = résultat */
+    function vblock(lines, lhsFinal) {
+        const out = [], rhs = l => l.slice(l.indexOf('&= ') + 3);
+        lines.forEach(l => { if (out.length && rhs(out[out.length - 1]) === rhs(l)) return; out.push(l); });
+        const res = rhs(out.pop());
+        return (out.length ? D('\\begin{aligned}' + out.join('\\\\[0.5em] ') + '\\end{aligned}') : '') + boxed(lhsFinal + ' = ' + res);
+    }
+    const ASK_D = 'Déterminer ' + M('f\'(x)') + '.';
+
+    /* =====================================================================
+       1. Dérivées de référence : domaines et f'(x)
+       ===================================================================== */
+    function refExp(maxPow, maxInv) {
+        const kind = pick(['pow', 'pow', 'inv', 'inv', 'sqrt', 'x']);
+        if (kind === 'pow') return pick(maxPow);
+        if (kind === 'inv') return -pick(maxInv);
+        return kind === 'sqrt' ? 's' : 1;
+    }
+    function genRef() {
+        const e = refExp([2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20], [1, 2, 3, 4, 5, 6, 8, 9, 12]);
+        const t = { c: Fr(1), e }, d = deriv(t), Dm = dom([t]);
+        let why;
+        if (e === 's') why = 'La racine carrée n\'est définie que pour ' + M('x\\geqslant 0') + '.';
+        else if (e < 0) why = 'Il faut ' + M(xp(-e) + '\\neq 0') + ', c\'est-à-dire ' + M('x\\neq 0') + '.';
+        else why = 'Une fonction puissance est définie pour tout réel ' + M('x') + '.';
+        let sol = step(1, 'Domaine de définition', P(why) + D('\\mathcal{D}_f = ' + Dm.def));
+        sol += step(2, 'Domaine de dérivabilité', e === 's'
+            ? P('La fonction racine carrée n\'est pas dérivable en 0 : ' + M('f') + ' est dérivable sur ' + M(Dm.der) + '.')
+            : P(M('f') + ' est dérivable sur tout son domaine de définition, ' + M(Dm.der) + '.'));
+        const inter = (typeof e !== 'number' || e === 1) ? [] : [e > 0 ? 'f\'(x) &= ' + e + 'x^{' + e + '-1}' : 'f\'(x) &= -\\frac{' + (-e) + '}{x^{' + (-e) + '+1}}'];
+        sol += step(3, 'Expression de ' + M('f\'(x)'), P('Formule du cours : ' + M(formula(e)) + (typeof e === 'number' && e !== 1 ? ', ici avec ' + M('n=' + Math.abs(e)) : '') + '. Pour tout ' + M(Dm.all) + ' :')
+            + vblock(['f(x) &= ' + termTex(t)].concat(inter.length ? inter.concat(['&= ' + termTex(d)]) : ['f\'(x) &= ' + termTex(d)]), 'f\'(x)'));
+        return {
+            cat: 'Dérivée de référence', consigne: 'Soit la fonction ' + M('f') + ' définie par :', q: 'f(x) = ' + termTex(t),
+            ask: 'Donner le domaine de définition, le domaine de dérivabilité et l\'expression de ' + M('f\'(x)') + '.',
+            sol, fn: x => evalT(t, x), dfn: x => evalT(d, x), pts: Dm.pts
+        };
+    }
+
+    /* =====================================================================
+       2. Produit par une constante : cu
+       ===================================================================== */
+    function genCu(mode) {
+        const m = mode === 'dec' ? 'int' : mode;
+        let c; do { c = randCoef(m, chance(0.15)); } while (c.n === 0 || (isOne(c)));
+        const e = pick([2, 3, 4, 5, 6, 'inv', 'inv', 's']);
+        const ex = e === 'inv' ? -R(1, 4) : e;
+        const t = { c, e: ex, over: c.d > 1 && chance(0.5) }, d = deriv(t), Dm = dom([t]);
+        const cT = numTex(c), cP = c.n < 0 ? par(cT) : cT, uT = baseTex(ex), uD = baseDer(ex);
+        let sol = step(1, 'Repérer ' + M('c') + ' et ' + M('u'), P(M('f') + ' est de la forme ' + M('cu') + ', avec ' + M('c=' + cT) + ' et ' + M('u(x)=' + uT) + '.'));
+        sol += step(2, 'Dériver ' + M('u'), P(M('u') + ' est dérivable sur ' + M(Dm.der) + ' et ' + M('u\'(x) = ' + uD) + ' (' + M(formula(ex)) + ').'));
+        sol += step(3, 'Calcul de ' + M('f\'(x)'), P(M('f') + ' est dérivable sur ' + M(Dm.der) + ' et, pour tout ' + M(Dm.all) + ' :')
+            + vblock(['f(x) &= ' + cP + '\\times ' + uT, 'f\'(x) &= ' + cP + '\\times u\'(x)', '&= ' + cP + '\\times ' + (uD === '1' ? '1' : par(uD)), '&= ' + termTex(d)], 'f\'(x)'));
+        return {
+            cat: 'Produit par une constante ' + M('cu'), consigne: 'Soit la fonction ' + M('f') + ' définie sur ' + M(Dm.def) + ' par :', q: 'f(x) = ' + termTex(t),
+            ask: 'Préciser ' + M('c') + ' et ' + M('u') + ', puis déterminer ' + M('f\'(x)') + '.', sol, fn: x => evalT(t, x), dfn: x => evalT(d, x), pts: Dm.pts
+        };
+    }
+
+    /* =====================================================================
+       3. Sommes u + v (+ w)
+       ===================================================================== */
+    function genSum(mode) {
+        const m = mode === 'dec' ? 'int' : mode, nt = chance(0.35) ? 3 : 2;
+        let es;
+        do { es = shuffle([0, 1, 2, 3, 4, 5, -1, -2, -3, 's']).slice(0, nt); } while (es.every(e => e === 0 || e === 1) || (!es.some(e => e === 's' || e < 0) && chance(0.6)));
+        const ts = es.map(e => { let c; do { c = randCoef(m, true); } while (c.n === 0); return { c, e, over: c.d > 1 && chance(0.4) }; });
+        const ds = ts.map(deriv), Dm = dom(ts), names = ['u', 'v', 'w'].slice(0, nt);
+        /* ligne 1 : u(x), v(x), w(x) ; ligne 2 : u'(x), v'(x), w'(x) */
+        const rows = [
+            ts.map((t, i) => names[i] + '(x) &= ' + termTex(t)).join(' &\\qquad '),
+            ts.map((t, i) => names[i] + '\'(x) &= ' + (t.e === 0 ? '0' : termTex(ds[i]))).join(' &\\qquad ')
+        ];
+        let sol = step(1, 'Décomposer en somme', P(M('f') + ' est de la forme ' + M(names.join('+')) + ', avec :') + D('\\begin{aligned}' + rows.join('\\\\[0.4em] ') + '\\end{aligned}'));
+        sol += step(2, 'Calcul de ' + M('f\'(x)'), P('Ces fonctions sont dérivables sur ' + M(Dm.der) + ', donc ' + M('f') + ' aussi et, pour tout ' + M(Dm.all) + ' :')
+            + vblock(['f(x) &= ' + names.map(n => n + '(x)').join(' + '), 'f\'(x) &= ' + names.map(n => n + '\'(x)').join(' + '), '&= ' + detail(ts), '&= ' + sumTex(ds)], 'f\'(x)')
+            + (Dm.sq ? NOTE('La racine carrée n\'étant pas dérivable en 0, on se place sur ' + M('\\left]0\\,;+\\infty\\right[') + '.') : ''));
+        return {
+            cat: 'Somme de fonctions', consigne: 'Soit la fonction ' + M('f') + ' définie sur ' + M(Dm.def) + ' par :', q: 'f(x) = ' + sumTex(ts),
+            ask: ASK_D, sol, fn: x => evalS(ts, x), dfn: x => evalS(ds, x), pts: Dm.pts
+        };
+    }
+
+    /* =====================================================================
+       4. Polynômes
+       ===================================================================== */
+    function genPoly(mode) {
+        const m = mode === 'mix' ? pick(['int', 'frac', 'dec']) : mode, dec = m === 'dec';
+        const n = R(2, 7), lower = shuffle([...Array(n).keys()]).slice(0, R(1, 3));
+        const es = [n].concat(lower).sort((a, b) => b - a);
+        const over = m === 'frac' && chance(0.5);
+        const ts = es.map(e => { let c; do { c = randCoef(m, true); } while (c.n === 0); return { c, e }; });
+        const ds = ts.map(deriv).filter(t => t.c.n !== 0), name = pick(['f', 'P', 'Q', 'R', 'T', 'U', 'V']);
+        const opt = { dec, over };
+        const lines = [name + '(x) &= ' + sumTex(ts, opt)];
+        if (over && ts.some(t => t.c.d > 1 && t.e > 0)) lines.push(name + '(x) &= ' + sumTex(ts, { dec }));
+        lines.push(name + '\'(x) &= ' + detail(ts, { dec }), '&= ' + sumTex(ds, { dec }));
+        const sol = step(1, 'Dériver terme à terme', P('Une fonction polynôme est dérivable sur ' + M('\\mathbb{R}') + ' et se dérive terme à terme'
+            + (lines.length > 3 ? ' (on réécrit d\'abord les coefficients)' : '') + '. Pour tout ' + M('x\\in\\mathbb{R}') + ' :') + vblock(lines, name + '\'(x)'));
+        return {
+            cat: 'Polynôme', consigne: 'Soit la fonction ' + M(name) + ' définie sur ' + M('\\mathbb{R}') + ' par :', q: name + '(x) = ' + sumTex(ts, opt),
+            ask: 'Déterminer ' + M(name + '\'(x)') + '.', sol, fn: x => evalS(ts, x), dfn: x => evalS(ds, x), pts: [-2.1, -0.4, 0.7, 1.9]
+        };
+    }
+
+    /* =====================================================================
+       5. Réécrire avant de dériver
+       ===================================================================== */
+    function termsFromPoly(c) { const ts = []; for (let k = c.length - 1; k >= 0; k--) if (c[k] !== 0) ts.push({ c: Fr(c[k]), e: k }); return ts; }
+    function genRewrite() {
+        const fam = pick(['k', 'sq', 'sq', 'cube', 'prod', 'inv', 'split', 'split', 'split', 'mix']);
+        let orig, mids = [], ts, fn, hint;
+        if (fam === 'k') {
+            let k; do { k = RNZ(-9, 9); } while (Math.abs(k) === 1);
+            const a = RNZ(-9, 9);
+            orig = k + par(polyTex([a, 1])); ts = termsFromPoly([k * a, k]); fn = x => k * (x + a); hint = 'On développe.';
+        } else if (fam === 'sq') {
+            const a = pick([1, 1, 2, 3, -1, -2]), b = RNZ(-6, 6), c = mulP([b, a], [b, a]);
+            orig = par(polyTex([b, a])) + '^{2}'; ts = termsFromPoly(c); fn = x => Math.pow(a * x + b, 2);
+            hint = 'On développe avec une identité remarquable.';
+        } else if (fam === 'cube') {
+            const a = RNZ(-4, 4), s = mulP([a, 1], [a, 1]), c = mulP(s, [a, 1]);
+            orig = par(polyTex([a, 1])) + '^{3}'; mids = [par(polyTex([a, 1])) + '^{2}' + par(polyTex([a, 1])), par(polyTex(s)) + par(polyTex([a, 1]))];
+            ts = termsFromPoly(c); fn = x => Math.pow(x + a, 3); hint = 'On écrit ' + M('A^3 = A^2\\times A') + ' et on développe.';
+        } else if (fam === 'prod') {
+            const a = RNZ(-5, 5), b = pick([1, 2, 3, -1, -2]), cc = RNZ(-6, 6), s = [0, a, 1], c = mulP(s, [cc, b]);
+            orig = 'x' + par(polyTex([a, 1])) + par(polyTex([cc, b])); mids = [par(polyTex(s)) + par(polyTex([cc, b]))];
+            ts = termsFromPoly(c); fn = x => x * (x + a) * (b * x + cc); hint = 'On développe.';
+        } else if (fam === 'inv') {
+            const c = pick([2, 3, 4, 5, 6, -2, -3]), n = R(1, 4);
+            orig = (c < 0 ? '-' : '') + '\\frac{1}{' + Math.abs(c) + xp(n) + '}';
+            mids = [numTex(Fr(1, c)) + '\\times\\frac{1}{' + xp(n) + '}'];
+            ts = [{ c: Fr(1, c), e: -n }]; fn = x => 1 / (c * Math.pow(x, n)); hint = 'On sort la constante.';
+        } else if (fam === 'split') {
+            const j = pick([1, 1, 2]), mden = pick([1, 1, 2, 3]), ks = shuffle([0, 1, 2, 3, 4]).slice(0, R(2, 3)).sort((a, b) => b - a);
+            const as = ks.map(() => RNZ(-9, 9)), denT = (mden === 1 ? '' : mden) + xp(j);
+            const num = []; ks.forEach((k, i) => { num[k] = as[i]; });
+            const numArr = Array.from({ length: Math.max(...ks) + 1 }, (_, i) => num[i] || 0);
+            orig = '\\frac{' + polyTex(numArr) + '}{' + denT + '}';
+            mids = [ks.map((k, i) => (i === 0 ? (as[i] < 0 ? '-' : '') : (as[i] < 0 ? ' - ' : ' + ')) + '\\frac{' + (Math.abs(as[i]) === 1 && k > 0 ? '' : Math.abs(as[i])) + xp(k) + '}{' + denT + '}').join('')];
+            ts = ks.map((k, i) => ({ c: Fr(as[i], mden), e: k - j })); fn = x => evalP(numArr, x) / (mden * Math.pow(x, j));
+            hint = 'On sépare la fraction, puis on simplifie chaque quotient.';
+        } else {
+            const a = RNZ(-6, 6), b = RNZ(-5, 5), c = pick([2, 3, 4, 5]);
+            orig = sumTex([{ c: Fr(a), e: 1 }]) + (b < 0 ? ' - ' : ' + ') + '\\frac{' + Math.abs(b) + '}{' + c + 'x}';
+            mids = [sumTex([{ c: Fr(a), e: 1 }]) + (b < 0 ? ' - ' : ' + ') + '\\frac{' + Math.abs(b) + '}{' + c + '}\\times\\frac{1}{x}'];
+            ts = [{ c: Fr(a), e: 1 }, { c: Fr(b, c), e: -1 }]; fn = x => a * x + b / (c * x); hint = 'On sort la constante du quotient.';
+        }
+        const ds = ts.map(deriv).filter(t => t.c.n !== 0), Dm = dom(ts);
+        const lines = ['f(x) &= ' + orig].concat(mids.map(t => '&= ' + t));
+        if (sumTex(ts) !== orig) lines.push('&= ' + sumTex(ts));
+        lines.push('f\'(x) &= ' + detail(ts), '&= ' + sumTex(ds));
+        const sol = step(1, 'Réécrire, puis dériver terme à terme', P(hint + ' ' + M('f') + ' est dérivable sur ' + M(Dm.der) + ' et, pour tout ' + M(Dm.all) + ' :') + vblock(lines, 'f\'(x)'));
+        return {
+            cat: 'Réécrire avant de dériver', consigne: 'Soit la fonction ' + M('f') + ' définie sur ' + M(Dm.def) + ' par :', q: 'f(x) = ' + orig,
+            ask: 'Réécrire ' + M('f(x)') + ' comme une somme, puis déterminer ' + M('f\'(x)') + '.', sol, fn, dfn: x => evalS(ds, x), pts: Dm.pts
+        };
+    }
+
+    /* =====================================================================
+       Interface
+       ===================================================================== */
+    const GEN = { ref: genRef, cu: genCu, sum: genSum, poly: genPoly, rewrite: genRewrite };
+    const USES_COEF = { cu: true, sum: true, poly: true };
+
+    function typeset(els) {
+        els.forEach(el => { el.classList.add('arithmatex'); el.querySelectorAll('*').forEach(c => c.classList.add('arithmatex')); });
+        if (window.MathJax && window.MathJax.typesetPromise) { MathJax.typesetClear(els); MathJax.typesetPromise(els); }
+    }
+    function generate() {
+        const t = document.getElementById('typeSelectDer').value, mode = document.getElementById('coeffSelectDer').value;
+        const type = t === 'all' ? pick(Object.keys(GEN)) : t;
+        const ex = GEN[type](mode);
+        const cat = document.getElementById('categoryLabelDer'), cons = document.getElementById('consigneDer');
+        const q = document.getElementById('questionAreaDer'), sol = document.getElementById('solutionTextDer');
+        cat.innerHTML = ex.cat;
+        cons.innerHTML = ex.consigne;
+        q.innerHTML = D(ex.q) + (ex.ask ? '<p style="font-size:0.85em;margin:0.3em 0;">' + ex.ask + '</p>' : '');
+        sol.innerHTML = ex.sol;
+        document.getElementById('solutionAreaDer').classList.remove('active');
+        const btn = document.getElementById('btnToggleDer');
+        btn.textContent = 'Voir la correction'; btn.style.backgroundColor = '#d35400';
+        typeset([cat, cons, q, sol]);
+    }
+    function onTypeChange() {
+        const t = document.getElementById('typeSelectDer').value, cs = document.getElementById('coeffSelectDer');
+        cs.disabled = !(t === 'all' || USES_COEF[t]);
+        Array.from(cs.options).forEach(o => { if (o.value === 'dec') o.disabled = !(t === 'all' || t === 'poly'); });
+        if (cs.options[cs.selectedIndex].disabled) cs.value = 'int';
+        generate();
+    }
+    function toggleSolution() {
+        const solDiv = document.getElementById('solutionAreaDer'), btn = document.getElementById('btnToggleDer');
+        solDiv.classList.toggle('active');
+        if (solDiv.classList.contains('active')) { btn.textContent = 'Masquer la correction'; btn.style.backgroundColor = '#e74c3c'; }
+        else { btn.textContent = 'Voir la correction'; btn.style.backgroundColor = '#d35400'; }
+    }
+
+    window.derGenerate = generate;
+    window.derOnTypeChange = onTypeChange;
+    window.derToggleSolution = toggleSolution;
+    window.__derTest = { GEN };
+
+    if (document.getElementById('typeSelectDer')) setTimeout(onTypeChange, 300);
+})();
+</script>
+
+<details class="tip">
+<summary>Rappels du cours</summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Fonction <span class="arithmatex">\(f\)</span></th>
+<th style="text-align: center;">Définie sur</th>
+<th style="text-align: center;">Dérivable sur</th>
+<th style="text-align: center;">Dérivée <span class="arithmatex">\(f'\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(k\)</span> (constante)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{R}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{R}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{R}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{R}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x^n\)</span> (<span class="arithmatex">\(n\geqslant 1\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{R}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{R}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(nx^{n-1}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{1}{x^n}\)</span> (<span class="arithmatex">\(n\geqslant 1\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{R}^{*}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbb{R}^{*}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-\frac{n}{x^{n+1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\sqrt{x}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\left[0\,;+\infty\right[\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\left]0\,;+\infty\right[\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{1}{2\sqrt{x}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Produit par une constante</strong> : <span class="arithmatex">\((cu)' = c\,u'\)</span>.</li>
+<li><strong>Somme</strong> : <span class="arithmatex">\((u+v)' = u' + v'\)</span>.</li>
+<li><strong>Polynômes</strong> : dérivables sur <span class="arithmatex">\(\mathbb{R}\)</span>, ils se dérivent terme à terme.</li>
+<li><strong>Produits et quotients</strong> : pour l'instant, on les <strong>réécrit</strong> en somme (développer, sortir la constante, séparer la fraction) avant de dériver.</li>
+</ul>
+</details><script type="text/javascript">
+CONFIG.needMermaid = false;
+CONFIG.overlordClasses = [];
+globalThis.PAGE_IDES_CONFIG = '.\x1e}{\x1e0b0a.'
+</script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Avez-vous trouvé le contenu de la page utile?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="Le contenu de la page est utile" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="Le contenu peut être amélioré" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Merci pour votre avis !
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Merci pour votre avis !
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
+        
+          
+          <a href="../../rituels/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Rituels de début d&#39;heure">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              <div class="md-ellipsis">
+                Rituels de début d'heure
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../deroulement2025/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Déroulement 2025-2026">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              <div class="md-ellipsis">
+                Déroulement 2025-2026
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  <div class="md-copyright_pyodide">
+    
+      <div class="md-copyright__highlight">
+        <a href="https://moussatat.github.io/about">Nizar MOUSSATAT, 2026</a>
+<a style="vertical-align:middle" rel="Sous licence CC BY-NC-SA 4.0" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Sous licence CC BY-NC-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>   
+
+      </div>
+    
+    
+      
+<div class="md-social">
+  
+    
+    
+    
+    
+    <p><a href="mailto:nizar.moussatat@ac-grenoble.fr" target="_blank" rel="noopener" title="Écrire à l&#39;auteur" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16v22.1l172.5 141.6c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16zM48 212.2V384c0 8.8 7.2 16 16 16h384c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0zM0 128c0-35.3 28.7-64 64-64h384c35.3 0 64 28.7 64 64v256c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64z"/></svg>
+    </a></p>
+  
+    
+    
+    
+    
+    <p><a href="https://x.com/zenxbear" target="_blank" rel="noopener" title="Tweeter à l&#39;auteur" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9zm-24.8 373.8h39.1L151.1 88h-42z"/></svg>
+    </a></p>
+  
+    
+    
+    
+    
+    <p><a href="https://discord.gg/zyvrR4P5Rr" target="_blank" rel="noopener" title="Joindre le discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a></p>
+  
+    
+    
+    
+    
+    <p><a href="https://github.com/moussatat" target="_blank" rel="noopener" title="Dépôt github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a></p>
+  
+    
+    
+    
+    
+    <p><a href="https://www.csja.fr/" target="_blank" rel="noopener" title="Lycée Jeanne d&#39;Arc" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M337.8 5.4c-10.8-7.2-24.8-7.2-35.6 0L166.3 96H48c-26.5 0-48 21.5-48 48v320c0 26.5 21.5 48 48 48h208v-96c0-35.3 28.7-64 64-64s64 28.7 64 64v96h208c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H473.7zM96 192h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16m400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16zM96 320h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16m400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16zM232 176a88 88 0 1 1 176 0 88 88 0 1 1-176 0m88-48c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-16v-16c0-8.8-7.2-16-16-16"/></svg>
+    </a></p>
+  
+</div>
+    
+  </div>
+  
+</div>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+
+<h4>Consentement aux cookies</h4>
+<p>Ce site intègre des cookies analytics (pour des statistiques de fréquentation anonymes, les requêtes dans la barre de recherche) et des cookies de l'hébergeur <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement#our-use-of-cookies-and-tracking-technologies">GitHub</a>.  Dès lors qu’une donnée est susceptible d’être collectée, vous pouvez vous y opposer dans les choix de paramètres ci-dessous.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Paramétrer vos choix</label>
+    
+  
+    
+      <button class="md-button md-button--primary">Accepter</button>
+    
+    
+    
+  
+    
+    
+      <button type="reset" class="md-button md-button--primary">Refuser</button>
+    
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "header.autohide", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+
+
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../../xtra/javascripts/extra.js"></script>
+      
+        <script src="../../../xtra/javascripts/rituels.js"></script>
+      
+        <script src="../../../js/open_in_new_tab.js"></script>
+      
+    
+<script src="../../../js-scripts/overlord.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-scripts/subscriptions.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+
+
+  </body>
+</html>
