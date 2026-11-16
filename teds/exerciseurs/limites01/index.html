@@ -1,0 +1,4671 @@
+<!--
+pyodide-mkdocs-theme
+Copyleft GNU GPLv3 🄯 2024 Frédéric Zinelli
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.
+If not, see <https://www.gnu.org/licenses/>.
+-->
+
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Les progressions communes, les cahiers de texte, les supports de cours, les exercices et les évaluations.</br> Choisissez l'onglet de votre classe ou consultez la page des liens pour tous les niveaux">
+      
+      
+        <meta name="author" content="Nizar MOUSSATAT">
+      
+      
+        <link rel="canonical" href="https://moussatat.github.io/teds/exerciseurs/limites01/">
+      
+      
+        <link rel="prev" href="../../rituels/">
+      
+      
+        <link rel="next" href="../primitives01/">
+      
+      
+      <link rel="icon" href="../../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Calcul de limites - Maths au CSJA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+    
+
+<script type="importmap">{"imports": {"functools": "../../../js-libs/functools.js", "functoolsStorage": "../../../js-libs/functoolsStorage.js", "functoolsTxt": "../../../js-libs/functoolsTxt.js", "functoolsUi": "../../../js-libs/functoolsUi.js", "functoolsUiBuilder": "../../../js-libs/functoolsUiBuilder.js", "jsLogger": "../../../js-libs/jsLogger.js", "process_and_gui": "../../../js-libs/process_and_gui.js", "0-generic-python-snippets-pyodide": "../../../js-per-pages/0-generic-python-snippets-pyodide.js", "1-error_logs-pyodide": "../../../js-per-pages/1-error_logs-pyodide.js", "1-packagesInstaller-install-pyodide": "../../../js-per-pages/1-packagesInstaller-install-pyodide.js", "1-runtimeManager-runtime-pyodide": "../../../js-per-pages/1-runtimeManager-runtime-pyodide.js", "2-0-runnersManager-runners": "../../../js-per-pages/2-0-runnersManager-runners.js", "2-pyodideSectionsRunner-runner-pyodide": "../../../js-per-pages/2-pyodideSectionsRunner-runner-pyodide.js", "3-btnRunner-py_btn": "../../../js-per-pages/3-btnRunner-py_btn.js", "3-terminalRunner-term": "../../../js-per-pages/3-terminalRunner-term.js", "4-0-idesManager-ide": "../../../js-per-pages/4-0-idesManager-ide.js", "4-ideLogistic-ide": "../../../js-per-pages/4-ideLogistic-ide.js", "4-ideRunner-ide": "../../../js-per-pages/4-ideRunner-ide.js", "5-ideTester-ides_test": "../../../js-per-pages/5-ideTester-ides_test.js", "6-2-init-playground": "../../../js-per-pages/6-2-init-playground.js", "6-idePlayground-playground": "../../../js-per-pages/6-idePlayground-playground.js", "qcms-qcm": "../../../js-per-pages/qcms-qcm.js", "start-pyodide": "../../../js-per-pages/start-pyodide.js", "overlord": "../../../js-scripts/overlord.js", "subscriptions": "../../../js-scripts/subscriptions.js"}}</script>
+
+
+
+      
+    
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.43.1/css/jquery.terminal.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<script src="../../../js-libs/0-config.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script type="text/javascript">
+if(!window.CONFIG) window.CONFIG={}
+CONFIG._devMode=true
+CONFIG.argsFigureDivId="figure1"
+CONFIG.baseUrl="../../.."
+CONFIG.buttonIconsDirectory="../../../assets/images"
+CONFIG.editorFontFamily="monospace"
+CONFIG.editorFontSize=15
+CONFIG.exportZipPrefix=""
+CONFIG.exportZipWithNames=false
+CONFIG.inServe=false
+CONFIG.keyStrokesAutoSave=30
+CONFIG.language="fr"
+CONFIG.pmtUrl="https://gitlab.com/frederic-zinelli/pyodide-mkdocs-theme"
+CONFIG.projectId="csja"
+CONFIG.projectMoveFromOldId=null
+CONFIG.projectNoJsWarning=false
+CONFIG.pythonLibs=['alien_python', 'turtle']
+CONFIG.siteUrl="https://moussatat.github.io/"
+CONFIG.version="5.5.3"
+CONFIG.lang={"allOthersTrash": {"msg": "1 entr\u00e9e non associ\u00e9e au projet en cours a \u00e9t\u00e9 trouv\u00e9e. Voulez-vous la supprimer ?\n(Vous risquez de perdre des donn\u00e9es d'un site voisin !)", "plural": "{N} entr\u00e9es non associ\u00e9es au projet en cours ont \u00e9t\u00e9 trouv\u00e9es. Voulez-vous toutes les supprimer ?\n(Vous risquez de perdre des donn\u00e9es d'un site voisin !)"}, "attemptsLeft": {"msg": "\u00c9valuations restantes"}, "check": {"msg": "Valider<br><kbd>Ctrl</kbd>+<kbd>Enter</kbd><br>(Clic droit pour l'historique)", "em": 9, "kbd": ""}, "comments": {"msg": "(D\u00e9s-)Active le code apr\u00e8s la ligne <code># Tests</code> (insensible \u00e0 la casse)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>I</kbd>)", "em": 17, "kbd": "Ctrl+I"}, "complementTrash": {"msg": "Nota : 1 entr\u00e9e non associ\u00e9e \u00e0 ce projet, qui ne sera pas supprim\u00e9e", "plural": "Nota : {N} entr\u00e9es non associ\u00e9es \u00e0 ce projet, qui ne seront pas supprim\u00e9es"}, "corr": {"msg": "\ud83d\udc0d Proposition de correction"}, "corrBtn": {"msg": "Tester la correction (serve)", "em": 0, "kbd": ""}, "delayedReveal": {"msg": "Solution affich\u00e9e dans {N} essai(s).", "format": "info"}, "download": {"msg": "T\u00e9l\u00e9charger", "em": 0, "kbd": ""}, "editorCode": {"msg": "\u00c9diteur", "format": "info"}, "failHead": {"msg": "Dommage !", "format": "warning"}, "failTail": {"msg": "est maintenant disponible", "plural": "sont maintenant disponibles"}, "feedback": {"msg": "Tronquer ou non le feedback dans les terminaux (sortie standard & stacktrace / relancer le code pour appliquer)", "em": 19, "kbd": ""}, "figureAdmoTitle": {"msg": "Votre figure"}, "figureText": {"msg": "Votre trac\u00e9 sera ici"}, "fullScreen": {"msg": "Entrer ou sortir du mode \"plein \u00e9cran\"<br>(<kbd>Esc</kbd>)<br>(<kbd>Esc</kbd>)", "em": 10, "kbd": "Esc"}, "installDone": {"msg": "Installations termin\u00e9es !", "format": "info"}, "installStart": {"msg": "Installation de paquets python. Ceci peut prendre un certain temps...", "format": "info"}, "loadIde": {"msg": "Configure l'IDE avec ces donn\u00e9es", "em": 10, "kbd": ""}, "noCodesTrash": {"msg": "Pas de codes trouv\u00e9s pour le projet en cours sur ce navigateur."}, "p5Start": {"msg": "D\u00e9marre l'animation", "em": 0, "kbd": ""}, "p5Step": {"msg": "Avance d'une image", "em": 0, "kbd": ""}, "p5Stop": {"msg": "Arr\u00eate l'animation", "em": 0, "kbd": ""}, "pickerFailure": {"msg": "Veuillez cliquer sur la page entre deux utilisations des raccourcis clavier ou utiliser un bouton, afin de pouvoir t\u00e9l\u00e9verser un fichier."}, "play": {"msg": "Ex\u00e9cuter le code<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)<br>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)", "em": 9, "kbd": "Ctrl+S"}, "publicTests": {"msg": "Tests publics", "format": "info"}, "pyBtn": {"msg": "Ex\u00e9cuter le code", "em": 9, "kbd": ""}, "qcmCheckTip": {"msg": "V\u00e9rifier les r\u00e9ponses", "em": 11, "kbd": ""}, "qcmMaskTip": {"msg": "Les r\u00e9ponses resteront cach\u00e9es...", "em": 11, "kbd": ""}, "qcmRedoTip": {"msg": "Recommencer", "em": 9, "kbd": ""}, "qcmTitle": {"msg": "Question", "plural": "Questions"}, "refresh": {"msg": "Une version plus r\u00e9cente du code existe.\nVeuillez copier vos \u00e9ventuelles modifications puis r\u00e9initialiser l'IDE.", "format": "warning"}, "rem": {"msg": "Remarques"}, "removeTrash": {"msg": "Il y a actuellement 1 r\u00e9f\u00e9rence enregistr\u00e9e sur ce navigateur.\nVoulez-vous l'effacer ?", "plural": "Il y a actuellement {N} r\u00e9f\u00e9rences enregistr\u00e9es sur ce navigateur.\nVoulez-vous toutes les effacer ?"}, "restart": {"msg": "R\u00e9initialiser l'\u00e9diteur", "em": 0, "kbd": ""}, "restartConfirm": {"msg": "ATTENTION: r\u00e9initialiser l'\u00e9diteur fera perdre les anciens codes, status de validation et historiques.", "em": 0, "kbd": ""}, "revealCorr": {"msg": "le corrig\u00e9"}, "revealJoin": {"msg": "et"}, "revealRem": {"msg": "les commentaires"}, "runScript": {"msg": "Script lanc\u00e9...", "format": "info"}, "save": {"msg": "Sauvegarder dans le navigateur", "em": 0, "kbd": ""}, "secretTests": {"msg": "Tests secrets", "format": "info"}, "show": {"msg": "Afficher corr & REMs", "em": 0, "kbd": ""}, "splitModePlaceholder": {"msg": "\u00c9diteur dans l'autre colonne"}, "splitScreen": {"msg": "Entrer ou sortir du mode \"deux colonnes\"<br>(<kbd>Alt+:</kbd> ; <kbd>Ctrl</kbd> pour inverser les colonnes)", "em": 23, "kbd": ""}, "storageIdCollision": {"msg": "Contacter l'auteur du site web en lui fournissant ce message complet. Une collision potentielle d'ids entre plusieurs projets \u00e0 \u00e9t\u00e9 rencontr\u00e9e. Il faut ajouter ou modifier l'argument ID pour l'IDE suivant:"}, "successHead": {"msg": "Bravo !", "format": "success"}, "successHeadExtra": {"msg": "Vous avez r\u00e9ussi tous les tests !"}, "successMsg": {"msg": "OK", "format": "success"}, "successMsgNoTests": {"msg": "Termin\u00e9 sans erreur.", "format": "info"}, "successTail": {"msg": "Pensez \u00e0 lire"}, "test1Ide": {"msg": "Lance ce test", "em": 7, "kbd": ""}, "testIdes": {"msg": "Lance tous les tests...", "em": 7, "kbd": ""}, "testStop": {"msg": "Arr\u00eate les tests", "em": 6, "kbd": ""}, "tests": {"msg": "\n\n\n# Tests\n\n\n", "as_pattern": "^#\\s*Tests"}, "testsDone": {"msg": "Tests termin\u00e9s", "format": "info"}, "tipTrash": {"msg": "Supprimer du navigateur les codes enregistr\u00e9s pour Maths au CSJA", "em": 15, "kbd": ""}, "titleCorr": {"msg": "Solution"}, "titleRem": {"msg": "Remarques"}, "unforgettable": {"msg": "N'oubliez pas de faire une validation !", "format": "warning"}, "upload": {"msg": "T\u00e9l\u00e9verser", "em": 0, "kbd": ""}, "validation": {"msg": "Validation - ", "format": "info"}, "wrapTerm": {"msg": "Si activ\u00e9, le texte copi\u00e9 dans le terminal est joint sur une seule ligne avant d'\u00eatre copi\u00e9 dans le presse-papier", "em": 19, "kbd": ""}, "zip": {"msg": "Archiver les codes des IDEs exportables de la page", "em": 14, "kbd": ""}, "zipAskForNames": {"msg": "Veuillez pr\u00e9ciser votre/vos noms (cha\u00eene vide interdite) :"}}
+</script>
+<script src="../../../js-libs/0-legacy-subscriber.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script src="../../../js-libs/functools.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/functoolsStorage.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/functoolsTxt.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/functoolsUi.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/functoolsUiBuilder.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/jsLogger.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-libs/mathjax-libs.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<script src="../../../js-libs/process_and_gui.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<link href="../../../pyodide-css/0-generic.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/btns-header.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/history.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/hourglass.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/ide.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/qcm.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/terminal.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<link href="../../../pyodide-css/testing.css" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" rel="stylesheet"/>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="text/javascript"></script>
+
+<input type="checkbox" id="ace_palette" autocomplete="off" class="md-toggle" data-ace-dark-mode="tomorrow_night_bright" data-ace-light-mode="crimson_editor">
+
+
+
+    <!--
+      TikZJax (rod2ik/tikzjax) — rendu de schémas TikZ/LaTeX côté navigateur,
+      sans installation LaTeX serveur.
+      Doc : https://rod2ik.github.io/tikzjax/installation/mkdocs/
+
+      Ordre important : config AVANT le bundle.
+      Vérifier de temps en temps la dernière version :
+      https://github.com/rod2ik/tikzjax/releases
+    -->
+    <script src="../../../xtra/javascripts/tikzjax.config.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/fonts.min.css"
+    >
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@rod2ik/tikzjax@1.5.0/dist/tikzjax.min.js"
+      defer
+    ></script>
+
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../xtra/stylesheets/ajustements.css">
+    
+      <link rel="stylesheet" href="../../../xtra/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../xtra/stylesheets/rituels.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-GBSMT6Z1K0"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-GBSMT6Z1K0",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-GBSMT6Z1K0",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Maths au CSJA" class="md-header__button md-logo" aria-label="Maths au CSJA" data-md-component="logo">
+      
+  <img src="../../../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Maths au CSJA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Calcul de limites
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Passer au mode nuit"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode nuit" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="red"  aria-label="Passer au mode jour"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode jour" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Partager" aria-label="Partager" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/moussatat/journal" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Terminale
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../1eds/" class="md-tabs__link">
+          
+  
+  
+  Première
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../2gt/" class="md-tabs__link">
+          
+  
+  
+  Seconde
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../python/" class="md-tabs__link">
+          
+  
+  
+  🐍 Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../snt/" class="md-tabs__link">
+          
+  
+  
+  🤖 SNT
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../dnl/" class="md-tabs__link">
+          
+  
+  
+  DNL
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Maths au CSJA" class="md-nav__button md-logo" aria-label="Maths au CSJA" data-md-component="logo">
+      
+  <img src="../../../images/logo.svg" alt="logo">
+
+    </a>
+    Maths au CSJA
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/moussatat/journal" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accueil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Terminale
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Terminale
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V8h14v1h2V5a2 2 0 0 0-2-2m2.7 10.35-1 1-2.05-2 1-1c.2-.21.54-.22.77 0l1.28 1.28c.19.2.19.52 0 .72M12 18.94l6.07-6.06 2.05 2L14.06 21H12z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2026-2027
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression2026/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M7 8h2v4H8V9H7zm3 9v1H7v-.92L9 15H7v-1h2.25c.41 0 .75.34.75.75 0 .2-.08.39-.21.52L8.12 17zm1-13c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m6 13h-5v-2h5zm0-6h-5V9h5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2026-2027
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels de début d'heure
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    🧮 Exerciseurs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧮 Exerciseurs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.6 6.62C21.58 6.62 24 9 24 12c0 2.96-2.42 5.37-5.4 5.37-1.45 0-2.8-.56-3.82-1.57L12 13.34l-2.83 2.51c-.97.97-2.33 1.53-3.77 1.53C2.42 17.38 0 14.96 0 12s2.42-5.38 5.4-5.38c1.44 0 2.8.56 3.82 1.58L12 10.66l2.83-2.51c.97-.97 2.33-1.53 3.77-1.53M7.8 14.39 10.5 12 7.84 9.65c-.68-.68-1.53-1.03-2.44-1.03C3.53 8.62 2 10.13 2 12s1.53 3.38 3.4 3.38c.91 0 1.76-.35 2.4-.99m8.4-4.78L13.5 12l2.66 2.35c.68.68 1.54 1.03 2.44 1.03 1.87 0 3.4-1.51 3.4-3.38s-1.53-3.38-3.4-3.38c-.91 0-1.76.35-2.4.99"/></svg>
+  
+  <span class="md-ellipsis">
+    Calcul de limites
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_2" id="__nav_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Primitives
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Primitives
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../primitives01/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    1. Usuelles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../primitives02/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    2. Affines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../primitives03/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    3. Composées
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../primitives04/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    4. Identification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../primitives05/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 19.1c-.2 1.1-.6 1.9-1.3 2.4s-1.6.6-2.7.4c-.4-.1-1.2-.2-1.5-.4l.5-1.5c.3.1.9.3 1.2.3 1.1.2 1.7-.3 1.9-1.5L12 5.2c.2-1.2.7-2 1.4-2.6.7-.5 1.7-.7 2.8-.5.4.1 1.2.2 1.8.5L17.5 4c-.2-.1-.9-.2-1.2-.3-1.3-.2-2 .4-2.3 1.9z"/></svg>
+  
+  <span class="md-ellipsis">
+    5. Décomposition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📁 Archive
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            📁 Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deroulement2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../progression2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deroulement2024/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2024-2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Première
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Première
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1eds/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V8h14v1h2V5a2 2 0 0 0-2-2m2.7 10.35-1 1-2.05-2 1-1c.2-.21.54-.22.77 0l1.28 1.28c.19.2.19.52 0 .72M12 18.94l6.07-6.06 2.05 2L14.06 21H12z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2026-2027
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1eds/progression2026/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M7 8h2v4H8V9H7zm3 9v1H7v-.92L9 15H7v-1h2.25c.41 0 .75.34.75.75 0 .2-.08.39-.21.52L8.12 17zm1-13c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m6 13h-5v-2h5zm0-6h-5V9h5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2026-2027
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1eds/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels de début d'heure
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📁 Archive
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            📁 Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1eds/deroulement2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1eds/progression2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1eds/deroulement2024/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2024-2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seconde
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Seconde
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V8h14v1h2V5a2 2 0 0 0-2-2m2.7 10.35-1 1-2.05-2 1-1c.2-.21.54-.22.77 0l1.28 1.28c.19.2.19.52 0 .72M12 18.94l6.07-6.06 2.05 2L14.06 21H12z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2026-2027
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/progression2026/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M7 8h2v4H8V9H7zm3 9v1H7v-.92L9 15H7v-1h2.25c.41 0 .75.34.75.75 0 .2-.08.39-.21.52L8.12 17zm1-13c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m6 13h-5v-2h5zm0-6h-5V9h5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2026-2027
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/rituels/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7m0-16a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m.5 4H11v6l4.75 2.85.75-1.23-4-2.37zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86z"/></svg>
+  
+  <span class="md-ellipsis">
+    Rituels de début d'heure
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new" title="Nouveau">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    📁 Archive
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            📁 Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/deroulement2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/progression2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Progression 2025-2026
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2gt/deroulement2024/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement 2024-2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    🐍 Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            🐍 Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🏡 Ressources pour la classe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    👣 Parcours de découverte
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            👣 Parcours de découverte
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (TD) Découvrir Python en 1h
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDE et consoles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types de valeurs et opérations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Variables et affectations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Librairies et compléments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les fonctions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les instructions conditionnelles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (TD) Fonctions et tests
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (TD) Silent Teacher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les boucles finies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les boucles conditionnées
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-2gt-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (TD) PY-rates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/python-1eds-00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les listes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    ⚙️ TP (seconde)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            ⚙️ TP (seconde)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/TP_alien/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚧 Alien (débranché)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/TP_turtle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚧 Le module turtle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/TP_kandinsky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚧 Le module kandinsky
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/bac_a_sable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    💻 Bac à Sable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    🤖 SNT
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            🤖 SNT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Codage de l'information
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Codage de l'information
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/CodagesA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Le binaire
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/CodagesB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Le hexadécimal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/CodagesC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - Les caractères
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/CodagesD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - Les images
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Données structurées
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            Données structurées
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/DonneesA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/DonneesB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Structurer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/DonneesC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - Traiter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/DonneesD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - Projet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Internet
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            Internet
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Les protocoles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - Simuler un réseau
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - Impact écologique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/InternetE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5 - 🚧 P2P
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Le Web
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            Le Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Les langages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - Les protocoles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - 🚧 PageRank
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/WebE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5 - 🚧 Les cookies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Les réseaux sociaux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            Les réseaux sociaux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - Modélisation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - 🚧 Les infox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4 - 🚧 Données personnelles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5 - 🚧 Harcèlement et cyberviolences
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ReseauxSociauxCours/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6 - Le bilan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Objets connectés
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            Objets connectés
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/ObjetsConnectesA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Le Numérique
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_8">
+            <span class="md-nav__icon md-icon"></span>
+            Le Numérique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/NumeriqueA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1 - 🚧 Découverte
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/NumeriqueB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2 - 🚧 Numérique et logistique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../snt/NumeriqueC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3 - 🚧 Parcours PIX
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    DNL
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            DNL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dnl/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V8h14v1h2V5a2 2 0 0 0-2-2m2.7 10.35-1 1-2.05-2 1-1c.2-.21.54-.22.77 0l1.28 1.28c.19.2.19.52 0 .72M12 18.94l6.07-6.06 2.05 2L14.06 21H12z"/></svg>
+  
+  <span class="md-ellipsis">
+    Déroulement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dnl/archive2025/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    Archives 2024-2025
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+
+                  
+
+  
+    <a href="https://github.com/moussatat/journal/edit/main/docs/teds/exerciseurs/limites01.md" title="Editer cette page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/moussatat/journal/raw/main/docs/teds/exerciseurs/limites01.md" title="Consulter la source de cette page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">⚓︎</a></h1>
+<style>
+    #exo-limites { background-color: #f8f9fa; color: #2c3e50; padding: 15px; border-radius: 8px; margin-top: 20px;}
+    #exo-limites h2 { text-align: center; border-bottom: 2px solid #16a085; padding-bottom: 10px; color: #117a65; margin-top: 0;}
+    #exo-limites .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+
+    #exo-limites .menus-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; background: #f0faf7; padding: 15px; border-radius: 8px; border: 1px solid #b8e2d6;}
+    #exo-limites .menu-group { display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 250px; }
+    #exo-limites select { padding: 8px 12px; font-size: 1em; border-radius: 5px; border: 1px solid #bdc3c7; background-color: white; cursor: pointer; color: #2c3e50; width: 100%; box-sizing: border-box;}
+    #exo-limites select:focus { outline: none; border-color: #16a085; }
+    #exo-limites option:disabled { color: #aab2b7; }
+
+    #exo-limites .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    #exo-limites button { font-size: 1em; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+    #exo-limites .btn-toggle { background-color: #16a085; }
+    #exo-limites .btn-toggle:hover { background-color: #117a65; }
+    #exo-limites .btn-new { background-color: #27ae60; }
+    #exo-limites .btn-new:hover { background-color: #219a52; }
+
+    #exo-limites .consigne { font-size: 1.15em; margin-bottom: 5px; color: #34495e; font-weight: 500; }
+    #exo-limites .question-box { font-size: 1.25em; margin-bottom: 25px; padding: 15px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; overflow-x: auto;}
+    #exo-limites .question-box p { margin: 0.3em 0; font-size: 0.9em; }
+    #exo-limites .solution { display: none; margin-top: 15px; padding: 20px; background-color: #fdfefe; border-left: 4px solid #16a085; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; border-radius: 0 5px 5px 0; overflow-x: auto;}
+    #exo-limites .solution.active { display: block; }
+    #exo-limites .category-badge { display: inline-block; background: #e3f6f1; color: #117a65; padding: 4px 12px; border-radius: 15px; font-size: 0.9em; margin-bottom: 15px; font-weight: bold; }
+    #exo-limites .lim-step { margin-bottom: 0.9em; padding-bottom: 0.4em; border-bottom: 1px dotted #d5dbdb; }
+    #exo-limites .lim-step:last-child { border-bottom: none; }
+    #exo-limites .lim-step p { margin: 0.35em 0; }
+    #exo-limites .lim-step-title { color: #117a65; }
+    #exo-limites .lim-note { color: #5d6d7e; font-style: italic; }
+</style>
+
+<div id="exo-limites">
+    <h2>Calcul de limites</h2>
+
+    <div class="card">
+
+        <div class="menus-container">
+            <div class="menu-group">
+                <label for="typeSelectLim" style="margin-bottom: 5px;"><strong>Type de fonction :</strong></label>
+                <select id="typeSelectLim" onchange="limOnTypeChange()">
+                    <option value="all">🔀 Mélange aléatoire</option>
+                    <option value="poly">1. Polynômes</option>
+                    <option value="rat">2. Fractions rationnelles</option>
+                    <option value="expaff">3. Composée e^(u(x)) : e^(ax+b), e^(P(x)), e^(c/(ax+b))</option>
+                    <option value="polyexp">4. P(x)·e^(ax+b) (sans croissances comparées)</option>
+                    <option value="expP">5. P(x)·e^(±x) (croissances comparées)</option>
+                    <option value="expPlusP">6. e^(±x) + P(x) (croissances comparées)</option>
+                    <option value="cc">7. xⁿ et e^(ax) : changement de variable X = ax</option>
+                    <option value="taux">8. Taux de variation (sin, cos, exp, √)</option>
+                    <option value="cmp">9. Comparaison et gendarmes (sin, cos)</option>
+                    <option value="conj">★ Bonus : quantité conjuguée</option>
+                </select>
+            </div>
+            <div class="menu-group">
+                <label for="boundSelectLim" style="margin-bottom: 5px;"><strong>Limite en :</strong></label>
+                <select id="boundSelectLim" onchange="limGenerate()">
+                    <option value="all">🔀 Mélange aléatoire</option>
+                    <option value="pinf">x → +∞</option>
+                    <option value="minf">x → −∞</option>
+                    <option value="pt">x → a (à gauche et à droite)</option>
+                    <option value="ptm">x → a⁻ (à gauche)</option>
+                    <option value="ptp">x → a⁺ (à droite)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="categoryLabelLim" class="category-badge arithmatex">Catégorie</div>
+
+        <p id="consigneLim" class="consigne arithmatex">On considère la fonction \(f\) définie par :</p>
+
+        <div id="questionAreaLim" class="question-box arithmatex">Chargement...</div>
+
+        <div class="controls">
+            <button id="btnToggleLim" class="btn-toggle" onclick="limToggleSolution()">Voir la correction</button>
+            <button class="btn-new" onclick="limGenerate()">Nouvel exercice</button>
+        </div>
+
+        <div id="solutionAreaLim" class="solution">
+            <div id="solutionTextLim" style="font-size: 1.05em;" class="arithmatex"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    "use strict";
+
+    /* =====================================================================
+       Outils numériques
+       ===================================================================== */
+    const R = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+    const RNZ = (a, b) => { let v; do { v = R(a, b); } while (v === 0); return v; };
+    const pick = t => t[Math.floor(Math.random() * t.length)];
+    const chance = p => Math.random() < p;
+    const sgn = v => (v > 0 ? 1 : (v < 0 ? -1 : 0));
+    function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { const t = b; b = a % b; a = t; } return a || 1; }
+    function F(n, d) { if (d === undefined) d = 1; if (d < 0) { n = -n; d = -d; } const g = gcd(n, d); return { n: n / g, d: d / g }; }
+    function shuffle(t) { const a = t.slice(); for (let i = a.length - 1; i > 0; i--) { const j = R(0, i); const x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+
+    /* Polynômes : tableau c, c[k] = coefficient de x^k */
+    function deg(c) { for (let k = c.length - 1; k >= 0; k--) if (c[k] !== 0) return k; return -1; }
+    function nTerms(c) { return c.filter(v => v !== 0).length; }
+    function evalPoly(c, x) { let s = 0; for (let k = c.length - 1; k >= 0; k--) s = s * x + c[k]; return s; }
+    function mul(p, q) { const r = new Array(p.length + q.length - 1).fill(0); p.forEach((a, i) => q.forEach((b, j) => { r[i + j] += a * b; })); return r; }
+    function scale(p, k) { return p.map(v => v * k); }
+    function nonConst(c) { const r = []; for (let k = c.length - 1; k >= 1; k--) if (c[k] !== 0) r.push(k); return r; }
+
+    /* polynôme de degré n à nt termes (coefficient dominant non nul) */
+    function randPoly(n, nt) {
+        const c = new Array(n + 1).fill(0);
+        c[n] = RNZ(-5, 5);
+        shuffle([...Array(n).keys()]).slice(0, Math.max(0, Math.min(nt - 1, n))).forEach(k => { c[k] = RNZ(-9, 9); });
+        return c;
+    }
+    /* signe de la limite de x^k en s*infini */
+    const powLim = (k, s) => ((s > 0 || k % 2 === 0) ? 1 : -1);
+    const termSign = (a, k, s) => sgn(a) * powLim(k, s);
+    function internalFI(c, s) { const t = nonConst(c).map(k => termSign(c[k], k, s)); return t.some(v => v > 0) && t.some(v => v < 0); }
+    function polyLimSign(c, s) { const n = deg(c); return termSign(c[n], n, s); }
+    /* polynôme sans F.I. interne en s*infini, de limite target*infini (target = 0 : au hasard) */
+    function randPolyNoFI(n, nt, s, target) {
+        const c = randPoly(n, nt);
+        const want = target || pick([1, -1]);
+        nonConst(c).forEach(k => { if (termSign(c[k], k, s) !== want) c[k] = -c[k]; });
+        return c;
+    }
+    function proportional(a, b) {
+        const n = deg(a); if (n !== deg(b)) return false;
+        for (let k = 0; k <= n; k++) if ((a[k] || 0) * b[n] !== (b[k] || 0) * a[n]) return false;
+        return true;
+    }
+
+    /* =====================================================================
+       Outils LaTeX
+       ===================================================================== */
+    const M = t => '\\(' + t + '\\)';
+    const D = t => '\\[' + t + '\\]';
+    const par = t => '\\left(' + t + '\\right)';
+    const pm = s => (s > 0 ? '+' : '-');
+    function xp(k, v) { v = v || 'x'; return k === 0 ? '' : (k === 1 ? v : v + '^{' + k + '}'); }
+    function fracTex(f) { if (f.d === 1) return String(f.n); return (f.n < 0 ? '-' : '') + '\\frac{' + Math.abs(f.n) + '}{' + f.d + '}'; }
+    function kTex(k) { return k === 1 ? '' : (k === -1 ? '-' : String(k)); }
+    function coefTex(f) { return f.d === 1 ? kTex(f.n) : fracTex(f); }
+    function joinSigned(parts) { return parts.map((p, i) => (i === 0 ? (p.neg ? '-' : '') + p.tex : (p.neg ? ' - ' : ' + ') + p.tex)).join(''); }
+    function monoTex(a, k, v) { const b = Math.abs(a); return (a < 0 ? '-' : '') + ((b === 1 && k > 0) ? xp(k, v) : b + xp(k, v)); }
+    const parNeg = t => (t.charAt(0) === '-' ? par(t) : t);
+    function monoPar(a, k) { const t = monoTex(a, k); return a < 0 ? par(t) : t; }
+    function polyParts(c, v) {
+        const parts = [];
+        for (let k = c.length - 1; k >= 0; k--) if (c[k] !== 0) {
+            const b = Math.abs(c[k]);
+            parts.push({ neg: c[k] < 0, tex: (b === 1 && k > 0) ? xp(k, v) : b + xp(k, v) });
+        }
+        return parts;
+    }
+    function polyTex(c, v) { const p = polyParts(c, v); return p.length ? joinSigned(p) : '0'; }
+    function polyPar(c) { return nTerms(c) > 1 || c[deg(c)] < 0 ? par(polyTex(c)) : polyTex(c); }
+    function xma(a) { return a === 0 ? 'x' : (a > 0 ? 'x-' + a : 'x+' + (-a)); }
+    /* (r) x^d avec r fraction : 2x/3, -3/(2x^2), ... */
+    function monoFracTex(r, d, v) {
+        const A = Math.abs(r.n), Q = r.d; let body;
+        if (d > 0) body = Q === 1 ? (A === 1 ? xp(d, v) : A + xp(d, v)) : '\\frac{' + (A === 1 ? '' : A) + xp(d, v) + '}{' + Q + '}';
+        else if (d === 0) body = Q === 1 ? String(A) : '\\frac{' + A + '}{' + Q + '}';
+        else body = '\\frac{' + A + '}{' + (Q === 1 ? '' : Q) + xp(-d, v) + '}';
+        return (r.n < 0 ? '-' : '') + body;
+    }
+    /* factorisation par le terme dominant : 1 + a/(b x) + ... */
+    function bracket(c) {
+        const n = deg(c), parts = [{ neg: false, tex: '1' }], ms = [];
+        for (let k = n - 1; k >= 0; k--) {
+            if (c[k] === 0) continue;
+            const f = F(c[k], c[n]), m = n - k; ms.push(m);
+            parts.push({ neg: f.n < 0, tex: '\\frac{' + Math.abs(f.n) + '}{' + (f.d === 1 ? '' : f.d) + xp(m) + '}' });
+        }
+        return { tex: joinSigned(parts), ms };
+    }
+
+    /* Limites : {inf: ±1} ou {val: fraction, side: '+'|'-'|''} */
+    const INF = s => ({ inf: s });
+    const VAL = (f, side) => ({ val: (typeof f === 'number') ? F(f) : f, side: side || '' });
+    const VALT = (tex, num) => ({ val: null, tex, num });
+    function limTex(L) { if (L.inf) return L.inf > 0 ? '+\\infty' : '-\\infty'; if (L.tex) return L.tex; return fracTex(L.val) + (L.side ? '^{' + L.side + '}' : ''); }
+    function under(B) {
+        if (B.kind === 'inf') return 'x\\to ' + pm(B.s) + '\\infty';
+        if (!B.side) return 'x\\to ' + B.a;
+        return '\\substack{x\\to ' + B.a + '\\\\ x' + (B.side < 0 ? '\\lt ' : '\\gt ') + B.a + '}';
+    }
+    const lim = B => '\\lim\\limits_{' + under(B) + '}';
+    const ptB = (a, side) => ({ kind: 'pt', a, side });
+
+    /* Mise en forme de la correction */
+    function cases(lines) { return '\\begin{cases}' + lines.join('\\\\[0.5em] ') + '\\end{cases}'; }
+    function step(n, title, body) { return '<div class="lim-step"><p class="lim-step-title"><strong>' + n + '. ' + title + '</strong></p>' + body + '</div>'; }
+    const P = t => '<p>' + t + '</p>';
+    const NOTE = t => '<p class="lim-note">' + t + '</p>';
+    const boxed = t => D('\\boxed{' + t + '}');
+    /* bloc de composition, comme dans le cours */
+    function compo(B, innerTex, Lin, outerTex, Lout, finalTex) {
+        return D('\\left.\\begin{aligned}&' + lim(B) + ' ' + innerTex + ' = \\textcolor{red}{' + limTex(Lin) + '}\\\\[0.4em] '
+            + '&\\lim\\limits_{X\\to \\textcolor{red}{' + limTex(Lin) + '}} ' + outerTex + ' = ' + limTex(Lout)
+            + '\\end{aligned}\\;\\right\\}\\implies ' + lim(B) + ' ' + finalTex + ' = ' + limTex(Lout));
+    }
+    const FI = t => 'On obtient une <strong>forme indéterminée</strong> « ' + M(t) + ' ».';
+    const EX = '\\mathrm{e}^{x}', EMX = '\\mathrm{e}^{-x}';
+    const infName = s => M(pm(s) + '\\infty');
+
+    /* =====================================================================
+       1. Polynômes en ±infini
+       ===================================================================== */
+    function genPoly(B) {
+        const s = B.s, u = lim(B);
+        let c;
+        do { const n = R(2, 4); c = randPoly(n, R(3, Math.min(4, n + 1))); } while (!internalFI(c, s));
+        const n = deg(c), an = c[n], L = INF(polyLimSign(c, s)), br = bracket(c);
+        const ms = [...new Set(br.ms)].sort((x, y) => x - y);
+        const det = nonConst(c).map(k => u + ' ' + monoPar(c[k], k) + ' = ' + limTex(INF(termSign(c[k], k, s))));
+        const inter = [u + ' ' + monoPar(an, n) + ' = ' + limTex(L)].concat(ms.map(m => u + ' \\frac{1}{' + xp(m) + '} = 0'));
+        let sol = '';
+        sol += step(1, 'Recherche directe', P('Limite de chaque terme non constant :') + D(cases(det)) + P(FI('+\\infty-\\infty')));
+        sol += step(2, 'Lever l\'indétermination', P('On factorise par le terme de plus haut degré ' + M(monoTex(an, n)) + '. Pour tout ' + M('x\\neq 0') + ' :')
+            + D('f(x) = ' + monoTex(an, n) + par(br.tex)));
+        sol += step(3, 'Limites intermédiaires', D(cases(inter))
+            + P('Par produit par une constante puis par somme : ' + M(u + ' ' + par(br.tex) + ' = 1') + '.'));
+        sol += step(4, 'Conclusion', P('Par produit des limites :') + boxed(u + ' f(x) = ' + limTex(L)));
+        return { cat: 'Polynôme en ' + infName(s), fx: polyTex(c), B, sol, fn: x => evalPoly(c, x), checks: [{ B, L }] };
+    }
+
+    /* =====================================================================
+       2a. Fractions rationnelles en ±infini
+       ===================================================================== */
+    function detect(c, B, name) {
+        const s = B.s, u = lim(B);
+        if (!internalFI(c, s)) {
+            const L = INF(polyLimSign(c, s));
+            return { fi: false, L, tex: name + ' : par produit et somme, ' + M(u + ' ' + polyPar(c) + ' = ' + limTex(L)) + '.' };
+        }
+        const ks = nonConst(c), kp = ks.find(k => termSign(c[k], k, s) > 0), km = ks.find(k => termSign(c[k], k, s) < 0);
+        return {
+            fi: true, tex: name + ' : ' + M(u + ' ' + monoPar(c[kp], kp) + ' = +\\infty') + ' et ' + M(u + ' ' + monoPar(c[km], km) + ' = -\\infty')
+                + ', c\'est déjà une F.I. « ' + M('+\\infty-\\infty') + ' ».'
+        };
+    }
+    function genRatInf(B) {
+        const s = B.s, u = lim(B);
+        let N, Dn;
+        do {
+            const p = R(1, 3), q = R(1, 3);
+            N = randPoly(p, R(2, Math.min(3, p + 1)));
+            Dn = randPoly(q, R(2, Math.min(3, q + 1)));
+        } while (proportional(N, Dn));
+        const dN = detect(N, B, 'Au numérateur'), dD = detect(Dn, B, 'Au dénominateur');
+        const form = (dN.fi || dD.fi) ? '\\frac{\\infty}{\\infty}' : '\\frac{' + limTex(dN.L) + '}{' + limTex(dD.L) + '}';
+        const p = deg(N), q = deg(Dn), a = N[p], b = Dn[q], r = F(a, b), d = p - q;
+        const bN = bracket(N), bD = bracket(Dn), Mt = monoFracTex(r, d);
+        const ratio = '\\frac{' + bN.tex + '}{' + bD.tex + '}';
+        let L;
+        if (d > 0) L = INF(sgn(r.n) * powLim(d, s)); else if (d === 0) L = VAL(r); else L = VAL(0);
+        const chain = '\\begin{aligned} f(x) &= \\frac{' + monoTex(a, p) + par(bN.tex) + '}{' + monoTex(b, q) + par(bD.tex) + '}\\\\[0.6em] '
+            + '&= \\frac{' + monoTex(a, p) + '}{' + monoTex(b, q) + '}\\times' + ratio + '\\\\[0.6em] '
+            + '&= ' + (Mt === '1' ? ratio : Mt + '\\times' + ratio) + '\\end{aligned}';
+        const ms = [...new Set(bN.ms.concat(bD.ms).concat(d < 0 ? [-d] : []))].sort((x, y) => x - y);
+        const inter = ms.map(m => u + ' \\frac{1}{' + xp(m) + '} = 0');
+        if (d > 0) inter.unshift(u + ' ' + xp(d) + ' = ' + limTex(INF(powLim(d, s))));
+        let txt = 'Par produit et somme : ' + M(u + ' ' + par(bN.tex) + ' = 1') + ' et ' + M(u + ' ' + par(bD.tex) + ' = 1') + ', donc par quotient ' + M(u + ' ' + ratio + ' = 1') + '.';
+        if (d !== 0) txt += ' Par produit par une constante : ' + M(u + ' ' + parNeg(Mt) + ' = ' + limTex(L)) + '.';
+        let sol = '';
+        sol += step(1, 'Recherche directe', P(dN.tex) + P(dD.tex) + P(FI(form)));
+        sol += step(2, 'Lever l\'indétermination', P('On factorise le numérateur et le dénominateur par leur terme de plus haut degré, puis on simplifie. Pour ' + M('x\\neq 0') + ' :') + D(chain));
+        sol += step(3, 'Limites intermédiaires', D(cases(inter)) + P(txt));
+        sol += step(4, 'Conclusion', P(d === 0 ? 'Par produit des limites :' : 'Par produit des limites :') + boxed(u + ' f(x) = ' + limTex(L))
+            + (d === 0 ? NOTE('La droite d\'équation ' + M('y=' + fracTex(r)) + ' est asymptote horizontale à la courbe de ' + M('f') + ' en ' + infName(s) + '.')
+                : d < 0 ? NOTE('La droite d\'équation ' + M('y=0') + ' est asymptote horizontale à la courbe de ' + M('f') + ' en ' + infName(s) + '.') : ''));
+        return { cat: 'Fraction rationnelle en ' + infName(s), fx: '\\frac{' + polyTex(N) + '}{' + polyTex(Dn) + '}', B, sol, fn: x => evalPoly(N, x) / evalPoly(Dn, x), checks: [{ B, L }] };
+    }
+
+    /* =====================================================================
+       2b. Fractions rationnelles en une valeur interdite a
+       ===================================================================== */
+    function randNum(a) {
+        let N;
+        do { N = chance(0.15) ? [RNZ(-6, 6)] : randPoly(R(1, 2), R(1, 3)); } while (evalPoly(N, a) === 0);
+        return N;
+    }
+    const sideTitle = (s, a) => s < 0 ? 'Limite à gauche ' + M(par('x\\lt ' + a)) : 'Limite à droite ' + M(par('x\\gt ' + a));
+    const quot = (num, ds) => 'Par quotient des limites « ' + M('\\frac{' + num + '}{0^{' + pm(ds) + '}}') + ' » :';
+    const asymV = a => NOTE('La droite d\'équation ' + M('x=' + a) + ' est asymptote verticale à la courbe de ' + M('f') + '.');
+
+    function genRatPoint(side) {
+        const a = R(-4, 4), xa = par(xma(a));
+        const sc = pick(['S1', 'S1', 'S2', 'S3', 'S3', 'S4']);
+        const B = ptB(a, side), sides = side ? [side] : [-1, 1];
+        let N, Dc, sol = '', checks = [], cat;
+        const c0 = 'On remplace ' + M('x') + ' par ' + M(a) + ' : ';
+
+        if (sc === 'S1' || sc === 'S2') {
+            /* forme c/0 */
+            N = randNum(a);
+            const Na = evalPoly(N, a);
+            let k, r = null, Dfact, other;
+            if (sc === 'S1') {
+                k = pick([-3, -2, -1, 1, 2, 3]);
+                if (chance(0.6)) { do { r = R(-4, 4); } while (r === a); }
+                if (r !== null) { Dc = scale(mul([-a, 1], [-r, 1]), k); Dfact = kTex(k) + xa + par(xma(r)); other = { tex: kTex(k) + par(xma(r)), val: k * (a - r) }; }
+                else { Dc = [-k * a, k]; Dfact = k === 1 ? xma(a) : kTex(k) + xa; other = k === 1 ? null : { tex: String(k), val: k }; }
+            } else {
+                k = pick([-2, -1, 1, 1, 2, 3]);
+                Dc = scale(mul([-a, 1], [-a, 1]), k); Dfact = kTex(k) + xa + '^{2}';
+            }
+            cat = 'Fraction rationnelle en une valeur interdite';
+            sol += step(1, 'Recherche directe', P(c0 + 'le dénominateur s\'annule (' + M(a) + ' est une valeur interdite) et le numérateur vaut ' + M(Na) + '.')
+                + P('Forme « ' + M('\\frac{' + Na + '}{0}') + ' » : la limite est infinie, son signe dépend du <strong>signe du dénominateur</strong> au voisinage de ' + M(a) + '.'));
+            let n = 2;
+            if (Dfact !== xma(a)) {
+                sol += step(n++, 'Factoriser le dénominateur', P(M(a) + ' est racine du dénominateur, on le factorise par ' + M(xa) + ' :') + D(polyTex(Dc) + ' = ' + Dfact));
+            }
+            if (sc === 'S2') {
+                const runs = side ? [side] : [0];
+                runs.forEach(sd => {
+                    const Bs = ptB(a, sd), ds = sgn(k), L = INF(sgn(Na) * ds);
+                    const lines = [lim(Bs) + ' ' + polyPar(N) + ' = ' + Na, lim(Bs) + ' ' + xa + '^{2} = 0^{+} \\quad \\text{(un carré est positif)}'];
+                    let body = D(cases(lines));
+                    if (k !== 1) body += P('Par produit (par ' + M(k) + ') : ' + M(lim(Bs) + ' ' + par(polyTex(Dc)) + ' = 0^{' + pm(ds) + '}') + '.');
+                    body += P(quot(Na, ds)) + boxed(lim(Bs) + ' f(x) = ' + limTex(L));
+                    if (!sd) body += NOTE('Le dénominateur garde le même signe à gauche et à droite de ' + M(a) + ' : la limite est la même des deux côtés.');
+                    sol += step(n++, 'Limites du numérateur et du dénominateur', body);
+                    (sd ? [sd] : [-1, 1]).forEach(z => checks.push({ B: ptB(a, z), L }));
+                });
+            } else {
+                sides.forEach(sd => {
+                    const Bs = ptB(a, sd), ds = sgn(k) * sd * (r !== null ? sgn(a - r) : 1), L = INF(sgn(Na) * ds);
+                    const lines = [lim(Bs) + ' ' + polyPar(N) + ' = ' + Na, lim(Bs) + ' ' + xa + ' = 0^{' + pm(sd) + '}'];
+                    if (r !== null) lines.push(lim(Bs) + ' ' + other.tex + ' = ' + other.val);
+                    let body = D(cases(lines));
+                    if (other) body += P('Par produit : ' + M(lim(Bs) + ' ' + par(polyTex(Dc)) + ' = 0^{' + pm(ds) + '}') + '.');
+                    body += P(quot(Na, ds)) + boxed(lim(Bs) + ' f(x) = ' + limTex(L));
+                    sol += step(n++, sideTitle(sd, a), body);
+                    checks.push({ B: Bs, L });
+                });
+            }
+            if (!side) sol += asymV(a);
+        } else {
+            /* forme 0/0 */
+            let N1, D1, k = null;
+            do {
+                N1 = [R(-6, 6), pick([1, 1, 2, -1, 3, -2])];
+                if (sc === 'S4') { k = pick([-2, -1, 1, 1, 2]); D1 = null; }
+                else if (chance(0.35)) { k = pick([1, 2, 3]); D1 = [k]; }
+                else { k = null; D1 = [R(-6, 6), pick([1, 1, 2, -1, 3])]; }
+            } while (evalPoly(N1, a) === 0 || (D1 && evalPoly(D1, a) === 0) || (D1 && D1.length === 2 && proportional(N1, D1)));
+            N = mul([-a, 1], N1);
+            Dc = sc === 'S4' ? scale(mul([-a, 1], [-a, 1]), k) : mul([-a, 1], D1);
+            const ca = '\\cancel{' + xa + '}';
+            let numF = ca + par(polyTex(N1)), denF, simp;
+            if (sc === 'S4') { denF = kTex(k) + ca + xa; simp = '\\frac{' + polyTex(N1) + '}{' + (k === 1 ? xma(a) : kTex(k) + xa) + '}'; }
+            else if (D1.length === 1) { denF = kTex(k) + ca; simp = k === 1 ? polyTex(N1) : '\\frac{' + polyTex(N1) + '}{' + k + '}'; }
+            else { denF = ca + par(polyTex(D1)); simp = '\\frac{' + polyTex(N1) + '}{' + polyTex(D1) + '}'; }
+            cat = 'Fraction rationnelle en une valeur interdite';
+            sol += step(1, 'Recherche directe', D(cases([lim(B) + ' ' + par(polyTex(N)) + ' = 0', lim(B) + ' ' + par(polyTex(Dc)) + ' = 0'])) + P(FI('\\frac{0}{0}')));
+            sol += step(2, 'Lever l\'indétermination', P(M(a) + ' annule le numérateur et le dénominateur : on factorise chacun par ' + M(xa) + ', puis on simplifie. Pour ' + M('x\\neq ' + a) + ' :')
+                + D('f(x) = \\frac{' + numF + '}{' + denF + '} = ' + simp)
+                + NOTE('Le second facteur s\'obtient par identification, ou à l\'aide des racines du trinôme.'));
+            const N1a = evalPoly(N1, a);
+            if (sc === 'S3') {
+                const den = D1.length === 1 ? k : evalPoly(D1, a), L = VAL(F(N1a, den));
+                const lines = [lim(B) + ' ' + par(polyTex(N1)) + ' = ' + N1a];
+                if (D1.length === 2) lines.push(lim(B) + ' ' + par(polyTex(D1)) + ' = ' + den);
+                sol += step(3, 'Limites intermédiaires', D(cases(lines)));
+                sol += step(4, 'Conclusion', P('Par quotient des limites :') + boxed(lim(B) + ' f(x) = ' + limTex(L))
+                    + NOTE('La limite est finie : pas d\'asymptote verticale en ' + M(a) + '.'));
+                (side ? [side] : [-1, 1]).forEach(z => checks.push({ B: ptB(a, z), L }));
+            } else {
+                sol += P('On obtient maintenant une forme « ' + M('\\frac{' + N1a + '}{0}') + ' » : on étudie le signe du dénominateur.');
+                let n = 3;
+                sides.forEach(sd => {
+                    const Bs = ptB(a, sd), ds = sgn(k) * sd, L = INF(sgn(N1a) * ds);
+                    const lines = [lim(Bs) + ' ' + par(polyTex(N1)) + ' = ' + N1a, lim(Bs) + ' ' + xa + ' = 0^{' + pm(sd) + '}'];
+                    let body = D(cases(lines));
+                    if (k !== 1) body += P('Par produit (par ' + M(k) + ') : ' + M(lim(Bs) + ' ' + kTex(k) + xa + ' = 0^{' + pm(ds) + '}') + '.');
+                    body += P(quot(N1a, ds)) + boxed(lim(Bs) + ' f(x) = ' + limTex(L));
+                    sol += step(n++, sideTitle(sd, a), body);
+                    checks.push({ B: Bs, L });
+                });
+                if (!side) sol += asymV(a);
+            }
+        }
+        return { cat, fx: '\\frac{' + polyTex(N) + '}{' + polyTex(Dc) + '}', B, sol, fn: x => evalPoly(N, x) / evalPoly(Dc, x), checks };
+    }
+
+    /* =====================================================================
+       3. k e^(ax+b) + c  (composition)
+       ===================================================================== */
+    function expAffStep(B, A, b) {
+        const s = B.s, u = lim(B), aff = polyTex([b, A]), E = '\\mathrm{e}^{' + aff + '}';
+        const Lin = INF(sgn(A) * s), Lexp = Lin.inf > 0 ? INF(1) : VAL(0, '+');
+        const body = P('Par produit et somme, ' + M(u + ' ' + par(aff) + ' = ' + limTex(Lin)) + '. On pose ' + M('X = ' + aff) + ' :')
+            + compo(B, par(aff), Lin, '\\mathrm{e}^{X}', Lexp, E)
+            + P('par composition des limites (limite du cours : ' + M('\\lim_{X\\to ' + limTex(Lin) + '}\\mathrm{e}^{X} = ' + limTex(Lexp)) + ').');
+        return { E, aff, Lexp, body };
+    }
+    /* exposant u(x) en ±infini : affine, polynôme de degré 2 ou c/(ax+b) */
+    function expInner(B) {
+        const s = B.s, u = lim(B), v = pick(['aff', 'aff', 'poly', 'inv']);
+        if (v === 'aff') {
+            const A = RNZ(-4, 4), b = R(-6, 6), tex = polyTex([b, A]), Lin = INF(sgn(A) * s);
+            return { tex, Lin, fn: x => A * x + b, just: P('Par produit et somme, ' + M(u + ' ' + par(tex) + ' = ' + limTex(Lin)) + '.') };
+        }
+        if (v === 'poly') {
+            const c = randPoly(2, R(2, 3)); c[2] = RNZ(-3, 3);
+            const tex = polyTex(c), Lin = INF(polyLimSign(c, s));
+            let just;
+            if (internalFI(c, s)) {
+                const br = bracket(c);
+                just = P('F.I. « ' + M('+\\infty-\\infty') + ' » dans l\'exposant : on factorise par le terme de plus haut degré, '
+                    + M(tex + ' = ' + monoTex(c[2], 2) + par(br.tex)) + '. Comme ' + M(u + ' ' + par(br.tex) + ' = 1') + ' et '
+                    + M(u + ' ' + monoPar(c[2], 2) + ' = ' + limTex(Lin)) + ', par produit ' + M(u + ' ' + par(tex) + ' = ' + limTex(Lin)) + '.');
+            } else just = P('Par produit et somme, ' + M(u + ' ' + par(tex) + ' = ' + limTex(Lin)) + '.');
+            return { tex, Lin, fn: x => evalPoly(c, x), just };
+        }
+        const A = RNZ(-3, 3), b = R(-5, 5), cc = RNZ(-4, 4), den = polyTex([b, A]);
+        const tex = (cc < 0 ? '-' : '') + '\\frac{' + Math.abs(cc) + '}{' + den + '}';
+        const Lin = VAL(0, pm(sgn(cc) * sgn(A) * s));
+        return {
+            tex, Lin, fn: x => cc / (A * x + b),
+            just: P('Par produit et somme, ' + M(u + ' ' + par(den) + ' = ' + limTex(INF(sgn(A) * s))) + ', donc par quotient « '
+                + M('\\frac{' + cc + '}{\\infty}') + ' » : ' + M(u + ' ' + parNeg(tex) + ' = ' + limTex(Lin)) + '.')
+        };
+    }
+    function genExpAff(B) {
+        const s = B.s, u = lim(B), inn = expInner(B);
+        const E = '\\mathrm{e}^{' + inn.tex + '}';
+        const k = pick([1, 1, 1, -1, 2, -2, 3, -3, 4, 5]), c = chance(0.5) ? 0 : RNZ(-6, 6);
+        const Lexp = inn.Lin.inf ? (inn.Lin.inf > 0 ? INF(1) : VAL(0, '+')) : VAL(1);
+        const note = inn.Lin.inf ? 'limite du cours : ' + M('\\lim_{X\\to ' + limTex(inn.Lin) + '}\\mathrm{e}^{X} = ' + limTex(Lexp))
+            : 'continuité de l\'exponentielle en 0 : ' + M('\\mathrm{e}^{0} = 1');
+        const fx = kTex(k) + E + (c ? (c > 0 ? ' + ' + c : ' - ' + (-c)) : '');
+        let sol = step(1, 'Limite de ' + M(E) + ' par composition', inn.just + P('On pose ' + M('X = ' + inn.tex) + ' :')
+            + compo(B, par(inn.tex), inn.Lin, '\\mathrm{e}^{X}', Lexp, E) + P('par composition des limites (' + note + ').'));
+        let L;
+        if (k === 1 && c === 0) {
+            L = Lexp;
+            sol += step(2, 'Conclusion', boxed(u + ' f(x) = ' + limTex(L)));
+        } else {
+            const v = Lexp.inf ? 0 : Lexp.val.n;
+            const Lk = Lexp.inf ? INF(sgn(k)) : VAL(k * v);
+            L = Lexp.inf ? Lk : VAL(k * v + c);
+            let body = '';
+            if (k !== 1) body += P('Par produit par ' + M(k) + ' : ' + M(u + ' ' + parNeg(kTex(k) + E) + ' = ' + limTex(Lk)) + '.');
+            body += P(c !== 0 ? 'Par somme (avec ' + M(c) + ') :' : 'Donc :');
+            body += boxed(u + ' f(x) = ' + limTex(L));
+            sol += step(2, 'Conclusion', body);
+        }
+        if (!L.inf) sol += NOTE('La droite d\'équation ' + M('y=' + fracTex(L.val)) + ' est asymptote horizontale à la courbe de ' + M('f') + ' en ' + infName(s) + '.');
+        return { cat: 'Composée ' + M('\\mathrm{e}^{u(x)}') + ' en ' + infName(s), fx, B, sol, fn: x => k * Math.exp(inn.fn(x)) + c, checks: [{ B, L }] };
+    }
+    /* e^(c/(ax+b)) en la valeur interdite x0 = -b/a */
+    function genExpCompPoint(side) {
+        const x0 = R(-3, 3), A = pick([1, 1, 2, -1, -2, 3]), b = -A * x0, cc = RNZ(-4, 4), d = chance(0.3) ? RNZ(-5, 5) : 0;
+        const den = polyTex([b, A]), inner = (cc < 0 ? '-' : '') + '\\frac{' + Math.abs(cc) + '}{' + den + '}';
+        const E = '\\mathrm{e}^{' + inner + '}', fx = E + (d ? (d > 0 ? ' + ' + d : ' - ' + (-d)) : '');
+        const B = ptB(x0, side), sides = side ? [side] : [-1, 1], checks = [];
+        let sol = step(1, 'Valeur interdite', P(M(den) + ' s\'annule en ' + M(x0) + ' : l\'exposant ' + M(inner) + ' n\'est pas défini en ' + M(x0)
+            + '. On cherche d\'abord la limite de l\'exposant, à gauche et à droite, puis on compose par l\'exponentielle.'));
+        let n = 2, inf = false;
+        sides.forEach(sd => {
+            const Bs = ptB(x0, sd), ds = sgn(A) * sd, Lin = INF(sgn(cc) * ds), Lexp = Lin.inf > 0 ? INF(1) : VAL(0, '+');
+            const L = Lexp.inf ? INF(1) : (d ? VAL(d) : Lexp);
+            if (L.inf) inf = true;
+            let body = D(cases([lim(Bs) + ' ' + parNeg(String(cc)) + ' = ' + cc, lim(Bs) + ' ' + par(den) + ' = 0^{' + pm(ds) + '}']));
+            body += P('Par quotient des limites « ' + M('\\frac{' + cc + '}{0^{' + pm(ds) + '}}') + ' » : ' + M(lim(Bs) + ' ' + parNeg(inner) + ' = ' + limTex(Lin)) + '. On pose ' + M('X = ' + inner) + ' :');
+            body += compo(Bs, parNeg(inner), Lin, '\\mathrm{e}^{X}', Lexp, E) + P('par composition des limites (limite du cours).');
+            if (d) body += P('Par somme (avec ' + M(d) + ') :') + boxed(lim(Bs) + ' f(x) = ' + limTex(L));
+            else body += boxed(lim(Bs) + ' f(x) = ' + limTex(L));
+            sol += step(n++, sideTitle(sd, x0), body);
+            checks.push({ B: Bs, L });
+        });
+        if (inf) sol += asymV(x0);
+        return { cat: 'Composée ' + M('\\mathrm{e}^{u(x)}') + ' en une valeur interdite', fx, B, sol, fn: x => Math.exp(cc / (A * x + b)) + d, checks };
+    }
+
+    /* =====================================================================
+       4. P(x) e^(ax+b) sans croissances comparées
+       ===================================================================== */
+    function genPolyExp(B) {
+        const s = B.s, u = lim(B);
+        const A = s * R(1, 4), b = R(-5, 5);
+        const Pc = randPolyNoFI(R(1, 2), R(1, 3), s, 0);
+        const st = expAffStep(B, A, b), E = st.E, LP = INF(polyLimSign(Pc, s)), L = INF(LP.inf);
+        let sol = '';
+        sol += step(1, 'Limite de ' + M(E) + ' par composition', st.body);
+        sol += step(2, 'Limite du polynôme', P('Par produit et somme : ' + M(u + ' ' + polyPar(Pc) + ' = ' + limTex(LP)) + '.'));
+        sol += step(3, 'Conclusion', D(cases([u + ' ' + polyPar(Pc) + ' = ' + limTex(LP), u + ' ' + E + ' = +\\infty']))
+            + P('Il n\'y a pas de forme indéterminée. Par produit des limites :') + boxed(u + ' f(x) = ' + limTex(L)));
+        return { cat: M('P(x)\\,\\mathrm{e}^{ax+b}') + ' en ' + infName(s), fx: polyPar(Pc) + E, B, sol, fn: x => evalPoly(Pc, x) * Math.exp(A * x + b), checks: [{ B, L }] };
+    }
+
+    /* =====================================================================
+       5. P(x) e^(±x)  : croissances comparées
+       ===================================================================== */
+    function ccTerms(Pc, eps) {
+        /* eps>0 : c x^k e^x ; eps<0 : c x^k / e^x */
+        const parts = [], lines = [], ns = [];
+        for (let k = Pc.length - 1; k >= 0; k--) {
+            if (Pc[k] === 0) continue;
+            const b = Math.abs(Pc[k]), cf = (b === 1 && k > 0) ? '' : String(b);
+            if (eps > 0) parts.push({ neg: Pc[k] < 0, tex: cf + xp(k) + EX });
+            else parts.push({ neg: Pc[k] < 0, tex: '\\frac{' + cf + xp(k) + '}{' + EX + '}' });
+            if (k >= 1) { ns.push(k); lines.push(eps > 0 ? xp(k) + EX : '\\frac{' + xp(k) + '}{' + EX + '}'); }
+            else lines.push(eps > 0 ? EX : '\\frac{1}{' + EX + '}');
+        }
+        return { tex: joinSigned(parts), lines, ns };
+    }
+    function courseCC(eps, ns) {
+        const nT = ns.length === 1 ? M('n=' + ns[0]) : M('n\\in\\{' + ns.join(' ; ') + '\\}');
+        const res = eps > 0 ? '\\lim\\limits_{x\\to-\\infty} x^{n}\\mathrm{e}^{x} = 0' : '\\lim\\limits_{x\\to+\\infty} \\frac{x^{n}}{\\mathrm{e}^{x}} = 0';
+        return 'On reconnaît la croissance comparée du cours ' + M(res) + ', ici avec ' + nT + '.';
+    }
+    function genExpP(B) {
+        const s = B.s, u = lim(B);
+        const fi = chance(0.75), eps = fi ? -s : s;
+        const Pc = randPolyNoFI(R(1, 3), R(1, 3), s, 0);
+        const Ex = eps > 0 ? EX : EMX, LP = INF(polyLimSign(Pc, s));
+        const fx = polyPar(Pc) + Ex;
+        let sol = '', L;
+        if (!fi) {
+            L = INF(LP.inf);
+            sol += step(1, 'Limites des facteurs', D(cases([u + ' ' + Ex + ' = +\\infty', u + ' ' + polyPar(Pc) + ' = ' + limTex(LP) + '\\quad\\text{(produit et somme)}']))
+                + P('Il n\'y a pas de forme indéterminée.'));
+            sol += step(2, 'Conclusion', P('Par produit des limites :') + boxed(u + ' f(x) = ' + limTex(L)));
+        } else {
+            L = VAL(0);
+            const t = ccTerms(Pc, eps);
+            sol += step(1, 'Recherche directe', D(cases([u + ' ' + Ex + ' = 0' + (eps < 0 ? '\\quad\\text{car } \\mathrm{e}^{-x} = \\frac{1}{\\mathrm{e}^{x}}' : ''),
+                u + ' ' + polyPar(Pc) + ' = ' + limTex(LP) + '\\quad\\text{(produit et somme)}'])) + P(FI('0\\times\\infty')));
+            sol += step(2, 'Lever l\'indétermination', P('On développe pour faire apparaître les croissances comparées du cours' + (eps < 0 ? ', en écrivant ' + M(EMX + '=\\frac{1}{' + EX + '}') : '') + ' :')
+                + D('f(x) = ' + (eps < 0 ? '\\frac{' + polyTex(Pc) + '}{' + EX + '} = ' : '') + t.tex));
+            sol += step(3, 'Limites intermédiaires', D(cases(t.lines.map(l => u + ' ' + l + ' = 0'))) + P(courseCC(eps, t.ns)));
+            sol += step(4, 'Conclusion', P('Par produit par des constantes, puis par somme des limites :') + boxed(u + ' f(x) = 0')
+                + NOTE('La droite d\'équation ' + M('y=0') + ' est asymptote horizontale à la courbe de ' + M('f') + ' en ' + infName(s) + '.'));
+        }
+        return { cat: M('P(x)\\,\\mathrm{e}^{\\pm x}') + ' en ' + infName(s), fx, B, sol, fn: x => evalPoly(Pc, x) * Math.exp(eps * x), checks: [{ B, L }] };
+    }
+
+    /* =====================================================================
+       6. e^(±x) + P(x) : croissances comparées
+       ===================================================================== */
+    function genExpPlusP(B) {
+        const s = B.s, u = lim(B);
+        const fi = chance(0.75);
+        let eps, Pc;
+        if (fi) { eps = s; Pc = randPolyNoFI(R(1, 3), R(1, 3), s, -1); }
+        else { eps = pick([1, -1]); Pc = randPolyNoFI(R(1, 3), R(1, 3), s, eps * s > 0 ? 1 : pick([1, -1])); }
+        const Ex = eps > 0 ? EX : EMX, LP = INF(polyLimSign(Pc, s)), LE = eps * s > 0 ? INF(1) : VAL(0, '+');
+        const fx = joinSigned([{ neg: false, tex: Ex }].concat(polyParts(Pc)));
+        let sol = '', L;
+        if (!fi) {
+            L = LE.inf ? INF(1) : LP;
+            sol += step(1, 'Limites des termes', D(cases([u + ' ' + Ex + ' = ' + limTex(LE), u + ' ' + polyPar(Pc) + ' = ' + limTex(LP) + '\\quad\\text{(produit et somme)}']))
+                + P('Il n\'y a pas de forme indéterminée.'));
+            sol += step(2, 'Conclusion', P('Par somme des limites :') + boxed(u + ' f(x) = ' + limTex(L)));
+        } else {
+            L = INF(1);
+            const t = ccTerms(Pc, -eps); /* eps>0 : c x^k / e^x ; eps<0 : c x^k e^x */
+            sol += step(1, 'Recherche directe', D(cases([u + ' ' + Ex + ' = +\\infty', u + ' ' + polyPar(Pc) + ' = -\\infty\\quad\\text{(produit et somme)}'])) + P(FI('+\\infty-\\infty')));
+            const onePlus = tx => (tx.charAt(0) === '-' ? '1 - ' + tx.slice(1) : '1 + ' + tx);
+            const chain = eps > 0
+                ? EX + par('1 + \\frac{' + polyTex(Pc) + '}{' + EX + '}') + ' = ' + EX + par(onePlus(t.tex))
+                : EMX + par('1 + \\frac{' + polyTex(Pc) + '}{' + EMX + '}') + ' = ' + EMX + par('1 + ' + polyPar(Pc) + EX) + ' = ' + EMX + par(onePlus(t.tex));
+            sol += step(2, 'Lever l\'indétermination', P('On factorise par le terme prépondérant ' + M(Ex) + (eps < 0 ? ', en utilisant ' + M('\\frac{1}{' + EMX + '} = ' + EX) : '') + ' :')
+                + D('f(x) = ' + chain));
+            sol += step(3, 'Limites intermédiaires', D(cases(t.lines.map(l => u + ' ' + l + ' = 0'))) + P(courseCC(-eps, t.ns))
+                + P('Par produit par des constantes et somme : ' + M(u + ' ' + par(onePlus(t.tex)) + ' = 1') + '.'));
+            sol += step(4, 'Conclusion', P('Comme ' + M(u + ' ' + Ex + ' = +\\infty') + ', par produit des limites :') + boxed(u + ' f(x) = +\\infty'));
+        }
+        return { cat: M('\\mathrm{e}^{\\pm x}+P(x)') + ' en ' + infName(s), fx, B, sol, fn: x => Math.exp(eps * x) + evalPoly(Pc, x), checks: [{ B, L }] };
+    }
+
+    /* =====================================================================
+       7. monôme et e^(ax) : changement de variable X = ax
+       ===================================================================== */
+    function genCC(B) {
+        const s = B.s, u = lim(B);
+        const n = R(1, 3), form = pick(['i', 'i', 'ii', 'iii']);
+        const pq = pick([[2, 1], [3, 1], [1, 2], [1, 3], [4, 1], [5, 1], [3, 2]]), p = pq[0], q = pq[1];
+        const want = form === 'i' ? -1 : 1, sa = want * s;
+        const k = pick([1, 1, 1, -1, 2, -2, 3]), kA = Math.abs(k), kS = k < 0 ? '-' : '';
+        const axTex = (sa < 0 ? '-' : '') + (q === 1 ? (p === 1 ? 'x' : p + 'x') : '\\frac{' + (p === 1 ? '' : p) + 'x}{' + q + '}');
+        const Eax = '\\mathrm{e}^{' + axTex + '}', EXX = '\\mathrm{e}^{X}';
+        const xX = monoFracTex(F(sa * q, p), 1, 'X');
+        const powX = par(xX) + (n > 1 ? '^{' + n + '}' : '');
+        const pn = Math.pow(p, n), qn = Math.pow(q, n), san = Math.pow(sa, n);
+        const Xinf = INF(want), aval = sa * p / q;
+        let fx, sub, res, L, course, det, fiForm, fn;
+        if (form === 'i') {
+            const C = F(k * qn * san, pn);
+            fx = kTex(k) + xp(n) + Eax; sub = kTex(k) + powX + EXX; res = coefTex(C) + xp(n, 'X') + EXX; L = VAL(0);
+            course = '\\lim\\limits_{X\\to-\\infty} ' + xp(n, 'X') + EXX + ' = 0';
+            det = [u + ' ' + monoPar(k, n) + ' = ' + limTex(INF(sgn(k) * powLim(n, s))), u + ' ' + Eax + ' = 0'];
+            fiForm = '\\infty\\times 0';
+            fn = x => k * Math.pow(x, n) * Math.exp(aval * x);
+        } else if (form === 'ii') {
+            const C = F(k * san * pn, qn);
+            fx = kS + '\\frac{' + (kA === 1 ? '' : kA) + Eax + '}{' + xp(n) + '}'; sub = '\\frac{' + kTex(k) + EXX + '}{' + powX + '}';
+            res = coefTex(C) + '\\frac{' + EXX + '}{' + xp(n, 'X') + '}'; L = INF(sgn(C.n));
+            course = '\\lim\\limits_{X\\to+\\infty} \\frac{' + EXX + '}{' + xp(n, 'X') + '} = +\\infty';
+            det = [u + ' ' + Eax + ' = +\\infty', u + ' ' + xp(n) + ' = ' + limTex(INF(powLim(n, s)))];
+            fiForm = '\\frac{\\infty}{\\infty}';
+            fn = x => k * Math.exp(aval * x) / Math.pow(x, n);
+        } else {
+            const C = F(k * qn * san, pn);
+            fx = kS + '\\frac{' + (kA === 1 ? '' : kA) + xp(n) + '}{' + Eax + '}'; sub = '\\frac{' + kTex(k) + powX + '}{' + EXX + '}';
+            res = coefTex(C) + '\\frac{' + xp(n, 'X') + '}{' + EXX + '}'; L = VAL(0);
+            course = '\\lim\\limits_{X\\to+\\infty} \\frac{' + xp(n, 'X') + '}{' + EXX + '} = 0';
+            det = [u + ' ' + xp(n) + ' = ' + limTex(INF(powLim(n, s))), u + ' ' + Eax + ' = +\\infty'];
+            fiForm = '\\frac{\\infty}{\\infty}';
+            fn = x => k * Math.pow(x, n) / Math.exp(aval * x);
+        }
+        let sol = '';
+        sol += step(1, 'Recherche directe', D(cases(det))
+            + P('(pour l\'exponentielle : ' + M(u + ' ' + par(axTex) + ' = ' + limTex(Xinf)) + ' et ' + M('\\lim_{X\\to ' + limTex(Xinf) + '}' + EXX + ' = ' + (want > 0 ? '+\\infty' : '0')) + ', par composition).')
+            + P(FI(fiForm)));
+        sol += step(2, 'Changement de variable', P('On pose ' + M('X = ' + axTex) + ', c\'est-à-dire ' + M('x = ' + xX) + '. On remplace ' + M('x') + ' dans l\'expression :')
+            + D('f(x) = ' + sub + ' = ' + res));
+        sol += step(3, 'Limite par composition', compo(B, par(axTex), Xinf, parNeg(res), L, 'f(x)')
+            + P('car ' + M(course) + ' : c\'est la croissance comparée du cours, multipliée ici par une constante.'));
+        sol += step(4, 'Conclusion', boxed(u + ' f(x) = ' + limTex(L)));
+        return { cat: M('x^n') + ' et ' + M('\\mathrm{e}^{ax}') + ' en ' + infName(s) + ' : changement de variable', fx, B, sol, fn, checks: [{ B, L }] };
+    }
+
+    /* =====================================================================
+       8. Taux de variation
+       ===================================================================== */
+    const eTex = c => (c === 0 ? '1' : (c === 1 ? '\\mathrm{e}' : '\\mathrm{e}^{' + c + '}'));
+    function genTaux(side) {
+        const fam = pick(['sin', 'cos', 'exp0', 'expA', 'expA', 'sqrt0', 'sqrtA', 'sqrt2', 'pi']);
+        let a = 0, an = 0, num, den = 'x', g, ga, gp, gpa, L, fnum, rule = '';
+        if (fam === 'sin' || fam === 'cos' || fam === 'exp0') {
+            const k = fam === 'exp0' ? pick([1, 2, 3, 4, 5, -1, -2, -3]) : pick([1, 2, 3, 4, 5]), kx = monoTex(k, 1);
+            if (fam === 'sin') {
+                num = '\\sin(' + kx + ')'; g = num; ga = '\\sin(0) = 0'; gp = kTex(k) + '\\cos(' + kx + ')'; gpa = kTex(k) + '\\cos(0) = ' + k; L = VAL(k);
+                fnum = x => Math.sin(k * x); rule = M('(\\sin(ax))\' = a\\cos(ax)');
+            } else if (fam === 'cos') {
+                num = '\\cos(' + kx + ') - 1'; g = '\\cos(' + kx + ')'; ga = '\\cos(0) = 1'; gp = kTex(-k) + '\\sin(' + kx + ')'; gpa = kTex(-k) + '\\sin(0) = 0'; L = VAL(0);
+                fnum = x => Math.cos(k * x) - 1; rule = M('(\\cos(ax))\' = -a\\sin(ax)');
+            } else {
+                num = '\\mathrm{e}^{' + kx + '} - 1'; g = '\\mathrm{e}^{' + kx + '}'; ga = '\\mathrm{e}^{0} = 1'; gp = kTex(k) + '\\mathrm{e}^{' + kx + '}'; gpa = kTex(k) + '\\mathrm{e}^{0} = ' + k; L = VAL(k);
+                fnum = x => Math.exp(k * x) - 1; rule = M('(\\mathrm{e}^{ax+b})\' = a\\,\\mathrm{e}^{ax+b}');
+            }
+        } else if (fam === 'expA') {
+            const x0 = R(-3, 4), m = RNZ(-3, 3), c = R(-3, 3), b = c - m * x0, aff = polyTex([b, m]);
+            a = x0; an = x0; den = xma(x0);
+            num = '\\mathrm{e}^{' + aff + '} - ' + eTex(c); g = '\\mathrm{e}^{' + aff + '}';
+            ga = '\\mathrm{e}^{' + c + '} = ' + eTex(c); gp = kTex(m) + '\\mathrm{e}^{' + aff + '}';
+            gpa = kTex(m) + '\\mathrm{e}^{' + c + '}' + (c === 0 ? ' = ' + m : c === 1 ? ' = ' + kTex(m) + '\\mathrm{e}' : '');
+            L = c === 0 ? VAL(m) : VALT(kTex(m) + eTex(c), m * Math.exp(c));
+            fnum = x => Math.exp(m * x + b) - Math.exp(c); rule = M('(\\mathrm{e}^{ax+b})\' = a\\,\\mathrm{e}^{ax+b}');
+        } else if (fam === 'sqrt0') {
+            const k = pick([1, 2, 3, 4, 5, -1, -2, -3]), inner = '1 ' + (k > 0 ? '+ ' : '- ') + monoTex(Math.abs(k), 1);
+            num = '\\sqrt{' + inner + '} - 1'; g = '\\sqrt{' + inner + '}'; ga = '\\sqrt{1} = 1';
+            gp = '\\frac{' + k + '}{2\\sqrt{' + inner + '}}'; gpa = '\\frac{' + k + '}{2\\sqrt{1}} = ' + fracTex(F(k, 2)); L = VAL(F(k, 2));
+            fnum = x => Math.sqrt(1 + k * x) - 1; rule = M('(\\sqrt{u})\' = \\frac{u\'}{2\\sqrt{u}}');
+        } else if (fam === 'sqrtA') {
+            const r = R(1, 4), x0 = R(-3, 5), c = r * r - x0, inner = polyTex([c, 1]);
+            a = x0; an = x0; den = xma(x0);
+            num = '\\sqrt{' + inner + '} - ' + r; g = '\\sqrt{' + inner + '}'; ga = '\\sqrt{' + (r * r) + '} = ' + r;
+            gp = '\\frac{1}{2\\sqrt{' + inner + '}}'; gpa = '\\frac{1}{2\\sqrt{' + (r * r) + '}} = ' + fracTex(F(1, 2 * r)); L = VAL(F(1, 2 * r));
+            fnum = x => Math.sqrt(x + c) - r; rule = M('(\\sqrt{u})\' = \\frac{u\'}{2\\sqrt{u}}');
+        } else if (fam === 'sqrt2') {
+            const t = pick([[1, 3, 8], [2, 3, 5], [1, 2, 3], [3, 5, 16], [4, 5, 9], [3, 4, 7], [2, 4, 12]]), x0 = pick([1, -1]) * t[0], r = t[1], c = t[2];
+            const inner = 'x^{2} + ' + c;
+            a = x0; an = x0; den = xma(x0);
+            num = '\\sqrt{' + inner + '} - ' + r; g = '\\sqrt{' + inner + '}'; ga = '\\sqrt{' + (x0 * x0) + ' + ' + c + '} = ' + r;
+            gp = '\\frac{2x}{2\\sqrt{' + inner + '}} = \\frac{x}{\\sqrt{' + inner + '}}'; gpa = '\\frac{' + x0 + '}{\\sqrt{' + (r * r) + '}} = ' + fracTex(F(x0, r)); L = VAL(F(x0, r));
+            fnum = x => Math.sqrt(x * x + c) - r; rule = M('(\\sqrt{u})\' = \\frac{u\'}{2\\sqrt{u}}');
+        } else {
+            const PI2 = '\\frac{\\pi}{2}', c = pick([
+                { num: '\\sin(x)', a: '\\pi', an: Math.PI, g: '\\sin(x)', ga: '\\sin(\\pi) = 0', gp: '\\cos(x)', gpa: '\\cos(\\pi) = -1', v: -1, f: x => Math.sin(x) },
+                { num: '\\cos(x)', a: PI2, an: Math.PI / 2, g: '\\cos(x)', ga: '\\cos\\left(' + PI2 + '\\right) = 0', gp: '-\\sin(x)', gpa: '-\\sin\\left(' + PI2 + '\\right) = -1', v: -1, f: x => Math.cos(x) },
+                { num: '\\cos(x) + 1', a: '\\pi', an: Math.PI, g: '\\cos(x)', ga: '\\cos(\\pi) = -1', gp: '-\\sin(x)', gpa: '-\\sin(\\pi) = 0', v: 0, f: x => Math.cos(x) + 1 },
+                { num: '\\sin(x) - 1', a: PI2, an: Math.PI / 2, g: '\\sin(x)', ga: '\\sin\\left(' + PI2 + '\\right) = 1', gp: '\\cos(x)', gpa: '\\cos\\left(' + PI2 + '\\right) = 0', v: 0, f: x => Math.sin(x) - 1 }]);
+            a = c.a; an = c.an; den = 'x - ' + c.a; num = c.num; g = c.g; ga = c.ga; gp = c.gp; gpa = c.gpa; L = VAL(c.v); fnum = c.f;
+        }
+        const B = { kind: 'pt', a, an, side }, u = lim(B);
+        const aPar = (typeof a === 'number' && a < 0) ? '(' + a + ')' : a;
+        let sol = '';
+        sol += step(1, 'Recherche directe', D(cases([u + ' ' + par(num) + ' = 0', u + ' ' + (den.includes(' ') ? par(den) : den) + ' = 0'])) + P(FI('\\frac{0}{0}')));
+        sol += step(2, 'Reconnaître un taux de variation', P('On pose ' + M('g(x) = ' + g) + ', dérivable en ' + M(a) + '. On a ' + M('g(' + a + ') = ' + ga) + ', donc :')
+            + D('f(x) = \\frac{g(x) - g(' + a + ')}{x - ' + aPar + '}')
+            + P('Par définition du nombre dérivé : ' + M(u + ' \\frac{g(x) - g(' + a + ')}{x - ' + aPar + '} = g\'(' + a + ')') + '.'));
+        sol += step(3, 'Calcul du nombre dérivé', (rule ? P('On utilise ' + rule + ' :') : '') + D('g\'(x) = ' + gp) + D('g\'(' + a + ') = ' + gpa));
+        sol += step(4, 'Conclusion', boxed(u + ' f(x) = ' + limTex(L)));
+        const checks = (side ? [side] : [-1, 1]).map(z => ({ B: { kind: 'pt', a, an, side: z }, L }));
+        return {
+            cat: 'Taux de variation', fx: '\\frac{' + num + '}{' + den + '}', B, sol, fn: x => fnum(x) / (x - an), checks,
+            ask: 'Déterminer ' + M('\\displaystyle ' + u + ' f(x)') + ' en reconnaissant un taux de variation.'
+        };
+    }
+
+    /* =====================================================================
+       9. Comparaison et encadrement
+       ===================================================================== */
+    function trigT(v) {
+        const f = pick(['sin', 'cos']), k = v ? 1 : pick([1, 1, 2, 3]);
+        const arg = v ? '\\left(' + v + '\\right)' : '(' + monoTex(k, 1) + ')';
+        return { tex: '\\' + f + arg, f: f === 'sin' ? Math.sin : Math.cos, k };
+    }
+    const noLim = (T, where) => P(M(T) + ' n\'a pas de limite ' + where + ' : on ne peut pas conclure avec les opérations sur les limites.');
+    /* encadrement de T/x^n au voisinage de s*infini */
+    function encXn(T, n, s) {
+        const xn = xp(n);
+        if (n % 2 === 1 && s < 0) return { cond: 'x\\lt 0', tex: '\\frac{1}{' + xn + '} \\leqslant \\frac{' + T + '}{' + xn + '} \\leqslant -\\frac{1}{' + xn + '}' };
+        return { cond: n % 2 === 0 ? 'x\\neq 0' : 'x\\gt 0', tex: '-\\frac{1}{' + xn + '} \\leqslant \\frac{' + T + '}{' + xn + '} \\leqslant \\frac{1}{' + xn + '}' };
+    }
+    function genCmpInf(B) {
+        const s = B.s, u = lim(B), fam = pick(['squeeze', 'squeeze', 'compare', 'compareQ', 'quot', 'quot', 'quot']);
+        const where = 'en ' + infName(s);
+        let sol = '', fx, L, fn, cat;
+        if (fam === 'squeeze') {
+            const T = trigT(), c = pick([1, 1, 2, 3, -1, -2]), K = Math.abs(c), d = R(1, 5);
+            const opts = s > 0 ? ['x', 'x+d', 'x2', 'x2+d'] : ['x2', 'x2+d', 'd-x'];
+            const o = pick(opts);
+            const dn = { 'x': ['x', 'x\\gt 0', x => x], 'x+d': ['x + ' + d, 'x\\gt ' + (-d), x => x + d], 'x2': ['x^{2}', 'x\\neq 0', x => x * x],
+                'x2+d': ['x^{2} + ' + d, 'x\\in\\mathbb{R}', x => x * x + d], 'd-x': [d + ' - x', 'x\\lt ' + d, x => d - x] }[o];
+            const num = kTex(c) + T.tex;
+            fx = '\\frac{' + num + '}{' + dn[0] + '}'; L = VAL(0); fn = x => c * T.f(T.k * x) / dn[2](x); cat = 'Théorème des gendarmes en ' + infName(s);
+            sol += step(1, 'Recherche directe', noLim(T.tex, where) + P('On encadre la fonction.'));
+            let body = P('Pour tout réel ' + M('x') + ' :') + D('-1 \\leqslant ' + T.tex + ' \\leqslant 1');
+            if (c !== 1) body += P('donc, l\'encadrement étant symétrique :') + D('-' + K + ' \\leqslant ' + num + ' \\leqslant ' + K);
+            body += P('Pour ' + M(dn[1]) + ', ' + M(dn[0] + '\\gt 0') + ' ; en divisant :') + D('-\\frac{' + K + '}{' + dn[0] + '} \\leqslant f(x) \\leqslant \\frac{' + K + '}{' + dn[0] + '}');
+            sol += step(2, 'Encadrement', body);
+            sol += step(3, 'Limites des encadrants', D(cases([u + ' ' + par(dn[0]) + ' = +\\infty', u + ' \\left(-\\frac{' + K + '}{' + dn[0] + '}\\right) = 0', u + ' \\frac{' + K + '}{' + dn[0] + '} = 0']))
+                + P('(par quotient des limites « ' + M('\\frac{' + K + '}{+\\infty}') + ' »)'));
+            sol += step(4, 'Conclusion', P('D\'après le théorème d\'encadrement (des gendarmes) :') + boxed(u + ' f(x) = 0')
+                + NOTE('La droite d\'équation ' + M('y=0') + ' est asymptote horizontale à la courbe de ' + M('f') + ' en ' + infName(s) + '.'));
+        } else if (fam === 'compare') {
+            const T = trigT(), c = pick([1, 2, 3, -1, -2, 5]), K = Math.abs(c), n = pick([1, 1, 2]);
+            const Pc = new Array(n + 1).fill(0); Pc[n] = RNZ(-4, 4); Pc[0] = R(-6, 6);
+            const Ls = termSign(Pc[n], n, s), Pb = Pc.slice(); Pb[0] = Pc[0] - Ls * K;
+            fx = joinSigned(polyParts(Pc).concat([{ neg: c < 0, tex: (K === 1 ? '' : K) + T.tex }])); L = INF(Ls);
+            fn = x => evalPoly(Pc, x) + c * T.f(T.k * x); cat = 'Théorème de comparaison en ' + infName(s);
+            sol += step(1, 'Recherche directe', noLim(T.tex, where) + P('On utilise un théorème de comparaison.'));
+            const ineq = Ls > 0 ? '\\geqslant' : '\\leqslant';
+            sol += step(2, Ls > 0 ? 'Minoration' : 'Majoration', P('Pour tout réel ' + M('x') + ', ' + M('-1 \\leqslant ' + T.tex + ' \\leqslant 1') + ', donc ' + M(kTex(c) + T.tex + ' ' + ineq + ' ' + (Ls > 0 ? '-' : '') + K) + '. En ajoutant ' + M(polyTex(Pc)) + ' :')
+                + D('f(x) ' + ineq + ' ' + polyTex(Pb)));
+            sol += step(3, 'Limite du ' + (Ls > 0 ? 'minorant' : 'majorant'), P('Par produit et somme : ' + M(u + ' ' + par(polyTex(Pb)) + ' = ' + limTex(L)) + '.'));
+            sol += step(4, 'Conclusion', P('D\'après le théorème de comparaison :') + boxed(u + ' f(x) = ' + limTex(L)));
+        } else if (fam === 'compareQ') {
+            const d = R(2, 4), c = RNZ(-(d - 1), d - 1), K = Math.abs(c), T = trigT(), m = RNZ(-3, 3), q = R(-5, 5);
+            const numT = polyTex([q, m]), denT = d + (c > 0 ? ' + ' : ' - ') + (K === 1 ? '' : K) + T.tex, Ls = sgn(m) * s;
+            fx = '\\frac{' + numT + '}{' + denT + '}'; L = INF(Ls); fn = x => (m * x + q) / (d + c * T.f(T.k * x)); cat = 'Théorème de comparaison en ' + infName(s);
+            const up = d + K, lo = d - K;
+            sol += step(1, 'Recherche directe', noLim(T.tex, where) + P('On utilise un théorème de comparaison.'));
+            sol += step(2, 'Encadrer le dénominateur', P('Pour tout réel ' + M('x') + ', ' + M('-1 \\leqslant ' + T.tex + ' \\leqslant 1') + ', donc :')
+                + D(lo + ' \\leqslant ' + denT + ' \\leqslant ' + up)
+                + P('Le dénominateur est strictement positif et, par passage à l\'inverse :') + D('\\frac{1}{' + up + '} \\leqslant \\frac{1}{' + denT + '} \\leqslant ' + fracTex(F(1, lo))));
+            sol += step(3, Ls > 0 ? 'Minoration' : 'Majoration', P('Au voisinage de ' + infName(s) + ', ' + M(numT + (Ls > 0 ? '\\gt 0' : '\\lt 0')) + ' ; en multipliant l\'inégalité de gauche par ' + M(numT) + (Ls > 0 ? '' : ' (négatif, on change le sens)') + ' :')
+                + D('f(x) ' + (Ls > 0 ? '\\geqslant' : '\\leqslant') + ' \\frac{' + numT + '}{' + up + '}')
+                + P('Par produit et somme : ' + M(u + ' \\frac{' + numT + '}{' + up + '} = ' + limTex(L)) + '.'));
+            sol += step(4, 'Conclusion', P('D\'après le théorème de comparaison :') + boxed(u + ' f(x) = ' + limTex(L)));
+        } else {
+            const p = R(1, 2), q = R(1, 2), a = RNZ(-4, 4), b = RNZ(-4, 4), c1 = RNZ(-3, 3), c2 = RNZ(-3, 3), T1 = trigT(), T2 = trigT();
+            const numT = monoTex(a, p) + (c1 > 0 ? ' + ' : ' - ') + (Math.abs(c1) === 1 ? '' : Math.abs(c1)) + T1.tex;
+            const denT = monoTex(b, q) + (c2 > 0 ? ' + ' : ' - ') + (Math.abs(c2) === 1 ? '' : Math.abs(c2)) + T2.tex;
+            const brk = (c, a0, T, n) => { const r = F(c, a0); return '1 ' + (r.n < 0 ? '- ' : '+ ') + (Math.abs(r.n) === 1 && r.d === 1 ? '' : fracTex(F(Math.abs(r.n), r.d))) + '\\frac{' + T.tex + '}{' + xp(n) + '}'; };
+            const bN = brk(c1, a, T1, p), bD = brk(c2, b, T2, q), r = F(a, b), dd = p - q, Mt = monoFracTex(r, dd), ratio = '\\frac{' + bN + '}{' + bD + '}';
+            if (dd > 0) L = INF(sgn(r.n) * powLim(dd, s)); else if (dd === 0) L = VAL(r); else L = VAL(0);
+            fx = '\\frac{' + numT + '}{' + denT + '}'; fn = x => (a * Math.pow(x, p) + c1 * T1.f(T1.k * x)) / (b * Math.pow(x, q) + c2 * T2.f(T2.k * x));
+            cat = 'Factorisation et gendarmes en ' + infName(s);
+            sol += step(1, 'Recherche directe', P((T1.tex === T2.tex ? M(T1.tex) + ' n\'a' : M(T1.tex) + ' et ' + M(T2.tex) + ' n\'ont') + ' pas de limite ' + where + ' : on ne peut pas conclure directement.')
+                + P('On factorise le numérateur et le dénominateur par leur terme dominant ' + M(monoTex(a, p)) + ' et ' + M(monoTex(b, q)) + '.'));
+            sol += step(2, 'Factoriser', P('Pour ' + M('x\\neq 0') + ' :') + D('\\begin{aligned} f(x) &= \\frac{' + monoTex(a, p) + par(bN) + '}{' + monoTex(b, q) + par(bD) + '}\\\\[0.6em] &= '
+                + (Mt === '1' ? ratio : Mt + '\\times' + ratio) + '\\end{aligned}'));
+            const items = [[T1.tex, p], [T2.tex, q]].filter((it, i, arr) => i === 0 || it[0] !== arr[0][0] || it[1] !== arr[0][1]);
+            const lines = items.map(it => u + ' \\frac{' + it[0] + '}{' + xp(it[1]) + '} = 0 \\quad\\text{(gendarmes)}');
+            if (dd > 0) lines.unshift(u + ' ' + xp(dd) + ' = ' + limTex(INF(powLim(dd, s))));
+            if (dd < 0) lines.unshift(u + ' \\frac{1}{' + xp(-dd) + '} = 0');
+            let body = D(cases(lines)) + P('Justification par le théorème des gendarmes :');
+            items.forEach(it => { const e = encXn(it[0], it[1], s); body += P('pour ' + M(e.cond) + ', ' + M(e.tex) + ', et les encadrants tendent vers 0 ' + where + '.'); });
+            body += P('Par produit et somme, les deux parenthèses tendent vers 1, donc par quotient ' + M(u + ' ' + ratio + ' = 1') + '.');
+            if (dd !== 0) body += P('Par produit par une constante : ' + M(u + ' ' + parNeg(Mt) + ' = ' + limTex(L)) + '.');
+            sol += step(3, 'Limites intermédiaires', body);
+            sol += step(4, 'Conclusion', P('Par produit des limites :') + boxed(u + ' f(x) = ' + limTex(L)));
+        }
+        return { cat, fx, B, sol, fn, checks: [{ B, L }] };
+    }
+    /* (x-a)^n * sin(1/(x-a)) en a */
+    function genCmpPoint(side) {
+        const a = chance(0.6) ? 0 : pick([-2, -1, 1, 2]), n = pick([1, 2]), c = pick([1, 1, 1, 2, -1, 3]), K = Math.abs(c), Kt = K === 1 ? '' : String(K);
+        const ux = xma(a), inv = '\\frac{1}{' + ux + '}', T = trigT(inv);
+        const pw = n === 1 ? (a === 0 ? 'x' : par(ux)) : (a === 0 ? 'x^{2}' : par(ux) + '^{2}');
+        const B = ptB(a, side), L = VAL(0), checks = [];
+        let sol = step(1, 'Recherche directe', P(M(T.tex) + ' n\'a pas de limite en ' + M(a) + ' (car ' + M(inv) + ' tend vers l\'infini) : on ne peut pas conclure avec les opérations sur les limites. On encadre.'));
+        const enc = (sd) => {
+            if (n === 2) return { cond: 'x\\neq ' + a, pos: pw + '\\geqslant 0', tex: '-' + Kt + pw + ' \\leqslant f(x) \\leqslant ' + Kt + pw };
+            if (sd > 0) return { cond: 'x\\gt ' + a, pos: pw + '\\gt 0', tex: '-' + Kt + pw + ' \\leqslant f(x) \\leqslant ' + Kt + pw };
+            return { cond: 'x\\lt ' + a, pos: pw + '\\lt 0', tex: Kt + pw + ' \\leqslant f(x) \\leqslant -' + Kt + pw };
+        };
+        const runs = (n === 2) ? [side] : (side ? [side] : [-1, 1]);
+        let k = 2;
+        runs.forEach(sd => {
+            const Bs = ptB(a, sd), e = enc(sd);
+            let body = P('Pour ' + M(e.cond) + ', ' + M('-1 \\leqslant ' + T.tex + ' \\leqslant 1') + ' et ' + M(e.pos) + '. En multipliant' + (n === 1 && sd < 0 ? ' (on change le sens)' : '') + ' :') + D(e.tex);
+            const lo = e.tex.split(' \\leqslant f(x) \\leqslant ')[0], hi = e.tex.split(' \\leqslant f(x) \\leqslant ')[1];
+            body += D(cases([lim(Bs) + ' ' + parNeg(lo) + ' = 0', lim(Bs) + ' ' + parNeg(hi) + ' = 0']));
+            body += P('D\'après le théorème d\'encadrement (des gendarmes) :') + boxed(lim(Bs) + ' f(x) = 0');
+            sol += step(k++, n === 2 ? 'Encadrement' : sideTitle(sd, a), body);
+            (sd ? [sd] : [-1, 1]).forEach(z => checks.push({ B: ptB(a, z), L }));
+        });
+        if (n === 1 && !side) sol += step(k, 'Conclusion', P('Les limites à gauche et à droite sont égales :') + boxed(lim(B) + ' f(x) = 0'));
+        return { cat: 'Théorème des gendarmes en un point', fx: kTex(c) + pw + T.tex, B, sol, fn: x => c * Math.pow(x - a, n) * T.f(1 / (x - a)), checks,
+            ask: 'Déterminer ' + M('\\displaystyle ' + lim(B) + ' f(x)') + '.' };
+    }
+
+    /* =====================================================================
+       10. Bonus : quantité conjuguée
+       ===================================================================== */
+    function genConj(B) {
+        const s = B.s, u = lim(B);
+        let sol = '', fx, L, fn;
+        if (s > 0 && chance(0.3)) {
+            let al, be; do { al = R(-5, 5); be = R(-5, 5); } while (al === be);
+            const r1 = '\\sqrt{' + polyTex([al, 1]) + '}', r2 = '\\sqrt{' + polyTex([be, 1]) + '}';
+            fx = r1 + ' - ' + r2; L = VAL(0); fn = x => Math.sqrt(x + al) - Math.sqrt(x + be);
+            sol += step(1, 'Recherche directe', D(cases([u + ' ' + r1 + ' = +\\infty', u + ' ' + r2 + ' = +\\infty'])) + P('(par composition avec ' + M('\\lim_{X\\to+\\infty}\\sqrt{X}=+\\infty') + ') ' + FI('+\\infty-\\infty')));
+            sol += step(2, 'Multiplier par la quantité conjuguée', P('On multiplie et divise par ' + M(r1 + ' + ' + r2) + ' (strictement positif) et on utilise ' + M('(A-B)(A+B) = A^2 - B^2') + ' :')
+                + D('f(x) = \\frac{\\left(' + r1 + ' - ' + r2 + '\\right)\\left(' + r1 + ' + ' + r2 + '\\right)}{' + r1 + ' + ' + r2 + '} = \\frac{' + par(polyTex([al, 1])) + ' - ' + par(polyTex([be, 1])) + '}{' + r1 + ' + ' + r2 + '} = \\frac{' + (al - be) + '}{' + r1 + ' + ' + r2 + '}'));
+            sol += step(3, 'Limites intermédiaires', D(cases([u + ' ' + (al - be) + ' = ' + (al - be), u + ' \\left(' + r1 + ' + ' + r2 + '\\right) = +\\infty'])) + P('Par quotient des limites « ' + M('\\frac{' + (al - be) + '}{+\\infty}') + ' » :'));
+            sol += step(4, 'Conclusion', boxed(u + ' f(x) = 0'));
+            return { cat: 'Bonus : quantité conjuguée en ' + infName(s), fx, B, sol, fn, checks: [{ B, L }] };
+        }
+        const m = pick([1, 1, 2, 3]), p = chance(0.2) ? 0 : RNZ(-6, 6);
+        let q; do { q = R(-5, 5); } while (p === 0 && q === 0);
+        const A = polyTex([q, p, m * m]), rA = '\\sqrt{' + A + '}', mx = monoTex(m, 1);
+        const conj = s > 0 ? rA + ' + ' + mx : rA + ' - ' + mx;
+        fx = s > 0 ? rA + ' - ' + mx : rA + ' + ' + mx;
+        fn = x => Math.sqrt(m * m * x * x + p * x + q) - s * m * x;
+        const numT = polyTex([q, p]);
+        sol += step(1, 'Recherche directe', D(cases([u + ' ' + par(A) + ' = +\\infty \\quad\\text{(factorisation par } ' + monoTex(m * m, 2) + ')',
+            u + ' ' + rA + ' = +\\infty \\quad\\text{(composition)}', u + ' ' + parNeg((s > 0 ? '-' : '') + mx) + ' = -\\infty'])) + P(FI('+\\infty-\\infty')));
+        sol += step(2, 'Multiplier par la quantité conjuguée', P('On multiplie et divise par ' + M(conj) + ' (strictement positif au voisinage de ' + infName(s) + ') et on utilise ' + M('(A-B)(A+B) = A^2 - B^2') + ' :')
+            + D('f(x) = \\frac{\\left(' + fx + '\\right)\\left(' + conj + '\\right)}{' + conj + '} = \\frac{' + par(A) + ' - ' + monoTex(m * m, 2) + '}{' + conj + '} = \\frac{' + numT + '}{' + conj + '}'));
+        if (p === 0) {
+            L = VAL(0);
+            sol += step(3, 'Limites intermédiaires', D(cases([u + ' ' + par(conj) + ' = +\\infty'])) + P('Par quotient des limites « ' + M('\\frac{' + q + '}{+\\infty}') + ' » :'));
+            sol += step(4, 'Conclusion', boxed(u + ' f(x) = 0'));
+        } else {
+            L = VAL(F(s * p, 2 * m));
+            const S = joinSigned([{ neg: false, tex: String(m * m) }, { neg: p < 0, tex: '\\frac{' + Math.abs(p) + '}{x}' }].concat(q ? [{ neg: q < 0, tex: '\\frac{' + Math.abs(q) + '}{x^{2}}' }] : []));
+            const rS = '\\sqrt{' + S + '}', nB = q ? joinSigned([{ neg: p < 0, tex: String(Math.abs(p)) }, { neg: q < 0, tex: '\\frac{' + Math.abs(q) + '}{x}' }]) : String(p);
+            const absx = s > 0 ? 'x' : '-x';
+            sol += step(3, 'Factoriser par ' + M('x'), P('Pour ' + M(s > 0 ? 'x\\gt 0' : 'x\\lt 0') + ', ' + M('\\sqrt{x^{2}} = |x| = ' + absx) + ', donc ' + M(rA + ' = \\sqrt{x^{2}' + par(S) + '} = ' + absx + rS) + '. Ainsi :')
+                + D('f(x) = \\frac{x' + par(nB) + '}{' + absx + rS + (s > 0 ? ' + ' : ' - ') + mx + '} = \\frac{x' + par(nB) + '}{' + absx + '\\left(' + rS + ' + ' + m + '\\right)} = '
+                    + (s > 0 ? '' : '-') + '\\frac{' + nB + '}{' + rS + ' + ' + m + '}'));
+            const lines = [u + ' \\frac{1}{x} = 0'];
+            if (q) lines.push(u + ' \\frac{1}{x^{2}} = 0');
+            lines.push(u + ' ' + rS + ' = \\sqrt{' + (m * m) + '} = ' + m + '\\quad\\text{(somme puis composition)}');
+            sol += step(4, 'Limites intermédiaires', D(cases(lines)) + P('Par somme et quotient : ' + M(u + ' ' + parNeg((s > 0 ? '' : '-') + '\\frac{' + nB + '}{' + rS + ' + ' + m + '}') + ' = ' + (s > 0 ? '' : '-') + '\\frac{' + p + '}{' + m + ' + ' + m + '} = ' + limTex(L)) + '.'));
+            sol += step(5, 'Conclusion', boxed(u + ' f(x) = ' + limTex(L))
+                + NOTE('La droite d\'équation ' + M('y=' + fracTex(L.val)) + ' est asymptote horizontale à la courbe de ' + M('f') + ' en ' + infName(s) + '.'));
+        }
+        return { cat: 'Bonus : quantité conjuguée en ' + infName(s), fx, B, sol, fn, checks: [{ B, L }] };
+    }
+
+    /* =====================================================================
+       Interface
+       ===================================================================== */
+    /* générateurs en ±infini et en un point a */
+    const GEN = { poly: genPoly, rat: genRatInf, expaff: genExpAff, polyexp: genPolyExp, expP: genExpP, expPlusP: genExpPlusP, cc: genCC, cmp: genCmpInf, conj: genConj };
+    const PTGEN = { rat: genRatPoint, expaff: genExpCompPoint, taux: genTaux, cmp: genCmpPoint };
+    const TYPES = ['poly', 'rat', 'expaff', 'polyexp', 'expP', 'expPlusP', 'cc', 'taux', 'cmp', 'conj'];
+    const MIX = TYPES.filter(t => t !== 'conj'); /* le bonus n'est pas dans le mélange */
+    const PT = ['pt', 'ptm', 'ptp'];
+    const hasInf = t => !!GEN[t], hasPt = t => !!PTGEN[t];
+
+    function build(type, bsel) {
+        let usePt;
+        if (PT.includes(bsel)) usePt = true;
+        else if (bsel === 'pinf' || bsel === 'minf') usePt = false;
+        else usePt = hasPt(type) && (!hasInf(type) || chance(0.45));
+        if (usePt) {
+            const side = bsel === 'ptm' ? -1 : bsel === 'ptp' ? 1 : (bsel === 'pt' ? 0 : pick([0, 0, -1, 1]));
+            return PTGEN[type](side);
+        }
+        const s = bsel === 'pinf' ? 1 : bsel === 'minf' ? -1 : pick([1, -1]);
+        return GEN[type]({ kind: 'inf', s });
+    }
+
+    function askText(ex) {
+        const B = ex.B;
+        if (ex.ask) return ex.ask;
+        if (B.kind === 'pt' && !B.side) return 'Étudier la limite de ' + M('f') + ' en ' + M(B.a) + ' (valeur interdite), à gauche et à droite si nécessaire.';
+        return 'Déterminer ' + M('\\displaystyle ' + lim(B) + ' f(x)') + '.';
+    }
+
+    function typeset(els) {
+        els.forEach(el => { el.classList.add('arithmatex'); el.querySelectorAll('*').forEach(c => c.classList.add('arithmatex')); });
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            MathJax.typesetClear(els);
+            MathJax.typesetPromise(els);
+        }
+    }
+
+    function generate() {
+        const t = document.getElementById('typeSelectLim').value;
+        const b = document.getElementById('boundSelectLim').value;
+        let types = t === 'all' ? MIX : [t];
+        if (PT.includes(b)) types = types.filter(hasPt);
+        else if (b !== 'all') types = types.filter(hasInf);
+        if (!types.length) types = [t];
+        const ex = build(pick(types), b);
+
+        const cat = document.getElementById('categoryLabelLim');
+        const q = document.getElementById('questionAreaLim');
+        const sol = document.getElementById('solutionTextLim');
+        const consigne = document.getElementById('consigneLim');
+        cat.innerHTML = ex.cat;
+        q.innerHTML = D('f(x) = ' + ex.fx) + '<p>' + askText(ex) + '</p>';
+        sol.innerHTML = ex.sol;
+
+        document.getElementById('solutionAreaLim').classList.remove('active');
+        const btn = document.getElementById('btnToggleLim');
+        btn.textContent = 'Voir la correction';
+        btn.style.backgroundColor = '#16a085';
+        typeset([cat, consigne, q, sol]);
+    }
+
+    function onTypeChange() {
+        const t = document.getElementById('typeSelectLim').value;
+        const bs = document.getElementById('boundSelectLim');
+        const allowPt = t === 'all' || hasPt(t), allowInf = t === 'all' || hasInf(t);
+        Array.from(bs.options).forEach(o => {
+            if (PT.includes(o.value)) o.disabled = !allowPt;
+            if (o.value === 'pinf' || o.value === 'minf') o.disabled = !allowInf;
+        });
+        if (bs.options[bs.selectedIndex].disabled) bs.value = 'all';
+        generate();
+    }
+
+    function toggleSolution() {
+        const solDiv = document.getElementById('solutionAreaLim');
+        const btn = document.getElementById('btnToggleLim');
+        solDiv.classList.toggle('active');
+        if (solDiv.classList.contains('active')) { btn.textContent = 'Masquer la correction'; btn.style.backgroundColor = '#e74c3c'; }
+        else { btn.textContent = 'Voir la correction'; btn.style.backgroundColor = '#16a085'; }
+    }
+
+    window.limGenerate = generate;
+    window.limOnTypeChange = onTypeChange;
+    window.limToggleSolution = toggleSolution;
+    window.__limTest = { GEN, PTGEN, TYPES, build };
+
+    if (document.getElementById('typeSelectLim')) setTimeout(onTypeChange, 300);
+})();
+</script>
+
+<details class="tip">
+<summary>Rappels du cours</summary>
+<ul>
+<li><strong>Formes indéterminées</strong> : « <span class="arithmatex">\(+\infty-\infty\)</span> », « <span class="arithmatex">\(0\times\infty\)</span> », « <span class="arithmatex">\(\frac{\infty}{\infty}\)</span> », « <span class="arithmatex">\(\frac{0}{0}\)</span> ».</li>
+<li><strong>Polynômes et fractions rationnelles en <span class="arithmatex">\(\pm\infty\)</span></strong> : on factorise par le terme de plus haut degré (au numérateur <strong>et</strong> au dénominateur), on simplifie, puis on utilise <span class="arithmatex">\(\lim\limits_{x\to\pm\infty}\frac{1}{x^n}=0\)</span>.</li>
+<li><strong>Valeur interdite <span class="arithmatex">\(a\)</span></strong> : forme « <span class="arithmatex">\(\frac{c}{0}\)</span> » <span class="arithmatex">\(\Rightarrow\)</span> étudier le signe du dénominateur à gauche et à droite ; forme « <span class="arithmatex">\(\frac{0}{0}\)</span> » <span class="arithmatex">\(\Rightarrow\)</span> factoriser par <span class="arithmatex">\((x-a)\)</span> et simplifier.</li>
+<li><strong>Composition</strong> : si <span class="arithmatex">\(\lim\limits_{x\to a}u(x)=b\)</span> et <span class="arithmatex">\(\lim\limits_{X\to b}g(X)=c\)</span>, alors <span class="arithmatex">\(\lim\limits_{x\to a}g\big(u(x)\big)=c\)</span>.</li>
+<li><strong>Exponentielle</strong> : <span class="arithmatex">\(\lim\limits_{x\to+\infty}\mathrm{e}^{x}=+\infty\)</span> et <span class="arithmatex">\(\lim\limits_{x\to-\infty}\mathrm{e}^{x}=0^+\)</span>.</li>
+<li><strong>Croissances comparées</strong> (<span class="arithmatex">\(n\geqslant 1\)</span>) : <span class="arithmatex">\(\lim\limits_{x\to+\infty}\frac{\mathrm{e}^{x}}{x^n}=+\infty\)</span>, <span class="arithmatex">\(\lim\limits_{x\to+\infty}\frac{x^n}{\mathrm{e}^{x}}=0\)</span> et <span class="arithmatex">\(\lim\limits_{x\to-\infty}x^n\mathrm{e}^{x}=0\)</span>.</li>
+<li><strong>Taux de variation</strong> : si <span class="arithmatex">\(g\)</span> est dérivable en <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(\lim\limits_{x\to a}\frac{g(x)-g(a)}{x-a}=g'(a)\)</span>.</li>
+<li><strong>Théorème des gendarmes</strong> : si <span class="arithmatex">\(g(x)\leqslant f(x)\leqslant h(x)\)</span> et <span class="arithmatex">\(\lim g=\lim h=\ell\)</span> (finie), alors <span class="arithmatex">\(\lim f=\ell\)</span>.</li>
+<li><strong>Théorèmes de comparaison</strong> : si <span class="arithmatex">\(f(x)\geqslant g(x)\)</span> et <span class="arithmatex">\(\lim g=+\infty\)</span>, alors <span class="arithmatex">\(\lim f=+\infty\)</span> (et de même vers <span class="arithmatex">\(-\infty\)</span> avec <span class="arithmatex">\(f(x)\leqslant g(x)\)</span>).</li>
+<li><strong>Quantité conjuguée</strong> (bonus) : <span class="arithmatex">\(\sqrt{A}-B=\frac{A-B^2}{\sqrt{A}+B}\)</span>, puis <span class="arithmatex">\(\sqrt{x^2}=|x|\)</span>.</li>
+</ul>
+</details><script type="text/javascript">
+CONFIG.needMermaid = false;
+CONFIG.overlordClasses = [];
+globalThis.PAGE_IDES_CONFIG = '.\x1e{}\x1e0a0b.'
+</script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Avez-vous trouvé le contenu de la page utile?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="Le contenu de la page est utile" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="Le contenu peut être amélioré" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Merci pour votre avis !
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Merci pour votre avis !
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
+        
+          
+          <a href="../../rituels/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Rituels de début d&#39;heure">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              <div class="md-ellipsis">
+                Rituels de début d'heure
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../primitives01/" class="md-footer__link md-footer__link--next" aria-label="Suivant: 1. Usuelles">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              <div class="md-ellipsis">
+                1. Usuelles
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  <div class="md-copyright_pyodide">
+    
+      <div class="md-copyright__highlight">
+        <a href="https://moussatat.github.io/about">Nizar MOUSSATAT, 2026</a>
+<a style="vertical-align:middle" rel="Sous licence CC BY-NC-SA 4.0" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Sous licence CC BY-NC-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>   
+
+      </div>
+    
+    
+      
+<div class="md-social">
+  
+    
+    
+    
+    
+    <p><a href="mailto:nizar.moussatat@ac-grenoble.fr" target="_blank" rel="noopener" title="Écrire à l&#39;auteur" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16v22.1l172.5 141.6c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16zM48 212.2V384c0 8.8 7.2 16 16 16h384c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0zM0 128c0-35.3 28.7-64 64-64h384c35.3 0 64 28.7 64 64v256c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64z"/></svg>
+    </a></p>
+  
+    
+    
+    
+    
+    <p><a href="https://x.com/zenxbear" target="_blank" rel="noopener" title="Tweeter à l&#39;auteur" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9zm-24.8 373.8h39.1L151.1 88h-42z"/></svg>
+    </a></p>
+  
+    
+    
+    
+    
+    <p><a href="https://discord.gg/zyvrR4P5Rr" target="_blank" rel="noopener" title="Joindre le discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a></p>
+  
+    
+    
+    
+    
+    <p><a href="https://github.com/moussatat" target="_blank" rel="noopener" title="Dépôt github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a></p>
+  
+    
+    
+    
+    
+    <p><a href="https://www.csja.fr/" target="_blank" rel="noopener" title="Lycée Jeanne d&#39;Arc" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M337.8 5.4c-10.8-7.2-24.8-7.2-35.6 0L166.3 96H48c-26.5 0-48 21.5-48 48v320c0 26.5 21.5 48 48 48h208v-96c0-35.3 28.7-64 64-64s64 28.7 64 64v96h208c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H473.7zM96 192h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16m400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16zM96 320h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16m400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16zM232 176a88 88 0 1 1 176 0 88 88 0 1 1-176 0m88-48c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-16v-16c0-8.8-7.2-16-16-16"/></svg>
+    </a></p>
+  
+</div>
+    
+  </div>
+  
+</div>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+
+<h4>Consentement aux cookies</h4>
+<p>Ce site intègre des cookies analytics (pour des statistiques de fréquentation anonymes, les requêtes dans la barre de recherche) et des cookies de l'hébergeur <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement#our-use-of-cookies-and-tracking-technologies">GitHub</a>.  Dès lors qu’une donnée est susceptible d’être collectée, vous pouvez vous y opposer dans les choix de paramètres ci-dessous.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Paramétrer vos choix</label>
+    
+  
+    
+      <button class="md-button md-button--primary">Accepter</button>
+    
+    
+    
+  
+    
+    
+      <button type="reset" class="md-button md-button--primary">Refuser</button>
+    
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.path", "navigation.footer", "toc.follow", "navigation.top", "header.autohide", "content.code.annotate", "content.code.copy", "content.code.select", "announce.dismiss", "content.action.edit", "content.action.view", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+
+
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../../xtra/javascripts/extra.js"></script>
+      
+        <script src="../../../xtra/javascripts/rituels.js"></script>
+      
+        <script src="../../../js/open_in_new_tab.js"></script>
+      
+    
+<script src="../../../js-scripts/overlord.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+<script src="../../../js-scripts/subscriptions.js" crossorigin="anonymous" referrerpolicy="no-referrer" charset="utf-8" type="module"></script>
+
+
+
+  </body>
+</html>
