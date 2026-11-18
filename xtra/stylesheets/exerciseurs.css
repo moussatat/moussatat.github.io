@@ -1,0 +1,47 @@
+/* ============================================================
+   Exerciseurs de Terminale : mode sombre + mode projection
+   Les styles clairs restent dans chaque page (<style> local) ;
+   ici on ne fait que les surcharger. !important est nécessaire
+   car les règles locales sont indexées sur un #id (spécificité
+   supérieure). Le bouton "Mode projection" est injecté par
+   exerciseurs.js à droite du titre h2.
+   ============================================================ */
+.exo-head { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
+.exo-head > h2 { flex: 1; margin-bottom: 0 !important; }
+.exo-head .btn-proj { font-size: 0.85em; padding: 8px 14px; white-space: nowrap; background: var(--md-primary-fg-color, #555); color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+.exo-head .btn-proj:hover { filter: brightness(1.15); }
+
+/* ---------- Mode sombre (palier "slate" de mkdocs-material) ---------- */
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) { background-color: #1e2127 !important; color: #eceff4 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) h2 { color: #f2f4f8 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .card { background: #272b33 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .menus-container { background: #30333b !important; border-color: #4a4e58 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) label { color: #eceff4 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) select { background-color: #1e2127 !important; color: #eceff4 !important; border-color: #6b7280 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) option:disabled { color: #8a929a !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .consigne { color: #e5e9f0 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .question-box { background: #272b33 !important; color: #eceff4 !important; border-color: #6b7280 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .solution { background-color: #20242b !important; color: #eceff4 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .category-badge { background: #3a3f4a !important; color: #f2f4f8 !important; border-color: #5a606c !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .lim-step { border-bottom-color: #4a4e58 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .lim-step-title { color: #5fd4b8 !important; }
+[data-md-color-scheme="slate"] [id^="exo-"]:not(#exo-derivees) .lim-note { color: #b4bcc8 !important; }
+
+/* ---------- Mode projection ---------- */
+body.exo-proj .md-header, body.exo-proj .md-tabs, body.exo-proj .md-sidebar,
+body.exo-proj .md-footer, body.exo-proj .md-feedback, body.exo-proj .md-content__button,
+body.exo-proj .md-source { display: none !important; }
+body.exo-proj .md-main__inner, body.exo-proj .md-grid { max-width: none !important; margin: 0 !important; }
+body.exo-proj .md-content, body.exo-proj .md-content__inner { margin: 0 !important; padding: 0 !important; }
+body.exo-proj .md-typeset > h1 { display: none; }
+body.exo-proj [id^="exo-"]:not(#exo-derivees) { margin: 0 !important; min-height: 100vh; border-radius: 0 !important; box-sizing: border-box; padding: 2vh 3vw !important; font-size: 1.5em; }
+body.exo-proj [id^="exo-"] .exo-head h2 { font-size: 1.6em; }
+body.exo-proj [id^="exo-"] .btn-proj { opacity: 0.4; }
+body.exo-proj [id^="exo-"] .btn-proj:hover { opacity: 1; }
+body.exo-proj [id^="exo-"]:not(#exo-derivees) .card { padding: 3vh 3vw !important; }
+body.exo-proj [id^="exo-"]:not(#exo-derivees) .menus-container { display: none !important; }
+body.exo-proj [id^="exo-"]:not(#exo-derivees) .consigne { font-size: 1.3em !important; }
+body.exo-proj [id^="exo-"]:not(#exo-derivees) .question-box { font-size: 1.7em !important; padding: 3vh 2vw !important; }
+body.exo-proj [id^="exo-"]:not(#exo-derivees) .solution { font-size: 1.25em; }
+body.exo-proj [id^="exo-"]:not(#exo-derivees) .category-badge { font-size: 1.1em !important; }
+body.exo-proj [id^="exo-"]:not(#exo-derivees) .controls button { font-size: 1.1em !important; padding: 14px 28px !important; }
